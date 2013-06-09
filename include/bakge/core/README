@@ -1,0 +1,38 @@
+Core classes and API for the engine. These components will include:
+
+
+Window
+======
+
+Wrapper class for GLFW window. This abstraction layer is necessary in case the GLFW media library is replaced or removed in the future.
+
+
+Engine
+======
+
+Base class for the engine. Contains renderers, scene managers, resource managers, and a window as member variables. Houses the main loop and is a central link between components of the engine and the game logic. In simpler terms, the engine class handles the "who", "what", "where", "when" and "why", while other classes like the Window class or Texture class all deal with their individual "how"s.
+
+
+Texture
+=======
+
+Wrapper class for an OpenGL texture. Factory function accepts texture metadata and raw image data, making it easily usable with any image loader.
+
+
+EventHandler
+============
+
+This class should generally be used as an inherited interface to ensure the Engine class implements functions to respond to events, either from GLFW or elsewhere. Bakge won't have any abstraction layer between the Engine and the media library events protocol, so the EventHandler class can be subject to drastic changes. Naturally, this class should be tightly coupled to or even combined with a game logic class
+
+
+Drawable
+========
+
+A drawable object is anything that can be drawn to the screen using OpenGL: meshes, textures, primitive shapes, etc. The Drawable class is an abstract class used as an interface to ensure these objects can all be drawn, for use in Renderer classes. (see below)
+
+
+Renderer
+========
+
+A renderer is any class that implements a Render(Drawable* Obj) function. This common API call allows for all the internal protocol of a renderer (immediate mode, shader, deferred, etc) to be abstracted down to a simple function call. The Renderer handles the "how" of setting up the OpenGL state to draw the object, while the Drawable handles the "how" the object is explicitly drawn. (function calls, etc)
+
