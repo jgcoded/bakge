@@ -30,6 +30,7 @@
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Window.h>
 #include <bakge/core/Texture.h>
+#include <bakge/core/EventHandler.h>
 #include <bakge/core/Engine.h>
 
 #endif /* BAKGE_BAKGE_H */
