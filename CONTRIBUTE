@@ -63,8 +63,8 @@ palistov/contribution on the left. Put a short description of your changes
 so we can know what you're trying to do. If the code withstands initial
 scrutiny the change will be merged into the contribution branch, where it
 will undergo testing. Then if all is well, it will be merged into the master
-branch. Once you do your successful-pull-request victory dance, run this
-command to merge the new changes into your master branch. Important note: You
+branch. Once you do your successful-pull-request victory dance, continue
+below to update your forked repo's master branch. Important note: You
 can still commit more changes to the branch after sending the pull request,
 and they will be applied. So if you discover a bug in your code after sending
 the request, no worries! The same goes for if your request doesn't initially
