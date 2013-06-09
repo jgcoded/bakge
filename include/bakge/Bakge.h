@@ -21,7 +21,7 @@
 #endif /* __GNUC__  */
 
 
-#include "../lib/glfw-2.7.9/include/GL/glfw.h"
+#include <GL/glfw.h>
 
 
 /* Include Bakge */
