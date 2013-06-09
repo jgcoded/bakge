@@ -25,6 +25,12 @@ EventHandler
 This class should generally be used as an inherited interface to ensure the Engine class implements functions to respond to events, either from GLFW or elsewhere. Bakge won't have any abstraction layer between the Engine and the media library events protocol, so the EventHandler class can be subject to drastic changes. Naturally, this class should be tightly coupled to or even combined with a game logic class
 
 
+Bindable
+========
+
+A bindable object is any object that must be bound using Bind() before it can properly be used, and must be unbound using Unbind() to prevent undesired consequences. A bindable is almost always a class that is related to the OpenGL state in some way, such as a texture or a renderer.
+
+
 Drawable
 ========
 
@@ -34,5 +40,5 @@ A drawable object is anything that can be drawn to the screen using OpenGL: mesh
 Renderer
 ========
 
-A renderer is any class that implements a Render(Drawable* Obj) function. This common API call allows for all the internal protocol of a renderer (immediate mode, shader, deferred, etc) to be abstracted down to a simple function call. The Renderer handles the "how" of setting up the OpenGL state to draw the object, while the Drawable handles the "how" the object is explicitly drawn. (function calls, etc)
+A renderer is any class that implements a Render(Drawable* Obj) function. Renderers are bindable, since there may be a specific protocol to properly set up OpenGL. Try to minimize Bind() and Unbind() calls in your engine class's draw phase protocol. This common API call allows for all the internal protocol of a renderer (immediate mode, shader, deferred, etc) to be abstracted down to a simple function call, making it extremely friendly to the engine class. The Renderer handles the "how" of setting up the OpenGL state to draw the object, while the Drawable handles the "how" the object is explicitly drawn. (glVertex* function calls, matrix transformations, etc)
 
