@@ -27,7 +27,9 @@ help:
 	@echo "Bakge build targets";
 	@echo "===================";
 	@echo " - all: Build Bakge";
-	@echo " - clean: Clean all Bakge generated files";
+	@echo " - suite: Build Bakge and associated tests";
+	@echo " - clean: Clean all Bakge engine generated files";
+	@echo " - purge: Clean all libs, tests and engine generated files.";
 	@echo "";
 
 all:
@@ -35,6 +37,9 @@ all:
 	@cd $(OBJDIR)/src && mkdir -p $(MODULES);
 	@make -s $(LIBBAKGE);
 
+suite:
+	@make -s all;
+	@cd $(TESTDIR) && make -s;
 
 $(LIBBAKGE): $(patsubst %, $(OBJDIR)/%, $(OBJECTS))
 	@echo "Linking $@...";
@@ -47,13 +52,13 @@ $(OBJDIR)/%.o: %.cpp $(INCDIR)/bakge/Bakge.h $(GLFW)
 	@echo "  - Done";
 
 clean:
-	@rm -f $(LIBBAKGE);
-	@rm -rf $(OBJDIR)/src;
+	rm -f $(LIBBAKGE);
+	rm -rf $(OBJDIR)/src;
 
 purge:
-	make clean;
-	cd $(LIBDIR) && make clean;
-	cd $(TESTDIR) && make clean;
+	@make -s clean;
+	@cd $(LIBDIR) && make -s clean;
+	@cd $(TESTDIR) && make -s clean;
 
 $(GLFW):
 	@cd $(LIBDIR) && make -s;
