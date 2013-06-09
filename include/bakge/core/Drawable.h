@@ -17,7 +17,7 @@ public:
     {
     }
 
-    virtual Result Draw() const = 0
+    virtual Result Draw() const = 0;
 
 }; /* Drawable */
 
