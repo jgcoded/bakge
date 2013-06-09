@@ -5,15 +5,19 @@ CSUB Summer project game engine. A collaborative effort between CS students at C
 
 Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started.
 
+Currently Bakge only builds on Linux, but one of our current issues is to get a cross-platform build system working. Can you do this for Bakge? Go for it!
+
 
 How to help
 ===========
 
-Check out the guidelines here: http://github.com/palistov/bakge/blob/master/CONTRIBUTE The process might seem confusing and unnecessarily complex, but it helps changes be discussed and tested openly before being finalized.
+Check out the guidelines here:
+http://github.com/palistov/bakge/blob/master/CONTRIBUTE
+The process might seem confusing and unnecessarily complex, but it helps changes be discussed and tested openly before being finalized.
 
 
 Just want to try it out?
  $ git clone http://github.com/palistov/bakge
  $ cd bakge
- $ make all
+ $ make suite
 
