@@ -13,10 +13,13 @@ build:
 
 
 glfw-2.7.9:
-	@echo "Downloading GLFW 2.7.9...";
-	@wget $(GLFWURL) -O $@.zip;
+	@echo "Downloading $@...";
+	@wget $(GLFWURL) -O $@.zip 2> /dev/null;
+	@echo "  - Done";
+	@echo "Unzipping $@...";
 	@unzip glfw-2.7.9.zip;
 	@rm glfw-2.7.9.zip;
+	@echo "  - Done";
 
-
-
+clean:
+	rm -rf glfw-2.7.9;

@@ -26,7 +26,9 @@
 
 /* Include Bakge */
 #include <bakge/core/Type.h>
+#include <bakge/core/Bindable.h>
 #include <bakge/core/Window.h>
+#include <bakge/core/Texture.h>
 
 #endif /* BAKGE_BAKGE_H */
 

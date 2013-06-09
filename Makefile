@@ -5,6 +5,7 @@ SRCDIR=$(CWD)/src
 OBJDIR=$(CWD)/obj
 INCDIR=$(CWD)/include
 LIBDIR=$(CWD)/lib
+TESTDIR=$(CWD)/test
 
 MODULES=core
 SOURCES=$(foreach mod, $(MODULES), $(wildcard src/$(mod)/*.cpp))
@@ -48,6 +49,11 @@ $(OBJDIR)/%.o: %.cpp $(INCDIR)/bakge/Bakge.h $(GLFW)
 clean:
 	@rm -f $(LIBBAKGE);
 	@rm -rf $(OBJDIR)/src;
+
+purge:
+	make clean;
+	cd $(LIBDIR) && make clean;
+	cd $(TESTDIR) && make clean;
 
 $(GLFW):
 	@cd $(LIBDIR) && make -s;

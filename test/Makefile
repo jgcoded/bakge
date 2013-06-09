@@ -7,7 +7,7 @@
 # it in the test source file.
 
 
-TESTS=window.cpp types.cpp glfw.cpp
+TESTS=window.cpp types.cpp glfw.cpp texture.cpp
 EXECS=$(TESTS:.cpp=)
 LIBBAKGE=../lib/libbakge.a
 LFLAGS=-lX11 -lXrandr -lGL -lGLU -lpthread
