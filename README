@@ -1,0 +1,12 @@
+bakge
+
+CSUB Summer project game engine. A collaborative effort between CS students at California State University, Bakersfield.
+
+
+How to help
+Look for a place to start: Browse the repo here on Github until you find something you can contribute to. The various README files can offer some insight as to what needs to be done. You can also check out the source code itself and look for TODO comments.
+
+Get and build bakge
+ $ git clone http://github.com/palistov/bakge
+ $ cd bakge
+ $ make all
