@@ -9,14 +9,12 @@ class Window
 
 public:
 
-    Window() { }
-    ~Window() { }
+    Window();
+    ~Window();
 
-    void Dummy();
+    BGE_FACTORY Window* Create(int Width, int Height);
 
-protected:
-
-};
+}; /* Window */
 
 } /* bakge */
 
