@@ -1,6 +1,7 @@
-bakge
-
+Bakge
 CSUB Summer project game engine. A collaborative effort between CS students at California State University, Bakersfield.
+
+Bakge builds as a static library. Unit testing is done in the test/ directory.
 
 
 How to help
@@ -10,3 +11,4 @@ Get and build bakge
  $ git clone http://github.com/palistov/bakge
  $ cd bakge
  $ make all
+
