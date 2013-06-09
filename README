@@ -1,9 +1,13 @@
 Bakge
+=====
+
 CSUB Summer project game engine. A collaborative effort between CS students at California State University, Bakersfield. Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Because that's the point! Please help and contribute!
 
 
 How to help
-Check out the guidelines here: http://github.com/palistov/bakge/wiki/Contribution-Guidelines. The process might seem confusing and unnecessarily complex, but it helps changes be discussed and tested openly before being finalized.
+===========
+
+Check out the guidelines here: http://github.com/palistov/bakge/blob/master/CONTRIBUTE The process might seem confusing and unnecessarily complex, but it helps changes be discussed and tested openly before being finalized.
 
 
 Just want to try it out?
