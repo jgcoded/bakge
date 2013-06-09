@@ -7,6 +7,19 @@
 #include <time.h>
 #include <math.h>
 
+/* GCC-only attributes */
+#ifdef __GNUC__
+/* Send compiler warning if function return result is not used */
+#define BGE_WUNUSED __attribute__((warn_unused_result))
+/* Mark a variable as possibly unused in its function  */
+#define BGE_UNUSED __attribute__((unused))
+/* Factory functions are static class methods that return allocated memory  */
+#define BGE_FACTORY static BGE_WUNUSED
+#else /* Define them anyways to avoid compilation errors  */
+#define BGE_WUNUSED
+#define BGE_UNUSED
+#endif /* __GNUC__  */
+
 
 /* Include Bakge */
 #include <bakge/core/Window.h>
