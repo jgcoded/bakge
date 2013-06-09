@@ -22,6 +22,7 @@
 
 
 /* Include Bakge */
+#include <bakge/core/Type.h>
 #include <bakge/core/Window.h>
 
 #endif /* BAKGE_BAKGE_H */

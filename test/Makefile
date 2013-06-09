@@ -7,7 +7,7 @@
 # it in the test source file.
 
 
-TESTS=window.cpp
+TESTS=window.cpp types.cpp
 EXECS=$(TESTS:.cpp=)
 LIBBAKGE=../lib/libbakge.a
 
