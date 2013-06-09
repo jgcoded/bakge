@@ -13,11 +13,17 @@ OBJECTS=$(SOURCES:.cpp=.o)
 LIBBAKGE=$(LIBDIR)/libbakge.a
 
 help:
+	@echo "";
 	@echo "Bakge build targets";
 	@echo "===================";
 	@echo " - all: Build Bakge";
+	@echo " - clean: Clean all Bakge generated files";
+	@echo "";
 
-all: $(LIBBAKGE)
+all:
+	@mkdir -p $(OBJDIR)/src;
+	@cd $(OBJDIR)/src && mkdir -p $(MODULES);
+	@make -s $(LIBBAKGE);
 
 
 $(LIBBAKGE): $(patsubst %, $(OBJDIR)/%, $(OBJECTS))
@@ -26,9 +32,9 @@ $(LIBBAKGE): $(patsubst %, $(OBJDIR)/%, $(OBJECTS))
 	@echo "  - Done";
 
 $(OBJDIR)/%.o: %.cpp $(INCDIR)/bakge/Bakge.h
-	@mkdir -p $(OBJDIR)/src;
-	@cd $(OBJDIR)/src && mkdir -p $(MODULES);
+	@echo "Compiling $@...";
 	@g++ -I$(INCDIR) -o $@ -c $<;
+	@echo "  - Done";
 
 clean:
 	@rm -f $(LIBBAKGE);
