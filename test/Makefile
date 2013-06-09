@@ -7,9 +7,10 @@
 # it in the test source file.
 
 
-TESTS=window.cpp types.cpp
+TESTS=window.cpp types.cpp glfw.cpp
 EXECS=$(TESTS:.cpp=)
 LIBBAKGE=../lib/libbakge.a
+LFLAGS=-lX11 -lXrandr -lGL -lGLU -lpthread
 
 # First line builds libbakge in case it has changed
 tests:
@@ -19,7 +20,7 @@ tests:
 # Depend on libbakge so tests rebuild if it changed
 %: %.cpp $(LIBBAKGE)
 	@echo "Compiling test $@...";
-	@g++ -o $@ $< -I../include -L../lib -lm -lbakge;
+	@g++ -o $@ $< -I../include -L../lib -lm -lbakge $(LFLAGS);
 	@echo "  - Done";
 
 clean:

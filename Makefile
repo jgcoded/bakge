@@ -10,7 +10,16 @@ MODULES=core
 SOURCES=$(foreach mod, $(MODULES), $(wildcard src/$(mod)/*.cpp))
 OBJECTS=$(SOURCES:.cpp=.o)
 
+# Path of the static library
 LIBBAKGE=$(LIBDIR)/libbakge.a
+
+# Other object files to build our static library
+GLFW=$(LIBDIR)/glfw-2.7.9
+GLFWOBJ=$(wildcard $(LIBDIR)/glfw-2.7.9/lib/x11/*.o)
+LIBOBJ=$(GLFWOBJ)
+
+# Compilation flags
+CFLAGS=-I$(CWD)/include -I$(LIBDIR)/glfw-2.7.9/include
 
 help:
 	@echo "";
@@ -28,14 +37,17 @@ all:
 
 $(LIBBAKGE): $(patsubst %, $(OBJDIR)/%, $(OBJECTS))
 	@echo "Linking $@...";
-	@ar rcs $@ $^;
+	@ar rcs $@ $^ $(LIBOBJ);
 	@echo "  - Done";
 
-$(OBJDIR)/%.o: %.cpp $(INCDIR)/bakge/Bakge.h
+$(OBJDIR)/%.o: %.cpp $(INCDIR)/bakge/Bakge.h $(GLFW)
 	@echo "Compiling $@...";
-	@g++ -I$(INCDIR) -o $@ -c $<;
+	@g++ -o $@ -c $< $(CFLAGS);
 	@echo "  - Done";
 
 clean:
 	@rm -f $(LIBBAKGE);
 	@rm -rf $(OBJDIR)/src;
+
+$(GLFW):
+	@cd $(LIBDIR) && make -s;
