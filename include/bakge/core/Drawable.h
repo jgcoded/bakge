@@ -1,6 +1,8 @@
 #ifndef BAKGE_CORE_DRAWABLE_H
 #define BAKGE_CORE_DRAWABLE_H
 
+#include <bakge/Bakge.h>
+
 namespace bakge
 {
 
@@ -9,13 +11,8 @@ class Drawable
 
 public:
 
-    Drawable()
-    {
-    }
-
-    virtual ~Drawable()
-    {
-    }
+    Drawable();
+    virtual ~Drawable();
 
     virtual Result Draw() const = 0;
 

@@ -1,6 +1,8 @@
 #ifndef BAKGE_CORE_WINDOW_H
 #define BAKGE_CORE_WINDOW_H
 
+#include <bakge/Bakge.h>
+
 namespace bakge
 {
 
