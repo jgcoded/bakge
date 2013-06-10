@@ -28,6 +28,7 @@
 #include <bakge/core/Type.h>
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
+#include <bakge/core/Renderer.h>
 #include <bakge/core/Window.h>
 #include <bakge/core/Texture.h>
 #include <bakge/core/EventHandler.h>

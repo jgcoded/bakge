@@ -9,13 +9,8 @@ class EventHandler
 
 public:
 
-    EventHandler()
-    {
-    }
-
-    virtual ~EventHandler()
-    {
-    }
+    EventHandler();
+    virtual ~EventHandler();
 
     /* *
      * Want to build this interface class? See details here

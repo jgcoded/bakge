@@ -11,13 +11,8 @@ class Bindable
 
 public:
 
-    Bindable()
-    {
-    }
-
-    virtual ~Bindable()
-    {
-    }
+    Bindable();
+    virtual ~Bindable();
 
     /* *
      * Bind and Unbind return results. A failed Bind means you shouldn't

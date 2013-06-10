@@ -9,13 +9,8 @@ class Drawable
 
 public:
 
-    Drawable()
-    {
-    }
-
-    virtual ~Drawable()
-    {
-    }
+    Drawable();
+    virtual ~Drawable();
 
     virtual Result Draw() const = 0;
 
