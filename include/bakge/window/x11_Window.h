@@ -41,6 +41,16 @@ public:
 
     BGE_FACTORY x11_Window* Create(int Width, int Height);
 
+    Result Close();
+
+
+private:
+
+    static Display* XDisplay;
+    ::Window XWindow;
+
+    Atom CloseProtocol;
+
 } Window; /* x11_Window */
 
 } /* bakge */

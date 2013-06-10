@@ -4,7 +4,7 @@ Core classes and API for the engine. These components will include:
 Window
 ======
 
-Wrapper class for GLFW window. This abstraction layer is necessary in case the GLFW media library is replaced or removed in the future.
+Platform-independent wrapper class for windows using the Win32 or X-Windows API. Platform implementations are marked as such.
 
 
 Engine
@@ -22,7 +22,7 @@ Wrapper class for an OpenGL texture. Factory function accepts texture metadata a
 EventHandler
 ============
 
-This class should generally be used as an inherited interface to ensure the Engine class implements functions to respond to events, either from GLFW or elsewhere. Bakge won't have any abstraction layer between the Engine and the media library events protocol, so the EventHandler class can be subject to drastic changes. Naturally, this class should be tightly coupled to or even combined with a game logic class
+This class should generally be used as an inherited interface to ensure the Engine class implements functions to respond to events. Bakge will provide its own abstraction layer for events received by a Bakge Window in the form of the Event class. Naturally, this class should be tightly coupled to or even combined with a game logic class.
 
 
 Bindable
