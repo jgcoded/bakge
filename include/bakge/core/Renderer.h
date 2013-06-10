@@ -11,13 +11,8 @@ class Renderer : public Bindable
 
 public:
 
-    Renderer()
-    {
-    }
-
-    virtual ~Renderer()
-    {
-    }
+    Renderer();
+    virtual ~Renderer();
 
     virtual Result Draw(Drawable* Obj) = 0;
 

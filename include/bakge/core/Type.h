@@ -1,6 +1,8 @@
 #ifndef BAKGE_CORE_TYPE_H
 #define BAKGE_CORE_TYPE_H
 
+#include <bakge/Bakge.h>
+
 namespace bakge
 {
 

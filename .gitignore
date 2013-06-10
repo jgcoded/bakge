@@ -1,5 +1,7 @@
+build/*
 obj/*
 lib/*
 test/*
 !test/*.cpp
 !*Makefile*
+!*CMakeLists.txt
