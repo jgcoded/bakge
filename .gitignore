@@ -1,7 +1,12 @@
+# Ignores
 build/*
+bin/*
 obj/*
 lib/*
 test/*
-!test/*.cpp
-!*Makefile*
-!*CMakeLists.txt
+
+# Includes
+!*/*.cpp
+!*/Makefile
+!*/CMakeLists.txt
+
