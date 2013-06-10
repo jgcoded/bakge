@@ -41,6 +41,6 @@ endif(WIN32)
 
 
 foreach(test ${TESTS})
-  add_executable(${test} ${test}.cpp $<TARGET_OBJECTS:BAKGE>)
-  target_link_libraries(${test} ${CORELIBS})
+  add_executable(${test} ${test}.cpp)
+  target_link_libraries(${test} ${CORELIBS} bakge)
 endforeach(test)
