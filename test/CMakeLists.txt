@@ -6,10 +6,10 @@ include_directories(${BAKGE_SOURCE_DIR}/include)
 include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-2.7.9/include)
 
 set(TESTS
-  window
-  types
-  texture
   glfw
+  texture
+  types
+  window
 )
 
 if(UNIX)
