@@ -22,25 +22,43 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_DRAWABLE_H
-#define BAKGE_API_DRAWABLE_H
+#ifndef BAKGE_GRAPHICS_TEXTURE_H
+#define BAKGE_GRAPHICS_TEXTURE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-class Drawable
+
+class Texture : public Bindable
 {
 
 public:
 
-    Drawable();
-    virtual ~Drawable();
+    Texture();
+    ~Texture();
 
-    virtual Result Draw() const = 0;
+    /* *
+     * Accepts metadata and raw image data to create an OpenGL texture
+     * Width, Height, Format and Type are metadata, while Data is the
+     * raw image data.
+     * */
+    BGE_FACTORY Texture* Create(int Width, int Height, GLint Format,
+                                            GLenum Type, void* Data);
 
-}; /* Drawable */
+   /* *
+    * Want to create this class? Here are some resources to get you
+    * started with OpenGL texture creation.
+    *
+    * http://www.opengl.org/wiki/Texture
+    * http://nehe.gamedev.net/tutorial/texture_mapping/12038/
+    * http://www.swiftless.com/tutorials/opengl/texture_under_windows.html
+    *
+    * */
+
+}; /* Texture */
 
 } /* bakge */
 
-#endif /* BAKGE_API_DRAWABLE_H */
+#endif /* BAKGE_GRAPHICS_TEXTURE_H */
+

@@ -53,19 +53,24 @@
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
 
-/* External library dependencies */
-#include <GL/glfw.h>
-
-/* Include Bakge */
+/* Include core Bakge classes (no OpenGL inclusion yet) */
+#include <bakge/api/Window.h>
 #include <bakge/core/Type.h>
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
-#include <bakge/core/Window.h>
-#include <bakge/core/Texture.h>
 #include <bakge/core/EventHandler.h>
 #include <bakge/core/Engine.h>
 
+/* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
+#ifdef __linux__ /* || OSX */
+#include <bakge/platform/x11_Bakge.h>
+#elif defined(_WIN32)
+#include <bakge/platform/win32_Bakge.h>
+#endif /* __linux__ */
+
+/* Additional Bakge classes (may depend on OpenGL) */
+#include <bakge/graphics/Texture.h>
 #include <bakge/renderer/FrontRenderer.h>
 
 #endif /* BAKGE_BAKGE_H */

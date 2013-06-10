@@ -22,26 +22,31 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_WINDOW_H
-#define BAKGE_CORE_WINDOW_H
+#ifndef BAKGE_API_WINDOW_H
+#define BAKGE_API_WINDOW_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
+namespace api
+{
 
 class Window
 {
 
-public:
+protected:
 
     Window();
-    ~Window();
+    
 
-    BGE_FACTORY Window* Create(int Width, int Height);
+public:
+
+    virtual ~Window();
 
 }; /* Window */
 
+} /* api */
 } /* bakge */
 
-#endif /* BAKGE_CORE_WINDOW_H */
+#endif /* BAKGE_API_WINDOW_H */

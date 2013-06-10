@@ -22,25 +22,13 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_DRAWABLE_H
-#define BAKGE_API_DRAWABLE_H
+#ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
+#define BAKGE_PLATFORM_WIN32_BAKGE_H
 
-#include <bakge/Bakge.h>
+#include <windows.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
-namespace bakge
-{
-class Drawable
-{
+#include <bakge/window/win32_Window.h>
 
-public:
-
-    Drawable();
-    virtual ~Drawable();
-
-    virtual Result Draw() const = 0;
-
-}; /* Drawable */
-
-} /* bakge */
-
-#endif /* BAKGE_API_DRAWABLE_H */
+#endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */

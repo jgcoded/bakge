@@ -22,25 +22,21 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_DRAWABLE_H
-#define BAKGE_API_DRAWABLE_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-class Drawable
+namespace api
 {
 
-public:
+Window::Window()
+{
+}
 
-    Drawable();
-    virtual ~Drawable();
 
-    virtual Result Draw() const = 0;
+Window::~Window()
+{
+}
 
-}; /* Drawable */
-
+} /* api */
 } /* bakge */
-
-#endif /* BAKGE_API_DRAWABLE_H */

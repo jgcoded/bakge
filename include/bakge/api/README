@@ -1,0 +1,1 @@
+API classes are pure abstract classes used to enforce a common API between platform-specific implementations of classes, like the Window class, or Thread class.

@@ -22,25 +22,27 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_DRAWABLE_H
-#define BAKGE_API_DRAWABLE_H
+#ifndef BAKGE_WINDOW_WIN32_WINDOW_H
+#define BAKGE_WINDOW_WIN32_WINDOW_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-class Drawable
-{
+
+typedef class win32_Window {
+
+    win32_Window();
+
 
 public:
 
-    Drawable();
-    virtual ~Drawable();
+    ~win32_Window();
+    
+    BGE_FACTORY win32_Window* Create(int Width, int Height);
 
-    virtual Result Draw() const = 0;
-
-}; /* Drawable */
+} Window; /* win32_Window */
 
 } /* bakge */
 
-#endif /* BAKGE_API_DRAWABLE_H */
+#endif /* BAKGE_WINDOW_WIN32_WINDOW_H */
