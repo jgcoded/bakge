@@ -16,12 +16,15 @@ set(MODULES
   renderer/FrontRenderer
 )
 
-set(PLATFORM_MODULES
-  window
-)
+set(PLATFORM_PREFIX "x11")
 
 if(WIN32)
   set(PLATFORM_PREFIX "win32")
 endif(WIN32)
 
-add_library(bakge ${MODULES}.cpp ${PLATFORM_MODULES}/${PLATFORM_PREFIX}*)
+set(PLATFORM_MODULES
+  window/${PLATFORM_PREFIX}_Window
+)
+
+add_library(bakge ${MODULES}.cpp ${PLATFORM_MODULES}.cpp)
+

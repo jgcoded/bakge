@@ -39,6 +39,8 @@ public:
 
     ~x11_Window();
 
+    BGE_FACTORY x11_Window* Create(int Width, int Height);
+
 } Window; /* x11_Window */
 
 } /* bakge */
