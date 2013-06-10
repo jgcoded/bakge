@@ -29,15 +29,16 @@
 #include <GL/glx.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#elif defined (__APPLE__)
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#endif
+
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
 #include <X11/Xatom.h>
-#elif defined (__APPLE__)
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#endif
 
 #include <bakge/window/x11_Window.h>
 
