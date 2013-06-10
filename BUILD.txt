@@ -1,8 +1,9 @@
-
 Building Bakge
 ==============
 
 Bakge now has a CMake build. To clean generated files, remove the build/ directory.
+Note that Bakge doesn't include required external libraries. See the lib/README
+file for info on downloading/installing these dependencies.
 
 
 Unix commandline
