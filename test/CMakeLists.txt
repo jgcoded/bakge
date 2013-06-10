@@ -13,6 +13,7 @@ set(TESTS
 )
 
 if(UNIX)
+  find_package(GLFW REQUIRED)
   set(CORELIBS
     ${GLFW_LIBRARY}
     m
