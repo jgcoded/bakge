@@ -43,12 +43,18 @@
 #define BGE_UNUSED
 #endif /* __GNUC__  */
 
+/* MSVC pragmas */
+#ifdef _MSC_VER
+/* Prevent library conflict warning */
+#pragma comment(linker, "/NODEFAULTLIB:MSVCRT")
+#endif /* _MSC_VER */
+
+/* Common definitions */
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
 
-
+/* External library dependencies */
 #include <GL/glfw.h>
-
 
 /* Include Bakge */
 #include <bakge/core/Type.h>
