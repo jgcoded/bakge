@@ -11,6 +11,7 @@ set(MODULES
   core/EventHandler
   core/Renderer
   core/Texture
+  core/Utility
   core/Window
 )
 

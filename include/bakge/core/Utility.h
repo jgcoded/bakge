@@ -22,43 +22,16 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_BAKGE_H
-#define BAKGE_BAKGE_H
+#ifndef BAKGE_CORE_UTILITY_H
+#define BAKGE_CORE_UTILITY_H
 
-/* Include standard library dependencies */
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <math.h>
+#include <bakge/Bakge.h>
 
-/* GCC-only attributes */
-#ifdef __GNUC__
-/* Send compiler warning if function return result is not used */
-#define BGE_WUNUSED __attribute__((warn_unused_result))
-/* Mark a variable as possibly unused in its function  */
-#define BGE_UNUSED __attribute__((unused))
-/* Factory functions are static class methods that return allocated memory  */
-#else /* Define them anyways to avoid compilation errors  */
-#define BGE_WUNUSED
-#define BGE_UNUSED
-#endif /* __GNUC__  */
+namespace bakge
+{
 
-#define BGE_FUNC extern
-#define BGE_FACTORY static BGE_WUNUSED
+BGE_FUNC Byte* LoadFileContents(const char* Path);
 
+} /* bakge */
 
-#include <GL/glfw.h>
-
-
-/* Include Bakge */
-#include <bakge/core/Type.h>
-#include <bakge/core/Bindable.h>
-#include <bakge/core/Drawable.h>
-#include <bakge/core/Renderer.h>
-#include <bakge/core/Window.h>
-#include <bakge/core/Texture.h>
-#include <bakge/core/EventHandler.h>
-#include <bakge/core/Engine.h>
-
-#endif /* BAKGE_BAKGE_H */
-
+#endif /* BAKGE_CORE_UTILITY_H */
