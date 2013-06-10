@@ -7,6 +7,5 @@ test/*
 
 # Includes
 !*/*.cpp
-!*/Makefile
 !*/CMakeLists.txt
 

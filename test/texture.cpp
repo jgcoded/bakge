@@ -4,9 +4,11 @@
 #include <bakge/Bakge.h>
 
 
-int main()
+int main(int argc, char* argv[])
 {
     bakge::Texture* Tex;
+
+    bakge::Init(argc, argv);
 
     /* When testing the completed class, pass raw image data as last param */
     Tex = bakge::Texture::Create(64, 64, GL_RGB, GL_UNSIGNED_BYTE, NULL);
@@ -19,6 +21,8 @@ int main()
 
     if(Tex != NULL)
         delete Tex;
+
+    bakge::Deinit();
 
     return 0;
 }

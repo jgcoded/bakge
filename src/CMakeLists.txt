@@ -24,6 +24,7 @@ endif(WIN32)
 
 set(PLATFORM_MODULES
   window/${PLATFORM_PREFIX}_Window
+  core/${PLATFORM_PREFIX}_Utility
 )
 
 add_library(bakge ${MODULES}.cpp ${PLATFORM_MODULES}.cpp)

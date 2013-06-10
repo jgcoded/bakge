@@ -8,8 +8,10 @@
 #include <bakge/Bakge.h>
 
 
-int main()
+int main(int argc, char* argv[])
 {
+
+    bakge::Init(argc, argv);
 
     /* Test bakge::Result */
     bakge::Result Res = BGE_FAILURE;
@@ -18,6 +20,8 @@ int main()
     } else {
         printf("Operation failed!\n");
     }
+
+    bakge::Deinit();
 
     return 0;
 }

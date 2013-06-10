@@ -22,41 +22,20 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_X11_WINDOW_H
-#define BAKGE_WINDOW_X11_WINDOW_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class x11_Window {
-
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    static Display* XDisplay;
-    static Atom CloseProtocol;
-
-    x11_Window();
+Result Init(int argc, char* argv[])
+{
+    return BGE_FAILURE;
+}
 
 
-public:
-
-    ~x11_Window();
-
-    BGE_FACTORY x11_Window* Create(int Width, int Height);
-
-    Result Close();
-
-
-private:
-
-    ::Window XWindow;
-
-
-} Window; /* x11_Window */
+Result Deinit()
+{
+    return BGE_FAILURE;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_WINDOW_X11_WINDOW_H */

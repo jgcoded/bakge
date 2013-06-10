@@ -4,9 +4,11 @@
 #include <bakge/Bakge.h>
 
 
-int main()
+int main(int argc, char* argv[])
 {
     bakge::Window* Win;
+
+    bakge::Init(argc, argv);
 
     Win = bakge::Window::Create(64, 64);
 
@@ -16,6 +18,8 @@ int main()
 
     if(Win != NULL)
         delete Win;
+
+    bakge::Deinit();
 
     return 0;
 }
