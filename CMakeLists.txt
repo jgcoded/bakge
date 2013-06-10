@@ -17,7 +17,7 @@ endif(UNIX)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
-endif(${CMAKE_SYSTEM_NAME})
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
