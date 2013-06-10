@@ -1,9 +1,4 @@
 
-/* *
- * Compile: g++ -o window window.cpp -I<path_to_bakge>/include
- *              -lm -L<path_to_bakge>/lib -lbakge
- * */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <bakge/Bakge.h>

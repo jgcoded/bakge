@@ -1,8 +1,5 @@
 
 /* *
- * Compile: g++ -o types types.cpp -I<path_to_bakge>/include
- *              -lm -L<path_to_bakge>/lib -lbakge
- *
  * Test various types in Bakge here.
  * */
 

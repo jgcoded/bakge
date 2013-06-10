@@ -1,9 +1,5 @@
 
 /* *
- * Compile: g++ -o glfw glfw.cpp -I<path_to_bakge>/include
- *              -L<path_to_bakge>/lib -lbakge -lX11 -lXrandr
- *              -lpthread -lGL -lGLU -lm
- *
  * Test out GLFW from Bakge
  * */
 
