@@ -66,5 +66,7 @@
 #include <bakge/core/EventHandler.h>
 #include <bakge/core/Engine.h>
 
+#include <bakge/renderer/FrontRenderer.h>
+
 #endif /* BAKGE_BAKGE_H */
 

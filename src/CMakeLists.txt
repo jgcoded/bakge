@@ -13,6 +13,7 @@ set(MODULES
   core/Texture
   core/Utility
   core/Window
+  renderer/FrontRenderer
 )
 
 add_library(bakge ${MODULES}.cpp)
