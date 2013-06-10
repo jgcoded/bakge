@@ -3,8 +3,9 @@
 TARGET=build
 
 all:
-	@mkdir $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" && make;
+	@mkdir $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" && make -s;
 
 clean:
 	rm -rf $(TARGET);
+	rm -rf bin;
 
