@@ -1,11 +1,11 @@
 Bakge
 =====
 
-CSUB Summer project game engine. A collaborative effort between CS students at California State University, Bakersfield. But even if you don't attend CSUB, feel free to contribute. The project is more about collaboration than it is about the engine.
+CSUB Summer project game engine. A collaborative effort between CS students, hobby-learners and developers of all kinds. Bakge will suport both 2D and 3D games.
 
-Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started.
+Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started. See the BUILD.txt file for info on building Bakge.
 
-See the BUILD.txt file for info on building Bakge.
+Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file.
 
 
 How to help
