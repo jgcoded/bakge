@@ -36,4 +36,10 @@ x11_Window::~x11_Window()
 {
 }
 
+
+x11_Window* x11_Window::Create(int Width, int Height)
+{
+    return NULL;
+}
+
 } /* bakge */
