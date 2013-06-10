@@ -1,6 +1,8 @@
 #ifndef BAKGE_CORE_EVENTHANDLER_H
 #define BAKGE_CORE_EVENTHANDLER_H
 
+#include <bakge/Bakge.h>
+
 namespace bakge
 {
 

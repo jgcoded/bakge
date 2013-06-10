@@ -14,11 +14,12 @@
 /* Mark a variable as possibly unused in its function  */
 #define BGE_UNUSED __attribute__((unused))
 /* Factory functions are static class methods that return allocated memory  */
-#define BGE_FACTORY static BGE_WUNUSED
 #else /* Define them anyways to avoid compilation errors  */
 #define BGE_WUNUSED
 #define BGE_UNUSED
 #endif /* __GNUC__  */
+
+#define BGE_FACTORY static BGE_WUNUSED
 
 
 #include <GL/glfw.h>
