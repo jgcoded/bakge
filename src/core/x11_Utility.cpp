@@ -29,12 +29,24 @@ namespace bakge
 
 Result Init(int argc, char* argv[])
 {
+    /* Connect to X server */
+    x11_Window::XDisplay = XOpenDisplay(NULL);
+    if(x11_Window::XDisplay == NULL) {
+        printf("Unable to connect to X server\n");
+        return BGE_FAILURE;
+    }
+
     return BGE_FAILURE;
 }
 
 
 Result Deinit()
 {
+    /* Close X server connection */
+    if(x11_Window::XDisplay != NULL) {
+        XCloseDisplay(x11_Window::XDisplay);
+    }
+
     return BGE_FAILURE;
 }
 

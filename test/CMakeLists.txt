@@ -13,6 +13,7 @@ set(TESTS
 if(UNIX)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
+  link_directories(${X11_LIBRARY_DIR})
   set(CORELIBS
     m
     ${X11_X_PRE_LIBS}
@@ -26,6 +27,7 @@ endif(UNIX)
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
+  link_directories(${X11_LIBRARY_DIR})
   set(CORELIBS
     m
     ${X11_X_PRE_LIBS}
@@ -49,5 +51,5 @@ endif(WIN32)
 
 foreach(test ${TESTS})
   add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} ${CORELIBS} bakge)
+  target_link_libraries(${test} bakge ${CORELIBS})
 endforeach(test)
