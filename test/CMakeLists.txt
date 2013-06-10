@@ -14,15 +14,32 @@ set(TESTS
 
 if(UNIX)
   find_package(GLFW REQUIRED)
+  find_package(X11 REQUIRED)
   set(CORELIBS
     ${GLFW_LIBRARY}
     m
-    X11
-    Xrandr
+    ${X11_X_PRE_LIBS}
+    ${X11_LIBRARIES}
+    ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
   )
 endif(UNIX)
+
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  find_package(GLFW REQUIRED)
+  find_package(X11 REQUIRED)
+  set(CORELIBS
+    ${GLFW_LIBRARY}
+    m
+    ${X11_X_PRE_LIBS}
+    ${X11_LIBRARIES}
+    ${X11_X_EXTRA_LIBRARIES}
+    GL
+    GLU
+  )
+endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 
 if(WIN32)

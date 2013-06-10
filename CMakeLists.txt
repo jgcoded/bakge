@@ -7,6 +7,7 @@ project (BAKGE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
+link_directories(/usr/X11/lib)
 
 find_package(OpenGL)
 
