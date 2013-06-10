@@ -3,7 +3,6 @@
 cmake_minimum_required(VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
-include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-2.7.9/include)
 
 set(TESTS
   texture
@@ -13,26 +12,26 @@ set(TESTS
 
 if(UNIX)
   find_package(X11 REQUIRED)
+  include_directories(${X11_INCLUDE_DIR})
   set(CORELIBS
     m
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
+    ${GL_LIBRARY}
   )
 endif(UNIX)
 
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   find_package(X11 REQUIRED)
+  include_directories(${X11_INCLUDE_DIR})
   set(CORELIBS
     m
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
+    ${GL_LIBRARY}
   )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
