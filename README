@@ -1,22 +1,49 @@
 Bakge
 =====
 
-CSUB Summer project game engine. A collaborative effort between CS students, hobby-learners and developers of all kinds. Bakge will suport both 2D and 3D games.
+BAKersfield Game Engine -- A collaborative effort between CS students, hobby-learners and developers of all kinds. Bakge will suport both 2D and 3D games, and include all the standard facilities of a game engine.
 
-Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started. See the BUILD.txt file for info on building Bakge.
-
-Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file.
+Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file. Note that copyright holders include any and all contributors or authors. If you'd like your name left out, don't write your name into the AUTHORS file.
 
 
 How to help
 ===========
 
-Check out the guidelines here:
+The process of contributing code to Bakge may seem confusing and unnecessarily complex, but it's the best way to organize and keep track of various changes without accidentally breaking the master build or adding/removing files.
+
+There are plenty of ways you can help without having to program:
+- Run the test suite and report bugs to the issues page
+- Tell your friends about Bakge!
+- Look through the code and try to spot defects or bugs
+- Contribute your ideas to the design of Bakge's components and classes
+
+
+Check out the contribution guidelines here:
 http://github.com/palistov/bakge/blob/master/CONTRIBUTE
-The process might seem confusing and unnecessarily complex, but it helps changes be discussed and tested openly before being finalized.
 
 
-Just want to try it out? Clone the repo with
-$ git clone http://github.com/palistov/bakge
-then check out BUILD.txt for information on building the engine and test suite
+Building Bakge
+==============
 
+Bakge is built with CMake. I suggest you build into a single folder, build/. This way you can easily clean up CMake's generated files, and the .gitignore file will prevent you from accidentally adding generated files to your fork.
+
+Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started.
+
+Note that Bakge doesn't include required external libraries. See the lib/README file for info on downloading/installing these dependencies. Future renditions of the build system may included automated download and installation of required libraries, but for now you must do it by hand.
+
+
+Unix commandline
+ $ mkdir build
+ $ cd build
+ $ cmake .. -G "Unix Makefiles"
+ $ make
+
+
+Win32 CMake GUI
+ 1) Find Bakge root directory, set it as source
+ 2) Set build directory to <Bakge_root>/build
+ 3) Click 'Configure' at the bottom left
+ 4) Click 'Generate' at bottom left
+ 5) Open ALL_BUILD project file
+ 6) Right click ALL_BUILD and click 'Build'.
+ 
