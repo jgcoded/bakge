@@ -1,0 +1,13 @@
+Bakge Libraries
+===============
+
+If you're on Linux you'll need to install required libraries.
+
+Install GLFW 2.7.9
+ - Download GLFW from http://www.glfw.org
+ - Extract and enter the directory
+ - Run $ sudo make x11 x11-install
+
+
+If you're on Windows, download the Win32 binaries archive and extract include and lib-* folders to
+bakge/lib/glfw-2.7.9/
