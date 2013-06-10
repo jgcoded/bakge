@@ -20,4 +20,4 @@ foreach(module ${MODULES})
               src/${module}.cpp)
 endforeach(module)
 
-
+add_subdirectory(test)

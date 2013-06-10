@@ -22,7 +22,7 @@ if(UNIX)
 endif(UNIX)
 
 foreach(test ${TESTS})
-  add_executable(${test} ${test}.cpp)
+  add_executable(${test} ${test}.cpp $<TARGET_OBJECTS:BAKGE>)
   target_link_libraries(${test} ${CORELIBS})
 endforeach(test)
 
