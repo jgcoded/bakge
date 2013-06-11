@@ -34,6 +34,15 @@ Vector4::Vector4()
 }
 
 
+Vector4::Vector4(float X, float Y, float Z, float W)
+{
+    Val[0] = X;
+    Val[1] = Y;
+    Val[2] = Z;
+    Val[3] = W;
+}
+
+
 Vector4::~Vector4()
 {
 }
