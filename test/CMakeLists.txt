@@ -19,7 +19,8 @@ if(UNIX)
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
-    ${GL_LIBRARY}
+    GL
+    GLU
   )
 endif(UNIX)
 

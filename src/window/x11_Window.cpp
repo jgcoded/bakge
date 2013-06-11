@@ -28,6 +28,7 @@ namespace bakge
 {
 
 Display* x11_Window::XDisplay = NULL;
+Atom x11_Window::CloseProtocol;
 
 x11_Window::x11_Window()
 {
@@ -37,6 +38,7 @@ x11_Window::x11_Window()
 
 x11_Window::~x11_Window()
 {
+    Close();
 }
 
 
@@ -48,12 +50,22 @@ x11_Window* x11_Window::Create(int Width, int Height)
         return NULL;
     }
 
-    return NULL;
+    x11_Window* Win = new x11_Window();
+    /* TODO Assert Win != NULL */
+
+    return Win;
 }
 
 
 Result x11_Window::Close()
 {
+    /* Prevent closing a window that isn't open */
+    if(XWindow != None) {
+        /* Close the window */
+        XDestroyWindow(XDisplay, XWindow);
+        XWindow = None;
+    }
+
     return BGE_FAILURE;
 }
 

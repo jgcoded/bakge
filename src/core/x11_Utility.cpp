@@ -36,6 +36,16 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
 
+    /* Check if X server has GLX extension */
+    if(glXQueryExtension(x11_Window::XDisplay, NULL, NULL) == False) {
+        printf("X server has no GLX extension\n");
+        return BGE_FAILURE;
+    }
+
+    /* Create window close event atom */
+    x11_Window::CloseProtocol = XInternAtom(x11_Window::XDisplay,
+                                        "WM_DELETE_WINDOW", True);
+
     return BGE_FAILURE;
 }
 
