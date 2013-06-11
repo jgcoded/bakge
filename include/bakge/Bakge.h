@@ -52,6 +52,7 @@
 /* Common definitions */
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
+#define BGE_NCP const&
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
