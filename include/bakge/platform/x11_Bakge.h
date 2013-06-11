@@ -25,16 +25,9 @@
 #ifndef BAKGE_PLATFORM_X11_BAKGE_H
 #define BAKGE_PLATFORM_X11_BAKGE_H
 
-#ifdef __linux__
-#include <GL/glx.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
-#elif defined (__APPLE__)
-#include <OpenGL/glext.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#endif
-
+#include <GL/glx.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
