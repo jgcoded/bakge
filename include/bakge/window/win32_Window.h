@@ -45,6 +45,8 @@ public:
 
     Result Open();
     Result Close();
+    
+    Result PollEvent(Event* Ev);
 
 } Window; /* win32_Window */
 

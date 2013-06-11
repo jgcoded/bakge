@@ -43,6 +43,12 @@ win32_Window* win32_Window::Create(int Width, int Height)
 }
 
 
+Result win32_Window::PollEvent(Event* Ev)
+{
+    return BGE_FAILURE;
+}
+
+
 bool win32_Window::IsOpen()
 {
     return false;
