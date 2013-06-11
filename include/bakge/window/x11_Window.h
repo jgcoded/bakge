@@ -57,6 +57,8 @@ public:
 
     Result PollEvent(Event* Ev);
 
+    Result SwapBuffers();
+
 
 private:
 
