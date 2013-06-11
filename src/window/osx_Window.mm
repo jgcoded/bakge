@@ -62,4 +62,10 @@ Result osx_Window::Close()
     return BGE_FAILURE;
 }
 
+
+Result osx_Window::SwapBuffers()
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */

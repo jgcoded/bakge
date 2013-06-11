@@ -51,6 +51,8 @@ public:
 
     virtual Result PollEvent(Event* Ev) = 0;
 
+    virtual Result SwapBuffers() = 0;
+
 }; /* Window */
 
 } /* api */

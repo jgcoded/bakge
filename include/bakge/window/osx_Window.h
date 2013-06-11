@@ -46,6 +46,8 @@ public:
     Result Open();
     Result Close();
 
+    Result SwapBuffers();
+
 } Window; /* osx_Window */
 
 } /* bakge */

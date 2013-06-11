@@ -66,4 +66,10 @@ Result win32_Window::Close()
     return BGE_FAILURE;
 }
 
+
+Result win32_Window::SwapBuffers()
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */

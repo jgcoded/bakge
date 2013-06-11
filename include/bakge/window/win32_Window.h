@@ -48,6 +48,8 @@ public:
     
     Result PollEvent(Event* Ev);
 
+    Result SwapBuffers();
+
 } Window; /* win32_Window */
 
 } /* bakge */
