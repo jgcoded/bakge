@@ -30,6 +30,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #elif defined (__APPLE__)
+#include <OpenGL/glext.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 #endif
