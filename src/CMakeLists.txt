@@ -32,7 +32,7 @@ endif()
 
 set(PLATFORM_MODULES
   window/${PLATFORM_PREFIX}_Window
-  core/${PLATFORM_PREFIX}_Utility
+  utility/${PLATFORM_PREFIX}_Utility
 )
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES})
