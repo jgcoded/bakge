@@ -13,9 +13,8 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(64, 64);
 
-    /* *
-     * Future window testing will go here.
-     * */
+    while(Win->IsOpen())
+      ;
 
     if(Win != NULL)
         delete Win;

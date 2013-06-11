@@ -50,12 +50,15 @@ public:
 
     BGE_FACTORY x11_Window* Create(int Width, int Height);
 
+    bool IsOpen();
+
     Result Close();
 
 
 private:
 
     ::Window XWindow;
+    XSetWindowAttributes XAttrib;
 
 
 } Window; /* x11_Window */
