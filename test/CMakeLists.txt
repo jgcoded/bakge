@@ -8,6 +8,7 @@ set(TESTS
   texture
   types
   window
+  vector4
 )
 
 if(UNIX)
