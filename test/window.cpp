@@ -8,6 +8,7 @@ int main(int argc, char* argv[])
 {
     bakge::Window* Win;
 
+    printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     Win = bakge::Window::Create(64, 64);
@@ -19,6 +20,7 @@ int main(int argc, char* argv[])
     if(Win != NULL)
         delete Win;
 
+    printf("Deinitializing Bakge\n");
     bakge::Deinit();
 
     return 0;

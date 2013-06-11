@@ -29,6 +29,10 @@ namespace bakge
 
 Result Init(int argc, char* argv[])
 {
+    /* Visual info settings */
+    int DoubleBuffer[] = { GLX_RGBA, GLX_DEPTH_SIZE, 16, None };
+    int Dummy;
+
     /* Connect to X server */
     x11_Window::XDisplay = XOpenDisplay(NULL);
     if(x11_Window::XDisplay == NULL) {
@@ -37,8 +41,34 @@ Result Init(int argc, char* argv[])
     }
 
     /* Check if X server has GLX extension */
-    if(glXQueryExtension(x11_Window::XDisplay, NULL, NULL) == False) {
+    if(glXQueryExtension(x11_Window::XDisplay, &Dummy, &Dummy) == False) {
         printf("X server has no GLX extension\n");
+        return BGE_FAILURE;
+    }
+
+    /* Get visual mode */
+    x11_Window::XVisual = glXChooseVisual(x11_Window::XDisplay, DefaultScreen
+                                       (x11_Window::XDisplay), DoubleBuffer);
+    if(x11_Window::XVisual == NULL) {
+        printf("Unable to find RGBA display with depth buffer\n");
+        return BGE_FAILURE;
+    }
+
+    /* Create OpenGL context for our window(s) */
+    x11_Window::Context = glXCreateContext(x11_Window::XDisplay,
+                               x11_Window::XVisual, None, GL_TRUE);
+    if(x11_Window::Context == NULL) {
+        printf("Unable to create OpenGL context\n");
+        return BGE_FAILURE;
+    }
+
+    /* Create a colormap */
+    x11_Window::ColorMap = XCreateColormap(x11_Window::XDisplay,
+                              RootWindow(x11_Window::XDisplay, 
+                              x11_Window::XVisual->screen),
+                              x11_Window::XVisual->visual, AllocNone);
+    if(x11_Window::ColorMap == None) {
+        printf("Unable to create colormap attachment\n");
         return BGE_FAILURE;
     }
 
@@ -52,6 +82,25 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
+    /* Free colormap */
+    if(x11_Window::ColorMap != None) {
+        XFreeColormap(x11_Window::XDisplay, x11_Window::ColorMap);
+        x11_Window::ColorMap = None;
+    }
+
+    /* Free OpenGL Context */
+    if(x11_Window::Context != None) {
+        glXMakeCurrent(x11_Window::XDisplay, None, NULL);
+        glXDestroyContext(x11_Window::XDisplay, x11_Window::Context);
+        x11_Window::Context = None;
+    }
+
+    /* Free visual info */
+    if(x11_Window::XVisual != NULL) {
+        XFree((void*)x11_Window::XVisual);
+        x11_Window::XVisual = NULL;
+    }
+
     /* Close X server connection */
     if(x11_Window::XDisplay != NULL) {
         XCloseDisplay(x11_Window::XDisplay);

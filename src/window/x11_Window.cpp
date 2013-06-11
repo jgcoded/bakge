@@ -28,6 +28,9 @@ namespace bakge
 {
 
 Display* x11_Window::XDisplay = NULL;
+XVisualInfo* x11_Window::XVisual = NULL;
+GLXContext x11_Window::Context = None;
+Colormap x11_Window::ColorMap = None;
 Atom x11_Window::CloseProtocol;
 
 x11_Window::x11_Window()

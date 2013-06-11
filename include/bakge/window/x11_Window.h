@@ -36,6 +36,9 @@ typedef class x11_Window {
     friend Result Deinit();
 
     static Display* XDisplay;
+    static XVisualInfo* XVisual;
+    static GLXContext Context;
+    static Colormap ColorMap;
     static Atom CloseProtocol;
 
     x11_Window();
