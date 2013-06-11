@@ -38,6 +38,7 @@ class Vector4
 public:
 
     Vector4();
+	Vector4(float X, float Y, float Z, float W);
     ~Vector4();
 
 
