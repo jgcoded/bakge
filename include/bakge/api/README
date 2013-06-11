@@ -1,1 +1,7 @@
 API classes are pure abstract classes used to enforce a common API between platform-specific implementations of classes, like the Window class, or Thread class.
+
+
+Window
+======
+
+Platform-independent wrapper class for windows using the Win32 or X-Windows API. Platform implementations are marked as such. You can find headers for these implementations in the include/bakge/window/ folder. The sources are in src/window/.

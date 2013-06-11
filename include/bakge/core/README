@@ -1,22 +1,10 @@
-Core classes and API for the engine. These components will include:
-
-
-Window
-======
-
-Platform-independent wrapper class for windows using the Win32 or X-Windows API. Platform implementations are marked as such.
+Core interface classes describing the engine API.
 
 
 Engine
 ======
 
-Base class for the engine. Contains renderers, scene managers, resource managers, and a window as member variables. Houses the main loop and is a central link between components of the engine and the game logic. In simpler terms, the engine class handles the "who", "what", "where", "when" and "why", while other classes like the Window class or Texture class all deal with their individual "how"s.
-
-
-Texture
-=======
-
-Wrapper class for an OpenGL texture. Factory function accepts texture metadata and raw image data, making it easily usable with any image loader.
+Base class for the engine. A typical engine will contain renderers, scene managers, resource managers, and a window as member variables. It should also houses the main loop and act as a central link between components of the engine and the game logic. In simpler terms, the engine class handles the "who", "what", "where", "when" and "why", while other classes like the Window class or Texture class all deal with their individual "how"s.
 
 
 EventHandler
@@ -24,11 +12,13 @@ EventHandler
 
 This class should generally be used as an inherited interface to ensure the Engine class implements functions to respond to events. Bakge will provide its own abstraction layer for events received by a Bakge Window in the form of the Event class. Naturally, this class should be tightly coupled to or even combined with a game logic class.
 
+If a script language is added to dictate game logic, it is likely that that script engine class will inherit EventHandler, so the Engine classes can dispatch events which the scripts will receive.
+
 
 Bindable
 ========
 
-A bindable object is any object that must be bound using Bind() before it can properly be used, and must be unbound using Unbind() to prevent undesired consequences. A bindable is almost always a class that is related to the OpenGL state in some way, such as a texture or a renderer.
+A bindable object is any object that must be bound using Bind() before it can properly be used, and must be unbound using Unbind() to prevent undesired consequences. A bindable is almost always a class that is related to the OpenGL state in some way, such as a texture, shader or a renderer.
 
 
 Drawable
