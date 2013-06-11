@@ -4,7 +4,8 @@ Bakge builds as a static library, making it much easier to run various tests
 without having to constantly modify the main function.
 
 Here are some links to design documents that you can read up on to learn
-about Bakge and the design.
+about Bakge and the design. You can also check out the contents of the doc/
+folder to read up on some of the design principles.
 
 
 Core Classes Design
