@@ -42,4 +42,22 @@ win32_Window* win32_Window::Create(int Width, int Height)
     return NULL;
 }
 
+
+bool win32_Window::IsOpen()
+{
+    return false;
+}
+
+
+Result win32_Window::Open()
+{
+    return BGE_FAILURE;
+}
+
+
+Result win32_Window::Close()
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */

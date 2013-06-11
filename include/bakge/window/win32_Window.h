@@ -41,6 +41,11 @@ public:
     
     BGE_FACTORY win32_Window* Create(int Width, int Height);
 
+    bool IsOpen();
+
+    Result Open();
+    Result Close();
+
 } Window; /* win32_Window */
 
 } /* bakge */

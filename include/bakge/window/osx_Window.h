@@ -43,6 +43,7 @@ public:
 
     bool IsOpen();
 
+    Result Open();
     Result Close();
 
 } Window; /* osx_Window */

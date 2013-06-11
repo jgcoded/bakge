@@ -52,6 +52,7 @@ public:
 
     bool IsOpen();
 
+    Result Open();
     Result Close();
 
 

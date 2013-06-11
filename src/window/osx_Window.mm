@@ -50,4 +50,16 @@ bool osx_Window::IsOpen()
     return false;
 }
 
+
+Result osx_Window::Open()
+{
+    return BGE_FAILURE;
+}
+
+
+Result osx_Window::Close()
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */

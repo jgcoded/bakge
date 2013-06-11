@@ -54,13 +54,16 @@
 #define BGE_FACTORY static BGE_WUNUSED
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
-#include <bakge/api/Window.h>
 #include <bakge/core/Type.h>
 #include <bakge/core/Utility.h>
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
 #include <bakge/core/EventHandler.h>
+
+/* Include API interfaces */
+#include <bakge/api/Window.h>
+
 #include <bakge/core/Engine.h>
 
 /* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
