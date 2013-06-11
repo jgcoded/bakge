@@ -64,10 +64,12 @@
 #include <bakge/core/Engine.h>
 
 /* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
-#if (defined __linux__) || (defined __APPLE__)
+#ifdef __linux__
 #include <bakge/platform/x11_Bakge.h>
 #elif defined(_WIN32)
 #include <bakge/platform/win32_Bakge.h>
+#elif defined(__APPLE__)
+#include <bakge/platform/osx_Bakge.h>
 #endif /* __linux__ */
 
 /* Additional Bakge classes (may depend on OpenGL) */

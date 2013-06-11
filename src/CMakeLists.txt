@@ -16,16 +16,22 @@ set(MODULES
   renderer/FrontRenderer
 )
 
-set(PLATFORM_PREFIX "x11")
+if(UNIX AND NOT APPLE)
+  set(PLATFORM_PREFIX "x11")
+endif()
+
+if(UNIX AND APPLE)
+  set(PLATFORM_PREFIX "osx")
+endif()
 
 if(WIN32)
   set(PLATFORM_PREFIX "win32")
-endif(WIN32)
+endif()
 
 set(PLATFORM_MODULES
   window/${PLATFORM_PREFIX}_Window
   core/${PLATFORM_PREFIX}_Utility
 )
 
-add_library(bakge ${MODULES}.cpp ${PLATFORM_MODULES}.cpp)
+add_library(bakge ${MODULES} ${PLATFORM_MODULES})
 
