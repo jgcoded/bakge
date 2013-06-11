@@ -62,6 +62,9 @@
 #include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 
+/* Math modules */
+#include <bakge/math/Vector4.h>
+
 /* Include API interfaces */
 #include <bakge/api/Window.h>
 

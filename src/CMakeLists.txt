@@ -14,6 +14,7 @@ set(MODULES
   core/Renderer
   core/Utility
   graphics/Texture
+  math/Vector4
   renderer/FrontRenderer
 )
 
