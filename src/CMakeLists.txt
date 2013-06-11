@@ -9,6 +9,7 @@ set(MODULES
   core/Bindable
   core/Drawable
   core/Engine
+  core/Event
   core/EventHandler
   core/Renderer
   core/Utility

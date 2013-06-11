@@ -108,4 +108,31 @@ Result x11_Window::Close()
     return BGE_FAILURE;
 }
 
+
+Result x11_Window::PollEvent(Event* Ev)
+{
+    static XEvent XEv;
+
+    if(!IsOpen())
+        return BGE_FAILURE;
+
+    XNextEvent(XDisplay, &XEv);
+
+    if(XEv.xany.window != XWindow) {
+        XPutBackEvent(XDisplay, &XEv);
+        return BGE_FAILURE;
+    }
+
+    Ev->Clear();
+
+    switch(XEv.type) {
+    case ClientMessage:
+        if(XEv.xclient.data.l[0] == (long)CloseProtocol)
+            Ev->Type = -1;
+        break;
+    }
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

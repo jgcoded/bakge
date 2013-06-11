@@ -59,6 +59,7 @@
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
+#include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 
 /* Include API interfaces */

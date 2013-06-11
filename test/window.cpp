@@ -13,8 +13,14 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(64, 64);
 
-    while(Win->IsOpen())
-      ;
+    bakge::Event Ev;
+
+    while(Win->IsOpen()) {
+        while(Win->PollEvent(&Ev) == BGE_SUCCESS) {
+            if(Ev.Type == -1)
+                Win->Close();
+        }
+    }
 
     if(Win != NULL)
         delete Win;

@@ -22,50 +22,32 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_X11_WINDOW_H
-#define BAKGE_WINDOW_X11_WINDOW_H
+#ifndef BAKGE_CORE_EVENT_H
+#define BAKGE_CORE_EVENT_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class x11_Window {
-
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    static Display* XDisplay;
-    static XVisualInfo* XVisual;
-    static GLXContext Context;
-    static Colormap ColorMap;
-    static Atom CloseProtocol;
-
-    x11_Window();
-
+class Event
+{
 
 public:
 
-    ~x11_Window();
+    Event();
+    ~Event();
 
-    BGE_FACTORY x11_Window* Create(int Width, int Height);
+    void Clear();
 
-    bool IsOpen();
+    int Type;
+    union {
+        int T;
+    };
 
-    Result Open();
-    Result Close();
-
-    Result PollEvent(Event* Ev);
-
-
-private:
-
-    ::Window XWindow;
-    XSetWindowAttributes XAttrib;
-
-
-} Window; /* x11_Window */
+}; /* Event */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_X11_WINDOW_H */
+#endif /* BAKGE_CORE_EVENT_H */
+

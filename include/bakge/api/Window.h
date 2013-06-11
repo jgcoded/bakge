@@ -49,6 +49,8 @@ public:
     virtual Result Open() = 0;
     virtual Result Close() = 0;
 
+    virtual Result PollEvent(Event* Ev) = 0;
+
 }; /* Window */
 
 } /* api */
