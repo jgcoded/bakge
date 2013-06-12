@@ -30,7 +30,10 @@
 namespace bakge
 {
 
-typedef class osx_Window {
+typedef class osx_Window
+{
+    friend Result Init(int argc, char* argv[]);
+    friend Result Deinit();
 
     osx_Window();
 

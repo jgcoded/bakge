@@ -27,8 +27,26 @@
 namespace bakge
 {
 
+HINSTANCE win32_Window::Instance;
+WNDCLASSEX win32_Window::WindowClass;
+HDC win32_Window::Device;
+HGLRC win32_Window::Context;
+
+LRESULT CALLBACK
+win32_Window::WindowProcCallback(HWND Win, UINT Msg, WPARAM W, LPARAM L)
+{
+    if(Msg == WM_CLOSE) {
+        PostMessage(Win, Msg, W, L);
+        return 0;
+    }
+    
+    return DefWindowProc(Win, Msg, W, L);
+}
+
+
 win32_Window::win32_Window()
 {
+    Window = 0;
 }
 
 
@@ -39,19 +57,63 @@ win32_Window::~win32_Window()
 
 win32_Window* win32_Window::Create(int Width, int Height)
 {
-    return NULL;
+    /* Make sure init was called and succeeded */
+    if(WindowClass.cbSize == 0) {
+        printf("Unable to create window\n");
+        return NULL;
+    }
+    
+    win32_Window* Win = new win32_Window;
+    if(Win == NULL) {
+        printf("Error allocating window\n");
+        return NULL;
+    }
+    
+    Win->Window = CreateWindowEx(0, WindowClass.lpszClassName, "Bakge",
+                            WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+                            CW_USEDEFAULT, Width, Height, NULL, NULL,
+                            Instance, NULL
+    );
+    
+    if(Win->Window == 0) {
+        printf("Error creating window\n");
+        return NULL;
+    }
+    
+    ShowWindow(Win->Window, SW_SHOWDEFAULT);
+    
+    return Win;
 }
 
 
 Result win32_Window::PollEvent(Event* Ev)
 {
-    return BGE_FAILURE;
+    static MSG Msg;
+    
+    if(!PeekMessage(&Msg, Window, 0, 0, PM_REMOVE)) {
+        return BGE_FAILURE;
+    }
+    
+    Ev->Clear();
+    
+    switch(Msg.message) {
+
+    case WM_CLOSE:
+        Ev->Type = -1;
+        break;
+
+    default:
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
+    
+    return BGE_SUCCESS;
 }
 
 
 bool win32_Window::IsOpen()
 {
-    return false;
+    return Window != 0 ? true : false;
 }
 
 
@@ -63,13 +125,20 @@ Result win32_Window::Open()
 
 Result win32_Window::Close()
 {
-    return BGE_FAILURE;
+    if(IsOpen()) {
+        if(Window != 0) {
+            DestroyWindow(Window);
+            Window = 0;
+        }
+    }
+
+    return BGE_SUCCESS;
 }
 
 
 Result win32_Window::SwapBuffers()
 {
-    return BGE_FAILURE;
+    return ::SwapBuffers(Device) ? BGE_SUCCESS : BGE_FAILURE;
 }
 
 } /* bakge */

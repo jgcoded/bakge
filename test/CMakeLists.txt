@@ -44,9 +44,9 @@ endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 if(WIN32)
   set(CORELIBS
-    user32.lib
-    gdi32.lib
     opengl32.lib
+    gdi32.lib
+    user32.lib
     glu32.lib
     winmm.lib
   )
