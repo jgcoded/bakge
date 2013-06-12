@@ -11,6 +11,7 @@ set(TESTS
   node
   vector4
   quaternion
+  matrix
   pawn
 )
 

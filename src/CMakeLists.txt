@@ -21,6 +21,7 @@ set(MODULES
   graphics/Pawn
   math/Vector4
   math/Quaternion
+  math/Matrix
   renderer/FrontRenderer
 )
 

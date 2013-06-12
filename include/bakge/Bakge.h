@@ -66,6 +66,7 @@
 
 /* Math modules */
 #include <bakge/math/Vector4.h>
+#include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
 
 /* Include API classes */
