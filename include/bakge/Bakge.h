@@ -83,6 +83,8 @@
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
+#include <bakge/graphics/Shader.h>
+#include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/FrontRenderer.h>
 
 #endif /* BAKGE_BAKGE_H */
