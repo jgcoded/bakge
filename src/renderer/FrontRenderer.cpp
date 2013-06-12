@@ -37,6 +37,18 @@ FrontRenderer::~FrontRenderer()
 }
 
 
+Result FrontRenderer::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result FrontRenderer::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
+
 Result FrontRenderer::Draw(Drawable* Obj) const
 {
     return BGE_FAILURE;
