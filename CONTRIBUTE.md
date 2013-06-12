@@ -1,9 +1,7 @@
 Contribution
 ============
 
-Contributing is a very simple thing to do, once you understand the process. It may seem a bit complicated, but this is the best way to keep track of changes, organize them, review and test them without compromising the stability of the master branch codebase.
-
-Here's a diagram overview of the process.
+Contributing is a very simple thing to do, once you understand the process. It may seem a bit complicated, but this is the best way to keep track of changes, organize them, review and test them without compromising the stability of the master branch codebase. Here's a simple diagram overview of the process.
 
 ![Contribution process](http://yuml.me/cbdc7520)
 
