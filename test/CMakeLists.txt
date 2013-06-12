@@ -10,6 +10,7 @@ set(TESTS
   window
   node
   vector4
+  quaternion
   pawn
 )
 

@@ -20,6 +20,7 @@ set(MODULES
   graphics/Node
   graphics/Pawn
   math/Vector4
+  math/Quaternion
   renderer/FrontRenderer
 )
 

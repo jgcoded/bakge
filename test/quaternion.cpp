@@ -30,17 +30,9 @@ int main(int argc, char* argv[])
 {
     bakge::Init(argc, argv);
     
-    bakge::math::Vector4 Vec1;
-    bakge::math::Vector4 Vec2;
-    bakge::math::Vector4 Vec3 = Vec2;
-    bakge::math::Vector4 Vec4 = Vec2 + Vec1;
+    bakge::math::Quaternion Q;
     
     /* Test some operations */
-    Vec1 = Vec2;
-    Vec1 = Vec2 * 2.5f;
-    Vec4 = Vec1 + Vec2;
-    Vec2 = Vec2 - Vec1;
-    Vec3 = Vec4 / 1.8f;
     
     bakge::Deinit();
 
