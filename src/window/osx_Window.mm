@@ -51,12 +51,6 @@ bool osx_Window::IsOpen()
 }
 
 
-Result osx_Window::Open()
-{
-    return BGE_FAILURE;
-}
-
-
 Result osx_Window::Close()
 {
     return BGE_FAILURE;

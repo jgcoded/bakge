@@ -125,12 +125,6 @@ bool x11_Window::IsOpen()
 }
 
 
-Result x11_Window::Open()
-{
-    return BGE_FAILURE;
-}
-
-
 Result x11_Window::Close()
 {
     /* Prevent closing a window that isn't open */
