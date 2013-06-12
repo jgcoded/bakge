@@ -65,6 +65,7 @@
 #include <bakge/core/EventHandler.h>
 
 /* Math modules */
+#include <bakge/math/Math.h>
 #include <bakge/math/Vector4.h>
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>

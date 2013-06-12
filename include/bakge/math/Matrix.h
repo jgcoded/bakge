@@ -43,7 +43,7 @@ public:
 
 private:
 
-    float Val[16];
+    Scalar Val[16];
 
 }; /* Matrix */
 

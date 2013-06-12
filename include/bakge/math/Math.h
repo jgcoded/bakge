@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_MATH_VECTOR4_H
-#define BAKGE_MATH_VECTOR4_H
+#ifndef BAKGE_MATH_MATH_H
+#define BAKGE_MATH_MATH_H
 
 #include <bakge/Bakge.h>
 
@@ -32,36 +32,26 @@ namespace bakge
 namespace math
 {
 
-class Vector4
+#define SCALAR_EPSILON 0.000001
+#define RAD_PER_DEG 0.0174532925
+#define DEG_PER_RAD 57.2957795
+typedef float Scalar;
+typedef Scalar Degrees;
+typedef Scalar Radians;
+
+
+inline Radians ToRadians(Degrees BGE_NCP Deg)
 {
-
-public:
-
-    Vector4();
-    Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);
-    Vector4(Vector4 BGE_NCP Other);
-    ~Vector4();
-
-    Scalar& operator[](int BGE_NCP At);
-    Scalar BGE_NCP operator[](int BGE_NCP At) const;
-    
-    Vector4 BGE_NCP operator=(Vector4 BGE_NCP Other);
-    
-    friend Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-    friend Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-    
-    friend Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
-    friend Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
+    return (Deg * RAD_PER_DEG);
+}
 
 
-private:
-
-    Scalar Val[4];
-
-}; /* Vector4 */
+inline Degrees ToDegrees(Radians BGE_NCP Rad)
+{
+    return (Rad * DEG_PER_RAD);
+}
 
 } /* math */
 } /* bakge */
 
-#endif /* BAKGE_MATH_VECTOR4_H */
-
+#endif /* BAKGE_MATH_MATH_H */
