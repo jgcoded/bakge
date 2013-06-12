@@ -6,6 +6,14 @@ BAKersfield Game Engine -- A collaborative effort between CS students, hobby-lea
 Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file. Note that copyright holders include any and all contributors or authors. If you'd like your name left out, don't write your name into the AUTHORS file.
 
 
+Design Principles
+=================
+
+There are two primary goals for Bakge: First and foremost is to provide contributors with a rich and engaging environment for collaborative coding. There is PLENTY you can do. Secondly is the creation and maintenance of a simple and effective game and graphics engine.
+
+If you have any way to improve Bakge in either way, please feel free to share and improve the project.
+
+
 How to help
 ===========
 
