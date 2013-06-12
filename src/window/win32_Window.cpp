@@ -31,6 +31,8 @@ HINSTANCE win32_Window::Instance;
 WNDCLASSEX win32_Window::WindowClass;
 HDC win32_Window::Device;
 HGLRC win32_Window::Context;
+PIXELFORMATDESCRIPTOR win32_Window::PixFormat;
+int win32_Window::Format;
 
 LRESULT CALLBACK
 win32_Window::WindowProcCallback(HWND Win, UINT Msg, WPARAM W, LPARAM L)
@@ -65,31 +67,50 @@ win32_Window* win32_Window::Create(int Width, int Height)
         return NULL;
     }
     
+    /* Allocate window memory */
     win32_Window* Win = new win32_Window;
     if(Win == NULL) {
         printf("Error allocating window\n");
         return NULL;
     }
     
+    /* Create the window */
     Win->Window = CreateWindowEx(0, WindowClass.lpszClassName, "Bakge",
                             WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
                             CW_USEDEFAULT, Width, Height, NULL, NULL,
-                            Instance, NULL
-    );
-    
+                            Instance, NULL);
     if(Win->Window == 0) {
         printf("Error creating window\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Set this window's device pixel format */
+    if(!SetPixelFormat(GetDC(Win->Window), Format, &PixFormat)) {
+        printf("Unable to set window's pixel format\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Create a local context for this window */
+    Win->LocalContext = wglCreateContext(GetDC(Win->Window));
+    if(Win->LocalContext == 0) {
+        printf("Error creating window's OpenGL context\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Connect to the shared context */
+    wglShareLists(Context, Win->LocalContext);
+    if(!wglMakeCurrent(GetDC(Win->Window), Win->LocalContext)) {
+        printf("Error making window context current\n");
+        delete Win;
         return NULL;
     }
     
-    Win->LocalContext = wglCreateContext(GetDC(Win->Window));
-    
-    wglShareLists(Context, Win->LocalContext);
-    
-    wglMakeCurrent(GetDC(Win->Window), Win->LocalContext);
-    
+    /* Display our window */
     ShowWindow(Win->Window, SW_SHOWDEFAULT);
-    
+
     return Win;
 }
 
@@ -146,7 +167,7 @@ Result win32_Window::Close()
 
 Result win32_Window::SwapBuffers()
 {
-    return ::SwapBuffers(Device) ? BGE_SUCCESS : BGE_FAILURE;
+    return ::SwapBuffers(GetDC(Window)) ? BGE_SUCCESS : BGE_FAILURE;
 }
 
 } /* bakge */

@@ -37,8 +37,10 @@ typedef class win32_Window
 
     static HINSTANCE Instance;
     static WNDCLASSEX WindowClass;
-	static HDC Device; /* Device context */
-	static HGLRC Context; /* OpenGL context */
+    static HDC Device; /* Device context */
+    static HGLRC Context; /* OpenGL context */
+    static PIXELFORMATDESCRIPTOR PixFormat;
+    static int Format;
     
     static LRESULT CALLBACK WindowProcCallback(HWND, UINT, WPARAM, LPARAM);
 

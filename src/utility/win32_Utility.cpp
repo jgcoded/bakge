@@ -32,8 +32,6 @@ namespace bakge
 Result Init(int argc, char* argv[])
 {
     win32_Window::Instance = GetModuleHandle(0);
-    PIXELFORMATDESCRIPTOR PixFormat;
-    int Format;
     
     /* Convenience */
     WNDCLASSEX* WinClass = &(win32_Window::WindowClass);
@@ -61,23 +59,24 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
     
-    ZeroMemory(&PixFormat, sizeof(PixFormat));
-    PixFormat.nSize = sizeof(PixFormat);
-    PixFormat.nVersion = 1;
-    PixFormat.iPixelType = PFD_TYPE_RGBA;
-    PixFormat.cColorBits = 24;
-    PixFormat.cDepthBits = 16;
-    PixFormat.iLayerType = PFD_MAIN_PLANE;
-    PixFormat.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL |
+    PIXELFORMATDESCRIPTOR* PixFormat = &(win32_Window::PixFormat);
+    ZeroMemory(PixFormat, sizeof(*PixFormat));
+    PixFormat->nSize = sizeof(*PixFormat);
+    PixFormat->nVersion = 1;
+    PixFormat->iPixelType = PFD_TYPE_RGBA;
+    PixFormat->cColorBits = 24;
+    PixFormat->cDepthBits = 16;
+    PixFormat->iLayerType = PFD_MAIN_PLANE;
+    PixFormat->dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL |
                                                     PFD_DOUBLEBUFFER;
     /* Choose a pixel format for our device */
-    Format = ChoosePixelFormat(win32_Window::Device, &PixFormat);
-    if(Format == 0) {
+    win32_Window::Format = ChoosePixelFormat(win32_Window::Device, PixFormat);
+    if(win32_Window::Format == 0) {
         printf("Unable to choose pixel format\n");
         return BGE_FAILURE;
     }
     
-    SetPixelFormat(win32_Window::Device, Format, &PixFormat);
+    SetPixelFormat(win32_Window::Device, win32_Window::Format, PixFormat);
     
     /* Create our OpenGL context */
     win32_Window::Context = wglCreateContext(win32_Window::Device);
