@@ -81,6 +81,7 @@
 
 /* Additional Bakge classes (may depend on OpenGL) */
 #include <bakge/graphics/Node.h>
+#include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>

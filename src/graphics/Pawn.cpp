@@ -22,35 +22,44 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_GRAPHICS_NODE_H
-#define BAKGE_GRAPHICS_NODE_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class Node : public Drawable
+Pawn::Pawn()
 {
-
-public:
-
-    Node();
-    virtual ~Node();
-
-    virtual Result Bind() const;
-    virtual Result Unbind() const;
-
-    virtual Result Draw() const;
+}
 
 
-protected:
+Pawn::~Pawn()
+{
+}
 
-    math::Vector4 Position;
 
-}; /* Node */
+Result Pawn::Bind() const
+{
+    Node::Bind();
+    return BGE_FAILURE;
+}
+
+
+Result Pawn::Unbind() const
+{
+    Node::Unbind();
+    return BGE_FAILURE;
+}
+
+
+Result Pawn::Draw() const
+{
+    Node::Draw();
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0); /* Pass position in */
+    glVertex3f(0, 0, 1); /* Pass position + facing */
+    glEnd();
+    return BGE_SUCCESS;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_GRAPHICS_NODE_H */
 

@@ -18,6 +18,7 @@ set(MODULES
   graphics/Shader
   graphics/Shape
   graphics/Node
+  graphics/Pawn
   math/Vector4
   renderer/FrontRenderer
 )

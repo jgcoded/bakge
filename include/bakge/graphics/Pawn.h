@@ -22,21 +22,21 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_GRAPHICS_NODE_H
-#define BAKGE_GRAPHICS_NODE_H
+#ifndef BAKGE_GRAPHICS_PAWN_H
+#define BAKGE_GRAPHICS_PAWN_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class Node : public Drawable
+class Pawn : public Node
 {
 
 public:
 
-    Node();
-    virtual ~Node();
+    Pawn();
+    virtual ~Pawn();
 
     virtual Result Bind() const;
     virtual Result Unbind() const;
@@ -46,11 +46,11 @@ public:
 
 protected:
 
-    math::Vector4 Position;
+    math::Quaternion Facing;
 
-}; /* Node */
+}; /* Pawn */
 
 } /* bakge */
 
-#endif /* BAKGE_GRAPHICS_NODE_H */
+#endif /* BAKGE_GRAPHICS_PAWN_H */
 
