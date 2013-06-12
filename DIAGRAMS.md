@@ -17,4 +17,4 @@ Need a visual representation of things? Here you go! These diagrams were created
 
 ## Bakge Class Diagram
 
-![Bakge Class Diagram, updated 6/11/2013](http://yuml.me/f466f2a4)
+![Bakge Class Diagram, updated 6/11/2013](http://yuml.me/5fd71660)
