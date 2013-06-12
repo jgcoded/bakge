@@ -53,6 +53,18 @@ Vector4::~Vector4()
 }
 
 
+float& Vector4::operator[](int BGE_NCP At)
+{
+    return *Val;
+}
+
+
+float BGE_NCP Vector4::operator[](int BGE_NCP At) const
+{
+    return *Val;
+}
+
+
 Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
 {
     return *this; /* Allow cascading assignment */

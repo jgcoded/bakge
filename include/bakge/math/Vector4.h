@@ -41,6 +41,9 @@ public:
     Vector4(float X, float Y, float Z, float W);
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
+
+    float& operator[](int BGE_NCP At);
+    float BGE_NCP operator[](int BGE_NCP At) const;
     
     Vector4 BGE_NCP operator=(Vector4 BGE_NCP Other);
     
