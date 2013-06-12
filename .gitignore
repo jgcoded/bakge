@@ -3,10 +3,8 @@ build/*
 bin/*
 obj/*
 lib/*
-test/*
 bakge.wiki/*
 
 # Includes
-!*/*.cpp
 !*/CMakeLists.txt
 
