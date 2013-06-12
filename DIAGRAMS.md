@@ -9,9 +9,9 @@ Need a visual representation of things? Here you go! These diagrams were created
 
 ![Association](http://yuml.me/3ed9d14d)
 
-#### Empty arrows represent direct inheritance.
+#### Empty arrows represent direct class inheritance.
 
-![Inheritance](http://yuml.me/c818f171)
+![Class inheritance](http://yuml.me/c818f171)
 
 
 
