@@ -67,7 +67,7 @@
 /* Math modules */
 #include <bakge/math/Vector4.h>
 
-/* Include API interfaces */
+/* Include API classes */
 #include <bakge/api/Window.h>
 
 /* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
