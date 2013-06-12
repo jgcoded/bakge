@@ -96,3 +96,4 @@ Vector4 operator/(Vector4 BGE_NCP Left, float BGE_NCP Right)
 
 } /* math */
 } /* bakge */
+

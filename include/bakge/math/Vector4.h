@@ -64,3 +64,4 @@ private:
 } /* bakge */
 
 #endif /* BAKGE_MATH_VECTOR4_H */
+
