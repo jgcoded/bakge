@@ -146,12 +146,6 @@ bool win32_Window::IsOpen()
 }
 
 
-Result win32_Window::Open()
-{
-    return BGE_FAILURE;
-}
-
-
 Result win32_Window::Close()
 {
     if(IsOpen()) {
