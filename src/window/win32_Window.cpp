@@ -47,11 +47,13 @@ win32_Window::WindowProcCallback(HWND Win, UINT Msg, WPARAM W, LPARAM L)
 win32_Window::win32_Window()
 {
     Window = 0;
+    LocalContext = 0;
 }
 
 
 win32_Window::~win32_Window()
 {
+    Close();
 }
 
 
@@ -79,6 +81,12 @@ win32_Window* win32_Window::Create(int Width, int Height)
         printf("Error creating window\n");
         return NULL;
     }
+    
+    Win->LocalContext = wglCreateContext(GetDC(Win->Window));
+    
+    wglShareLists(Context, Win->LocalContext);
+    
+    wglMakeCurrent(GetDC(Win->Window), Win->LocalContext);
     
     ShowWindow(Win->Window, SW_SHOWDEFAULT);
     

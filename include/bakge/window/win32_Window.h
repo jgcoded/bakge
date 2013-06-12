@@ -64,6 +64,7 @@ public:
 protected:
 
     HWND Window;
+    HGLRC LocalContext;
 
 } Window; /* win32_Window */
 

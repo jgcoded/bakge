@@ -85,11 +85,6 @@ Result Init(int argc, char* argv[])
         printf("Error creating OpenGL context\n");
         return BGE_FAILURE;
     }
-    
-    if(!wglMakeCurrent(win32_Window::Device, win32_Window::Context)) {
-        printf("Error making OpenGL context current\n");
-        return BGE_FAILURE;
-    }
 
     return BGE_SUCCESS;
 }
