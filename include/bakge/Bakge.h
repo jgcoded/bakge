@@ -60,6 +60,7 @@
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
+#include <bakge/core/Engine.h>
 #include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 
@@ -68,8 +69,6 @@
 
 /* Include API interfaces */
 #include <bakge/api/Window.h>
-
-#include <bakge/core/Engine.h>
 
 /* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
 #ifdef __linux__
@@ -81,6 +80,8 @@
 #endif /* __linux__ */
 
 /* Additional Bakge classes (may depend on OpenGL) */
+#include <bakge/graphics/Node.h>
+#include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/renderer/FrontRenderer.h>
 

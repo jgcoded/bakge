@@ -8,6 +8,7 @@ set(TESTS
   texture
   types
   window
+  node
   vector4
 )
 
