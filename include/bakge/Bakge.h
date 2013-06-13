@@ -70,6 +70,10 @@
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
 
+/* Data structure modules */
+#include <bakge/data/SingleNode.h>
+#include <bakge/data/LinkedList.h>
+
 /* Include API classes */
 #include <bakge/api/Window.h>
 

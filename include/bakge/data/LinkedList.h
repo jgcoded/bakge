@@ -22,36 +22,32 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_MATH_MATH_H
-#define BAKGE_MATH_MATH_H
+#ifndef BAKGE_DATA_LINKEDLIST_H
+#define BAKGE_DATA_LINKEDLIST_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-namespace math
+
+template<class T>
+class LinkedList
 {
 
-#define SCALAR_EPSILON 0.000001
-#define RAD_PER_DEG 0.0174532925f
-#define DEG_PER_RAD 57.2957795f
-typedef float Scalar;
-typedef Scalar Degrees;
-typedef Scalar Radians;
+public:
+
+    LinkedList();
+    ~LinkedList();
 
 
-inline Radians ToRadians(Degrees BGE_NCP Deg)
-{
-    return (Deg * RAD_PER_DEG);
-}
+protected:
 
+    SingleNode<T>* Head;
+    SingleNode<T>* Tail;
 
-inline Degrees ToDegrees(Radians BGE_NCP Rad)
-{
-    return (Rad * DEG_PER_RAD);
-}
+}; /* LinkedList */
 
-} /* math */
 } /* bakge */
 
-#endif /* BAKGE_MATH_MATH_H */
+#endif /* BAKGE_DATA_LINKEDLIST_H */
+
