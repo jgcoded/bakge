@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 2.6)
 include_directories(${BAKGE_SOURCE_DIR}/include)
 
 set(TESTS
+  clock
   texture
   types
   window
@@ -15,7 +16,7 @@ set(TESTS
   pawn
 )
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   link_directories(${X11_LIBRARY_DIR})
@@ -27,22 +28,21 @@ if(UNIX)
     GL
     GLU
   )
-endif(UNIX)
+endif()
 
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
-  include_directories(${X11_INCLUDE_DIR})
-  link_directories(${X11_LIBRARY_DIR})
+  FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+  include_directories(${Cocoa_INCLUDE_DIRS})
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(CORELIBS
     m
-    ${X11_X_PRE_LIBS}
-    ${X11_LIBRARIES}
-    ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
+    ${COCOA_LIBRARY}
   )
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+endif()
 
 
 if(WIN32)

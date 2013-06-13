@@ -27,9 +27,13 @@
 namespace bakge
 {
 
+NSDate* StartTime;
+
 Result Init(int argc, char* argv[])
 {
-    return BGE_FAILURE;
+    StartTime = [NSDate date];
+
+    return BGE_SUCCESS;
 }
 
 

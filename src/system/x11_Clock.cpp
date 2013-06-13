@@ -27,16 +27,15 @@
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+Result Delay(Milliseconds BGE_NCP Time)
 {
+    return BGE_FAILURE;
 }
 
 
-template<class T>
-SingleNode<T>::~SingleNode()
+Milliseconds GetRunningTime()
 {
+    return Milliseconds(0);
 }
 
 } /* bakge */
-

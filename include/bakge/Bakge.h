@@ -64,6 +64,9 @@
 #include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 
+/* System modules */
+#include <bakge/system/Clock.h>
+
 /* Math modules */
 #include <bakge/math/Math.h>
 #include <bakge/math/Vector4.h>

@@ -22,21 +22,28 @@
  * THE SOFTWARE.
  * */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
 
-template<class T>
-SingleNode<T>::SingleNode()
-{
+    printf("Getting start time\n");
+    
+    bakge::Milliseconds T = bakge::GetRunningTime();
+
+    printf("%u milliseconds right now\n", T);
+
+    bakge::Delay(2000);
+
+    T = bakge::GetRunningTime() - T;
+
+    printf("%u milliseconds have passed\n", T);
+    
+    bakge::Deinit();
+
+    return 0;
 }
-
-
-template<class T>
-SingleNode<T>::~SingleNode()
-{
-}
-
-} /* bakge */
 

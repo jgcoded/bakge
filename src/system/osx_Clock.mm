@@ -27,16 +27,30 @@
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+Result Delay(Milliseconds BGE_NCP Time)
 {
+    NSTimeInterval DelayTime;
+
+    DelayTime = Time / 1000;
+    DelayTime += 0.001 * (Time % 1000);
+
+    [NSThread sleepForTimeInterval: DelayTime];
+
+    return BGE_FAILURE;
 }
 
 
-template<class T>
-SingleNode<T>::~SingleNode()
+Milliseconds GetRunningTime()
 {
+    extern NSDate* StartTime; /* Defined in src/utility/osx_Utility.mm */
+    NSDate* Now;
+    NSTimeInterval NowSec;
+
+    /* Get current time & use it to get time since StartTime */
+    Now = [NSDate date];
+    NowSec = [Now timeIntervalSinceDate: StartTime];
+
+    return NowSec * 1000;
 }
 
 } /* bakge */
-

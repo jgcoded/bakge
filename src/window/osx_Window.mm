@@ -22,8 +22,6 @@
  * THE SOFTWARE.
  * */
 
-#import <cocoa/Cocoa.h>
-
 #include <bakge/Bakge.h>
 
 namespace bakge
@@ -58,6 +56,12 @@ Result osx_Window::Close()
 
 
 Result osx_Window::SwapBuffers()
+{
+    return BGE_FAILURE;
+}
+
+
+Result osx_Window::PollEvent(Event* Ev)
 {
     return BGE_FAILURE;
 }
