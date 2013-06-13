@@ -16,7 +16,7 @@ set(TESTS
   pawn
 )
 
-if(UNIX)
+if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   link_directories(${X11_LIBRARY_DIR})
@@ -28,10 +28,10 @@ if(UNIX)
     GL
     GLU
   )
-endif(UNIX)
+endif()
 
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   link_directories(${X11_LIBRARY_DIR})
@@ -42,8 +42,9 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
+    objc
   )
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+endif()
 
 
 if(WIN32)

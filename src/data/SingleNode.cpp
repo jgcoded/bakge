@@ -39,3 +39,4 @@ SingleNode<T>::~SingleNode()
 }
 
 } /* bakge */
+

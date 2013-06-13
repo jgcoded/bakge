@@ -45,10 +45,9 @@ public:
     BGE_FACTORY osx_Window* Create(int Width, int Height);
 
     bool IsOpen();
-
     Result Close();
-
     Result SwapBuffers();
+    Result PollEvent(Event* Ev);
 
 } Window; /* osx_Window */
 

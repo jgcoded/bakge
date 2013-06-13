@@ -33,6 +33,7 @@ endif()
 
 if(UNIX AND APPLE)
   set(PLATFORM_PREFIX "osx")
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
 endif()
 
 if(WIN32)

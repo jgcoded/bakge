@@ -22,6 +22,7 @@
  * THE SOFTWARE.
  * */
 
+#import <cocoa/Cocoa.h>
 #include <bakge/Bakge.h>
 
 namespace bakge
@@ -29,13 +30,32 @@ namespace bakge
 
 Result Delay(Milliseconds BGE_NCP Time)
 {
+    Milliseconds StopTime = GetRunningTime() + Time;
+
+    while(GetRunningTime() < StopTime)
+        ;
+
     return BGE_FAILURE;
 }
 
 
 Milliseconds GetRunningTime()
 {
-    return Milliseconds(0);
+    extern NSDate* StartTime; /* Defined in src/utility/osx_Utility.mm */
+    NSDate* Now;
+    NSTimeInterval NowSec;
+    Milliseconds ElapsedTime;
+
+    /* Get current time & use it to get time since StartTime */
+    Now = [NSDate date];
+    NowSec = [Now timeIntervalSinceDate: StartTime];
+
+    /* Convert to Milliseconds */
+    ElapsedTime = floor(NowSec);
+    NowSec -= ElapsedTime;
+    ElapsedTime += (NowSec * 1000);
+
+    return ElapsedTime;
 }
 
 } /* bakge */
