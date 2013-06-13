@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-typedef class win32_Window
+typedef class win32_Window : api::Window
 {
     friend Result Init(int argc, char* argv[]);
     friend Result Deinit();
