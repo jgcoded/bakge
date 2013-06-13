@@ -22,7 +22,6 @@
  * THE SOFTWARE.
  * */
 
-#import <cocoa/Cocoa.h>
 #include <bakge/Bakge.h>
 
 namespace bakge

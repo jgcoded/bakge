@@ -35,6 +35,7 @@ if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
   FIND_LIBRARY(COCOA_LIBRARY Cocoa)
   include_directories(${Cocoa_INCLUDE_DIRS})
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(CORELIBS
     m
     GL
