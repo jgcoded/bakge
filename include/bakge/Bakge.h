@@ -79,6 +79,7 @@
 
 /* Include API classes */
 #include <bakge/api/Window.h>
+#include <bakge/api/Thread.h>
 
 /* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
 #ifdef __linux__

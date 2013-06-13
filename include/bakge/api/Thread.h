@@ -22,14 +22,29 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
-#define BAKGE_PLATFORM_WIN32_BAKGE_H
+#ifndef BAKGE_API_THREAD_H
+#define BAKGE_API_THREAD_H
 
-#include <windows.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+namespace bakge
+{
+namespace api
+{
 
-#include <bakge/window/win32_Window.h>
-#include <bakge/thread/win32_Thread.h>
+class Thread
+{
 
-#endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */
+public:
+
+    Thread();
+    virtual ~Thread();
+
+    virtual Result Kill() = 0;
+    virtual Result Wait() = 0;
+    virtual int GetExitCode() = 0;
+
+}; /* Thread */
+
+} /* api */
+} /* bakge */
+
+#endif /* BAKGE_API_THREAD_H */

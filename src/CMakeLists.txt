@@ -43,6 +43,7 @@ endif()
 
 set(PLATFORM_MODULES
   clock/${PLATFORM_PREFIX}_Clock
+  thread/${PLATFORM_PREFIX}_Thread
   utility/${PLATFORM_PREFIX}_Utility
   window/${PLATFORM_PREFIX}_Window
 )

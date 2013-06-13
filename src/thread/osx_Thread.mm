@@ -22,14 +22,18 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
-#define BAKGE_PLATFORM_WIN32_BAKGE_H
+#include <bakge/Bakge.h>
 
-#include <windows.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+namespace bakge
+{
 
-#include <bakge/window/win32_Window.h>
-#include <bakge/thread/win32_Thread.h>
+osx_Thread::osx_Thread()
+{
+}
 
-#endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */
+
+osx_Thread::~osx_Thread()
+{
+}
+
+} /* bakge */
