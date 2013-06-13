@@ -22,21 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_TYPE_H
-#define BAKGE_CORE_TYPE_H
-
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
+    
+    bakge::Milliseconds T = bakge::GetRunningTime();
 
-#define BGE_FAILURE 1
-#define BGE_SUCCESS 0
-typedef int Result;
+    bakge::Delay(3000); /* Delay 3 seconds */
+    T = bakge::GetRunningTime() - T;
 
-typedef unsigned char Byte;
-typedef unsigned int Milliseconds;
+    printf("%u milliseconds have passed\n", T);
+    
+    bakge::Deinit();
 
-} /* bakge */
-
-#endif /* BAKGE_CORE_TYPE_H */
+    return 0;
+}

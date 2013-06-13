@@ -42,6 +42,7 @@ endif()
 set(PLATFORM_MODULES
   window/${PLATFORM_PREFIX}_Window
   utility/${PLATFORM_PREFIX}_Utility
+  system/${PLATFORM_PREFIX}_Clock
 )
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES})

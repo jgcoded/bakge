@@ -22,21 +22,20 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_TYPE_H
-#define BAKGE_CORE_TYPE_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-#define BGE_FAILURE 1
-#define BGE_SUCCESS 0
-typedef int Result;
+Result Delay(Milliseconds BGE_NCP Time)
+{
+    return BGE_FAILURE;
+}
 
-typedef unsigned char Byte;
-typedef unsigned int Milliseconds;
+
+Milliseconds GetRunningTime()
+{
+    return Milliseconds(0);
+}
 
 } /* bakge */
-
-#endif /* BAKGE_CORE_TYPE_H */
