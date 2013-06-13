@@ -35,6 +35,6 @@
 #include <X11/Xatom.h>
 
 #include <bakge/window/x11_Window.h>
-#include <bakge/thread/x11_Window.h>
+#include <bakge/thread/x11_Thread.h>
 
 #endif /* BAKGE_PLATFORM_X11_BAKGE_H */
