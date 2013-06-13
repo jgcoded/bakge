@@ -22,36 +22,36 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_MATH_MATH_H
+#define BAKGE_MATH_MATH_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-
-FrontRenderer::FrontRenderer()
+namespace math
 {
+
+#define SCALAR_EPSILON 0.000001
+#define RAD_PER_DEG 0.0174532925
+#define DEG_PER_RAD 57.2957795
+typedef float Scalar;
+typedef Scalar Degrees;
+typedef Scalar Radians;
+
+
+inline Radians ToRadians(Degrees BGE_NCP Deg)
+{
+    return (Deg * RAD_PER_DEG);
 }
 
 
-FrontRenderer::~FrontRenderer()
+inline Degrees ToDegrees(Radians BGE_NCP Rad)
 {
+    return (Rad * DEG_PER_RAD);
 }
 
-
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
-
+} /* math */
 } /* bakge */
+
+#endif /* BAKGE_MATH_MATH_H */

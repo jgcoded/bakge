@@ -27,31 +27,39 @@
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+Pawn::Pawn()
 {
 }
 
 
-FrontRenderer::~FrontRenderer()
+Pawn::~Pawn()
 {
 }
 
 
-Result FrontRenderer::Bind() const
+Result Pawn::Bind() const
 {
+    Node::Bind();
     return BGE_FAILURE;
 }
 
 
-Result FrontRenderer::Unbind() const
+Result Pawn::Unbind() const
 {
+    Node::Unbind();
     return BGE_FAILURE;
 }
 
 
-Result FrontRenderer::Draw(Drawable* Obj) const
+Result Pawn::Draw() const
 {
-    return BGE_FAILURE;
+    Node::Draw();
+    glBegin(GL_LINES);
+    glVertex3f(0, 0, 0); /* Pass position in */
+    glVertex3f(0, 0, 1); /* Pass position + facing */
+    glEnd();
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
+

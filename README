@@ -6,6 +6,14 @@ BAKersfield Game Engine -- A collaborative effort between CS students, hobby-lea
 Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file. Note that copyright holders include any and all contributors or authors. If you'd like your name left out, don't write your name into the AUTHORS file.
 
 
+Design Principles
+=================
+
+There are two primary goals for Bakge: First and foremost is to provide contributors with a rich and engaging environment for collaborative coding. There is PLENTY you can do. Secondly is the creation and maintenance of a simple and effective game and graphics engine.
+
+If you have any way to improve Bakge in either way, please feel free to share and improve the project.
+
+
 How to help
 ===========
 
@@ -25,11 +33,11 @@ http://github.com/palistov/bakge/blob/master/CONTRIBUTE
 Building Bakge
 ==============
 
-Bakge is built with CMake. I suggest you build into a single folder, build/. This way you can easily clean up CMake's generated files, and the .gitignore file will prevent you from accidentally adding generated files to your fork.
+Bakge is built with CMake. I suggest you build into a single folder, build/. This way you can easily clean up CMake's generated files, and the .gitignore file will prevent you from accidentally adding generated files to your fork. If you have any trouble or errors when building CMake, PLEASE CREATE AN ISSUE REPORT. It really helps to know what problems the build has, and that it works on all of the target platforms.
 
 Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started.
 
-Note that Bakge doesn't include required external libraries in its source tree. See the lib/README file for info on downloading/installing these dependencies. Future renditions of the build system may included automated download and installation of required libraries, but for now you must do it by hand.
+Note that Bakge doesn't include required external libraries in its source tree. Once Bakge requires external libraries, these will be downloaded and built with the CMake build as part of the project.
 
 
 Commandline (Unix-like)
@@ -37,6 +45,12 @@ Commandline (Unix-like)
  $ cd build
  $ cmake .. -G "Unix Makefiles"
  $ make
+
+-- or --
+
+ $ make
+
+The Makefile in the root directory exists for convenience and contains two targets: all and clean. All runs the above commands to build into the build/ folder, and clean simply removes generated files/folders.
 
 
 CMake GUI

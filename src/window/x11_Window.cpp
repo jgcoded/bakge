@@ -24,6 +24,34 @@
 
 #include <bakge/Bakge.h>
 
+#define ALL_X11_EVENTS (\
+    KeyPressMask                |\
+    KeyReleaseMask              |\
+    ButtonPressMask             |\
+    ButtonReleaseMask           |\
+    EnterWindowMask             |\
+    LeaveWindowMask             |\
+    PointerMotionMask           |\
+    PointerMotionHintMask       |\
+    Button1MotionMask           |\
+    Button2MotionMask           |\
+    Button3MotionMask           |\
+    Button4MotionMask           |\
+    Button5MotionMask           |\
+    ButtonMotionMask            |\
+    KeymapStateMask             |\
+    ExposureMask                |\
+    VisibilityChangeMask        |\
+    StructureNotifyMask         |\
+    ResizeRedirectMask          |\
+    SubstructureNotifyMask      |\
+    SubstructureRedirectMask    |\
+    FocusChangeMask             |\
+    PropertyChangeMask          |\
+    ColormapChangeMask          |\
+    OwnerGrabButtonMask         \
+    )
+
 namespace bakge
 {
 
@@ -58,7 +86,7 @@ x11_Window* x11_Window::Create(int Width, int Height)
 
     Win->XAttrib.colormap = ColorMap;
     Win->XAttrib.border_pixel = 0;
-    Win->XAttrib.event_mask = 0;
+    Win->XAttrib.event_mask = ALL_X11_EVENTS;
 
     Win->XWindow = XCreateWindow(XDisplay, RootWindow(XDisplay,
                                     XVisual->screen), 0, 0, Width,
@@ -68,6 +96,13 @@ x11_Window* x11_Window::Create(int Width, int Height)
                                     &(Win->XAttrib));
     if(Win->XWindow == None) {
         printf("Unable to create window\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Set OpenGL context as current for this window */
+    if(glXMakeCurrent(XDisplay, Win->XWindow, Context) == False) {
+        printf("Unable to make OpenGL context current\n");
         delete Win;
         return NULL;
     }
@@ -90,12 +125,6 @@ bool x11_Window::IsOpen()
 }
 
 
-Result x11_Window::Open()
-{
-    return BGE_FAILURE;
-}
-
-
 Result x11_Window::Close()
 {
     /* Prevent closing a window that isn't open */
@@ -113,16 +142,28 @@ Result x11_Window::PollEvent(Event* Ev)
 {
     static XEvent XEv;
 
+    Bool HasEvent;
+
     if(!IsOpen())
         return BGE_FAILURE;
 
-    XNextEvent(XDisplay, &XEv);
-
-    if(XEv.xany.window != XWindow) {
-        XPutBackEvent(XDisplay, &XEv);
+    /* If no events in the queue, no need to poll */
+    if(XPending(XDisplay) == 0) {
         return BGE_FAILURE;
     }
 
+    XNextEvent(XDisplay, &XEv);
+
+    /* If not for this window, send it back to queue */
+    if(XEv.xany.window != XWindow) {
+        XSendEvent(XDisplay, XEv.xany.window, False, ALL_X11_EVENTS, &XEv);
+        return BGE_FAILURE;
+    }
+
+    /* *
+     * Else it is for this window, clear the Bakge event and translate
+     * the X11 event
+     * */
     Ev->Clear();
 
     switch(XEv.type) {
@@ -132,6 +173,13 @@ Result x11_Window::PollEvent(Event* Ev)
         break;
     }
 
+    return BGE_SUCCESS;
+}
+
+
+Result x11_Window::SwapBuffers()
+{
+    glXSwapBuffers(XDisplay, XWindow);
     return BGE_SUCCESS;
 }
 

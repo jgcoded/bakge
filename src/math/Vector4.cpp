@@ -34,7 +34,7 @@ Vector4::Vector4()
 }
 
 
-Vector4::Vector4(float X, float Y, float Z, float W)
+Vector4::Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W)
 {
     Val[0] = X;
     Val[1] = Y;
@@ -43,9 +43,57 @@ Vector4::Vector4(float X, float Y, float Z, float W)
 }
 
 
+Vector4::Vector4(Vector4 BGE_NCP Other)
+{
+}
+
+
 Vector4::~Vector4()
 {
 }
 
+
+Scalar& Vector4::operator[](int BGE_NCP At)
+{
+    return *Val;
+}
+
+
+Scalar BGE_NCP Vector4::operator[](int BGE_NCP At) const
+{
+    return *Val;
+}
+
+
+Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
+{
+    return *this; /* Allow cascading assignment */
+}
+
+    
+Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+    return Vector4();
+}
+
+
+Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+    return Vector4();
+}
+
+
+Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right)
+{
+    return Vector4();
+}
+
+
+Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right)
+{
+    return Vector4();
+}
+
 } /* math */
 } /* bakge */
+

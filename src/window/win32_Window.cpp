@@ -27,37 +27,141 @@
 namespace bakge
 {
 
+HINSTANCE win32_Window::Instance;
+WNDCLASSEX win32_Window::WindowClass;
+HDC win32_Window::Device;
+HGLRC win32_Window::Context;
+PIXELFORMATDESCRIPTOR win32_Window::PixFormat;
+int win32_Window::Format;
+
+LRESULT CALLBACK
+win32_Window::WindowProcCallback(HWND Win, UINT Msg, WPARAM W, LPARAM L)
+{
+    if(Msg == WM_CLOSE) {
+        PostMessage(Win, Msg, W, L);
+        return 0;
+    }
+    
+    return DefWindowProc(Win, Msg, W, L);
+}
+
+
 win32_Window::win32_Window()
 {
+    Window = 0;
+    LocalContext = 0;
 }
 
 
 win32_Window::~win32_Window()
 {
+    Close();
 }
 
 
 win32_Window* win32_Window::Create(int Width, int Height)
 {
-    return NULL;
+    /* Make sure init was called and succeeded */
+    if(WindowClass.cbSize == 0) {
+        printf("Unable to create window\n");
+        return NULL;
+    }
+    
+    /* Allocate window memory */
+    win32_Window* Win = new win32_Window;
+    if(Win == NULL) {
+        printf("Error allocating window\n");
+        return NULL;
+    }
+    
+    /* Create the window */
+    Win->Window = CreateWindowEx(0, WindowClass.lpszClassName, "Bakge",
+                            WS_OVERLAPPEDWINDOW, CW_USEDEFAULT,
+                            CW_USEDEFAULT, Width, Height, NULL, NULL,
+                            Instance, NULL);
+    if(Win->Window == 0) {
+        printf("Error creating window\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Set this window's device pixel format */
+    if(!SetPixelFormat(GetDC(Win->Window), Format, &PixFormat)) {
+        printf("Unable to set window's pixel format\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Create a local context for this window */
+    Win->LocalContext = wglCreateContext(GetDC(Win->Window));
+    if(Win->LocalContext == 0) {
+        printf("Error creating window's OpenGL context\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Connect to the shared context */
+    wglShareLists(Context, Win->LocalContext);
+    if(!wglMakeCurrent(GetDC(Win->Window), Win->LocalContext)) {
+        printf("Error making window context current\n");
+        delete Win;
+        return NULL;
+    }
+    
+    /* Display our window */
+    ShowWindow(Win->Window, SW_SHOWDEFAULT);
+
+    return Win;
+}
+
+
+Result win32_Window::PollEvent(Event* Ev)
+{
+    static MSG Msg;
+    
+    if(!PeekMessage(&Msg, Window, 0, 0, PM_REMOVE)) {
+        return BGE_FAILURE;
+    }
+    
+    Ev->Clear();
+    
+    switch(Msg.message) {
+
+    case WM_CLOSE:
+        Ev->Type = -1;
+        break;
+
+    default:
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
+    
+    return BGE_SUCCESS;
 }
 
 
 bool win32_Window::IsOpen()
 {
-    return false;
-}
-
-
-Result win32_Window::Open()
-{
-    return BGE_FAILURE;
+    return Window != 0 ? true : false;
 }
 
 
 Result win32_Window::Close()
 {
-    return BGE_FAILURE;
+    if(IsOpen()) {
+        if(Window != 0) {
+            DestroyWindow(Window);
+            Window = 0;
+        }
+    }
+
+    return BGE_SUCCESS;
+}
+
+
+Result win32_Window::SwapBuffers()
+{
+    return ::SwapBuffers(GetDC(Window)) ? BGE_SUCCESS : BGE_FAILURE;
 }
 
 } /* bakge */

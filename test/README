@@ -1,0 +1,17 @@
+
+Unit Tests
+==========
+
+Unit testing is very important. Verifying that a class or function works in isolation makes it much easier to integrate into existing code.
+
+NOTE: Currently, all unit test programs are built into build/test/, so don't worry if you can't see your program in test/ after building Bakge. This will be fixed at a later time :)
+
+If you make a contribution which requires or required some testing, you should add it to the CMake build. It's actually quite easy, just open the test/CMakeLists.txt file, and search for the line that says:
+
+set(TESTS
+  ...
+  ...
+)
+
+Insert your file into the list (no extension necessary). If all is well you should see your test compile the next time you run a fresh CMake build.
+

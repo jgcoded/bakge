@@ -22,36 +22,25 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_SHAPE_H
+#define BAKGE_GRAPHICS_SHAPE_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+class Shape : public Node
 {
-}
 
+public:
 
-FrontRenderer::~FrontRenderer()
-{
-}
+    Shape();
+    ~Shape();
 
-
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
+}; /* Shape */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_SHAPE_H */
+

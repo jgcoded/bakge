@@ -22,36 +22,19 @@
  * THE SOFTWARE.
  * */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
+    
+    bakge::math::Matrix M;
+    
+    /* Test some operations */
+    
+    bakge::Deinit();
 
-FrontRenderer::FrontRenderer()
-{
+    return 0;
 }
-
-
-FrontRenderer::~FrontRenderer()
-{
-}
-
-
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
-
-} /* bakge */

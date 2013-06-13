@@ -22,36 +22,25 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_MESH_H
+#define BAKGE_GRAPHICS_MESH_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+class Mesh : public Drawable
 {
-}
 
+public:
 
-FrontRenderer::~FrontRenderer()
-{
-}
+    Mesh();
+    ~Mesh();
 
-
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
+}; /* Mesh */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_MESH_H */
+

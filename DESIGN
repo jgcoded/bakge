@@ -3,13 +3,14 @@ Design of Bakge
 Bakge builds as a static library, making it much easier to run various tests
 without having to constantly modify the main function.
 
-Currently Bakge will use GLFW as its media library. This could change in
-the future if working with X-windows or Windows API interests anyone.
-
 Here are some links to design documents that you can read up on to learn
-about Bakge and the design.
+about Bakge and the design. You can also check out the contents of the doc/
+folder to read up on some of the design principles.
 
 
 Core Classes Design
 http://github.com/palistov/bakge/tree/master/include/bakge/core
+
+API classes
+http://github.com/palistov/bakge/tree/master/include/bakge/api
 

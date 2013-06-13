@@ -52,6 +52,7 @@
 /* Common definitions */
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
+#define BGE_NCP const&
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
@@ -59,16 +60,18 @@
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
+#include <bakge/core/Engine.h>
 #include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 
 /* Math modules */
+#include <bakge/math/Math.h>
 #include <bakge/math/Vector4.h>
+#include <bakge/math/Matrix.h>
+#include <bakge/math/Quaternion.h>
 
-/* Include API interfaces */
+/* Include API classes */
 #include <bakge/api/Window.h>
-
-#include <bakge/core/Engine.h>
 
 /* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
 #ifdef __linux__
@@ -80,7 +83,12 @@
 #endif /* __linux__ */
 
 /* Additional Bakge classes (may depend on OpenGL) */
+#include <bakge/graphics/Node.h>
+#include <bakge/graphics/Pawn.h>
+#include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
+#include <bakge/graphics/Shader.h>
+#include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/FrontRenderer.h>
 
 #endif /* BAKGE_BAKGE_H */

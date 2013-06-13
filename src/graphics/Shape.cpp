@@ -27,31 +27,14 @@
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+Shape::Shape()
 {
 }
 
 
-FrontRenderer::~FrontRenderer()
+Shape::~Shape()
 {
-}
-
-
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
 }
 
 } /* bakge */
+

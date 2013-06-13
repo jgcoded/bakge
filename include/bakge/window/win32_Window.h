@@ -30,7 +30,19 @@
 namespace bakge
 {
 
-typedef class win32_Window {
+typedef class win32_Window
+{
+    friend Result Init(int argc, char* argv[]);
+    friend Result Deinit();
+
+    static HINSTANCE Instance;
+    static WNDCLASSEX WindowClass;
+    static HDC Device; /* Device context */
+    static HGLRC Context; /* OpenGL context */
+    static PIXELFORMATDESCRIPTOR PixFormat;
+    static int Format;
+    
+    static LRESULT CALLBACK WindowProcCallback(HWND, UINT, WPARAM, LPARAM);
 
     win32_Window();
 
@@ -43,8 +55,17 @@ public:
 
     bool IsOpen();
 
-    Result Open();
     Result Close();
+    
+    Result PollEvent(Event* Ev);
+
+    Result SwapBuffers();
+
+
+protected:
+
+    HWND Window;
+    HGLRC LocalContext;
 
 } Window; /* win32_Window */
 

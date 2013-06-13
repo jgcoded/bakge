@@ -30,8 +30,8 @@
 namespace bakge
 {
 
-typedef class x11_Window {
-
+typedef class x11_Window
+{
     friend Result Init(int argc, char* argv[]);
     friend Result Deinit();
 
@@ -52,10 +52,11 @@ public:
 
     bool IsOpen();
 
-    Result Open();
     Result Close();
 
     Result PollEvent(Event* Ev);
+
+    Result SwapBuffers();
 
 
 private:

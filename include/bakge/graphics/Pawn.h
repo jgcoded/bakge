@@ -22,36 +22,35 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_PAWN_H
+#define BAKGE_GRAPHICS_PAWN_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+class Pawn : public Node
 {
-}
+
+public:
+
+    Pawn();
+    virtual ~Pawn();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
+    virtual Result Draw() const;
 
 
-FrontRenderer::~FrontRenderer()
-{
-}
+protected:
 
+    math::Quaternion Facing;
 
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
+}; /* Pawn */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_PAWN_H */
+

@@ -22,36 +22,33 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_MATH_MATRIX_H
+#define BAKGE_MATH_MATRIX_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-
-FrontRenderer::FrontRenderer()
+namespace math
 {
-}
 
-
-FrontRenderer::~FrontRenderer()
+class Matrix
 {
-}
+
+public:
+
+    Matrix();
+    ~Matrix();
 
 
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
+private:
 
+    Scalar Val[16];
 
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
+}; /* Matrix */
 
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
-
+} /* math */
 } /* bakge */
+
+#endif /* BAKGE_MATH_MATRIX_H */
+

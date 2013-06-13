@@ -22,36 +22,31 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_SHADER_H
+#define BAKGE_GRAPHICS_SHADER_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+class Shader : public Bindable
 {
-}
 
+public:
 
-FrontRenderer::~FrontRenderer()
-{
-}
+    Shader();
+    ~Shader();
 
+    /* *
+     * Loads the vertex and fragment shaders from provided paths.
+     * If either fails to load or compile, shader creation fails.
+     * */
+    BGE_FACTORY Shader* Create(const char* VertexPath, const char* FragPath);
 
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
+}; /* Shader */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_SHADER_H */
+

@@ -45,11 +45,9 @@ public:
     virtual ~Window();
 
     virtual bool IsOpen() = 0;
-
-    virtual Result Open() = 0;
     virtual Result Close() = 0;
-
     virtual Result PollEvent(Event* Ev) = 0;
+    virtual Result SwapBuffers() = 0;
 
 }; /* Window */
 

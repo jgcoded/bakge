@@ -36,9 +36,12 @@ class FrontRenderer : public Renderer
 public:
 
     FrontRenderer();
-    ~FrontRenderer();
+    virtual ~FrontRenderer();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
     
-    Result Draw(Drawable* Obj) const;
+    virtual Result Draw(Drawable* Obj) const;
 
 }; /* FrontRenderer */
 

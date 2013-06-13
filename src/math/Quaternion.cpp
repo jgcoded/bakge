@@ -26,32 +26,18 @@
 
 namespace bakge
 {
+namespace math
+{
 
-FrontRenderer::FrontRenderer()
+Quaternion::Quaternion()
 {
 }
 
 
-FrontRenderer::~FrontRenderer()
+Quaternion::~Quaternion()
 {
 }
 
-
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
-
+} /* math */
 } /* bakge */
+

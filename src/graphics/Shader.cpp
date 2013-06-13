@@ -27,31 +27,20 @@
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+Shader::Shader()
 {
 }
 
 
-FrontRenderer::~FrontRenderer()
+Shader::~Shader()
 {
 }
 
 
-Result FrontRenderer::Bind() const
+Shader* Shader::Create(const char* VertexPath, const char* FragPath)
 {
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
+    return NULL;
 }
 
 } /* bakge */
+

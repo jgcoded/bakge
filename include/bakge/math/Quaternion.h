@@ -22,20 +22,33 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_MATH_QUATERNION_H
+#define BAKGE_MATH_QUATERNION_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
-
-Result Init(int argc, char* argv[])
+namespace math
 {
-    return BGE_FAILURE;
-}
 
-
-Result Deinit()
+class Quaternion
 {
-    return BGE_FAILURE;
-}
 
+public:
+
+    Quaternion();
+    ~Quaternion();
+
+
+private:
+
+    Vector4 Val; /* X, Y, Z - vector, W - real */
+
+}; /* Quaternion */
+
+} /* math */
 } /* bakge */
+
+#endif /* BAKGE_MATH_QUATERNION_H */
+

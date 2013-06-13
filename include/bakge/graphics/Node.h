@@ -22,36 +22,35 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_NODE_H
+#define BAKGE_GRAPHICS_NODE_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-FrontRenderer::FrontRenderer()
+class Node : public Drawable
 {
-}
+
+public:
+
+    Node();
+    virtual ~Node();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
+    virtual Result Draw() const;
 
 
-FrontRenderer::~FrontRenderer()
-{
-}
+protected:
 
+    math::Vector4 Position;
 
-Result FrontRenderer::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result FrontRenderer::Draw(Drawable* Obj) const
-{
-    return BGE_FAILURE;
-}
+}; /* Node */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_NODE_H */
+

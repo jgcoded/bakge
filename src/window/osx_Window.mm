@@ -51,13 +51,13 @@ bool osx_Window::IsOpen()
 }
 
 
-Result osx_Window::Open()
+Result osx_Window::Close()
 {
     return BGE_FAILURE;
 }
 
 
-Result osx_Window::Close()
+Result osx_Window::SwapBuffers()
 {
     return BGE_FAILURE;
 }
