@@ -29,10 +29,15 @@
 int main(int argc, char* argv[])
 {
     bakge::Init(argc, argv);
+
+    printf("Getting start time\n");
     
     bakge::Milliseconds T = bakge::GetRunningTime();
 
-    bakge::Delay(3000); /* Delay 3 seconds */
+    printf("%u milliseconds right now\n", T);
+
+    bakge::Delay(2000);
+
     T = bakge::GetRunningTime() - T;
 
     printf("%u milliseconds have passed\n", T);

@@ -33,16 +33,13 @@ endif()
 
 if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
-  include_directories(${X11_INCLUDE_DIR})
-  link_directories(${X11_LIBRARY_DIR})
+  FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+  include_directories(${Cocoa_INCLUDE_DIRS})
   set(CORELIBS
     m
-    ${X11_X_PRE_LIBS}
-    ${X11_LIBRARIES}
-    ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
-    objc
+    ${COCOA_LIBRARY}
   )
 endif()
 
