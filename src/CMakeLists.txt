@@ -6,6 +6,9 @@ include_directories(${BAKGE_SOURCE_DIR}/include)
 
 set(MODULES
   api/Window
+  api/Thread
+  data/SingleNode
+  data/LinkedList
   core/Bindable
   core/Drawable
   core/Engine
@@ -13,14 +16,12 @@ set(MODULES
   core/EventHandler
   core/Renderer
   core/Utility
-  data/SingleNode
-  data/LinkedList
   graphics/Mesh
-  graphics/Texture
-  graphics/Shader
-  graphics/Shape
   graphics/Node
   graphics/Pawn
+  graphics/Shader
+  graphics/Shape
+  graphics/Texture
   math/Vector4
   math/Quaternion
   math/Matrix
@@ -41,9 +42,9 @@ if(WIN32)
 endif()
 
 set(PLATFORM_MODULES
-  window/${PLATFORM_PREFIX}_Window
+  clock/${PLATFORM_PREFIX}_Clock
   utility/${PLATFORM_PREFIX}_Utility
-  system/${PLATFORM_PREFIX}_Clock
+  window/${PLATFORM_PREFIX}_Window
 )
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES})
