@@ -35,6 +35,9 @@ typedef class osx_Window : api::Window
     friend Result Init(int argc, char* argv[]);
     friend Result Deinit();
 
+    static NSOpenGLContext* SharedContext;
+    static NSOpenGLPixelFormat* PixelFormat;
+
     osx_Window();
 
 

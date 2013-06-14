@@ -31,7 +31,25 @@ NSDate* StartTime;
 
 Result Init(int argc, char* argv[])
 {
+    /* Attributes for our OpenGL pixel format */
+    NSOpenGLPixelFormatAttribute FormatAttribs[] = {
+        NSOpenGLPFADoubleBuffer, NSOpenGLPFADepthSize, 32,
+        0
+    };
+
+    /* Get start date of application */
     StartTime = [NSDate date];
+
+    /* Create our pixel format */
+    osx_Window::PixelFormat = [NSOpenGLPixelFormat alloc];
+    [osx_Window::PixelFormat initWithAttributes: FormatAttribs];
+
+    /* Create our OpenGL context */
+    osx_Window::SharedContext = [[NSOpenGLContext alloc] initWithFormat:
+                             osx_Window::PixelFormat shareContext: nil];
+
+    /* Make our context current */
+    [osx_Window::SharedContext makeCurrentContext];
 
     return BGE_SUCCESS;
 }
@@ -39,7 +57,11 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    return BGE_FAILURE;
+    /* Release pixel format and OpenGL context */
+    [osx_Window::PixelFormat release];
+    [osx_Window::SharedContext release];
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
