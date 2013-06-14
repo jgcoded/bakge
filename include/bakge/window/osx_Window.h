@@ -37,6 +37,12 @@ typedef class osx_Window : api::Window
 
     __strong NSWindow* WindowHandle;
 
+    static NSOpenGLContext* SharedContext;
+    static NSOpenGLPixelFormat* PixelFormat;
+
+    NSOpenGLView* GLView;
+    NSOpenGLContext* Context;
+
     osx_Window();
 
 

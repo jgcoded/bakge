@@ -27,6 +27,9 @@
 namespace bakge
 {
 
+NSOpenGLPixelFormat* osx_Window::PixelFormat;
+NSOpenGLContext* osx_Window::SharedContext;
+
 osx_Window::osx_Window()
 {
     WindowHandle = NULL;
@@ -42,7 +45,10 @@ osx_Window::~osx_Window()
 osx_Window* osx_Window::Create(int Width, int Height)
 {
     osx_Window* Win;
+    NSOpenGLContext* Context;
+    NSRect Frame;
 
+    /* Allocate a window */
     Win = new osx_Window;
 
     Win->WindowHandle = [[NSWindow alloc] initWithContentRect:
@@ -55,6 +61,40 @@ osx_Window* osx_Window::Create(int Width, int Height)
                                           defer: NO]; 
 
     [Win->WindowHandle makeKeyAndOrderFront: Win->WindowHandle];
+
+    Frame.origin.x = 50.0f;
+    Frame.origin.y = 50.0f;
+    Frame.size.width = Width;
+    Frame.size.height = Height;
+
+    /* Create our OpenGL view */
+    Win->GLView = [[NSOpenGLView alloc] initWithFrame: Frame
+                                        pixelFormat: PixelFormat];
+
+    if(Win->GLView == NULL) {
+        printf("Error creating OpenGL view\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Allocate a OpenGL context sharing our SharedContext */
+    Win->Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
+                                            shareContext: SharedContext];
+
+    if(Win->Context == NULL) {
+        printf("Error creating OpenGL context\n");
+        delete Win;
+        return NULL;
+    }
+
+    /* Set our view's context & set our context's view */
+    [Win->GLView setOpenGLContext: Win->Context];
+    [Win->Context setView: Win->GLView];
+
+    /* Make our window's context current on this thread */
+    [Win->Context makeCurrentContext];
+
+    [Win->Context clearDrawable];
 
     return Win;
 }
@@ -82,7 +122,8 @@ Result osx_Window::Close()
 
 Result osx_Window::SwapBuffers()
 {
-    return BGE_FAILURE;
+    [Context flushBuffer];
+    return BGE_SUCCESS;
 }
 
 

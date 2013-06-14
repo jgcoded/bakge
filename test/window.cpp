@@ -17,6 +17,8 @@ int main(int argc, char* argv[])
 
     bakge::Event Ev;
 
+    printf("Beginning GL calls\n");
+
     glClearColor(1, 0, 0, 1);
 
     printf("Entering main loop\n");
@@ -34,6 +36,8 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Win->SwapBuffers();
     }
+
+    printf("Main loop terminated\n");
 
     if(Win != NULL)
         delete Win;

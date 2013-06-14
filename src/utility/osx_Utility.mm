@@ -34,6 +34,14 @@ Result Init(int argc, char* argv[])
 {
     NSMenu* MenuBar;
     NSMenuItem* MenuItem;
+    /* Attributes for our OpenGL pixel format */
+    NSOpenGLPixelFormatAttribute FormatAttribs[] = {
+        NSOpenGLPFAWindow,
+        NSOpenGLPFADoubleBuffer,
+        NSOpenGLPFAColorSize, 24,
+        NSOpenGLPFAAlphaSize, 8,
+        0
+    };
 
     NSPool = [[NSAutoreleasePool alloc] init];
 
@@ -50,13 +58,32 @@ Result Init(int argc, char* argv[])
 
     [NSApp finishLaunching];
 
+    /* Get start date of application */
+    StartTime = [NSDate date];
+
+    printf("Creating OpenGL pixel format\n");
+
+    /* Create our pixel format */
+    osx_Window::PixelFormat = [[NSOpenGLPixelFormat alloc]
+                              initWithAttributes: FormatAttribs];
+
+    printf("Setting shared context\n");
+
+    /* Create our OpenGL context */
+    osx_Window::SharedContext = [[NSOpenGLContext alloc] initWithFormat:
+                             osx_Window::PixelFormat shareContext: nil];
+
     return BGE_SUCCESS;
 }
 
 
 Result Deinit()
 {
-    return BGE_FAILURE;
+    /* Release pixel format and OpenGL context */
+    [osx_Window::PixelFormat release];
+    [osx_Window::SharedContext release];
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
