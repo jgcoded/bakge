@@ -1,4 +1,3 @@
-
 Coding Style
 ============
 
@@ -136,6 +135,7 @@ General Convetion
 
 
 * Else blocks and if blocks should always match each other.
+
     e.g.    if(PlayerOne->IsAlive()) {
                 ...
             } else return NULL; /* BAD */
@@ -152,6 +152,7 @@ General Convetion
   If a default case exists, put it at the end of the switch block.
   Do not use a break statement in a default case.
   Put a newline above each case label.
+
     e.g.    switch(PlayerLevel) {
 
             case 1:
