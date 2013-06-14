@@ -14,6 +14,7 @@ set(TESTS
   quaternion
   matrix
   pawn
+  loadfile
 )
 
 if(UNIX AND NOT APPLE)
