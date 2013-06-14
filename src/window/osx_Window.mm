@@ -94,8 +94,6 @@ osx_Window* osx_Window::Create(int Width, int Height)
     /* Make our window's context current on this thread */
     [Win->Context makeCurrentContext];
 
-    [Win->Context clearDrawable];
-
     return Win;
 }
 
@@ -123,6 +121,8 @@ Result osx_Window::Close()
 Result osx_Window::SwapBuffers()
 {
     [Context flushBuffer];
+    [Context clearDrawable];
+
     return BGE_SUCCESS;
 }
 
