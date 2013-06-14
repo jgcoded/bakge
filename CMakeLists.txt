@@ -4,7 +4,7 @@ cmake_minimum_required (VERSION 2.6)
 
 project (BAKGE)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Common required packages
 find_package(OpenGL)
