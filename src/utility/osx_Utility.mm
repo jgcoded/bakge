@@ -33,16 +33,23 @@ Result Init(int argc, char* argv[])
 {
     /* Attributes for our OpenGL pixel format */
     NSOpenGLPixelFormatAttribute FormatAttribs[] = {
-        NSOpenGLPFADoubleBuffer, NSOpenGLPFADepthSize, 32,
+        NSOpenGLPFAWindow,
+        NSOpenGLPFADoubleBuffer,
+        NSOpenGLPFAColorSize, 24,
+        NSOpenGLPFAAlphaSize, 8,
         0
     };
 
     /* Get start date of application */
     StartTime = [NSDate date];
 
+    printf("Creating OpenGL pixel format\n");
+
     /* Create our pixel format */
-    osx_Window::PixelFormat = [NSOpenGLPixelFormat alloc];
-    [osx_Window::PixelFormat initWithAttributes: FormatAttribs];
+    osx_Window::PixelFormat = [[NSOpenGLPixelFormat alloc]
+                              initWithAttributes: FormatAttribs];
+
+    printf("Setting shared context\n");
 
     /* Create our OpenGL context */
     osx_Window::SharedContext = [[NSOpenGLContext alloc] initWithFormat:

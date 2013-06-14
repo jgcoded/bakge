@@ -60,13 +60,30 @@ osx_Window* osx_Window::Create(int Width, int Height)
     Win->GLView = [[NSOpenGLView alloc] initWithFrame: Frame
                                         pixelFormat: PixelFormat];
 
+    if(Win->GLView == NULL) {
+        printf("Error creating OpenGL view\n");
+        delete Win;
+        return NULL;
+    }
+
     /* Allocate a OpenGL context sharing our SharedContext */
-   Win-> Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
+    Win->Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
                                             shareContext: SharedContext];
+
+    if(Win->Context == NULL) {
+        printf("Error creating OpenGL context\n");
+        delete Win;
+        return NULL;
+    }
 
     /* Set our view's context & set our context's view */
     [Win->GLView setOpenGLContext: Win->Context];
     [Win->Context setView: Win->GLView];
+
+    /* Make our window's context current on this thread */
+    [Win->Context makeCurrentContext];
+
+    [Win->Context clearDrawable];
 
     return Win;
 }
