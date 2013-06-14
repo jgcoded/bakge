@@ -27,6 +27,14 @@
 namespace bakge
 {
 
+template <class T>
+class LinkedList
+{
+    public:
+    T push(T toPush, T root);
+    T pop(T root);
+    LinkedList(void){Head = NULL;}
+};
 template<class T>
 LinkedList<T>::LinkedList()
 {
@@ -38,6 +46,9 @@ LinkedList<T>::LinkedList()
 template<class T>
 LinkedList<T>::~LinkedList()
 {
+    public:
+    T push(T toPush, T root);
+    T pop(T root);
 }
 
 } /* bakge */
