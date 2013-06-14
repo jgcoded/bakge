@@ -9,6 +9,9 @@ I'll adjust it before finalizing the pull request.
 Except for the following cases, code should match the Linux kernel coding
 style as described here: https://www.kernel.org/doc/Documentation/CodingStyle
 
+If you have any questions about styling and convention that aren't answered
+here, feel free to e-mail me!
+
 
 Naming Conventions
 ==================
@@ -109,10 +112,13 @@ General Convetion
 
 * Put two newlines between function definitions
 
-* Empty loops OK but put the semicolon on a new line, indented
+* Avoid using a lot of do-while loops. They can be confusing.
+
+* Empty loops are OK but put the semicolon on a new line, indented
 
     e.g.   while(i < 20)
                ;
+
 
 * Do not put spaces between control flow statements and their predicates
 
@@ -139,4 +145,25 @@ General Convetion
             } else {
                 return NULL; /* GOOD */
             }
+
+
+* Switch statement case labels should line up with their switch statement.
+  The case block code and break (or return, not both) should be indented once.
+  If a default case exists, put it at the end of the switch block.
+  Do not use a break statement in a default case.
+  Put a newline above each case label.
+    e.g.    switch(PlayerLevel) {
+
+            case 1:
+                ...
+                return false;
+
+            case 2:
+                ...
+                break;
+
+            default:
+                ...
+            }
+
 
