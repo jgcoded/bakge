@@ -29,18 +29,21 @@ namespace bakge
 
 Byte* LoadFileContents(const char* Path)
 {
-    FILE* fp;
-    long length;
-    Byte* content;
-    fp = fopen(Path, "rb");
-    if (fp != NULL) {
-        fseek(fp, 0, SEEK_END);
-        length = ftell(fp);
-        fseek(fp, 0, SEEK_SET);
-        content = (Byte*)malloc(length);
-        fread(content, length, 1, fp);
-        fclose(fp);
-        return content;
+    FILE* FileHandle;
+    long Length;
+    Byte* FileContent;
+    
+    FileHandle = fopen(Path, "rb");
+    if (FileHandle != NULL) {
+        /* Get character count of file */
+        fseek(FileHandle, 0, SEEK_END);
+        Length = ftell(FileHandle);
+        fseek(FileHandle, 0, SEEK_SET);
+        /* Allocate memory and read in file contents */
+        FileContent = (Byte*)malloc(Length);
+        fread(FileContent, Length, 1, FileHandle);
+        fclose(FileHandle);
+        return FileContent;
     } else {
         return NULL;
     }
