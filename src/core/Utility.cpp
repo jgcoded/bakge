@@ -29,7 +29,21 @@ namespace bakge
 
 Byte* LoadFileContents(const char* Path)
 {
-    return NULL;
+    FILE* fp;
+    long length;
+    Byte* content;
+    fp = fopen(Path, "rb");
+    if (fp != NULL) {
+        fseek(fp, 0, SEEK_END);
+        length = ftell(fp);
+        fseek(fp, 0, SEEK_SET);
+        content = (Byte*)malloc(length);
+        fread(content, length, 1, fp);
+        fclose(fp);
+        return content;
+    } else {
+        return NULL;
+    }
 }
 
 } /* bakge */
