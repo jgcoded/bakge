@@ -10,12 +10,16 @@ int main(int argc, char* argv[])
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
+    printf("Done initializing\n");
 
+    printf("Creating window\n");
     Win = bakge::Window::Create(600, 400);
 
     bakge::Event Ev;
 
     glClearColor(1, 0, 0, 1);
+
+    printf("Entering main loop\n");
 
     while(1) {
         while(Win->PollEvent(&Ev) == BGE_SUCCESS) {

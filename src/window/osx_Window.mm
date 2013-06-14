@@ -27,31 +27,56 @@
 namespace bakge
 {
 
-osx_Window::~osx_Window()
+osx_Window::osx_Window()
 {
+    WindowHandle = NULL;
 }
 
 
-osx_Window::osx_Window()
+osx_Window::~osx_Window()
 {
+    Close();
 }
 
 
 osx_Window* osx_Window::Create(int Width, int Height)
 {
-    return NULL;
+    osx_Window* Win;
+
+    Win = new osx_Window;
+
+    Win->WindowHandle = [[NSWindow alloc] initWithContentRect:
+                                            NSMakeRect(0, 0, Width, Height)
+                                          styleMask:
+                                            NSTitledWindowMask | 
+                                            NSClosableWindowMask | 
+                                            NSMiniaturizableWindowMask 
+                                          backing: NSBackingStoreBuffered 
+                                          defer: NO]; 
+
+    [Win->WindowHandle makeKeyAndOrderFront: Win->WindowHandle];
+
+    return Win;
 }
 
 
 bool osx_Window::IsOpen()
 {
-    return false;
+    return WindowHandle != NULL;
 }
 
 
 Result osx_Window::Close()
 {
-    return BGE_FAILURE;
+    if(IsOpen()) {
+        /* Release NS window */
+        [WindowHandle release];
+        WindowHandle = NULL;
+
+        return BGE_SUCCESS;
+    } else {
+        return BGE_FAILURE;
+    }
 }
 
 

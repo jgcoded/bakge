@@ -35,6 +35,8 @@ typedef class osx_Window : api::Window
     friend Result Init(int argc, char* argv[]);
     friend Result Deinit();
 
+    __strong NSWindow* WindowHandle;
+
     osx_Window();
 
 

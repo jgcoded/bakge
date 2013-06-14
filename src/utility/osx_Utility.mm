@@ -27,11 +27,28 @@
 namespace bakge
 {
 
+NSAutoreleasePool* NSPool;
 NSDate* StartTime;
 
 Result Init(int argc, char* argv[])
 {
+    NSMenu* MenuBar;
+    NSMenuItem* MenuItem;
+
+    NSPool = [[NSAutoreleasePool alloc] init];
+
+    /* Set start date of app */
     StartTime = [NSDate date];
+
+    [NSApplication sharedApplication];
+
+    /*
+    MenuBar = [[NSMenu alloc] init];
+    [NSApp setMainMenu: MenuBar];
+    [NSApp performSelector: @selector(setAppleMenu:) withObject: MenuBar];
+    */
+
+    [NSApp finishLaunching];
 
     return BGE_SUCCESS;
 }
