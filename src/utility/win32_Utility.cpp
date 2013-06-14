@@ -37,14 +37,10 @@ Result Init(int argc, char* argv[])
     HANDLE CurrentThread;
     DWORD_PTR OldThreadMask;
     
-    /**********************************
-     * Clock stuff
-     *********************************/
-    
     /* Grab current thread handle */
     CurrentThread = GetCurrentThread();
     
-    /* Run this on processor 1 only */
+    /* Run clock stuff on processor 1 only */
     OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
     
     /* Get PerformanceCounter frequency and start tick count */
@@ -55,9 +51,7 @@ Result Init(int argc, char* argv[])
     SetThreadAffinityMask(CurrentThread, OldThreadMask);
     
     
-    /**********************************
-     * Set up window stuff
-     *********************************/
+    /* Do window class set up */
     win32_Window::Instance = GetModuleHandle(0);
     
     /* Convenience */
