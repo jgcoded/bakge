@@ -32,7 +32,7 @@
 #include <math.h>
 
 /* GCC-only attributes */
-#ifdef __GNUC__
+#if defined __GNUC__ || defined __clang__
 /* Send compiler warning if function return result is not used */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
 /* Mark a variable as possibly unused in its function  */
