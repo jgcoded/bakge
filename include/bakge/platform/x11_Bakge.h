@@ -33,6 +33,8 @@
 #include <X11/Xutil.h>
 #include <X11/Xos.h>
 #include <X11/Xatom.h>
+#include <time.h>
+#include <pthread.h>
 
 #include <bakge/window/x11_Window.h>
 #include <bakge/thread/x11_Thread.h>

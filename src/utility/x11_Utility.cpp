@@ -27,11 +27,15 @@
 namespace bakge
 {
 
+timespec StartTime;
+
 Result Init(int argc, char* argv[])
 {
     /* Visual info settings */
     int DoubleBuffer[] = { GLX_RGBA, GLX_DEPTH_SIZE, 16, None };
     int Dummy;
+
+    clock_gettime(CLOCK_MONOTONIC, &StartTime);
 
     /* Connect to X server */
     x11_Window::XDisplay = XOpenDisplay(NULL);

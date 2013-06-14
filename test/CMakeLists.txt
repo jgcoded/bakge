@@ -27,6 +27,7 @@ if(UNIX AND NOT APPLE)
     ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
+    pthread
   )
 endif()
 
