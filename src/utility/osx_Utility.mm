@@ -48,9 +48,6 @@ Result Init(int argc, char* argv[])
     osx_Window::SharedContext = [[NSOpenGLContext alloc] initWithFormat:
                              osx_Window::PixelFormat shareContext: nil];
 
-    /* Make our context current */
-    [osx_Window::SharedContext makeCurrentContext];
-
     return BGE_SUCCESS;
 }
 

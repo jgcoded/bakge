@@ -27,37 +27,74 @@
 namespace bakge
 {
 
-osx_Window::~osx_Window()
-{
-}
-
+NSOpenGLContext* osx_Window::SharedContext;
+NSOpenGLPixelFormat* osx_Window::PixelFormat;
 
 osx_Window::osx_Window()
 {
+    GLView = NULL;
+}
+
+
+osx_Window::~osx_Window()
+{
+    Close();
 }
 
 
 osx_Window* osx_Window::Create(int Width, int Height)
 {
-    return NULL;
+    osx_Window* Win;
+    NSOpenGLContext* Context;
+    NSRect Frame;
+
+    /* Allocate a window */
+    Win = new osx_Window;
+
+    Frame.origin.x = 50.0f;
+    Frame.origin.y = 50.0f;
+    Frame.size.width = Width;
+    Frame.size.height = Height;
+
+    /* Create our OpenGL view */
+    Win->GLView = [[NSOpenGLView alloc] initWithFrame: Frame
+                                        pixelFormat: PixelFormat];
+
+    /* Allocate a OpenGL context sharing our SharedContext */
+   Win-> Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
+                                            shareContext: SharedContext];
+
+    /* Set our view's context & set our context's view */
+    [Win->GLView setOpenGLContext: Win->Context];
+    [Win->Context setView: Win->GLView];
+
+    return Win;
 }
 
 
 bool osx_Window::IsOpen()
 {
-    return false;
+    return GLView != NULL;
 }
 
 
 Result osx_Window::Close()
 {
+    if(IsOpen()) {
+
+        [GLView release];
+        GLView = NULL;
+
+    }
+
     return BGE_FAILURE;
 }
 
 
 Result osx_Window::SwapBuffers()
 {
-    return BGE_FAILURE;
+    [Context flushBuffer];
+    return BGE_SUCCESS;
 }
 
 
