@@ -29,8 +29,35 @@ namespace bakge
 
 #define BAKGE_WINDOW_CLASS_NAME "BakgeWinClass"
 
+LARGE_INTEGER ClockFreq;
+LARGE_INTEGER StartCount;
+
 Result Init(int argc, char* argv[])
 {
+    HANDLE CurrentThread;
+    DWORD_PTR OldThreadMask;
+    
+    /**********************************
+     * Clock stuff
+     *********************************/
+    
+    /* Grab current thread handle */
+    CurrentThread = GetCurrentThread();
+    
+    /* Run this on processor 1 only */
+    OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
+    
+    /* Get PerformanceCounter frequency and start tick count */
+    QueryPerformanceFrequency(&ClockFreq);
+    QueryPerformanceCounter(&StartCount);
+    
+    /* Reset thread affinity mask for this thread */
+    SetThreadAffinityMask(CurrentThread, OldThreadMask);
+    
+    
+    /**********************************
+     * Set up window stuff
+     *********************************/
     win32_Window::Instance = GetModuleHandle(0);
     
     /* Convenience */
