@@ -39,6 +39,12 @@ public:
     SingleNode();
     ~SingleNode();
 
+    SingleNode<T>* getNext();
+    void setNext(SingleNode<T>*);
+
+    T getData();
+    void setData(const T&);
+
 
 protected:
 
@@ -46,6 +52,46 @@ protected:
     T Data;
 
 }; /* SingleNode */
+
+template<class T>
+SingleNode<T>::SingleNode()
+{
+    Next = NULL;
+}
+
+
+template<class T>
+SingleNode<T>::~SingleNode()
+{
+}
+
+
+template<class T>
+SingleNode<T>* SingleNode<T>::getNext()
+{
+    return Next;
+}
+
+
+template<class T>
+void SingleNode<T>::setNext(SingleNode<T>* Next)
+{
+    this->Next = Next;
+}
+
+
+template<class T>
+T SingleNode<T>::getData()
+{
+    return Data;
+}
+
+
+template<class T>
+void SingleNode<T>::setData(const T& Data)
+{
+    this->Data = Data;
+}
 
 } /* bakge */
 

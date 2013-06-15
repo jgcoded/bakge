@@ -39,6 +39,10 @@ public:
     LinkedList();
     ~LinkedList();
 
+    T Push(T toPush); /* For what do we need to return the same value that we just pushed? */
+    T Pop();
+
+	bool IsEmpty();
 
 protected:
 
@@ -46,6 +50,77 @@ protected:
     SingleNode<T>* Tail;
 
 }; /* LinkedList */
+
+template<class T>
+LinkedList<T>::LinkedList()
+{
+    Head = NULL;
+    Tail = NULL;
+}
+
+
+template<class T>
+LinkedList<T>::~LinkedList()
+{
+    /* Iterate list and free memory */
+    SingleNode<T>* Node;
+    while (Head != NULL) {
+        Node = Head;
+        Head = Head->getNext();
+        delete Node;
+    }
+}
+
+
+template<class T>
+T LinkedList<T>::Push(T toPush)
+{
+    /* Create new node */
+    SingleNode<T>* NewNode = new SingleNode<T>();
+    NewNode->setData(toPush);
+
+    /* Move pointers */
+    if (Head == NULL) {
+        Tail = Head = NewNode;
+        NewNode->setNext(NULL);
+    } else {
+        NewNode->setNext(Head);
+        Head = NewNode;
+    }
+    return toPush;
+}
+
+
+template<class T>
+T LinkedList<T>::Pop()
+{
+    /* What about exceptions? Use default or write our own? */
+    if (Head == NULL) {
+        throw "LinkedList is empty";
+    }
+    
+    /* Memorize pointer to free memory */
+    SingleNode<T>* TopNode = Head;
+    
+    /* Move pointers */
+    Head = Head->getNext();
+    if (Head == NULL) {
+        Tail = Head;
+    }
+    
+    /* Memorize return value and free memory */
+    T Result = TopNode->getData();
+    delete TopNode;
+    return Result;
+}
+
+
+template<class T>
+bool LinkedList<T>::IsEmpty()
+{
+	/* List is empty if Head pointer is NULL */
+	return Head == NULL;
+}
 
 } /* bakge */
 

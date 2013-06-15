@@ -13,8 +13,6 @@ set(MODULES
   core/EventHandler
   core/Renderer
   core/Utility
-  data/SingleNode
-  data/LinkedList
   graphics/Mesh
   graphics/Texture
   graphics/Shader

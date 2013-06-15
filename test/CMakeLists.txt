@@ -14,6 +14,7 @@ set(TESTS
   quaternion
   matrix
   pawn
+  linkedlist
 )
 
 if(UNIX AND NOT APPLE)
