@@ -62,12 +62,11 @@ if(WIN32)
     user32.lib
     glu32.lib
     winmm.lib
-    libglfw3.lib
   )
 endif(WIN32)
 
 
 foreach(test ${TESTS})
   add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} bakge ${CORELIBS})
+  target_link_libraries(${test} bakge glfw3 ${CORELIBS})
 endforeach(test)
