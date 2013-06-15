@@ -22,21 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_X11_THREAD_H
+#define BAKGE_THREAD_X11_THREAD_H
 
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+class x11_Thread : api::Thread
 {
-}
 
+public:
 
-template<class T>
-SingleNode<T>::~SingleNode()
-{
-}
+    x11_Thread();
+    virtual ~x11_Thread();
+
+}; /* x11_Thread */
 
 } /* bakge */
 
+#endif /* BAKGE_THREAD_X11_THREAD_H */

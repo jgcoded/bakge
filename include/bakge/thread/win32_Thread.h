@@ -22,21 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_WIN32_THREAD_H
+#define BAKGE_THREAD_WIN32_THREAD_H
 
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+class win32_Thread : api::Thread
 {
-}
 
+public:
 
-template<class T>
-SingleNode<T>::~SingleNode()
-{
-}
+    win32_Thread();
+    virtual ~win32_Thread();
+
+}; /* win32_Thread */
 
 } /* bakge */
 
+#endif /* BAKGE_THREAD_WIN32_THREAD_H */

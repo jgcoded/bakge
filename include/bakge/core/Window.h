@@ -22,21 +22,43 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_CORE_WINDOW_H
+#define BAKGE_CORE_WINDOW_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
-{
-}
+#define GLFWCALLBACK static
 
-
-template<class T>
-SingleNode<T>::~SingleNode()
+class Window : public Bindable
 {
-}
+    GLFWCALLBACK void WindowMoved(GLFWwindow* Handle,  int X, int Y);
+    GLFWCALLBACK void WindowResized(GLFWwindow* Handle, int Width, int Height);
+    GLFWCALLBACK void WindowClosed(GLFWwindow* Handle);
+
+    GLFWwindow* WindowHandle;
+
+    Window();
+    
+
+public:
+
+    ~Window();
+
+    BGE_FACTORY Window* Create(int Width, int Height);
+
+    bool IsOpen();
+    Result Close();
+    Result PollEvent(Event* Ev);
+    Result SwapBuffers();
+
+    Result Bind() const;
+    Result Unbind() const;
+
+}; /* Window */
 
 } /* bakge */
 
+#endif /* BAKGE_CORE_WINDOW_H */

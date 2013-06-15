@@ -27,16 +27,40 @@
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+Result Delay(Milliseconds BGE_NCP Time)
 {
+    Milliseconds End = Time + GetRunningTime();
+    
+    while(GetRunningTime() < End)
+        ;
+    
+    return BGE_SUCCESS;
 }
 
 
-template<class T>
-SingleNode<T>::~SingleNode()
+Milliseconds GetRunningTime()
 {
+    /* Defined in src/utility/win32_Utility.cpp */
+    extern LARGE_INTEGER ClockFreq;
+    extern LARGE_INTEGER StartCount;
+    LARGE_INTEGER TickCount;
+    HANDLE CurrentThread;
+    DWORD_PTR OldThreadMask;
+    
+    /* Grab current thread handle */
+    CurrentThread = GetCurrentThread();
+    
+    /* Run this on processor 1 only */
+    OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
+    
+    /* Get tick count */
+    QueryPerformanceCounter(&TickCount);
+    
+    /* Reset thread affinity mask for this thread */
+    SetThreadAffinityMask(CurrentThread, OldThreadMask);
+    
+    return (Milliseconds)(1000 * TickCount.QuadPart / ClockFreq.QuadPart)
+          - (Milliseconds)(1000 * StartCount.QuadPart / ClockFreq.QuadPart);
 }
 
 } /* bakge */
-

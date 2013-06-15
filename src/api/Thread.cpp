@@ -26,17 +26,17 @@
 
 namespace bakge
 {
+namespace api
+{
 
-template<class T>
-SingleNode<T>::SingleNode()
+Thread::Thread()
 {
 }
 
 
-template<class T>
-SingleNode<T>::~SingleNode()
+Thread::~Thread()
 {
 }
 
+} /* api */
 } /* bakge */
-

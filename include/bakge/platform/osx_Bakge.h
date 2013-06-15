@@ -25,9 +25,10 @@
 #ifndef BAKGE_PLATFORM_OSX_BAKGE_H
 #define BAKGE_PLATFORM_OSX_BAKGE_H
 
+#import <cocoa/Cocoa.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 
-#include <bakge/window/osx_Window.h>
+#include <bakge/thread/osx_Thread.h>
 
 #endif /* BAKGE_PLATFORM_OSX_BAKGE_H */

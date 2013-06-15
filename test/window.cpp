@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
     bakge::Event Ev;
 
     glClearColor(1, 0, 0, 1);
+    glViewport(0, 0, 600, 400);
 
     while(1) {
         while(Win->PollEvent(&Ev) == BGE_SUCCESS) {
@@ -27,8 +28,10 @@ int main(int argc, char* argv[])
         if(Win->IsOpen() == false)
             break;
 
+        Win->Bind();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Win->SwapBuffers();
+        Win->Unbind();
     }
 
     if(Win != NULL)

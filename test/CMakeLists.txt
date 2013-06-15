@@ -3,8 +3,10 @@
 cmake_minimum_required(VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
+include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
 
 set(TESTS
+  clock
   texture
   types
   window
@@ -13,36 +15,44 @@ set(TESTS
   quaternion
   matrix
   pawn
+  loadfile
 )
 
-if(UNIX)
+
+link_directories(${BAKGE_SOURCE_DIR}/lib)
+
+if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   link_directories(${X11_LIBRARY_DIR})
   set(CORELIBS
     m
+    glfw3
+    GL
+    GLU
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
+    Xrandr
+    Xi
+    pthread
   )
-endif(UNIX)
+endif()
 
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
-  include_directories(${X11_INCLUDE_DIR})
-  link_directories(${X11_LIBRARY_DIR})
+  FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+  include_directories(${Cocoa_INCLUDE_DIRS})
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(CORELIBS
     m
-    ${X11_X_PRE_LIBS}
-    ${X11_LIBRARIES}
-    ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
+    ${COCOA_LIBRARY}
+    glfw3
   )
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+endif()
 
 
 if(WIN32)
@@ -58,5 +68,5 @@ endif(WIN32)
 
 foreach(test ${TESTS})
   add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} bakge ${CORELIBS})
+  target_link_libraries(${test} bakge glfw3 ${CORELIBS})
 endforeach(test)

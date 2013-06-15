@@ -27,16 +27,13 @@
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+osx_Thread::osx_Thread()
 {
 }
 
 
-template<class T>
-SingleNode<T>::~SingleNode()
+osx_Thread::~osx_Thread()
 {
 }
 
 } /* bakge */
-

@@ -27,15 +27,70 @@
 namespace bakge
 {
 
+BakgeApplicationDelegate* AppDelegate;
+NSAutoreleasePool* NSPool;
+NSDate* StartTime;
+
 Result Init(int argc, char* argv[])
 {
-    return BGE_FAILURE;
+    NSMenu* MenuBar;
+    NSMenuItem* MenuItem;
+    /* Attributes for our OpenGL pixel format */
+    NSOpenGLPixelFormatAttribute FormatAttribs[] = {
+        NSOpenGLPFAWindow,
+        NSOpenGLPFADoubleBuffer,
+        NSOpenGLPFAColorSize, 24,
+        NSOpenGLPFAAlphaSize, 8,
+        0
+    };
+
+    NSPool = [[NSAutoreleasePool alloc] init];
+
+    /* Set start date of app */
+    StartTime = [NSDate date];
+
+    [NSApplication sharedApplication];
+
+    /* Menu bar */
+    MenuBar = [[NSMenu alloc] init];
+    [NSApp setMainMenu: MenuBar];
+
+    [NSApp performSelector: @selector(setAppleMenu:) withObject: MenuBar];
+
+    [NSApp finishLaunching];
+
+    AppDelegate = [[BakgeApplicationDelegate alloc] init];
+
+    [NSApp setDelegate: AppDelegate];
+
+    /* Get start date of application */
+    StartTime = [NSDate date];
+
+    printf("Creating OpenGL pixel format\n");
+
+    /* Create our pixel format */
+    osx_Window::PixelFormat = [[NSOpenGLPixelFormat alloc]
+                              initWithAttributes: FormatAttribs];
+
+    printf("Setting shared context\n");
+
+    /* Create our OpenGL context */
+    osx_Window::SharedContext = [[NSOpenGLContext alloc] initWithFormat:
+                             osx_Window::PixelFormat shareContext: nil];
+
+    return BGE_SUCCESS;
 }
 
 
 Result Deinit()
 {
-    return BGE_FAILURE;
+    /* Release pixel format and OpenGL context */
+    [osx_Window::PixelFormat release];
+    [osx_Window::SharedContext release];
+
+    [NSPool release];
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

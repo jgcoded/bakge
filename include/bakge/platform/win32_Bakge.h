@@ -29,6 +29,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include <bakge/window/win32_Window.h>
+#include <bakge/thread/win32_Thread.h>
 
 #endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */

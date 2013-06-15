@@ -22,21 +22,19 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_SYSTEM_CLOCK_H
+#define BAKGE_SYSTEM_CLOCK_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
-{
-}
+BGE_FUNC Result Delay(Milliseconds BGE_NCP Time);
 
-
-template<class T>
-SingleNode<T>::~SingleNode()
-{
-}
+BGE_FUNC Milliseconds GetRunningTime();
 
 } /* bakge */
+
+#endif /* BAKGE_SYSTEM_CLOCK_H */
 

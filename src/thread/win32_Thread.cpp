@@ -27,16 +27,13 @@
 namespace bakge
 {
 
-template<class T>
-SingleNode<T>::SingleNode()
+win32_Thread::win32_Thread()
 {
 }
 
 
-template<class T>
-SingleNode<T>::~SingleNode()
+win32_Thread::~win32_Thread()
 {
 }
 
 } /* bakge */
-
