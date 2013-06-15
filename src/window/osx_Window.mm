@@ -24,24 +24,49 @@
 
 #include <bakge/Bakge.h>
 
-@implementation BakgeOpenGLView
+@implementation BakgeApplicationDelegate
 
-- (void) prepareOpenGL
+- (NSApplicationTerminateReply) applicationShouldTerminate:
+                                    (NSApplication*) Sender
 {
+    printf("Termination sent to application\n");
+    return NSTerminateCancel;
+}
+
+@end
+
+
+@implementation BakgeWindowDelegate
+
+- (BOOL) windowShouldClose: (id) Sender
+{
+    printf("Window closing\n");
+    return YES;
 }
 
 
-- (void) drawRect: (NSRect) bounds
+- (void) windowDidResize: (NSNotification*) Notification
 {
+    printf("Resized\n");
 }
 
+@end
 
-- (void) reshape
+
+@implementation BakgeContentView
+
+- (id) init
 {
+    self = [super init];
+    return self;
 }
 
+@end
 
-- (BOOL) acceptsFirstResponder
+
+@implementation BakgeWindow
+
+- (BOOL) canBecomeKeyWindow
 {
     return YES;
 }
@@ -71,47 +96,41 @@ osx_Window* osx_Window::Create(int Width, int Height)
     osx_Window* Win;
     NSOpenGLContext* Context;
     NSRect Frame;
+    NSView* WindowView;
 
     /* Allocate a window */
     Win = new osx_Window;
 
-    Win->WindowHandle = [[NSWindow alloc] initWithContentRect:
+    Win->WindowHandle = [[BakgeWindow alloc] initWithContentRect:
                                             NSMakeRect(0, 0, Width, Height)
                                           styleMask:
                                             NSTitledWindowMask | 
                                             NSClosableWindowMask | 
+                                            NSResizableWindowMask | 
                                             NSMiniaturizableWindowMask 
                                           backing: NSBackingStoreBuffered 
                                           defer: NO]; 
 
-    [Win->WindowHandle makeKeyAndOrderFront: Win->WindowHandle];
+    [Win->WindowHandle makeKeyAndOrderFront: nil];
+    [Win->WindowHandle setTitle: @"Bakge"];
 
-    Frame.origin.x = 50.0f;
-    Frame.origin.y = 50.0f;
-    Frame.size.width = Width;
-    Frame.size.height = Height;
-
-    /* Create our OpenGL view */
-    Win->GLView = [[BakgeOpenGLView alloc] initWithFrame: Frame
-                                        pixelFormat: PixelFormat];
-
-    if(Win->GLView == NULL) {
-        printf("Error creating OpenGL view\n");
+    Win->WindowDelegate = [[BakgeWindowDelegate alloc] init];
+    if(Win->WindowDelegate == NULL) {
+        printf("Error creating window delegate\n");
         delete Win;
         return NULL;
     }
+    [Win->WindowHandle setDelegate: Win->WindowDelegate];
 
-    printf("Creating window's context\n");
+    Frame.origin.x = 0;
+    Frame.origin.y = 0;
+    Frame.size.width = Width;
+    Frame.size.height = Height;
 
-    /* Allocate a OpenGL context sharing our SharedContext */
-    /*Win->Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
-                                            shareContext: SharedContext];
-    */
-
-    Win->Context = [Win->GLView openGLContext];
-
-    if(Win->Context == NULL) {
-        printf("Error creating OpenGL context\n");
+    printf("Creating window's content view\n");
+    Win->ContentView = [[BakgeContentView alloc] init];
+    if(Win->ContentView == NULL) {
+        printf("Error creating window content view\n");
         delete Win;
         return NULL;
     }
@@ -121,19 +140,9 @@ osx_Window* osx_Window::Create(int Width, int Height)
     Opaque = 0;
     [Win->Context setValues: &SwapInterval forParameter: NSOpenGLCPSwapInterval];
     [Win->Context setValues: &Opaque forParameter: NSOpenGLCPSurfaceOpacity];
+    [Win->Context setView: Win->ContentView];
 
-    printf("Making context current\n");
-
-    /* Make our window's context current on this thread */
-    //[[Win->GLView openGLcontext] makeCurrentContext];
-
-    printf("Setting view's context\n");
-    /* Set our view's context */
-    //[Win->GLView setOpenGLContext: Win->Context];
-
-    printf("Setting Context's view\n");
-    /* Set our context's view */
-    //[Win->Context setView: Win->GLView];
+    [Win->WindowHandle setContentView: Win->ContentView];
 
     return Win;
 }
@@ -174,15 +183,13 @@ Result osx_Window::PollEvent(Event* Ev)
 
 Result osx_Window::Bind() const
 {
-    [Context clearDrawable];
-    [GLView setNeedsDisplay: YES];
+    [Context update];
     return BGE_SUCCESS;
 }
 
 
 Result osx_Window::Unbind() const
 {
-    [GLView setNeedsDisplay: YES];
     return BGE_SUCCESS;
 }
 

@@ -27,6 +27,7 @@
 namespace bakge
 {
 
+BakgeApplicationDelegate* AppDelegate;
 NSAutoreleasePool* NSPool;
 NSDate* StartTime;
 
@@ -50,13 +51,15 @@ Result Init(int argc, char* argv[])
 
     [NSApplication sharedApplication];
 
-    /*
+    /* Menu bar */
     MenuBar = [[NSMenu alloc] init];
     [NSApp setMainMenu: MenuBar];
-    [NSApp performSelector: @selector(setAppleMenu:) withObject: MenuBar];
-    */
 
     [NSApp finishLaunching];
+
+    AppDelegate = [[BakgeApplicationDelegate alloc] init];
+
+    [NSApp setDelegate: AppDelegate];
 
     /* Get start date of application */
     StartTime = [NSDate date];
@@ -82,6 +85,8 @@ Result Deinit()
     /* Release pixel format and OpenGL context */
     [osx_Window::PixelFormat release];
     [osx_Window::SharedContext release];
+
+    [NSPool release];
 
     return BGE_SUCCESS;
 }

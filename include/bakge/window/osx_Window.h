@@ -28,7 +28,19 @@
 #include <bakge/Bakge.h>
 
 /* Our OpenGL view class */
-@interface BakgeOpenGLView : NSOpenGLView
+@interface BakgeContentView : NSView
+
+- (id) init;
+
+@end
+
+@interface BakgeApplicationDelegate : NSObject<NSApplicationDelegate>
+@end
+
+@interface BakgeWindow : NSWindow { }
+@end
+
+@interface BakgeWindowDelegate : NSObject<NSWindowDelegate>
 @end
 
 namespace bakge
@@ -44,8 +56,9 @@ typedef class osx_Window : api::Window
     static NSOpenGLContext* SharedContext;
     static NSOpenGLPixelFormat* PixelFormat;
 
-    NSOpenGLView* GLView;
+    BakgeContentView* ContentView;
     NSOpenGLContext* Context;
+    BakgeWindowDelegate* WindowDelegate;
 
     osx_Window();
 
