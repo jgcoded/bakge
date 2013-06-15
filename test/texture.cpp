@@ -7,61 +7,73 @@
 int main(int argc, char* argv[])
 {
     bakge::Texture* Tex;
-	bakge::Byte* pictureInfo;
-	bakge::Window* win;
+    bakge::Byte* PictureInfo;
+    bakge::Window* Win;
 
     bakge::Init(argc, argv);
 
-	pictureInfo = bakge::LoadFileContents("C:\\Users\\Student\\Desktop\\texture.raw");
+    PictureInfo = (bakge::Byte*)malloc(512 * 512 * 3);
+
+    /* Create a random (really ugly) texture */
+    for(int i=0;i<512;++i) {
+        for(int j=0;j<512;++j) {
+            PictureInfo[i*512*3+j] = (j - i) * 256 / 512;
+            PictureInfo[i*512*3+j+1] = j * 256 / 512;
+            PictureInfo[i*512*3+j+2] = i * 256 / 512;
+        }
+    }
+
+    Win = bakge::Window::Create(600, 400);
+    Win->Bind();
 
     /* When testing the completed class, pass raw image data as last param */
-    Tex = bakge::Texture::Create(64, 64, GL_RGB, GL_UNSIGNED_BYTE, (void*)pictureInfo);
-
-	win = bakge::Window::Create(600, 400);
+    Tex = bakge::Texture::Create(64, 64, GL_RGB, GL_UNSIGNED_BYTE, (void*)PictureInfo);
 
     bakge::Event Ev;
 
     glClearColor(1, 0, 0, 1);
+    glEnable(GL_TEXTURE_2D);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0, 600, 0, 400, -1, 1);
 
-
-	    while(1) {
-        while(win->PollEvent(&Ev) == BGE_SUCCESS) {
+    while(1) {
+        while(Win->PollEvent(&Ev) == BGE_SUCCESS) {
             if(Ev.Type == -1)
-                win->Close();
+                Win->Close();
         }
 
         /* Don't draw if the window has closed */
-        if(win->IsOpen() == false)
+        if(Win->IsOpen() == false)
             break;
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		glLoadIdentity(); 
-		//glEnable( GL_TEXTURE_2D );
-		//gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-		
-		Tex->Draw();
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
 
-        win->SwapBuffers();
+        Tex->Bind();
+        glBegin(GL_QUADS);
+        glTexCoord2i(0, 0); glVertex2i(0, 0);
+        glTexCoord2i(0, 1); glVertex2i(0, 400);
+        glTexCoord2i(1, 1); glVertex2i(600, 400);
+        glTexCoord2i(1, 0); glVertex2i(600, 0);
+        glEnd();
+        Tex->Unbind();
+        
+        glMatrixMode(GL_PROJECTION);
+        Win->SwapBuffers();
     }
 
-    
 
-
-
-    /* *
-     * Future texture testing will go here.
-     * The texture will need to be drawn to fully test it, so a simple
-     * window/engine class might be built for this test too
-     * */
-
-
-
-	if(win != NULL)
-		delete win;
+    if(Win != NULL)
+        delete Win;
 
     if(Tex != NULL)
         delete Tex;
+
+    free(PictureInfo);
 
     bakge::Deinit();
 

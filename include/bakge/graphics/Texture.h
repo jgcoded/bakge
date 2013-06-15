@@ -51,8 +51,6 @@ public:
 
     Texture();
     ~Texture();
-	Result Bind() const;
-	Result Unbind() const;
 
     /* *
      * Accepts metadata and raw image data to create an OpenGL texture
@@ -62,17 +60,13 @@ public:
     BGE_FACTORY Texture* Create(int Width, int Height, GLint Format,
                                             GLenum Type, void* Data);
 
-	void Draw();
+    Result Bind() const;
+    Result Unbind() const;
+
 
 private:
-	GLuint texture[1]; // The openGL texture ID
-	int width;
-	int height;
-	
 
-	
-
-
+    GLuint TextureID;
 
 }; /* Texture */
 
