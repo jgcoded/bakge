@@ -27,6 +27,10 @@
 
 #include <bakge/Bakge.h>
 
+/* Our OpenGL view class */
+@interface BakgeOpenGLView : NSOpenGLView
+@end
+
 namespace bakge
 {
 
@@ -51,6 +55,9 @@ public:
     ~osx_Window();
 
     BGE_FACTORY osx_Window* Create(int Width, int Height);
+
+    Result Bind() const;
+    Result Unbind() const;
 
     bool IsOpen();
     Result Close();

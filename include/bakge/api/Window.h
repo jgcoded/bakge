@@ -32,7 +32,7 @@ namespace bakge
 namespace api
 {
 
-class Window
+class Window : public Bindable
 {
 
 protected:

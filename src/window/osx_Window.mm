@@ -24,6 +24,30 @@
 
 #include <bakge/Bakge.h>
 
+@implementation BakgeOpenGLView
+
+- (void) prepareOpenGL
+{
+}
+
+
+- (void) drawRect: (NSRect) bounds
+{
+}
+
+
+- (void) reshape
+{
+}
+
+
+- (BOOL) acceptsFirstResponder
+{
+    return YES;
+}
+
+@end
+
 namespace bakge
 {
 
@@ -68,7 +92,7 @@ osx_Window* osx_Window::Create(int Width, int Height)
     Frame.size.height = Height;
 
     /* Create our OpenGL view */
-    Win->GLView = [[NSOpenGLView alloc] initWithFrame: Frame
+    Win->GLView = [[BakgeOpenGLView alloc] initWithFrame: Frame
                                         pixelFormat: PixelFormat];
 
     if(Win->GLView == NULL) {
@@ -77,9 +101,14 @@ osx_Window* osx_Window::Create(int Width, int Height)
         return NULL;
     }
 
+    printf("Creating window's context\n");
+
     /* Allocate a OpenGL context sharing our SharedContext */
-    Win->Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
+    /*Win->Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
                                             shareContext: SharedContext];
+    */
+
+    Win->Context = [Win->GLView openGLContext];
 
     if(Win->Context == NULL) {
         printf("Error creating OpenGL context\n");
@@ -87,12 +116,24 @@ osx_Window* osx_Window::Create(int Width, int Height)
         return NULL;
     }
 
-    /* Set our view's context & set our context's view */
-    [Win->GLView setOpenGLContext: Win->Context];
-    [Win->Context setView: Win->GLView];
+    GLint SwapInterval, Opaque;
+    SwapInterval = 1;
+    Opaque = 0;
+    [Win->Context setValues: &SwapInterval forParameter: NSOpenGLCPSwapInterval];
+    [Win->Context setValues: &Opaque forParameter: NSOpenGLCPSurfaceOpacity];
+
+    printf("Making context current\n");
 
     /* Make our window's context current on this thread */
-    [Win->Context makeCurrentContext];
+    //[[Win->GLView openGLcontext] makeCurrentContext];
+
+    printf("Setting view's context\n");
+    /* Set our view's context */
+    //[Win->GLView setOpenGLContext: Win->Context];
+
+    printf("Setting Context's view\n");
+    /* Set our context's view */
+    //[Win->Context setView: Win->GLView];
 
     return Win;
 }
@@ -121,8 +162,6 @@ Result osx_Window::Close()
 Result osx_Window::SwapBuffers()
 {
     [Context flushBuffer];
-    [Context clearDrawable];
-
     return BGE_SUCCESS;
 }
 
@@ -130,6 +169,21 @@ Result osx_Window::SwapBuffers()
 Result osx_Window::PollEvent(Event* Ev)
 {
     return BGE_FAILURE;
+}
+
+
+Result osx_Window::Bind() const
+{
+    [Context clearDrawable];
+    [GLView setNeedsDisplay: YES];
+    return BGE_SUCCESS;
+}
+
+
+Result osx_Window::Unbind() const
+{
+    [GLView setNeedsDisplay: YES];
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

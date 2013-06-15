@@ -33,8 +33,10 @@ int main(int argc, char* argv[])
         if(Win->IsOpen() == false)
             break;
 
+        Win->Bind();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         Win->SwapBuffers();
+        Win->Unbind();
     }
 
     printf("Main loop terminated\n");
