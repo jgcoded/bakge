@@ -33,9 +33,13 @@ namespace api
 class Thread
 {
 
-public:
+protected:
 
     Thread();
+
+
+public:
+
     virtual ~Thread();
 
     virtual Result Kill() = 0;
