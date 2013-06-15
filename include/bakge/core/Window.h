@@ -30,10 +30,15 @@
 namespace bakge
 {
 
+#define GLFWCALLBACK static
+
 class Window : public Bindable
 {
+    GLFWCALLBACK void WindowMoved(GLFWwindow* Handle,  int X, int Y);
+    GLFWCALLBACK void WindowResized(GLFWwindow* Handle, int Width, int Height);
+    GLFWCALLBACK void WindowClosed(GLFWwindow* Handle);
 
-protected:
+    GLFWwindow* WindowHandle;
 
     Window();
     

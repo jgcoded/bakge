@@ -27,54 +27,97 @@
 namespace bakge
 {
 
+void Window::WindowMoved(GLFWwindow* Handle,  int X, int Y)
+{
+}
+
+
+void Window::WindowResized(GLFWwindow* Handle, int Width, int Height)
+{
+}
+
+
+void Window::WindowClosed(GLFWwindow* Handle)
+{
+    Window* BakgeWindow = (Window*)glfwGetWindowUserPointer(Handle);
+    BakgeWindow->Close();
+}
+
+
 Window::Window()
 {
+    WindowHandle = NULL;
 }
 
 
 Window::~Window()
 {
+    Close();
 }
 
 
 Window* Window::Create(int Width, int Height)
 {
-    return NULL;
+    Window* Win = new Window;
+
+    Win->WindowHandle = glfwCreateWindow(Width, Height, "Bakge", NULL, NULL);
+
+    /* Store pointer to Bakge window so global callbacks can access it */
+    glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);
+
+    glfwSetWindowCloseCallback(Win->WindowHandle, WindowClosed);
+    glfwSetWindowSizeCallback(Win->WindowHandle, WindowResized);
+    glfwSetWindowPosCallback(Win->WindowHandle, WindowMoved);
+
+    Win->Bind();
+
+    return Win;
 }
 
 
 Result Window::SwapBuffers()
 {
-    return BGE_FAILURE;
+    glfwSwapBuffers(WindowHandle);
+    return BGE_SUCCESS;
 }
 
 
 Result Window::Bind() const
 {
-    return BGE_FAILURE;
+    glfwMakeContextCurrent(WindowHandle);
+    return BGE_SUCCESS;
 }
 
 
 Result Window::Unbind() const
 {
-    return BGE_FAILURE;
+    glfwMakeContextCurrent(NULL);
+    return BGE_SUCCESS;
 }
 
 
 Result Window::Close()
 {
-    return BGE_FAILURE;
+    if(IsOpen()) {
+        glfwDestroyWindow(WindowHandle);
+        WindowHandle = NULL;
+
+        return BGE_SUCCESS;
+    } else {
+        return BGE_FAILURE;
+    }
 }
 
 
 bool Window::IsOpen()
 {
-    return false;
+    return WindowHandle != NULL;
 }
 
 
 Result Window::PollEvent(Event* Ev)
 {
+    glfwPollEvents();
     return BGE_FAILURE;
 }
 

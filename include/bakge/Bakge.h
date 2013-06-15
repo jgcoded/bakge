@@ -54,7 +54,7 @@
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 
-#include <GL/glfw.h>
+#include <GLFW/glfw3.h>
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
