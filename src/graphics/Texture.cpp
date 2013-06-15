@@ -29,18 +29,67 @@ namespace bakge
 
 Texture::Texture()
 {
+    TextureID = 0;
 }
 
 
 Texture::~Texture()
 {
+    if(TextureID != 0)
+        glDeleteTextures(1, &TextureID);
+}
+
+
+Result Texture::Bind() const
+{
+    glBindTexture(GL_TEXTURE_2D, TextureID);
+    return BGE_SUCCESS;
+}
+
+
+Result Texture::Unbind() const
+{
+    glBindTexture(GL_TEXTURE_2D, 0);
+    return BGE_SUCCESS;
 }
 
 
 Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
                                                               void* Data)
 {
-    return NULL;
+    Texture* NewTexture = new Texture;
+    
+    /* Generate an "ID" that we can reference */
+    glGenTextures(1, &(NewTexture->TextureID));
+
+    /* Check if Generate worked */
+    if(NewTexture->TextureID == 0) {
+        printf("GL Generate Texture Error\n");
+        delete NewTexture;
+        return NULL;
+    }
+
+    /* Bind the texture, code below applies only to this texture */
+    NewTexture->Bind();
+
+    /* *
+     * START TEXTURE PARAMETERS CONFIG
+     * See: http://www.opengl.org/sdk/docs/man/xhtml/glTexParameter.xml
+     * For definitions of the parameters in glTexParamterf
+     * */
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE); 
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    /* END TEXTURE PARAMETERS */
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Width, Height, 0, Format, Type,
+                                                                    Data);
+
+    NewTexture->Unbind();
+
+    return NewTexture;
 }
 
 } /* bakge */

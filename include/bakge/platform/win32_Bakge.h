@@ -25,6 +25,9 @@
 #ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
 #define BAKGE_PLATFORM_WIN32_BAKGE_H
 
+#pragma warning(disable : 4193)
+#pragma warning(disable : 4005)
+
 #include <windows.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
