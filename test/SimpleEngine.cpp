@@ -78,13 +78,16 @@ int SimpleEngine::Run()
 
         while(AppWindow->PollEvent(&Ev) == BGE_SUCCESS) {
             if(Ev.Type == -1) {
+                /* For now, window events don't work */
                 AppWindow->Close();
-                ExitCode = 0;
             }
         }
 
-        if(AppWindow->IsOpen() == false)
+        if(AppWindow->IsOpen() == false) {
+            printf("Closing SimpleEngine window\n");
+            ExitCode = 0;
             break;
+		}
 
         Update();
         PreRenderStage();
@@ -119,7 +122,7 @@ bakge::Result SimpleEngine::Initialize()
 
     Quadric = gluNewQuadric();
 
-    glClearColor(0, 0.3, 0.5, 1);
+    glClearColor(0, 0.3f, 0.5f, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMatrixMode(GL_PROJECTION);
@@ -138,6 +141,7 @@ bakge::Result SimpleEngine::PreRenderStage()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
+    return BGE_SUCCESS;
 }
 
 
@@ -145,6 +149,7 @@ bakge::Result SimpleEngine::PostRenderStage()
 {
     glMatrixMode(GL_PROJECTION);
     AppWindow->SwapBuffers();
+    return BGE_SUCCESS;
 }
 
 
@@ -156,6 +161,7 @@ bakge::Result SimpleEngine::RenderStage()
      * */
     glColor3f(0.7f, 0.7f, 0.7f);
     gluSphere(Quadric, 1.0f, 32, 32);
+    return BGE_SUCCESS;
 }
 
 
