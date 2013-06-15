@@ -38,8 +38,9 @@ public:
     Engine();
     virtual ~Engine();
 
-    /* Initialize here any components */
+    /* Initialize and clean up any components */
     virtual Result Initialize() = 0;
+    virtual Result ShutDown() = 0;
 
     /* Run the application main loop */
     virtual int Run() = 0;

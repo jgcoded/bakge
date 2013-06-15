@@ -14,6 +14,7 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  SimpleEngine
   texture
   thread
   types
