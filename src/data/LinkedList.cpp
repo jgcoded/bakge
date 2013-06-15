@@ -45,52 +45,59 @@ LinkedList<T>::~LinkedList()
     SingleNode<T>* Node;
     while (Head != NULL) {
         Node = Head;
-        Head = Head->getNext();
+        Head = Head->GetNext();
         delete Node;
     }
 }
 
 
 template<class T>
-T LinkedList<T>::Push(T toPush)
+T LinkedList<T>::Push(T DataValue)
 {
+    SingleNode<T>* NewNode;
+
     /* Create new node */
-    SingleNode<T>* NewNode = new SingleNode<T>();
-    NewNode->setData(toPush);
+    NewNode = new SingleNode<T>();
+    NewNode->SetData(DataValue);
 
     /* Move pointers */
     if (Head == NULL) {
         Tail = Head = NewNode;
-        NewNode->setNext(NULL);
+        NewNode->SetNext(NULL);
     } else {
-        NewNode->setNext(Head);
+        NewNode->SetNext(Head);
         Head = NewNode;
     }
-    return toPush;
+
+    return DataValue;
 }
 
 
 template<class T>
 T LinkedList<T>::Pop()
 {
+    SingleNode<T>* TopNode;
+    T DataValue;
+
     /* What about exceptions? Use default or write our own? */
     if (Head == NULL) {
         throw "LinkedList is empty";
     }
     
     /* Memorize pointer to free memory */
-    SingleNode<T>* TopNode = Head;
+    TopNode = Head;
     
     /* Move pointers */
-    Head = Head->getNext();
+    Head = Head->GetNext();
     if (Head == NULL) {
         Tail = Head;
     }
     
     /* Memorize return value and free memory */
-    T Result = TopNode->getData();
+    DataValue = TopNode->GetData();
     delete TopNode;
-    return Result;
+
+    return DataValue;
 }
 
 
@@ -98,7 +105,7 @@ template<class T>
 bool LinkedList<T>::IsEmpty()
 {
 	/* List is empty if Head pointer is NULL */
-	return Head == NULL;
+	return (Head == NULL);
 }
 
 } /* bakge */

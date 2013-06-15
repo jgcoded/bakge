@@ -44,28 +44,28 @@ SingleNode<T>::~SingleNode()
 
 
 template<class T>
-SingleNode<T>* SingleNode<T>::getNext()
+SingleNode<T>* SingleNode<T>::GetNext()
 {
     return Next;
 }
 
 
 template<class T>
-void SingleNode<T>::setNext(SingleNode<T>* Next)
+void SingleNode<T>::SetNext(SingleNode<T>* Next)
 {
     this->Next = Next;
 }
 
 
 template<class T>
-T SingleNode<T>::getData()
+T SingleNode<T>::GetData()
 {
     return Data;
 }
 
 
 template<class T>
-void SingleNode<T>::setData(const T& Data)
+void SingleNode<T>::SetData(const T& Data)
 {
     this->Data = Data;
 }
