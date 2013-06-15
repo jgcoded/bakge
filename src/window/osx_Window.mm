@@ -111,8 +111,8 @@ osx_Window* osx_Window::Create(int Width, int Height)
                                           backing: NSBackingStoreBuffered 
                                           defer: NO]; 
 
-    [Win->WindowHandle makeKeyAndOrderFront: nil];
     [Win->WindowHandle setTitle: @"Bakge"];
+    [Win->WindowHandle setAcceptsMouseMovedEvents: YES];
 
     Win->WindowDelegate = [[BakgeWindowDelegate alloc] init];
     if(Win->WindowDelegate == NULL) {

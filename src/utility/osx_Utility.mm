@@ -55,6 +55,8 @@ Result Init(int argc, char* argv[])
     MenuBar = [[NSMenu alloc] init];
     [NSApp setMainMenu: MenuBar];
 
+    [NSApp performSelector: @selector(setAppleMenu:) withObject: MenuBar];
+
     [NSApp finishLaunching];
 
     AppDelegate = [[BakgeApplicationDelegate alloc] init];
