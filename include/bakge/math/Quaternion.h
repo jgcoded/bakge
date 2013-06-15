@@ -32,6 +32,19 @@ namespace bakge
 namespace math
 {
 
+/* *
+ * Quaternions are used to describe rotational orientations in 3D space.
+ * They consist of four parts - Three which represent an axis, and the fourth
+ * which represents a rotation about that axis (right-handed rule).
+ * Quaternions are extremely useful because they avoid gimbal lock, a problem
+ * that can arise from the use of Euler angles to store info.
+ * Not only that, but quaternions are easy to turn into 4x4 matrices, split
+ * into the individual parts (axis and angle) and can easily be created
+ * from Euler angles.
+ *
+ * Quaternions also see use in animation keyframing, where joints' or bones'
+ * rotations are relative to their parent joint.
+ * */
 class Quaternion
 {
 
