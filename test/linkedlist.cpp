@@ -22,36 +22,37 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_WINDOW_H
-#define BAKGE_API_WINDOW_H
-
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
-namespace api
-{
+    printf("Checking linked list as a stack\n");
 
-class Window
-{
-
-protected:
-
-    Window();
+    char* Strings[] = { "Wake", "up", "Neo", "Matrix", "has", "you" };
+    bakge::LinkedList<char*> List;
     
+    /* Push values to list */
+    for (int i = 0; i < sizeof(Strings) / sizeof(char*); i++) {
+        List.Push(Strings[i]);
+    }
 
-public:
+    /* Pop values in reversed order */
+    while (!List.IsEmpty()) {
+        char* Popped = List.Pop();
+        printf("%s ", Popped);
+    }
+    printf("\n");
 
-    virtual ~Window();
+    /* Try to pop from empty list */
+    try {
+        char* Popped = List.Pop();
+        printf ("Something is wrong");
+    } catch (char* Exception) {
+        printf ("Exception successfully thrown: %s\n", Exception);
+    }
 
-    virtual bool IsOpen() = 0;
-    virtual Result Close() = 0;
-    virtual Result PollEvent(Event* Ev) = 0;
-    virtual Result SwapBuffers() = 0;
+    return 0;
+}
 
-}; /* Window */
-
-} /* api */
-} /* bakge */
-
-#endif /* BAKGE_API_WINDOW_H */

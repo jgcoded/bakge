@@ -34,7 +34,7 @@ namespace bakge
 #define BGE_SUCCESS 0
 typedef int Result;
 
-typedef unsigned char Byte;
+typedef char Byte;
 typedef unsigned int Milliseconds;
 
 } /* bakge */

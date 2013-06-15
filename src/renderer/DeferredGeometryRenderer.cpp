@@ -27,15 +27,31 @@
 namespace bakge
 {
 
-Result Delay(Milliseconds BGE_NCP Time)
+DeferredGeometryRenderer::DeferredGeometryRenderer()
+{
+}
+
+
+DeferredGeometryRenderer::~DeferredGeometryRenderer()
+{
+}
+
+
+Result DeferredGeometryRenderer::Bind() const
 {
     return BGE_FAILURE;
 }
 
 
-Milliseconds GetRunningTime()
+Result DeferredGeometryRenderer::Unbind() const
 {
-    return Milliseconds(0);
+    return BGE_FAILURE;
+}
+
+
+Result DeferredGeometryRenderer::Draw(Drawable* Obj) const
+{
+    return BGE_FAILURE;
 }
 
 } /* bakge */

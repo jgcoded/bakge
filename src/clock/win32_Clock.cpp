@@ -27,27 +27,40 @@
 namespace bakge
 {
 
-Byte* LoadFileContents(const char* Path)
+Result Delay(Milliseconds BGE_NCP Time)
 {
-    FILE* FileHandle;
-    long Length;
-    Byte* FileContent;
+    Milliseconds End = Time + GetRunningTime();
     
-    FileHandle = fopen(Path, "rb");
-    if (FileHandle != NULL) {
-        /* Get character count of file */
-        fseek(FileHandle, 0, SEEK_END);
-        Length = ftell(FileHandle);
-        fseek(FileHandle, 0, SEEK_SET);
-        /* Allocate memory and read in file contents */
-        FileContent = (Byte*)malloc(Length + 1);
-        FileContent[Length] = '\0';
-        fread(FileContent, Length, 1, FileHandle);
-        fclose(FileHandle);
-        return FileContent;
-    } else {
-        return NULL;
-    }
+    while(GetRunningTime() < End)
+        ;
+    
+    return BGE_SUCCESS;
+}
+
+
+Milliseconds GetRunningTime()
+{
+    /* Defined in src/utility/win32_Utility.cpp */
+    extern LARGE_INTEGER ClockFreq;
+    extern LARGE_INTEGER StartCount;
+    LARGE_INTEGER TickCount;
+    HANDLE CurrentThread;
+    DWORD_PTR OldThreadMask;
+    
+    /* Grab current thread handle */
+    CurrentThread = GetCurrentThread();
+    
+    /* Run this on processor 1 only */
+    OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
+    
+    /* Get tick count */
+    QueryPerformanceCounter(&TickCount);
+    
+    /* Reset thread affinity mask for this thread */
+    SetThreadAffinityMask(CurrentThread, OldThreadMask);
+    
+    return (Milliseconds)(1000 * TickCount.QuadPart / ClockFreq.QuadPart)
+          - (Milliseconds)(1000 * StartCount.QuadPart / ClockFreq.QuadPart);
 }
 
 } /* bakge */

@@ -22,53 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_WIN32_WINDOW_H
-#define BAKGE_WINDOW_WIN32_WINDOW_H
-
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_OSX_THREAD_H
+#define BAKGE_THREAD_OSX_THREAD_H
 
 namespace bakge
 {
 
-typedef class win32_Window
+class osx_Thread : api::Thread
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    static HINSTANCE Instance;
-    static WNDCLASSEX WindowClass;
-    static HDC Device; /* Device context */
-    static HGLRC Context; /* OpenGL context */
-    static PIXELFORMATDESCRIPTOR PixFormat;
-    static int Format;
-    
-    static LRESULT CALLBACK WindowProcCallback(HWND, UINT, WPARAM, LPARAM);
-
-    win32_Window();
-
 
 public:
 
-    ~win32_Window();
-    
-    BGE_FACTORY win32_Window* Create(int Width, int Height);
+    osx_Thread();
+    virtual ~osx_Thread();
 
-    bool IsOpen();
-
-    Result Close();
-    
-    Result PollEvent(Event* Ev);
-
-    Result SwapBuffers();
-
-
-protected:
-
-    HWND Window;
-    HGLRC LocalContext;
-
-} Window; /* win32_Window */
+}; /* osx_Thread */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_WIN32_WINDOW_H */
+#endif /* BAKGE_THREAD_OSX_THREAD_H */

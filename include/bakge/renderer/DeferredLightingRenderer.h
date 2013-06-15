@@ -22,20 +22,36 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H
+#define BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-Result Delay(Milliseconds BGE_NCP Time)
+class DeferredLightingRenderer : public Renderer
 {
-    return BGE_FAILURE;
-}
 
+public:
 
-Milliseconds GetRunningTime()
-{
-    return Milliseconds(0);
-}
+    DeferredLightingRenderer();
+    virtual ~DeferredLightingRenderer();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+    
+    virtual Result Draw(Drawable* Obj) const;
+
+    /*
+    virtual Result SetTargetFramebuffer(GBuffer* Buffer);
+
+    virtual Result SetFragmentShader(Shader* Obj);
+    virtual Result SetVertexShader(Shader* Obj);
+    */
+
+}; /* DeferredLightingRenderer */
 
 } /* bakge */
+
+#endif /* BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H */

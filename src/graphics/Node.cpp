@@ -39,20 +39,22 @@ Node::~Node()
 
 Result Node::Bind() const
 {
-    return BGE_FAILURE;
+    /* Translate to position */
+    return BGE_SUCCESS;
 }
 
 
 Result Node::Unbind() const
 {
-    return BGE_FAILURE;
+    /* Load identity */
+    return BGE_SUCCESS;
 }
 
 
 Result Node::Draw() const
 {
     glBegin(GL_POINTS);
-    glVertex3f(0, 0, 0); /* Pass position in */
+    glVertex3f(0, 0, 0);
     glEnd();
     return BGE_SUCCESS;
 }

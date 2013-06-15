@@ -27,27 +27,31 @@
 namespace bakge
 {
 
-Byte* LoadFileContents(const char* Path)
+DeferredLightingRenderer::DeferredLightingRenderer()
 {
-    FILE* FileHandle;
-    long Length;
-    Byte* FileContent;
-    
-    FileHandle = fopen(Path, "rb");
-    if (FileHandle != NULL) {
-        /* Get character count of file */
-        fseek(FileHandle, 0, SEEK_END);
-        Length = ftell(FileHandle);
-        fseek(FileHandle, 0, SEEK_SET);
-        /* Allocate memory and read in file contents */
-        FileContent = (Byte*)malloc(Length + 1);
-        FileContent[Length] = '\0';
-        fread(FileContent, Length, 1, FileHandle);
-        fclose(FileHandle);
-        return FileContent;
-    } else {
-        return NULL;
-    }
+}
+
+
+DeferredLightingRenderer::~DeferredLightingRenderer()
+{
+}
+
+
+Result DeferredLightingRenderer::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result DeferredLightingRenderer::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result DeferredLightingRenderer::Draw(Drawable* Obj) const
+{
+    return BGE_FAILURE;
 }
 
 } /* bakge */
