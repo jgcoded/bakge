@@ -39,7 +39,7 @@ public:
     virtual ~Thread();
 
     virtual Result Kill() = 0;
-    virtual Result Wait() = 0;
+    virtual int Wait() = 0;
     virtual int GetExitCode() = 0;
 
 }; /* Thread */
