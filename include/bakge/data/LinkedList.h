@@ -39,6 +39,9 @@ public:
     LinkedList();
     ~LinkedList();
 
+    T Push(T toPush);
+    T Pop();
+
 
 protected:
 

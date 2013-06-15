@@ -22,21 +22,45 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_X11_BAKGE_H
-#define BAKGE_PLATFORM_X11_BAKGE_H
+#include <bakge/Bakge.h>
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glx.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xos.h>
-#include <X11/Xatom.h>
-#include <time.h>
-#include <pthread.h>
+namespace bakge
+{
 
-#include <bakge/window/x11_Window.h>
-#include <bakge/thread/x11_Thread.h>
+Result Delay(Milliseconds BGE_NCP Time)
+{
+    Milliseconds End = Time + GetRunningTime();
+    
+    while(GetRunningTime() < End)
+        ;
+    
+    return BGE_SUCCESS;
+}
 
-#endif /* BAKGE_PLATFORM_X11_BAKGE_H */
+
+Milliseconds GetRunningTime()
+{
+    /* Defined in src/utility/win32_Utility.cpp */
+    extern LARGE_INTEGER ClockFreq;
+    extern LARGE_INTEGER StartCount;
+    LARGE_INTEGER TickCount;
+    HANDLE CurrentThread;
+    DWORD_PTR OldThreadMask;
+    
+    /* Grab current thread handle */
+    CurrentThread = GetCurrentThread();
+    
+    /* Run this on processor 1 only */
+    OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
+    
+    /* Get tick count */
+    QueryPerformanceCounter(&TickCount);
+    
+    /* Reset thread affinity mask for this thread */
+    SetThreadAffinityMask(CurrentThread, OldThreadMask);
+    
+    return (Milliseconds)(1000 * TickCount.QuadPart / ClockFreq.QuadPart)
+          - (Milliseconds)(1000 * StartCount.QuadPart / ClockFreq.QuadPart);
+}
+
+} /* bakge */

@@ -40,5 +40,19 @@ LinkedList<T>::~LinkedList()
 {
 }
 
+
+template<class T>
+T LinkedList<T>::Push(T toPush)
+{
+    return T();
+}
+
+
+template<class T>
+T LinkedList<T>::Pop()
+{
+    return T();
+}
+
 } /* bakge */
 

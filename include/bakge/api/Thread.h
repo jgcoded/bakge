@@ -22,20 +22,29 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/Bakge.h>
+#ifndef BAKGE_API_THREAD_H
+#define BAKGE_API_THREAD_H
 
 namespace bakge
 {
-
-Result Delay(Milliseconds BGE_NCP Time)
+namespace api
 {
-    return BGE_FAILURE;
-}
 
-
-Milliseconds GetRunningTime()
+class Thread
 {
-    return Milliseconds(0);
-}
 
+public:
+
+    Thread();
+    virtual ~Thread();
+
+    virtual Result Kill() = 0;
+    virtual Result Wait() = 0;
+    virtual int GetExitCode() = 0;
+
+}; /* Thread */
+
+} /* api */
 } /* bakge */
+
+#endif /* BAKGE_API_THREAD_H */

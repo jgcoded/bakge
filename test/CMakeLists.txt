@@ -14,6 +14,7 @@ set(TESTS
   quaternion
   matrix
   pawn
+  loadfile
 )
 
 if(UNIX AND NOT APPLE)
@@ -27,6 +28,7 @@ if(UNIX AND NOT APPLE)
     ${X11_X_EXTRA_LIBRARIES}
     GL
     GLU
+    pthread
   )
 endif()
 

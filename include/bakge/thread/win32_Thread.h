@@ -22,21 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_X11_BAKGE_H
-#define BAKGE_PLATFORM_X11_BAKGE_H
+#ifndef BAKGE_THREAD_WIN32_THREAD_H
+#define BAKGE_THREAD_WIN32_THREAD_H
 
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <GL/glx.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xos.h>
-#include <X11/Xatom.h>
-#include <time.h>
-#include <pthread.h>
+namespace bakge
+{
 
-#include <bakge/window/x11_Window.h>
-#include <bakge/thread/x11_Thread.h>
+class win32_Thread : api::Thread
+{
 
-#endif /* BAKGE_PLATFORM_X11_BAKGE_H */
+public:
+
+    win32_Thread();
+    virtual ~win32_Thread();
+
+}; /* win32_Thread */
+
+} /* bakge */
+
+#endif /* BAKGE_THREAD_WIN32_THREAD_H */

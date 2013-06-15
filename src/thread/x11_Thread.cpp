@@ -27,15 +27,13 @@
 namespace bakge
 {
 
-Result Delay(Milliseconds BGE_NCP Time)
+x11_Thread::x11_Thread()
 {
-    return BGE_FAILURE;
 }
 
 
-Milliseconds GetRunningTime()
+x11_Thread::~x11_Thread()
 {
-    return Milliseconds(0);
 }
 
 } /* bakge */
