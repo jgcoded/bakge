@@ -41,7 +41,7 @@ Byte* LoadFileContents(const char* Path)
         fseek(FileHandle, 0, SEEK_SET);
         /* Allocate memory and read in file contents */
         FileContent = (Byte*)malloc(Length + 1);
-		FileContent[Length] = '\0';
+        FileContent[Length] = '\0';
         fread(FileContent, Length, 1, FileHandle);
         fclose(FileHandle);
         return FileContent;
