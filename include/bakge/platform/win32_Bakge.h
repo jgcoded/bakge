@@ -25,10 +25,14 @@
 #ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
 #define BAKGE_PLATFORM_WIN32_BAKGE_H
 
+/* Disable some pesky MSVC warnings */
+#pragma warning(disable : 4193)
+#pragma warning(disable : 4005)
+
 #include <windows.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 
-#include <bakge/window/win32_Window.h>
+#include <bakge/thread/win32_Thread.h>
 
 #endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */

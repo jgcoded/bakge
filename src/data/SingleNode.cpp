@@ -22,6 +22,9 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_DATA_SINGLENODE_CPP
+#define BAKGE_DATA_SINGLENODE_CPP
+
 #include <bakge/Bakge.h>
 
 namespace bakge
@@ -30,6 +33,7 @@ namespace bakge
 template<class T>
 SingleNode<T>::SingleNode()
 {
+    Next = NULL;
 }
 
 
@@ -38,5 +42,34 @@ SingleNode<T>::~SingleNode()
 {
 }
 
+
+template<class T>
+SingleNode<T>* SingleNode<T>::GetNext()
+{
+    return Next;
+}
+
+
+template<class T>
+void SingleNode<T>::SetNext(SingleNode<T>* Next)
+{
+    this->Next = Next;
+}
+
+
+template<class T>
+T SingleNode<T>::GetData()
+{
+    return Data;
+}
+
+
+template<class T>
+void SingleNode<T>::SetData(const T& Data)
+{
+    this->Data = Data;
+}
+
 } /* bakge */
 
+#endif /* BAKGE_DATA_SINGLENODE_CPP */

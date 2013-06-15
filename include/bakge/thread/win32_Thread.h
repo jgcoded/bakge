@@ -22,32 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_WIN32_THREAD_H
+#define BAKGE_THREAD_WIN32_THREAD_H
 
 namespace bakge
 {
 
-Byte* LoadFileContents(const char* Path)
+class win32_Thread : api::Thread
 {
-    FILE* FileHandle;
-    long Length;
-    Byte* FileContent;
-    
-    FileHandle = fopen(Path, "rb");
-    if (FileHandle != NULL) {
-        /* Get character count of file */
-        fseek(FileHandle, 0, SEEK_END);
-        Length = ftell(FileHandle);
-        fseek(FileHandle, 0, SEEK_SET);
-        /* Allocate memory and read in file contents */
-        FileContent = (Byte*)malloc(Length + 1);
-        FileContent[Length] = '\0';
-        fread(FileContent, Length, 1, FileHandle);
-        fclose(FileHandle);
-        return FileContent;
-    } else {
-        return NULL;
-    }
-}
+
+public:
+
+    win32_Thread();
+    virtual ~win32_Thread();
+
+}; /* win32_Thread */
 
 } /* bakge */
+
+#endif /* BAKGE_THREAD_WIN32_THREAD_H */

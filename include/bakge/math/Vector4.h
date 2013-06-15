@@ -32,6 +32,18 @@ namespace bakge
 namespace math
 {
 
+/* *
+ * Vectors are used to represent arbitrary points, or directions (and
+ * their magnitudes). The homogeneous fourth coordinate, identified as the w
+ * coordinate, distinguishes points from 3D vectors. If w is 0, the Vector4
+ * represents a vector with a direction and length, or magnitude. If w is a 1,
+ * the Vector4 represents a point in 3D space. This is used to enforce common
+ * logic -- a point plus a point is meaningless. A point plus a vector is
+ * another point, and a vector plus a vector is another vector. Many operations
+ * check this homogeneous coordinate before proceeding, such as scalar
+ * multiplication. Dividing a point by a constant is meaningless. Dividing a
+ * vector by a constant reduces its magnitude (length).
+ * */
 class Vector4
 {
 

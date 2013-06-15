@@ -22,35 +22,36 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
-
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_X11_THREAD_H
+#define BAKGE_THREAD_X11_THREAD_H
 
 namespace bakge
 {
 
-typedef class osx_Window
+typedef class x11_Thread : api::Thread
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
+    static void* Entry(void* Data); /* Internal thread entry function */
 
-    osx_Window();
+    int (*UserEntry)(void* Data); /* End-user thread entry function */
+    void* UserData; /* End-user specificied argument */
+    pthread_t ThreadHandle;
+    int ExitCode;
+
+    x11_Thread();
 
 
 public:
 
-    ~osx_Window();
+    virtual ~x11_Thread();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+    static x11_Thread* Create(int (*EntryFunc)(void*), void* EntryData);
 
-    bool IsOpen();
-    Result Close();
-    Result SwapBuffers();
-    Result PollEvent(Event* Ev);
+    Result Kill();
+    int Wait();
+    int GetExitCode();
 
-} Window; /* osx_Window */
+} Thread; /* x11_Thread */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
+#endif /* BAKGE_THREAD_X11_THREAD_H */

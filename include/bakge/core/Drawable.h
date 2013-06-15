@@ -29,7 +29,8 @@
 
 namespace bakge
 {
-class Drawable
+
+class Drawable : public Bindable
 {
 
 public:

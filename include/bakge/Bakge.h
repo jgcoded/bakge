@@ -32,7 +32,7 @@
 #include <math.h>
 
 /* GCC-only attributes */
-#ifdef __GNUC__
+#if defined __GNUC__ || defined __clang__
 /* Send compiler warning if function return result is not used */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
 /* Mark a variable as possibly unused in its function  */
@@ -54,6 +54,8 @@
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 
+#include <GLFW/glfw3.h>
+
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
 #include <bakge/core/Utility.h>
@@ -63,6 +65,7 @@
 #include <bakge/core/Engine.h>
 #include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
+#include <bakge/core/Window.h>
 
 /* System modules */
 #include <bakge/system/Clock.h>
@@ -78,9 +81,9 @@
 #include <bakge/data/LinkedList.h>
 
 /* Include API classes */
-#include <bakge/api/Window.h>
+#include <bakge/api/Thread.h>
 
-/* Platform headers (may depend on core Bakge classes; #includes OpenGL) */
+/* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
 #include <bakge/platform/x11_Bakge.h>
 #elif defined(_WIN32)

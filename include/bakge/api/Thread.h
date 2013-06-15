@@ -22,51 +22,33 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_X11_WINDOW_H
-#define BAKGE_WINDOW_X11_WINDOW_H
-
-#include <bakge/Bakge.h>
+#ifndef BAKGE_API_THREAD_H
+#define BAKGE_API_THREAD_H
 
 namespace bakge
 {
-
-typedef class x11_Window
+namespace api
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
 
-    static Display* XDisplay;
-    static XVisualInfo* XVisual;
-    static GLXContext Context;
-    static Colormap ColorMap;
-    static Atom CloseProtocol;
+class Thread
+{
 
-    x11_Window();
+protected:
+
+    Thread();
 
 
 public:
 
-    ~x11_Window();
+    virtual ~Thread();
 
-    BGE_FACTORY x11_Window* Create(int Width, int Height);
+    virtual Result Kill() = 0;
+    virtual int Wait() = 0;
+    virtual int GetExitCode() = 0;
 
-    bool IsOpen();
+}; /* Thread */
 
-    Result Close();
-
-    Result PollEvent(Event* Ev);
-
-    Result SwapBuffers();
-
-
-private:
-
-    ::Window XWindow;
-    XSetWindowAttributes XAttrib;
-
-
-} Window; /* x11_Window */
-
+} /* api */
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_X11_WINDOW_H */
+#endif /* BAKGE_API_THREAD_H */

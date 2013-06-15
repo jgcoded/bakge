@@ -3,18 +3,26 @@
 cmake_minimum_required(VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
+include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
 
 set(TESTS
   clock
-  texture
-  types
-  window
-  node
-  vector4
-  quaternion
+  linkedlist
+  loadfile
   matrix
+  node
   pawn
+  frontrenderer
+  quaternion
+  texture
+  thread
+  types
+  vector4
+  window
 )
+
+
+link_directories(${BAKGE_SOURCE_DIR}/lib)
 
 if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
@@ -22,11 +30,15 @@ if(UNIX AND NOT APPLE)
   link_directories(${X11_LIBRARY_DIR})
   set(CORELIBS
     m
+    glfw3
+    GL
+    GLU
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
+    Xrandr
+    Xi
+    pthread
   )
 endif()
 
@@ -41,6 +53,7 @@ if(UNIX AND APPLE)
     GL
     GLU
     ${COCOA_LIBRARY}
+    glfw3
   )
 endif()
 
@@ -58,5 +71,5 @@ endif(WIN32)
 
 foreach(test ${TESTS})
   add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} bakge ${CORELIBS})
+  target_link_libraries(${test} bakge glfw3 ${CORELIBS})
 endforeach(test)

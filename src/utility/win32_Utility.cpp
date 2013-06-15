@@ -29,61 +29,31 @@ namespace bakge
 
 #define BAKGE_WINDOW_CLASS_NAME "BakgeWinClass"
 
+LARGE_INTEGER ClockFreq;
+LARGE_INTEGER StartCount;
+
 Result Init(int argc, char* argv[])
 {
-    win32_Window::Instance = GetModuleHandle(0);
+    HANDLE CurrentThread;
+    DWORD_PTR OldThreadMask;
     
-    /* Convenience */
-    WNDCLASSEX* WinClass = &(win32_Window::WindowClass);
-    WinClass->cbSize = sizeof(WNDCLASSEX);
-    WinClass->style = CS_OWNDC;
-    WinClass->lpfnWndProc = win32_Window::WindowProcCallback;
-    WinClass->cbClsExtra = 0;
-    WinClass->cbWndExtra = 0;
-    WinClass->hInstance = win32_Window::Instance;
-    WinClass->hIcon = LoadIcon(NULL, IDI_APPLICATION);
-    WinClass->hCursor = LoadCursor(NULL, IDC_ARROW);
-    WinClass->hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-    WinClass->lpszMenuName = NULL;
-    WinClass->lpszClassName = BAKGE_WINDOW_CLASS_NAME;
-    WinClass->hIconSm = LoadIcon(NULL, IDI_APPLICATION);
-    
-    if(RegisterClassEx(WinClass) == 0) {
-        printf("Unable to register window class\n");
+    if(!glfwInit()) {
+        printf("Unable to initialize GLFW 3.0\n");
         return BGE_FAILURE;
     }
     
-    win32_Window::Device = GetDC(NULL);
-    if(win32_Window::Device == NULL) {
-        printf("Unable to get device context\n");
-        return BGE_FAILURE;
-    }
+    /* Grab current thread handle */
+    CurrentThread = GetCurrentThread();
     
-    PIXELFORMATDESCRIPTOR* PixFormat = &(win32_Window::PixFormat);
-    ZeroMemory(PixFormat, sizeof(*PixFormat));
-    PixFormat->nSize = sizeof(*PixFormat);
-    PixFormat->nVersion = 1;
-    PixFormat->iPixelType = PFD_TYPE_RGBA;
-    PixFormat->cColorBits = 24;
-    PixFormat->cDepthBits = 16;
-    PixFormat->iLayerType = PFD_MAIN_PLANE;
-    PixFormat->dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL |
-                                                    PFD_DOUBLEBUFFER;
-    /* Choose a pixel format for our device */
-    win32_Window::Format = ChoosePixelFormat(win32_Window::Device, PixFormat);
-    if(win32_Window::Format == 0) {
-        printf("Unable to choose pixel format\n");
-        return BGE_FAILURE;
-    }
+    /* Run clock stuff on processor 1 only */
+    OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
     
-    SetPixelFormat(win32_Window::Device, win32_Window::Format, PixFormat);
+    /* Get PerformanceCounter frequency and start tick count */
+    QueryPerformanceFrequency(&ClockFreq);
+    QueryPerformanceCounter(&StartCount);
     
-    /* Create our OpenGL context */
-    win32_Window::Context = wglCreateContext(win32_Window::Device);
-    if(win32_Window::Context == 0) {
-        printf("Error creating OpenGL context\n");
-        return BGE_FAILURE;
-    }
+    /* Reset thread affinity mask for this thread */
+    SetThreadAffinityMask(CurrentThread, OldThreadMask);
 
     return BGE_SUCCESS;
 }
@@ -91,18 +61,8 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    /* Delete OpenGL context */
-    if(win32_Window::Context != 0) {
-        wglMakeCurrent(NULL, NULL);
-        wglDeleteContext(win32_Window::Context);
-        win32_Window::Context = 0;
-    }
-    
-    if(win32_Window::WindowClass.cbSize > 0)
-        UnregisterClass(BAKGE_WINDOW_CLASS_NAME, win32_Window::Instance);
+    glfwTerminate();
 
-    ReleaseDC(NULL, win32_Window::Device);
-    
     return BGE_FAILURE;
 }
 
