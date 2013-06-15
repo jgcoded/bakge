@@ -54,16 +54,39 @@ public:
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
+    /* *
+     * No real need for them to be friends, just a way to not have to
+     * declare them elsewhere
+     * */
+    friend Vector4 Point(Scalar X, Scalar Y, Scalar Z);
+    friend Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
+    friend Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
+
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
     
     Vector4 BGE_NCP operator=(Vector4 BGE_NCP Other);
+
+    Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
+    Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
+
+    Vector4 BGE_NCP operator*=(Scalar BGE_NCP Value);
+    Vector4 BGE_NCP operator/=(Scalar BGE_NCP Value);
+
+    Vector4 BGE_NCP Normalize();
+    Vector4 Normalized() const;
+
+    Scalar LengthSquared() const;
+    Scalar Length() const;
     
     friend Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     
     friend Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
     friend Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
+
+    friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+    friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
 
 private:
