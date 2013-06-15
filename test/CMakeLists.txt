@@ -17,6 +17,7 @@ set(TESTS
   pawn
   loadfile
   thread
+  linkedlist
 )
 
 

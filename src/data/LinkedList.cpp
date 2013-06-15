@@ -22,6 +22,9 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_DATA_LINKEDLIST_CPP
+#define BAKGE_DATA_LINKEDLIST_CPP
+
 #include <bakge/Bakge.h>
 
 namespace bakge
@@ -38,21 +41,73 @@ LinkedList<T>::LinkedList()
 template<class T>
 LinkedList<T>::~LinkedList()
 {
+    /* Iterate list and free memory */
+    SingleNode<T>* Node;
+    while (Head != NULL) {
+        Node = Head;
+        Head = Head->GetNext();
+        delete Node;
+    }
 }
 
 
 template<class T>
-T LinkedList<T>::Push(T toPush)
+T LinkedList<T>::Push(T DataValue)
 {
-    return T();
+    SingleNode<T>* NewNode;
+
+    /* Create new node */
+    NewNode = new SingleNode<T>();
+    NewNode->SetData(DataValue);
+
+    /* Move pointers */
+    if (Head == NULL) {
+        Tail = Head = NewNode;
+        NewNode->SetNext(NULL);
+    } else {
+        NewNode->SetNext(Head);
+        Head = NewNode;
+    }
+
+    return DataValue;
 }
 
 
 template<class T>
 T LinkedList<T>::Pop()
 {
-    return T();
+    SingleNode<T>* TopNode;
+    T DataValue;
+
+    /* What about exceptions? Use default or write our own? */
+    if (Head == NULL) {
+        throw "LinkedList is empty";
+    }
+    
+    /* Memorize pointer to free memory */
+    TopNode = Head;
+    
+    /* Move pointers */
+    Head = Head->GetNext();
+    if (Head == NULL) {
+        Tail = Head;
+    }
+    
+    /* Memorize return value and free memory */
+    DataValue = TopNode->GetData();
+    delete TopNode;
+
+    return DataValue;
+}
+
+
+template<class T>
+bool LinkedList<T>::IsEmpty()
+{
+	/* List is empty if Head pointer is NULL */
+	return (Head == NULL);
 }
 
 } /* bakge */
 
+#endif /* BAKGE_DATA_LINKEDLIST_CPP */
