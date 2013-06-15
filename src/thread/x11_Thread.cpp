@@ -27,13 +27,73 @@
 namespace bakge
 {
 
+void* x11_Thread::Entry(void* Data)
+{
+    x11_Thread* T;
+
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+
+    T = (x11_Thread*)Data;
+    T->ExitCode = T->UserEntry(T->UserData);
+    pthread_exit(NULL);
+}
+
 x11_Thread::x11_Thread()
 {
+    ThreadHandle = 0;
+    ExitCode = -1;
+    UserEntry = NULL;
+    UserData = NULL;
 }
 
 
 x11_Thread::~x11_Thread()
 {
+    Wait();
+}
+
+
+Result x11_Thread::Kill()
+{
+    if(pthread_cancel(ThreadHandle) < 0)
+        return BGE_FAILURE;
+    else
+        return BGE_SUCCESS;
+}
+
+
+x11_Thread* x11_Thread::Create(int (*EntryFunc)(void*), void* EntryData)
+{
+    int Result;
+    x11_Thread* T;
+
+    T = new x11_Thread;
+    T->UserEntry = EntryFunc;
+    T->UserData = EntryData;
+
+    Result = pthread_create(&(T->ThreadHandle), NULL, Entry, (void*)T);
+    if(Result < 0) {
+        delete T;
+        return NULL;
+    }
+
+    return T;
+}
+
+
+int x11_Thread::Wait()
+{
+    if(pthread_join(ThreadHandle, NULL) != 0) {
+        return -1;
+    } else {
+        return GetExitCode();
+    }
+}
+
+
+int x11_Thread::GetExitCode()
+{
+    return ExitCode;
 }
 
 } /* bakge */

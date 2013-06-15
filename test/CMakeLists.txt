@@ -16,6 +16,7 @@ set(TESTS
   matrix
   pawn
   loadfile
+  thread
 )
 
 
