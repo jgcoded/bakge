@@ -51,8 +51,8 @@ public:
 
     Texture();
     ~Texture();
-	Result Bind();
-	Result Unbind();
+	Result Bind() const;
+	Result Unbind() const;
 
     /* *
      * Accepts metadata and raw image data to create an OpenGL texture

@@ -38,12 +38,12 @@ Texture::~Texture()
 
 }
 
-Result Texture::Bind()
+Result Texture::Bind() const
 {
 	return 0;
 }
 
-Result Texture::Unbind()
+Result Texture::Unbind() const
 {
 	return 0;
 }
@@ -129,16 +129,16 @@ void Texture::Draw()
 
 	
     glTexCoord2d(0.0,0.0); 
-	glVertex2d(-1.0,-1.0); //with our vertices we have to assign a texcoord
+	glVertex2d(-.5,-.5); //with our vertices we have to assign a texcoord
 
     glTexCoord2d(1.0,0.0); 
-	glVertex2d(+1.0,-1.0); //so that our texture has some points to draw to
+	glVertex2d(+.5,-.5); //so that our texture has some points to draw to
     
 	glTexCoord2d(1.0,1.0); 
-	glVertex2d(+1.0,+1.0);
+	glVertex2d(+.5,+.5);
 
     glTexCoord2d(0.0,1.0); 
-	glVertex2d(-1.0,+1.0);
+	glVertex2d(-.5,+.5);
 
     glEnd();
 
