@@ -50,13 +50,13 @@ if(UNIX AND APPLE)
   list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(CORELIBS
     m
+    glfw3
     GL
     GLU
     ${COCOA_LIBRARY}
     ${IOKIT_LIBRARY}
     ${CORE_FOUNDATION_LIBRARY}
     ${AGL_LIBRARY}
-    glfw3
   )
 endif()
 
