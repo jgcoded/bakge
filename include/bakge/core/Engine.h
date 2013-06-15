@@ -38,10 +38,19 @@ public:
     Engine();
     virtual ~Engine();
 
-    /* *
-     * Want to build this class? Check out the issue here for details
-     * http://github.com/palistov/bakge/issues/6
-     * */
+    /* Initialize here any components */
+    virtual Result Initialize() = 0;
+
+    /* Run the application main loop */
+    virtual int Run() = 0;
+
+    /* Main loop updatetes the application/game world here */
+    virtual Result Update() = 0;
+
+    /* Render stages */
+    virtual Result PreRenderStage() = 0;
+    virtual Result RenderStage() = 0;
+    virtual Result PostRenderStage() = 0;
 
 }; /* Engine */
 
