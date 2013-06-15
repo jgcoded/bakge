@@ -60,7 +60,13 @@ Window* Window::Create(int Width, int Height)
 {
     Window* Win = new Window;
 
+    glfwWindowHint(GLFW_DEPTH_BITS, 16);
+
     Win->WindowHandle = glfwCreateWindow(Width, Height, "Bakge", NULL, NULL);
+    if(Win->WindowHandle == NULL) {
+        delete Win;
+        return NULL;
+    }
 
     /* Store pointer to Bakge window so global callbacks can access it */
     glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);

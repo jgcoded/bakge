@@ -9,9 +9,16 @@ int main(int argc, char* argv[])
     bakge::Window* Win;
 
     printf("Initializing Bakge\n");
-    bakge::Init(argc, argv);
+    if(bakge::Init(argc, argv) != BGE_SUCCESS) {
+        printf("Error initializing Bakge\n");
+        return 1;
+    }
 
     Win = bakge::Window::Create(600, 400);
+    if(Win == NULL) {
+        printf("Error creating Bakge window\n");
+        return bakge::Deinit();
+    }
 
     bakge::Event Ev;
 

@@ -43,6 +43,9 @@ endif()
 if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
   FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+  FIND_LIBRARY(IOKIT_LIBRARY IOKit)
+  FIND_LIBRARY(AGL_LIBRARY AGL)
+  FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
   include_directories(${Cocoa_INCLUDE_DIRS})
   list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(CORELIBS
@@ -50,6 +53,9 @@ if(UNIX AND APPLE)
     GL
     GLU
     ${COCOA_LIBRARY}
+    ${IOKIT_LIBRARY}
+    ${CORE_FOUNDATION_LIBRARY}
+    ${AGL_LIBRARY}
     glfw3
   )
 endif()
@@ -62,11 +68,12 @@ if(WIN32)
     user32.lib
     glu32.lib
     winmm.lib
+    glfw3
   )
 endif(WIN32)
 
-
 foreach(test ${TESTS})
   add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} bakge glfw3 ${CORELIBS})
+  target_link_libraries(${test} bakge ${CORELIBS})
 endforeach(test)
+
