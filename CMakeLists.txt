@@ -21,8 +21,8 @@ if(UNIX)
 endif(UNIX)
 
 # Set output directory of the static library
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SOURCE_DIR}/lib)
 
+add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(test)
-

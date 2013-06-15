@@ -22,53 +22,60 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_WIN32_WINDOW_H
-#define BAKGE_WINDOW_WIN32_WINDOW_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class win32_Window : api::Window
+Window::Window()
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    static HINSTANCE Instance;
-    static WNDCLASSEX WindowClass;
-    static HDC Device; /* Device context */
-    static HGLRC Context; /* OpenGL context */
-    static PIXELFORMATDESCRIPTOR PixFormat;
-    static int Format;
-    
-    static LRESULT CALLBACK WindowProcCallback(HWND, UINT, WPARAM, LPARAM);
-
-    win32_Window();
+}
 
 
-public:
-
-    ~win32_Window();
-    
-    BGE_FACTORY win32_Window* Create(int Width, int Height);
-
-    bool IsOpen();
-
-    Result Close();
-    
-    Result PollEvent(Event* Ev);
-
-    Result SwapBuffers();
+Window::~Window()
+{
+}
 
 
-protected:
+Window* Window::Create(int Width, int Height)
+{
+    return NULL;
+}
 
-    HWND Window;
-    HGLRC LocalContext;
 
-} Window; /* win32_Window */
+Result Window::SwapBuffers()
+{
+    return BGE_FAILURE;
+}
+
+
+Result Window::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result Window::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result Window::Close()
+{
+    return BGE_FAILURE;
+}
+
+
+bool Window::IsOpen()
+{
+    return false;
+}
+
+
+Result Window::PollEvent(Event* Ev)
+{
+    return BGE_FAILURE;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_WINDOW_WIN32_WINDOW_H */

@@ -1,6 +1,6 @@
 
-set(GLFW_MIRROR http://sourceforge.net/projects/glfw/files/glfw/2.7.9/glfw-2.7.9.zip/download?use_mirror=autoselect)
-set(GLFW_TARGET ${BAKGE_SOURCE_DIR}/lib/glfw-2.7.9)
+set(GLFW_MIRROR http://sourceforge.net/projects/glfw/files/glfw/3.0/glfw-3.0.zip/download?use_mirror=autoselect)
+set(GLFW_TARGET ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
 set(GLFW_ARCHIVE ${GLFW_TARGET}.zip)
 
 if(NOT EXISTS ${GLFW_ARCHIVE} AND NOT EXISTS ${GLFW_TARGET})

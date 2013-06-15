@@ -17,17 +17,23 @@ set(TESTS
   loadfile
 )
 
+
+link_directories(${BAKGE_SOURCE_DIR}/lib)
+
 if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   link_directories(${X11_LIBRARY_DIR})
   set(CORELIBS
     m
+    glfw3
+    GL
+    GLU
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
-    GL
-    GLU
+    Xrandr
+    Xi
     pthread
   )
 endif()
@@ -43,6 +49,7 @@ if(UNIX AND APPLE)
     GL
     GLU
     ${COCOA_LIBRARY}
+    glfw3
   )
 endif()
 
@@ -54,6 +61,7 @@ if(WIN32)
     user32.lib
     glu32.lib
     winmm.lib
+    libglfw3.lib
   )
 endif(WIN32)
 

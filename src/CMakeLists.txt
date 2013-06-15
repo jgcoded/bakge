@@ -3,9 +3,9 @@
 cmake_minimum_required (VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
+include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
 
 set(MODULES
-  api/Window
   api/Thread
   data/SingleNode
   data/LinkedList
@@ -16,6 +16,7 @@ set(MODULES
   core/EventHandler
   core/Renderer
   core/Utility
+  core/Window
   graphics/Mesh
   graphics/Node
   graphics/Pawn
@@ -45,7 +46,6 @@ set(PLATFORM_MODULES
   clock/${PLATFORM_PREFIX}_Clock
   thread/${PLATFORM_PREFIX}_Thread
   utility/${PLATFORM_PREFIX}_Utility
-  window/${PLATFORM_PREFIX}_Window
 )
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES})

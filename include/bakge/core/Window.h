@@ -22,63 +22,38 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
+#ifndef BAKGE_CORE_WINDOW_H
+#define BAKGE_CORE_WINDOW_H
 
 #include <bakge/Bakge.h>
-
-/* Our OpenGL view class */
-@interface BakgeContentView : NSView
-
-- (id) init;
-
-@end
-
-@interface BakgeApplicationDelegate : NSObject<NSApplicationDelegate>
-@end
-
-@interface BakgeWindow : NSWindow { }
-@end
-
-@interface BakgeWindowDelegate : NSObject<NSWindowDelegate>
-@end
 
 namespace bakge
 {
 
-typedef class osx_Window : api::Window
+class Window : public Bindable
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
 
-    __strong NSWindow* WindowHandle;
+protected:
 
-    static NSOpenGLContext* SharedContext;
-    static NSOpenGLPixelFormat* PixelFormat;
-
-    BakgeContentView* ContentView;
-    NSOpenGLContext* Context;
-    BakgeWindowDelegate* WindowDelegate;
-
-    osx_Window();
-
+    Window();
+    
 
 public:
 
-    ~osx_Window();
+    ~Window();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+    BGE_FACTORY Window* Create(int Width, int Height);
+
+    bool IsOpen();
+    Result Close();
+    Result PollEvent(Event* Ev);
+    Result SwapBuffers();
 
     Result Bind() const;
     Result Unbind() const;
 
-    bool IsOpen();
-    Result Close();
-    Result SwapBuffers();
-    Result PollEvent(Event* Ev);
-
-} Window; /* osx_Window */
+}; /* Window */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */
+#endif /* BAKGE_CORE_WINDOW_H */
