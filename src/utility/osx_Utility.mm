@@ -83,6 +83,8 @@ Result Deinit()
     [osx_Window::PixelFormat release];
     [osx_Window::SharedContext release];
 
+    [NSPool release];
+
     return BGE_SUCCESS;
 }
 

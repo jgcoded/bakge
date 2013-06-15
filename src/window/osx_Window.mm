@@ -33,6 +33,7 @@
 
 - (void) drawRect: (NSRect) bounds
 {
+    printf("DrawRect\n");
 }
 
 
@@ -71,6 +72,7 @@ osx_Window* osx_Window::Create(int Width, int Height)
     osx_Window* Win;
     NSOpenGLContext* Context;
     NSRect Frame;
+    NSView* WindowView;
 
     /* Allocate a window */
     Win = new osx_Window;
@@ -84,7 +86,8 @@ osx_Window* osx_Window::Create(int Width, int Height)
                                           backing: NSBackingStoreBuffered 
                                           defer: NO]; 
 
-    [Win->WindowHandle makeKeyAndOrderFront: Win->WindowHandle];
+    [Win->WindowHandle makeKeyAndOrderFront: nil];
+    [Win->WindowHandle setTitle: @"Bakge"];
 
     Frame.origin.x = 50.0f;
     Frame.origin.y = 50.0f;
@@ -103,18 +106,7 @@ osx_Window* osx_Window::Create(int Width, int Height)
 
     printf("Creating window's context\n");
 
-    /* Allocate a OpenGL context sharing our SharedContext */
-    /*Win->Context = [[NSOpenGLContext alloc] initWithFormat: PixelFormat
-                                            shareContext: SharedContext];
-    */
-
     Win->Context = [Win->GLView openGLContext];
-
-    if(Win->Context == NULL) {
-        printf("Error creating OpenGL context\n");
-        delete Win;
-        return NULL;
-    }
 
     GLint SwapInterval, Opaque;
     SwapInterval = 1;
@@ -123,17 +115,10 @@ osx_Window* osx_Window::Create(int Width, int Height)
     [Win->Context setValues: &Opaque forParameter: NSOpenGLCPSurfaceOpacity];
 
     printf("Making context current\n");
+    [Win->Context makeCurrentContext];
 
-    /* Make our window's context current on this thread */
-    //[[Win->GLView openGLcontext] makeCurrentContext];
-
-    printf("Setting view's context\n");
-    /* Set our view's context */
-    //[Win->GLView setOpenGLContext: Win->Context];
-
-    printf("Setting Context's view\n");
-    /* Set our context's view */
-    //[Win->Context setView: Win->GLView];
+    WindowView = [Win->WindowHandle contentView];
+    [WindowView addSubview: Win->GLView];
 
     return Win;
 }
@@ -174,8 +159,6 @@ Result osx_Window::PollEvent(Event* Ev)
 
 Result osx_Window::Bind() const
 {
-    [Context clearDrawable];
-    [GLView setNeedsDisplay: YES];
     return BGE_SUCCESS;
 }
 

@@ -20,6 +20,7 @@ int main(int argc, char* argv[])
     printf("Beginning GL calls\n");
 
     glClearColor(1, 0, 0, 1);
+    glViewport(0, 0, 600, 400);
 
     printf("Entering main loop\n");
 
