@@ -37,21 +37,37 @@ FrontRenderer::~FrontRenderer()
 }
 
 
+FrontRenderer* FrontRenderer::Create()
+{
+    return new FrontRenderer;
+}
+
+
 Result FrontRenderer::Bind() const
 {
-    return BGE_FAILURE;
+    glEnable(GL_COLOR);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    return BGE_SUCCESS;
 }
 
 
 Result FrontRenderer::Unbind() const
 {
-    return BGE_FAILURE;
+    return BGE_SUCCESS;
 }
 
 
-Result FrontRenderer::Draw(Drawable* Obj) const
+Result FrontRenderer::Draw(Drawable* Obj)
 {
-    return BGE_FAILURE;
+    if(Obj->Bind() != BGE_SUCCESS)
+        return BGE_FAILURE;
+
+    Obj->Draw();
+    Obj->Unbind();
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
