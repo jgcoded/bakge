@@ -25,8 +25,6 @@
 #ifndef BAKGE_GRAPHICS_TEXTURE_H
 #define BAKGE_GRAPHICS_TEXTURE_H
 
-#include <gl/GL.h>
-#include <gl/GLU.h>
 #include <bakge/Bakge.h>
 
 namespace bakge
