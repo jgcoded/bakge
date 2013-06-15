@@ -25,6 +25,7 @@
 #ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
 #define BAKGE_PLATFORM_WIN32_BAKGE_H
 
+/* Disable some pesky MSVC warnings */
 #pragma warning(disable : 4193)
 #pragma warning(disable : 4005)
 

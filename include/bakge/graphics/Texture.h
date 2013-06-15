@@ -22,18 +22,6 @@
  * THE SOFTWARE.
  * */
 
-
-/* *
-* Want to create this class? Here are some resources to get you
-* started with OpenGL texture creation.
-*
-* http://www.opengl.org/wiki/Texture
-* http://nehe.gamedev.net/tutorial/texture_mapping/12038/
-* http://www.swiftless.com/tutorials/opengl/texture_under_windows.html
-*
-* */
-
-
 #ifndef BAKGE_GRAPHICS_TEXTURE_H
 #define BAKGE_GRAPHICS_TEXTURE_H
 
@@ -73,4 +61,3 @@ private:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_TEXTURE_H */
-

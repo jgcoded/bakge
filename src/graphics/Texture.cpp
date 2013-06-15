@@ -93,4 +93,3 @@ Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
 }
 
 } /* bakge */
-
