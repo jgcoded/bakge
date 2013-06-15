@@ -52,7 +52,7 @@ Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
                                                               void* Data)
 {
 	int error;
-	Texture* newTexture;
+	Texture* newTexture = new Texture;
 	
 	newTexture->width = Width;
 	newTexture->height = Height;
