@@ -28,19 +28,31 @@
 
 int main(int argc, char* argv[])
 {
+    bakge::Microseconds SleepTime;
+    bakge::Microseconds NowTime;
+
+    if(argc > 1) {
+        SleepTime = atoi(argv[1]);
+        if(SleepTime > 5000000) {
+            printf("Too long, don't want to sleep for more than 5 seconds\n");
+            SleepTime = 5000000;
+        }
+    } else {
+        printf("No sleep time provided, sleeping for default 2 seconds\n");
+        SleepTime = 2000000;
+    }
+
     bakge::Init(argc, argv);
 
-    printf("Getting start time\n");
-    
-    bakge::Microseconds T = bakge::GetRunningTime();
+    NowTime = bakge::GetRunningTime();
 
-    printf("%u microseconds right now\n", T);
+    printf("%ld microseconds right now\n", NowTime);
 
-    bakge::Delay(1000000);
+    bakge::Delay(SleepTime);
 
-    T = bakge::GetRunningTime() - T;
+    NowTime = bakge::GetRunningTime() - NowTime;
 
-    printf("%u microseconds have passed\n", T);
+    printf("%ld microseconds have passed\n", NowTime);
     
     bakge::Deinit();
 
