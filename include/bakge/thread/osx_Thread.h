@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-class osx_Thread : api::Thread
+typedef class osx_Thread : api::Thread
 {
 
 public:
@@ -36,7 +36,9 @@ public:
     osx_Thread();
     virtual ~osx_Thread();
 
-}; /* osx_Thread */
+    static osx_Thread* Create(int (*EntryFunc)(void*), void* Data);
+
+} Thread; /* osx_Thread */
 
 } /* bakge */
 

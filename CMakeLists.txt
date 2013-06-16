@@ -4,6 +4,11 @@ cmake_minimum_required (VERSION 2.6)
 
 project (BAKGE)
 
+# Version of GLFW we're using
+set(BAKGE_GLFW_VERSION "3.0")
+set(BAKGE_GLFW_VERSION_FULL "3.0.0")
+message("-- Bakge GLFW version ${GLFW_VERSION_FULL}")
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Common required packages

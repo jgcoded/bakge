@@ -36,4 +36,10 @@ osx_Thread::~osx_Thread()
 {
 }
 
+
+osx_Thread* osx_Thread::Create(int (*EntryFunc)(void*), void* Data)
+{
+    return NULL;
+}
+
 } /* bakge */

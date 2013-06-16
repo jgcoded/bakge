@@ -3,10 +3,16 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
+void glfwErrorCallback(int Code, const char* Description)
+{
+    printf("GLFW error %d: %s\n", Code, Description);
+}
 
 int main(int argc, char* argv[])
 {
     bakge::Window* Win;
+
+    glfwSetErrorCallback(glfwErrorCallback);
 
     printf("Initializing Bakge\n");
     if(bakge::Init(argc, argv) != BGE_SUCCESS) {
