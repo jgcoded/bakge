@@ -36,7 +36,7 @@ public:
     osx_Thread();
     virtual ~osx_Thread();
 
-    static osx_Thread* Create(int (*EntryFunc)(void*), void* Data);
+    BGE_FACTORY osx_Thread* Create(int (*EntryFunc)(void*), void* Data);
 
 } Thread; /* osx_Thread */
 

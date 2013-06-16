@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-class win32_Thread : api::Thread
+typedef class win32_Thread : api::Thread
 {
 
 public:
@@ -36,7 +36,9 @@ public:
     win32_Thread();
     virtual ~win32_Thread();
 
-}; /* win32_Thread */
+    BGE_FACTORY win32_Thread* Create(int (*EntryFunc)(void*), void* Data);
+
+} Thread; /* win32_Thread */
 
 } /* bakge */
 

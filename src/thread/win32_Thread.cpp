@@ -36,4 +36,10 @@ win32_Thread::~win32_Thread()
 {
 }
 
+
+win32_Thread* win32_Thread::Create(int (*EntryFunc)(void*), void* Data)
+{
+    return NULL;
+}
+
 } /* bakge */
