@@ -10,7 +10,7 @@ int ThreadFunc(void* Nothing)
 {
     /* While window is open, print dots from this thread */
     while(Win->IsOpen()) {
-        bakge::Delay(100);
+        bakge::Delay(100000);
         printf(".");
         fflush(0);
     }
