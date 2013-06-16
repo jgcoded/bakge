@@ -103,6 +103,7 @@ Result Window::Unbind() const
 Result Window::Close()
 {
     if(IsOpen()) {
+        /* Destroy the GLFW window */
         glfwDestroyWindow(WindowHandle);
         WindowHandle = NULL;
 

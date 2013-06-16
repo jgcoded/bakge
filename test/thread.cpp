@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
-bakge::Window* Win;
-bakge::Thread* Thr;
-
-int ThreadFunc(void* Nothing)
+int ThreadFunc(void* Data)
 {
+    bakge::Window* Win;
+
+    Win = (bakge::Window*)Data;
     /* While window is open, print dots from this thread */
     while(Win->IsOpen()) {
         bakge::Delay(100000);
@@ -25,8 +25,11 @@ int main(int argc, char* argv[])
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
+    bakge::Window* Win;
+    bakge::Thread* Thr;
+
     Win = bakge::Window::Create(600, 400);
-    Thr = bakge::Thread::Create(ThreadFunc, NULL);
+    Thr = bakge::Thread::Create(ThreadFunc, (void*)Win);
 
     bakge::Event Ev;
 
