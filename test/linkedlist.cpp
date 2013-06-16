@@ -22,32 +22,37 @@
  * THE SOFTWARE.
  * */
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
+    printf("Checking linked list as a stack\n");
 
-Byte* LoadFileContents(const char* Path)
-{
-    FILE* FileHandle;
-    long Length;
-    Byte* FileContent;
+    char* Strings[] = { "Wake", "up", "Neo", "Matrix", "has", "you" };
+    bakge::LinkedList<char*> List;
     
-    FileHandle = fopen(Path, "rb");
-    if (FileHandle != NULL) {
-        /* Get character count of file */
-        fseek(FileHandle, 0, SEEK_END);
-        Length = ftell(FileHandle);
-        fseek(FileHandle, 0, SEEK_SET);
-        /* Allocate memory and read in file contents */
-        FileContent = (Byte*)malloc(Length + 1);
-        FileContent[Length] = '\0';
-        fread(FileContent, Length, 1, FileHandle);
-        fclose(FileHandle);
-        return FileContent;
-    } else {
-        return NULL;
+    /* Push values to list */
+    for (int i = 0; i < sizeof(Strings) / sizeof(char*); i++) {
+        List.Push(Strings[i]);
     }
+
+    /* Pop values in reversed order */
+    while (!List.IsEmpty()) {
+        char* Popped = List.Pop();
+        printf("%s ", Popped);
+    }
+    printf("\n");
+
+    /* Try to pop from empty list */
+    try {
+        char* Popped = List.Pop();
+        printf ("Something is wrong");
+    } catch (char* Exception) {
+        printf ("Exception successfully thrown: %s\n", Exception);
+    }
+
+    return 0;
 }
 
-} /* bakge */

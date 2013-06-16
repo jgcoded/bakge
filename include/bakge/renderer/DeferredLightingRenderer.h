@@ -22,32 +22,36 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H
+#define BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-Byte* LoadFileContents(const char* Path)
+class DeferredLightingRenderer : public Renderer
 {
-    FILE* FileHandle;
-    long Length;
-    Byte* FileContent;
+
+public:
+
+    DeferredLightingRenderer();
+    virtual ~DeferredLightingRenderer();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
     
-    FileHandle = fopen(Path, "rb");
-    if (FileHandle != NULL) {
-        /* Get character count of file */
-        fseek(FileHandle, 0, SEEK_END);
-        Length = ftell(FileHandle);
-        fseek(FileHandle, 0, SEEK_SET);
-        /* Allocate memory and read in file contents */
-        FileContent = (Byte*)malloc(Length + 1);
-        FileContent[Length] = '\0';
-        fread(FileContent, Length, 1, FileHandle);
-        fclose(FileHandle);
-        return FileContent;
-    } else {
-        return NULL;
-    }
-}
+    virtual Result Draw(Drawable* Obj) const;
+
+    /*
+    virtual Result SetTargetFramebuffer(GBuffer* Buffer);
+
+    virtual Result SetFragmentShader(Shader* Obj);
+    virtual Result SetVertexShader(Shader* Obj);
+    */
+
+}; /* DeferredLightingRenderer */
 
 } /* bakge */
+
+#endif /* BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H */

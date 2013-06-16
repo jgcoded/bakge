@@ -4,6 +4,7 @@ bin/*
 obj/*
 lib/*
 bakge.wiki/*
+*.swp # vim swap files
 
 # Includes
 !*/CMakeLists.txt

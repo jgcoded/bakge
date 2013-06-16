@@ -7,15 +7,19 @@ include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
 
 set(TESTS
   clock
-  texture
-  types
-  window
-  node
-  vector4
-  quaternion
-  matrix
-  pawn
+  linkedlist
   loadfile
+  matrix
+  node
+  pawn
+  frontrenderer
+  quaternion
+  SimpleEngine
+  texture
+  thread
+  types
+  vector4
+  window
 )
 
 

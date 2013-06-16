@@ -28,15 +28,29 @@
 namespace bakge
 {
 
-class x11_Thread : api::Thread
+typedef class x11_Thread : api::Thread
 {
+    static void* Entry(void* Data); /* Internal thread entry function */
+
+    int (*UserEntry)(void* Data); /* End-user thread entry function */
+    void* UserData; /* End-user specificied argument */
+    pthread_t ThreadHandle;
+    int ExitCode;
+
+    x11_Thread();
+
 
 public:
 
-    x11_Thread();
     virtual ~x11_Thread();
 
-}; /* x11_Thread */
+    static x11_Thread* Create(int (*EntryFunc)(void*), void* EntryData);
+
+    Result Kill();
+    int Wait();
+    int GetExitCode();
+
+} Thread; /* x11_Thread */
 
 } /* bakge */
 

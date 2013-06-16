@@ -38,10 +38,12 @@ public:
     FrontRenderer();
     virtual ~FrontRenderer();
 
+    BGE_FACTORY FrontRenderer* Create();
+
     virtual Result Bind() const;
     virtual Result Unbind() const;
     
-    virtual Result Draw(Drawable* Obj) const;
+    virtual Result Draw(Drawable* Obj);
 
 }; /* FrontRenderer */
 

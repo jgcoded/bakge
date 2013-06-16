@@ -39,8 +39,10 @@ public:
     LinkedList();
     ~LinkedList();
 
-    T Push(T toPush);
+    T Push(T Value);
     T Pop();
+
+	bool IsEmpty();
 
 
 protected:
@@ -52,5 +54,6 @@ protected:
 
 } /* bakge */
 
-#endif /* BAKGE_DATA_LINKEDLIST_H */
+#include <../src/data/LinkedList.cpp> /* Include the implementation here */
 
+#endif /* BAKGE_DATA_LINKEDLIST_H */
