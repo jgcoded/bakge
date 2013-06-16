@@ -45,10 +45,25 @@ public:
     /* Run the application main loop */
     virtual int Run() = 0;
 
-    /* Main loop updatetes the application/game world here */
-    virtual Result Update() = 0;
+    /* *
+     * The main loop updates the application/game world here.
+     * Physics world steps, animation and anything that relates
+     * to time is done here.
+     * */
+    virtual Result Update(Seconds DeltaTime) = 0;
 
-    /* Render stages */
+    /* *
+     * Rendering is split up into 3 stages, to allow for flexible
+     * rendering targets such as offscreen framebuffers or textures.
+     *
+     * The PreRender stage is used to clear and set up framebuffers,
+     * set modelview transforms, etc.
+     *
+     * The Render stage is when scene and GUI rendering takes place.
+     *
+     * The PostRender stage usually does things like blitting framebuffers
+     * to the screen, switch to projection transforms, etc.
+     * */
     virtual Result PreRenderStage() = 0;
     virtual Result RenderStage() = 0;
     virtual Result PostRenderStage() = 0;

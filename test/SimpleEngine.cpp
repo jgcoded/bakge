@@ -15,7 +15,7 @@ public:
     bakge::Result ShutDown();
     int Run();
 
-    bakge::Result Update();
+    bakge::Result Update(bakge::Seconds DeltaTime);
 
     bakge::Result PreRenderStage();
     bakge::Result RenderStage();
@@ -86,7 +86,7 @@ int SimpleEngine::Run()
         if(AppWindow->IsOpen() == false)
             break;
 
-        Update();
+        Update(0);
         PreRenderStage();
         RenderStage();
         PostRenderStage();
@@ -159,7 +159,7 @@ bakge::Result SimpleEngine::RenderStage()
 }
 
 
-bakge::Result SimpleEngine::Update()
+bakge::Result SimpleEngine::Update(bakge::Seconds DeltaTime)
 {
     /* Nothing to do really */
     return BGE_SUCCESS;

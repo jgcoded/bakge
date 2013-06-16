@@ -36,6 +36,7 @@ typedef int Result;
 
 typedef char Byte;
 typedef unsigned int Milliseconds;
+typedef double Seconds;
 
 } /* bakge */
 
