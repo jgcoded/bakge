@@ -27,12 +27,12 @@
 namespace bakge
 {
 
-Result Delay(Milliseconds BGE_NCP Time)
+Result Delay(Microseconds BGE_NCP Time)
 {
     NSTimeInterval DelayTime;
 
-    DelayTime = Time / 1000;
-    DelayTime += 0.001 * (Time % 1000);
+    DelayTime = Time / 1000000;
+    DelayTime += 0.001 * (Time % 1000000);
 
     [NSThread sleepForTimeInterval: DelayTime];
 
@@ -40,7 +40,7 @@ Result Delay(Milliseconds BGE_NCP Time)
 }
 
 
-Milliseconds GetRunningTime()
+Microseconds GetRunningTime()
 {
     extern NSDate* StartTime; /* Defined in src/utility/osx_Utility.mm */
     NSDate* Now;
@@ -50,7 +50,7 @@ Milliseconds GetRunningTime()
     Now = [NSDate date];
     NowSec = [Now timeIntervalSinceDate: StartTime];
 
-    return NowSec * 1000;
+    return NowSec * 1000000;
 }
 
 } /* bakge */

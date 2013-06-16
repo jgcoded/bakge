@@ -27,9 +27,9 @@
 namespace bakge
 {
 
-Result Delay(Milliseconds BGE_NCP Time)
+Result Delay(Microseconds BGE_NCP Time)
 {
-    Milliseconds End = Time + GetRunningTime();
+    Microseconds End = Time + GetRunningTime();
     
     while(GetRunningTime() < End)
         ;
@@ -38,7 +38,7 @@ Result Delay(Milliseconds BGE_NCP Time)
 }
 
 
-Milliseconds GetRunningTime()
+Microseconds GetRunningTime()
 {
     /* Defined in src/utility/win32_Utility.cpp */
     extern LARGE_INTEGER ClockFreq;
@@ -59,8 +59,8 @@ Milliseconds GetRunningTime()
     /* Reset thread affinity mask for this thread */
     SetThreadAffinityMask(CurrentThread, OldThreadMask);
     
-    return (Milliseconds)(1000 * TickCount.QuadPart / ClockFreq.QuadPart)
-          - (Milliseconds)(1000 * StartCount.QuadPart / ClockFreq.QuadPart);
+    return (Microseconds)(1000000 * TickCount.QuadPart / ClockFreq.QuadPart)
+          - (Microseconds)(1000000 * StartCount.QuadPart / ClockFreq.QuadPart);
 }
 
 } /* bakge */

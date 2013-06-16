@@ -27,7 +27,7 @@
 namespace bakge
 {
 
-Result Delay(Milliseconds BGE_NCP Time)
+Result Delay(Microseconds BGE_NCP Time)
 {
     pthread_mutex_t WaitLock;
     timespec Delay;
@@ -40,8 +40,9 @@ Result Delay(Milliseconds BGE_NCP Time)
     /* Implementation inspired by SFML */
     gettimeofday(&Now, NULL);
 
-    Delay.tv_nsec = (Now.tv_usec + (Time * 1000 % 1000000L)) * 1000;
-    Delay.tv_sec = Now.tv_sec + (Time / 1000) + (Delay.tv_nsec / 1000000000L);
+    Delay.tv_nsec = (Now.tv_usec + (Time % 1000000)) * 1000;
+    Delay.tv_sec = Now.tv_sec + (Time / 1000000)
+                   + (Delay.tv_nsec / 1000000000L);
     Delay.tv_nsec %= 1000000000L;
 
     pthread_mutex_lock(&WaitLock);
@@ -53,7 +54,7 @@ Result Delay(Milliseconds BGE_NCP Time)
 }
 
 
-Milliseconds GetRunningTime()
+Microseconds GetRunningTime()
 {
     extern timespec StartTime; /* Defined in src/utility/x11_Utility.cpp */
     timespec Time;
@@ -61,8 +62,8 @@ Milliseconds GetRunningTime()
     /* Get current time; convert it to milliseconds */
     clock_gettime(CLOCK_MONOTONIC, &Time);
 
-    return ((Time.tv_sec - StartTime.tv_sec) * 1000)
-             + ((Time.tv_nsec - StartTime.tv_nsec) / 1000000L);
+    return ((Time.tv_sec - StartTime.tv_sec) * 1000000)
+             + ((Time.tv_nsec - StartTime.tv_nsec) / 1000);
 }
 
 } /* bakge */
