@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
-bakge::Window* Win;
-bakge::Thread* Thr;
-
-int ThreadFunc(void* Nothing)
+int ThreadFunc(void* Data)
 {
+    bakge::Window* Win;
+
+    Win = (bakge::Window*)Data;
     /* While window is open, print dots from this thread */
     while(Win->IsOpen()) {
-        bakge::Delay(100);
+        bakge::Delay(100000);
         printf(".");
         fflush(0);
     }
@@ -22,13 +22,21 @@ int ThreadFunc(void* Nothing)
 
 int main(int argc, char* argv[])
 {
+    bakge::Event Ev;
+
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
-    Win = bakge::Window::Create(600, 400);
-    Thr = bakge::Thread::Create(ThreadFunc, NULL);
+    bakge::Window* Win;
+    bakge::Thread* Thr;
 
-    bakge::Event Ev;
+    Win = bakge::Window::Create(600, 400);
+    Thr = bakge::Thread::Create(ThreadFunc, (void*)Win);
+
+    if(Win == NULL || Thr == NULL) {
+        printf("Error initializing window and thread\n");
+        goto CLEANUP;
+    }
 
     glClearColor(1, 0, 0, 1);
     glViewport(0, 0, 600, 400);
@@ -50,11 +58,14 @@ int main(int argc, char* argv[])
         Win->Unbind();
     }
 
-    if(Win != NULL)
-        delete Win;
+
+CLEANUP:
 
     if(Thr != NULL)
         delete Thr;
+
+    if(Win != NULL)
+        delete Win;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
