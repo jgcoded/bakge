@@ -17,4 +17,4 @@ How-To's
 * **Clone**: `$ git clone http://github.com/you/bakge`
 * **Branch**: `$ git checkout -b name_of_branch`
 * **Pull palistov/master**: `git pull http://github.com/palistov/bakge master`
-* * **Pull Request**: Go to your Bakge repo page and click the green compare button on the top left. Select your contribution branch on the right and palistov/contribution on the left and click 'Send Pull Request'
+* **Pull Request**: Go to your Bakge repo page and click the green compare button on the top left. Select your contribution branch on the right and palistov/contribution on the left and click 'Send Pull Request'
