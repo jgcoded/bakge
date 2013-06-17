@@ -73,17 +73,22 @@ public:
     Vector4 BGE_NCP operator*=(Scalar BGE_NCP Value);
     Vector4 BGE_NCP operator/=(Scalar BGE_NCP Value);
 
-    Vector4 BGE_NCP Normalize();
+	bool BGE_NCP operator==(Vector4 BGE_NCP left);
+
+    void Normalize();
     Vector4 Normalized() const;
 
     Scalar LengthSquared() const;
     Scalar Length() const;
+
     
     friend Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     
     friend Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
     friend Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
+
+	friend bool BGE_NCP operator==(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
     friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
