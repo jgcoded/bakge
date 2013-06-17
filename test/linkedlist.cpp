@@ -30,26 +30,26 @@ int main(int argc, char* argv[])
 {
     printf("Checking linked list as a stack\n");
 
-    char* Strings[] = { "Wake", "up", "Neo", "Matrix", "has", "you" };
-    bakge::LinkedList<char*> List;
+    const char* Strings[] = { "Wake", "up", "Neo", "Matrix", "has", "you" };
+    bakge::LinkedList<const char*> List;
     
     /* Push values to list */
-    for (int i = 0; i < sizeof(Strings) / sizeof(char*); i++) {
+    for (int i = 0; i < sizeof(Strings) / sizeof(const char*); i++) {
         List.Push(Strings[i]);
     }
 
     /* Pop values in reversed order */
     while (!List.IsEmpty()) {
-        char* Popped = List.Pop();
+        const char* Popped = List.Pop();
         printf("%s ", Popped);
     }
     printf("\n");
 
     /* Try to pop from empty list */
     try {
-        char* Popped = List.Pop();
+        const char* Popped = List.Pop();
         printf ("Something is wrong");
-    } catch (char* Exception) {
+    } catch (const char* Exception) {
         printf ("Exception successfully thrown: %s\n", Exception);
     }
 
