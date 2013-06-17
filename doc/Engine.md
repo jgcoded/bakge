@@ -4,6 +4,9 @@ Engine
 Engine classes should focused on controlling interactions between various components like the renderers, scene manager and scene objects, event handlers, and more. Engines will house the main loop of the application, from which game world updates are polled, and render calls dispatched. A good example of Engine behavior is rendering the scene.
 
 
+Legend
+======
+
 For following diagrams, the empty diamond arrow denotes a container containing the object pointed to.
 
 ![Box contains stuff](http://www.cs.csubak.edu/~pholden/bakge/info_contains.png)
