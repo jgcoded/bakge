@@ -35,7 +35,8 @@ namespace bakge
 typedef int Result;
 
 typedef char Byte;
-typedef unsigned int Milliseconds;
+typedef unsigned long long Microseconds;
+typedef double Seconds;
 
 } /* bakge */
 

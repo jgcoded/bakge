@@ -14,6 +14,7 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  SimpleEngine
   texture
   thread
   types
@@ -46,14 +47,20 @@ endif()
 if(UNIX AND APPLE)
   find_package(X11 REQUIRED)
   FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+  FIND_LIBRARY(IOKIT_LIBRARY IOKit)
+  FIND_LIBRARY(AGL_LIBRARY AGL)
+  FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
   include_directories(${Cocoa_INCLUDE_DIRS})
   list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(CORELIBS
     m
+    glfw3
     GL
     GLU
     ${COCOA_LIBRARY}
-    glfw3
+    ${IOKIT_LIBRARY}
+    ${CORE_FOUNDATION_LIBRARY}
+    ${AGL_LIBRARY}
   )
 endif()
 
@@ -65,11 +72,22 @@ if(WIN32)
     user32.lib
     glu32.lib
     winmm.lib
+    glfw3
   )
 endif(WIN32)
 
-
-foreach(test ${TESTS})
-  add_executable(${test} ${test}.cpp)
-  target_link_libraries(${test} bakge glfw3 ${CORELIBS})
-endforeach(test)
+if(NOT APPLE)
+  foreach(test ${TESTS})
+    add_executable(${test} ${test}.cpp)
+    target_link_libraries(${test} bakge ${CORELIBS})
+  endforeach(test)
+else()
+  foreach(test ${TESTS})
+    add_executable(${test} MACOSX_BUNDLE ${test})
+    target_link_libraries(${test} bakge ${CORELIBS})
+    message("-- Executable ${test} version string ${BAKGE_GLFW_VERSION}")
+    set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME ${test})
+    set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING ${BAKGE_GLFW_VERSION}
+                                             MACOSX_BUNDLE_LONG_VERSION_STRING ${BAKGE_GLFW_VERSION_FULL})
+  endforeach(test)
+endif()

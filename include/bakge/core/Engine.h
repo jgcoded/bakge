@@ -38,10 +38,35 @@ public:
     Engine();
     virtual ~Engine();
 
+    /* Initialize and clean up any components */
+    virtual Result Initialize() = 0;
+    virtual Result ShutDown() = 0;
+
+    /* Run the application main loop */
+    virtual int Run() = 0;
+
     /* *
-     * Want to build this class? Check out the issue here for details
-     * http://github.com/palistov/bakge/issues/6
+     * The main loop updates the application/game world here.
+     * Physics world steps, animation and anything that relates
+     * to time is done here.
      * */
+    virtual Result Update(Seconds DeltaTime) = 0;
+
+    /* *
+     * Rendering is split up into 3 stages, to allow for flexible
+     * rendering targets such as offscreen framebuffers or textures.
+     *
+     * The PreRender stage is used to clear and set up framebuffers,
+     * set modelview transforms, etc.
+     *
+     * The Render stage is when scene and GUI rendering takes place.
+     *
+     * The PostRender stage usually does things like blitting framebuffers
+     * to the screen, switch to projection transforms, etc.
+     * */
+    virtual Result PreRenderStage() = 0;
+    virtual Result RenderStage() = 0;
+    virtual Result PostRenderStage() = 0;
 
 }; /* Engine */
 

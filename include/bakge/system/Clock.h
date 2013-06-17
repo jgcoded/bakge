@@ -30,9 +30,9 @@
 namespace bakge
 {
 
-BGE_FUNC Result Delay(Milliseconds BGE_NCP Time);
+BGE_FUNC Result Delay(Microseconds BGE_NCP Time);
 
-BGE_FUNC Milliseconds GetRunningTime();
+BGE_FUNC Microseconds GetRunningTime();
 
 } /* bakge */
 

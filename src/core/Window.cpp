@@ -61,6 +61,10 @@ Window* Window::Create(int Width, int Height)
     Window* Win = new Window;
 
     Win->WindowHandle = glfwCreateWindow(Width, Height, "Bakge", NULL, NULL);
+    if(Win->WindowHandle == NULL) {
+        delete Win;
+        return NULL;
+    }
 
     /* Store pointer to Bakge window so global callbacks can access it */
     glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);
@@ -70,7 +74,7 @@ Window* Window::Create(int Width, int Height)
     glfwSetWindowPosCallback(Win->WindowHandle, WindowMoved);
 
     Win->Bind();
-
+    
     return Win;
 }
 
@@ -99,9 +103,11 @@ Result Window::Unbind() const
 Result Window::Close()
 {
     if(IsOpen()) {
-        glfwDestroyWindow(WindowHandle);
+        /* Destroy the GLFW window */
+        GLFWwindow* Handle = WindowHandle;
         WindowHandle = NULL;
-
+        glfwDestroyWindow(Handle);
+        
         return BGE_SUCCESS;
     } else {
         return BGE_FAILURE;
@@ -111,7 +117,7 @@ Result Window::Close()
 
 bool Window::IsOpen()
 {
-    return WindowHandle != NULL;
+    return WindowHandle != NULL && !glfwWindowShouldClose(WindowHandle);
 }
 
 
