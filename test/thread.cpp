@@ -22,13 +22,18 @@ int ThreadFunc(void* Nothing)
 
 int main(int argc, char* argv[])
 {
+    bakge::Event Ev;
+
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     Win = bakge::Window::Create(600, 400);
     Thr = bakge::Thread::Create(ThreadFunc, NULL);
 
-    bakge::Event Ev;
+    if(Win == NULL || Thr == NULL) {
+        printf("Error initializing window and thread\n");
+        goto CLEANUP;
+    }
 
     glClearColor(1, 0, 0, 1);
     glViewport(0, 0, 600, 400);
@@ -50,11 +55,14 @@ int main(int argc, char* argv[])
         Win->Unbind();
     }
 
-    if(Win != NULL)
-        delete Win;
+
+CLEANUP:
 
     if(Thr != NULL)
         delete Thr;
+
+    if(Win != NULL)
+        delete Win;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();

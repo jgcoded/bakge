@@ -27,7 +27,7 @@
 namespace bakge
 {
 
-DWORD win32_Thread::Entry(LPVOID Data)
+DWORD WINAPI win32_Thread::Entry(LPVOID Data)
 {
     win32_Thread* T;
 
