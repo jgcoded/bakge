@@ -99,6 +99,8 @@
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>
 #include <bakge/graphics/Mesh.h>
+#include <bakge/renderer/DeferredGeometryRenderer.h>
+#include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
 
 #endif /* BAKGE_BAKGE_H */
