@@ -1,5 +1,4 @@
 # Ignores
-.old/* # Dross folder
 build/*
 bin/*
 obj/*

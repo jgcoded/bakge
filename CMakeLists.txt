@@ -7,11 +7,11 @@ project(BAKGE)
 # Version of GLFW we're using
 set(BAKGE_GLFW_VERSION "3.0")
 set(BAKGE_GLFW_VERSION_FULL "3.0.0")
-message("-- Bakge GLFW version ${GLFW_VERSION_FULL}")
+message("-- Bakge using GLFW version ${GLFW_VERSION_FULL}")
 
+set(BAKGE_SDK_PATH "sdk")
 set(BAKGE_LIB_DIR "lib")
 set(BAKGE_BIN_DIR "bin")
-set(BAKGE_SDK_DIR "sdk")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
@@ -28,20 +28,23 @@ set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${OPENGL_INCLUDE_DIR})
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 
-option(BAKGE_BUILD_SDK "Build an SDK for Bakge to export/" OFF)
+# Output all generated libraries and binaries to the SDK dir
+set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
+set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
+set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
+set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
+set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
 
-if(BAKGE_BUILD_SDK)
-  set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_DIR})
-  # Set output directory of the static library
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
-  set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
-  set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
-  set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
-endif()
+# We want ALL libraries (event external ones)to build into the
+# SDK's library directory
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
 
 
+# Append SDK directories so Bakge examples and tests can build against them
+list(APPEND BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SDK_LIB_PATH})
 
-# Set requird library vars
+
+# Set required library vars
 
 if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
