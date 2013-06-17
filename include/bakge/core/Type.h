@@ -34,8 +34,14 @@ namespace bakge
 #define BGE_SUCCESS 0
 typedef int Result;
 
+#ifndef _WIN32
+typedef uint64_t Uint64;
+#else
+typedef unsigned long long Uint64;
+#endif
+
 typedef char Byte;
-typedef unsigned long long Microseconds;
+typedef Uint64 Microseconds;
 typedef double Seconds;
 
 } /* bakge */
