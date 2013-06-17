@@ -1,6 +1,6 @@
 # Bakge CMake file
 
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 2.6)
 
 project(BAKGE)
 
@@ -12,11 +12,13 @@ message("-- Bakge using GLFW version ${GLFW_VERSION_FULL}")
 set(BAKGE_SDK_PATH "sdk")
 set(BAKGE_LIB_DIR "lib")
 set(BAKGE_BIN_DIR "bin")
+set(BAKGE_INC_DIR "include")
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Common required packages
 find_package(OpenGL)
+include_directories(${OPENGL_INCLUDE_DIR})
 
 set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
 
@@ -25,11 +27,11 @@ set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
 set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 
 # Append common directories
-list(APPEND BAKGE_INCLUDE_DIRECTORIES ${OPENGL_INCLUDE_DIR})
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 
 # Output all generated libraries and binaries to the SDK dir
 set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
+set(BAKGE_SDK_INC_PATH ${BAKGE_TARGET_DIR}/${BAKGE_INC_DIR})
 set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
 set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
 set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
@@ -107,3 +109,12 @@ add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(test)
 add_subdirectory(example)
+
+# Copy Bakge headers and library headers to SDK dir
+# Doesn't copy OpenGL or platform-specific headres like windows.h or x11.h
+make_directory(${BAKGE_TARGET_DIR})
+make_directory(${BAKGE_SDK_INC_PATH})
+foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
+  execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}
+                                                    ${BAKGE_SDK_INC_PATH})
+endforeach(include_dir)

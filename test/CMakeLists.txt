@@ -1,6 +1,6 @@
 # Bakge unit tests CMake file
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.6)
 
 if(BAKGE_BUILD_SDK)
   set(TESTS_SUBDIR "test")

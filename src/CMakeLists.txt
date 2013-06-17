@@ -1,6 +1,6 @@
 # Bakge CMake file
 
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
 include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)

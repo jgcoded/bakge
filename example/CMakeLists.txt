@@ -1,5 +1,5 @@
 
-cmake_minimum_required (VERSION 2.8)
+cmake_minimum_required (VERSION 2.6)
 
 set(EXECUTABLE_OUTPUT_PATH ${BAKGE_SDK_EXAMPLES_OUTPUT_PATH})
 
