@@ -9,6 +9,10 @@ set(BAKGE_GLFW_VERSION "3.0")
 set(BAKGE_GLFW_VERSION_FULL "3.0.0")
 message("-- Bakge GLFW version ${GLFW_VERSION_FULL}")
 
+set(BAKGE_LIB_DIR "lib")
+set(BAKGE_BIN_DIR "bin")
+set(BAKGE_SDK_DIR "sdk")
+
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Common required packages
@@ -24,8 +28,17 @@ set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${OPENGL_INCLUDE_DIR})
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 
-# Set output directory of the static library
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SOURCE_DIR}/lib)
+option(BAKGE_BUILD_SDK "Build an SDK for Bakge to export/" OFF)
+
+if(BAKGE_BUILD_SDK)
+  set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_DIR})
+  # Set output directory of the static library
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
+  set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
+  set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
+  set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
+endif()
+
 
 
 # Set requird library vars

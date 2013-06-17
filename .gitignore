@@ -6,6 +6,7 @@ obj/*
 lib/*
 bakge.wiki/*
 *.swp # vim swap files
+sdk/* # SDK build output folder
 
 # Includes
 !*/CMakeLists.txt
