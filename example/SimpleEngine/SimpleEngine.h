@@ -21,3 +21,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * */
+
+#ifndef BAKGE_EXAMPLE_SIMPLEENGINE_H
+#define BAKGE_EXAMPLE_SIMPLEENGINE_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <bakge/Bakge.h>
+
+class SimpleEngine : bakge::Engine
+{
+
+public:
+
+    SimpleEngine();
+    ~SimpleEngine();
+
+    bakge::Result Initialize();
+    bakge::Result ShutDown();
+    int Run();
+
+    bakge::Result Update(bakge::Seconds DeltaTime);
+
+    bakge::Result PreRenderStage();
+    bakge::Result RenderStage();
+    bakge::Result PostRenderStage();
+
+
+protected:
+
+    bakge::Window* AppWindow;
+    bakge::FrontRenderer* SceneRenderer;
+
+    GLUquadric* Quadric;
+
+};
+
+#endif /* BAKGE_EXAMPLE_SIMPLEENGINE_H */

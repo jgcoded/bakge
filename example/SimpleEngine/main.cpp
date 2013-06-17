@@ -21,3 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * */
+
+#include "SimpleEngine.h"
+
+int main(int argc, char* argv[])
+{
+    SimpleEngine* MyEngine;
+
+    printf("Initializing Bakge\n");
+    bakge::Init(argc, argv);
+
+    MyEngine = new SimpleEngine;
+
+    if(MyEngine->Initialize() == BGE_FAILURE) {
+        printf("Engine init failed\n");
+        return 1;
+    }
+
+    MyEngine->Run();
+    MyEngine->ShutDown();
+    delete MyEngine;
+
+    printf("Deinitializing Bakge\n");
+    bakge::Deinit();
+
+    return 0;
+}

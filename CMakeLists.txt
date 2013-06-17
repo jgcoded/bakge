@@ -2,7 +2,7 @@
 
 cmake_minimum_required (VERSION 2.6)
 
-project (BAKGE)
+project(BAKGE)
 
 # Version of GLFW we're using
 set(BAKGE_GLFW_VERSION "3.0")
@@ -13,21 +13,88 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Common required packages
 find_package(OpenGL)
-include_directories(${OPENGL_INCLUDE_DIR})
 
-# Bakge include directory
-include_directories(${BAKGE_SOURCE_DIR}/include)
+set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
+
+# Bakge include/link directories
+set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
+set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
+
+# Append common directories
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${OPENGL_INCLUDE_DIR})
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 
 # Unix-like or OS X
 if(UNIX)
   find_package(X11 REQUIRED)
-  include_directories(${X11_INCLUDE_DIR})
-  link_directories(${X11_LIBRARY_DIR})
+  list(APPEND BAKGE_INCLUDE_DIRECTORIES ${X11_INCLUDE_DIR})
+  list(APPEND BAKGE_LIBRARY_DIRECTORIES ${X11_LIBRARY_DIR})
 endif(UNIX)
 
 # Set output directory of the static library
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SOURCE_DIR}/lib)
 
+
+# Set requird library vars
+
+if(UNIX AND NOT APPLE)
+  find_package(X11 REQUIRED)
+  list(APPEND BAKGE_INCLUDE_DIRECTORIES ${X11_INCLUDE_DIR})
+  list(APPEND BAKGE_LIBRARY_DIRECTORIES ${X11_LIBRARY_DIR})
+  set(BAKGE_LIBRARIES
+    m
+    glfw3
+    GL
+    GLU
+    ${X11_X_PRE_LIBS}
+    ${X11_LIBRARIES}
+    ${X11_X_EXTRA_LIBRARIES}
+    Xrandr
+    Xi
+    pthread
+  )
+endif()
+
+if(UNIX AND APPLE)
+  find_package(X11 REQUIRED)
+  FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+  FIND_LIBRARY(IOKIT_LIBRARY IOKit)
+  FIND_LIBRARY(AGL_LIBRARY AGL)
+  FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
+  list(APPEND BAKGE_INCLUDE_DIRECTORIES ${Cocoa_INCLUDE_DIRS})
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
+  set(BAKGE_LIBRARIES
+    m
+    glfw3
+    GL
+    GLU
+    ${COCOA_LIBRARY}
+    ${IOKIT_LIBRARY}
+    ${CORE_FOUNDATION_LIBRARY}
+    ${AGL_LIBRARY}
+  )
+endif()
+
+if(WIN32)
+  set(BAKGE_LIBRARIES
+    opengl32.lib
+    gdi32.lib
+    user32.lib
+    glu32.lib
+    winmm.lib
+    glfw3
+  )
+endif(WIN32)
+
+foreach(directory ${BAKGE_INCLUDE_DIRECTORIES})
+  include_directories(${directory})
+endforeach(directory)
+
+foreach(directory ${BAKGE_LIBRARY_DIRECTORIES})
+  link_directories(${directory})
+endforeach(directory)
+
 add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(example)
