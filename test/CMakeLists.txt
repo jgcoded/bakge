@@ -11,6 +11,7 @@ set(TESTS
   linkedlist
   loadfile
   matrix
+  minlua
   node
   pawn
   frontrenderer

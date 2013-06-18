@@ -54,7 +54,15 @@
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 
+/* Include external library headers */
 #include <GLFW/glfw3.h>
+extern "C"
+{
+#include <lua/lua.h>
+#include <lua/luaconf.h>
+#include <lua/lualib.h>
+#include <lua/lauxlib.h>
+}
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>

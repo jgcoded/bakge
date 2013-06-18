@@ -53,6 +53,7 @@ if(UNIX AND NOT APPLE)
   set(BAKGE_LIBRARIES
     m
     glfw3
+    lua
     GL
     GLU
     ${X11_X_PRE_LIBS}
@@ -75,6 +76,7 @@ if(UNIX AND APPLE)
   set(BAKGE_LIBRARIES
     m
     glfw3
+    lua
     GL
     GLU
     ${COCOA_LIBRARY}
@@ -92,9 +94,9 @@ if(WIN32)
     glu32.lib
     winmm.lib
     glfw3
+    lua
   )
 endif(WIN32)
-
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS
