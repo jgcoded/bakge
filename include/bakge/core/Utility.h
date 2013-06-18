@@ -27,6 +27,14 @@
 
 #include <bakge/Bakge.h>
 
+#define BGE_ASSERT(PRED) \
+    if(!(PRED)) { \
+        fprintf(stderr, "Assertion failed at line %d in file %s, " \
+                        "function %s\n - predicate %s\n" \
+        __LINE__, __FILE__, __func__, #PRED); \
+        exit(-1); \
+    }
+
 namespace bakge
 {
 
