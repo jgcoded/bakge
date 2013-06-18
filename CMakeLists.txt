@@ -42,11 +42,9 @@ set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
 
 
-# Append SDK directories so Bakge examples and tests can build against them
-list(APPEND BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SDK_LIB_PATH})
-
-
-# Set required library vars
+########################################
+# PLATFORM SPECIFIC LIBRARIES SETUP
+########################################
 
 if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
@@ -97,6 +95,12 @@ if(WIN32)
   )
 endif(WIN32)
 
+
+########################################
+# BAKGE INCLUDE/LIB PATHS
+########################################
+
+# Add include directories
 foreach(directory ${BAKGE_INCLUDE_DIRECTORIES})
   include_directories(${directory})
 endforeach(directory)
@@ -105,10 +109,31 @@ foreach(directory ${BAKGE_LIBRARY_DIRECTORIES})
   link_directories(${directory})
 endforeach(directory)
 
+# Also add SDK paths
+include_directories(${BAKGE_SDK_INC_PATH})
+link_directories(${BAKGE_SDK_LIB_PATH})
+
+
+########################################
+# BAKGE CMAKE SUBDIRECTORIES
+########################################
+
+# Downloads and builds external library dependencies
 add_subdirectory(lib)
+
+# Compile Bakge library
 add_subdirectory(src)
+
+# Compiles Bakge unit tests
 add_subdirectory(test)
+
+# Compiles example Bakge programs
 add_subdirectory(example)
+
+
+########################################
+# BAKGE SDK BUILD
+########################################
 
 # Copy Bakge headers and library headers to SDK dir
 # Doesn't copy OpenGL or platform-specific headres like windows.h or x11.h
@@ -118,3 +143,15 @@ foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}
                                                     ${BAKGE_SDK_INC_PATH})
 endforeach(include_dir)
+
+###
+# ! NOTE: Lua headers are copied separately before the build, since
+# their build generates an include/ directory with necessary headers.
+# As such Lua include directories aren't appended to the
+# BAKGE_INCLUDE_DIRECTORIES list.
+# Instead, Bakge copies these headers to the SDK before
+# building its library, and compiles with the SDK's include path
+# to resolve any potential include path inconsistencies.
+# e.g. #include <lua/lua.h>   vs   #include <lua.h>
+###
+
