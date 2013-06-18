@@ -28,6 +28,7 @@
 /* Disable some pesky MSVC warnings */
 #pragma warning(disable : 4193)
 #pragma warning(disable : 4005)
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <windows.h>
 #include <GL/gl.h>
