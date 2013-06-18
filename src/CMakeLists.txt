@@ -26,6 +26,8 @@ set(MODULES
   math/Vector4
   math/Quaternion
   math/Matrix
+  renderer/DeferredGeometryRenderer
+  renderer/DeferredLightingRenderer
   renderer/FrontRenderer
 )
 

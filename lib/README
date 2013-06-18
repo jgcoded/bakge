@@ -1,0 +1,10 @@
+
+Bakge libraries
+===============
+
+Bakge's build will download and build any required libraries locally. You should not have to install any software.
+
+Bakge relies on certain external libraries to build and run. While Bakge is licensed under the MIT License, any use of it must be compliant with the terms of the individual licenses under which these libraries are bound.
+
+License information for these libraries should be included with the downloaded source trees, but if they are not, they will be included within Bakge's source tree for viewing.
+

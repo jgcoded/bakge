@@ -1,18 +1,18 @@
 /* *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2013 Paul Holden et al. (See AUTHORS)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,7 +31,7 @@
 #include <time.h>
 #include <math.h>
 
-/* GCC-only attributes */
+/* GCC & Clang attributes */
 #if defined __GNUC__ || defined __clang__
 /* Send compiler warning if function return result is not used */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
@@ -54,7 +54,15 @@
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 
+/* Include external library headers */
 #include <GLFW/glfw3.h>
+extern "C"
+{
+#include <lua/lua.h>
+#include <lua/luaconf.h>
+#include <lua/lualib.h>
+#include <lua/lauxlib.h>
+}
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
@@ -99,6 +107,8 @@
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>
 #include <bakge/graphics/Mesh.h>
+#include <bakge/renderer/DeferredGeometryRenderer.h>
+#include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
 
 #endif /* BAKGE_BAKGE_H */
