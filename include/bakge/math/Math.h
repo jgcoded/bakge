@@ -1,18 +1,18 @@
 /* *
  * The MIT License (MIT)
- * 
+ *
  * Copyright (c) 2013 Paul Holden et al. (See AUTHORS)
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,12 +33,13 @@ namespace math
 {
 
 #define SCALAR_EPSILON 0.000001
-#define RAD_PER_DEG 0.0174532925f
-#define DEG_PER_RAD 57.2957795f
-typedef float Scalar;
+#define RAD_PER_DEG 0.0174532925
+#define DEG_PER_RAD 57.2957795
+typedef double Scalar;
 typedef Scalar Degrees;
 typedef Scalar Radians;
 
+#define GET_SIGN(x) x > 0 ? 1 : x == 0 ? 0 : -1
 
 inline Radians ToRadians(Degrees BGE_NCP Deg)
 {
@@ -49,6 +50,11 @@ inline Radians ToRadians(Degrees BGE_NCP Deg)
 inline Degrees ToDegrees(Radians BGE_NCP Rad)
 {
     return (Rad * DEG_PER_RAD);
+}
+
+inline bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
+{
+    return abs(Right - Left) < SCALAR_EPSILON;
 }
 
 } /* math */

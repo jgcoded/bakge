@@ -46,13 +46,13 @@ int main(int argc, char* argv[])
 
     NowTime = bakge::GetRunningTime();
 
-    printf("%ld microseconds right now\n", NowTime);
+    printf("%lu microseconds right now\n", NowTime);
 
     bakge::Delay(SleepTime);
 
     NowTime = bakge::GetRunningTime() - NowTime;
 
-    printf("%ld microseconds have passed\n", NowTime);
+    printf("%lu microseconds have passed\n", NowTime);
     
     bakge::Deinit();
 

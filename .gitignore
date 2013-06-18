@@ -1,11 +1,12 @@
 # Ignores
-.old/* # Dross folder
 build/*
 bin/*
 obj/*
 lib/*
 bakge.wiki/*
-*.swp # vim swap files
+*.swp
+sdk/*
+resource/*
 
 # Includes
 !*/CMakeLists.txt
