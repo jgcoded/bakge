@@ -4,8 +4,8 @@ bin/*
 obj/*
 lib/*
 bakge.wiki/*
-*.swp # vim swap files
-sdk/* # SDK build output folder
+*.swp
+sdk/*
 resource/*
 
 # Includes
