@@ -54,10 +54,6 @@ public:
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
-    /* *
-     * No real need for them to be friends, just a way to not have to
-     * declare them elsewhere
-     * */
     friend Vector4 Point(Scalar X, Scalar Y, Scalar Z);
     friend Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
     friend Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
@@ -81,14 +77,6 @@ public:
     Scalar LengthSquared() const;
     Scalar Length() const;
 
-    friend Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-    friend Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-
-    friend Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
-    friend Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
-
-    friend bool operator==(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-
     friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
@@ -99,6 +87,17 @@ private:
     int W;
 
 }; /* Vector4 */
+
+
+/* *
+ * Unfortunately GCC won't let us use friend functions
+ * as global declarations
+ * */
+Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+Vector4 Point(Scalar X, Scalar Y, Scalar Z);
+Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
+Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
 
 } /* math */
 } /* bakge */
