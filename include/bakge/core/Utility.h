@@ -30,8 +30,16 @@
 #define BGE_ASSERT(PRED) \
     if(!(PRED)) { \
         fprintf(stderr, "Assertion failed at line %d in file %s, " \
-                        "function %s\n - predicate %s\n" \
+                        "function %s\n - predicate %s\n", \
         __LINE__, __FILE__, __func__, #PRED); \
+        exit(-1); \
+    }
+
+#define BGE_ASSERT_EX(PRED, MSG) \
+    if(!(PRED)) { \
+        fprintf(stderr, "%s: at line %d in file %s, " \
+                        "function %s\n - predicate %s\n", \
+        MSG, __LINE__, __FILE__, __func__, #PRED); \
         exit(-1); \
     }
 

@@ -45,10 +45,10 @@ Vector4::Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W)
 
 Vector4::Vector4(Vector4 BGE_NCP Other)
 {
-	Val[0] = Other[0];
-	Val[1] = Other[1];
-	Val[2] = Other[2];
-	Val[3] = Other[3];
+    Val[0] = Other[0];
+    Val[1] = Other[1];
+    Val[2] = Other[2];
+    Val[3] = Other[3];
 
 }
 
@@ -91,10 +91,10 @@ Scalar BGE_NCP Vector4::operator[](int BGE_NCP At) const
 
 Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
 {
-	Val[0] = Other[0];
-	Val[1] = Other[1];
-	Val[2] = Other[2];
-	Val[3] = Other[3];
+    Val[0] = Other[0];
+    Val[1] = Other[1];
+    Val[2] = Other[2];
+    Val[3] = Other[3];
 
     return *this; /* Allow cascading assignment */
 }
@@ -102,13 +102,13 @@ Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
 
 Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
 {
-	/* A point plus a point is meaningless */
-	if(Val[3] == 1 && Other[3] == 0 || Val[3] == 0 && Other[3] == 1 || Val[3] == 0 && Other[3] == 0)
-	{
-		Val[0] += Other[0];
-		Val[1] += Other[1];
-		Val[2] += Other[2];
-	}
+    /* A point plus a point is meaningless */
+    if(Val[3] == 1 && Other[3] == 0 || Val[3] == 0 && Other[3] == 1 || Val[3] == 0 && Other[3] == 0)
+    {
+        Val[0] += Other[0];
+        Val[1] += Other[1];
+        Val[2] += Other[2];
+    }
 
     return *this;
 }
@@ -116,13 +116,13 @@ Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
 
 Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
 {
-	/* A point plus a point is meaningless */
-	if(Val[3] == 1 && Other[3] == 0 || Val[3] == 0 && Other[3] == 1 || Val[3] == 0 && Other[3] == 0)
-	{
-		Val[0] -= Other[0];
-		Val[1] -= Other[1];
-		Val[2] -= Other[2];
-	}
+    /* A point plus a point is meaningless */
+    if(Val[3] == 1 && Other[3] == 0 || Val[3] == 0 && Other[3] == 1 || Val[3] == 0 && Other[3] == 0)
+    {
+        Val[0] -= Other[0];
+        Val[1] -= Other[1];
+        Val[2] -= Other[2];
+    }
 
     return *this;
 }
@@ -130,35 +130,39 @@ Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
 
 Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
 {
-	if(Val[3] == 0) /* Multiplying a point is meaningless */
-		Val[0] *= Value; /* Increase the magnitude */
-	
-	return *this;
+    /* Multiplying a point is meaningless */
+    BGE_ASSERT_EX(Val[3] == 0, "Not a vector")
+    
+    Val[0] *= Value;
+    Val[1] *= Value;
+    Val[2] *= Value;
+
+    return *this;
 }
 
 
 Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
 {
-	if(Val[3] == 0) /* Dividing a point is meaningless */
-		Val[0] /= Value; /* Decrease the magnitude */
-		
+    if(Val[3] == 0) /* Dividing a point is meaningless */
+        Val[0] /= Value; /* Decrease the magnitude */
+
     return *this;
 }
 
 bool BGE_NCP Vector4::operator==(Vector4 BGE_NCP Other)
 {
-	return (Val[0] == Other[0] && Val[1] == Other[1] && Val[2] == Other[2] && Val[3] == Other[3]);
+    return (Val[0] == Other[0] && Val[1] == Other[1] && Val[2] == Other[2] && Val[3] == Other[3]);
 }
 
 
 void Vector4::Normalize()
 {
-	/* Gives a warning since there is a loss of data from converting Scalar(float) to int */
-	Val[0] = GET_SIGN(Val[0]);
-	Val[1] = GET_SIGN(Val[1]);
-	Val[2] = GET_SIGN(Val[2]);
+    /* Gives a warning since there is a loss of data from converting Scalar(float) to int */
+    Val[0] = GET_SIGN(Val[0]);
+    Val[1] = GET_SIGN(Val[1]);
+    Val[2] = GET_SIGN(Val[2]);
 
-	/* Val[3] is what seperates this Vector4 from being a position */
+    /* Val[3] is what seperates this Vector4 from being a position */
 }
 
 
@@ -182,16 +186,16 @@ Scalar Vector4::Length() const
 
 Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-	/* A point plus a point is meaningless */
-	if(Left[3] == 1 && Right[3] == 0 || Left[3] == 0 && Right[3] == 1 || Left[3] == 0 && Right[3] == 0)
-	{
-		Vector4 newVector;
-		newVector[0] = Left[0] + Right[0];
-		newVector[1] = Left[1] + Right[1];
-		newVector[2] = Left[2] + Right[2];
-		newVector[3] = Left[3];
-		return newVector;
-	}
+    /* A point plus a point is meaningless */
+    if(Left[3] == 1 && Right[3] == 0 || Left[3] == 0 && Right[3] == 1 || Left[3] == 0 && Right[3] == 0)
+    {
+        Vector4 newVector;
+        newVector[0] = Left[0] + Right[0];
+        newVector[1] = Left[1] + Right[1];
+        newVector[2] = Left[2] + Right[2];
+        newVector[3] = Left[3];
+        return newVector;
+    }
 
     return Vector4();
 }
@@ -200,16 +204,16 @@ Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
 
-	/* A point minus a point is meaningless */
-	if(Left[3] == 1 && Right[3] == 0 || Left[3] == 0 && Right[3] == 1 || Left[3] == 0 && Right[3] == 0)
-	{
-		Vector4 newVector;
-		newVector[0] = Left[0] - Right[0];
-		newVector[1] = Left[1] - Right[1];
-		newVector[2] = Left[2] - Right[2];
-		newVector[3] = 1;
-		return newVector;
-	}
+    /* A point minus a point is meaningless */
+    if(Left[3] == 1 && Right[3] == 0 || Left[3] == 0 && Right[3] == 1 || Left[3] == 0 && Right[3] == 0)
+    {
+        Vector4 newVector;
+        newVector[0] = Left[0] - Right[0];
+        newVector[1] = Left[1] - Right[1];
+        newVector[2] = Left[2] - Right[2];
+        newVector[3] = 1;
+        return newVector;
+    }
 
     return Vector4();
 }
@@ -217,15 +221,15 @@ Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 
 Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right)
 {
-	Vector4 newVector;
-	
-	if(Left[3] == 0) /* Multiplying a point by a constant is meaningless */
-	{
-		newVector[0] = Left[0] * Right; /* Increase the magnitude */
-		newVector[1] = Left[1];
-		newVector[2] = Left[2];
-		newVector[3] = Left[3];
-	}
+    Vector4 newVector;
+
+    if(Left[3] == 0) /* Multiplying a point by a constant is meaningless */
+    {
+        newVector[0] = Left[0] * Right; /* Increase the magnitude */
+        newVector[1] = Left[1];
+        newVector[2] = Left[2];
+        newVector[3] = Left[3];
+    }
 
     return newVector;
 }
@@ -235,20 +239,20 @@ Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right)
 {
     Vector4 newVector;
 
-	if(Left[3] == 0) /* Dividing a point by a constant is meaningless */
-	{
-		newVector[0] = Left[0] / Right; /* Decrease the Magnitude */
-		newVector[1] = Left[1];
-		newVector[2] = Left[2];
-		newVector[3] = Left[3];
-	}
+    if(Left[3] == 0) /* Dividing a point by a constant is meaningless */
+    {
+        newVector[0] = Left[0] / Right; /* Decrease the Magnitude */
+        newVector[1] = Left[1];
+        newVector[2] = Left[2];
+        newVector[3] = Left[3];
+    }
 
     return newVector;
 }
 
 bool BGE_NCP operator==(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-	return (Left[0] == Right[0] && Left[1] == Right[1] && Left[2] == Right[2] && Left[3] == Right[3]);
+    return (Left[0] == Right[0] && Left[1] == Right[1] && Left[2] == Right[2] && Left[3] == Right[3]);
 }
 
 
@@ -263,12 +267,12 @@ Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
     Vector4 Cross;
 
-	Cross[0] = (Left[1] * Right[2]) - (Left[2] * Right[1]);
-	Cross[1] = (Left[2] * Right[0]) - (Left[0] * Right[2]);
-	Cross[2] = (Left[0] * Right[1]) - (Left[1] * Right[0]);
-	Cross[3] = Left[3];
+    Cross[0] = (Left[1] * Right[2]) - (Left[2] * Right[1]);
+    Cross[1] = (Left[2] * Right[0]) - (Left[0] * Right[2]);
+    Cross[2] = (Left[0] * Right[1]) - (Left[1] * Right[0]);
+    Cross[3] = Left[3];
 
-	return Cross;
+    return Cross;
 }
 
 } /* math */
