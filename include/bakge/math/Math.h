@@ -39,6 +39,7 @@ typedef float Scalar;
 typedef Scalar Degrees;
 typedef Scalar Radians;
 
+#define GET_SIGN(x) x > 0 ? 1 : x == 0 ? 0 : -1
 
 inline Radians ToRadians(Degrees BGE_NCP Deg)
 {
