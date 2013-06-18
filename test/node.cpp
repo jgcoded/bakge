@@ -16,7 +16,8 @@ int main(int argc, char* argv[])
 
     bakge::Event Ev;
 
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 1, 1);
+    glViewport(0, 0, 600, 400);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMatrixMode(GL_PROJECTION);

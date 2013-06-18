@@ -22,36 +22,28 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_OSX_WINDOW_H
-#define BAKGE_WINDOW_OSX_WINDOW_H
-
+#include <stdio.h>
+#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
 
-typedef class osx_Window
-{
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
+    printf("Getting start time\n");
+    
+    bakge::Milliseconds T = bakge::GetRunningTime();
 
-    osx_Window();
+    printf("%u milliseconds right now\n", T);
 
+    bakge::Delay(2000);
 
-public:
+    T = bakge::GetRunningTime() - T;
 
-    ~osx_Window();
+    printf("%u milliseconds have passed\n", T);
+    
+    bakge::Deinit();
 
-    BGE_FACTORY osx_Window* Create(int Width, int Height);
+    return 0;
+}
 
-    bool IsOpen();
-
-    Result Close();
-
-    Result SwapBuffers();
-
-} Window; /* osx_Window */
-
-} /* bakge */
-
-#endif /* BAKGE_WINDOW_OSX_WINDOW_H */

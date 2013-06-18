@@ -22,36 +22,22 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_API_WINDOW_H
-#define BAKGE_API_WINDOW_H
-
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_OSX_THREAD_H
+#define BAKGE_THREAD_OSX_THREAD_H
 
 namespace bakge
 {
-namespace api
+
+class osx_Thread : api::Thread
 {
-
-class Window
-{
-
-protected:
-
-    Window();
-    
 
 public:
 
-    virtual ~Window();
+    osx_Thread();
+    virtual ~osx_Thread();
 
-    virtual bool IsOpen() = 0;
-    virtual Result Close() = 0;
-    virtual Result PollEvent(Event* Ev) = 0;
-    virtual Result SwapBuffers() = 0;
+}; /* osx_Thread */
 
-}; /* Window */
-
-} /* api */
 } /* bakge */
 
-#endif /* BAKGE_API_WINDOW_H */
+#endif /* BAKGE_THREAD_OSX_THREAD_H */

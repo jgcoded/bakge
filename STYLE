@@ -1,0 +1,170 @@
+Coding Style
+============
+
+For consistency across the codebase, a certain coding style is recommended.
+If you commit code that doesn't meet the styling standards, no worries --
+I'll adjust it before finalizing the pull request.
+
+Except for the following cases, code should match the Linux kernel coding
+style as described here: https://www.kernel.org/doc/Documentation/CodingStyle
+
+If you have any questions about styling and convention that aren't answered
+here, feel free to e-mail me!
+
+
+Naming Conventions
+==================
+
+To maintain code readability, use succinct yet descriptive identifiers for
+variables, types and functions. All identifiers should be camel-cased.
+
+int nplayer; /* BAD */
+int NumPlayers; /* GOOD */
+
+
+FUNCTIONS
+
+If a function is a public API call, the identifier should be clear in what
+it does. Internal functions do not need to have such a level of clarity,
+but they should still be easily understood by those familiar with the
+system in which they are used.
+
+/* BAD - Reset all what?! */
+void ResetAll()
+{
+    ...
+}
+
+
+/* GOOD */
+void ResetPlayers()
+{
+    ...
+}
+
+
+TYPES AND CLASSES
+
+Classes and type definitions should aim to provide as much detail about the
+use of the type as possible.
+
+/* BAD */
+void SetVelocity(float X, float Y, float Z, float S);
+{
+    ...
+}
+
+
+/* GOOD */
+void SetVelocity(Vector4 Direction, Meters PerSec)
+{
+    ...
+}
+
+
+VARIABLES
+
+Variables should be as succinct as possible without being too long. When
+placed into context the user should be quite clear as to the use of the
+variable. Where appropriate, certain abbreviations are acceptable (Num for
+Number, Prev for Previous)
+
+Degrees GetElevationAngle()
+{
+    float PreviousCameraElevationAngle; /* BAD */
+    float PrevElevation; /* GOOD */
+
+    ...
+
+    return ...;
+}
+
+
+Comment Styling
+===============
+
+Comment your code! Use multi-line comments, even for a single-lined comment.
+
+// BAD
+/* GOOD */
+
+
+Indentation
+===========
+
+Indentation is done using 4 spaces. Please don't use tabs! Namespaces and
+class declarations should begin at column 0. Do not nest namespaces.
+
+
+General Convetion
+=================
+
+* Avoid declaring typedefs or new data types inside classes.
+
+* Avoid the use of unnamed namespaces.
+
+* Declaring global variables in headers is NOT OK.
+
+* Declaring variables inside source files (hidden vars) is OK.
+
+* Put one newline between function definitions and namespace declarations
+
+* Put two newlines between function definitions
+
+* Avoid using a lot of do-while loops. They can be confusing.
+
+* Empty loops are OK but put the semicolon on a new line, indented
+
+    e.g.   while(i < 20)
+               ;
+
+
+* Do not put spaces between control flow statements and their predicates
+
+    e.g.    if (i > 12) /* BAD */
+
+            if(i > 12) /* GOOOD */
+
+
+* Put single lines after control flow statements on a new line
+
+    e.g.    if(Win->IsOpen()) return true; /* BAD */
+
+            if(Win->IsOpen()) /* GOOD */
+                return true;
+
+
+* Else blocks and if blocks should always match each other.
+
+    e.g.    if(PlayerOne->IsAlive()) {
+                ...
+            } else return NULL; /* BAD */
+
+            if(PlayerOne->IsAlive()) {
+                ...
+            } else {
+                return NULL; /* GOOD */
+            }
+
+
+* Switch statement case labels should line up with their switch statement.
+  The case block code and break (or return, not both) should be indented once.
+  If a default case exists, put it at the end of the switch block.
+  Do not use a break statement in a default case.
+  Put a newline above each case label.
+
+    e.g.    switch(PlayerLevel) {
+
+            case 1:
+                ...
+                return false;
+
+            case 2:
+                ...
+                break;
+
+            default:
+                ...
+            }
+
+

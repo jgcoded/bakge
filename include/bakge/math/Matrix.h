@@ -32,6 +32,17 @@ namespace bakge
 namespace math
 {
 
+/* *
+ * 4x4 matrix. Used to store matrices for use in OpenGL
+ * The matrices are stored in column-major form, much like OpenGL's, for
+ * faster multiplication.
+ *
+ * They will most often be used to store matrix transforms that need to be
+ * quickly loaded into OpenGL on a regular bases -- such as projection
+ * matrices for 2D and 3D renderers.
+ *
+ * Position and/or rotation data can be described with a Node or Pawn object.
+ * */
 class Matrix
 {
 

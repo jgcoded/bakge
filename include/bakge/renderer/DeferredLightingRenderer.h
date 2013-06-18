@@ -22,51 +22,36 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_WINDOW_X11_WINDOW_H
-#define BAKGE_WINDOW_X11_WINDOW_H
+#ifndef BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H
+#define BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class x11_Window
+class DeferredLightingRenderer : public Renderer
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
-
-    static Display* XDisplay;
-    static XVisualInfo* XVisual;
-    static GLXContext Context;
-    static Colormap ColorMap;
-    static Atom CloseProtocol;
-
-    x11_Window();
-
 
 public:
 
-    ~x11_Window();
+    DeferredLightingRenderer();
+    virtual ~DeferredLightingRenderer();
 
-    BGE_FACTORY x11_Window* Create(int Width, int Height);
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+    
+    virtual Result Draw(Drawable* Obj) const;
 
-    bool IsOpen();
+    /*
+    virtual Result SetTargetFramebuffer(GBuffer* Buffer);
 
-    Result Close();
+    virtual Result SetFragmentShader(Shader* Obj);
+    virtual Result SetVertexShader(Shader* Obj);
+    */
 
-    Result PollEvent(Event* Ev);
-
-    Result SwapBuffers();
-
-
-private:
-
-    ::Window XWindow;
-    XSetWindowAttributes XAttrib;
-
-
-} Window; /* x11_Window */
+}; /* DeferredLightingRenderer */
 
 } /* bakge */
 
-#endif /* BAKGE_WINDOW_X11_WINDOW_H */
+#endif /* BAKGE_RENDERER_DEFERREDLIGHTINGRENDERER_H */

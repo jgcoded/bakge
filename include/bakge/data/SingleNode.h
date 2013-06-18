@@ -39,6 +39,12 @@ public:
     SingleNode();
     ~SingleNode();
 
+    SingleNode<T>* GetNext();
+    void SetNext(SingleNode<T>* Next);
+
+    T GetData();
+    void SetData(const T& Data);
+
 
 protected:
 
@@ -49,5 +55,6 @@ protected:
 
 } /* bakge */
 
-#endif /* BAKGE_DATA_SINGLENODE_H */
+#include <../src/data/SingleNode.cpp> /* Include the implementation here */
 
+#endif /* BAKGE_DATA_SINGLENODE_H */

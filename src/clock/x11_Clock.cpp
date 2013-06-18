@@ -26,17 +26,43 @@
 
 namespace bakge
 {
-namespace api
-{
 
-Window::Window()
+Result Delay(Milliseconds BGE_NCP Time)
 {
+    pthread_mutex_t WaitLock;
+    timespec Delay;
+    timeval Now;
+
+    if(pthread_mutex_init(&WaitLock, NULL) < 0) {
+        return BGE_FAILURE;
+    }
+
+    /* Implementation inspired by SFML */
+    gettimeofday(&Now, NULL);
+
+    Delay.tv_nsec = (Now.tv_usec + (Time * 1000 % 1000000L)) * 1000;
+    Delay.tv_sec = Now.tv_sec + (Time / 1000) + (Delay.tv_nsec / 1000000000L);
+    Delay.tv_nsec %= 1000000000L;
+
+    pthread_mutex_lock(&WaitLock);
+    pthread_mutex_timedlock(&WaitLock, &Delay);
+    pthread_mutex_unlock(&WaitLock);
+    pthread_mutex_destroy(&WaitLock);
+
+    return BGE_SUCCESS;
 }
 
 
-Window::~Window()
+Milliseconds GetRunningTime()
 {
+    extern timespec StartTime; /* Defined in src/utility/x11_Utility.cpp */
+    timespec Time;
+
+    /* Get current time; convert it to milliseconds */
+    clock_gettime(CLOCK_MONOTONIC, &Time);
+
+    return ((Time.tv_sec - StartTime.tv_sec) * 1000)
+             + ((Time.tv_nsec - StartTime.tv_nsec) / 1000000L);
 }
 
-} /* api */
 } /* bakge */
