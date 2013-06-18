@@ -27,6 +27,7 @@
 
 #include <bakge/Bakge.h>
 
+#ifdef _DEBUG
 #define BGE_ASSERT(PRED) \
     if(!(PRED)) { \
         fprintf(stderr, "Assertion failed at line %d in file %s\n" \
@@ -42,6 +43,10 @@
         MSG, __LINE__, __FILE__, #PRED); \
         exit(-1); \
     }
+#else
+#define BGE_ASSERT(PRED)
+#define BGE_ASSERT_EX(PRED, MSG)
+#endif
 
 namespace bakge
 {

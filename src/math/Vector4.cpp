@@ -48,8 +48,7 @@ Vector4::Vector4(Vector4 BGE_NCP Other)
     Val[0] = Other[0];
     Val[1] = Other[1];
     Val[2] = Other[2];
-    this->W = W;
-
+    this->W = Other.W;
 }
 
 
@@ -158,7 +157,7 @@ bool Vector4::operator==(Vector4 BGE_NCP Other)
     return ScalarCompare(Val[0], Other.Val[0])
         && ScalarCompare(Val[1], Other.Val[1])
         && ScalarCompare(Val[2], Other.Val[2])
-        && ScalarCompare(Val[3], Other.Val[3]);
+        && W == Other.W;
 }
 
 
@@ -199,7 +198,7 @@ Scalar Vector4::Length() const
 
 Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    BGE_ASSERT_EX(Right.W, "Point addition is invalid")
+    BGE_ASSERT_EX(!Right.W, "Point addition is invalid")
 
     return Vector4(Left[0] + Right[0], Left[1] + Right[1],
                                     Left[2] + Right[2], Left.W);
@@ -208,7 +207,7 @@ Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 
 Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    BGE_ASSERT_EX(Right.W, "Point subtraction is invalid")
+    BGE_ASSERT_EX(!Right.W, "Point subtraction is invalid")
 
     return Vector4(Left[0] - Right[0], Left[1] - Right[1],
                                     Left[2] - Right[2], Left.W);
