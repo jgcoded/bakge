@@ -33,9 +33,9 @@ namespace math
 {
 
 #define SCALAR_EPSILON 0.000001
-#define RAD_PER_DEG 0.0174532925f
-#define DEG_PER_RAD 57.2957795f
-typedef float Scalar;
+#define RAD_PER_DEG 0.0174532925
+#define DEG_PER_RAD 57.2957795
+typedef double Scalar;
 typedef Scalar Degrees;
 typedef Scalar Radians;
 
@@ -50,6 +50,11 @@ inline Radians ToRadians(Degrees BGE_NCP Deg)
 inline Degrees ToDegrees(Radians BGE_NCP Rad)
 {
     return (Rad * DEG_PER_RAD);
+}
+
+inline bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
+{
+    return abs(Right - Left) < SCALAR_EPSILON;
 }
 
 } /* math */

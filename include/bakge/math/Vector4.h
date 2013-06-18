@@ -50,7 +50,7 @@ class Vector4
 public:
 
     Vector4();
-    Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);
+    Vector4(Scalar X, Scalar Y, Scalar Z, int W);
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
@@ -73,9 +73,9 @@ public:
     Vector4 BGE_NCP operator*=(Scalar BGE_NCP Value);
     Vector4 BGE_NCP operator/=(Scalar BGE_NCP Value);
 
-    bool BGE_NCP operator==(Vector4 BGE_NCP left);
+    bool operator==(Vector4 BGE_NCP left);
 
-    void Normalize();
+    Vector4 BGE_NCP Normalize();
     Vector4 Normalized() const;
 
     Scalar LengthSquared() const;
@@ -87,7 +87,7 @@ public:
     friend Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
     friend Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right);
 
-    friend bool BGE_NCP operator==(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+    friend bool operator==(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
     friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
@@ -95,7 +95,8 @@ public:
 
 private:
 
-    Scalar Val[4];
+    Scalar Val[3];
+    int W;
 
 }; /* Vector4 */
 
