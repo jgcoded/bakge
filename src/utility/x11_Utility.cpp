@@ -42,7 +42,7 @@ Result Init(int argc, char* argv[])
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
     if(glewInit() != GLEW_OK) {
-        printf("GLFW initialization failed\n");
+        printf("GLEW initialization failed\n");
         return BGE_FAILURE;
     }
 
