@@ -38,13 +38,12 @@ public:
     EventHandler();
     virtual ~EventHandler();
 
-    /* *
-     * Want to build this interface class? See details here
-     * http://github.com/palistov/bakge/issues/7
-     * */
+    virtual Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M) = 0;
+    virtual Result MouseEvent(ButtonID B, ButtonState S, ModField M) = 0;
 
 }; /* EventHandler */
 
 } /* bakge */
 
 #endif /* BAKGE_CORE_EVENTHANDLER_H */
+
