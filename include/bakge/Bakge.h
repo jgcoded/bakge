@@ -55,6 +55,7 @@
 #define BGE_NCP const&
 
 /* Include external library headers */
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"
 {

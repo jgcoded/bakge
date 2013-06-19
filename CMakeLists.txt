@@ -20,14 +20,17 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 find_package(OpenGL)
 include_directories(${OPENGL_INCLUDE_DIR})
 
-set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
-
 # Bakge include/link directories
 set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
 set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 
-# Append common directories
+# Append library include directories
+# SDK build needs to copy them into the SDK directory
+# Note: Lua has a special build and headers copy
+set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
+set(BAKGE_GLEW_PATH ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
 
 # Output all generated libraries and binaries to the SDK dir
 set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
