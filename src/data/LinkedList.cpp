@@ -79,11 +79,6 @@ T LinkedList<T>::Pop()
     SingleNode<T>* TopNode;
     T DataValue;
 
-    /* What about exceptions? Use default or write our own? */
-    if (Head == NULL) {
-        throw "LinkedList is empty";
-    }
-
     /* Memorize pointer to free memory */
     TopNode = Head;
 
