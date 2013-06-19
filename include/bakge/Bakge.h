@@ -72,7 +72,6 @@ extern "C"
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
 #include <bakge/core/Engine.h>
-#include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 #include <bakge/core/Window.h>
 

@@ -14,8 +14,6 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(600, 400);
 
-    bakge::Event Ev;
-
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -29,10 +27,8 @@ int main(int argc, char* argv[])
     glHint(GL_POINT_SMOOTH, GL_NICEST);
 
     while(1) {
-        while(Win->PollEvent(&Ev) == BGE_SUCCESS) {
-            if(Ev.Type == -1)
-                Win->Close();
-        }
+        /* Poll events for all windows */
+        bakge::Window::PollEvents();
 
         /* Don't draw if the window has closed */
         if(Win->IsOpen() == false)
