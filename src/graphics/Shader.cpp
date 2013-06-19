@@ -37,7 +37,13 @@ Shader::~Shader()
 }
 
 
-Shader* Shader::Create(const char* VertexPath, const char* FragPath)
+Shader* Shader::CreateVertexShader(const char* SourcePath)
+{
+    return NULL;
+}
+
+
+Shader* Shader::CreateFragmentShader(const char* SourcePath)
 {
     return NULL;
 }
