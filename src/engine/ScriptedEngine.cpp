@@ -27,25 +27,13 @@
 namespace bakge
 {
 
-Shader::Shader()
+ScriptedEngine::ScriptedEngine()
 {
 }
 
 
-Shader::~Shader()
+ScriptedEngine::~ScriptedEngine()
 {
-}
-
-
-Shader* Shader::CreateVertexShader(const char* SourcePath)
-{
-    return NULL;
-}
-
-
-Shader* Shader::CreateFragmentShader(const char* SourcePath)
-{
-    return NULL;
 }
 
 } /* bakge */

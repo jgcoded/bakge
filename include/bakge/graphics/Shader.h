@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Shader : public Bindable
+class Shader
 {
 
 public:
@@ -40,9 +40,10 @@ public:
 
     /* *
      * Loads the vertex and fragment shaders from provided paths.
-     * If either fails to load or compile, shader creation fails.
+     * Shaders can then be attached to a ShaderProgram object
      * */
-    BGE_FACTORY Shader* Create(const char* VertexPath, const char* FragPath);
+    BGE_FACTORY Shader* CreateVertexShader(const char* SourcePath);
+    BGE_FACTORY Shader* CreateFragmentShader(const char* SourcePath);
 
 }; /* Shader */
 

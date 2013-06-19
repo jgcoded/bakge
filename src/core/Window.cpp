@@ -27,26 +27,120 @@
 namespace bakge
 {
 
-void Window::WindowMoved(GLFWwindow* Handle,  int X, int Y)
+void Window::Moved(GLFWwindow* Handle,  int X, int Y)
 {
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Deploy event here */
+    }
 }
 
 
-void Window::WindowResized(GLFWwindow* Handle, int Width, int Height)
+void Window::Resized(GLFWwindow* Handle, int Width, int Height)
 {
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Deploy event here */
+    }
 }
 
 
-void Window::WindowClosed(GLFWwindow* Handle)
+void Window::Closed(GLFWwindow* Handle)
 {
-    Window* BakgeWindow = (Window*)glfwGetWindowUserPointer(Handle);
-    BakgeWindow->Close();
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    /* Deploy closed event before closing the window */
+    if(Handler != NULL) {
+        /* Deploy event here */
+    }
+
+    Win->Close();
+}
+
+
+void Window::Key(GLFWwindow* Handle, int Key, int Code, int Pressed, int Mod)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Deploy event here */
+    }
+}
+
+
+void Window::Mouse(GLFWwindow* Handle, int Button, int Pressed, int Mod)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Ok to pass int, ButtonID, ModField etc are just typedef int */
+        Handler->MouseEvent(Button, Pressed, Mod);
+    }
+}
+
+
+void Window::MouseMotion(GLFWwindow* Handle, double XPos, double YPos)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        int X, Y;
+        /* Floor values, we want integral arguments */
+        X = math::Max((int)floor(XPos), INT_MAX);
+        Y = math::Max((int)floor(YPos), INT_MAX);
+        Handler->MotionEvent(X, Y);
+    }
+}
+
+
+void Window::Scroll(GLFWwindow* Handle, double XOffset, double YOffset)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        int X, Y;
+        /* Floor values, we want integral arguments */
+        X = math::Max((int)floor(XOffset), INT_MAX);
+        Y = math::Max((int)floor(YOffset), INT_MAX);
+        Handler->ScrollEvent(X, Y);
+    }
 }
 
 
 Window::Window()
 {
     WindowHandle = NULL;
+    Handler = NULL;
 }
 
 
@@ -69,9 +163,13 @@ Window* Window::Create(int Width, int Height)
     /* Store pointer to Bakge window so global callbacks can access it */
     glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);
 
-    glfwSetWindowCloseCallback(Win->WindowHandle, WindowClosed);
-    glfwSetWindowSizeCallback(Win->WindowHandle, WindowResized);
-    glfwSetWindowPosCallback(Win->WindowHandle, WindowMoved);
+    glfwSetWindowCloseCallback(Win->WindowHandle, Window::Closed);
+    glfwSetWindowSizeCallback(Win->WindowHandle, Window::Resized);
+    glfwSetWindowPosCallback(Win->WindowHandle, Window::Moved);
+    glfwSetKeyCallback(Win->WindowHandle, Window::Key);
+    glfwSetMouseButtonCallback(Win->WindowHandle, Window::Mouse);
+    glfwSetCursorPosCallback(Win->WindowHandle, Window::MouseMotion);
+    glfwSetScrollCallback(Win->WindowHandle, Window::Scroll);
 
     Win->Bind();
 
@@ -121,10 +219,63 @@ bool Window::IsOpen()
 }
 
 
-Result Window::PollEvent(Event* Ev)
+bool Window::IsActive()
+{
+    /* Windows are only active if they have input focus */
+    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED);
+}
+
+
+void Window::PollEvents()
 {
     glfwPollEvents();
-    return BGE_FAILURE;
+}
+
+
+Result Window::GetMousePosition(DeviceCoord* X, DeviceCoord* Y)
+{
+    /* Can't access mouse if window isn't active */
+    if(!IsActive())
+        return BGE_FAILURE;
+
+    glfwGetCursorPos(WindowHandle, X, Y);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
+{
+    /* Can't change mouse position if window isn't active */
+    if(!IsActive())
+        return BGE_FAILURE;
+
+    glfwSetCursorPos(WindowHandle, X, Y);
+
+    return BGE_SUCCESS;
+}
+
+
+void Window::Show()
+{
+    glfwShowWindow(WindowHandle);
+}
+
+
+void Window::Hide()
+{
+    glfwHideWindow(WindowHandle);
+}
+
+
+EventHandler* Window::SetEventHandler(EventHandler* Who)
+{
+    EventHandler* Previous;
+
+    Previous = Handler;
+    Handler = Who;
+
+    return Previous;
 }
 
 } /* bakge */

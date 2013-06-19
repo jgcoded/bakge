@@ -22,25 +22,36 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_ENGINE_SCRIPTEDENGINE_H
+#define BAKGE_ENGINE_SCRIPTEDENGINE_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-Event::Event()
+class ScriptedEngine : public Engine
 {
-}
+
+public:
+
+    ScriptedEngine();
+    ~ScriptedEngine();
+
+    /* *
+     * This function signature will change
+     * Runs if an error occurs in script. Should report details
+     * of the error and gracefully terminate the script state
+     * */
+    virtual void Error() = 0;
 
 
-Event::~Event()
-{
-}
+protected:
 
+    lua_State* L;
 
-void Event::Clear()
-{
-    Type = 0;
-}
+}; /* ScriptedEngine */
 
 } /* bakge */
 
+#endif /* BAKGE_ENGINE_SCRIPTEDENGINE_H */

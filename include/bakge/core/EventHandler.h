@@ -30,6 +30,16 @@
 namespace bakge
 {
 
+/* *
+ * EventHandler is really just a coupling interface class. Window classes
+ * can be their own event handler, but can also link to an external handler.
+ * This interface is used to ensure whatever the designated event handling
+ * class is implements the proper methods for responding to events.
+ *
+ * Bakge will also have an ElectiveEventHandler class which lets you
+ * "hook" into certain events and ignore others, with an easy way
+ * to active/deactivate specific event types.
+ * */
 class EventHandler
 {
 
@@ -38,13 +48,19 @@ public:
     EventHandler();
     virtual ~EventHandler();
 
+    virtual Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M) = 0;
+    virtual Result MouseEvent(ButtonID B, ButtonState S, ModField M) = 0;
+
     /* *
-     * Want to build this interface class? See details here
-     * http://github.com/palistov/bakge/issues/7
+     * These will likely change. I'm not sure if we want relative motion
+     * or absolute positions to be passed as the arguments
      * */
+    virtual Result MotionEvent(int X, int Y) = 0;
+    virtual Result ScrollEvent(int X, int Y) = 0;
 
 }; /* EventHandler */
 
 } /* bakge */
 
 #endif /* BAKGE_CORE_EVENTHANDLER_H */
+

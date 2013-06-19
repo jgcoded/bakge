@@ -22,32 +22,25 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_EVENT_H
-#define BAKGE_CORE_EVENT_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class Event
+ShaderProgram::ShaderProgram()
 {
+}
 
-public:
 
-    Event();
-    ~Event();
+ShaderProgram::~ShaderProgram()
+{
+}
 
-    void Clear();
 
-    int Type;
-    union {
-        int T;
-    };
-
-}; /* Event */
+ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
+{
+    return NULL;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_CORE_EVENT_H */
 

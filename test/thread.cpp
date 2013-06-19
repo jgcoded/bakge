@@ -22,8 +22,6 @@ int ThreadFunc(void* Data)
 
 int main(int argc, char* argv[])
 {
-    bakge::Event Ev;
-
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
@@ -42,10 +40,8 @@ int main(int argc, char* argv[])
     glViewport(0, 0, 600, 400);
 
     while(1) {
-        while(Win->PollEvent(&Ev) == BGE_SUCCESS) {
-            if(Ev.Type == -1)
-                Win->Close();
-        }
+        /* Poll events for all windows */
+        bakge::Window::PollEvents();
 
         /* Don't draw if the window has closed */
         if(Win->IsOpen() == false)

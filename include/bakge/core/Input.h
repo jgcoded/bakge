@@ -22,31 +22,57 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_CORE_INPUT_H
+#define BAKGE_CORE_INPUT_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-Shader::Shader()
+/* GLFW key or button symbol */
+typedef int KeyID;
+typedef int ButtonID;
+
+/* Bitfield containing active key modifiers */
+typedef int ModField;
+
+/* Platform code for the key */
+typedef int ScanCode;
+
+#define KEY_STATE_PRESSED GLFW_PRESS
+#define KEY_STATE_RELEASED GLFW_RELEASE
+#define KEY_STATE_REPEAT GLFW_REPEAT
+typedef int KeyState;
+
+#define BUTTON_STATE_PRESSED GLFW_PRESS
+#define BUTTON_STATE_RELEASED GLFW_RELEASE
+typedef int ButtonState;
+
+
+inline bool ShiftPressed(ModField M)
 {
+    return M & GLFW_MOD_SHIFT;
 }
 
 
-Shader::~Shader()
+inline bool AltPressed(ModField M)
 {
+    return M & GLFW_MOD_ALT;
 }
 
 
-Shader* Shader::CreateVertexShader(const char* SourcePath)
+inline bool ControlPressed(ModField M)
 {
-    return NULL;
+    return M & GLFW_MOD_CONTROL;
 }
 
 
-Shader* Shader::CreateFragmentShader(const char* SourcePath)
+inline bool SuperPressed(ModField M)
 {
-    return NULL;
+    return M & GLFW_MOD_SUPER;
 }
 
 } /* bakge */
 
+#endif /* BAKGE_CORE_INPUT_H */

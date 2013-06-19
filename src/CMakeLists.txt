@@ -3,7 +3,8 @@
 cmake_minimum_required (VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
-include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
+include_directories(${BAKGE_GLFW_PATH}/include)
+include_directories(${BAKGE_GLEW_PATH}/include)
 
 
 ########################################
@@ -17,15 +18,16 @@ set(MODULES
   core/Bindable
   core/Drawable
   core/Engine
-  core/Event
   core/EventHandler
   core/Renderer
   core/Utility
   core/Window
+  engine/ScriptedEngine
   graphics/Mesh
   graphics/Node
   graphics/Pawn
   graphics/Shader
+  graphics/ShaderProgram
   graphics/Shape
   graphics/Texture
   math/Vector4
@@ -36,8 +38,14 @@ set(MODULES
   renderer/FrontRenderer
 )
 
-# Create headers list
-set(HEADERS "")
+# Create headers list, add those without a source file
+# since they won't get picked up by the following foreach loop
+set(HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge/Bakge
+  ${BAKGE_SOURCE_DIR}/include/bakge/math/Math
+  ${BAKGE_SOURCE_DIR}/include/bakge/core/Type
+)
+
 foreach(module ${MODULES})
   list(APPEND HEADERS ${BAKGE_SOURCE_DIR}/include/bakge/${module})
 endforeach(module)
@@ -69,6 +77,7 @@ set(PLATFORM_MODULES
 # Platform modules might share a common header.
 # Manually set them here
 set(PLATFORM_HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge/platform/${PLATFORM_PREFIX}_Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/system/Clock
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
   ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread

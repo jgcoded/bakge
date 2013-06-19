@@ -50,7 +50,7 @@ class Vector4
 public:
 
     Vector4();
-    Vector4(Scalar X, Scalar Y, Scalar Z, int W);
+    Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
@@ -65,9 +65,13 @@ public:
 
     Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
     Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
-
     Vector4 BGE_NCP operator*=(Scalar BGE_NCP Value);
     Vector4 BGE_NCP operator/=(Scalar BGE_NCP Value);
+
+    Vector4 operator+(Vector4 BGE_NCP Other);
+    Vector4 operator-(Vector4 BGE_NCP Other);
+    Vector4 operator*(Scalar BGE_NCP Value);
+    Vector4 operator/(Scalar BGE_NCP Value);
 
     bool operator==(Vector4 BGE_NCP left);
 
@@ -83,8 +87,7 @@ public:
 
 private:
 
-    Scalar Val[3];
-    int W;
+    Scalar Val[4];
 
 }; /* Vector4 */
 

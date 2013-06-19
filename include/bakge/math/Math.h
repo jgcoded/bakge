@@ -57,6 +57,12 @@ inline bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
     return abs(Right - Left) < SCALAR_EPSILON;
 }
 
+template<class T>
+T BGE_NCP Max(T BGE_NCP A, T BGE_NCP B)
+{
+    return (A > B) ? (A) : (B);
+}
+
 } /* math */
 } /* bakge */
 

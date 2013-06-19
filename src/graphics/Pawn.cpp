@@ -40,14 +40,18 @@ Pawn::~Pawn()
 Result Pawn::Bind() const
 {
     Node::Bind();
+    /* TODO: Quaternions
+    Vector4 Axis;
+    Axis = Facing.GetAxis();
+    glRotated(ToDegrees(Facing.GetAngle(), Axis[0], Axis[1], Axis[2]);
+    */
     return BGE_FAILURE;
 }
 
 
 Result Pawn::Unbind() const
 {
-    Node::Unbind();
-    return BGE_FAILURE;
+    return Node::Unbind();
 }
 
 
@@ -55,8 +59,9 @@ Result Pawn::Draw() const
 {
     Node::Draw();
     glBegin(GL_LINES);
-    glVertex3f(0, 0, 0); /* Pass position in */
-    glVertex3f(0, 0, 1); /* Pass position + facing */
+    /* Matrix is translated and rotated from Bind() */
+    glVertex3f(0, 0, 0);
+    glVertex3f(0, 0, 1); /* Draw line straight forward */
     glEnd();
     return BGE_SUCCESS;
 }

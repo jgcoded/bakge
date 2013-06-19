@@ -27,9 +27,8 @@ int main(int argc, char* argv[])
     Win->Bind();
 
     /* When testing the completed class, pass raw image data as last param */
-    Tex = bakge::Texture::Create(64, 64, GL_RGB, GL_UNSIGNED_BYTE, (void*)PictureInfo);
-
-    bakge::Event Ev;
+    Tex = bakge::Texture::Create(64, 64, GL_RGB, GL_UNSIGNED_BYTE,
+                                                (void*)PictureInfo);
 
     glClearColor(1, 0, 0, 1);
     glEnable(GL_TEXTURE_2D);
@@ -40,10 +39,8 @@ int main(int argc, char* argv[])
     glOrtho(0, 600, 0, 400, -1, 1);
 
     while(1) {
-        while(Win->PollEvent(&Ev) == BGE_SUCCESS) {
-            if(Ev.Type == -1)
-                Win->Close();
-        }
+        /* Poll events for all windows */
+        bakge::Window::PollEvents();
 
         /* Don't draw if the window has closed */
         if(Win->IsOpen() == false)
@@ -61,7 +58,7 @@ int main(int argc, char* argv[])
         glTexCoord2i(1, 0); glVertex2i(600, 0);
         glEnd();
         Tex->Unbind();
-        
+
         glMatrixMode(GL_PROJECTION);
         Win->SwapBuffers();
     }

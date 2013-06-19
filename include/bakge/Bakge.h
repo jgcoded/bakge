@@ -53,8 +53,11 @@
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
+#define BGE_VER_MAJ 0
+#define BGE_VER_MIN 0
 
 /* Include external library headers */
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"
 {
@@ -66,12 +69,12 @@ extern "C"
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
+#include <bakge/core/Input.h>
 #include <bakge/core/Utility.h>
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
 #include <bakge/core/Renderer.h>
 #include <bakge/core/Engine.h>
-#include <bakge/core/Event.h>
 #include <bakge/core/EventHandler.h>
 #include <bakge/core/Window.h>
 
@@ -106,10 +109,12 @@ extern "C"
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>
+#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
+#include <bakge/engine/ScriptedEngine.h>
 
 #endif /* BAKGE_BAKGE_H */
 

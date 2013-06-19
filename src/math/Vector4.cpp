@@ -31,15 +31,19 @@ namespace math
 
 Vector4::Vector4()
 {
+    Val[0] = 0;
+    Val[1] = 0;
+    Val[2] = 0;
+    Val[3] = 0;
 }
 
 
-Vector4::Vector4(Scalar X, Scalar Y, Scalar Z, int W)
+Vector4::Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W)
 {
     Val[0] = X;
     Val[1] = Y;
     Val[2] = Z;
-    this->W = W;
+    Val[3] = W;
 }
 
 
@@ -48,7 +52,7 @@ Vector4::Vector4(Vector4 BGE_NCP Other)
     Val[0] = Other[0];
     Val[1] = Other[1];
     Val[2] = Other[2];
-    this->W = Other.W;
+    Val[3] = Other[3];
 }
 
 
@@ -59,7 +63,7 @@ Vector4::~Vector4()
 
 Vector4 Point(Scalar X, Scalar Y, Scalar Z)
 {
-    return Vector4(X, Y, Z, 1);
+    return Vector4(X, Y, Z, 1.0);
 }
 
 
@@ -93,18 +97,13 @@ Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
     Val[0] = Other[0];
     Val[1] = Other[1];
     Val[2] = Other[2];
-    W = Other.W;
 
-    /* Allow cascading assignment */
     return *this;
 }
 
 
 Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
 {
-    /* A point plus a point is meaningless */
-    BGE_ASSERT_EX(Other.W, "Point addition is invalid")
-
     Val[0] += Other[0];
     Val[1] += Other[1];
     Val[2] += Other[2];
@@ -115,9 +114,6 @@ Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
 
 Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
 {
-    /* A point plus a point is meaningless */
-    BGE_ASSERT_EX(Other.W, "Point subtraction is invalid")
-
     Val[0] -= Other[0];
     Val[1] -= Other[1];
     Val[2] -= Other[2];
@@ -128,9 +124,6 @@ Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
 
 Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
 {
-    /* Scalar multiplication is only relevant to vectors */
-    BGE_ASSERT_EX(!W, "Not a vector");
-
     Val[0] *= Value;
     Val[1] *= Value;
     Val[2] *= Value;
@@ -141,9 +134,10 @@ Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
 
 Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
 {
-    /* Scalar division is only relevant to vectors */
-    BGE_ASSERT_EX(!W, "Not a vector");
-    BGE_ASSERT_EX(!ScalarCompare(Value, 0), "Division by 0")
+    if(ScalarCompare(Value, 0)) {
+        printf("Division by 0. Cancelling operation\n");
+        return *this;
+    }
 
     Val[0] /= Value;
     Val[1] /= Value;
@@ -157,14 +151,12 @@ bool Vector4::operator==(Vector4 BGE_NCP Other)
     return ScalarCompare(Val[0], Other.Val[0])
         && ScalarCompare(Val[1], Other.Val[1])
         && ScalarCompare(Val[2], Other.Val[2])
-        && W == Other.W;
+        && ScalarCompare(Val[3], Other.Val[3]);
 }
 
 
 Vector4 BGE_NCP Vector4::Normalize()
 {
-    BGE_ASSERT_EX(!W, "Not a vector");
-
     return *this /= Length();
 }
 
@@ -173,8 +165,6 @@ Vector4 Vector4::Normalized() const
 {
     Scalar Len;
 
-    BGE_ASSERT_EX(!W, "Not a vector");
-
     Len = Length();
     return Vector4(Val[0] / Len, Val[1] / Len, Val[2] / Len, 0);
 }
@@ -182,40 +172,61 @@ Vector4 Vector4::Normalized() const
 
 Scalar Vector4::LengthSquared() const
 {
-    BGE_ASSERT_EX(!W, "Not a vector");
-
     return Scalar(Val[0] * Val[0] + Val[1] * Val[1] + Val[2] * Val[2]);
 }
 
 
 Scalar Vector4::Length() const
 {
-    BGE_ASSERT_EX(!W, "Not a vector");
-
     return sqrt(LengthSquared());
 }
 
 
 Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    BGE_ASSERT_EX(!Left.W, "Not a vector")
-    BGE_ASSERT_EX(!Right.W, "Not a vector")
-
     return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2];
 }
 
 
 Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    BGE_ASSERT_EX(!Left.W, "Not a vector")
-    BGE_ASSERT_EX(!Right.W, "Not a vector")
-
     return Vector4(
         Left[1] * Right[2] - Left[2] * Right[1],
         Left[2] * Right[0] - Left[0] * Right[2],
         Left[0] * Right[1] - Left[1] * Right[0],
         0
     );
+}
+
+
+Vector4 Vector4::operator+(Vector4 BGE_NCP Other)
+{
+    return Vector4(Val[0] + Other[0], Val[1] + Other[1], Val[2] + Other[2],
+                                                        Val[3] + Other[3]);
+}
+
+
+Vector4 Vector4::operator-(Vector4 BGE_NCP Other)
+{
+    return Vector4(Val[0] - Other[0], Val[1] - Other[1], Val[2] - Other[2],
+                                                        Val[3] - Other[3]);
+}
+
+
+Vector4 Vector4::operator*(Scalar BGE_NCP Value)
+{
+    return Vector4(Val[0] * Value, Val[1] * Value, Val[2] * Value, Val[3]);
+}
+
+
+Vector4 Vector4::operator/(Scalar BGE_NCP Value)
+{
+    if(ScalarCompare(Value, 0)) {
+        printf("Division by 0. Cancelling operation\n");
+        return *this;
+    }
+
+    return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value, Val[3]);
 }
 
 } /* math */

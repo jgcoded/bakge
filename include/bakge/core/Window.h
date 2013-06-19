@@ -34,11 +34,19 @@ namespace bakge
 
 class Window : public Bindable
 {
-    GLFWCALLBACK void WindowMoved(GLFWwindow* Handle,  int X, int Y);
-    GLFWCALLBACK void WindowResized(GLFWwindow* Handle, int Width, int Height);
-    GLFWCALLBACK void WindowClosed(GLFWwindow* Handle);
+    /* GLFW callbacks. Private for protection against bogus events */
+    GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
+    GLFWCALLBACK void Resized(GLFWwindow*, int, int);
+    GLFWCALLBACK void Closed(GLFWwindow*);
+    GLFWCALLBACK void Key(GLFWwindow*, int, int, int, int);
+    GLFWCALLBACK void Mouse(GLFWwindow*, int, int, int);
+    GLFWCALLBACK void MouseMotion(GLFWwindow*, double, double);
+    GLFWCALLBACK void Scroll(GLFWwindow*, double, double);
 
     GLFWwindow* WindowHandle;
+
+    /* Who receives events from the window? */
+    EventHandler* Handler;
 
     Window();
 
@@ -49,13 +57,31 @@ public:
 
     BGE_FACTORY Window* Create(int Width, int Height);
 
+    /* Call manually to process events for all windows */
+    static void PollEvents();
+
     bool IsOpen();
+    bool IsActive();
+
     Result Close();
-    Result PollEvent(Event* Ev);
+
     Result SwapBuffers();
 
+    /* Binding makes this window's context current on the calling thread */
     Result Bind() const;
     Result Unbind() const;
+
+    EventHandler* SetEventHandler(EventHandler* Who);
+
+    Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
+    Result SetMousePosition(DeviceCoord X, DeviceCoord Y);
+
+    /* *
+     * Hide and Show can fail if window is already hidden/shown,
+     * but will do so silently
+     * */
+    void Hide();
+    void Show();
 
 }; /* Window */
 
