@@ -66,6 +66,7 @@ extern "C"
 
 /* Include core Bakge classes (no OpenGL inclusion yet) */
 #include <bakge/core/Type.h>
+#include <bakge/core/Input.h>
 #include <bakge/core/Utility.h>
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>

@@ -22,53 +22,57 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_WINDOW_H
-#define BAKGE_CORE_WINDOW_H
+#ifndef BAKGE_CORE_INPUT_H
+#define BAKGE_CORE_INPUT_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-#define GLFWCALLBACK static
+/* GLFW key or button symbol */
+typedef int KeyID;
+typedef int ButtonID;
 
-class Window : public Bindable
+/* Bitfield containing active key modifiers */
+typedef int ModField;
+
+/* Platform code for the key */
+typedef int ScanCode;
+
+#define KEY_STATE_PRESSED GLFW_PRESS
+#define KEY_STATE_RELEASED GLFW_RELEASE
+#define KEY_STATE_REPEAT GLFW_REPEAT
+typedef int KeyState;
+
+#define BUTTON_STATE_PRESSED GLFW_PRESS
+#define BUTTON_STATE_RELEASED GLFW_RELEASE
+typedef int ButtonState;
+
+
+inline bool ShiftPressed(ModField M)
 {
-    /* GLFW callbacks. Private for protection against bogus events */
-    GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
-    GLFWCALLBACK void Resized(GLFWwindow*, int, int);
-    GLFWCALLBACK void Closed(GLFWwindow*);
-    GLFWCALLBACK void Key(GLFWwindow*, int, int, int, int);
-    GLFWCALLBACK void Mouse(GLFWwindow*, int, int, int);
-    GLFWCALLBACK void MouseMotion(GLFWwindow*, double, double);
-    GLFWCALLBACK void Scroll(GLFWwindow*, double, double);
-
-    GLFWwindow* WindowHandle;
-
-    /* Who receives events from the window? */
-    EventHandler* Handler;
-
-    Window();
+    return M & GLFW_MOD_SHIFT;
+}
 
 
-public:
+inline bool AltPressed(ModField M)
+{
+    return M & GLFW_MOD_ALT;
+}
 
-    ~Window();
 
-    BGE_FACTORY Window* Create(int Width, int Height);
+inline bool ControlPressed(ModField M)
+{
+    return M & GLFW_MOD_CONTROL;
+}
 
-    bool IsOpen();
-    Result Close();
-    Result PollEvent(Event* Ev);
-    Result SwapBuffers();
 
-    Result Bind() const;
-    Result Unbind() const;
-
-    EventHandler* SetEventHandler(EventHandler* Who);
-
-}; /* Window */
+inline bool SuperPressed(ModField M)
+{
+    return M & GLFW_MOD_SUPER;
+}
 
 } /* bakge */
 
-#endif /* BAKGE_CORE_WINDOW_H */
+#endif /* BAKGE_CORE_INPUT_H */
