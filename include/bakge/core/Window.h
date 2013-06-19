@@ -49,13 +49,13 @@ public:
 
     BGE_FACTORY Window* Create(int Width, int Height);
 
+    /* Call manually to process events for all windows */
+    static void PollEvents();
+
     bool IsOpen();
     bool IsActive();
 
     Result Close();
-
-    /* Call manually to process events for this window */
-    Result PollEvent(Event* Ev);
 
     Result SwapBuffers();
 

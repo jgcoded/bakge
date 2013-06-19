@@ -17,7 +17,6 @@ set(MODULES
   core/Bindable
   core/Drawable
   core/Engine
-  core/Event
   core/EventHandler
   core/Renderer
   core/Utility
@@ -39,8 +38,9 @@ set(MODULES
 # Create headers list, add those without a source file
 # since they won't get picked up by the following foreach loop
 set(HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge/Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/math/Math
-  ${BAKGE_SOURCE_DIR}/include/bakge/core/Type.h
+  ${BAKGE_SOURCE_DIR}/include/bakge/core/Type
 )
 
 foreach(module ${MODULES})

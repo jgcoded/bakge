@@ -128,10 +128,9 @@ bool Window::IsActive()
 }
 
 
-Result Window::PollEvent(Event* Ev)
+void Window::PollEvents()
 {
     glfwPollEvents();
-    return BGE_FAILURE;
 }
 
 
