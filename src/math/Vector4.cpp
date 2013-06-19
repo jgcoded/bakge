@@ -208,7 +208,7 @@ Vector4 Vector4::operator+(Vector4 BGE_NCP Other)
 
 Vector4 Vector4::operator-(Vector4 BGE_NCP Other)
 {
-    return Vector4(Val[0] - Other[0], Val[1] - Other[1], al[2] - Other[2],
+    return Vector4(Val[0] - Other[0], Val[1] - Other[1], Val[2] - Other[2],
                                                         Val[3] - Other[3]);
 }
 
