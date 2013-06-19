@@ -15,7 +15,7 @@ all:
 	@mkdir $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS) && make -s;
 
 codeblocks:
-	@mkdir $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS);
+	@mkdir $(TARGET) && cd $(TARGET) && cmake .. -G "CodeBlocks - Unix Makefiles" $(OPTIONS);
 
 clean:
 	rm -rf $(TARGET) $(SDK);
