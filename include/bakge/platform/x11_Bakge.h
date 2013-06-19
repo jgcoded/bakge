@@ -25,14 +25,8 @@
 #ifndef BAKGE_PLATFORM_X11_BAKGE_H
 #define BAKGE_PLATFORM_X11_BAKGE_H
 
-#include <GL/gl.h>
 #include <GL/glu.h>
-#include <GL/glx.h>
-#include <X11/X.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/Xos.h>
-#include <X11/Xatom.h>
+#include <sys/time.h>
 #include <time.h>
 #include <pthread.h>
 
