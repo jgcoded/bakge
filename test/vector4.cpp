@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
     printVector(Vec2);
     printf("%s\n\n", (Vec1 == Vec2) ? "True" : "False");
 
-    /* Multiply and Divide Vector3 */
+    /* Multiply and Divide Vector4 */
     printf("Multiply and Divide two Vectors:\n");
     Vec2 *= bakge::math::Scalar(1.5);
     Vec1 /= bakge::math::Scalar(1.5);

@@ -63,13 +63,13 @@ Vector4 Point(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Vector4 Vector(Scalar X, Scalar Y, Scalar Z)
+static Vector4 Vector(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 0);
 }
 
 
-Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
+static Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
 {
     Scalar Len = sqrt(X * X + Y * Y + Z * Z);
     return Vector4(X / Len, Y / Len, Z / Len, 0);
@@ -103,7 +103,7 @@ Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
 Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
 {
     /* A point plus a point is meaningless */
-    BGE_ASSERT_EX(Other.W, "Point addition is invalid")
+    BGE_ASSERT_EX(Other.W, "Point addition is invalid");
 
     Val[0] += Other[0];
     Val[1] += Other[1];
@@ -116,7 +116,7 @@ Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
 Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
 {
     /* A point plus a point is meaningless */
-    BGE_ASSERT_EX(Other.W, "Point subtraction is invalid")
+    BGE_ASSERT_EX(Other.W, "Point subtraction is invalid");
 
     Val[0] -= Other[0];
     Val[1] -= Other[1];
@@ -198,17 +198,17 @@ Scalar Vector4::Length() const
 
 Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    BGE_ASSERT_EX(!Left.W, "Not a vector")
-    BGE_ASSERT_EX(!Right.W, "Not a vector")
+    BGE_ASSERT_EX(!Left.W, "Not a vector");
+    BGE_ASSERT_EX(!Right.W, "Not a vector");
 
     return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2];
 }
 
 
-Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    BGE_ASSERT_EX(!Left.W, "Not a vector")
-    BGE_ASSERT_EX(!Right.W, "Not a vector")
+    BGE_ASSERT_EX(!Left.W, "Not a vector");
+    BGE_ASSERT_EX(!Right.W, "Not a vector");
 
     return Vector4(
         Left[1] * Right[2] - Left[2] * Right[1],
@@ -217,6 +217,30 @@ Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
         0
     );
 }
+
+/* Performs a linear interpolation between two points
+	using cubic Hermite Spline
+	@see http://codeplea.com/introduction-to-splines
+	*/
+Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tanLeft, Vector4 BGE_NCP Right, 
+															Vector4 BGE_NCP tanRight,
+															Scalar amount)
+{
+
+	Scalar sqr = amount * amount;
+	Scalar cube = sqr * amount;
+	Scalar func1 = 2*cube - 3* sqr + 1;
+	Scalar func2 = -2*cube + 3*sqr;
+	Scalar func3 = cube - 2*sqr + amount;
+	Scalar func4 = cube - sqr;
+	
+	return Vector4(Left[0] * func1 + Right[0] * func2 + tanLeft[0] * func3 + tanRight[0] * func4,
+				   Left[1] * func1 + Right[1] * func2 + tanLeft[1] * func3 + tanRight[1] * func4,
+				   Left[2] * func1 + Right[2] * func2 + tanLeft[2] * func3 + tanRight[2] * func4,
+				   Left[3] * func1 + Right[3] * func2 + tanLeft[3] * func3 + tanRight[3] * func4);
+}
+
+
 
 } /* math */
 } /* bakge */

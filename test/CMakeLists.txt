@@ -19,6 +19,7 @@ set(TESTS
   texture
   thread
   types
+  vector3
   vector4
   window
 )

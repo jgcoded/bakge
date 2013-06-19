@@ -28,6 +28,7 @@ set(MODULES
   graphics/Shader
   graphics/Shape
   graphics/Texture
+  math/Vector3
   math/Vector4
   math/Quaternion
   math/Matrix

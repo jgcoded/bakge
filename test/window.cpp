@@ -50,5 +50,7 @@ int main(int argc, char* argv[])
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
 
+	system("pause");
+
     return 0;
 }
