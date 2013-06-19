@@ -27,6 +27,21 @@
 namespace bakge
 {
 
+const char* bgeWorldTransform =
+    "uniforma mat4x4 bgeModelview;"
+    "vec4 bgeWorldTransform(vec4 Vertex)"
+    "{"
+    "    return Vertex * bgeModelview;"
+    "}"
+    "\n";
+
+const char* DefaultVertexShader =
+    "void main()"
+    "{"
+    "    gl_Position = bgeWorldTransform(gl_Vertex);"
+    "}"
+    "\n";
+
 ShaderProgram::ShaderProgram()
 {
 }
