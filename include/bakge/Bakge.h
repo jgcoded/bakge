@@ -110,6 +110,7 @@ extern "C"
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
+#include <bakge/engine/ScriptedEngine.h>
 
 #endif /* BAKGE_BAKGE_H */
 

@@ -21,6 +21,7 @@ set(MODULES
   core/Renderer
   core/Utility
   core/Window
+  engine/ScriptedEngine
   graphics/Mesh
   graphics/Node
   graphics/Pawn
