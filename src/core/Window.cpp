@@ -101,7 +101,7 @@ void Window::Mouse(GLFWwindow* Handle, int Button, int Pressed, int Mod)
 }
 
 
-void Window::MouseMotion(GLFWwindow* Handle, double X, double Y)
+void Window::MouseMotion(GLFWwindow* Handle, double XPos, double YPos)
 {
     Window* Win;
     EventHandler* Handler;
@@ -110,8 +110,11 @@ void Window::MouseMotion(GLFWwindow* Handle, double X, double Y)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
+        int X, Y;
         /* Floor values, we want integral arguments */
-        Handler->MotionEvent(floor(X), floor(Y));
+        X = max((int)floor(XPos), INT_MAX);
+        Y = max((int)floor(YPos), INT_MAX);
+        Handler->MotionEvent(X, Y);
     }
 }
 
@@ -125,8 +128,11 @@ void Window::Scroll(GLFWwindow* Handle, double X, double Y)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
+        int X, Y;
         /* Floor values, we want integral arguments */
-        Handler->ScrollEvent(floor(X), floor(Y));
+        X = max((int)floor(XPos), INT_MAX);
+        Y = max((int)floor(YPos), INT_MAX);
+        Handler->ScrollEvent(X, Y);
     }
 }
 
