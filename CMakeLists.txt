@@ -70,6 +70,7 @@ if(UNIX AND NOT APPLE)
   include_directories(${X11_LIBRARY_DIR})
   set(BAKGE_LIBRARIES
     m
+    glew
     glfw3
     lua
     GL
@@ -93,6 +94,7 @@ if(UNIX AND APPLE)
   list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   set(BAKGE_LIBRARIES
     m
+    glew
     glfw3
     lua
     GL
@@ -111,6 +113,7 @@ if(WIN32)
     user32.lib
     glu32.lib
     winmm.lib
+    glew
     glfw3
     lua
   )
