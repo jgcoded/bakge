@@ -121,6 +121,13 @@ bool Window::IsOpen()
 }
 
 
+bool Window::IsActive()
+{
+    /* Windows are only active if they have input focus */
+    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED);
+}
+
+
 Result Window::PollEvent(Event* Ev)
 {
     glfwPollEvents();
@@ -128,15 +135,27 @@ Result Window::PollEvent(Event* Ev)
 }
 
 
-Result Window::GetMousePosition(WindowCoord* X, WindowCoord* Y)
+Result Window::GetMousePosition(DeviceCoord* X, DeviceCoord* Y)
 {
-    return BGE_FAILURE;
+    /* Can't access mouse if window isn't active */
+    if(!IsActive())
+        return BGE_FAILURE;
+
+    glfwGetCursorPos(WindowHandle, X, Y);
+
+    return BGE_SUCCESS;
 }
 
 
-Result Window::SetMousePosition(WindowCoord X, WindowCoord)
+Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
 {
-    return BGE_FAILURE;
+    /* Can't change mouse position if window isn't active */
+    if(!IsActive())
+        return BGE_FAILURE;
+
+    glfwSetCursorPos(WindowHandle, X, Y);
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

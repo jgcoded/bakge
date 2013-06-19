@@ -50,6 +50,8 @@ public:
     BGE_FACTORY Window* Create(int Width, int Height);
 
     bool IsOpen();
+    bool IsActive();
+
     Result Close();
     Result PollEvent(Event* Ev);
     Result SwapBuffers();
@@ -57,8 +59,8 @@ public:
     Result Bind() const;
     Result Unbind() const;
 
-    Result GetMousePosition(WindowCoord* X, WindowCoord* Y);
-    Result SetMousePosition(WindowCoord X, WindowCoord Y);
+    Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
+    Result SetMousePosition(DeviceCoord X, DeviceCoord Y);
 
 }; /* Window */
 

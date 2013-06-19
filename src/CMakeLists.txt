@@ -36,8 +36,13 @@ set(MODULES
   renderer/FrontRenderer
 )
 
-# Create headers list
-set(HEADERS "")
+# Create headers list, add those without a source file
+# since they won't get picked up by the following foreach loop
+set(HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge/math/Math
+  ${BAKGE_SOURCE_DIR}/include/bakge/core/Type.h
+)
+
 foreach(module ${MODULES})
   list(APPEND HEADERS ${BAKGE_SOURCE_DIR}/include/bakge/${module})
 endforeach(module)
