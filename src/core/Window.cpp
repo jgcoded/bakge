@@ -29,24 +29,40 @@ namespace bakge
 
 void Window::WindowMoved(GLFWwindow* Handle,  int X, int Y)
 {
+    Window* Win = (Window*)glfwGetWindowUserPointer(Handle);
+
+    if(Win->Handler != NULL) {
+        /* Deploy event here */
+    }
 }
 
 
 void Window::WindowResized(GLFWwindow* Handle, int Width, int Height)
 {
+    Window* Win = (Window*)glfwGetWindowUserPointer(Handle);
+
+    if(Win->Handler != NULL) {
+        /* Deploy event here */
+    }
 }
 
 
 void Window::WindowClosed(GLFWwindow* Handle)
 {
-    Window* BakgeWindow = (Window*)glfwGetWindowUserPointer(Handle);
-    BakgeWindow->Close();
+    Window* Win = (Window*)glfwGetWindowUserPointer(Handle);
+
+    Win->Close();
+
+    if(Win->Handler != NULL) {
+        /* Deploy event here */
+    }
 }
 
 
 Window::Window()
 {
     WindowHandle = NULL;
+    Handler = NULL;
 }
 
 
@@ -125,6 +141,17 @@ Result Window::PollEvent(Event* Ev)
 {
     glfwPollEvents();
     return BGE_FAILURE;
+}
+
+
+EventHandler* Window::SetEventHandler(EventHandler* Who)
+{
+    EventHandler* Previous;
+
+    Previous = Handler;
+    Handler = Who;
+
+    return Previous;
 }
 
 } /* bakge */

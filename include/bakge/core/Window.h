@@ -34,11 +34,15 @@ namespace bakge
 
 class Window : public Bindable
 {
+    /* GLFW callbacks. Private for protection against bogus events */
     GLFWCALLBACK void WindowMoved(GLFWwindow* Handle,  int X, int Y);
     GLFWCALLBACK void WindowResized(GLFWwindow* Handle, int Width, int Height);
     GLFWCALLBACK void WindowClosed(GLFWwindow* Handle);
 
     GLFWwindow* WindowHandle;
+
+    /* Who receives events from the window? */
+    EventHandler* Handler;
 
     Window();
 
@@ -56,6 +60,8 @@ public:
 
     Result Bind() const;
     Result Unbind() const;
+
+    EventHandler* SetEventHandler(EventHandler* Who);
 
 }; /* Window */
 
