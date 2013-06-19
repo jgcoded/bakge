@@ -5,6 +5,11 @@ cmake_minimum_required (VERSION 2.6)
 include_directories(${BAKGE_SOURCE_DIR}/include)
 include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
 
+
+########################################
+# COMMON HEADERS & MODULES
+########################################
+
 set(MODULES
   api/Thread
   data/SingleNode
@@ -31,6 +36,17 @@ set(MODULES
   renderer/FrontRenderer
 )
 
+# Create headers list
+set(HEADERS "")
+foreach(module ${MODULES})
+  list(APPEND HEADERS ${BAKGE_SOURCE_DIR}/include/bakge/${module})
+endforeach(module)
+
+
+########################################
+# PLATFORM MODULES & HEADERS
+########################################
+
 if(UNIX AND NOT APPLE)
   set(PLATFORM_PREFIX "x11")
 endif()
@@ -50,5 +66,14 @@ set(PLATFORM_MODULES
   utility/${PLATFORM_PREFIX}_Utility
 )
 
-add_library(bakge ${MODULES} ${PLATFORM_MODULES})
+# Platform modules might share a common header.
+# Manually set them here
+set(PLATFORM_HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge/system/Clock
+  ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
+  ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread
+)
+
+add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
+                                        ${PLATFORM_HEADERS})
 
