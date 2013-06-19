@@ -39,6 +39,7 @@ Node::~Node()
 
 Result Node::Bind() const
 {
+    glPushMatrix();
     /* Translate to position */
     glTranslated(Position[0], Position[1], Position[2]);
     return BGE_SUCCESS;
@@ -47,8 +48,7 @@ Result Node::Bind() const
 
 Result Node::Unbind() const
 {
-    /* Load identity */
-    glLoadIdentity();
+    glPopMatrix();
     return BGE_SUCCESS;
 }
 
