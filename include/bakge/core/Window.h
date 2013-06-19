@@ -35,9 +35,13 @@ namespace bakge
 class Window : public Bindable
 {
     /* GLFW callbacks. Private for protection against bogus events */
-    GLFWCALLBACK void WindowMoved(GLFWwindow* Handle,  int X, int Y);
-    GLFWCALLBACK void WindowResized(GLFWwindow* Handle, int Width, int Height);
-    GLFWCALLBACK void WindowClosed(GLFWwindow* Handle);
+    GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
+    GLFWCALLBACK void Resized(GLFWwindow*, int, int);
+    GLFWCALLBACK void Closed(GLFWwindow*);
+    GLFWCALLBACK void Key(GLFWwindow*, int, int, int, int);
+    GLFWCALLBACK void Mouse(GLFWwindow*, int, int, int);
+    GLFWCALLBACK void MouseMotion(GLFWwindow*, double, double);
+    GLFWCALLBACK void Scroll(GLFWwindow*, double, double);
 
     GLFWwindow* WindowHandle;
 

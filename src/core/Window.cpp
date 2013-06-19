@@ -27,34 +27,106 @@
 namespace bakge
 {
 
-void Window::WindowMoved(GLFWwindow* Handle,  int X, int Y)
+void Window::Moved(GLFWwindow* Handle,  int X, int Y)
 {
-    Window* Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Window* Win;
+    EventHandler* Handler;
 
-    if(Win->Handler != NULL) {
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
         /* Deploy event here */
     }
 }
 
 
-void Window::WindowResized(GLFWwindow* Handle, int Width, int Height)
+void Window::Resized(GLFWwindow* Handle, int Width, int Height)
 {
-    Window* Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Window* Win;
+    EventHandler* Handler;
 
-    if(Win->Handler != NULL) {
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
         /* Deploy event here */
     }
 }
 
 
-void Window::WindowClosed(GLFWwindow* Handle)
+void Window::Closed(GLFWwindow* Handle)
 {
-    Window* Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    /* Deploy closed event before closing the window */
+    if(Handler != NULL) {
+        /* Deploy event here */
+    }
 
     Win->Close();
+}
 
-    if(Win->Handler != NULL) {
+
+void Window::Key(GLFWwindow* Handle, int Key, int Code, int Pressed, int Mod)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
         /* Deploy event here */
+    }
+}
+
+
+void Window::Mouse(GLFWwindow* Handle, int Button, int Pressed, int Mod)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Ok to pass int, ButtonID, ModField etc are just typedef int */
+        Handler->MouseEvent(Button, Pressed, Mod);
+    }
+}
+
+
+void Window::MouseMotion(GLFWwindow* Handle, double X, double Y)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Floor values, we want integral arguments */
+        Handler->MotionEvent(floor(X), floor(Y));
+    }
+}
+
+
+void Window::Scroll(GLFWwindow* Handle, double X, double Y)
+{
+    Window* Win;
+    EventHandler* Handler;
+
+    Win = (Window*)glfwGetWindowUserPointer(Handle);
+    Handler = Win->Handler;
+
+    if(Handler != NULL) {
+        /* Floor values, we want integral arguments */
+        Handler->ScrollEvent(floor(X), floor(Y));
     }
 }
 
@@ -85,9 +157,13 @@ Window* Window::Create(int Width, int Height)
     /* Store pointer to Bakge window so global callbacks can access it */
     glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);
 
-    glfwSetWindowCloseCallback(Win->WindowHandle, WindowClosed);
-    glfwSetWindowSizeCallback(Win->WindowHandle, WindowResized);
-    glfwSetWindowPosCallback(Win->WindowHandle, WindowMoved);
+    glfwSetWindowCloseCallback(Win->WindowHandle, Window::Closed);
+    glfwSetWindowSizeCallback(Win->WindowHandle, Window::Resized);
+    glfwSetWindowPosCallback(Win->WindowHandle, Window::Moved);
+    glfwSetKeyCallback(Win->WindowHandle, Window::Key);
+    glfwSetMouseButtonCallback(Win->WindowHandle, Window::Mouse);
+    glfwSetCursorPosCallback(Win->WindowHandle, Window::MouseMotion);
+    glfwSetScrollCallback(Win->WindowHandle, Window::Scroll);
 
     Win->Bind();
 
