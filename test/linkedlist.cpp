@@ -45,14 +45,6 @@ int main(int argc, char* argv[])
     }
     printf("\n");
 
-    /* Try to pop from empty list */
-    try {
-        const char* Popped = List.Pop();
-        printf ("Something is wrong");
-    } catch (const char* Exception) {
-        printf ("Exception successfully thrown: %s\n", Exception);
-    }
-
     return 0;
 }
 

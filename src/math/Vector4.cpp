@@ -196,49 +196,6 @@ Scalar Vector4::Length() const
 }
 
 
-Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
-{
-    BGE_ASSERT_EX(!Right.W, "Point addition is invalid")
-
-    return Vector4(Left[0] + Right[0], Left[1] + Right[1],
-                                    Left[2] + Right[2], Left.W);
-}
-
-
-Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
-{
-    BGE_ASSERT_EX(!Right.W, "Point subtraction is invalid")
-
-    return Vector4(Left[0] - Right[0], Left[1] - Right[1],
-                                    Left[2] - Right[2], Left.W);
-}
-
-
-Vector4 operator*(Vector4 BGE_NCP Left, Scalar BGE_NCP Right)
-{
-    BGE_ASSERT_EX(!Left.W, "Not a vector")
-
-    return Vector4(Left[0] * Right, Left[1] * Right, Left[2] * Right, 0);
-}
-
-
-Vector4 operator/(Vector4 BGE_NCP Left, Scalar BGE_NCP Right)
-{
-    BGE_ASSERT_EX(!Left.W, "Not a vector")
-    BGE_ASSERT_EX(!ScalarCompare(Right, 0), "Division by 0")
-
-    return Vector4(Left[0] / Right, Left[1] / Right, Left[2] / Right, Left.W);
-}
-
-bool operator==(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
-{
-    return ScalarCompare(Left[0], Right[0])
-        && ScalarCompare(Left[1], Right[1])
-        && ScalarCompare(Left[2], Right[2])
-        && ScalarCompare(Left[3], Right[3]);
-}
-
-
 Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
     BGE_ASSERT_EX(!Left.W, "Not a vector")
