@@ -40,7 +40,7 @@ Node::~Node()
 Result Node::Bind() const
 {
     /* Translate to position */
-    glTranslatedv(&Position[0]);
+    glTranslated(Position[0], Position[1], Position[2]);
     return BGE_SUCCESS;
 }
 
