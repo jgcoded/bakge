@@ -106,6 +106,7 @@ extern "C"
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>
+#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
