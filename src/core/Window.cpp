@@ -121,10 +121,52 @@ bool Window::IsOpen()
 }
 
 
-Result Window::PollEvent(Event* Ev)
+bool Window::IsActive()
+{
+    /* Windows are only active if they have input focus */
+    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED);
+}
+
+
+void Window::PollEvents()
 {
     glfwPollEvents();
-    return BGE_FAILURE;
+}
+
+
+Result Window::GetMousePosition(DeviceCoord* X, DeviceCoord* Y)
+{
+    /* Can't access mouse if window isn't active */
+    if(!IsActive())
+        return BGE_FAILURE;
+
+    glfwGetCursorPos(WindowHandle, X, Y);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
+{
+    /* Can't change mouse position if window isn't active */
+    if(!IsActive())
+        return BGE_FAILURE;
+
+    glfwSetCursorPos(WindowHandle, X, Y);
+
+    return BGE_SUCCESS;
+}
+
+
+void Window::Show()
+{
+    glfwShowWindow(WindowHandle);
+}
+
+
+void Window::Hide()
+{
+    glfwHideWindow(WindowHandle);
 }
 
 } /* bakge */

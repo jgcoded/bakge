@@ -49,13 +49,29 @@ public:
 
     BGE_FACTORY Window* Create(int Width, int Height);
 
+    /* Call manually to process events for all windows */
+    static void PollEvents();
+
     bool IsOpen();
+    bool IsActive();
+
     Result Close();
-    Result PollEvent(Event* Ev);
+
     Result SwapBuffers();
 
+    /* Binding makes this window's context current on the calling thread */
     Result Bind() const;
     Result Unbind() const;
+
+    Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
+    Result SetMousePosition(DeviceCoord X, DeviceCoord Y);
+
+    /* *
+     * Hide and Show can fail if window is already hidden/shown,
+     * but will do so silently
+     * */
+    void Hide();
+    void Show();
 
 }; /* Window */
 

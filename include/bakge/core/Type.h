@@ -44,6 +44,13 @@ typedef char Byte;
 typedef Uint64 Microseconds;
 typedef double Seconds;
 
+/* *
+ * GLFW uses doubles for its mouse/scroll motion measurements.
+ * Better to just deal with doubles than with casting to integral types
+ * */
+typedef double DeviceMotion;
+typedef double DeviceCoord;
+
 } /* bakge */
 
 #endif /* BAKGE_CORE_TYPE_H */
