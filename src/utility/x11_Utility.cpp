@@ -28,35 +28,37 @@ namespace bakge
 {
 
 timespec StartTime;
-GLFWwindow* SharedWindow;
+Window* SharedWindow;
 
 Result Init(int argc, char* argv[])
 {
     if(!glfwInit()) {
-        fprintf(stderr, "GLFW initialization failed\n");
+        printf("GLFW initialization failed\n");
         return BGE_FAILURE;
     }
 
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-    SharedWindow = glfwCreateWindow(16, 16, NULL, NULL, NULL);
+    SharedWindow = Window::Create(16, 16);
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
     if(glewInit() != GLEW_OK) {
-        fprintf(stderr, "GLEW initialization failed\n");
+        printf("GLFW initialization failed\n");
         return BGE_FAILURE;
     }
 
     clock_gettime(CLOCK_MONOTONIC, &StartTime);
 
-    return BGE_FAILURE;
+    return BGE_SUCCESS;
 }
 
 
 Result Deinit()
 {
+    delete SharedWindow;
+
     glfwTerminate();
 
-    return BGE_FAILURE;
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
