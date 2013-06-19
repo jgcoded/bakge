@@ -158,4 +158,16 @@ Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
     return BGE_SUCCESS;
 }
 
+
+void Window::Show()
+{
+    glfwShowWindow(WindowHandle);
+}
+
+
+void Window::Hide()
+{
+    glfwHideWindow(WindowHandle);
+}
+
 } /* bakge */
