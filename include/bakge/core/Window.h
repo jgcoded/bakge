@@ -57,6 +57,9 @@ public:
     Result Bind() const;
     Result Unbind() const;
 
+    Result GetMousePosition(WindowCoord* X, WindowCoord* Y);
+    Result SetMousePosition(WindowCoord X, WindowCoord Y);
+
 }; /* Window */
 
 } /* bakge */

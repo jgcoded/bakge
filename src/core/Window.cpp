@@ -127,4 +127,16 @@ Result Window::PollEvent(Event* Ev)
     return BGE_FAILURE;
 }
 
+
+Result Window::GetMousePosition(WindowCoord* X, WindowCoord* Y)
+{
+    return BGE_FAILURE;
+}
+
+
+Result Window::SetMousePosition(WindowCoord X, WindowCoord)
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */
