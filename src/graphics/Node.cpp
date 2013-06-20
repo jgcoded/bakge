@@ -52,7 +52,7 @@ Result Node::Bind() const
         return BGE_FAILURE;
 
     /* Assign this node's position as bge_Position */
-    glUniform4dv(Location, 4, &Position[0]);
+    glUniform4dv(Location, 1, &Position[0]);
 
     return BGE_SUCCESS;
 }
@@ -63,7 +63,7 @@ Result Node::Unbind() const
     static const math::Vector4 Origin;
     GLint Program, Location;
 
-    /* Retrieve location of the bge_Position vec4 */
+    /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
         return BGE_FAILURE;
@@ -74,7 +74,7 @@ Result Node::Unbind() const
         return BGE_FAILURE;
 
     /* Assign origin position as bge_Position */
-    glUniform4dv(Location, 4, &Origin[0]);
+    glUniform4dv(Location, 1, &Origin[0]);
 
     return BGE_SUCCESS;
 }
