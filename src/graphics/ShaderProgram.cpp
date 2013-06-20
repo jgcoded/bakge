@@ -28,7 +28,7 @@ namespace bakge
 {
 
 const char* bgeWorldTransform =
-    "uniforma vec4 bge_Position;"
+    "uniform vec4 bge_Position;"
     "vec4 bgeWorldTransform(vec4 Vertex)"
     "{"
     "    return vec4(0, 0, 0, 1);"
