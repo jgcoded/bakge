@@ -53,17 +53,19 @@ public:
 
     Vector3 BGE_NCP operator+=(Vector3 BGE_NCP Other);
     Vector3 BGE_NCP operator-=(Vector3 BGE_NCP Other);
-
+    
     Vector3 BGE_NCP operator*=(Vector3 BGE_NCP Other);
     Vector3 BGE_NCP operator/=(Vector3 BGE_NCP Other);
     Vector3 BGE_NCP operator/=(Scalar Value);
-
+    
+    Vector3 operator+(Vector3 BGE_NCP Other);
+    Vector3 operator-(Vector3 Other);
+    Vector3 operator*(Vector3 BGE_NCP Other);
+    Vector3 operator/(Vector3 BGE_NCP Other);
+    Vector3 operator/(Scalar Value);
 
     bool BGE_NCP operator==(Vector3 BGE_NCP Other);
 
-    
-
-    Vector3 BGE_NCP Normalize();
     Vector3 Normalized() const;
 
     Scalar LengthSquared() const;
@@ -72,8 +74,9 @@ public:
     friend Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
     friend Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
 
-    static const Vector3 UpVector;
+    static const Vector3 UpVector; /* Where do I define this? */
 
+    static Vector3 Normalize(Vector3 Other);
     static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
     static Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
     static Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z);
@@ -86,6 +89,11 @@ private:
 
 }; /* Vector3 */
 
+Vector3 operator+(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+Vector3 operator-(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+Vector3 operator-(Vector3 BGE_NCP This);
+Vector3 operator*(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+Vector3 operator/(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
 
 } /* math */
 } /* bakge */

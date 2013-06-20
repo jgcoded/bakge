@@ -75,7 +75,6 @@ public:
 
     bool operator==(Vector4 BGE_NCP left);
 
-    Vector4 BGE_NCP Normalize();
     Vector4 Normalized() const;
 
     Scalar LengthSquared() const;
@@ -88,6 +87,7 @@ public:
      * Unfortunately GCC won't let us use friend functions
      * as global declarations
      * */
+    static Vector4 Normalize(Vector4 Other);
     static Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     static Vector4 Point(Scalar X, Scalar Y, Scalar Z);
@@ -102,6 +102,12 @@ private:
     Scalar Val[4];
 
 }; /* Vector4 */
+
+Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+Vector4 operator-(Vector4 BGE_NCP This);
+Vector4 operator*(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+Vector4 operator/(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
 
 } /* math */

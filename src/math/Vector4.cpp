@@ -155,9 +155,12 @@ bool Vector4::operator==(Vector4 BGE_NCP Other)
 }
 
 
-Vector4 BGE_NCP Vector4::Normalize()
+static Vector4 Normalize(Vector4 BGE_NCP Other)
 {
-    return *this /= Length();
+
+    Scalar Len = Other.Length();
+
+    return Vector4(Other[0] / Len, Other[1] / Len, Other[2] / Len, 0);
 }
 
 
@@ -230,14 +233,14 @@ Vector4 Vector4::operator/(Scalar BGE_NCP Value)
 }
 
 
-static Vector4 Vector4::Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tangentLeft, Vector4 BGE_NCP Right, 
-                                                                   Vector4 BGE_NCP tangentRight, 
-                                                                   Scalar amount);
+static Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tanLeft, Vector4 BGE_NCP Right, 
+                                                                   Vector4 BGE_NCP tanRight, 
+                                                                   Scalar amount)
 {
 
 	Scalar sqr = amount * amount;
 	Scalar cube = sqr * amount;
-	Scalar func1 = 2*cube - 3* sqr + 1;
+	Scalar func1 = 2*cube - 3*sqr + 1;
 	Scalar func2 = -2*cube + 3*sqr;
 	Scalar func3 = cube - 2*sqr + amount;
 	Scalar func4 = cube - sqr;
@@ -250,6 +253,39 @@ static Vector4 Vector4::Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tangentLef
     );
 }
 
+
+Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] + Right[0], Left[1] + Right[1], Left[2] + Right[2], Left[3]);
+}
+
+
+Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] - Right[0], Left[1] - Right[1], Left[2] - Right[2], Left[3]);
+}
+
+
+Vector4 operator-(Vector4 BGE_NCP This)
+{
+
+    return Vector4(-This[0], -This[1], -This[2], This[0]);
+}
+
+
+Vector4 operator*(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] * Right[0], Left[1] * Right[1], Left[2] * Right[2], Left[0]);
+}
+
+
+Vector4 operator/(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] / Right[0], Left[1] / Right[1], Left[2] / Right[2], Left[0]);
 }
 
 } /* math */

@@ -54,6 +54,17 @@ Vector3::~Vector3()
 {
 }
 
+Scalar& Vector3::operator[](int BGE_NCP At)
+{
+    return Val[At];
+}
+
+
+Scalar BGE_NCP Vector3::operator[](int BGE_NCP At) const
+{
+    return Val[At];
+}
+
 
 Vector3 BGE_NCP Vector3::operator+=(Vector3 BGE_NCP Other)
 {
@@ -66,6 +77,13 @@ Vector3 BGE_NCP Vector3::operator+=(Vector3 BGE_NCP Other)
 }
 
 
+Vector3 Vector3::operator+(Vector3 BGE_NCP Other)
+{
+    
+    return Vector3(Val[0] + Other[0], Val[1] + Other[1], Val[2] + Other[2]);
+}
+
+
 Vector3 BGE_NCP Vector3::operator-=(Vector3 BGE_NCP Other)
 {
     
@@ -74,6 +92,13 @@ Vector3 BGE_NCP Vector3::operator-=(Vector3 BGE_NCP Other)
     Val[2] -= Other[2];
 
     return *this;
+}
+
+
+Vector3 Vector3::operator-(Vector3 Other)
+{
+
+    return Vector3(Val[0] - Other[0], Val[1] - Other[1], Val[2] - Other[2]);
 }
 
 
@@ -98,14 +123,38 @@ Vector3 BGE_NCP Vector3::operator/=(Vector3 BGE_NCP Other)
     return *this;
 }
 
+
+Vector3 Vector3::operator/(Vector3 BGE_NCP Other)
+{
+
+    return  Vector3(Val[0] / Other[0], Val[1] / Other[1], Val[2] / Other[2]);
+}
+
+
 Vector3 BGE_NCP Vector3::operator/=(Scalar Value)
 {
+
+    if(ScalarCompare(Value, 0)) {
+        printf("Division by 0. Cancelling operation\n");
+        return *this;
+    }
 
     Val[0] /= Value;
     Val[1] /= Value;
     Val[2] /= Value;
 
     return *this;
+}
+
+
+Vector3 Vector3::operator/(Scalar Value)
+{
+    if(ScalarCompare(Value, 0)) {
+        printf("Division by 0. Cancelling operation\n");
+        return *this;
+    }
+
+    return Vector3(Val[0] / Value, Val[1] / Value, Val[2] / Value);
 }
 
 
@@ -117,17 +166,13 @@ bool BGE_NCP Vector3::operator==(Vector3 BGE_NCP Other)
         && ScalarCompare(Val[2], Other.Val[2]);
 }
 
-Vector3 operator+=(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+
+static Vector3 Normalize(Vector3 BGE_NCP Other)
 {
 
-    return Vector3(0,1,0);
-}
+    Scalar Len = Other.Length();
 
-
-Vector3 BGE_NCP Vector3::Normalize()
-{
-
-    return *this /= Length();
+    return Vector3(Other[0] / Len, Other[1] / Len, Other[2] / Len);
 }
 
 
@@ -195,6 +240,40 @@ static Vector3 Hermite(Vector3 BGE_NCP Left, Vector3 BGE_NCP tanLeft, Vector3 BG
 				   Left[2] * func1 + Right[2] * func2 + tanLeft[2] * func3 + tanRight[2] * func4);
 }
 
+
+Vector3 operator+(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+{
+
+    return Vector3(Left[0] + Right[0], Left[1] + Right[1], Left[2] + Right[2]);
+}
+
+
+Vector3 operator-(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+{
+
+    return Vector3(Left[0] - Right[0], Left[1] - Right[1], Left[2] - Right[2]);
+}
+
+
+Vector3 operator-(Vector3 BGE_NCP This)
+{
+
+    return Vector3(-This[0], -This[1], -This[2]);
+}
+
+
+Vector3 operator*(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+{
+
+    return Vector3(Left[0] * Right[0], Left[1] * Right[1], Left[2] * Right[2]);
+}
+
+
+Vector3 operator/(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+{
+
+    return Vector3(Left[0] / Right[0], Left[1] / Right[1], Left[2] / Right[2]);
+}
 
 } /* bakge */
 } /* math */
