@@ -63,14 +63,17 @@ Result Node::Unbind() const
     static const math::Vector4 Origin;
     GLint Program, Location;
 
+    /* Retrieve location of the bge_Position vec4 */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
         return BGE_FAILURE;
 
+    /* Retrieve location of the bge_Position vec4 */
     Location = glGetUniformLocation(Program, "bge_Position");
     if(Location < 0)
         return BGE_FAILURE;
 
+    /* Assign origin position as bge_Position */
     glUniform4dv(Location, 4, &Origin[0]);
 
     return BGE_SUCCESS;
