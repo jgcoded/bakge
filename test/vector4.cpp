@@ -81,6 +81,11 @@ int main(int argc, char* argv[])
     Vec4 = bakge::math::Cross(x1, x2);
     printVector(Vec4);
 
+    /* Hermite spline */
+    printf("Hermite spline:\n");
+    bakge::math::Vector4 Vec5(3, 4, 5, 0), tanUp(0, 1, 0, 0), Vec6(1, 2, 3, 0), Vec7;
+    Vec7 = bakge::math::Vector4::Hermite(Vec5, tanUp, Vec6, tanUp, 3);
+    printVector(Vec7);
 
     /* *
      *This will send an assertion failure!

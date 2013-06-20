@@ -50,7 +50,7 @@ class Vector4
 public:
 
     Vector4();
-    Vector4(Scalar X, Scalar Y, Scalar Z, int W);
+    Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
@@ -65,9 +65,13 @@ public:
 
     Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
     Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
-
     Vector4 BGE_NCP operator*=(Scalar BGE_NCP Value);
     Vector4 BGE_NCP operator/=(Scalar BGE_NCP Value);
+
+    Vector4 operator+(Vector4 BGE_NCP Other);
+    Vector4 operator-(Vector4 BGE_NCP Other);
+    Vector4 operator*(Scalar BGE_NCP Value);
+    Vector4 operator/(Scalar BGE_NCP Value);
 
     bool operator==(Vector4 BGE_NCP left);
 
@@ -80,28 +84,27 @@ public:
     friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
+    /* *
+     * Unfortunately GCC won't let us use friend functions
+     * as global declarations
+     * */
+    static Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+    static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+    static Vector4 Point(Scalar X, Scalar Y, Scalar Z);
+    static Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
+    static Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
+    static Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tangentLeft, Vector4 BGE_NCP Right, Vector4 BGE_NCP tangentRight, Scalar amount);
+
+
 
 private:
 
-    Scalar Val[3];
-    int W;
+    Scalar Val[4];
 
 }; /* Vector4 */
 
-
-/* *
- * Unfortunately GCC won't let us use friend functions
- * as global declarations
- * */
-static Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-static Vector4 Point(Scalar X, Scalar Y, Scalar Z);
-static Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
-static Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
-static Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tangentLeft, Vector4 BGE_NCP Right, Vector4 BGE_NCP tangentRight);
 
 } /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_VECTOR4_H */
-

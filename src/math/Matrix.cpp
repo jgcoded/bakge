@@ -38,6 +38,18 @@ Matrix::~Matrix()
 {
 }
 
+static Matrix BGE_NCP CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget,
+                                                            Vector3 BGE_NCP CameraUpVector)
+{
+    /* Why is the subtraction not working?
+    CameraPos -= CameraTarget;
+    bakge::math::Vector3 dPositions = CameraPos.Normalize();
+    dPositions.Normalize();
+    */
+
+}
+
+
 } /* math */
 } /* bakge */
 

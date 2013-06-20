@@ -51,6 +51,7 @@ public:
     Matrix();
     ~Matrix();
 
+    static Matrix BGE_NCP CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget, Vector3 BGE_NCP CameraUpVector);
 
 private:
 

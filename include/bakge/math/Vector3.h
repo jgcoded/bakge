@@ -51,10 +51,33 @@ public:
     
     Vector3 BGE_NCP operator=(Vector3 BGE_NCP Other);
 
-    Vector3 BGE_NCP operator+(Vector3 BGE_NCP Other);
-    Vector3 BGE_NCP operator-(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator+=(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator-=(Vector3 BGE_NCP Other);
 
-    Vector3 BGE_NCP operator*(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator*=(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator/=(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator/=(Scalar Value);
+
+
+    bool BGE_NCP operator==(Vector3 BGE_NCP Other);
+
+    
+
+    Vector3 BGE_NCP Normalize();
+    Vector3 Normalized() const;
+
+    Scalar LengthSquared() const;
+    Scalar Length() const;
+
+    friend Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+    friend Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+
+    static const Vector3 UpVector;
+
+    static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+    static Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+    static Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z);
+    static Vector3 Hermite(Vector3 BGE_NCP Left, Vector3 BGE_NCP tangentLeft, Vector3 BGE_NCP Right, Vector3 BGE_NCP tangentRight, Scalar amount);
 
 private:
 
@@ -62,6 +85,7 @@ private:
 
 
 }; /* Vector3 */
+
 
 } /* math */
 } /* bakge */
