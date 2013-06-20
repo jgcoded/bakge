@@ -7,6 +7,11 @@ set(BAKGE_EXAMPLE_SUITE
   ${BAKGE_SOURCE_DIR}/example/SimpleEngine
 )
 
+if(UNIX AND APPLE)
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
+endif()
+
 foreach(example ${BAKGE_EXAMPLE_SUITE})
   add_subdirectory(${example})
 endforeach(example)
+
