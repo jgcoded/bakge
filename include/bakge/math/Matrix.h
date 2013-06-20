@@ -48,8 +48,13 @@ class Matrix
 
 public:
 
+    static Matrix Identity;
+
     Matrix();
     ~Matrix();
+
+    Scalar BGE_NCP operator[](int BGE_NCP At) const;
+    Scalar& operator[](int BGE_NCP At);
 
 
 private:

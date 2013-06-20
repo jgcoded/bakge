@@ -39,18 +39,43 @@ Pawn::~Pawn()
 
 Result Pawn::Bind() const
 {
+    GLint Program, Location;
+    math::Matrix Transform;
+
     Node::Bind();
-    /* TODO: Quaternions
-    Vector4 Axis;
-    Axis = Facing.GetAxis();
-    glRotated(ToDegrees(Facing.GetAngle(), Axis[0], Axis[1], Axis[2]);
-    */
-    return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Position vec4 */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Position vec4 */
+    Location = glGetUniformLocation(Program, "bge_Rotation");
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    glUniformMatrix4dv(Location, 1, GL_FALSE, &Transform[0]);
+
+    return BGE_SUCCESS;
 }
 
 
 Result Pawn::Unbind() const
 {
+    GLint Program, Location;
+
+    /* Retrieve location of the bge_Position vec4 */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Position vec4 */
+    Location = glGetUniformLocation(Program, "bge_Rotation");
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    glUniformMatrix4dv(Location, 1, GL_FALSE, &math::Matrix::Identity[0]);
+
     return Node::Unbind();
 }
 

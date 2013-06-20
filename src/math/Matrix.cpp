@@ -29,6 +29,8 @@ namespace bakge
 namespace math
 {
 
+Matrix Matrix::Identity;
+
 Matrix::Matrix()
 {
 }
@@ -36,6 +38,18 @@ Matrix::Matrix()
 
 Matrix::~Matrix()
 {
+}
+
+
+Scalar BGE_NCP Matrix::operator[](int BGE_NCP At) const
+{
+    return Val[At];
+}
+
+
+Scalar& Matrix::operator[](int BGE_NCP At)
+{
+    return Val[At];
 }
 
 } /* math */
