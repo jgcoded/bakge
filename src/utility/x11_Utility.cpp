@@ -32,6 +32,7 @@ Window* SharedWindow;
 
 Result Init(int argc, char* argv[])
 {
+
     if(!glfwInit()) {
         printf("GLFW initialization failed\n");
         return BGE_FAILURE;
@@ -48,6 +49,9 @@ Result Init(int argc, char* argv[])
 
     clock_gettime(CLOCK_MONOTONIC, &StartTime);
 
+    if(ShaderProgram::InitShaderLibrary() != BGE_SUCCESS)
+        return BGE_FAILURE;
+
     return BGE_SUCCESS;
 }
 
@@ -57,6 +61,8 @@ Result Deinit()
     delete SharedWindow;
 
     glfwTerminate();
+
+    ShaderProgram::DeinitShaderLibrary();
 
     return BGE_SUCCESS;
 }

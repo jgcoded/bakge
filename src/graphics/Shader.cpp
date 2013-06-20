@@ -40,18 +40,31 @@ Shader::~Shader()
 }
 
 
-Shader* Shader::Create(GLenum Type, const char* SourcePath)
+Shader* Shader::LoadFromFile(GLenum Type, const char* FilePath)
 {
     Shader* S;
     Byte* Source;
-    GLint Status, Length;
 
     /* Load the contents of the shader file */
-    Source = LoadFileContents(SourcePath);
+    Source = LoadFileContents(FilePath);
     if(Source == NULL) {
-        printf("Unable to load shader source \"%s\"\n", SourcePath);
+        printf("Unable to load shader source \"%s\"\n", FilePath);
         return NULL;
     }
+
+    S = Shader::LoadFromString(Type, Source);
+
+    delete[] Source;
+
+    return S;
+}
+
+
+Shader* Shader::LoadFromString(GLenum Type, const char* Source)
+{
+    Shader* S;
+    GLint Status, Length;
+    Byte* Info;
 
     /* Allocate memory for the new Shader */
     S = new Shader;
@@ -72,8 +85,7 @@ Shader* Shader::Create(GLenum Type, const char* SourcePath)
      * Set source for shader resource. Do the const cast since
      * compiler whines when passing non-const char*
      * */
-    glShaderSource(S->Handle, 1, (const Byte**)&Source, NULL);
-    delete[] Source;
+    glShaderSource(S->Handle, 1, &Source, NULL);
 
     /* Compile the shader source */
     glCompileShader(S->Handle);
@@ -81,15 +93,15 @@ Shader* Shader::Create(GLenum Type, const char* SourcePath)
     /* Now get any errors or warnings */
     glGetShaderiv(S->Handle, GL_COMPILE_STATUS, &Status);
     if(Status == GL_FALSE)
-        printf("Shader compilation failed: \"%s\"\n", SourcePath);
+        printf("%s shader compilation failed\n",
+            Type == GL_VERTEX_SHADER ? "Vertex" : "Fragment");
 
     glGetShaderiv(S->Handle, GL_INFO_LOG_LENGTH, &Length);
-    if(Length > 0) {
-        /* Re-use Source variable too. Waste not. */
-        Source =  new Byte[Length];
-        glGetShaderInfoLog(S->Handle, Length, &Length, Source);
-        printf("%s\n", Source);
-        delete[] Source;
+    if(Length > 1) {
+        Info =  new Byte[Length];
+        glGetShaderInfoLog(S->Handle, Length, &Length, Info);
+        printf("%s\n", Info);
+        delete[] Info;
         /* Don't return shader if compilation failed */
         if(Status == GL_FALSE) {
             delete S;
@@ -101,15 +113,27 @@ Shader* Shader::Create(GLenum Type, const char* SourcePath)
 }
 
 
-Shader* Shader::CreateVertexShader(const char* SourcePath)
+Shader* Shader::LoadVertexShaderFile(const char* FilePath)
 {
-    return Shader::Create(GL_VERTEX_SHADER, SourcePath);
+    return Shader::LoadFromFile(GL_VERTEX_SHADER, FilePath);
 }
 
 
-Shader* Shader::CreateFragmentShader(const char* SourcePath)
+Shader* Shader::LoadFragmentShaderFile(const char* FilePath)
 {
-    return Shader::Create(GL_FRAGMENT_SHADER, SourcePath);
+    return Shader::LoadFromFile(GL_FRAGMENT_SHADER, FilePath);
+}
+
+
+Shader* Shader::LoadVertexShaderString(const char* Source)
+{
+    return Shader::LoadFromString(GL_VERTEX_SHADER, Source);
+}
+
+
+Shader* Shader::LoadFragmentShaderString(const char* Source)
+{
+    return Shader::LoadFromString(GL_FRAGMENT_SHADER, Source);
 }
 
 } /* bakge */

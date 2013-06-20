@@ -32,6 +32,20 @@ namespace bakge
 
 class ShaderProgram
 {
+    friend Result Init(int argc, char* argv[]);
+    friend Result Deinit();
+
+    /* Initialize all library Shaders */
+    static Result InitShaderLibrary();
+    static Result DeinitShaderLibrary();
+
+    static Shader* bgeWorldTransform;
+    static Shader* GenericVertexShader;
+    static Shader* GenericFragmentShader;
+
+    Shader* VertexShader;
+    Shader* FragmentShader;
+
 
 public:
 
