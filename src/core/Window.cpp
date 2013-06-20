@@ -222,7 +222,7 @@ bool Window::IsOpen()
 bool Window::IsActive()
 {
     /* Windows are only active if they have input focus */
-    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED);
+    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) > 0 ? true : false;
 }
 
 
