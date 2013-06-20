@@ -34,7 +34,7 @@ Vector4::Vector4()
     Val[0] = 0;
     Val[1] = 0;
     Val[2] = 0;
-    Val[3] = 0;
+    Val[3] = 1.0;
 }
 
 

@@ -39,16 +39,40 @@ Node::~Node()
 
 Result Node::Bind() const
 {
-    glPushMatrix();
-    /* Translate to position */
-    glTranslated(Position[0], Position[1], Position[2]);
+    GLint Program, Location;
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Position vec4 */
+    Location = glGetUniformLocation(Program, "bge_Position");
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    /* Assign this node's position as bge_Position */
+    glUniform4dv(Location, 4, &Position[0]);
+
     return BGE_SUCCESS;
 }
 
 
 Result Node::Unbind() const
 {
-    glPopMatrix();
+    static const math::Vector4 Origin;
+    GLint Program, Location;
+
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    Location = glGetUniformLocation(Program, "bge_Position");
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    glUniform4dv(Location, 4, &Origin[0]);
+
     return BGE_SUCCESS;
 }
 
