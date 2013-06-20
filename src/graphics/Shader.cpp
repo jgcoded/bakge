@@ -29,23 +29,87 @@ namespace bakge
 
 Shader::Shader()
 {
+    Handle = 0;
 }
 
 
 Shader::~Shader()
 {
+    if(Handle != 0)
+        glDeleteShader(Handle);
+}
+
+
+Shader* Shader::Create(GLenum Type, const char* SourcePath)
+{
+    Shader* S;
+    Byte* Source;
+    GLint Status, Length;
+
+    /* Load the contents of the shader file */
+    Source = LoadFileContents(SourcePath);
+    if(Source == NULL) {
+        printf("Unable to load shader source \"%s\"\n", SourcePath);
+        return NULL;
+    }
+
+    /* Allocate memory for the new Shader */
+    S = new Shader;
+    if(S == NULL) {
+        printf("Unable to allocate new shader\n");
+        return NULL;
+    }
+
+    /* Allocate a shader resource of provided type (vertex or fragment) */
+    S->Handle = glCreateShader(Type);
+    if(S->Handle == 0) {
+        printf("Unable to create vertex shader resource\n");
+        delete S;
+        return NULL;
+    }
+
+    /* *
+     * Set source for shader resource. Do the const cast since
+     * compiler whines when passing non-const char*
+     * */
+    glShaderSource(S->Handle, 1, (const Byte**)&Source, NULL);
+    delete[] Source;
+
+    /* Compile the shader source */
+    glCompileShader(S->Handle);
+
+    /* Now get any errors or warnings */
+    glGetShaderiv(S->Handle, GL_COMPILE_STATUS, &Status);
+    if(Status == GL_FALSE)
+        printf("Shader compilation failed: \"%s\"\n", SourcePath);
+
+    glGetShaderiv(S->Handle, GL_INFO_LOG_LENGTH, &Length);
+    if(Length > 0) {
+        /* Re-use Source variable too. Waste not. */
+        Source =  new Byte[Length];
+        glGetShaderInfoLog(S->Handle, Length, &Length, Source);
+        printf("%s\n", Source);
+        delete[] Source;
+        /* Don't return shader if compilation failed */
+        if(Status == GL_FALSE) {
+            delete S;
+            S = NULL;
+        }
+    }
+
+    return S;
 }
 
 
 Shader* Shader::CreateVertexShader(const char* SourcePath)
 {
-    return NULL;
+    return Shader::Create(GL_VERTEX_SHADER, SourcePath);
 }
 
 
 Shader* Shader::CreateFragmentShader(const char* SourcePath)
 {
-    return NULL;
+    return Shader::Create(GL_FRAGMENT_SHADER, SourcePath);
 }
 
 } /* bakge */

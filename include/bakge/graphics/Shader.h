@@ -32,6 +32,15 @@ namespace bakge
 
 class Shader
 {
+    GLuint Handle;
+
+    /* *
+     * Private version of the shader factory. The public
+     * static methods are really just for convenience. This
+     * function does all the heavy lifting.
+     * */
+    static Shader* Create(GLenum Type, const char* SourcePath);
+
 
 public:
 
