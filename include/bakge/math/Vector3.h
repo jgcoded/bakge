@@ -71,9 +71,6 @@ public:
     Scalar LengthSquared() const;
     Scalar Length() const;
 
-    friend Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
-    friend Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
-
     static const Vector3 UpVector; /* Where do I define this? */
 
     static Vector3 Normalize(Vector3 Other);

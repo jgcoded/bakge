@@ -167,7 +167,7 @@ bool BGE_NCP Vector3::operator==(Vector3 BGE_NCP Other)
 }
 
 
-static Vector3 Normalize(Vector3 BGE_NCP Other)
+Vector3 Normalize(Vector3 BGE_NCP Other)
 {
 
     Scalar Len = Other.Length();
@@ -197,14 +197,14 @@ Scalar Vector3::Length() const
 }
 
 
-static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
 {
 
     return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2];
 }
 
 
-static Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
+Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
 {
 
         return Vector3(
@@ -215,7 +215,7 @@ static Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
 }
 
 
-static Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z)
+Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z)
 {
 
     Scalar Len = sqrt(X * X + Y * Y + Z * Z);
@@ -223,7 +223,7 @@ static Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-static Vector3 Hermite(Vector3 BGE_NCP Left, Vector3 BGE_NCP tanLeft, Vector3 BGE_NCP Right,
+Vector3 Hermite(Vector3 BGE_NCP Left, Vector3 BGE_NCP tanLeft, Vector3 BGE_NCP Right,
                                                                    Vector3 BGE_NCP tanRight,
                                                                    Scalar amount)
 {

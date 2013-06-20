@@ -51,7 +51,7 @@ Scalar BGE_NCP Matrix::operator[](int BGE_NCP At) const
 }
 
 
-static Matrix BGE_NCP CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget,
+Matrix BGE_NCP Matrix::CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget,
                                                             Vector3 BGE_NCP CameraUpVector)
 {
     

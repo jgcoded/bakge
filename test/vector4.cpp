@@ -59,12 +59,12 @@ int main(int argc, char* argv[])
     /* Normalize a Vector4 */
     printf("Normalize a Vector4:\n");
     printVector(Vec1);
-    Vec1.Normalize();
+    Vec1 = bakge::math::Vector4::Normalize(Vec1);
     printVector(Vec1);
 
     /* Unit Vector */
     printf("Unit Vector:\n");
-    bakge::math::Vector4 Vec3 = bakge::math::UnitVector(4, 3, 2);
+    bakge::math::Vector4 Vec3 = bakge::math::Vector4::UnitVector(4, 3, 2);
     printVector(Vec3);
 
     /* Length and Length^2 */
@@ -72,13 +72,13 @@ int main(int argc, char* argv[])
                                 Vec1.Length(), Vec2.LengthSquared());
 
     /* Dot */
-    bakge::math::Scalar dot = bakge::math::Dot(Vec1, Vec2);
+    bakge::math::Scalar dot = bakge::math::Vector4::Dot(Vec1, Vec2);
     printf("Dot:\n%f\n\n", dot);
 
     /* Cross */
     printf("Cross:\n");
     bakge::math::Vector4 Vec4, x1(2, 3, 2, 0), x2(1, 2, 3, 0);
-    Vec4 = bakge::math::Cross(x1, x2);
+    Vec4 = bakge::math::Vector4::Cross(x1, x2);
     printVector(Vec4);
 
     /* Hermite spline */
@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
     Vec2 += Vec1;
     printVector(Vec2);
     
-    Vec1 -= bakge::math::Point(4, -1, 4);
+    Vec1 -= bakge::math::Vector4::Point(4, -1, 4);
     printVector(Vec1);
 
     bakge::Deinit();
