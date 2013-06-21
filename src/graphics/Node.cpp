@@ -90,7 +90,7 @@ Result Node::Draw() const
 }
 
 
-void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
+void Node::SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z)
 {
     Position[0] = X;
     Position[1] = Y;
