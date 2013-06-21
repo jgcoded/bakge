@@ -27,6 +27,8 @@
 namespace bakge
 {
 
+Window* Window::SharedWindow;
+
 void Window::Moved(GLFWwindow* Handle,  int X, int Y)
 {
     Window* Win;
@@ -152,12 +154,16 @@ Window::~Window()
 
 Window* Window::Create(int Width, int Height)
 {
-    extern Window* SharedWindow;
     GLFWwindow* Handle;
+    GLFWwindow* SharedContext;
     Window* Win;
 
-    Handle = glfwCreateWindow(Width, Height, "Bakge", NULL,
-                                   SharedWindow->WindowHandle);
+    if(SharedWindow != NULL)
+        SharedContext = SharedWindow->WindowHandle;
+    else
+        SharedContext = NULL;
+
+    Handle = glfwCreateWindow(Width, Height, "Bakge", NULL, SharedContext);
     if(Handle == NULL) {
         return NULL;
     }

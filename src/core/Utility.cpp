@@ -51,9 +51,6 @@ Byte* LoadFileContents(const char* Path)
 }
 
 
-/* For OpenGL context sharing */
-Window* SharedWindow;
-
 Result Init(int argc, char* argv[])
 {
     /* *
@@ -69,7 +66,7 @@ Result Init(int argc, char* argv[])
     }
 
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-    SharedWindow = Window::Create(16, 16);
+    Window::SharedWindow = Window::Create(16, 16);
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
     if(glewInit() != GLEW_OK) {
@@ -93,8 +90,8 @@ Result Deinit()
 {
     Result Ok;
 
-    Ok = SharedWindow->Close();
-    delete SharedWindow;
+    Ok = Window::SharedWindow->Close();
+    delete Window::SharedWindow;
 
     ShaderProgram::DeinitShaderLibrary();
 
