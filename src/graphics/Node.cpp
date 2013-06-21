@@ -29,17 +29,36 @@ namespace bakge
 
 Node::Node()
 {
+    glGenBuffers(1, &Position);
 }
 
 
 Node::~Node()
 {
+    glDeleteBuffers(1, &Position);
+}
+
+
+Node* Node::Create(math::Scalar X, math::Scalar Y, math::Scalar Z)
+{
+    Node* N;
+
+    N = new Node;
+    if(N == NULL) {
+        printf("Error allocating new node\n");
+        return NULL;
+    }
+
+    N->SetPosition(X, Y, Z);
+
+    return N;
 }
 
 
 Result Node::Bind() const
 {
     GLint Program, Location;
+    math::Vector4 Pos;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
@@ -51,8 +70,10 @@ Result Node::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
+    Pos = GetPosition();
+
     /* Assign this node's position as bge_Position */
-    glUniform4dv(Location, 1, &Position[0]);
+    glUniform4dv(Location, 1, &Pos[0]);
 
     return BGE_SUCCESS;
 }
@@ -82,25 +103,36 @@ Result Node::Unbind() const
 
 Result Node::Draw() const
 {
-    glBegin(GL_POINTS);
-    /* Matrix is translated to position after Bind() */
-    glVertex3i(0, 0, 0);
-    glEnd();
     return BGE_SUCCESS;
 }
 
 
 void Node::SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z)
 {
-    Position[0] = X;
-    Position[1] = Y;
-    Position[2] = Z;
+    math::Vector4 Point(X, Y, Z, 1);
+
+    glBindBuffer(GL_ARRAY_BUFFER, Position);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Point[0]) * 4, &Point[0],
+                                                    GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_DOUBLE, GL_FALSE, 0, 0);
 }
 
 
-math::Vector4 BGE_NCP Node::GetPosition() const
+math::Vector4 Node::GetPosition() const
 {
-    return Position;
+    math::Vector4 Pos;
+    math::Scalar* Data;
+
+    glBindBuffer(GL_ARRAY_BUFFER, Position);
+    Data = (math::Scalar*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
+    Pos[0] = Data[0];
+    Pos[1] = Data[1];
+    Pos[2] = Data[2];
+    Pos[3] = Data[3];
+    glUnmapBuffer(GL_ARRAY_BUFFER);
+
+    return Pos;
 }
 
 } /* bakge */

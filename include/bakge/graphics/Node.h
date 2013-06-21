@@ -33,10 +33,16 @@ namespace bakge
 class Node : public Drawable
 {
 
-public:
+protected:
 
     Node();
+
+
+public:
+
     virtual ~Node();
+
+    BGE_FACTORY Node* Create(math::Scalar X, math::Scalar Y, math::Scalar Z);
 
     virtual Result Bind() const;
     virtual Result Unbind() const;
@@ -44,12 +50,12 @@ public:
     virtual Result Draw() const;
 
     void SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z);
-    math::Vector4 BGE_NCP GetPosition() const;
+    math::Vector4 GetPosition() const;
 
 
 protected:
 
-    math::Vector4 Position;
+    GLuint Position;
 
 }; /* Node */
 
