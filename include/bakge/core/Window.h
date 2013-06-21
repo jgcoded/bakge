@@ -63,7 +63,13 @@ public:
     /* Call manually to process events for all windows */
     static void PollEvents();
 
+    /* *
+     * Open windows are available for use, but not necessarily visible.
+     * They may be iconified or not in focus.
+     * */
     bool IsOpen();
+
+    /* Active windows are open, visible and in focus. */
     bool IsActive();
 
     Result Close();
@@ -74,6 +80,7 @@ public:
     Result Bind() const;
     Result Unbind() const;
 
+    /* Sets new event handler, returning the old one */
     EventHandler* SetEventHandler(EventHandler* Who);
 
     Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
