@@ -19,6 +19,7 @@ set(TESTS
   texture
   thread
   types
+  vao
   vector4
   window
 )
