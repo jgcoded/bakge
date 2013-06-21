@@ -34,6 +34,8 @@ namespace bakge
 
 class Window : public Bindable
 {
+    friend Result Init(int argc, char* argv[]);
+
     /* GLFW callbacks. Private for protection against bogus events */
     GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
     GLFWCALLBACK void Resized(GLFWwindow*, int, int);

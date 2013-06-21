@@ -16,6 +16,7 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  sharedcontext
   texture
   thread
   types

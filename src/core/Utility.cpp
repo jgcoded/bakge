@@ -51,7 +51,9 @@ Byte* LoadFileContents(const char* Path)
 }
 
 
+/* For OpenGL context sharing */
 Window* SharedWindow;
+GLFWwindow* SharedWindowHandle;
 
 Result Init(int argc, char* argv[])
 {
@@ -69,6 +71,7 @@ Result Init(int argc, char* argv[])
 
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
     SharedWindow = Window::Create(16, 16);
+    SharedWindowHandle = SharedWindow->WindowHandle;
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
     if(glewInit() != GLEW_OK) {
