@@ -50,4 +50,56 @@ Byte* LoadFileContents(const char* Path)
     }
 }
 
+
+Window* SharedWindow;
+
+Result Init(int argc, char* argv[])
+{
+    /* *
+     * Will be defined in platform-specific utility sources.
+     * This weird declaration is so that this function isn't
+     * exposed as end-user API
+     * */
+    extern Result PlatformInit(int, char*[]);
+
+    if(!glfwInit()) {
+        printf("GLFW initialization failed\n");
+        return BGE_FAILURE;
+    }
+
+    glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+    SharedWindow = Window::Create(16, 16);
+    glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
+
+    if(glewInit() != GLEW_OK) {
+        printf("GLEW initialization failed\n");
+        return BGE_FAILURE;
+    }
+
+    /* Initialize our Bakge shader library */
+    if(ShaderProgram::InitShaderLibrary() != BGE_SUCCESS)
+        return BGE_FAILURE;
+
+    /* Run platform-specific initialization protocol */
+    if(PlatformInit(argc, argv) != BGE_SUCCESS)
+        return BGE_FAILURE;
+
+    return BGE_SUCCESS;
+}
+
+
+Result Deinit()
+{
+    Result Ok;
+
+    Ok = SharedWindow->Close();
+    delete SharedWindow;
+
+    ShaderProgram::DeinitShaderLibrary();
+
+    glfwTerminate();
+
+    return Ok;
+}
+
 } /* bakge */
