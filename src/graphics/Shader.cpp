@@ -96,6 +96,7 @@ Shader* Shader::LoadFromString(GLenum Type, const char* Source)
         printf("%s shader compilation failed\n",
             Type == GL_VERTEX_SHADER ? "Vertex" : "Fragment");
 
+    /* Print out any warnings or errors in the info log */
     glGetShaderiv(S->Handle, GL_INFO_LOG_LENGTH, &Length);
     if(Length > 1) {
         Info =  new Byte[Length];
