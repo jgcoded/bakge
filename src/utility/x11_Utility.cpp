@@ -32,7 +32,6 @@ Window* SharedWindow;
 
 Result Init(int argc, char* argv[])
 {
-
     if(!glfwInit()) {
         printf("GLFW initialization failed\n");
         return BGE_FAILURE;
