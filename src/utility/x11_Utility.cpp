@@ -57,13 +57,16 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    delete SharedWindow;
+    Result Ok;
 
-    glfwTerminate();
+    Ok = SharedWindow->Close();
+    delete SharedWindow;
 
     ShaderProgram::DeinitShaderLibrary();
 
-    return BGE_SUCCESS;
+    glfwTerminate();
+
+    return Ok;
 }
 
 } /* bakge */

@@ -48,7 +48,10 @@ int main(int argc, char* argv[])
         delete Win;
 
     printf("Deinitializing Bakge\n");
-    bakge::Deinit();
+    if(bakge::Deinit() != BGE_SUCCESS) {
+        printf("Error deinitializating Bakge\n");
+        return 1;
+    }
 
     return 0;
 }
