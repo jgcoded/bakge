@@ -42,8 +42,6 @@ Result Pawn::Bind() const
     GLint Program, Location;
     math::Matrix Transform;
 
-    Node::Bind();
-
     /* Retrieve location of the bge_Position vec4 */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
@@ -56,7 +54,7 @@ Result Pawn::Bind() const
 
     glUniformMatrix4dv(Location, 1, GL_FALSE, &Transform[0]);
 
-    return BGE_SUCCESS;
+    return Node::Unbind();
 }
 
 
