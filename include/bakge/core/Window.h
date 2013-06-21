@@ -30,8 +30,6 @@
 namespace bakge
 {
 
-#define GLFWCALLBACK static
-
 class Window : public Bindable
 {
     friend Result Init(int argc, char* argv[]);
@@ -40,13 +38,13 @@ class Window : public Bindable
     static GLFWwindow* SharedContext;
 
     /* GLFW callbacks. Private for protection against bogus events */
-    GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
-    GLFWCALLBACK void Resized(GLFWwindow*, int, int);
-    GLFWCALLBACK void Closed(GLFWwindow*);
-    GLFWCALLBACK void Key(GLFWwindow*, int, int, int, int);
-    GLFWCALLBACK void Mouse(GLFWwindow*, int, int, int);
-    GLFWCALLBACK void MouseMotion(GLFWwindow*, double, double);
-    GLFWCALLBACK void Scroll(GLFWwindow*, double, double);
+    static void Moved(GLFWwindow*,  int, int);
+    static void Resized(GLFWwindow*, int, int);
+    static void Closed(GLFWwindow*);
+    static void Key(GLFWwindow*, int, int, int, int);
+    static void Mouse(GLFWwindow*, int, int, int);
+    static void MouseMotion(GLFWwindow*, double, double);
+    static void Scroll(GLFWwindow*, double, double);
 
     GLFWwindow* WindowHandle;
 
