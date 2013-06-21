@@ -48,7 +48,7 @@ class Matrix
 
 public:
 
-    static Matrix Identity;
+    static const Matrix Identity;
 
     Matrix();
     ~Matrix();
