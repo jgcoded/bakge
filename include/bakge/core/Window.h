@@ -30,8 +30,6 @@
 namespace bakge
 {
 
-#define GLFWCALLBACK static
-
 class Window : public Bindable
 {
     friend Result Init(int argc, char* argv[]);
@@ -40,13 +38,13 @@ class Window : public Bindable
     static GLFWwindow* SharedContext;
 
     /* GLFW callbacks. Private for protection against bogus events */
-    GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
-    GLFWCALLBACK void Resized(GLFWwindow*, int, int);
-    GLFWCALLBACK void Closed(GLFWwindow*);
-    GLFWCALLBACK void Key(GLFWwindow*, int, int, int, int);
-    GLFWCALLBACK void Mouse(GLFWwindow*, int, int, int);
-    GLFWCALLBACK void MouseMotion(GLFWwindow*, double, double);
-    GLFWCALLBACK void Scroll(GLFWwindow*, double, double);
+    static void Moved(GLFWwindow*,  int, int);
+    static void Resized(GLFWwindow*, int, int);
+    static void Closed(GLFWwindow*);
+    static void Key(GLFWwindow*, int, int, int, int);
+    static void Mouse(GLFWwindow*, int, int, int);
+    static void MouseMotion(GLFWwindow*, double, double);
+    static void Scroll(GLFWwindow*, double, double);
 
     GLFWwindow* WindowHandle;
 
@@ -65,7 +63,13 @@ public:
     /* Call manually to process events for all windows */
     static void PollEvents();
 
+    /* *
+     * Open windows are available for use, but not necessarily visible.
+     * They may be iconified or not in focus.
+     * */
     bool IsOpen();
+
+    /* Active windows are open, visible and in focus. */
     bool IsActive();
 
     Result Close();
@@ -76,6 +80,7 @@ public:
     Result Bind() const;
     Result Unbind() const;
 
+    /* Sets new event handler, returning the old one */
     EventHandler* SetEventHandler(EventHandler* Who);
 
     Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
