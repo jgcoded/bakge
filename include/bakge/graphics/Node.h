@@ -43,6 +43,9 @@ public:
 
     virtual Result Draw() const;
 
+    void SetPosition(Scalar X, Scalar Y, Scalar Z);
+    math::Vector4 BGE_NCP GetPosition() const;
+
 
 protected:
 

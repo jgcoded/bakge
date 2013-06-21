@@ -89,5 +89,19 @@ Result Node::Draw() const
     return BGE_SUCCESS;
 }
 
+
+void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
+{
+    Position[0] = X;
+    Position[1] = Y;
+    Position[2] = Z;
+}
+
+
+math::Vector4 BGE_NCP Node::GetPosition() const
+{
+    return Position;
+}
+
 } /* bakge */
 
