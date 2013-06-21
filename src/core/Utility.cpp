@@ -66,7 +66,10 @@ Result Init(int argc, char* argv[])
     }
 
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-    Window::SharedWindow = Window::Create(16, 16);
+    Window::SharedContext = glfwCreateWindow(16, 16, "", NULL, NULL);
+    if(Window::SharedContext == NULL) {
+        printf("Error creating shared context\n");
+    }
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
     if(glewInit() != GLEW_OK) {
@@ -88,16 +91,13 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    Result Ok;
-
-    Ok = Window::SharedWindow->Close();
-    delete Window::SharedWindow;
+    glfwDestroyWindow(Window::SharedContext);
 
     ShaderProgram::DeinitShaderLibrary();
 
     glfwTerminate();
 
-    return Ok;
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

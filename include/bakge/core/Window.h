@@ -37,7 +37,7 @@ class Window : public Bindable
     friend Result Init(int argc, char* argv[]);
     friend Result Deinit();
 
-	static Window* SharedWindow;
+    static GLFWwindow* SharedContext;
 
     /* GLFW callbacks. Private for protection against bogus events */
     GLFWCALLBACK void Moved(GLFWwindow*,  int, int);
