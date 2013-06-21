@@ -152,26 +152,36 @@ Window::~Window()
 
 Window* Window::Create(int Width, int Height)
 {
-    Window* Win = new Window;
+    GLFWwindow* Handle;
+    Window* Win;
 
-    Win->WindowHandle = glfwCreateWindow(Width, Height, "Bakge", NULL, NULL);
-    if(Win->WindowHandle == NULL) {
-        delete Win;
+
+    Handle = glfwCreateWindow(Width, Height, "Bakge", NULL, NULL);
+    if(Handle == NULL) {
         return NULL;
     }
 
-    /* Store pointer to Bakge window so global callbacks can access it */
-    glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);
+    glfwSetWindowCloseCallback(Handle, Window::Closed);
+    glfwSetWindowSizeCallback(Handle, Window::Resized);
+    glfwSetWindowPosCallback(Handle, Window::Moved);
+    glfwSetKeyCallback(Handle, Window::Key);
+    glfwSetMouseButtonCallback(Handle, Window::Mouse);
+    glfwSetCursorPosCallback(Handle, Window::MouseMotion);
+    glfwSetScrollCallback(Handle, Window::Scroll);
 
-    glfwSetWindowCloseCallback(Win->WindowHandle, Window::Closed);
-    glfwSetWindowSizeCallback(Win->WindowHandle, Window::Resized);
-    glfwSetWindowPosCallback(Win->WindowHandle, Window::Moved);
-    glfwSetKeyCallback(Win->WindowHandle, Window::Key);
-    glfwSetMouseButtonCallback(Win->WindowHandle, Window::Mouse);
-    glfwSetCursorPosCallback(Win->WindowHandle, Window::MouseMotion);
-    glfwSetScrollCallback(Win->WindowHandle, Window::Scroll);
+    /* Allocate our bakge Window */
+    Win = new Window;
+    if(Win == NULL) {
+        printf("Error allocating window memory\n");
+        return NULL;
+    }
 
+    /* Set its window handle and make the context current */
+    Win->WindowHandle = Handle;
     Win->Bind();
+
+    /* Store pointer to Bakge window so global callbacks can access it */
+    glfwSetWindowUserPointer(Handle, (void*)Win);
 
     return Win;
 }
