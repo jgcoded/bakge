@@ -100,7 +100,7 @@ Shader* Shader::LoadFromString(GLenum Type, const char* Source)
     if(Length > 1) {
         Info =  new Byte[Length];
         glGetShaderInfoLog(S->Handle, Length, &Length, Info);
-        printf("%s\n", Info);
+        printf("%s", Info);
         delete[] Info;
         /* Don't return shader if compilation failed */
         if(Status == GL_FALSE) {
