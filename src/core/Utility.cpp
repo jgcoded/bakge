@@ -65,13 +65,23 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
 
+    /* We don't want the shared context window visible */
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+
+    /* Create our shared context window */
     Window::SharedContext = glfwCreateWindow(16, 16, "", NULL, NULL);
     if(Window::SharedContext == NULL) {
         printf("Error creating shared context\n");
+        return BGE_FAILURE;
     }
+
+    /* Need to make context current so we can init the shader library */
+    glfwMakeContextCurrent(Window::SharedContext);
+
+    /* So future GLFW windows are visible */
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
+    /* GLEW requires an active context to properly init */
     if(glewInit() != GLEW_OK) {
         printf("GLEW initialization failed\n");
         return BGE_FAILURE;
@@ -91,9 +101,10 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    glfwDestroyWindow(Window::SharedContext);
-
     ShaderProgram::DeinitShaderLibrary();
+
+    /* Destroy our shared context window */
+    glfwDestroyWindow(Window::SharedContext);
 
     glfwTerminate();
 
