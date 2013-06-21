@@ -32,15 +32,10 @@ namespace bakge
 LARGE_INTEGER ClockFreq;
 LARGE_INTEGER StartCount;
 
-Result Init(int argc, char* argv[])
+Result PlatformInit(int argc, char* argv[])
 {
     HANDLE CurrentThread;
     DWORD_PTR OldThreadMask;
-
-    if(!glfwInit()) {
-        printf("Unable to initialize GLFW 3.0\n");
-        return BGE_FAILURE;
-    }
 
     /* Grab current thread handle */
     CurrentThread = GetCurrentThread();
@@ -56,14 +51,6 @@ Result Init(int argc, char* argv[])
     SetThreadAffinityMask(CurrentThread, OldThreadMask);
 
     return BGE_SUCCESS;
-}
-
-
-Result Deinit()
-{
-    glfwTerminate();
-
-    return BGE_FAILURE;
 }
 
 } /* bakge */

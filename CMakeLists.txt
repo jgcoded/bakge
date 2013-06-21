@@ -106,14 +106,14 @@ endif()
 
 if(WIN32)
   set(BAKGE_LIBRARIES
-    opengl32.lib
     gdi32.lib
     user32.lib
-    glu32.lib
     winmm.lib
     glew
     glfw3
     lua
+    glu32.lib
+    opengl32.lib
   )
 endif(WIN32)
 

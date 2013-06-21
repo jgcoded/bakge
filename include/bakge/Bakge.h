@@ -57,6 +57,7 @@
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
+#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"

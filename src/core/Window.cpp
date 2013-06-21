@@ -152,13 +152,12 @@ Window::~Window()
 
 Window* Window::Create(int Width, int Height)
 {
-    extern GLFWwindow* SharedWindowHandle;
+    extern Window* SharedWindow;
     GLFWwindow* Handle;
     Window* Win;
 
-
     Handle = glfwCreateWindow(Width, Height, "Bakge", NULL,
-                                        SharedWindowHandle);
+                                   SharedWindow->WindowHandle);
     if(Handle == NULL) {
         return NULL;
     }
