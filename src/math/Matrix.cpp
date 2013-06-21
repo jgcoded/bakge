@@ -29,7 +29,7 @@ namespace bakge
 namespace math
 {
 
-Matrix Matrix::Identity;
+const Matrix Matrix::Identity;
 
 Matrix::Matrix()
 {

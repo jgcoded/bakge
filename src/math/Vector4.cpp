@@ -29,6 +29,8 @@ namespace bakge
 namespace math
 {
 
+const Vector4 Vector4::Origin;
+
 Vector4::Vector4()
 {
     Val[0] = 0;
