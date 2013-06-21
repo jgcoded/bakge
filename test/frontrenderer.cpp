@@ -8,13 +8,14 @@ int main(int argc, char* argv[])
 {
     bakge::Window* Win;
     bakge::FrontRenderer* MyRenderer;
-    bakge::Node Point;
+    bakge::Node* Point;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     Win = bakge::Window::Create(600, 400);
     MyRenderer = bakge::FrontRenderer::Create();
+    Point = bakge::Node::Create(0, 0, 0);
 
     glClearColor(0, 0, 0, 1);
     glViewport(0, 0, 600, 400);
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
         glLoadIdentity();
         gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
         glColor3f(1, 1, 1);
-        MyRenderer->Draw(&Point);
+        MyRenderer->Draw(Point);
         glMatrixMode(GL_PROJECTION);
         Win->SwapBuffers();
     }
