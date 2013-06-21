@@ -32,7 +32,7 @@ Shader* ShaderProgram::GenericFragmentShader = NULL;
 Shader* ShaderProgram::bgeWorldTransform = NULL;
 
 const char* bgeWorldTransformSource =
-    "#version 130\n"
+    "#version 120\n"
     "\n"
     "uniform mat4x4 bge_Position;\n"
     "uniform mat4x4 bge_Rotation;\n"
@@ -45,11 +45,9 @@ const char* bgeWorldTransformSource =
     "\n";
 
 const char* GenericVertexShaderSource =
-    "#version 130\n"
+    "#version 120\n"
     "\n"
     "vec4 bgeWorldTransform(vec4);\n"
-    "\n"
-    "out vec2 bge_TexCoord;\n"
     "\n"
     "void main()\n"
     "{\n"
@@ -58,10 +56,9 @@ const char* GenericVertexShaderSource =
     "\n";
 
 const char* GenericFragmentShaderSource =
-    "#version 130\n"
+    "#version 120\n"
     "\n"
     "uniform sampler2D bge_Diffuse;\n"
-    "in vec2 bge_TexCoord;\n"
     "\n"
     "void main()\n"
     "{\n"
