@@ -32,10 +32,10 @@ namespace bakge
 namespace math
 {
 
-#define BGE_SCALAR_EPSILON 0.000001
-#define BGE_RAD_PER_DEG 0.0174532925
-#define BGE_DEG_PER_RAD 57.2957795
-typedef double Scalar;
+#define BGE_SCALAR_EPSILON 0.000001f
+#define BGE_RAD_PER_DEG 0.0174532925f
+#define BGE_DEG_PER_RAD 57.2957795f
+typedef float Scalar;
 typedef Scalar Degrees;
 typedef Scalar Radians;
 

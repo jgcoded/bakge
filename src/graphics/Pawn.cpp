@@ -52,7 +52,7 @@ Result Pawn::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    glUniformMatrix4dv(Location, 1, GL_FALSE, &Transform[0]);
+    //glUniformMatrix4fv
 
     return Node::Unbind();
 }
@@ -72,7 +72,7 @@ Result Pawn::Unbind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    glUniformMatrix4dv(Location, 1, GL_FALSE, &math::Matrix::Identity[0]);
+    //glUniformMatrix4fv
 
     return Node::Unbind();
 }

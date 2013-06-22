@@ -29,8 +29,8 @@ int main(int argc, char* argv[])
     }
 
     /* Default shaders */
-    printf("Creating default shader program\n");
     Program = bakge::ShaderProgram::Create(NULL, NULL);
+    Program->Bind();
 
     glClearColor(0, 0, 1, 1);
     glViewport(0, 0, 600, 400);
@@ -41,9 +41,7 @@ int main(int argc, char* argv[])
     gluPerspective(50.0, 1.5, 0.1, 500.0);
 
     /* Make it easy to see our points */
-    glEnable(GL_POINT_SMOOTH);
     glPointSize(10);
-    glHint(GL_POINT_SMOOTH, GL_NICEST);
 
     /* *
      * Test out node position setting/getting uses OpenGL buffers
@@ -54,7 +52,7 @@ int main(int argc, char* argv[])
     printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
 
     /* Test at a new position */
-    Point->SetPosition(3, 3, 1);
+    Point->SetPosition(1, 0, 0);
     Pos = Point->GetPosition();
     printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
     Point->Unbind();

@@ -50,7 +50,6 @@ const char* GenericVertexShaderSource =
     "vec4 bgeWorldTransform(vec4);\n"
     "\n"
     "attribute vec4 bge_VertexArray;\n"
-    "uniform vec4 bge_Position;\n"
     "\n"
     "void main()\n"
     "{\n"
@@ -65,7 +64,7 @@ const char* GenericFragmentShaderSource =
     "\n"
     "void main()\n"
     "{\n"
-    "    gl_FragColor = texture2D(bge_Diffuse, gl_TexCoord[0].st);\n"
+    "    gl_FragColor = vec4(1, 1, 1, 1);\n"
     "}\n"
     "\n";
 

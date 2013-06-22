@@ -57,8 +57,11 @@
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
-#define GLEW_STATIC
+#if 1 /* I've got 99 problems, and GLEW is one of them */
 #include <GL/glew.h>
+#else
+#define GL_GLEXT_PROTOTYPES
+#endif
 #include <GLFW/glfw3.h>
 extern "C"
 {

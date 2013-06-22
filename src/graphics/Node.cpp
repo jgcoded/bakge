@@ -78,7 +78,7 @@ Result Node::Bind() const
         return BGE_FAILURE;
 
     /* Assign this node's position as bge_Position */
-    glUniform4dv(Location, 1, &Position[0]);
+    glUniform4fv(Location, 1, &Position[0]);
 
     return BGE_SUCCESS;
 }
@@ -100,7 +100,7 @@ Result Node::Unbind() const
         return BGE_FAILURE;
 
     /* Assign origin position as bge_Position */
-    glUniform4dv(Location, 1, &Origin[0]);
+    glUniform4fv(Location, 1, &Origin[0]);
 
     return BGE_SUCCESS;
 }
