@@ -48,15 +48,13 @@ public:
     EventHandler();
     virtual ~EventHandler();
 
+    /* Key press/release and mouse button click/release events */
     virtual Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M) = 0;
     virtual Result MouseEvent(ButtonID B, ButtonState S, ModField M) = 0;
 
-    /* *
-     * These will likely change. I'm not sure if we want relative motion
-     * or absolute positions to be passed as the arguments
-     * */
-    virtual Result MotionEvent(int X, int Y) = 0;
-    virtual Result ScrollEvent(int X, int Y) = 0;
+    /* Relative device motion events */
+    virtual Result MotionEvent(DeviceMotion X, DeviceMotion Y) = 0;
+    virtual Result ScrollEvent(DeviceMotion X, DeviceMotion Y) = 0;
 
 }; /* EventHandler */
 
