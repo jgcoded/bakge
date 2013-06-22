@@ -87,7 +87,7 @@ int EngineAsEventHandler::Run()
             printf("Closing EngineAsEventHandler window\n");
             ExitCode = 0;
             break;
-		}
+        }
 
         Update(0);
         PreRenderStage();
