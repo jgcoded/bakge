@@ -56,6 +56,9 @@ public:
     virtual Result MotionEvent(DeviceMotion X, DeviceMotion Y) = 0;
     virtual Result ScrollEvent(DeviceMotion X, DeviceMotion Y) = 0;
 
+    /* Called just before the window is closed */
+    virtual Result CloseEvent() = 0;
+
 }; /* EventHandler */
 
 } /* bakge */
