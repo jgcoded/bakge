@@ -29,13 +29,13 @@ namespace bakge
 
 Node::Node()
 {
-    glGenBuffers(1, &Position);
+    glGenBuffers(1, &PositionBuffer);
 }
 
 
 Node::~Node()
 {
-    glDeleteBuffers(1, &Position);
+    glDeleteBuffers(1, &PositionBuffer);
 }
 
 
@@ -49,6 +49,14 @@ Node* Node::Create(math::Scalar X, math::Scalar Y, math::Scalar Z)
         return NULL;
     }
 
+    /* *
+     * Set buffer data. Nodes are drawn at 0, 0, 0 because the shader
+     * library will translate them in the vertex shader
+     * */
+    glBindBuffer(GL_ARRAY_BUFFER, N->PositionBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(N->Position[0]) * 4, &N->Position[0],
+                                                            GL_DYNAMIC_DRAW);
+
     N->SetPosition(X, Y, Z);
 
     return N;
@@ -57,8 +65,7 @@ Node* Node::Create(math::Scalar X, math::Scalar Y, math::Scalar Z)
 
 Result Node::Bind() const
 {
-    GLint Program, Location;
-    math::Vector4 Pos;
+    GLint Program, Location, VertexLocation;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
@@ -70,10 +77,14 @@ Result Node::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    Pos = GetPosition();
-
     /* Assign this node's position as bge_Position */
-    glUniform4dv(Location, 1, &Pos[0]);
+    glUniform4dv(Location, 1, &Position[0]);
+
+    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
+
+    VertexLocation = glGetAttribLocation(Program, "bge_VertexArray");
+    glEnableVertexAttribArray(VertexLocation);
+    glVertexAttribPointer(VertexLocation, 4, GL_DOUBLE, GL_FALSE, 0, 0);
 
     return BGE_SUCCESS;
 }
@@ -82,7 +93,7 @@ Result Node::Bind() const
 Result Node::Unbind() const
 {
     static const math::Vector4 Origin;
-    GLint Program, Location;
+    GLint Program, Location, VertexLocation;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
@@ -97,42 +108,34 @@ Result Node::Unbind() const
     /* Assign origin position as bge_Position */
     glUniform4dv(Location, 1, &Origin[0]);
 
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    VertexLocation = glGetAttribLocation(Program, "bge_VertexArray");
+    glDisableVertexAttribArray(VertexLocation);
+
     return BGE_SUCCESS;
 }
 
 
 Result Node::Draw() const
 {
+    unsigned int Indices[] = { 1 };
+    glDrawElements(GL_POINTS, 1, GL_UNSIGNED_INT, (void*)Indices);
     return BGE_SUCCESS;
 }
 
 
 void Node::SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z)
 {
-    math::Vector4 Point(X, Y, Z, 1);
-
-    glBindBuffer(GL_ARRAY_BUFFER, Position);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Point[0]) * 4, &Point[0],
-                                                    GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_DOUBLE, GL_FALSE, 0, 0);
+    Position[0] = X;
+    Position[1] = Y;
+    Position[2] = Z;
 }
 
 
-math::Vector4 Node::GetPosition() const
+math::Vector4 BGE_NCP Node::GetPosition() const
 {
-    math::Vector4 Pos;
-    math::Scalar* Data;
-
-    glBindBuffer(GL_ARRAY_BUFFER, Position);
-    Data = (math::Scalar*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
-    Pos[0] = Data[0];
-    Pos[1] = Data[1];
-    Pos[2] = Data[2];
-    Pos[3] = Data[3];
-    glUnmapBuffer(GL_ARRAY_BUFFER);
-
-    return Pos;
+    return Position;
 }
 
 } /* bakge */

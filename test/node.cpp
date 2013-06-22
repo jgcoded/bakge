@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
     printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
 
     /* Test at a new position */
-    Point->SetPosition(3, 0, 1);
+    Point->SetPosition(3, 3, 1);
     Pos = Point->GetPosition();
     printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
     Point->Unbind();

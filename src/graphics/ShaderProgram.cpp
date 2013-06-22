@@ -34,13 +34,13 @@ Shader* ShaderProgram::bgeWorldTransform = NULL;
 const char* bgeWorldTransformSource =
     "#version 120\n"
     "\n"
-    "uniform mat4x4 bge_Position;\n"
+    "uniform vec4 bge_Position;\n"
     "uniform mat4x4 bge_Rotation;\n"
     "uniform mat4x4 bge_Scale;\n"
     "\n"
     "vec4 bgeWorldTransform(vec4 Vertex)\n"
     "{\n"
-    "    return Vertex * (bge_Position * bge_Rotation * bge_Scale);\n"
+    "    return Vertex + bge_Position;\n"
     "}\n"
     "\n";
 
@@ -49,9 +49,11 @@ const char* GenericVertexShaderSource =
     "\n"
     "vec4 bgeWorldTransform(vec4);\n"
     "\n"
+    "attribute vec4 bge_VertexArray;\n"
+    "\n"
     "void main()\n"
     "{\n"
-    "    gl_Position = bgeWorldTransform(gl_Vertex);\n"
+    "    gl_Position = bgeWorldTransform(bge_VertexArray);\n"
     "}\n"
     "\n";
 

@@ -50,12 +50,13 @@ public:
     virtual Result Draw() const;
 
     void SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z);
-    math::Vector4 GetPosition() const;
+    math::Vector4 BGE_NCP GetPosition() const;
 
 
 protected:
 
-    GLuint Position;
+    math::Vector4 Position;
+    GLuint PositionBuffer;
 
 }; /* Node */
 
