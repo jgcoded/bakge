@@ -40,7 +40,7 @@ const char* bgeWorldTransformSource =
     "\n"
     "vec4 bgeWorldTransform(vec4 Vertex)\n"
     "{\n"
-    "    return Vertex;\n"
+    "    return Vertex + bge_Position;\n"
     "}\n"
     "\n";
 

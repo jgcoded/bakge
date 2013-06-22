@@ -69,7 +69,7 @@ Result Node::Bind() const
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0)
+    if(Program < 0)
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
@@ -91,7 +91,7 @@ Result Node::Unbind() const
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0)
+    if(Program < 0)
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
