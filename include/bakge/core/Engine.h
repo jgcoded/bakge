@@ -57,12 +57,12 @@ public:
      * rendering targets such as offscreen framebuffers or textures.
      *
      * The PreRender stage is used to clear and set up framebuffers,
-     * set modelview transforms, etc.
+     * set the viewing transform, etc.
      *
      * The Render stage is when scene and GUI rendering takes place.
      *
      * The PostRender stage usually does things like blitting framebuffers
-     * to the screen, switch to projection transforms, etc.
+     * to the screen, or drawer/logic thread synchronization.
      * */
     virtual Result PreRenderStage() = 0;
     virtual Result RenderStage() = 0;
