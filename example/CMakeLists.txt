@@ -5,6 +5,7 @@ set(EXECUTABLE_OUTPUT_PATH ${BAKGE_SDK_EXAMPLES_OUTPUT_PATH})
 
 set(BAKGE_EXAMPLE_SUITE
   ${BAKGE_SOURCE_DIR}/example/SimpleEngine
+  ${BAKGE_SOURCE_DIR}/example/EngineAsEventHandler
 )
 
 if(UNIX AND APPLE)

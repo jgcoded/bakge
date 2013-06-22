@@ -83,7 +83,8 @@ void Window::Key(GLFWwindow* Handle, int Key, int Code, int Pressed, int Mod)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        /* Deploy event here */
+        /* Ok to pass ints, all params are typedef int anyways */
+        Handler->KeyEvent(Key, Code, Pressed, Mod);
     }
 }
 
