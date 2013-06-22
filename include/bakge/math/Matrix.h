@@ -53,13 +53,13 @@ public:
     Matrix();
     ~Matrix();
 
-    inline Scalar BGE_NCP operator[](int BGE_NCP At) const
+    BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
         return Val[At];
     }
 
 
-    inline Scalar& operator[](int BGE_NCP At)
+    BGE_INL Scalar& operator[](int BGE_NCP At)
     {
         return Val[At];
     }
