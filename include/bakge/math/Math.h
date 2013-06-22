@@ -51,10 +51,12 @@ BGE_INL Degrees ToDegrees(Radians BGE_NCP Rad)
     return (Rad * BGE_DEG_PER_RAD);
 }
 
+
 BGE_INL bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
 {
     return abs(Right - Left) < BGE_SCALAR_EPSILON;
 }
+
 
 template<class T>
 BGE_INL T BGE_NCP Max(T BGE_NCP A, T BGE_NCP B)
