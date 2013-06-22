@@ -60,6 +60,7 @@
 
 /* Include external library headers */
 #if 1 /* I've got 99 problems, and GLEW is one of them */
+#define GLEW_STATIC
 #include <GL/glew.h>
 #else
 #define GL_GLEXT_PROTOTYPES

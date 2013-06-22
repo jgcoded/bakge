@@ -8,7 +8,6 @@ if(GLEW_TARGET)
   )
 
   add_definitions(-DGLEW_STATIC)
-  add_definitions(-DGLEW_NO_GLU)
   add_library(glew ${GLEW_SOURCES})
 
 else()
