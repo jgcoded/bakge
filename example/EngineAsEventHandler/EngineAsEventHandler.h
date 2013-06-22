@@ -60,6 +60,8 @@ public:
     bakge::Result MotionEvent(bakge::DeviceMotion X, bakge::DeviceMotion Y);
     bakge::Result ScrollEvent(bakge::DeviceMotion X, bakge::DeviceMotion Y);
 
+    bakge::Result CloseEvent();
+
 
 protected:
 

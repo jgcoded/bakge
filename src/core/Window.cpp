@@ -67,7 +67,7 @@ void Window::Closed(GLFWwindow* Handle)
 
     /* Deploy closed event before closing the window */
     if(Handler != NULL) {
-        /* Deploy event here */
+        Handler->CloseEvent();
     }
 
     Win->Close();

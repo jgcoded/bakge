@@ -68,6 +68,13 @@ bakge::Result EngineAsEventHandler::ScrollEvent(bakge::DeviceMotion X,
 }
 
 
+bakge::Result EngineAsEventHandler::CloseEvent()
+{
+    printf("Goodbye!\n");
+    return BGE_SUCCESS;
+}
+
+
 int EngineAsEventHandler::Run()
 {
     int ExitCode;
