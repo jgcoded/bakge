@@ -52,6 +52,7 @@ class Vector4
 public:
 
     static const Vector4 Origin;
+    static const Vector4 ZeroVector;
 
     Vector4();
     Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);

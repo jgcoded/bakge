@@ -30,6 +30,7 @@ namespace math
 {
 
 const Vector4 Vector4::Origin;
+const Vector4 Vector4::ZeroVector(0, 0, 0, 0);
 
 Vector4::Vector4()
 {
