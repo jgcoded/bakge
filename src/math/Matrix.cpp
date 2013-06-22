@@ -78,7 +78,7 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
     Clip1 = -FarClip / (FarClip - NearClip);
     Clip2 = (-FarClip * NearClip) / (FarClip - NearClip);
 
-    Val[0] = S;
+    Val[0] = S / Aspect;
     Val[5] = S;
     Val[10] = Clip1;
     Val[11] = Clip2;
