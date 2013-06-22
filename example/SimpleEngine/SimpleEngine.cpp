@@ -48,7 +48,7 @@ int SimpleEngine::Run()
             printf("Closing SimpleEngine window\n");
             ExitCode = 0;
             break;
-		}
+        }
 
         Update(0);
         PreRenderStage();
