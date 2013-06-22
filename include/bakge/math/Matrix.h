@@ -53,8 +53,16 @@ public:
     Matrix();
     ~Matrix();
 
-    Scalar BGE_NCP operator[](int BGE_NCP At) const;
-    Scalar& operator[](int BGE_NCP At);
+    inline Scalar BGE_NCP operator[](int BGE_NCP At) const
+    {
+        return Val[At];
+    }
+
+
+    inline Scalar& operator[](int BGE_NCP At)
+    {
+        return Val[At];
+    }
 
     Matrix BGE_NCP SetIdentity();
 

@@ -42,18 +42,6 @@ Matrix::~Matrix()
 }
 
 
-Scalar BGE_NCP Matrix::operator[](int BGE_NCP At) const
-{
-    return Val[At];
-}
-
-
-Scalar& Matrix::operator[](int BGE_NCP At)
-{
-    return Val[At];
-}
-
-
 Matrix BGE_NCP Matrix::SetIdentity()
 {
     memset((void*)Val, 0, sizeof(Scalar) * 16);
