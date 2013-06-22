@@ -59,12 +59,8 @@
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
-#if 1 /* I've got 99 problems, and GLEW is one of them */
 #define GLEW_STATIC
 #include <GL/glew.h>
-#else
-#define GL_GLEXT_PROTOTYPES
-#endif
 #include <GLFW/glfw3.h>
 extern "C"
 {
@@ -74,7 +70,7 @@ extern "C"
 #include <lua/lauxlib.h>
 }
 
-/* Include core Bakge classes (no OpenGL inclusion yet) */
+/* Include core Bakge classes */
 #include <bakge/core/Type.h>
 #include <bakge/core/Input.h>
 #include <bakge/core/Utility.h>
@@ -110,7 +106,7 @@ extern "C"
 #include <bakge/platform/osx_Bakge.h>
 #endif /* __linux__ */
 
-/* Additional Bakge classes (may depend on OpenGL) */
+/* Additional Bakge classes */
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
