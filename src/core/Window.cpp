@@ -162,6 +162,7 @@ Window* Window::Create(int Width, int Height)
         return NULL;
     }
 
+    /* Set all of our window's GLFW callbacks */
     glfwSetWindowCloseCallback(Handle, Window::Closed);
     glfwSetWindowSizeCallback(Handle, Window::Resized);
     glfwSetWindowPosCallback(Handle, Window::Moved);
@@ -181,7 +182,11 @@ Window* Window::Create(int Width, int Height)
     Win->WindowHandle = Handle;
     Win->Bind();
 
-    /* Store pointer to Bakge window so global callbacks can access it */
+    /* *
+     * Store pointer to Bakge window so global callbacks can access it.
+     * They are static Window class methods, so they have full access
+     * to the class objects.
+     * */
     glfwSetWindowUserPointer(Handle, (void*)Win);
 
     return Win;
