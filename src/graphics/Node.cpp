@@ -65,7 +65,7 @@ Node* Node::Create(math::Scalar X, math::Scalar Y, math::Scalar Z)
 
 Result Node::Bind() const
 {
-    GLint Program, Location, VertexLocation;
+    GLint Program, Location;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
@@ -80,12 +80,6 @@ Result Node::Bind() const
     /* Assign this node's position as bge_Position */
     glUniform4dv(Location, 1, &Position[0]);
 
-    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
-
-    VertexLocation = glGetAttribLocation(Program, "bge_VertexArray");
-    glEnableVertexAttribArray(VertexLocation);
-    glVertexAttribPointer(VertexLocation, 4, GL_DOUBLE, GL_FALSE, 0, 0);
-
     return BGE_SUCCESS;
 }
 
@@ -93,7 +87,7 @@ Result Node::Bind() const
 Result Node::Unbind() const
 {
     static const math::Vector4 Origin;
-    GLint Program, Location, VertexLocation;
+    GLint Program, Location;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
@@ -108,11 +102,6 @@ Result Node::Unbind() const
     /* Assign origin position as bge_Position */
     glUniform4dv(Location, 1, &Origin[0]);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    VertexLocation = glGetAttribLocation(Program, "bge_VertexArray");
-    glDisableVertexAttribArray(VertexLocation);
-
     return BGE_SUCCESS;
 }
 
@@ -120,7 +109,11 @@ Result Node::Unbind() const
 Result Node::Draw() const
 {
     unsigned int Indices[] = { 1 };
+
+    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
     glDrawElements(GL_POINTS, 1, GL_UNSIGNED_INT, (void*)Indices);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     return BGE_SUCCESS;
 }
 

@@ -57,6 +57,8 @@ public:
     BGE_FACTORY Shader* LoadVertexShaderString(const char* Source);
     BGE_FACTORY Shader* LoadFragmentShaderString(const char* Source);
 
+    GLuint GetHandle() const;
+
 }; /* Shader */
 
 } /* bakge */

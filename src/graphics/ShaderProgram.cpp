@@ -40,7 +40,7 @@ const char* bgeWorldTransformSource =
     "\n"
     "vec4 bgeWorldTransform(vec4 Vertex)\n"
     "{\n"
-    "    return Vertex + bge_Position;\n"
+    "    return Vertex;\n"
     "}\n"
     "\n";
 
@@ -50,6 +50,7 @@ const char* GenericVertexShaderSource =
     "vec4 bgeWorldTransform(vec4);\n"
     "\n"
     "attribute vec4 bge_VertexArray;\n"
+    "uniform vec4 bge_Position;\n"
     "\n"
     "void main()\n"
     "{\n"
@@ -105,17 +106,84 @@ Result ShaderProgram::DeinitShaderLibrary()
 
 ShaderProgram::ShaderProgram()
 {
+    ProgramHandle = 0;
 }
 
 
 ShaderProgram::~ShaderProgram()
 {
+    if(ProgramHandle != 0) {
+
+        glDetachShader(ProgramHandle, VertexShader->GetHandle());
+        glDetachShader(ProgramHandle, FragmentShader->GetHandle());
+        glDetachShader(ProgramHandle, bgeWorldTransform->GetHandle());
+        glDeleteProgram(ProgramHandle);
+
+        if(VertexShader != GenericVertexShader)
+            delete VertexShader;
+
+        if(FragmentShader != GenericFragmentShader)
+            delete FragmentShader;
+    }
 }
 
 
 ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
 {
-    return NULL;
+    ShaderProgram* Program;
+    GLuint Handle;
+
+    Program = new ShaderProgram;
+
+    Program->ProgramHandle = glCreateProgram();
+    if(Program->ProgramHandle == 0) {
+        printf("Error creating shader program resource\n");
+        delete Program;
+        return NULL;
+    }
+
+    Handle = Program->ProgramHandle;
+
+    if(bgeWorldTransform != NULL)
+        glAttachShader(Handle, bgeWorldTransform->GetHandle());
+    else
+        printf("Can't attach bgeWorldTransform\n");
+
+    if(Vertex == NULL) {
+        glAttachShader(Handle, GenericVertexShader->GetHandle());
+        Program->VertexShader = GenericVertexShader;
+    } else {
+        glAttachShader(Handle, Vertex->GetHandle());
+        Program->VertexShader = Vertex;
+    }
+
+    if(Fragment == NULL) {
+        glAttachShader(Handle, GenericFragmentShader->GetHandle());
+        Program->FragmentShader = GenericFragmentShader;
+    } else {
+        glAttachShader(Handle, Fragment->GetHandle());
+        Program->FragmentShader = Fragment;
+    }
+
+    glLinkProgram(Handle);
+
+    glUseProgram(Handle);
+
+    return Program;
+}
+
+
+Result ShaderProgram::Bind() const
+{
+    glUseProgram(ProgramHandle);
+    return BGE_SUCCESS;
+}
+
+
+Result ShaderProgram::Unbind() const
+{
+    glUseProgram(0);
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

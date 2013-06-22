@@ -137,5 +137,11 @@ Shader* Shader::LoadFragmentShaderString(const char* Source)
     return Shader::LoadFromString(GL_FRAGMENT_SHADER, Source);
 }
 
+
+GLuint Shader::GetHandle() const
+{
+    return Handle;
+}
+
 } /* bakge */
 
