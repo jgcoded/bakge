@@ -23,6 +23,7 @@ The process of contributing code to Bakge may seem confusing and unnecessarily c
 
 There are plenty of ways you can help without having to program:
 - Run the test suite and report bugs to the issues page
+- Download the latest SDK from http://www.cs.csubak.edu/~pholden/bakge/sdk/ and try it out
 - Tell your friends about Bakge!
 - Look through the code and try to spot defects or bugs
 - Contribute your ideas to the design of Bakge's components and classes
