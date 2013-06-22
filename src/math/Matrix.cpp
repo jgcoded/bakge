@@ -57,12 +57,11 @@ Matrix BGE_NCP Matrix::SetIdentity()
 Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
                                 Scalar NearClip, Scalar FarClip)
 {
-    SetIdentity();
-
     Scalar S, Clip1, Clip2;
 
-    S = 1 / tan(FOV * 0.5f * BGE_RAD_PER_DEG);
+    SetIdentity();
 
+    S = 1 / tan(FOV * 0.5f * BGE_RAD_PER_DEG);
     Clip1 = -FarClip / (FarClip - NearClip);
     Clip2 = (-FarClip * NearClip) / (FarClip - NearClip);
 
