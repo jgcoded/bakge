@@ -47,16 +47,13 @@ namespace math
  * */
 class Quaternion
 {
+    Vector4 Val; /* X, Y, Z - vector, W - real */
+
 
 public:
 
     Quaternion();
     ~Quaternion();
-
-
-private:
-
-    Vector4 Val; /* X, Y, Z - vector, W - real */
 
 }; /* Quaternion */
 

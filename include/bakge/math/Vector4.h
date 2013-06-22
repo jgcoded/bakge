@@ -46,6 +46,8 @@ namespace math
  * */
 class Vector4
 {
+    Scalar Val[4];
+
 
 public:
 
@@ -85,11 +87,6 @@ public:
 
     friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-
-
-private:
-
-    Scalar Val[4];
 
 }; /* Vector4 */
 
