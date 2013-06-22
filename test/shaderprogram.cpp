@@ -3,12 +3,20 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
+void PrintMatrix(bakge::math::Scalar M[16])
+{
+    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[0], M[4], M[8], M[12]);
+    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[1], M[5], M[9], M[13]);
+    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[2], M[6], M[10], M[14]);
+    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[3], M[7], M[11], M[15]);
+}
 
 int main(int argc, char* argv[])
 {
     bakge::Window* Win;
     bakge::Node* Point;
     bakge::ShaderProgram* Program;
+    bakge::math::Matrix Perspective;
 
     printf("Initializing Bakge\n");
     if(bakge::Init(argc, argv) != BGE_SUCCESS) {
@@ -34,28 +42,33 @@ int main(int argc, char* argv[])
 
     glClearColor(0, 0, 1, 1);
     glViewport(0, 0, 600, 400);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(50.0, 1.5, 0.1, 500.0);
+
+    gluPerspective(50.0f, 1.5f, 0.1f, 500.0f);
+    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
+
+    /* Compare OpenGL and our perspective matrix */
+    bakge::math::Scalar MatrixArray[16];
+
+    glGetFloatv(GL_PROJECTION_MATRIX, MatrixArray);
+
+    printf("OpenGL matrix\n");
+    printf("=============\n");
+    PrintMatrix(MatrixArray);
+
+    printf("Our matrix\n");
+    printf("==========\n");
+    PrintMatrix(&Perspective[0]);
 
     /* Make it easy to see our points */
     glPointSize(10);
 
-    /* *
-     * Test out node position setting/getting uses OpenGL buffers
-     * */
-    Point->Bind();
-    /* Test this node's position */
-    bakge::math::Vector4 Pos = Point->GetPosition();
-    printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
-
     /* Test at a new position */
-    Point->SetPosition(1, 0, 0);
-    Pos = Point->GetPosition();
-    printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
-    Point->Unbind();
+    Point->SetPosition(0.8f, 0, 0);
+
+    GLint ShaderProgram, Location;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
 
     while(1) {
         /* Poll events for all windows */
@@ -66,14 +79,10 @@ int main(int argc, char* argv[])
             break;
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
         glColor3f(1, 1, 1);
         Point->Bind();
         Point->Draw(); /* No renderer for now */
         Point->Unbind();
-        glMatrixMode(GL_PROJECTION);
         Win->SwapBuffers();
     }
 

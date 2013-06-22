@@ -37,10 +37,11 @@ const char* bgeWorldTransformSource =
     "uniform vec4 bge_Position;\n"
     "uniform mat4x4 bge_Rotation;\n"
     "uniform mat4x4 bge_Scale;\n"
+    "uniform mat4x4 bge_Perspective;\n"
     "\n"
     "vec4 bgeWorldTransform(vec4 Vertex)\n"
     "{\n"
-    "    return Vertex + bge_Position;\n"
+    "    return (Vertex + bge_Position) * bge_Perspective;\n"
     "}\n"
     "\n";
 

@@ -33,6 +33,7 @@ const Matrix Matrix::Identity;
 
 Matrix::Matrix()
 {
+    SetIdentity();
 }
 
 
@@ -50,6 +51,40 @@ Scalar BGE_NCP Matrix::operator[](int BGE_NCP At) const
 Scalar& Matrix::operator[](int BGE_NCP At)
 {
     return Val[At];
+}
+
+
+Matrix BGE_NCP Matrix::SetIdentity()
+{
+    memset((void*)Val, 0, sizeof(Scalar) * 16);
+    Val[0] = 1.0f;
+    Val[5] = 1.0f;
+    Val[10] = 1.0f;
+    Val[15] = 1.0f;
+
+    return *this;
+}
+
+
+Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
+                                Scalar NearClip, Scalar FarClip)
+{
+    SetIdentity();
+
+    Scalar S, Clip1, Clip2;
+
+    S = 1 / tan(FOV * 0.5f * BGE_RAD_PER_DEG);
+
+    Clip1 = -FarClip / (FarClip - NearClip);
+    Clip2 = (-FarClip * NearClip) / (FarClip - NearClip);
+
+    Val[0] = S;
+    Val[5] = S;
+    Val[10] = Clip1;
+    Val[11] = Clip2;
+    Val[14] = -1;
+
+    return *this;
 }
 
 } /* math */

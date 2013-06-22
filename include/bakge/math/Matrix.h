@@ -56,6 +56,11 @@ public:
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
     Scalar& operator[](int BGE_NCP At);
 
+    Matrix BGE_NCP SetIdentity();
+
+    Matrix BGE_NCP SetPerspective(Scalar FOV, Scalar Aspect, Scalar NearClip,
+                                                            Scalar FarClip);
+
 
 private:
 
