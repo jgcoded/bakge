@@ -54,6 +54,7 @@
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
+#define BGE_INL inline
 #define BGE_VER_MAJ 0
 #define BGE_VER_MIN 0
 
