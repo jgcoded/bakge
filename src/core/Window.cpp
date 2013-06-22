@@ -103,7 +103,7 @@ void Window::Mouse(GLFWwindow* Handle, int Button, int Pressed, int Mod)
 }
 
 
-void Window::MouseMotion(GLFWwindow* Handle, double XPos, double YPos)
+void Window::MouseMotion(GLFWwindow* Handle, double X, double Y)
 {
     Window* Win;
     EventHandler* Handler;
@@ -112,16 +112,14 @@ void Window::MouseMotion(GLFWwindow* Handle, double XPos, double YPos)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        int X, Y;
-        /* Floor values, we want integral arguments */
-        X = math::Max((int)floor(XPos), INT_MAX);
-        Y = math::Max((int)floor(YPos), INT_MAX);
-        Handler->MotionEvent(X, Y);
+        Handler->MotionEvent(X - Win->MouseCache.X, Y - Win->MouseCache.Y);
+        Win->MouseCache.X = X;
+        Win->MouseCache.Y = Y;
     }
 }
 
 
-void Window::Scroll(GLFWwindow* Handle, double XOffset, double YOffset)
+void Window::Scroll(GLFWwindow* Handle, double X, double Y)
 {
     Window* Win;
     EventHandler* Handler;
@@ -130,11 +128,9 @@ void Window::Scroll(GLFWwindow* Handle, double XOffset, double YOffset)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        int X, Y;
-        /* Floor values, we want integral arguments */
-        X = math::Max((int)floor(XOffset), INT_MAX);
-        Y = math::Max((int)floor(YOffset), INT_MAX);
-        Handler->ScrollEvent(X, Y);
+        Handler->ScrollEvent(X - Win->ScrollCache.X, Y - Win->ScrollCache.Y);
+        Win->ScrollCache.X = X;
+        Win->ScrollCache.Y = Y;
     }
 }
 
@@ -143,6 +139,10 @@ Window::Window()
 {
     WindowHandle = NULL;
     Handler = NULL;
+    MouseCache.X = 0;
+    MouseCache.Y = 0;
+    ScrollCache.X = 0;
+    ScrollCache.Y = 0;
 }
 
 

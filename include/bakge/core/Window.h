@@ -51,6 +51,18 @@ class Window : public Bindable
     /* Who receives events from the window? */
     EventHandler* Handler;
 
+    /* Store last mouse position */
+    struct {
+        double X;
+        double Y;
+    } MouseCache;
+
+    /* Store last scroll positions */
+    struct {
+        double X;
+        double Y;
+    } ScrollCache;
+
     Window();
 
 
