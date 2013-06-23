@@ -96,6 +96,8 @@ extern "C"
 
 /* Include API classes */
 #include <bakge/api/Thread.h>
+#include <bakge/api/Packet.h>
+#include <bakge/api/Socket.h>
 
 /* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
