@@ -8,6 +8,7 @@ endif()
 
 set(TESTS
   clock
+  info
   linkedlist
   loadfile
   matrix
