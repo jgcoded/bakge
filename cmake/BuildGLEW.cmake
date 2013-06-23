@@ -7,6 +7,7 @@ if(GLEW_TARGET)
     ${GLEW_TARGET}/src/visualinfo
   )
 
+  add_definitions(-DGLEW_STATIC)
   add_library(glew ${GLEW_SOURCES})
 
 else()

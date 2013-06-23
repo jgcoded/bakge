@@ -17,7 +17,7 @@ set(BAKGE_INC_DIR "include")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 # Common required packages
-find_package(OpenGL)
+find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
 # Bakge include/link directories
@@ -85,20 +85,18 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(UNIX AND APPLE)
-  find_package(X11 REQUIRED)
   FIND_LIBRARY(COCOA_LIBRARY Cocoa)
   FIND_LIBRARY(IOKIT_LIBRARY IOKit)
   FIND_LIBRARY(AGL_LIBRARY AGL)
   FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
   include_directories(${Cocoa_INCLUDE_DIRS})
-  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
+  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
   set(BAKGE_LIBRARIES
     m
     glew
     glfw3
     lua
-    GL
-    GLU
+    ${OPENGL_LIBRARY}
     ${COCOA_LIBRARY}
     ${IOKIT_LIBRARY}
     ${CORE_FOUNDATION_LIBRARY}
@@ -108,14 +106,14 @@ endif()
 
 if(WIN32)
   set(BAKGE_LIBRARIES
-    opengl32.lib
     gdi32.lib
     user32.lib
-    glu32.lib
     winmm.lib
     glew
     glfw3
     lua
+    glu32.lib
+    opengl32.lib
   )
 endif(WIN32)
 

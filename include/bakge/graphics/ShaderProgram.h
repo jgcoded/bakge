@@ -30,13 +30,32 @@
 namespace bakge
 {
 
-class ShaderProgram
+class ShaderProgram : public Bindable
 {
+    friend Result Init(int argc, char* argv[]);
+    friend Result Deinit();
+
+    /* Initialize all library Shaders */
+    static Result InitShaderLibrary();
+    static Result DeinitShaderLibrary();
+
+    static Shader* bgeWorldTransform;
+    static Shader* GenericVertexShader;
+    static Shader* GenericFragmentShader;
+
+    Shader* VertexShader;
+    Shader* FragmentShader;
+
+    GLuint ProgramHandle;
+
 
 public:
 
     ShaderProgram();
     ~ShaderProgram();
+
+    Result Bind() const;
+    Result Unbind() const;
 
     /* *
      * Create a shader program from given vertex and fragment shaders

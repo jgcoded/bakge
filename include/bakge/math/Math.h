@@ -32,33 +32,34 @@ namespace bakge
 namespace math
 {
 
-#define SCALAR_EPSILON 0.000001
-#define RAD_PER_DEG 0.0174532925
-#define DEG_PER_RAD 57.2957795
-typedef double Scalar;
+#define BGE_SCALAR_EPSILON 0.000001f
+#define BGE_RAD_PER_DEG 0.0174532925f
+#define BGE_DEG_PER_RAD 57.2957795f
+typedef float Scalar;
 typedef Scalar Degrees;
 typedef Scalar Radians;
 
-#define GET_SIGN(x) x > 0 ? 1 : x == 0 ? 0 : -1
 
-inline Radians ToRadians(Degrees BGE_NCP Deg)
+BGE_INL Radians ToRadians(Degrees BGE_NCP Deg)
 {
-    return (Deg * RAD_PER_DEG);
+    return (Deg * BGE_RAD_PER_DEG);
 }
 
 
-inline Degrees ToDegrees(Radians BGE_NCP Rad)
+BGE_INL Degrees ToDegrees(Radians BGE_NCP Rad)
 {
-    return (Rad * DEG_PER_RAD);
+    return (Rad * BGE_DEG_PER_RAD);
 }
 
-inline bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
+
+BGE_INL bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
 {
-    return abs(Right - Left) < SCALAR_EPSILON;
+    return abs(Right - Left) < BGE_SCALAR_EPSILON;
 }
+
 
 template<class T>
-T BGE_NCP Max(T BGE_NCP A, T BGE_NCP B)
+BGE_INL T BGE_NCP Max(T BGE_NCP A, T BGE_NCP B)
 {
     return (A > B) ? (A) : (B);
 }

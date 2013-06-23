@@ -46,8 +46,13 @@ namespace math
  * */
 class Vector4
 {
+    Scalar Val[4];
+
 
 public:
+
+    static const Vector4 Origin;
+    static const Vector4 ZeroVector;
 
     Vector4();
     Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);
@@ -83,11 +88,6 @@ public:
 
     friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
     friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-
-
-private:
-
-    Scalar Val[4];
 
 }; /* Vector4 */
 

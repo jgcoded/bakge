@@ -99,8 +99,8 @@ T LinkedList<T>::Pop()
 template<class T>
 bool LinkedList<T>::IsEmpty()
 {
-	/* List is empty if Head pointer is NULL */
-	return (Head == NULL);
+    /* List is empty if Head pointer is NULL */
+    return (Head == NULL);
 }
 
 } /* bakge */

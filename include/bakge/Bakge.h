@@ -28,6 +28,7 @@
 /* Include standard library dependencies */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include <math.h>
 
@@ -53,10 +54,12 @@
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
+#define BGE_INL inline
 #define BGE_VER_MAJ 0
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
+#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"
@@ -67,7 +70,7 @@ extern "C"
 #include <lua/lauxlib.h>
 }
 
-/* Include core Bakge classes (no OpenGL inclusion yet) */
+/* Include core Bakge classes */
 #include <bakge/core/Type.h>
 #include <bakge/core/Input.h>
 #include <bakge/core/Utility.h>
@@ -103,7 +106,7 @@ extern "C"
 #include <bakge/platform/osx_Bakge.h>
 #endif /* __linux__ */
 
-/* Additional Bakge classes (may depend on OpenGL) */
+/* Additional Bakge classes */
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>

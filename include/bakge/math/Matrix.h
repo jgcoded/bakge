@@ -45,16 +45,33 @@ namespace math
  * */
 class Matrix
 {
+    Scalar Val[16];
+
 
 public:
+
+    static const Matrix Identity;
 
     Matrix();
     ~Matrix();
 
+    BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
+    {
+        return Val[At];
+    }
 
-private:
 
-    Scalar Val[16];
+    BGE_INL Scalar& operator[](int BGE_NCP At)
+    {
+        return Val[At];
+    }
+
+    /* Set to an identity matrix */
+    Matrix BGE_NCP SetIdentity();
+
+    /* Create a perspective matrix transform */
+    Matrix BGE_NCP SetPerspective(Scalar FOV, Scalar Aspect, Scalar NearClip,
+                                                            Scalar FarClip);
 
 }; /* Matrix */
 

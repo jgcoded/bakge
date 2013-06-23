@@ -16,9 +16,12 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  shaderprogram
+  sharedcontext
   texture
   thread
   types
+  vao
   vector4
   window
 )
@@ -31,6 +34,7 @@ if(NOT APPLE)
     target_link_libraries(${test} bakge ${BAKGE_LIBRARIES})
   endforeach(test)
 else()
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
   foreach(test ${TESTS})
     add_executable(${test} MACOSX_BUNDLE ${test})
     target_link_libraries(${test} bakge ${BAKGE_LIBRARIES})

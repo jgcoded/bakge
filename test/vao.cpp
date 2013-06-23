@@ -26,6 +26,12 @@ int main(int argc, char* argv[])
         return bakge::Deinit();
     }
 
+    #if 0
+    if(glewIsSupported("GL_ARB_vertex_array_object")) {
+        printf("VAOs supported\n");
+    }
+    #endif
+
     glClearColor(1, 0, 0, 1);
     glViewport(0, 0, 600, 400);
 
@@ -48,10 +54,7 @@ int main(int argc, char* argv[])
         delete Win;
 
     printf("Deinitializing Bakge\n");
-    if(bakge::Deinit() != BGE_SUCCESS) {
-        printf("Error deinitializating Bakge\n");
-        return 1;
-    }
+    bakge::Deinit();
 
     return 0;
 }

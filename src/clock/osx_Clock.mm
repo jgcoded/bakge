@@ -32,7 +32,7 @@ Result Delay(Microseconds BGE_NCP Time)
     NSTimeInterval DelayTime;
 
     DelayTime = Time / 1000000;
-    DelayTime += 0.001 * (Time % 1000000);
+    DelayTime += 0.000001 * (Time % 1000000);
 
     [NSThread sleepForTimeInterval: DelayTime];
 

@@ -27,6 +27,8 @@
 namespace bakge
 {
 
+GLFWwindow* Window::SharedContext = NULL;
+
 void Window::Moved(GLFWwindow* Handle,  int X, int Y)
 {
     Window* Win;
@@ -65,7 +67,7 @@ void Window::Closed(GLFWwindow* Handle)
 
     /* Deploy closed event before closing the window */
     if(Handler != NULL) {
-        /* Deploy event here */
+        Handler->CloseEvent();
     }
 
     Win->Close();
@@ -81,7 +83,7 @@ void Window::Key(GLFWwindow* Handle, int Key, int Code, int Pressed, int Mod)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        /* Deploy event here */
+        Handler->KeyEvent(Key, Code, Pressed, Mod);
     }
 }
 
@@ -101,7 +103,7 @@ void Window::Mouse(GLFWwindow* Handle, int Button, int Pressed, int Mod)
 }
 
 
-void Window::MouseMotion(GLFWwindow* Handle, double XPos, double YPos)
+void Window::MouseMotion(GLFWwindow* Handle, double X, double Y)
 {
     Window* Win;
     EventHandler* Handler;
@@ -110,16 +112,14 @@ void Window::MouseMotion(GLFWwindow* Handle, double XPos, double YPos)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        int X, Y;
-        /* Floor values, we want integral arguments */
-        X = math::Max((int)floor(XPos), INT_MAX);
-        Y = math::Max((int)floor(YPos), INT_MAX);
-        Handler->MotionEvent(X, Y);
+        Handler->MotionEvent(X - Win->MouseCache.X, Y - Win->MouseCache.Y);
+        Win->MouseCache.X = X;
+        Win->MouseCache.Y = Y;
     }
 }
 
 
-void Window::Scroll(GLFWwindow* Handle, double XOffset, double YOffset)
+void Window::Scroll(GLFWwindow* Handle, double X, double Y)
 {
     Window* Win;
     EventHandler* Handler;
@@ -128,11 +128,9 @@ void Window::Scroll(GLFWwindow* Handle, double XOffset, double YOffset)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        int X, Y;
-        /* Floor values, we want integral arguments */
-        X = math::Max((int)floor(XOffset), INT_MAX);
-        Y = math::Max((int)floor(YOffset), INT_MAX);
-        Handler->ScrollEvent(X, Y);
+        Handler->ScrollEvent(X - Win->ScrollCache.X, Y - Win->ScrollCache.Y);
+        Win->ScrollCache.X = X;
+        Win->ScrollCache.Y = Y;
     }
 }
 
@@ -141,6 +139,10 @@ Window::Window()
 {
     WindowHandle = NULL;
     Handler = NULL;
+    MouseCache.X = 0;
+    MouseCache.Y = 0;
+    ScrollCache.X = 0;
+    ScrollCache.Y = 0;
 }
 
 
@@ -152,26 +154,40 @@ Window::~Window()
 
 Window* Window::Create(int Width, int Height)
 {
-    Window* Win = new Window;
+    GLFWwindow* Handle;
+    Window* Win;
 
-    Win->WindowHandle = glfwCreateWindow(Width, Height, "Bakge", NULL, NULL);
-    if(Win->WindowHandle == NULL) {
-        delete Win;
+    Handle = glfwCreateWindow(Width, Height, "Bakge", NULL, SharedContext);
+    if(Handle == NULL) {
         return NULL;
     }
 
-    /* Store pointer to Bakge window so global callbacks can access it */
-    glfwSetWindowUserPointer(Win->WindowHandle, (void*)Win);
+    /* Set all of our window's GLFW callbacks */
+    glfwSetWindowCloseCallback(Handle, Window::Closed);
+    glfwSetWindowSizeCallback(Handle, Window::Resized);
+    glfwSetWindowPosCallback(Handle, Window::Moved);
+    glfwSetKeyCallback(Handle, Window::Key);
+    glfwSetMouseButtonCallback(Handle, Window::Mouse);
+    glfwSetCursorPosCallback(Handle, Window::MouseMotion);
+    glfwSetScrollCallback(Handle, Window::Scroll);
 
-    glfwSetWindowCloseCallback(Win->WindowHandle, Window::Closed);
-    glfwSetWindowSizeCallback(Win->WindowHandle, Window::Resized);
-    glfwSetWindowPosCallback(Win->WindowHandle, Window::Moved);
-    glfwSetKeyCallback(Win->WindowHandle, Window::Key);
-    glfwSetMouseButtonCallback(Win->WindowHandle, Window::Mouse);
-    glfwSetCursorPosCallback(Win->WindowHandle, Window::MouseMotion);
-    glfwSetScrollCallback(Win->WindowHandle, Window::Scroll);
+    /* Allocate our bakge Window */
+    Win = new Window;
+    if(Win == NULL) {
+        printf("Error allocating window memory\n");
+        return NULL;
+    }
 
+    /* Set its window handle and make the context current */
+    Win->WindowHandle = Handle;
     Win->Bind();
+
+    /* *
+     * Store pointer to Bakge window so global callbacks can access it.
+     * They are static Window class methods, so they have full access
+     * to the class objects.
+     * */
+    glfwSetWindowUserPointer(Handle, (void*)Win);
 
     return Win;
 }
@@ -221,8 +237,18 @@ bool Window::IsOpen()
 
 bool Window::IsActive()
 {
+    /* Active windows must be open */
+    if(!IsOpen())
+        return false;
+
+    if(glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED))
+        return false;
+
     /* Windows are only active if they have input focus */
-    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED);
+    if(glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) == 0)
+        return false;
+
+    return true;
 }
 
 

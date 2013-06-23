@@ -29,37 +29,106 @@ namespace bakge
 
 Node::Node()
 {
+    glGenBuffers(1, &PositionBuffer);
 }
 
 
 Node::~Node()
 {
+    glDeleteBuffers(1, &PositionBuffer);
+}
+
+
+Node* Node::Create(math::Scalar X, math::Scalar Y, math::Scalar Z)
+{
+    Node* N;
+
+    N = new Node;
+    if(N == NULL) {
+        printf("Error allocating new node\n");
+        return NULL;
+    }
+
+    /* *
+     * Set buffer data. Nodes are drawn at 0, 0, 0 because the shader
+     * library will translate them in the vertex shader
+     * */
+    glBindBuffer(GL_ARRAY_BUFFER, N->PositionBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(N->Position[0]) * 4, &N->Position[0],
+                                                            GL_DYNAMIC_DRAW);
+
+    N->SetPosition(X, Y, Z);
+
+    return N;
 }
 
 
 Result Node::Bind() const
 {
-    glPushMatrix();
-    /* Translate to position */
-    glTranslated(Position[0], Position[1], Position[2]);
+    GLint Program, Location;
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program < 0)
+        return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Position vec4 */
+    Location = glGetUniformLocation(Program, "bge_Position");
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    /* Assign this node's position as bge_Position */
+    glUniform4fv(Location, 1, &Position[0]);
+
     return BGE_SUCCESS;
 }
 
 
 Result Node::Unbind() const
 {
-    glPopMatrix();
+    static const math::Vector4 Origin;
+    GLint Program, Location;
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program < 0)
+        return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Position vec4 */
+    Location = glGetUniformLocation(Program, "bge_Position");
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    /* Assign origin position as bge_Position */
+    glUniform4fv(Location, 1, &Origin[0]);
+
     return BGE_SUCCESS;
 }
 
 
 Result Node::Draw() const
 {
-    glBegin(GL_POINTS);
-    /* Matrix is translated to position after Bind() */
-    glVertex3i(0, 0, 0);
-    glEnd();
+    unsigned int Indices[] = { 1 };
+
+    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
+    glDrawElements(GL_POINTS, 1, GL_UNSIGNED_INT, (void*)Indices);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     return BGE_SUCCESS;
+}
+
+
+void Node::SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z)
+{
+    Position[0] = X;
+    Position[1] = Y;
+    Position[2] = Z;
+}
+
+
+math::Vector4 BGE_NCP Node::GetPosition() const
+{
+    return Position;
 }
 
 } /* bakge */

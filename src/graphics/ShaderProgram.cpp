@@ -27,19 +27,163 @@
 namespace bakge
 {
 
+Shader* ShaderProgram::GenericVertexShader = NULL;
+Shader* ShaderProgram::GenericFragmentShader = NULL;
+Shader* ShaderProgram::bgeWorldTransform = NULL;
+
+const char* bgeWorldTransformSource =
+    "#version 120\n"
+    "\n"
+    "uniform vec4 bge_Position;\n"
+    "uniform mat4x4 bge_Rotation;\n"
+    "uniform mat4x4 bge_Scale;\n"
+    "uniform mat4x4 bge_Perspective;\n"
+    "\n"
+    "vec4 bgeWorldTransform(vec4 Vertex)\n"
+    "{\n"
+    "    return (Vertex + bge_Position) * bge_Perspective;\n"
+    "}\n"
+    "\n";
+
+const char* GenericVertexShaderSource =
+    "#version 120\n"
+    "\n"
+    "vec4 bgeWorldTransform(vec4);\n"
+    "\n"
+    "attribute vec4 bge_VertexArray;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "    gl_Position = bgeWorldTransform(bge_VertexArray);\n"
+    "}\n"
+    "\n";
+
+const char* GenericFragmentShaderSource =
+    "#version 120\n"
+    "\n"
+    "uniform sampler2D bge_Diffuse;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "    gl_FragColor = vec4(1, 1, 1, 1);\n"
+    "}\n"
+    "\n";
+
+
+Result ShaderProgram::InitShaderLibrary()
+{
+    /* Load the default plain vertex shader */
+    GenericVertexShader = Shader::LoadVertexShaderString(
+                                    GenericVertexShaderSource);
+    if(GenericVertexShader == NULL)
+        return BGE_FAILURE;
+
+    /* Load the default plain fragment shader */
+    GenericFragmentShader = Shader::LoadFragmentShaderString(
+                                    GenericFragmentShaderSource);
+    if(GenericFragmentShader == NULL)
+        return BGE_FAILURE;
+
+    /* Load the shader library function bgeWorldTransform(vec4) */
+    bgeWorldTransform = Shader::LoadVertexShaderString(
+                                    bgeWorldTransformSource);
+    if(bgeWorldTransform == NULL)
+        return BGE_FAILURE;
+
+    return BGE_SUCCESS;
+}
+
+
+Result ShaderProgram::DeinitShaderLibrary()
+{
+    delete GenericVertexShader;
+    delete GenericFragmentShader;
+    delete bgeWorldTransform;
+
+    return BGE_SUCCESS;
+}
+
+
 ShaderProgram::ShaderProgram()
 {
+    ProgramHandle = 0;
 }
 
 
 ShaderProgram::~ShaderProgram()
 {
+    if(ProgramHandle != 0) {
+
+        glDetachShader(ProgramHandle, VertexShader->GetHandle());
+        glDetachShader(ProgramHandle, FragmentShader->GetHandle());
+        glDetachShader(ProgramHandle, bgeWorldTransform->GetHandle());
+        glDeleteProgram(ProgramHandle);
+
+        if(VertexShader != GenericVertexShader)
+            delete VertexShader;
+
+        if(FragmentShader != GenericFragmentShader)
+            delete FragmentShader;
+    }
 }
 
 
 ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
 {
-    return NULL;
+    ShaderProgram* Program;
+    GLuint Handle;
+
+    Program = new ShaderProgram;
+
+    Program->ProgramHandle = glCreateProgram();
+    if(Program->ProgramHandle == 0) {
+        printf("Error creating shader program resource\n");
+        delete Program;
+        return NULL;
+    }
+
+    Handle = Program->ProgramHandle;
+
+    if(bgeWorldTransform != NULL)
+        glAttachShader(Handle, bgeWorldTransform->GetHandle());
+    else
+        printf("Can't attach bgeWorldTransform\n");
+
+    if(Vertex == NULL) {
+        glAttachShader(Handle, GenericVertexShader->GetHandle());
+        Program->VertexShader = GenericVertexShader;
+    } else {
+        glAttachShader(Handle, Vertex->GetHandle());
+        Program->VertexShader = Vertex;
+    }
+
+    if(Fragment == NULL) {
+        glAttachShader(Handle, GenericFragmentShader->GetHandle());
+        Program->FragmentShader = GenericFragmentShader;
+    } else {
+        glAttachShader(Handle, Fragment->GetHandle());
+        Program->FragmentShader = Fragment;
+    }
+
+    glLinkProgram(Handle);
+
+    glUseProgram(Handle);
+
+    return Program;
+}
+
+
+Result ShaderProgram::Bind() const
+{
+    glUseProgram(ProgramHandle);
+    return BGE_SUCCESS;
+}
+
+
+Result ShaderProgram::Unbind() const
+{
+    glUseProgram(0);
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
