@@ -5,8 +5,14 @@ set(EXECUTABLE_OUTPUT_PATH ${BAKGE_SDK_EXAMPLES_OUTPUT_PATH})
 
 set(BAKGE_EXAMPLE_SUITE
   ${BAKGE_SOURCE_DIR}/example/SimpleEngine
+  ${BAKGE_SOURCE_DIR}/example/EngineAsEventHandler
 )
+
+if(UNIX AND APPLE)
+  list(APPEND CMAKE_CXX_FLAGS -ObjC++)
+endif()
 
 foreach(example ${BAKGE_EXAMPLE_SUITE})
   add_subdirectory(${example})
 endforeach(example)
+

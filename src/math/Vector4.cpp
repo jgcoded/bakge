@@ -29,12 +29,15 @@ namespace bakge
 namespace math
 {
 
+const Vector4 Vector4::Origin;
+const Vector4 Vector4::ZeroVector(0, 0, 0, 0);
+
 Vector4::Vector4()
 {
     Val[0] = 0;
     Val[1] = 0;
     Val[2] = 0;
-    Val[3] = 0;
+    Val[3] = 1.0;
 }
 
 

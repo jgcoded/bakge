@@ -22,21 +22,60 @@
  * THE SOFTWARE.
  * */
 
-#include "SimpleEngine.h"
+#include "EngineAsEventHandler.h"
 
-SimpleEngine::SimpleEngine()
+EngineAsEventHandler::EngineAsEventHandler()
 {
-    printf("Creating a SimpleEngine\n");
+    printf("Creating a EngineAsEventHandler\n");
 }
 
 
-SimpleEngine::~SimpleEngine()
+EngineAsEventHandler::~EngineAsEventHandler()
 {
-    printf("Destroying a SimpleEngine\n");
+    printf("Destroying a EngineAsEventHandler\n");
+}
+
+bakge::Result EngineAsEventHandler::KeyEvent(bakge::KeyID K, bakge::ScanCode C,
+                                        bakge::KeyState S, bakge::ModField M)
+{
+    printf("You %s %c\n", S == KEY_STATE_PRESSED ? "pressed" : "released", K);
+    return BGE_SUCCESS;
 }
 
 
-int SimpleEngine::Run()
+bakge::Result EngineAsEventHandler::MouseEvent(bakge::ButtonID B,
+                            bakge::ButtonState S, bakge::ModField M)
+{
+    printf("You %s mouse button %d\n", S == KEY_STATE_PRESSED ? "pressed" :
+                                                        "released", B);
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result EngineAsEventHandler::MotionEvent(bakge::DeviceMotion X,
+                                                bakge::DeviceMotion Y)
+{
+    printf("You moved the mouse %lf, %lf\n", X, Y);
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result EngineAsEventHandler::ScrollEvent(bakge::DeviceMotion X,
+                                                bakge::DeviceMotion Y)
+{
+    printf("You scrolled the mouse wheel %lf, %lf\n", X, Y);
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result EngineAsEventHandler::CloseEvent()
+{
+    printf("Goodbye!\n");
+    return BGE_SUCCESS;
+}
+
+
+int EngineAsEventHandler::Run()
 {
     int ExitCode;
 
@@ -45,7 +84,7 @@ int SimpleEngine::Run()
         bakge::Window::PollEvents();
 
         if(AppWindow->IsOpen() == false) {
-            printf("Closing SimpleEngine window\n");
+            printf("Closing EngineAsEventHandler window\n");
             ExitCode = 0;
             break;
         }
@@ -60,7 +99,7 @@ int SimpleEngine::Run()
 }
 
 
-bakge::Result SimpleEngine::ShutDown()
+bakge::Result EngineAsEventHandler::ShutDown()
 {
     gluDeleteQuadric(Quadric);
 
@@ -71,7 +110,7 @@ bakge::Result SimpleEngine::ShutDown()
 }
 
 
-bakge::Result SimpleEngine::Initialize()
+bakge::Result EngineAsEventHandler::Initialize()
 {
     SceneRenderer = bakge::FrontRenderer::Create();
     if(SceneRenderer == NULL)
@@ -80,6 +119,9 @@ bakge::Result SimpleEngine::Initialize()
     AppWindow = bakge::Window::Create(600, 400);
     if(AppWindow == NULL)
         return BGE_FAILURE;
+
+    /* Engine is the event handler! */
+    AppWindow->SetEventHandler(this);
 
     Quadric = gluNewQuadric();
 
@@ -96,7 +138,7 @@ bakge::Result SimpleEngine::Initialize()
 }
 
 
-bakge::Result SimpleEngine::PreRenderStage()
+bakge::Result EngineAsEventHandler::PreRenderStage()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
@@ -106,7 +148,7 @@ bakge::Result SimpleEngine::PreRenderStage()
 }
 
 
-bakge::Result SimpleEngine::PostRenderStage()
+bakge::Result EngineAsEventHandler::PostRenderStage()
 {
     glMatrixMode(GL_PROJECTION);
     AppWindow->SwapBuffers();
@@ -114,7 +156,7 @@ bakge::Result SimpleEngine::PostRenderStage()
 }
 
 
-bakge::Result SimpleEngine::RenderStage()
+bakge::Result EngineAsEventHandler::RenderStage()
 {
     /* *
      * Usually it would be SceneRenderer->Draw(&Something)
@@ -126,7 +168,7 @@ bakge::Result SimpleEngine::RenderStage()
 }
 
 
-bakge::Result SimpleEngine::Update(bakge::Seconds DeltaTime)
+bakge::Result EngineAsEventHandler::Update(bakge::Seconds DeltaTime)
 {
     /* Nothing to do really */
     return BGE_SUCCESS;

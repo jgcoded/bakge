@@ -52,25 +52,25 @@ typedef int ButtonState;
 
 inline bool ShiftPressed(ModField M)
 {
-    return M & GLFW_MOD_SHIFT;
+    return (M & GLFW_MOD_SHIFT) > 0 ? true : false;
 }
 
 
 inline bool AltPressed(ModField M)
 {
-    return M & GLFW_MOD_ALT;
+    return (M & GLFW_MOD_ALT) > 0 ? true : false;
 }
 
 
 inline bool ControlPressed(ModField M)
 {
-    return M & GLFW_MOD_CONTROL;
+    return (M & GLFW_MOD_CONTROL) > 0 ? true : false;
 }
 
 
 inline bool SuperPressed(ModField M)
 {
-    return M & GLFW_MOD_SUPER;
+    return (M & GLFW_MOD_SUPER) > 0 ? true : false;
 }
 
 } /* bakge */

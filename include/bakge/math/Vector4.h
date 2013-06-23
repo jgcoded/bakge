@@ -46,8 +46,13 @@ namespace math
  * */
 class Vector4
 {
+    Scalar Val[4];
+
 
 public:
+
+    static const Vector4 Origin;
+    static const Vector4 ZeroVector;
 
     Vector4();
     Vector4(Scalar X, Scalar Y, Scalar Z, Scalar W);
@@ -88,11 +93,6 @@ public:
     static Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
     static Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tangentLeft, Vector4 BGE_NCP Right, Vector4 BGE_NCP tangentRight, Scalar amount);
 
-
-
-private:
-
-    Scalar Val[4];
 
 }; /* Vector4 */
 

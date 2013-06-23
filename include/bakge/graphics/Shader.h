@@ -32,6 +32,16 @@ namespace bakge
 
 class Shader
 {
+    GLuint Handle;
+
+    /* *
+     * Private version of the shader factory. The public
+     * static methods are really just for convenience. This
+     * function does all the heavy lifting.
+     * */
+    static Shader* LoadFromFile(GLenum Type, const char* FilePath);
+    static Shader* LoadFromString(GLenum Type, const char* Source);
+
 
 public:
 
@@ -42,8 +52,12 @@ public:
      * Loads the vertex and fragment shaders from provided paths.
      * Shaders can then be attached to a ShaderProgram object
      * */
-    BGE_FACTORY Shader* CreateVertexShader(const char* SourcePath);
-    BGE_FACTORY Shader* CreateFragmentShader(const char* SourcePath);
+    BGE_FACTORY Shader* LoadVertexShaderFile(const char* FilePath);
+    BGE_FACTORY Shader* LoadFragmentShaderFile(const char* FilePath);
+    BGE_FACTORY Shader* LoadVertexShaderString(const char* Source);
+    BGE_FACTORY Shader* LoadFragmentShaderString(const char* Source);
+
+    GLuint GetHandle() const;
 
 }; /* Shader */
 

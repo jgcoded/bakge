@@ -22,40 +22,54 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_EXAMPLE_ENGINEASEVENTHANDLER_H
+#define BAKGE_EXAMPLE_ENGINEASEVENTHANDLER_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
-void PrintMatrix(bakge::math::Matrix BGE_NCP M)
+/* *
+ * EngineAsEventHandler builds off of SimpleEngine to respond
+ * to all events from the standard Bakge EventHandler interface.
+ * */
+class EngineAsEventHandler : bakge::Engine, bakge::EventHandler
 {
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[0], M[4], M[8], M[12]);
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[1], M[5], M[9], M[13]);
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[2], M[6], M[10], M[14]);
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[3], M[7], M[11], M[15]);
-}
 
-int main(int argc, char* argv[])
-{
-    bakge::Init(argc, argv);
+public:
 
-<<<<<<< HEAD
-    bakge::math::Vector3 CameraPos(1, 0, 0), TargetPos(1, 0, 1), CameraUp(0, 1, 0);
-    
-    /* Create Look At */
-    printf("Create Look At:\n");
-    bakge::math::Matrix M = bakge::math::Matrix::CreateLookAt(CameraPos, TargetPos, CameraUp);
-    
-    for(int i = 0; i < 16; i++)
-        printf("Mat[%d] = %f", i, M[i]);
-    
-=======
-    bakge::math::Matrix M;
+    EngineAsEventHandler();
+    ~EngineAsEventHandler();
 
-    /* Test some operations */
-    PrintMatrix(M);
+    bakge::Result Initialize();
+    bakge::Result ShutDown();
+    int Run();
 
->>>>>>> 4899413f7643cd68b265ae2605525f066d7b4aae
-    bakge::Deinit();
+    bakge::Result Update(bakge::Seconds DeltaTime);
 
-    return 0;
-}
+    bakge::Result PreRenderStage();
+    bakge::Result RenderStage();
+    bakge::Result PostRenderStage();
+
+    bakge::Result KeyEvent(bakge::KeyID K, bakge::ScanCode C,
+                        bakge::KeyState S, bakge::ModField M);
+
+    bakge::Result MouseEvent(bakge::ButtonID B, bakge::ButtonState S,
+                                                    bakge::ModField M);
+
+    bakge::Result MotionEvent(bakge::DeviceMotion X, bakge::DeviceMotion Y);
+    bakge::Result ScrollEvent(bakge::DeviceMotion X, bakge::DeviceMotion Y);
+
+    bakge::Result CloseEvent();
+
+
+protected:
+
+    bakge::Window* AppWindow;
+    bakge::FrontRenderer* SceneRenderer;
+
+    GLUquadric* Quadric;
+
+};
+
+#endif /* BAKGE_EXAMPLE_ENGINEASEVENTHANDLER_H */
