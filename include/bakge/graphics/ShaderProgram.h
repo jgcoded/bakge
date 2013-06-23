@@ -27,6 +27,10 @@
 
 #include <bakge/Bakge.h>
 
+#define BGE_POSITION_UNIFORM "bge_Position"
+#define BGE_ROTATION_UNIFORM "bge_Rotation"
+#define BGE_SCALE_UNIFORM "bge_Scale"
+
 namespace bakge
 {
 

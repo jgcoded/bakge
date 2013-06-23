@@ -73,7 +73,7 @@ Result Node::Bind() const
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, "bge_Position");
+    Location = glGetUniformLocation(Program, BGE_POSITION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -95,7 +95,7 @@ Result Node::Unbind() const
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, "bge_Position");
+    Location = glGetUniformLocation(Program, BGE_POSITION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
