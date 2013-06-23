@@ -22,74 +22,26 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/Bakge.h>
+#ifndef BAKGE_THREAD_WIN32_SOCKET_H
+#define BAKGE_THREAD_WIN32_SOCKET_H
 
 namespace bakge
 {
 
-Pawn::Pawn()
+typedef class win32_Socket : api::Socket
 {
-}
+
+    win32_Socket();
 
 
-Pawn::~Pawn()
-{
-}
+public:
 
+    virtual ~win32_Socket();
 
-Result Pawn::Bind() const
-{
-    GLint Program, Location;
-    math::Matrix Transform;
+    BGE_FACTORY win32_Socket* Create();
 
-    /* Retrieve current shader program */
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0)
-        return BGE_FAILURE;
-
-    /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
-
-    //glUniformMatrix4fv
-
-    return Node::Unbind();
-}
-
-
-Result Pawn::Unbind() const
-{
-    GLint Program, Location;
-
-    /* Retrieve current shader program */
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0)
-        return BGE_FAILURE;
-
-    /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
-
-    //glUniformMatrix4fv
-
-    return Node::Unbind();
-}
-
-
-Result Pawn::Draw() const
-{
-    Node::Draw();
-
-    glBegin(GL_LINES);
-    /* Matrix is translated and rotated from Bind() */
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 1); /* Draw line straight forward */
-    glEnd();
-
-    return BGE_SUCCESS;
-}
+} Socket; /* win32_Socket */
 
 } /* bakge */
 
+#endif /* BAKGE_THREAD_WIN32_SOCKET_H */

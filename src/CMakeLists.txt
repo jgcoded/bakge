@@ -12,6 +12,8 @@ include_directories(${BAKGE_GLEW_PATH}/include)
 ########################################
 
 set(MODULES
+  api/Packet
+  api/Socket
   api/Thread
   data/SingleNode
   data/LinkedList
@@ -70,6 +72,8 @@ endif()
 
 set(PLATFORM_MODULES
   clock/${PLATFORM_PREFIX}_Clock
+  packet/${PLATFORM_PREFIX}_Packet
+  socket/${PLATFORM_PREFIX}_Socket
   thread/${PLATFORM_PREFIX}_Thread
   utility/${PLATFORM_PREFIX}_Utility
 )
@@ -81,6 +85,8 @@ set(PLATFORM_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/system/Clock
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
   ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread
+  ${BAKGE_SOURCE_DIR}/include/bakge/socket/${PLATFORM_PREFIX}_Socket
+  ${BAKGE_SOURCE_DIR}/include/bakge/packet/${PLATFORM_PREFIX}_Packet
 )
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}

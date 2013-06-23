@@ -96,6 +96,8 @@ extern "C"
 
 /* Include API classes */
 #include <bakge/api/Thread.h>
+#include <bakge/api/Packet.h>
+#include <bakge/api/Socket.h>
 
 /* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
@@ -107,12 +109,12 @@ extern "C"
 #endif /* __linux__ */
 
 /* Additional Bakge classes */
+#include <bakge/graphics/Shader.h>
+#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
-#include <bakge/graphics/Shader.h>
-#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>

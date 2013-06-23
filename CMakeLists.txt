@@ -114,6 +114,7 @@ if(WIN32)
     lua
     glu32.lib
     opengl32.lib
+    ws2_32.lib
   )
 endif(WIN32)
 
