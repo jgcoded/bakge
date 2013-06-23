@@ -3,7 +3,8 @@
 cmake_minimum_required (VERSION 2.6)
 
 include_directories(${BAKGE_SOURCE_DIR}/include)
-include_directories(${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include)
+include_directories(${BAKGE_GLFW_PATH}/include)
+include_directories(${BAKGE_GLEW_PATH}/include)
 
 
 ########################################
@@ -26,6 +27,7 @@ set(MODULES
   graphics/Node
   graphics/Pawn
   graphics/Shader
+  graphics/ShaderProgram
   graphics/Shape
   graphics/Texture
   math/Vector3
@@ -76,6 +78,7 @@ set(PLATFORM_MODULES
 # Platform modules might share a common header.
 # Manually set them here
 set(PLATFORM_HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge/platform/${PLATFORM_PREFIX}_Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/system/Clock
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
   ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread

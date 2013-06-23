@@ -53,8 +53,11 @@
 #define BGE_FUNC extern
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
+#define BGE_VER_MAJ 0
+#define BGE_VER_MIN 0
 
 /* Include external library headers */
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"
 {
@@ -107,6 +110,7 @@ extern "C"
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Shader.h>
+#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>

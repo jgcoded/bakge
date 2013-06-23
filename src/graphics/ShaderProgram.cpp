@@ -27,23 +27,17 @@
 namespace bakge
 {
 
-Shader::Shader()
+ShaderProgram::ShaderProgram()
 {
 }
 
 
-Shader::~Shader()
+ShaderProgram::~ShaderProgram()
 {
 }
 
 
-Shader* Shader::CreateVertexShader(const char* SourcePath)
-{
-    return NULL;
-}
-
-
-Shader* Shader::CreateFragmentShader(const char* SourcePath)
+ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
 {
     return NULL;
 }

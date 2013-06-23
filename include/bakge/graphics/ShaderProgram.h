@@ -22,31 +22,31 @@
  * THE SOFTWARE.
  * */
 
+#ifndef BAKGE_GRAPHICS_SHADERPROGRAM_H
+#define BAKGE_GRAPHICS_SHADERPROGRAM_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-Shader::Shader()
+class ShaderProgram
 {
-}
 
+public:
 
-Shader::~Shader()
-{
-}
+    ShaderProgram();
+    ~ShaderProgram();
 
+    /* *
+     * Create a shader program from given vertex and fragment shaders
+     * If NULL is passed, a generic default shader is instead used.
+     * */
+    BGE_FACTORY ShaderProgram* Create(Shader* Vertex, Shader* Fragment);
 
-Shader* Shader::CreateVertexShader(const char* SourcePath)
-{
-    return NULL;
-}
-
-
-Shader* Shader::CreateFragmentShader(const char* SourcePath)
-{
-    return NULL;
-}
+}; /* ShaderProgram */
 
 } /* bakge */
+
+#endif /* BAKGE_GRAPHICS_SHADERPROGRAM_H */
 

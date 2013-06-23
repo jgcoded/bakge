@@ -157,10 +157,14 @@ bool Vector4::operator==(Vector4 BGE_NCP Other)
 
 static Vector4 Normalize(Vector4 BGE_NCP Other)
 {
+<<<<<<< HEAD
 
     Scalar Len = Other.Length();
 
     return Vector4(Other[0] / Len, Other[1] / Len, Other[2] / Len, 0);
+=======
+    return *this /= Length();
+>>>>>>> 72ba8801107416187d1009dff74fe98c925b842e
 }
 
 
@@ -232,6 +236,7 @@ Vector4 Vector4::operator/(Scalar BGE_NCP Value)
     return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value, Val[3]);
 }
 
+<<<<<<< HEAD
 
 static Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tanLeft, Vector4 BGE_NCP Right, 
                                                                    Vector4 BGE_NCP tanRight, 
@@ -288,5 +293,7 @@ Vector4 operator/(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
     return Vector4(Left[0] / Right[0], Left[1] / Right[1], Left[2] / Right[2], Left[0]);
 }
 
+=======
+>>>>>>> 72ba8801107416187d1009dff74fe98c925b842e
 } /* math */
 } /* bakge */
