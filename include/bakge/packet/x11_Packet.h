@@ -22,16 +22,26 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_X11_BAKGE_H
-#define BAKGE_PLATFORM_X11_BAKGE_H
+#ifndef BAKGE_PACKET_X11_PACKET_H
+#define BAKGE_PACKET_X11_PACKET_H
 
-#include <GL/glu.h>
-#include <sys/time.h>
-#include <time.h>
-#include <pthread.h>
+namespace bakge
+{
 
-#include <bakge/thread/x11_Thread.h>
-#include <bakge/packet/x11_Packet.h>
-#include <bakge/socket/x11_Socket.h>
+typedef class x11_Packet : api::Packet
+{
 
-#endif /* BAKGE_PLATFORM_X11_BAKGE_H */
+    x11_Packet();
+
+
+public:
+
+    virtual ~x11_Packet();
+
+    BGE_FACTORY x11_Packet* Create(const Byte* Data);
+
+} Packet; /* x11_Packet */
+
+} /* bakge */
+
+#endif /* BAKGE_PACKET_X11_PACKET_H */
