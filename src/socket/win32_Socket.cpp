@@ -29,6 +29,8 @@ namespace bakge
 
 win32_Socket::win32_Socket()
 {
+    SocketHandle = 0;
+    memset((void*)&ServerAddress, 0, sizeof(ServerAddress));
 }
 
 
