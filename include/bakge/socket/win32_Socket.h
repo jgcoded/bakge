@@ -22,25 +22,28 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
-#define BAKGE_PLATFORM_WIN32_BAKGE_H
+#ifndef BAKGE_THREAD_WIN32_SOCKET_H
+#define BAKGE_THREAD_WIN32_SOCKET_H
 
-/* Disable some pesky MSVC warnings */
-#pragma warning(disable : 4193)
-#pragma warning(disable : 4005)
-#define _CRT_SECURE_NO_WARNINGS
+namespace bakge
+{
 
-#ifndef WIN32_LEAN_AND_MEAN /* Really? */
-#define WIN32_LEAN_AND_MEAN
-#endif /* WIN32_LEAN_AND_MEAN */
+typedef class win32_Socket : api::Socket
+{
+    SOCKET SocketHandle;
+    struct sockaddr_in ServerAddress;
 
-#include <windows.h>
-#include <winsock2.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+    win32_Socket();
 
-#include <bakge/thread/win32_Thread.h>
-#include <bakge/packet/win32_Packet.h>
-#include <bakge/socket/win32_Socket.h>
 
-#endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */
+public:
+
+    virtual ~win32_Socket();
+
+    BGE_FACTORY win32_Socket* Create();
+
+} Socket; /* win32_Socket */
+
+} /* bakge */
+
+#endif /* BAKGE_THREAD_WIN32_SOCKET_H */

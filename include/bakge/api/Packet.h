@@ -22,25 +22,32 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
-#define BAKGE_PLATFORM_WIN32_BAKGE_H
+#ifndef BAKGE_API_PACKET_H
+#define BAKGE_API_PACKET_H
 
-/* Disable some pesky MSVC warnings */
-#pragma warning(disable : 4193)
-#pragma warning(disable : 4005)
-#define _CRT_SECURE_NO_WARNINGS
+namespace bakge
+{
+namespace api
+{
 
-#ifndef WIN32_LEAN_AND_MEAN /* Really? */
-#define WIN32_LEAN_AND_MEAN
-#endif /* WIN32_LEAN_AND_MEAN */
+class Packet
+{
 
-#include <windows.h>
-#include <winsock2.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
+protected:
 
-#include <bakge/thread/win32_Thread.h>
-#include <bakge/packet/win32_Packet.h>
-#include <bakge/socket/win32_Socket.h>
+    Packet();
 
-#endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */
+
+public:
+
+    virtual ~Packet();
+
+    /* Extract data segment from the packet */
+    virtual const Byte* Data() const = 0;
+
+}; /* Packet */
+
+} /* api */
+} /* bakge */
+
+#endif /* BAKGE_API_PACKET_H */

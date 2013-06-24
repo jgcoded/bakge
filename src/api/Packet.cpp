@@ -22,25 +22,21 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_WIN32_BAKGE_H
-#define BAKGE_PLATFORM_WIN32_BAKGE_H
+#include <bakge/Bakge.h>
 
-/* Disable some pesky MSVC warnings */
-#pragma warning(disable : 4193)
-#pragma warning(disable : 4005)
-#define _CRT_SECURE_NO_WARNINGS
+namespace bakge
+{
+namespace api
+{
 
-#ifndef WIN32_LEAN_AND_MEAN /* Really? */
-#define WIN32_LEAN_AND_MEAN
-#endif /* WIN32_LEAN_AND_MEAN */
+Packet::Packet()
+{
+}
 
-#include <windows.h>
-#include <winsock2.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
 
-#include <bakge/thread/win32_Thread.h>
-#include <bakge/packet/win32_Packet.h>
-#include <bakge/socket/win32_Socket.h>
+Packet::~Packet()
+{
+}
 
-#endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */
+} /* api */
+} /* bakge */
