@@ -1,4 +1,4 @@
-Core interface classes describing the engine API.
+Core interface classes describing some common ground between various classes in Bakge. Understanding these interfaces will help you learn how Bakge classes interact, and how to approriately use them, and what constitutes misuse of them.
 
 
 Engine
