@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Shape : public Node
+class Shape : public Pawn
 {
 
 public:
