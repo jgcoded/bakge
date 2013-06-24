@@ -32,6 +32,7 @@ set(MODULES
   graphics/ShaderProgram
   graphics/Shape
   graphics/Texture
+  graphics/shapes/Sphere
   math/Vector4
   math/Quaternion
   math/Matrix
