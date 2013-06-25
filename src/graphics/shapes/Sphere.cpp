@@ -42,7 +42,8 @@ Sphere::~Sphere()
 
 Result Sphere::Draw() const
 {
-    return BGE_FAILURE;
+    gluSphere(Quadric, Radius, Slices, Stacks);
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
