@@ -19,6 +19,7 @@ set(TESTS
   quaternion
   shaderprogram
   sharedcontext
+  sphere
   texture
   thread
   types
