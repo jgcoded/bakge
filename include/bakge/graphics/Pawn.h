@@ -53,4 +53,3 @@ protected:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_PAWN_H */
-

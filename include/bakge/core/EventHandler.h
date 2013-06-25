@@ -64,4 +64,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_CORE_EVENTHANDLER_H */
-

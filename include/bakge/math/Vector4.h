@@ -106,4 +106,3 @@ Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
 } /* bakge */
 
 #endif /* BAKGE_MATH_VECTOR4_H */
-

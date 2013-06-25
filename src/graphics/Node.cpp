@@ -132,4 +132,3 @@ math::Vector4 BGE_NCP Node::GetPosition() const
 }
 
 } /* bakge */
-

@@ -144,4 +144,3 @@ GLuint Shader::GetHandle() const
 }
 
 } /* bakge */
-

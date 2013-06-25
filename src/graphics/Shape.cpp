@@ -65,4 +65,3 @@ Result Shape::DrawStyle(BGE_SHAPE_STYLE Style)
 }
 
 } /* bakge */
-

@@ -63,4 +63,3 @@ protected:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_NODE_H */
-

@@ -49,4 +49,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHAPE_SPHERE_H */
-

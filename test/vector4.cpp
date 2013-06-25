@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
     printf("Add and Subtract two points:\n");
     Vec2 += Vec1;
     printVector(Vec2);
-    
+
     Vec1 -= bakge::math::Point(4, -1, 4);
     printVector(Vec1);
 
@@ -98,4 +98,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-

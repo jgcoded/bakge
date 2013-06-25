@@ -45,4 +45,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_CORE_RENDERER_H */
-

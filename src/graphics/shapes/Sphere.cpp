@@ -43,4 +43,3 @@ Result Sphere::Draw() const
 }
 
 } /* bakge */
-

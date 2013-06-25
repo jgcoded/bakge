@@ -112,4 +112,3 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
 
 } /* math */
 } /* bakge */
-

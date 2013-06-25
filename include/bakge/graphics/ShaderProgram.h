@@ -72,4 +72,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHADERPROGRAM_H */
-

@@ -123,4 +123,3 @@ extern "C"
 #include <bakge/engine/ScriptedEngine.h>
 
 #endif /* BAKGE_BAKGE_H */
-

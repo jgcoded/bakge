@@ -92,4 +92,3 @@ Result Pawn::Draw() const
 }
 
 } /* bakge */
-

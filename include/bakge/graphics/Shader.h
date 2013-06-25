@@ -64,4 +64,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHADER_H */
-

@@ -187,4 +187,3 @@ Result ShaderProgram::Unbind() const
 }
 
 } /* bakge */
-

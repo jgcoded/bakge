@@ -37,4 +37,3 @@ EventHandler::~EventHandler()
 }
 
 } /* bakge */
-

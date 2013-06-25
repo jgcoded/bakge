@@ -234,4 +234,3 @@ Vector4 Vector4::operator/(Scalar BGE_NCP Value) const
 
 } /* math */
 } /* bakge */
-

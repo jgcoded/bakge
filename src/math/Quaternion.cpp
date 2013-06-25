@@ -40,4 +40,3 @@ Quaternion::~Quaternion()
 
 } /* math */
 } /* bakge */
-
