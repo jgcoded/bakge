@@ -64,19 +64,19 @@ Vector4::~Vector4()
 }
 
 
-Vector4 Point(Scalar X, Scalar Y, Scalar Z)
+static Vector4 Point(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 1.0);
 }
 
 
-Vector4 Vector(Scalar X, Scalar Y, Scalar Z)
+static Vector4 Vector(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 0);
 }
 
 
-Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
+static Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
 {
     Scalar Len = sqrt(X * X + Y * Y + Z * Z);
     return Vector4(X / Len, Y / Len, Z / Len, 0);
@@ -158,9 +158,16 @@ bool Vector4::operator==(Vector4 BGE_NCP Other)
 }
 
 
-Vector4 BGE_NCP Vector4::Normalize()
+static Vector4 Normalize(Vector4 BGE_NCP Other)
 {
+<<<<<<< HEAD
+
+    Scalar Len = Other.Length();
+
+    return Vector4(Other[0] / Len, Other[1] / Len, Other[2] / Len, 0);
+=======
     return *this /= Length();
+>>>>>>> 72ba8801107416187d1009dff74fe98c925b842e
 }
 
 
@@ -185,13 +192,13 @@ Scalar Vector4::Length() const
 }
 
 
-Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+static Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
     return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2];
 }
 
 
-Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
     return Vector4(
         Left[1] * Right[2] - Left[2] * Right[1],
@@ -232,6 +239,64 @@ Vector4 Vector4::operator/(Scalar BGE_NCP Value)
     return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value, Val[3]);
 }
 
+<<<<<<< HEAD
+
+static Vector4 Hermite(Vector4 BGE_NCP Left, Vector4 BGE_NCP tanLeft, Vector4 BGE_NCP Right, 
+                                                                   Vector4 BGE_NCP tanRight, 
+                                                                   Scalar amount)
+{
+
+	Scalar sqr = amount * amount;
+	Scalar cube = sqr * amount;
+	Scalar func1 = 2*cube - 3*sqr + 1;
+	Scalar func2 = -2*cube + 3*sqr;
+	Scalar func3 = cube - 2*sqr + amount;
+	Scalar func4 = cube - sqr;
+
+    return Vector4(
+        Left[0] * func1 + Right[0] * func2 + tanLeft[0] * func3 + tanRight[0] * func4,
+	    Left[1] * func1 + Right[1] * func2 + tanLeft[1] * func3 + tanRight[1] * func4,
+	    Left[2] * func1 + Right[2] * func2 + tanLeft[2] * func3 + tanRight[2] * func4,
+        Left[3]
+    );
+}
+
+
+Vector4 operator+(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] + Right[0], Left[1] + Right[1], Left[2] + Right[2], Left[3]);
+}
+
+
+Vector4 operator-(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] - Right[0], Left[1] - Right[1], Left[2] - Right[2], Left[3]);
+}
+
+
+Vector4 operator-(Vector4 BGE_NCP This)
+{
+
+    return Vector4(-This[0], -This[1], -This[2], This[0]);
+}
+
+
+Vector4 operator*(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] * Right[0], Left[1] * Right[1], Left[2] * Right[2], Left[0]);
+}
+
+
+Vector4 operator/(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+{
+
+    return Vector4(Left[0] / Right[0], Left[1] / Right[1], Left[2] / Right[2], Left[0]);
+}
+
+=======
+>>>>>>> 72ba8801107416187d1009dff74fe98c925b842e
 } /* math */
 } /* bakge */
-

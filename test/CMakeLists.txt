@@ -21,7 +21,11 @@ set(TESTS
   texture
   thread
   types
+<<<<<<< HEAD
+  vector3
+=======
   vao
+>>>>>>> 4899413f7643cd68b265ae2605525f066d7b4aae
   vector4
   window
 )
