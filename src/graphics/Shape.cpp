@@ -29,11 +29,14 @@ namespace bakge
 
 Shape::Shape()
 {
+    Quadric = gluNewQuadric();
 }
 
 
 Shape::~Shape()
 {
+    if(Quadric != NULL)
+        gluDeleteQuadric(Quadric);
 }
 
 } /* bakge */

@@ -41,6 +41,11 @@ enum BGE_SHAPE_STYLE
 class Shape : public Pawn
 {
 
+protected:
+
+    GLUquadric* Quadric;
+
+
 public:
 
     Shape();
@@ -53,4 +58,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHAPE_H */
-
