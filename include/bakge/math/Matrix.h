@@ -55,7 +55,9 @@ public:
     Matrix();
     ~Matrix();
 
-    static Matrix BGE_NCP CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget, Vector3 BGE_NCP CameraUpVector);
+    static Matrix CreateLookAt(Vector4 BGE_NCP CameraPos,
+                                    Vector4 BGE_NCP CameraTarget,
+                                    Vector4 BGE_NCP CameraUpVector);
 
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
@@ -81,4 +83,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_MATH_MATRIX_H */
-
