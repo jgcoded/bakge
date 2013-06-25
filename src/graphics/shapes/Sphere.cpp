@@ -29,6 +29,9 @@ namespace bakge
 
 Sphere::Sphere()
 {
+    Radius = 1.0f;
+    Slices = 6;
+    Stacks = 6;
 }
 
 
