@@ -4,6 +4,11 @@ cmake_minimum_required (VERSION 2.6)
 
 project(BAKGE)
 
+# Prevent build attempts on any unsupported platform
+if(NOT APPLE AND NOT WIN32 AND NOT UNIX)
+  message(FATAL_ERROR "Bakge only builds on Windows, OS X or Linux")
+endif()
+
 # Version of GLFW we're using
 set(BAKGE_GLFW_VERSION "3.0")
 set(BAKGE_GLFW_VERSION_FULL "3.0.0")
