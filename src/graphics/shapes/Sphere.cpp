@@ -22,34 +22,25 @@
  * THE SOFTWARE.
  * */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <bakge/Bakge.h>
 
-void PrintMatrix(bakge::math::Matrix BGE_NCP M)
+namespace bakge
 {
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[0], M[4], M[8], M[12]);
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[1], M[5], M[9], M[13]);
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[2], M[6], M[10], M[14]);
-    printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[3], M[7], M[11], M[15]);
+
+Sphere::Sphere()
+{
 }
 
-int main(int argc, char* argv[])
+
+Sphere::~Sphere()
 {
-    bakge::Init(argc, argv);
-
-    bakge::math::Vector4 CameraPos(1, 0, 0, 1), TargetPos(1, 0, 1, 1),
-                                                CameraUp(0, 1, 0, 0);
-
-    /* Create Look At */
-    printf("Create Look At:\n");
-    bakge::math::Matrix M = bakge::math::Matrix::CreateLookAt(CameraPos,
-                                                    TargetPos, CameraUp);
-
-    /* Test some operations */
-    PrintMatrix(M);
-
-    bakge::Deinit();
-
-    return 0;
 }
+
+
+Result Sphere::Draw() const
+{
+    return BGE_FAILURE;
+}
+
+} /* bakge */
+
