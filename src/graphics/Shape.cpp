@@ -39,5 +39,30 @@ Shape::~Shape()
         gluDeleteQuadric(Quadric);
 }
 
+
+Result Shape::DrawStyle(BGE_SHAPE_STYLE Style)
+{
+    switch(Style) {
+
+    case BGE_SHAPE_STYLE_EDGE:
+        gluQuadricDrawStyle(Quadric, GLU_SILHOUETTE);
+        break;
+
+    case BGE_SHAPE_STYLE_SOLID:
+        gluQuadricDrawStyle(Quadric, GLU_FILL);
+        break;
+
+    case BGE_SHAPE_STYLE_WIREFRAME:
+        gluQuadricDrawStyle(Quadric, GLU_LINE);
+        break;
+
+    case BGE_SHAPE_STYLE_POINTS:
+        gluQuadricDrawStyle(Quadric, GLU_POINT);
+        break;
+    }
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
 
