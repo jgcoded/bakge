@@ -42,23 +42,10 @@ Matrix::~Matrix()
 }
 
 
-<<<<<<< HEAD
-Scalar& Matrix::operator[](int BGE_NCP At)
-{
-    return Val[At];
-}
-
-
-Scalar BGE_NCP Matrix::operator[](int BGE_NCP At) const
-{
-    return Val[At];
-}
-
-
 Matrix BGE_NCP Matrix::CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget,
                                                             Vector3 BGE_NCP CameraUpVector)
 {
-    
+
     Matrix mat;
 
     Vector3 dPosition = Vector3::Normalize(CameraPos - CameraTarget);
@@ -81,11 +68,11 @@ Matrix BGE_NCP Matrix::CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP C
     mat[13] = -Vector3::Dot(dPosOffX, CameraPos);
     mat[14] = -Vector3::Dot(dPosition, CameraPos);
     mat[15] = 1;
-    
+
     return mat;
 }
 
-=======
+
 Matrix BGE_NCP Matrix::SetIdentity()
 {
     memset((void*)Val, 0, sizeof(Scalar) * 16);
@@ -117,7 +104,6 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
 
     return *this;
 }
->>>>>>> 4899413f7643cd68b265ae2605525f066d7b4aae
 
 } /* math */
 } /* bakge */

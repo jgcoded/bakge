@@ -41,6 +41,8 @@ class Vector3
 
 public:
 
+    static const Vector3 UpVector;
+
     Vector3();
     Vector3(Scalar X, Scalar Y, Scalar Z);
     Vector3(Vector3 BGE_NCP Other);
@@ -48,21 +50,19 @@ public:
 
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
-    
+
     Vector3 BGE_NCP operator=(Vector3 BGE_NCP Other);
 
     Vector3 BGE_NCP operator+=(Vector3 BGE_NCP Other);
     Vector3 BGE_NCP operator-=(Vector3 BGE_NCP Other);
-    
-    Vector3 BGE_NCP operator*=(Vector3 BGE_NCP Other);
-    Vector3 BGE_NCP operator/=(Vector3 BGE_NCP Other);
-    Vector3 BGE_NCP operator/=(Scalar Value);
-    
+
+    Vector3 BGE_NCP operator*=(Scalar BGE_NCP Value);
+    Vector3 BGE_NCP operator/=(Scalar BGE_NCP Value);
+
     Vector3 operator+(Vector3 BGE_NCP Other);
-    Vector3 operator-(Vector3 Other);
-    Vector3 operator*(Vector3 BGE_NCP Other);
-    Vector3 operator/(Vector3 BGE_NCP Other);
-    Vector3 operator/(Scalar Value);
+    Vector3 operator-(Vector3 BGE_NCP Other);
+    Vector3 operator*(Scalar BGE_NCP Value);
+    Vector3 operator/(Scalar BGE_NCP Value);
 
     bool BGE_NCP operator==(Vector3 BGE_NCP Other);
 
@@ -71,18 +71,17 @@ public:
     Scalar LengthSquared() const;
     Scalar Length() const;
 
-    static const Vector3 UpVector; /* Where do I define this? */
-
     static Vector3 Normalize(Vector3 Other);
     static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
     static Vector3 Cross(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
     static Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z);
-    static Vector3 Hermite(Vector3 BGE_NCP Left, Vector3 BGE_NCP tangentLeft, Vector3 BGE_NCP Right, Vector3 BGE_NCP tangentRight, Scalar amount);
+    static Vector3 Hermite(Vector3 BGE_NCP Left, Vector3 BGE_NCP tangentLeft,
+        Vector3 BGE_NCP Right, Vector3 BGE_NCP tangentRight, Scalar amount);
+
 
 private:
 
     Scalar Val[3];
-
 
 }; /* Vector3 */
 

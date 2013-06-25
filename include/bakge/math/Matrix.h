@@ -55,17 +55,12 @@ public:
     Matrix();
     ~Matrix();
 
-<<<<<<< HEAD
-    Scalar& operator[](int BGE_NCP At);
-    Scalar BGE_NCP operator[](int BGE_NCP At) const;
-
     static Matrix BGE_NCP CreateLookAt(Vector3 BGE_NCP CameraPos, Vector3 BGE_NCP CameraTarget, Vector3 BGE_NCP CameraUpVector);
-=======
+
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
         return Val[At];
     }
->>>>>>> 4899413f7643cd68b265ae2605525f066d7b4aae
 
 
     BGE_INL Scalar& operator[](int BGE_NCP At)
