@@ -30,6 +30,14 @@
 namespace bakge
 {
 
+enum BGE_SHAPE_STYLE
+{
+    BGE_SHAPE_STYLE_POINTS = 1,
+    BGE_SHAPE_STYLE_WIREFRAME,
+    BGE_SHAPE_STYLE_SOLID,
+    BGE_SHAPE_STYLE_EDGE
+};
+
 class Shape : public Pawn
 {
 
@@ -37,6 +45,8 @@ public:
 
     Shape();
     ~Shape();
+
+    Result DrawStyle(BGE_SHAPE_STYLE Style);
 
 }; /* Shape */
 
