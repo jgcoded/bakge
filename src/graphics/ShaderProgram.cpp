@@ -74,19 +74,22 @@ Result ShaderProgram::InitShaderLibrary()
 {
     /* Load the default plain vertex shader */
     GenericVertexShader = Shader::LoadVertexShaderString(
-                                    GenericVertexShaderSource);
+                                    GenericVertexShaderSource,
+                                    "GenericVertexShader");
     if(GenericVertexShader == NULL)
         return BGE_FAILURE;
 
     /* Load the default plain fragment shader */
     GenericFragmentShader = Shader::LoadFragmentShaderString(
-                                    GenericFragmentShaderSource);
+                                GenericFragmentShaderSource,
+                                "GenericFragmentShaderSource");
     if(GenericFragmentShader == NULL)
         return BGE_FAILURE;
 
     /* Load the shader library function bgeWorldTransform(vec4) */
     bgeWorldTransform = Shader::LoadVertexShaderString(
-                                    bgeWorldTransformSource);
+                                    bgeWorldTransformSource,
+                                    "bgeWorldTransform");
     if(bgeWorldTransform == NULL)
         return BGE_FAILURE;
 
