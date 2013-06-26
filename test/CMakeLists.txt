@@ -9,6 +9,7 @@ endif()
 set(TESTS
   clock
   cube
+  cylinder
   info
   linkedlist
   loadfile
