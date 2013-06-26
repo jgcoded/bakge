@@ -152,10 +152,8 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
     /* Alias for shader program's handle, for convenience */
     Handle = Program->ProgramHandle;
 
-    if(bgeWorldTransform != NULL)
-        glAttachShader(Handle, bgeWorldTransform->GetHandle());
-    else
-        printf("Can't attach bgeWorldTransform\n");
+    /* Attach library shaders */
+    glAttachShader(Handle, bgeWorldTransform->GetHandle());
 
     /* If user passes NULL to vertex shader arg, use default generic one */
     if(Vertex == NULL) {
