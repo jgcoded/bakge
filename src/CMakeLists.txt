@@ -33,6 +33,7 @@ set(MODULES
   graphics/Shape
   graphics/Texture
   graphics/shapes/Sphere
+  graphics/shapes/Cube
   math/Vector3
   math/Vector4
   math/Quaternion

@@ -8,6 +8,7 @@ endif()
 
 set(TESTS
   clock
+  cube
   info
   linkedlist
   loadfile
