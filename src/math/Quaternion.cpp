@@ -74,5 +74,41 @@ Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
     return *this;
 }
 
+
+Quaternion BGE_NCP Quaternion::operator+(Quaternion BGE_NCP Other) const
+{
+    return *this;
+}
+
+
+Quaternion BGE_NCP Quaternion::operator-(Quaternion BGE_NCP Other) const
+{
+    return *this;
+}
+
+
+Quaternion BGE_NCP Quaternion::operator*(Quaternion BGE_NCP Other) const
+{
+    return *this;
+}
+
+
+Quaternion BGE_NCP Quaternion::operator/(Quaternion BGE_NCP Other) const
+{
+    return *this;
+}
+
+
+Quaternion BGE_NCP Quaternion::operator*(Scalar BGE_NCP Value) const
+{
+    return *this;
+}
+
+
+Quaternion BGE_NCP Quaternion::operator/(Scalar BGE_NCP Value) const
+{
+    return *this;
+}
+
 } /* math */
 } /* bakge */
