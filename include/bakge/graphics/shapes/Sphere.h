@@ -42,6 +42,22 @@ public:
     Sphere();
     ~Sphere();
 
+    BGE_INL math::Scalar BGE_NCP SetRadius(math::Scalar BGE_NCP R)
+    {
+        return Radius = R;
+    }
+
+    BGE_INL math::Scalar BGE_NCP GetRadius() const
+    {
+        return Radius;
+    }
+
+    BGE_INL void SetSlicesAndStacks(int NumSlices, int NumStacks)
+    {
+        Slices = NumSlices;
+        Stacks = NumStacks;
+    }
+
     Result Draw() const;
 
 }; /* Sphere */
