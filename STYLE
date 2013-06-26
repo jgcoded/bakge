@@ -1,3 +1,38 @@
+Source Control Convention
+=========================
+
+When committing code to your git repository, it's important to remember that
+each commit should be a single distinguishable change, new feature, or
+deletion. Source control is not about backing up code in a remote repository,
+it's about leaving a bread crumb trail which tracks the development of
+the program in bite-sized chunks.
+
+The better you are at managing your commits, the easier it is for me to
+review and add your patches to the codebase. But a little messiness can always
+be fixed with some git wizardry, so fear not!
+
+Some useful tips when committing code:
+
+1) Commit often. When you finish a change, commit it.
+
+2) Amend your commits if you find an error. `$ git commit --amend` lets you
+modify your latest commit. You can do this to unstage files or stage new
+changes you've made.
+
+3) Use `$ git commit -p` to split up your changes into different hunks. It's
+recommended you expand your terminal or console window vertically to see the
+entire output. Enter `?` at the prompt to see what each option does.
+
+4) Use selective commits e.g. `$ git commit include/bakge/MyChangedFile.h`
+to commit only hunks from a specific file or set of files.
+
+5) Ensure your working branch is up to date with the corresponding branch in
+palistov/bakge. This way if you submit a pull request I don't have to dig
+through a mountain of commits already pushed to my repo. You can do this by
+doing `$ git pull palistov <branch_name>` (assuming palistov is an alias
+for my remote repository https://github.com/palistov/bakge)
+
+
 Coding Style
 ============
 
