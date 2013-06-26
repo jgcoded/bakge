@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_GRAPHICS_SHAPE_SPHERE_H
-#define BAKGE_GRAPHICS_SHAPE_SPHERE_H
+#ifndef BAKGE_GRAPHICS_SHAPES_SPHERE_H
+#define BAKGE_GRAPHICS_SHAPES_SPHERE_H
 
 #include <bakge/Bakge.h>
 
@@ -48,4 +48,5 @@ public:
 
 } /* bakge */
 
-#endif /* BAKGE_GRAPHICS_SHAPE_SPHERE_H */
+#endif /* BAKGE_GRAPHICS_SHAPES_SPHERE_H */
+
