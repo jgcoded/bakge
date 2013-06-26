@@ -40,6 +40,18 @@ public:
     Cube();
     ~Cube();
 
+    BGE_INL void SetDimensions(math::Scalar X, math::Scalar Y, math::Scalar Z)
+    {
+        Dimensions[0] = X;
+        Dimensions[1] = Y;
+        Dimensions[2] = Z;
+    }
+
+    BGE_INL math::Vector4 BGE_NCP GetDimensions() const
+    {
+        return Dimensions;
+    }
+
     Result Draw() const;
 
 }; /* Cube */
