@@ -55,6 +55,13 @@ public:
     Quaternion();
     ~Quaternion();
 
+    Quaternion BGE_NCP operator+=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator-=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator*=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator/=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator*=(Scalar BGE_NCP Value);
+    Quaternion BGE_NCP operator/=(Scalar BGE_NCP Value);
+
 }; /* Quaternion */
 
 } /* math */
