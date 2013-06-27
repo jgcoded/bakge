@@ -45,6 +45,12 @@ public:
      * */
     virtual void Error() = 0;
 
+    /* Run a script from file */
+    virtual Result RunFile(const char* ScriptPath) = 0;
+
+    /* Run a script from a string */
+    virtual Result RunString(const char* Source) = 0;
+
 
 protected:
 
