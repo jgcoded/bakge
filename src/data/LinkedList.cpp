@@ -41,13 +41,7 @@ LinkedList<T>::LinkedList()
 template<class T>
 LinkedList<T>::~LinkedList()
 {
-    /* Iterate list and free memory */
-    SingleNode<T>* Node;
-    while (Head != NULL) {
-        Node = Head;
-        Head = Head->GetNext();
-        delete Node;
-    }
+    Clear();
 }
 
 
@@ -101,6 +95,19 @@ bool LinkedList<T>::IsEmpty()
 {
     /* List is empty if Head pointer is NULL */
     return (Head == NULL);
+}
+
+
+template<class T>
+void LinkedList<T>::Clear()
+{
+    /* Iterate list and free memory */
+    SingleNode<T>* Node;
+    while (Head != NULL) {
+        Node = Head;
+        Head = Head->GetNext();
+        delete Node;
+    }
 }
 
 } /* bakge */

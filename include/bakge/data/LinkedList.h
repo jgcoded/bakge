@@ -44,6 +44,9 @@ public:
 
 	bool IsEmpty();
 
+	/* Delete the entire contents of the list */
+	void Clear();
+
 
 protected:
 
