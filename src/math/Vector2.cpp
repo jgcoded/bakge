@@ -21,22 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * */
-
-#include <bakge/Bakge.h>
-
-namespace bakge
-{
-namespace api
-{
-
-Thread::Thread()
-{
-}
-
-
-Thread::~Thread()
-{
-}
-
-} /* api */
-} /* bakge */
+ 
+ #include <bakge/Bakge.h>
+ 
+ namespace bakge
+ {
+ namespace math
+ {
+ 
+ Vector2::Vector2()
+ {
+ }
+ 
+ 
+ Vector2::~Vector2()
+ {
+ }
+ 
+ } /* math */
+ } /* bakge */
