@@ -12,6 +12,7 @@ include_directories(${BAKGE_GLEW_PATH}/include)
 ########################################
 
 set(MODULES
+  api/Mutex
   api/Packet
   api/Socket
   api/Thread
