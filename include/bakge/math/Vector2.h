@@ -22,8 +22,8 @@
  * THE SOFTWARE.
  * */
  
- #ifndef BAKGE_MATH_VECTOR4_H
- #define BAKGE_MATH_VECTOR4_H
+ #ifndef BAKGE_MATH_VECTOR2_H
+ #define BAKGE_MATH_VECTOR2_H
  
  #include <bakge/Bakge.h>
  
