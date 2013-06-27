@@ -31,5 +31,7 @@
 #include <pthread.h>
 
 #include <bakge/thread/x11_Thread.h>
+#include <bakge/packet/x11_Packet.h>
+#include <bakge/socket/x11_Socket.h>
 
 #endif /* BAKGE_PLATFORM_X11_BAKGE_H */

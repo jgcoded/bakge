@@ -38,23 +38,17 @@ int main(int argc, char* argv[])
 {
     bakge::Init(argc, argv);
 
-<<<<<<< HEAD
-    bakge::math::Vector3 CameraPos(1, 0, 0), TargetPos(1, 0, 1), CameraUp(0, 1, 0);
-    
+    bakge::math::Vector4 CameraPos(1, 0, 0, 1), TargetPos(1, 0, 1, 1),
+                                                CameraUp(0, 1, 0, 0);
+
     /* Create Look At */
     printf("Create Look At:\n");
-    bakge::math::Matrix M = bakge::math::Matrix::CreateLookAt(CameraPos, TargetPos, CameraUp);
-    
-    for(int i = 0; i < 16; i++)
-        printf("Mat[%d] = %f", i, M[i]);
-    
-=======
-    bakge::math::Matrix M;
+    bakge::math::Matrix M = bakge::math::Matrix::CreateLookAt(CameraPos,
+                                                    TargetPos, CameraUp);
 
     /* Test some operations */
     PrintMatrix(M);
 
->>>>>>> 4899413f7643cd68b265ae2605525f066d7b4aae
     bakge::Deinit();
 
     return 0;

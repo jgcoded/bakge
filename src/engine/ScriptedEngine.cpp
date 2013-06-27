@@ -37,4 +37,3 @@ ScriptedEngine::~ScriptedEngine()
 }
 
 } /* bakge */
-

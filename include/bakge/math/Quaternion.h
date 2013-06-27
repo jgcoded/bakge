@@ -61,4 +61,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_MATH_QUATERNION_H */
-

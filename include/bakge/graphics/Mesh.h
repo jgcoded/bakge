@@ -43,4 +43,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_MESH_H */
-

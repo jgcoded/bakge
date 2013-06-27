@@ -86,7 +86,6 @@ extern "C"
 
 /* Math modules */
 #include <bakge/math/Math.h>
-#include <bakge/math/Vector3.h>
 #include <bakge/math/Vector4.h>
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
@@ -97,6 +96,8 @@ extern "C"
 
 /* Include API classes */
 #include <bakge/api/Thread.h>
+#include <bakge/api/Packet.h>
+#include <bakge/api/Socket.h>
 
 /* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
@@ -108,12 +109,13 @@ extern "C"
 #endif /* __linux__ */
 
 /* Additional Bakge classes */
+#include <bakge/graphics/Shader.h>
+#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
+#include <bakge/graphics/shapes/Sphere.h>
 #include <bakge/graphics/Texture.h>
-#include <bakge/graphics/Shader.h>
-#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
@@ -121,4 +123,3 @@ extern "C"
 #include <bakge/engine/ScriptedEngine.h>
 
 #endif /* BAKGE_BAKGE_H */
-

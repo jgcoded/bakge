@@ -47,10 +47,10 @@ public:
 protected:
 
     math::Quaternion Facing;
+    math::Vector4 Scale;
 
 }; /* Pawn */
 
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_PAWN_H */
-

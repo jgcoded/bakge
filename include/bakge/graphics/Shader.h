@@ -40,7 +40,8 @@ class Shader
      * function does all the heavy lifting.
      * */
     static Shader* LoadFromFile(GLenum Type, const char* FilePath);
-    static Shader* LoadFromString(GLenum Type, const char* Source);
+    static Shader* LoadFromString(GLenum Type, const char* Source,
+                                                const char* Name);
 
 
 public:
@@ -54,8 +55,12 @@ public:
      * */
     BGE_FACTORY Shader* LoadVertexShaderFile(const char* FilePath);
     BGE_FACTORY Shader* LoadFragmentShaderFile(const char* FilePath);
-    BGE_FACTORY Shader* LoadVertexShaderString(const char* Source);
-    BGE_FACTORY Shader* LoadFragmentShaderString(const char* Source);
+
+    /* Name helps identify a shader when compiling it */
+    BGE_FACTORY Shader* LoadVertexShaderString(const char* Source,
+                                               const char* Name);
+    BGE_FACTORY Shader* LoadFragmentShaderString(const char* Source,
+                                                 const char* Name);
 
     GLuint GetHandle() const;
 
@@ -64,4 +69,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHADER_H */
-

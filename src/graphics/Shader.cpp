@@ -52,7 +52,7 @@ Shader* Shader::LoadFromFile(GLenum Type, const char* FilePath)
         return NULL;
     }
 
-    S = Shader::LoadFromString(Type, Source);
+    S = Shader::LoadFromString(Type, Source, FilePath);
 
     delete[] Source;
 
@@ -60,7 +60,8 @@ Shader* Shader::LoadFromFile(GLenum Type, const char* FilePath)
 }
 
 
-Shader* Shader::LoadFromString(GLenum Type, const char* Source)
+Shader* Shader::LoadFromString(GLenum Type, const char* Source,
+                                                const char* Name)
 {
     Shader* S;
     GLint Status, Length;
@@ -93,8 +94,9 @@ Shader* Shader::LoadFromString(GLenum Type, const char* Source)
     /* Now get any errors or warnings */
     glGetShaderiv(S->Handle, GL_COMPILE_STATUS, &Status);
     if(Status == GL_FALSE)
-        printf("%s shader compilation failed\n",
-            Type == GL_VERTEX_SHADER ? "Vertex" : "Fragment");
+        printf("%s shader %s compilation failed\n",
+            Type == GL_VERTEX_SHADER ? "Vertex" : "Fragment",
+            Name != NULL ? Name : "from string");
 
     /* Print out any warnings or errors in the info log */
     glGetShaderiv(S->Handle, GL_INFO_LOG_LENGTH, &Length);
@@ -126,15 +128,15 @@ Shader* Shader::LoadFragmentShaderFile(const char* FilePath)
 }
 
 
-Shader* Shader::LoadVertexShaderString(const char* Source)
+Shader* Shader::LoadVertexShaderString(const char* Source, const char* Name)
 {
-    return Shader::LoadFromString(GL_VERTEX_SHADER, Source);
+    return Shader::LoadFromString(GL_VERTEX_SHADER, Source, Name);
 }
 
 
-Shader* Shader::LoadFragmentShaderString(const char* Source)
+Shader* Shader::LoadFragmentShaderString(const char* Source, const char* Name)
 {
-    return Shader::LoadFromString(GL_FRAGMENT_SHADER, Source);
+    return Shader::LoadFromString(GL_FRAGMENT_SHADER, Source, Name);
 }
 
 
@@ -144,4 +146,3 @@ GLuint Shader::GetHandle() const
 }
 
 } /* bakge */
-
