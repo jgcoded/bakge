@@ -42,7 +42,7 @@ public:
     T Push(T Value);
     T Pop();
 
-	bool IsEmpty();
+	bool IsEmpty() const;
 
 	/* Delete the entire contents of the list */
 	void Clear();

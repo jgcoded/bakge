@@ -91,7 +91,7 @@ T LinkedList<T>::Pop()
 
 
 template<class T>
-bool LinkedList<T>::IsEmpty()
+bool LinkedList<T>::IsEmpty() const
 {
     /* List is empty if Head pointer is NULL */
     return (Head == NULL);
