@@ -32,11 +32,28 @@ namespace bakge
 
 class Cone : public Shape
 {
+    math::Scalar BaseRadius;
+    math::Scalar TopRadius;
+    int Slices;
+    int Stacks;
+
 
 public:
 
     Cone();
     ~Cone();
+
+    BGE_INL void SetRadii(math::Scalar Base, math::Scalar Top)
+    {
+        BaseRadius = Base;
+        TopRadius = Top;
+    }
+
+    BGE_INL void SetSlicesAndStacks(int NumSlices, int NumStacks)
+    {
+        Slices = NumSlices;
+        Stacks = NumStacks;
+    }
 
 }; /* Cone */
 
