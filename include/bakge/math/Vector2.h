@@ -46,7 +46,7 @@ public:
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
     Vector2 BGE_NCP operator=(Vector2 BGE_NCP Other);
-    bool BGE_NCP operator==(Vector2 BGE_NCP Other);
+    bool operator==(Vector2 BGE_NCP Other);
 
     Vector2 BGE_NCP operator+=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator-=(Vector2 BGE_NCP Other);
@@ -54,11 +54,11 @@ public:
     Vector2 BGE_NCP operator/=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator/=(Scalar Value);
 
-    Vector2 BGE_NCP operator+(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator-(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator*(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator/(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator/(Scalar BGE_NCP Value);
+    Vector2 operator+(Vector2 BGE_NCP Other);
+    Vector2 operator-(Vector2 BGE_NCP Other);
+    Vector2 operator*(Vector2 BGE_NCP Other);
+    Vector2 operator/(Vector2 BGE_NCP Other);
+    Vector2 operator/(Scalar BGE_NCP Value);
 
     Vector2 Normalized() const;
 
@@ -67,7 +67,7 @@ public:
 
     static Vector2 Normalize(Vector2 BGE_NCP Other);
     static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-    static Vector2 UnitVector(Scalar X, Scalar Y, Scalar Z);
+    static Vector2 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y, Scalar BGE_NCP Z);
 
 private:
 
@@ -77,9 +77,9 @@ private:
 
 Vector2 operator+(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
 Vector2 operator-(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-Vector2 operator-(Vector2 BGE_NCP This);
-Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-Vector2 operator*(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
+Vector2 operator-(Vector2 BGE_NCP This); /* unary */
+//Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+//Vector2 operator*(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
 Vector2 operator/(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
 Vector2 operator/(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
 

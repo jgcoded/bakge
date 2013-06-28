@@ -73,7 +73,7 @@ Vector2 BGE_NCP Vector2::operator=(Vector2 BGE_NCP Other)
 }
 
 
-bool BGE_NCP Vector2::operator==(Vector2 BGE_NCP Other)
+bool Vector2::operator==(Vector2 BGE_NCP Other)
 {
 
     return Val[0] == Other[0] &&
@@ -133,35 +133,35 @@ Vector2 BGE_NCP Vector2::operator/=(Scalar Value)
 }
 
 
-Vector2 BGE_NCP Vector2::operator+(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator+(Vector2 BGE_NCP Other)
 {
 
     return Vector2(Val[0] + Other[0], Val[1] + Other[1], Val[2]);
 }
 
 
-Vector2 BGE_NCP Vector2::operator-(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator-(Vector2 BGE_NCP Other)
 {
 
     return Vector2(Val[0] - Other[0], Val[1] - Other[1], Val[2]);
 }
 
 
-Vector2 BGE_NCP Vector2::operator*(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator*(Vector2 BGE_NCP Other)
 {
 
     return Vector2(Val[0] * Other[0], Val[1] * Other[1], Val[2]);
 }
 
 
-Vector2 BGE_NCP Vector2::operator/(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator/(Vector2 BGE_NCP Other)
 {
 
     return Vector2(Val[0] / Other[0], Val[1] / Other[1], Val[2]);
 }
 
 
-Vector2 BGE_NCP Vector2::operator/(Scalar BGE_NCP Value)
+Vector2 Vector2::operator/(Scalar BGE_NCP Value)
 {
 
     if(ScalarCompare(Value, 0)){
@@ -208,7 +208,7 @@ static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 }
 
 
-static Vector2 UnitVector(Scalar X, Scalar Y, Scalar Z)
+static Vector2 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
 {
 
     Scalar Len = sqrt(X * X + Y * Y);
@@ -230,10 +230,24 @@ Vector2 operator-(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 }
 
 
+Vector2 operator-(Vector2 BGE_NCP This)
+{
+
+    return Vector2(-This[0], -This[1], This[2]);
+}
+
+
 Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 {
 
     return Vector2(Left[0] * Right[0], Left[1] * Right[1], Left[2]);
+}
+
+/*
+Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
+{
+
+    return Vector2(Left[0] / Right[0], Left[1] / Right[1], Left[2]);
 }
 
 
@@ -242,14 +256,7 @@ Vector2 operator*(Vector2 BGE_NCP Left, Scalar BGE_NCP Value)
 
     return Vector2(Left[0] * Value, Left[1] * Value, Left[2]);
 }
-
-
-Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
-{
-
-    return Vector2(Left[0] / Right[0], Left[1] / Right[1], Left[2]);
-}
-
+*/
 
 Vector2 operator/(Vector2 BGE_NCP Left, Scalar BGE_NCP Value)
 {
@@ -261,8 +268,6 @@ Vector2 operator/(Vector2 BGE_NCP Left, Scalar BGE_NCP Value)
 
     return Vector2(Left[0] / Value, Left[1] / Value, Left[2]);
 }
-
-
 
 } /* math */
 } /* bakge */
