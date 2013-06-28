@@ -36,6 +36,7 @@ Vector2::Vector2()
     Val[2] = 1.0;
 }
 
+
 Vector2::Vector2(Scalar X, Scalar Y, Scalar Z)
 {
     Val[0] = X;
@@ -43,8 +44,21 @@ Vector2::Vector2(Scalar X, Scalar Y, Scalar Z)
     Val[2] = Z;
 }
 
+
 Vector2::~Vector2()
 {
+}
+
+
+Scalar& Vector2::operator[](int BGE_NCP At)
+{
+    return Val[At];
+}
+
+
+Scalar BGE_NCP Vector2::operator[](int BGE_NCP At) const
+{
+    return Val[At];
 }
 
 } /* math */
