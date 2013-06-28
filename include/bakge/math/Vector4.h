@@ -82,11 +82,6 @@ public:
 
 }; /* Vector4 */
 
-
-/* *
- * Unfortunately GCC won't let us use friend functions
- * as global declarations
- * */
 BGE_FUNC Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 BGE_FUNC Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 BGE_FUNC Vector4 Point(Scalar X, Scalar Y, Scalar Z);
