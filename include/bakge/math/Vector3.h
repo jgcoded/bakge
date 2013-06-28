@@ -32,46 +32,46 @@ namespace bakge
 namespace math
 {
 
-class Vector2
+class Vector3
 {
 
 public:
 
-    Vector2();
-    Vector2(Scalar X, Scalar Y, Scalar Z);
-    Vector2(Vector2 BGE_NCP Other);
-    ~Vector2();
+    Vector3();
+    Vector3(Scalar X, Scalar Y, Scalar Z);
+    Vector3(Vector3 BGE_NCP Other);
+    ~Vector3();
 
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
-    Vector2 BGE_NCP operator=(Vector2 BGE_NCP Other);
-    bool operator==(Vector2 BGE_NCP Other);
+    Vector3 BGE_NCP operator=(Vector3 BGE_NCP Other);
+    bool operator==(Vector3 BGE_NCP Other);
 
-    Vector2 BGE_NCP operator+=(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator-=(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator*=(Scalar BGE_NCP Value);
-    Vector2 BGE_NCP operator/=(Scalar BGE_NCP Value);
+    Vector3 BGE_NCP operator+=(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator-=(Vector3 BGE_NCP Other);
+    Vector3 BGE_NCP operator*=(Scalar BGE_NCP Value);
+    Vector3 BGE_NCP operator/=(Scalar BGE_NCP Value);
 
-    Vector2 operator+(Vector2 BGE_NCP Other) const;
-    Vector2 operator-(Vector2 BGE_NCP Other) const;
-    Vector2 operator*(Scalar BGE_NCP Other) const;
-    Vector2 operator/(Scalar BGE_NCP Value) const;
+    Vector3 operator+(Vector3 BGE_NCP Other) const;
+    Vector3 operator-(Vector3 BGE_NCP Other) const;
+    Vector3 operator*(Scalar BGE_NCP Other) const;
+    Vector3 operator/(Scalar BGE_NCP Value) const;
 
-    Vector2 Normalized() const;
+    Vector3 Normalized() const;
 
     Scalar Length() const;
     Scalar LengthSquared() const;
 
-    static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-    static Vector2 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y,
+    static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
+    static Vector3 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y,
                                                 Scalar BGE_NCP Z);
 
 private:
 
     Scalar Val[3];
 
-}; /* Vector2 */
+}; /* Vector3 */
 
 } /* math */
 } /* bakge */
