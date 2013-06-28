@@ -55,6 +55,8 @@ public:
         Stacks = NumStacks;
     }
 
+    Result Draw() const;
+
 }; /* Cone */
 
 } /* bakge */

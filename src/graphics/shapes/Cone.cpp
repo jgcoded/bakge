@@ -36,4 +36,10 @@ Cone::~Cone()
 {
 }
 
+
+Result Cone::Draw() const
+{
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
