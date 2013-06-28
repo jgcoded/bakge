@@ -77,7 +77,6 @@ Vector2 BGE_NCP Vector2::operator+=(Vector2 BGE_NCP Other)
 {
     Val[0] += Other[0];
     Val[1] += Other[1];
-    Val[2] += Other[2];
 
     return *this;
 }
@@ -87,9 +86,50 @@ Vector2 BGE_NCP Vector2::operator-=(Vector2 BGE_NCP Other)
 {
     Val[0] -= Other[0];
     Val[1] -= Other[1];
-    Val[2] -= Other[2];
 
     return *this;
+}
+
+
+Vector2 BGE_NCP Vector2::operator*=(Vector2 BGE_NCP Other)
+{
+    Val[0] *= Other[0];
+    Val[1] *= Other[1];
+
+    return *this;
+}
+
+
+Vector2 BGE_NCP Vector2::operator/=(Vector2 BGE_NCP Other)
+{
+    Val[0] /= Other[0];
+    Val[1] /= Other[1];
+
+    return *this;
+}
+
+
+Vector2 BGE_NCP Vector2::operator/=(Scalar Value)
+{
+
+    if(ScalarCompare(Value, 0)){
+        printf("Division by 0. Cancelling operation\n");
+        return *this;
+    }
+
+    Val[0] /= Value;
+    Val[1] /= Value;
+
+    return *this;
+}
+
+
+bool BGE_NCP Vector2::operator==(Vector2 BGE_NCP Other)
+{
+
+    return Val[0] == Other[0] &&
+           Val[1] == Other[1] &&
+           Val[2] == Other[2];
 }
 
 } /* math */

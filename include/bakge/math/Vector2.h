@@ -50,6 +50,12 @@ public:
     Vector2 BGE_NCP operator+=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator-=(Vector2 BGE_NCP Other);
 
+    Vector2 BGE_NCP operator*=(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator/=(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator/=(Scalar Value);
+
+    bool BGE_NCP operator==(Vector2 BGE_NCP Other);
+
 private:
 
     Scalar Val[3];
