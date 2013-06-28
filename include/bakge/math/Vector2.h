@@ -75,6 +75,14 @@ private:
 
 }; /* Vector2 */
 
+Vector2 operator+(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+Vector2 operator-(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+Vector2 operator-(Vector2 BGE_NCP This);
+Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+Vector2 operator*(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
+Vector2 operator/(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+Vector2 operator/(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
+
 } /* math */
 } /* bakge */
 
