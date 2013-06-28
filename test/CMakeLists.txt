@@ -23,8 +23,8 @@ set(TESTS
   thread
   types
   vao
+  vector3
   vector4
-  vector2
   window
 )
 

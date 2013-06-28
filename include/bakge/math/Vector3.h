@@ -22,8 +22,8 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_MATH_VECTOR2_H
-#define BAKGE_MATH_VECTOR2_H
+#ifndef BAKGE_MATH_VECTOR3_H
+#define BAKGE_MATH_VECTOR3_H
 
 #include <bakge/Bakge.h>
 
@@ -86,4 +86,4 @@ Vector2 operator/(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
 } /* math */
 } /* bakge */
 
-#endif /* BAKGE_MATH_VECTOR2_H */
+#endif /* BAKGE_MATH_VECTOR3_H */

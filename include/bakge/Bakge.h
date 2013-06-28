@@ -86,8 +86,8 @@ extern "C"
 
 /* Math modules */
 #include <bakge/math/Math.h>
+#include <bakge/math/Vector3.h>
 #include <bakge/math/Vector4.h>
-#include <bakge/math/Vector2.h>
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
 
