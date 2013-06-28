@@ -49,6 +49,11 @@ public:
         Height = ConeHeight;
     }
 
+    BGE_INL math::Scalar BGE_NCP SetRadius(math::Scalar BGE_NCP R)
+    {
+        return Radius = R;
+    }
+
     Result Draw() const;
 
 }; /* Cylinder */
