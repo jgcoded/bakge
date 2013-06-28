@@ -9,6 +9,7 @@ endif()
 set(TESTS
   clock
   cube
+  cone
   cylinder
   info
   linkedlist

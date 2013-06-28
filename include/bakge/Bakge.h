@@ -116,6 +116,7 @@ extern "C"
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/shapes/Sphere.h>
+#include <bakge/graphics/shapes/Cone.h>
 #include <bakge/graphics/shapes/Cube.h>
 #include <bakge/graphics/shapes/Cylinder.h>
 #include <bakge/graphics/Texture.h>

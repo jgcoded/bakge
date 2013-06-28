@@ -33,6 +33,7 @@ set(MODULES
   graphics/Shape
   graphics/Texture
   graphics/shapes/Sphere
+  graphics/shapes/Cone
   graphics/shapes/Cube
   graphics/shapes/Cylinder
   math/Vector3
