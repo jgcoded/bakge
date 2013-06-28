@@ -35,8 +35,8 @@ class Cylinder : public Shape
     math::Scalar Radius;
     math::Scalar Length;
     math::Scalar Height;
-
     int Slices;
+    int Stacks;
 
 
 public:

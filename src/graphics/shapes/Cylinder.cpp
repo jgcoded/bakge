@@ -33,6 +33,7 @@ Cylinder::Cylinder()
     Length = 1.0f;
     Height = 2.0f;
     Slices = 12;
+    Stacks = 4;
 }
 
 
