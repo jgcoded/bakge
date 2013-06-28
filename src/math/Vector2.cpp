@@ -208,6 +208,14 @@ static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 }
 
 
+static Vector2 UnitVector(Scalar X, Scalar Y, Scalar Z)
+{
+
+    Scalar Len = sqrt(X * X + Y * Y);
+    return Vector2(X / Len, Y / Len, Z);
+}
+
+
 Vector2 operator+(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 {
 
