@@ -44,6 +44,11 @@ public:
     Cylinder();
     ~Cylinder();
 
+    BGE_INL void SetHeight(math::Scalar ConeHeight)
+    {
+        Height = ConeHeight;
+    }
+
     Result Draw() const;
 
 }; /* Cylinder */
