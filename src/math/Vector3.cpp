@@ -123,28 +123,28 @@ Vector2 BGE_NCP Vector2::operator/=(Scalar BGE_NCP Value)
 }
 
 
-Vector2 Vector2::operator+(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator+(Vector2 BGE_NCP Other) const
 {
 
     return Vector2(Val[0] + Other[0], Val[1] + Other[1], Val[2]);
 }
 
 
-Vector2 Vector2::operator-(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator-(Vector2 BGE_NCP Other) const
 {
 
     return Vector2(Val[0] - Other[0], Val[1] - Other[1], Val[2]);
 }
 
 
-Vector2 Vector2::operator*(Scalar BGE_NCP Value)
+Vector2 Vector2::operator*(Scalar BGE_NCP Value) const
 {
 
     return Vector2(Val[0] * Value, Val[1] * Value, Val[2]);
 }
 
 
-Vector2 Vector2::operator/(Scalar BGE_NCP Value)
+Vector2 Vector2::operator/(Scalar BGE_NCP Value) const
 {
 
     if(ScalarCompare(Value, 0)){
