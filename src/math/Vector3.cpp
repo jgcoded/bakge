@@ -75,7 +75,6 @@ Vector2 BGE_NCP Vector2::operator=(Vector2 BGE_NCP Other)
 
 bool Vector2::operator==(Vector2 BGE_NCP Other)
 {
-
     return Val[0] == Other[0] &&
            Val[1] == Other[1] &&
            Val[2] == Other[2];
@@ -125,28 +124,24 @@ Vector2 BGE_NCP Vector2::operator/=(Scalar BGE_NCP Value)
 
 Vector2 Vector2::operator+(Vector2 BGE_NCP Other) const
 {
-
     return Vector2(Val[0] + Other[0], Val[1] + Other[1], Val[2]);
 }
 
 
 Vector2 Vector2::operator-(Vector2 BGE_NCP Other) const
 {
-
     return Vector2(Val[0] - Other[0], Val[1] - Other[1], Val[2]);
 }
 
 
 Vector2 Vector2::operator*(Scalar BGE_NCP Value) const
 {
-
     return Vector2(Val[0] * Value, Val[1] * Value, Val[2]);
 }
 
 
 Vector2 Vector2::operator/(Scalar BGE_NCP Value) const
 {
-
     if(ScalarCompare(Value, 0)){
         printf("Division by 0. Cancelling operation\n");
         return *this;
@@ -165,28 +160,24 @@ Vector2 Vector2::Normalized() const
 
 Scalar Vector2::Length() const
 {
-
     return sqrt(LengthSquared());
 }
 
 
 Scalar Vector2::LengthSquared() const
 {
-
     return Scalar(Val[0] * Val[0] + Val[1] * Val[1]);
 }
 
 
 static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 {
-
     return Left[0] * Right[0] + Left[1] * Right[2];
 }
 
 
 static Vector2 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
 {
-
     Scalar Len = sqrt(X * X + Y * Y);
     return Vector2(X / Len, Y / Len, Z);
 }
