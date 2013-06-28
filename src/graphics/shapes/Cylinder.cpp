@@ -31,6 +31,7 @@ Cylinder::Cylinder()
 {
     Radius = 0.5f;
     Length = 1.0f;
+    Height = 2.0f;
     Slices = 12;
 }
 
