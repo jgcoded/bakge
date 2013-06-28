@@ -32,6 +32,9 @@ namespace bakge
 
 class Cylinder : public Shape
 {
+
+protected:
+
     math::Scalar Radius;
     math::Scalar Length;
     math::Scalar Height;
@@ -60,7 +63,7 @@ public:
         Stacks = NumStacks;
     }
 
-    Result Draw() const;
+    virtual Result Draw() const;
 
 }; /* Cylinder */
 

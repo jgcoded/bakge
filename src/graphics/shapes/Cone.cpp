@@ -29,7 +29,7 @@ namespace bakge
 
 Cone::Cone()
 {
-    BaseRadius = 0.5f;
+    Radius = 0.5f;
     TopRadius = 0.0f;
     Height = 2.0f;
 }
@@ -42,7 +42,7 @@ Cone::~Cone()
 
 Result Cone::Draw() const
 {
-    gluCylinder(Quadric, BaseRadius, TopRadius, Height, Slices, Stacks);
+    gluCylinder(Quadric, Radius, TopRadius, Height, Slices, Stacks);
     return BGE_SUCCESS;
 }
 

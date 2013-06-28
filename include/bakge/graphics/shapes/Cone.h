@@ -30,13 +30,9 @@
 namespace bakge
 {
 
-class Cone : public Shape
+class Cone : public Cylinder
 {
-    math::Scalar BaseRadius;
     math::Scalar TopRadius;
-    math::Scalar Height;
-    int Slices;
-    int Stacks;
 
 
 public:
@@ -44,21 +40,10 @@ public:
     Cone();
     ~Cone();
 
-    BGE_INL void SetHeight(math::Scalar ConeHeight)
-    {
-        Height = ConeHeight;
-    }
-
     BGE_INL void SetRadii(math::Scalar Base, math::Scalar Top)
     {
-        BaseRadius = Base;
+        Radius = Base;
         TopRadius = Top;
-    }
-
-    BGE_INL void SetSlicesAndStacks(int NumSlices, int NumStacks)
-    {
-        Slices = NumSlices;
-        Stacks = NumStacks;
     }
 
     Result Draw() const;
