@@ -50,38 +50,28 @@ public:
 
     Vector2 BGE_NCP operator+=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator-=(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator*=(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator/=(Vector2 BGE_NCP Other);
-    Vector2 BGE_NCP operator/=(Scalar Value);
+    Vector2 BGE_NCP operator*=(Scalar BGE_NCP Value);
+    Vector2 BGE_NCP operator/=(Scalar BGE_NCP Value);
 
-    Vector2 operator+(Vector2 BGE_NCP Other);
-    Vector2 operator-(Vector2 BGE_NCP Other);
-    Vector2 operator*(Vector2 BGE_NCP Other);
-    Vector2 operator/(Vector2 BGE_NCP Other);
-    Vector2 operator/(Scalar BGE_NCP Value);
+    Vector2 operator+(Vector2 BGE_NCP Other) const;
+    Vector2 operator-(Vector2 BGE_NCP Other) const;
+    Vector2 operator*(Scalar BGE_NCP Other) const;
+    Vector2 operator/(Scalar BGE_NCP Value) const;
 
     Vector2 Normalized() const;
 
     Scalar Length() const;
     Scalar LengthSquared() const;
 
-    static Vector2 Normalize(Vector2 BGE_NCP Other);
     static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-    static Vector2 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y, Scalar BGE_NCP Z);
+    static Vector2 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y,
+                                                Scalar BGE_NCP Z);
 
 private:
 
     Scalar Val[3];
 
 }; /* Vector2 */
-
-Vector2 operator+(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-Vector2 operator-(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-Vector2 operator-(Vector2 BGE_NCP This); /* unary */
-//Vector2 operator*(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-//Vector2 operator*(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
-Vector2 operator/(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
-Vector2 operator/(Vector2 BGE_NCP Left, Scalar BGE_NCP Value);
 
 } /* math */
 } /* bakge */
