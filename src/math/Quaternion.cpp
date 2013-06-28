@@ -122,5 +122,17 @@ Quaternion Quaternion::Inverted() const
     return Quaternion();
 }
 
+
+Quaternion BGE_NCP Quaternion::Normalize()
+{
+    return *this;
+}
+
+
+Quaternion Quaternion::Normalized() const
+{
+    return Quaternion();
+}
+
 } /* math */
 } /* bakge */

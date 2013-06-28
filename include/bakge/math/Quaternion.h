@@ -72,6 +72,9 @@ public:
     Quaternion BGE_NCP Invert();
     Quaternion Inverted() const;
 
+    Quaternion BGE_NCP Normalize();
+    Quaternion Normalized() const;
+
 }; /* Quaternion */
 
 } /* math */
