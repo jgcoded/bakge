@@ -24,6 +24,7 @@ set(TESTS
   types
   vao
   vector4
+  vector2
   window
 )
 
