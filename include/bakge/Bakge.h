@@ -96,6 +96,7 @@ extern "C"
 #include <bakge/data/LinkedList.h>
 
 /* Include API classes */
+#include <bakge/api/Mutex.h>
 #include <bakge/api/Thread.h>
 #include <bakge/api/Packet.h>
 #include <bakge/api/Socket.h>

@@ -22,17 +22,29 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_X11_BAKGE_H
-#define BAKGE_PLATFORM_X11_BAKGE_H
+#ifndef BAKGE_API_MUTEX_H
+#define BAKGE_API_MUTEX_H
 
-#include <GL/glu.h>
-#include <sys/time.h>
-#include <time.h>
-#include <pthread.h>
+namespace bakge
+{
+namespace api
+{
 
-#include <bakge/mutex/x11_Mutex.h>
-#include <bakge/thread/x11_Thread.h>
-#include <bakge/packet/x11_Packet.h>
-#include <bakge/socket/x11_Socket.h>
+class Mutex
+{
 
-#endif /* BAKGE_PLATFORM_X11_BAKGE_H */
+protected:
+
+    Mutex();
+
+
+public:
+
+    virtual ~Mutex();
+
+}; /* Mutex */
+
+} /* api */
+} /* bakge */
+
+#endif /* BAKGE_API_MUTEX_H */

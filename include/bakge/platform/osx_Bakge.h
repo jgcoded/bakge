@@ -29,6 +29,7 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
 
+#include <bakge/mutex/osx_Mutex.h>
 #include <bakge/thread/osx_Thread.h>
 #include <bakge/packet/osx_Packet.h>
 #include <bakge/socket/osx_Socket.h>

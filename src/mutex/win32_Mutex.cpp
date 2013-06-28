@@ -22,17 +22,18 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_X11_BAKGE_H
-#define BAKGE_PLATFORM_X11_BAKGE_H
+#include <bakge/Bakge.h>
 
-#include <GL/glu.h>
-#include <sys/time.h>
-#include <time.h>
-#include <pthread.h>
+namespace bakge
+{
 
-#include <bakge/mutex/x11_Mutex.h>
-#include <bakge/thread/x11_Thread.h>
-#include <bakge/packet/x11_Packet.h>
-#include <bakge/socket/x11_Socket.h>
+win32_Mutex::win32_Mutex()
+{
+}
 
-#endif /* BAKGE_PLATFORM_X11_BAKGE_H */
+
+win32_Mutex::~win32_Mutex()
+{
+}
+
+} /* bakge */
