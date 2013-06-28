@@ -61,6 +61,10 @@ public:
     Scalar Length() const;
     Scalar LengthSquared() const;
 
+    static Vector2 Normalize(Vector2 BGE_NCP Other);
+    static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+    static Vector2 Cross(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right);
+
 private:
 
     Scalar Val[3];

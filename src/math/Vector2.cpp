@@ -153,5 +153,19 @@ Scalar Vector2::LengthSquared() const
     return Scalar(Val[0] * Val[0] + Val[1] * Val[1]);
 }
 
+
+static Vector2 Normalize(Vector2 BGE_NCP Other)
+{
+    Scalar Len = Other.Length();
+    return Vector2(Other[0] / Len, Other[1] / Len, Other[2]);
+}
+
+
+static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
+{
+
+    return Left[0] * Right[0] + Left[1] * Right[2];
+}
+
 } /* math */
 } /* bakge */
