@@ -61,5 +61,36 @@ Scalar BGE_NCP Vector2::operator[](int BGE_NCP At) const
     return Val[At];
 }
 
+
+Vector2 BGE_NCP Vector2::operator=(Vector2 BGE_NCP Other)
+{
+    Val[0] = Other[0];
+    Val[1] = Other[1];
+    Val[2] = Other[2];
+
+    /* Cascading assignment */
+    return *this;
+}
+
+
+Vector2 BGE_NCP Vector2::operator+=(Vector2 BGE_NCP Other)
+{
+    Val[0] += Other[0];
+    Val[1] += Other[1];
+    Val[2] += Other[2];
+
+    return *this;
+}
+
+
+Vector2 BGE_NCP Vector2::operator-=(Vector2 BGE_NCP Other)
+{
+    Val[0] -= Other[0];
+    Val[1] -= Other[1];
+    Val[2] -= Other[2];
+
+    return *this;
+}
+
 } /* math */
 } /* bakge */

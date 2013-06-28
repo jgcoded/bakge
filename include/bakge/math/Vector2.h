@@ -45,6 +45,11 @@ public:
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
+    Vector2 BGE_NCP operator=(Vector2 BGE_NCP Other);
+
+    Vector2 BGE_NCP operator+=(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator-=(Vector2 BGE_NCP Other);
+
 private:
 
     Scalar Val[3];
