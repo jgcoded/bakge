@@ -46,15 +46,19 @@ public:
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
     Vector2 BGE_NCP operator=(Vector2 BGE_NCP Other);
+    bool BGE_NCP operator==(Vector2 BGE_NCP Other);
 
     Vector2 BGE_NCP operator+=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator-=(Vector2 BGE_NCP Other);
-
     Vector2 BGE_NCP operator*=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator/=(Vector2 BGE_NCP Other);
     Vector2 BGE_NCP operator/=(Scalar Value);
 
-    bool BGE_NCP operator==(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator+(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator-(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator*(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator/(Vector2 BGE_NCP Other);
+    Vector2 BGE_NCP operator/(Scalar BGE_NCP Value);
 
     Vector2 Normalized() const;
 

@@ -73,6 +73,15 @@ Vector2 BGE_NCP Vector2::operator=(Vector2 BGE_NCP Other)
 }
 
 
+bool BGE_NCP Vector2::operator==(Vector2 BGE_NCP Other)
+{
+
+    return Val[0] == Other[0] &&
+           Val[1] == Other[1] &&
+           Val[2] == Other[2];
+}
+
+
 Vector2 BGE_NCP Vector2::operator+=(Vector2 BGE_NCP Other)
 {
     Val[0] += Other[0];
@@ -124,12 +133,43 @@ Vector2 BGE_NCP Vector2::operator/=(Scalar Value)
 }
 
 
-bool BGE_NCP Vector2::operator==(Vector2 BGE_NCP Other)
+Vector2 BGE_NCP Vector2::operator+(Vector2 BGE_NCP Other)
 {
 
-    return Val[0] == Other[0] &&
-           Val[1] == Other[1] &&
-           Val[2] == Other[2];
+    return Vector2(Val[0] + Other[0], Val[1] + Other[1], Val[2]);
+}
+
+
+Vector2 BGE_NCP Vector2::operator-(Vector2 BGE_NCP Other)
+{
+
+    return Vector2(Val[0] - Other[0], Val[1] - Other[1], Val[2]);
+}
+
+
+Vector2 BGE_NCP Vector2::operator*(Vector2 BGE_NCP Other)
+{
+
+    return Vector2(Val[0] * Other[0], Val[1] * Other[1], Val[2]);
+}
+
+
+Vector2 BGE_NCP Vector2::operator/(Vector2 BGE_NCP Other)
+{
+
+    return Vector2(Val[0] / Other[0], Val[1] / Other[1], Val[2]);
+}
+
+
+Vector2 BGE_NCP Vector2::operator/(Scalar BGE_NCP Value)
+{
+
+    if(ScalarCompare(Value, 0)){
+        printf("Division by 0. Cancelling operation\n");
+        return *this;
+    }
+
+    return Vector2(Val[0] / Value, Val[1] / Value, Val[2]);
 }
 
 
