@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 Quaternion::Quaternion()
 {
@@ -134,5 +132,4 @@ Quaternion Quaternion::Normalized() const
     return Quaternion();
 }
 
-} /* math */
 } /* bakge */

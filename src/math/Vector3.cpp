@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 Vector3::Vector3()
 {
@@ -182,5 +180,4 @@ static Vector3 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
     return Vector3(X / Len, Y / Len, Z);
 }
 
-} /* math */
 } /* bakge */

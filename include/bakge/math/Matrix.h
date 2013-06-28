@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 /* *
  * 4x4 matrix. Used to store matrices for use in OpenGL
@@ -79,7 +77,6 @@ public:
 
 }; /* Matrix */
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_MATRIX_H */

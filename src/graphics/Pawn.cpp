@@ -40,7 +40,7 @@ Pawn::~Pawn()
 Result Pawn::Bind() const
 {
     GLint Program, Location;
-    math::Matrix Transform;
+    Matrix Transform;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);

@@ -32,7 +32,7 @@ namespace bakge
 
 class Cube : public Shape
 {
-    math::Vector4 Dimensions;
+    Vector4 Dimensions;
 
 
 public:
@@ -40,14 +40,14 @@ public:
     Cube();
     ~Cube();
 
-    BGE_INL void SetDimensions(math::Scalar X, math::Scalar Y, math::Scalar Z)
+    BGE_INL void SetDimensions(Scalar X, Scalar Y, Scalar Z)
     {
         Dimensions[0] = X;
         Dimensions[1] = Y;
         Dimensions[2] = Z;
     }
 
-    BGE_INL math::Vector4 BGE_NCP GetDimensions() const
+    BGE_INL Vector4 BGE_NCP GetDimensions() const
     {
         return Dimensions;
     }

@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     bakge::Window* Win;
     bakge::Node* Point;
     bakge::ShaderProgram* Program;
-    bakge::math::Matrix Perspective;
+    bakge::Matrix Perspective;
 
     printf("Initializing Bakge\n");
     if(bakge::Init(argc, argv) != BGE_SUCCESS) {

@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 class Vector3
 {
@@ -73,7 +71,6 @@ private:
 
 }; /* Vector3 */
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_VECTOR3_H */

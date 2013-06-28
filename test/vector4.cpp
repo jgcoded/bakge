@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
-void printVector(bakge::math::Vector4 vec)
+void printVector(bakge::Vector4 vec)
 {
     for(int i = 0; i < 3; ++i)
         printf("[%d] = %f\n", i, vec[i]);
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 {
     bakge::Init(argc, argv);
 
-    bakge::math::Vector4 Vec1(5, -2, 0, 0);
+    bakge::Vector4 Vec1(5, -2, 0, 0);
 
     /* *
      * Run some operations for testing
@@ -45,14 +45,14 @@ int main(int argc, char* argv[])
 
     /* Equate two vectors */
     printf("Equate two Vectors:\n");
-    bakge::math::Vector4 Vec2 = Vec1;
+    bakge::Vector4 Vec2 = Vec1;
     printVector(Vec2);
     printf("%s\n\n", (Vec1 == Vec2) ? "True" : "False");
 
     /* Multiply and Divide Vector3 */
     printf("Multiply and Divide two Vectors:\n");
-    Vec2 *= bakge::math::Scalar(1.5);
-    Vec1 /= bakge::math::Scalar(1.5);
+    Vec2 *= bakge::Scalar(1.5);
+    Vec1 /= bakge::Scalar(1.5);
     printVector(Vec2);
     printVector(Vec1);
 
@@ -64,7 +64,7 @@ int main(int argc, char* argv[])
 
     /* Unit Vector */
     printf("Unit Vector:\n");
-    bakge::math::Vector4 Vec3 = bakge::math::UnitVector(4, 3, 2);
+    bakge::Vector4 Vec3 = bakge::UnitVector(4, 3, 2);
     printVector(Vec3);
 
     /* Length and Length^2 */
@@ -72,13 +72,13 @@ int main(int argc, char* argv[])
                                 Vec1.Length(), Vec2.LengthSquared());
 
     /* Dot */
-    bakge::math::Scalar dot = bakge::math::Dot(Vec1, Vec2);
+    bakge::Scalar dot = bakge::Dot(Vec1, Vec2);
     printf("Dot:\n%f\n\n", dot);
 
     /* Cross */
     printf("Cross:\n");
-    bakge::math::Vector4 Vec4, x1(2, 3, 2, 0), x2(1, 2, 3, 0);
-    Vec4 = bakge::math::Cross(x1, x2);
+    bakge::Vector4 Vec4, x1(2, 3, 2, 0), x2(1, 2, 3, 0);
+    Vec4 = bakge::Cross(x1, x2);
     printVector(Vec4);
 
 
@@ -91,7 +91,7 @@ int main(int argc, char* argv[])
     Vec2 += Vec1;
     printVector(Vec2);
 
-    Vec1 -= bakge::math::Point(4, -1, 4);
+    Vec1 -= bakge::Point(4, -1, 4);
     printVector(Vec1);
 
     bakge::Deinit();

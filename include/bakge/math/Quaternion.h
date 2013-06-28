@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 /* *
  * Quaternions are used to describe rotational orientations in 3D space.
@@ -77,7 +75,6 @@ public:
 
 }; /* Quaternion */
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_QUATERNION_H */

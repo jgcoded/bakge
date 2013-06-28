@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 /* *
  * Vectors are used to represent arbitrary points, or directions (and
@@ -102,7 +100,6 @@ Vector4 Point(Scalar X, Scalar Y, Scalar Z);
 Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
 Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_VECTOR4_H */

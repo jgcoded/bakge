@@ -60,7 +60,7 @@ int main(int argc, char* argv[])
      * */
     Point->Bind();
     /* Test this node's position */
-    bakge::math::Vector4 Pos = Point->GetPosition();
+    bakge::Vector4 Pos = Point->GetPosition();
     printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
 
     /* Test at a new position */

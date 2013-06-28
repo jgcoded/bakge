@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 const Matrix Matrix::Identity;
 
@@ -110,5 +108,4 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
     return *this;
 }
 
-} /* math */
 } /* bakge */

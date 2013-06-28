@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 #define BGE_SCALAR_EPSILON 0.000001f
 #define BGE_RAD_PER_DEG 0.0174532925f
@@ -64,7 +62,6 @@ BGE_INL T BGE_NCP Max(T BGE_NCP A, T BGE_NCP B)
     return (A > B) ? (A) : (B);
 }
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_MATH_H */
