@@ -87,11 +87,11 @@ public:
  * Unfortunately GCC won't let us use friend functions
  * as global declarations
  * */
-Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-Vector4 Point(Scalar X, Scalar Y, Scalar Z);
-Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
-Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
+BGE_FUNC Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+BGE_FUNC Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+BGE_FUNC Vector4 Point(Scalar X, Scalar Y, Scalar Z);
+BGE_FUNC Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
+BGE_FUNC Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
 
 } /* bakge */
 
