@@ -137,17 +137,10 @@ Vector2 Vector2::operator-(Vector2 BGE_NCP Other)
 }
 
 
-Vector2 Vector2::operator*(Vector2 BGE_NCP Other)
+Vector2 Vector2::operator*(Scalar BGE_NCP Value)
 {
 
-    return Vector2(Val[0] * Other[0], Val[1] * Other[1], Val[2]);
-}
-
-
-Vector2 Vector2::operator/(Vector2 BGE_NCP Other)
-{
-
-    return Vector2(Val[0] / Other[0], Val[1] / Other[1], Val[2]);
+    return Vector2(Val[0] * Value, Val[1] * Value, Val[2]);
 }
 
 

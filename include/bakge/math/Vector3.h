@@ -55,8 +55,7 @@ public:
 
     Vector2 operator+(Vector2 BGE_NCP Other);
     Vector2 operator-(Vector2 BGE_NCP Other);
-    Vector2 operator*(Vector2 BGE_NCP Other);
-    Vector2 operator/(Vector2 BGE_NCP Other);
+    Vector2 operator*(Scalar BGE_NCP Other);
     Vector2 operator/(Scalar BGE_NCP Value);
 
     Vector2 Normalized() const;
