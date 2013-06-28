@@ -172,7 +172,7 @@ Scalar Vector2::LengthSquared() const
 
 static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
 {
-    return Left[0] * Right[0] + Left[1] * Right[2];
+    return Left[0] * Right[0] + Left[1] * Right[1];
 }
 
 
