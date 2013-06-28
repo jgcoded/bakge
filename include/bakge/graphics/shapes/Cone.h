@@ -34,6 +34,7 @@ class Cone : public Shape
 {
     math::Scalar BaseRadius;
     math::Scalar TopRadius;
+    math::Scalar Height;
     int Slices;
     int Stacks;
 
@@ -42,6 +43,11 @@ public:
 
     Cone();
     ~Cone();
+
+    BGE_INL void SetHeight(math::Scalar ConeHeight)
+    {
+        Height = ConeHeight;
+    }
 
     BGE_INL void SetRadii(math::Scalar Base, math::Scalar Top)
     {
