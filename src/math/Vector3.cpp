@@ -73,9 +73,9 @@ Vector3 BGE_NCP Vector3::operator=(Vector3 BGE_NCP Other)
 
 bool Vector3::operator==(Vector3 BGE_NCP Other) const
 {
-    return Val[0] == Other[0] &&
-           Val[1] == Other[1] &&
-           Val[2] == Other[2];
+    return ScalarCompare(Val[0], Other.Val[0])
+        && ScalarCompare(Val[1], Other.Val[1])
+        && ScalarCompare(Val[2], Other.Val[2]);
 }
 
 
