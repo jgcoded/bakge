@@ -57,10 +57,6 @@ public:
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
-    friend Vector4 Point(Scalar X, Scalar Y, Scalar Z);
-    friend Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
-    friend Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
-
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
@@ -83,9 +79,6 @@ public:
 
     Scalar LengthSquared() const;
     Scalar Length() const;
-
-    friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-    friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
 }; /* Vector4 */
 
