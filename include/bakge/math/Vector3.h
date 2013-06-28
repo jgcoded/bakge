@@ -32,6 +32,8 @@ namespace bakge
 
 class Vector3
 {
+    Scalar Val[3];
+
 
 public:
 
@@ -64,10 +66,6 @@ public:
     static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
     static Vector3 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y,
                                                 Scalar BGE_NCP Z);
-
-private:
-
-    Scalar Val[3];
 
 }; /* Vector3 */
 
