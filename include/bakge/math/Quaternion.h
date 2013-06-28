@@ -69,6 +69,9 @@ public:
     Quaternion BGE_NCP operator*(Scalar BGE_NCP Value) const;
     Quaternion BGE_NCP operator/(Scalar BGE_NCP Value) const;
 
+    Quaternion BGE_NCP Invert();
+    Quaternion Inverted() const;
+
 }; /* Quaternion */
 
 } /* math */

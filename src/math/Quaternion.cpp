@@ -110,5 +110,17 @@ Quaternion BGE_NCP Quaternion::operator/(Scalar BGE_NCP Value) const
     return *this;
 }
 
+
+Quaternion BGE_NCP Quaternion::Invert()
+{
+    return *this;
+}
+
+
+Quaternion Quaternion::Inverted() const
+{
+    return Quaternion();
+}
+
 } /* math */
 } /* bakge */
