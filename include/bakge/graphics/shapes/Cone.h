@@ -40,9 +40,8 @@ public:
     Cone();
     ~Cone();
 
-    BGE_INL void SetRadii(math::Scalar Base, math::Scalar Top)
+    BGE_INL void SetTopRadius(math::Scalar Top)
     {
-        Radius = Base;
         TopRadius = Top;
     }
 
