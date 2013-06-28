@@ -56,6 +56,11 @@ public:
 
     bool BGE_NCP operator==(Vector2 BGE_NCP Other);
 
+    Vector2 Normalized() const;
+
+    Scalar Length() const;
+    Scalar LengthSquared() const;
+
 private:
 
     Scalar Val[3];

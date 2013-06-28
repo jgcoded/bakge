@@ -132,5 +132,26 @@ bool BGE_NCP Vector2::operator==(Vector2 BGE_NCP Other)
            Val[2] == Other[2];
 }
 
+
+Vector2 Vector2::Normalized() const
+{
+    Scalar Len = Length();
+    return Vector2(Val[0] / Len, Val[1] / Len, Val[2]);
+}
+
+
+Scalar Vector2::Length() const
+{
+
+    return sqrt(LengthSquared());
+}
+
+
+Scalar Vector2::LengthSquared() const
+{
+
+    return Scalar(Val[0] * Val[0] + Val[1] * Val[1]);
+}
+
 } /* math */
 } /* bakge */
