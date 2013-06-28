@@ -34,6 +34,7 @@ set(MODULES
   graphics/Texture
   graphics/shapes/Sphere
   math/Vector4
+  math/Vector2
   math/Quaternion
   math/Matrix
   renderer/DeferredGeometryRenderer

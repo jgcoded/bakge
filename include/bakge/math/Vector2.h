@@ -30,7 +30,8 @@
  namespace bakge
  {
  namespace math
- 
+ {
+
  class Vector2
  {
  
@@ -42,4 +43,4 @@
  } /* math */
  } /* bakge */
  
- #endif
+ #endif /* BAKGE_MATH_VECTOR2_H */
