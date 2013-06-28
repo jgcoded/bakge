@@ -54,6 +54,12 @@ public:
         return Radius = R;
     }
 
+    BGE_INL void SetSlicesAndStacks(int NumSlices, int NumStacks)
+    {
+        Slices = NumSlices;
+        Stacks = NumStacks;
+    }
+
     Result Draw() const;
 
 }; /* Cylinder */
