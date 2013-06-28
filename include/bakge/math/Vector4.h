@@ -61,6 +61,7 @@ public:
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
     Vector4 BGE_NCP operator=(Vector4 BGE_NCP Other);
+    bool operator==(Vector4 BGE_NCP Other) const;
 
     Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
     Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
@@ -71,8 +72,6 @@ public:
     Vector4 operator-(Vector4 BGE_NCP Other) const;
     Vector4 operator*(Scalar BGE_NCP Value) const;
     Vector4 operator/(Scalar BGE_NCP Value) const;
-
-    bool operator==(Vector4 BGE_NCP left);
 
     Vector4 BGE_NCP Normalize();
     Vector4 Normalized() const;

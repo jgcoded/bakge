@@ -147,7 +147,7 @@ Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
     return *this;
 }
 
-bool Vector4::operator==(Vector4 BGE_NCP Other)
+bool Vector4::operator==(Vector4 BGE_NCP Other) const
 {
     return ScalarCompare(Val[0], Other.Val[0])
         && ScalarCompare(Val[1], Other.Val[1])

@@ -71,7 +71,7 @@ Vector3 BGE_NCP Vector3::operator=(Vector3 BGE_NCP Other)
 }
 
 
-bool Vector3::operator==(Vector3 BGE_NCP Other)
+bool Vector3::operator==(Vector3 BGE_NCP Other) const
 {
     return Val[0] == Other[0] &&
            Val[1] == Other[1] &&

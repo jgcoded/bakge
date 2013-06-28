@@ -46,7 +46,7 @@ public:
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
     Vector3 BGE_NCP operator=(Vector3 BGE_NCP Other);
-    bool operator==(Vector3 BGE_NCP Other);
+    bool operator==(Vector3 BGE_NCP Other) const;
 
     Vector3 BGE_NCP operator+=(Vector3 BGE_NCP Other);
     Vector3 BGE_NCP operator-=(Vector3 BGE_NCP Other);
