@@ -37,7 +37,7 @@ enum GAMEPAD_DETECT_MODE
     NUM_GAMEPAD_DETECT_MODES
 };
 
-class GamePad : public Bindable
+class GamePad
 {
     int Handle;
 
