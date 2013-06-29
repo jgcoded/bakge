@@ -41,6 +41,9 @@ class GamePad
 {
     int Handle;
 
+    int NumAxes;
+    Scalar* AxesValues;
+
     BGE_FACTORY GamePad* Detect(GAMEPAD_DETECT_MODE DetectMode);
 
     GamePad();
@@ -49,6 +52,21 @@ class GamePad
 public:
 
     ~GamePad();
+
+    BGE_INL int GetNumAxes() const
+    {
+        return NumAxes;
+    }
+
+    BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
+    {
+        return AxesValues[At];
+    }
+
+    BGE_INL Scalar& operator[](int BGE_NCP At)
+    {
+        return AxesValues[At];
+    }
 
 }; /* GamePad */
 
