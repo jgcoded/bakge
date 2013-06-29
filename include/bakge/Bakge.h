@@ -33,7 +33,7 @@
 #include <math.h>
 
 /* GCC & Clang attributes */
-#if defined __GNUC__ || defined __clang__
+#if defined __GNUC__ || defined __clang__ || defined __MINGW__
 /* Send compiler warning if function return result is not used */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
 /* Mark a variable as possibly unused in its function  */
