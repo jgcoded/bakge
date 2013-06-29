@@ -58,15 +58,8 @@ public:
         return NumAxes;
     }
 
-    BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
-    {
-        return AxesValues[At];
-    }
-
-    BGE_INL Scalar& operator[](int BGE_NCP At)
-    {
-        return AxesValues[At];
-    }
+    Scalar GetAxis(int AxisID) const;
+    void SetAxis(int AxisID, Scalar Value);
 
 }; /* GamePad */
 
