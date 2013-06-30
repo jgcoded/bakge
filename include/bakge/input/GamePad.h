@@ -59,7 +59,6 @@ public:
     }
 
     Scalar GetAxis(int AxisID) const;
-    void SetAxis(int AxisID, Scalar Value);
 
 }; /* GamePad */
 

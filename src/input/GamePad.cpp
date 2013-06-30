@@ -49,9 +49,4 @@ Scalar GamePad::GetAxis(int AxisID) const
     return 0;
 }
 
-
-void GamePad::SetAxis(int AxisID, Scalar Value)
-{
-}
-
 } /* bakge */
