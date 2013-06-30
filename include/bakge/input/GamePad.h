@@ -60,6 +60,7 @@ public:
 
     BGE_INL Scalar GetAxis(int AxisID) const
     {
+        AxesValues = glfwGetJoystickAxes(Handle, &NumAxes);
         return AxesValues[AxisID];
     }
 
