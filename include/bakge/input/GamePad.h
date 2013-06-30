@@ -42,7 +42,7 @@ class GamePad
     int Handle;
 
     int NumAxes;
-    Scalar* AxesValues;
+    const Scalar* AxesValues;
 
     BGE_FACTORY GamePad* Detect(GAMEPAD_DETECT_MODE DetectMode);
 
@@ -58,7 +58,7 @@ public:
         return NumAxes;
     }
 
-    BGE_INL Scalar GetAxis(int AxisID) const
+    BGE_INL Scalar GetAxis(int AxisID)
     {
         AxesValues = glfwGetJoystickAxes(Handle, &NumAxes);
         return AxesValues[AxisID];
