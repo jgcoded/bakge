@@ -43,10 +43,4 @@ GamePad* GamePad::Detect(GAMEPAD_DETECT_MODE DetectMode)
     return NULL;
 }
 
-
-Scalar GamePad::GetAxis(int AxisID) const
-{
-    return 0;
-}
-
 } /* bakge */

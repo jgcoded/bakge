@@ -58,7 +58,10 @@ public:
         return NumAxes;
     }
 
-    Scalar GetAxis(int AxisID) const;
+    BGE_INL Scalar GetAxis(int AxisID) const
+    {
+        return AxesValues[AxisID];
+    }
 
 }; /* GamePad */
 
