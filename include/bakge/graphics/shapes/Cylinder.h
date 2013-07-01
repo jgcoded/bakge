@@ -35,9 +35,9 @@ class Cylinder : public Shape
 
 protected:
 
-    math::Scalar Radius;
-    math::Scalar Length;
-    math::Scalar Height;
+    Scalar Radius;
+    Scalar Length;
+    Scalar Height;
     int Slices;
     int Stacks;
 
@@ -47,12 +47,12 @@ public:
     Cylinder();
     ~Cylinder();
 
-    BGE_INL void SetHeight(math::Scalar ConeHeight)
+    BGE_INL void SetHeight(Scalar ConeHeight)
     {
         Height = ConeHeight;
     }
 
-    BGE_INL math::Scalar BGE_NCP SetRadius(math::Scalar BGE_NCP R)
+    BGE_INL Scalar BGE_NCP SetRadius(Scalar BGE_NCP R)
     {
         return Radius = R;
     }

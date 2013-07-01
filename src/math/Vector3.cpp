@@ -26,10 +26,8 @@
 
 namespace bakge
 {
-namespace math
-{
 
-Vector2::Vector2()
+Vector3::Vector3()
 {
     Val[0] = 0;
     Val[1] = 0;
@@ -37,7 +35,7 @@ Vector2::Vector2()
 }
 
 
-Vector2::Vector2(Scalar X, Scalar Y, Scalar Z)
+Vector3::Vector3(Scalar X, Scalar Y, Scalar Z)
 {
     Val[0] = X;
     Val[1] = Y;
@@ -45,24 +43,24 @@ Vector2::Vector2(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Vector2::~Vector2()
+Vector3::~Vector3()
 {
 }
 
 
-Scalar& Vector2::operator[](int BGE_NCP At)
-{
-    return Val[At];
-}
-
-
-Scalar BGE_NCP Vector2::operator[](int BGE_NCP At) const
+Scalar& Vector3::operator[](int BGE_NCP At)
 {
     return Val[At];
 }
 
 
-Vector2 BGE_NCP Vector2::operator=(Vector2 BGE_NCP Other)
+Scalar BGE_NCP Vector3::operator[](int BGE_NCP At) const
+{
+    return Val[At];
+}
+
+
+Vector3 BGE_NCP Vector3::operator=(Vector3 BGE_NCP Other)
 {
     Val[0] = Other[0];
     Val[1] = Other[1];
@@ -73,15 +71,15 @@ Vector2 BGE_NCP Vector2::operator=(Vector2 BGE_NCP Other)
 }
 
 
-bool Vector2::operator==(Vector2 BGE_NCP Other)
+bool Vector3::operator==(Vector3 BGE_NCP Other) const
 {
-    return Val[0] == Other[0] &&
-           Val[1] == Other[1] &&
-           Val[2] == Other[2];
+    return ScalarCompare(Val[0], Other.Val[0])
+        && ScalarCompare(Val[1], Other.Val[1])
+        && ScalarCompare(Val[2], Other.Val[2]);
 }
 
 
-Vector2 BGE_NCP Vector2::operator+=(Vector2 BGE_NCP Other)
+Vector3 BGE_NCP Vector3::operator+=(Vector3 BGE_NCP Other)
 {
     Val[0] += Other[0];
     Val[1] += Other[1];
@@ -90,7 +88,7 @@ Vector2 BGE_NCP Vector2::operator+=(Vector2 BGE_NCP Other)
 }
 
 
-Vector2 BGE_NCP Vector2::operator-=(Vector2 BGE_NCP Other)
+Vector3 BGE_NCP Vector3::operator-=(Vector3 BGE_NCP Other)
 {
     Val[0] -= Other[0];
     Val[1] -= Other[1];
@@ -99,7 +97,7 @@ Vector2 BGE_NCP Vector2::operator-=(Vector2 BGE_NCP Other)
 }
 
 
-Vector2 BGE_NCP Vector2::operator*=(Scalar BGE_NCP Value)
+Vector3 BGE_NCP Vector3::operator*=(Scalar BGE_NCP Value)
 {
     Val[0] /= Value;
     Val[1] /= Value;
@@ -108,7 +106,7 @@ Vector2 BGE_NCP Vector2::operator*=(Scalar BGE_NCP Value)
 }
 
 
-Vector2 BGE_NCP Vector2::operator/=(Scalar BGE_NCP Value)
+Vector3 BGE_NCP Vector3::operator/=(Scalar BGE_NCP Value)
 {
     if(ScalarCompare(Value, 0)){
         printf("Division by 0. Cancelling operation\n");
@@ -122,65 +120,64 @@ Vector2 BGE_NCP Vector2::operator/=(Scalar BGE_NCP Value)
 }
 
 
-Vector2 Vector2::operator+(Vector2 BGE_NCP Other) const
+Vector3 Vector3::operator+(Vector3 BGE_NCP Other) const
 {
-    return Vector2(Val[0] + Other[0], Val[1] + Other[1], Val[2]);
+    return Vector3(Val[0] + Other[0], Val[1] + Other[1], Val[2]);
 }
 
 
-Vector2 Vector2::operator-(Vector2 BGE_NCP Other) const
+Vector3 Vector3::operator-(Vector3 BGE_NCP Other) const
 {
-    return Vector2(Val[0] - Other[0], Val[1] - Other[1], Val[2]);
+    return Vector3(Val[0] - Other[0], Val[1] - Other[1], Val[2]);
 }
 
 
-Vector2 Vector2::operator*(Scalar BGE_NCP Value) const
+Vector3 Vector3::operator*(Scalar BGE_NCP Value) const
 {
-    return Vector2(Val[0] * Value, Val[1] * Value, Val[2]);
+    return Vector3(Val[0] * Value, Val[1] * Value, Val[2]);
 }
 
 
-Vector2 Vector2::operator/(Scalar BGE_NCP Value) const
+Vector3 Vector3::operator/(Scalar BGE_NCP Value) const
 {
     if(ScalarCompare(Value, 0)){
         printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
-    return Vector2(Val[0] / Value, Val[1] / Value, Val[2]);
+    return Vector3(Val[0] / Value, Val[1] / Value, Val[2]);
 }
 
 
-Vector2 Vector2::Normalized() const
+Vector3 Vector3::Normalized() const
 {
     Scalar Len = Length();
-    return Vector2(Val[0] / Len, Val[1] / Len, Val[2]);
+    return Vector3(Val[0] / Len, Val[1] / Len, Val[2]);
 }
 
 
-Scalar Vector2::Length() const
+Scalar Vector3::Length() const
 {
     return sqrt(LengthSquared());
 }
 
 
-Scalar Vector2::LengthSquared() const
+Scalar Vector3::LengthSquared() const
 {
     return Scalar(Val[0] * Val[0] + Val[1] * Val[1]);
 }
 
 
-static Scalar Dot(Vector2 BGE_NCP Left, Vector2 BGE_NCP Right)
+static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
 {
     return Left[0] * Right[0] + Left[1] * Right[1];
 }
 
 
-static Vector2 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
+static Vector3 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
 {
     Scalar Len = sqrt(X * X + Y * Y);
-    return Vector2(X / Len, Y / Len, Z);
+    return Vector3(X / Len, Y / Len, Z);
 }
 
-} /* math */
 } /* bakge */

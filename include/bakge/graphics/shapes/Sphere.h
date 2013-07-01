@@ -32,7 +32,7 @@ namespace bakge
 
 class Sphere : public Shape
 {
-    math::Scalar Radius;
+    Scalar Radius;
     int Slices;
     int Stacks;
 
@@ -42,12 +42,12 @@ public:
     Sphere();
     ~Sphere();
 
-    BGE_INL math::Scalar BGE_NCP SetRadius(math::Scalar BGE_NCP R)
+    BGE_INL Scalar BGE_NCP SetRadius(Scalar BGE_NCP R)
     {
         return Radius = R;
     }
 
-    BGE_INL math::Scalar BGE_NCP GetRadius() const
+    BGE_INL Scalar BGE_NCP GetRadius() const
     {
         return Radius;
     }

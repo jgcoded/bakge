@@ -32,7 +32,7 @@ namespace bakge
 
 class Cone : public Cylinder
 {
-    math::Scalar TopRadius;
+    Scalar TopRadius;
 
 
 public:
@@ -40,7 +40,7 @@ public:
     Cone();
     ~Cone();
 
-    BGE_INL void SetTopRadius(math::Scalar Top)
+    BGE_INL void SetTopRadius(Scalar Top)
     {
         TopRadius = Top;
     }

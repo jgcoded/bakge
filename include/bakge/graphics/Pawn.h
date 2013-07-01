@@ -46,8 +46,8 @@ public:
 
 protected:
 
-    math::Quaternion Facing;
-    math::Vector4 Scale;
+    Quaternion Facing;
+    Vector4 Scale;
 
 }; /* Pawn */
 

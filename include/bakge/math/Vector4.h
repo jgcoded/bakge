@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 /* *
  * Vectors are used to represent arbitrary points, or directions (and
@@ -59,14 +57,11 @@ public:
     Vector4(Vector4 BGE_NCP Other);
     ~Vector4();
 
-    friend Vector4 Point(Scalar X, Scalar Y, Scalar Z);
-    friend Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
-    friend Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
-
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
     Vector4 BGE_NCP operator=(Vector4 BGE_NCP Other);
+    bool operator==(Vector4 BGE_NCP Other) const;
 
     Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
     Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
@@ -78,31 +73,20 @@ public:
     Vector4 operator*(Scalar BGE_NCP Value) const;
     Vector4 operator/(Scalar BGE_NCP Value) const;
 
-    bool operator==(Vector4 BGE_NCP left);
-
     Vector4 BGE_NCP Normalize();
     Vector4 Normalized() const;
 
     Scalar LengthSquared() const;
     Scalar Length() const;
 
-    friend Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-    friend Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-
 }; /* Vector4 */
 
+BGE_FUNC Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+BGE_FUNC Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+BGE_FUNC Vector4 Point(Scalar X, Scalar Y, Scalar Z);
+BGE_FUNC Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
+BGE_FUNC Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
 
-/* *
- * Unfortunately GCC won't let us use friend functions
- * as global declarations
- * */
-Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-Vector4 Point(Scalar X, Scalar Y, Scalar Z);
-Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
-Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
-
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_VECTOR4_H */
