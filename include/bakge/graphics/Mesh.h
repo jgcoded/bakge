@@ -30,6 +30,15 @@
 namespace bakge
 {
 
+enum MESH_BUFFERS
+{
+    MESH_BUFFER_POSITIONS = 0,
+    MESH_BUFFER_NORMALS,
+    MESH_BUFFER_TEXCOORDS,
+    MESH_BUFFER_INDICES,
+    NUM_MESH_BUFFERS
+};
+
 class BGE_API Mesh : public Drawable
 {
 
