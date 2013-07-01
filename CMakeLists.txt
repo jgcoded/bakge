@@ -55,6 +55,12 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
 option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
 
+if(NOT MSVC)
+  set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
+                                      "MinSizeRel" "RelWithDebInfo")
+endif()
+
 
 ########################################
 # PLATFORM SPECIFIC LIBRARIES SETUP
