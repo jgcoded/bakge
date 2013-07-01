@@ -38,9 +38,16 @@ GamePad::~GamePad()
 }
 
 
-GamePad* GamePad::Detect(GAMEPAD_DETECT_MODE DetectMode)
+GamePad* GamePad::Detect()
 {
-    return NULL;
+    GamePad* Pad = new GamePad;
+    for(int i=GLFW_JOYSTICK_1;i<GLFW_JOYSTICK_LAST;++i) {
+        if(glfwJoystickPresent(i) == GL_TRUE) {
+            Pad->Handle = i;
+            printf("Detected GamePad %d: %s\n", i, glfwGetJoystickName(i));
+        }
+    }
+    return Pad;
 }
 
 } /* bakge */

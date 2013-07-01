@@ -30,28 +30,23 @@
 namespace bakge
 {
 
-enum GAMEPAD_DETECT_MODE
-{
-    GAMEPAD_DETECT_FIRST = 0,
-    GAMEPAD_DETECT_ALL,
-    NUM_GAMEPAD_DETECT_MODES
-};
-
 class GamePad
 {
-    int Handle;
 
+    int Handle;
     int NumAxes;
     const Scalar* AxesValues;
-
-    BGE_FACTORY GamePad* Detect(GAMEPAD_DETECT_MODE DetectMode);
 
     GamePad();
 
 
 public:
 
+    static GamePad* AvailableGamePads;
+
     ~GamePad();
+
+    BGE_FACTORY GamePad* Detect();
 
     BGE_INL int GetNumAxes() const
     {
