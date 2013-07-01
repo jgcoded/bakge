@@ -12,7 +12,6 @@ endif()
 # Version of GLFW we're using
 set(BAKGE_GLFW_VERSION "3.0")
 set(BAKGE_GLFW_VERSION_FULL "3.0.0")
-message("-- Bakge using GLFW version ${GLFW_VERSION_FULL}")
 
 set(BAKGE_SDK_PATH "sdk")
 set(BAKGE_LIB_DIR "lib")
