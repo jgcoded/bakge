@@ -33,10 +33,14 @@ namespace bakge
 class BGE_API Mesh : public Drawable
 {
 
-public:
+protected:
 
     Mesh();
-    ~Mesh();
+
+
+public:
+
+    virtual ~Mesh();
 
 }; /* Mesh */
 
