@@ -8,7 +8,7 @@ if(GLEW_TARGET)
   )
 
   add_definitions(-DGLEW_STATIC)
-  add_library(glew ${GLEW_SOURCES})
+  add_library(glew STATIC ${GLEW_SOURCES})
 
 else()
   message("Couldn't find GLEW path")
