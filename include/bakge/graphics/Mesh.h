@@ -44,6 +44,9 @@ class BGE_API Mesh : public Drawable
 
 protected:
 
+    GLuint MeshVAO;
+    GLuint MeshBuffers[NUM_MESH_BUFFERS];
+
     Mesh();
 
 
