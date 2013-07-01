@@ -64,6 +64,9 @@ set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
 # SDK's library directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
 
+option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
+option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
+
 
 ########################################
 # PLATFORM SPECIFIC LIBRARIES SETUP
@@ -152,10 +155,14 @@ add_subdirectory(lib)
 add_subdirectory(src)
 
 # Compiles Bakge unit tests
-add_subdirectory(test)
+if(BAKGE_BUILD_TESTS)
+  add_subdirectory(test)
+endif()
 
 # Compiles example Bakge programs
-add_subdirectory(example)
+if(BAKGE_BUILD_EXAMPLES)
+  add_subdirectory(example)
+endif()
 
 
 ########################################
