@@ -43,19 +43,6 @@ set(BAKGE_SDK_INC_PATH ${BAKGE_TARGET_DIR}/${BAKGE_INC_DIR})
 set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
 set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
 
-# If not on Visual Studio, enable a simple debug/release build target
-if(NOT MSVC)
-  option(DEBUG_BUILD "Build with debug symbols and definitions" ON)
-  if(DEBUG_BUILD)
-    add_definitions(-D_DEBUG)
-    set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_LIB_PATH}/Debug)
-    set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_BIN_PATH}/Debug)
-  else()
-    set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_LIB_PATH}/Release)
-    set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_BIN_PATH}/Release)
-  endif()
-endif()
-
 # Now set our paths
 set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
 set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
@@ -64,6 +51,7 @@ set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
 # SDK's library directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
 
+# Bakge options
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
 option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
 
