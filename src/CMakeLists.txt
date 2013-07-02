@@ -100,6 +100,6 @@ set(PLATFORM_HEADERS
 add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
                                         ${PLATFORM_HEADERS})
 if(BUILD_SHARED_LIBS)
-  target_link_libraries(bakge glew glfw3dll ${BAKGE_LIBRARIES})
+  target_link_libraries(bakge ${BAKGE_LIBRARIES})
 endif()
 

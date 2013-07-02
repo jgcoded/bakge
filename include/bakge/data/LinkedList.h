@@ -55,8 +55,6 @@ protected:
 
 }; /* LinkedList */
 
-#ifdef bakge_EXPORTS
-
 template<class T>
 LinkedList<T>::LinkedList()
 {
@@ -136,8 +134,6 @@ void LinkedList<T>::Clear()
         delete Node;
     }
 }
-
-#endif /* bakge_EXPORTS */
 
 } /* bakge */
 

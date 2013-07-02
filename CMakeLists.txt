@@ -18,8 +18,6 @@ set(BAKGE_LIB_DIR "lib")
 set(BAKGE_BIN_DIR "bin")
 set(BAKGE_INC_DIR "include")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-
 # Common required packages
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -112,10 +110,10 @@ endif()
 if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
-  if(BUILD_SHARED_LIBS)
-    set(BAKGE_LFW_LIB glfw3dll)
+  if(BUILD_SHARED_LIBS AND MSVC)
+    set(BAKGE_GLFW_LIB glfw3dll)
   else()
-    set(BAKGE_LFW_LIB glfw3)
+    set(BAKGE_GLFW_LIB glfw3)
   endif()
 
   set(BAKGE_LIBRARIES

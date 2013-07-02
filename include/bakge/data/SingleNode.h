@@ -53,8 +53,6 @@ protected:
 
 }; /* SingleNode */
 
-#ifdef bakge_EXPORTS
-
 template<class T>
 SingleNode<T>::SingleNode()
 {
@@ -94,8 +92,6 @@ void SingleNode<T>::SetData(const T& Data)
 {
     this->Data = Data;
 }
-
-#endif /* bakge_EXPORTS */
 
 } /* bakge */
 
