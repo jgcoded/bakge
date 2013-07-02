@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class osx_Mutex : api::Mutex
+typedef class BGE_API osx_Mutex : api::Mutex
 {
     osx_Mutex();
 

@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Texture : public Bindable
+class BGE_API Texture : public Bindable
 {
 
 public:

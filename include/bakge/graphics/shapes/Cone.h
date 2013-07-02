@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Cone : public Cylinder
+class BGE_API Cone : public Cylinder
 {
     Scalar TopRadius;
 

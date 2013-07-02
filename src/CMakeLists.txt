@@ -81,6 +81,7 @@ set(PLATFORM_MODULES
   packet/${PLATFORM_PREFIX}_Packet
   socket/${PLATFORM_PREFIX}_Socket
   thread/${PLATFORM_PREFIX}_Thread
+  mutex/${PLATFORM_PREFIX}_Mutex
   utility/${PLATFORM_PREFIX}_Utility
 )
 
@@ -99,6 +100,6 @@ set(PLATFORM_HEADERS
 add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
                                         ${PLATFORM_HEADERS})
 if(BUILD_SHARED_LIBS)
-  target_link_libraries(bakge ${BAKGE_LIBRARIES})
+  target_link_libraries(bakge glew glfw3dll ${BAKGE_LIBRARIES})
 endif()
 

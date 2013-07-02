@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Mesh : public Drawable
+class BGE_API Mesh : public Drawable
 {
 
 public:

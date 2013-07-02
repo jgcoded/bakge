@@ -43,7 +43,7 @@ namespace bakge
  * Quaternions also see use in animation keyframing, where joints' or bones'
  * rotations are relative to their parent joint.
  * */
-class Quaternion
+class BGE_API Quaternion
 {
     Vector4 Val; /* X, Y, Z - vector, W - real */
 

@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class osx_Socket : api::Socket
+typedef class BGE_API osx_Socket : api::Socket
 {
 
     osx_Socket();

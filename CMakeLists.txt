@@ -111,13 +111,20 @@ endif()
 
 if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+
+  if(BUILD_SHARED_LIBS)
+    set(BAKGE_LFW_LIB glfw3dll)
+  else()
+    set(BAKGE_LFW_LIB glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
+	glew
     gdi32.lib
     user32.lib
     winmm.lib
-    glew
-    glfw3
-    lua
+	${BAKGE_GLFW_LIB}
+	lua
     glu32.lib
     ${OPENGL_LIBRARY}
     ws2_32.lib

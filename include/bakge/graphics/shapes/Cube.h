@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Cube : public Shape
+class BGE_API Cube : public Shape
 {
     Vector4 Dimensions;
 

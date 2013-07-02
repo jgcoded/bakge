@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class ScriptedEngine : public Engine
+class BGE_API ScriptedEngine : public Engine
 {
 
 public:

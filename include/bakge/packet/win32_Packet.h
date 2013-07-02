@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class win32_Packet : api::Packet
+typedef class BGE_API win32_Packet : api::Packet
 {
 
     win32_Packet();

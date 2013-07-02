@@ -38,7 +38,7 @@
 #define BGE_WUNUSED __attribute__((warn_unused_result))
 /* Mark a variable as possibly unused in its function  */
 #define BGE_UNUSED __attribute__((unused))
-/* Factory functions are static class methods that return allocated memory  */
+/* Factory functions are static class BGE_API methods that return allocated memory  */
 #else /* Define them anyways to avoid compilation errors  */
 #define BGE_WUNUSED
 #define BGE_UNUSED
@@ -48,10 +48,17 @@
 #ifdef _MSC_VER
 /* Prevent library conflict warning */
 #pragma comment(linker, "/NODEFAULTLIB:MSVCRT")
+#ifdef bakge_EXPORTS
+#define BGE_API __declspec(dllexport)
+#else
+#define BGE_API __declspec(dllimport)
+#endif /* bakge_EXPORTS */
+#else
+#define BGE_API
 #endif /* _MSC_VER */
 
 /* Common definitions */
-#define BGE_FUNC extern
+#define BGE_FUNC extern BGE_API
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 #define BGE_INL inline
@@ -59,7 +66,6 @@
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"

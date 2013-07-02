@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Drawable : public Bindable
+class BGE_API Drawable : public Bindable
 {
 
 public:
