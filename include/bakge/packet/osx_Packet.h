@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class osx_Packet : api::Packet
+typedef class BGE_API osx_Packet : api::Packet
 {
 
     osx_Packet();

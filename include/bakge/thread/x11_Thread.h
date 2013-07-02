@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class x11_Thread : api::Thread
+typedef class BGE_API x11_Thread : api::Thread
 {
     static void* Entry(void* Data); /* Internal thread entry function */
 

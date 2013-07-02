@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class x11_Socket : api::Socket
+typedef class BGE_API x11_Socket : api::Socket
 {
 
     x11_Socket();

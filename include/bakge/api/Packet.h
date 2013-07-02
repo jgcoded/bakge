@@ -30,7 +30,7 @@ namespace bakge
 namespace api
 {
 
-class Packet
+class BGE_API Packet
 {
 
 protected:

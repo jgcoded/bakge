@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class x11_Mutex : api::Mutex
+typedef class BGE_API x11_Mutex : api::Mutex
 {
     x11_Mutex();
 

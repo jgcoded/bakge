@@ -30,10 +30,10 @@
 namespace bakge
 {
 
-class Window : public Bindable
+class BGE_API Window : public Bindable
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
+    friend BGE_API Result Init(int argc, char* argv[]);
+    friend BGE_API Result Deinit();
 
     static GLFWwindow* SharedContext;
 

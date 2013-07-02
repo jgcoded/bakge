@@ -34,10 +34,10 @@
 namespace bakge
 {
 
-class ShaderProgram : public Bindable
+class BGE_API ShaderProgram : public Bindable
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
+    friend BGE_API Result Init(int argc, char* argv[]);
+    friend BGE_API Result Deinit();
 
     /* Initialize all library Shaders */
     static Result InitShaderLibrary();

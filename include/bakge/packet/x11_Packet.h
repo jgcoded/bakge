@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class x11_Packet : api::Packet
+typedef class BGE_API x11_Packet : api::Packet
 {
 
     x11_Packet();

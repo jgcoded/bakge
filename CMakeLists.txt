@@ -12,18 +12,24 @@ endif()
 # Version of GLFW we're using
 set(BAKGE_GLFW_VERSION "3.0")
 set(BAKGE_GLFW_VERSION_FULL "3.0.0")
-message("-- Bakge using GLFW version ${GLFW_VERSION_FULL}")
 
 set(BAKGE_SDK_PATH "sdk")
 set(BAKGE_LIB_DIR "lib")
 set(BAKGE_BIN_DIR "bin")
 set(BAKGE_INC_DIR "include")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-
 # Common required packages
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
+
+# Build option
+if(NOT MSVC)
+  if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
+                                      "MinSizeRel" "RelWithDebInfo")
+  endif()
+endif()
 
 # Bakge include/link directories
 set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
@@ -41,28 +47,20 @@ list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
 set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
 set(BAKGE_SDK_INC_PATH ${BAKGE_TARGET_DIR}/${BAKGE_INC_DIR})
 set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
-set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
-
-# If not on Visual Studio, enable a simple debug/release build target
-if(NOT MSVC)
-  option(DEBUG_BUILD "Build with debug symbols and definitions" ON)
-  if(DEBUG_BUILD)
-    add_definitions(-D_DEBUG)
-    set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_LIB_PATH}/Debug)
-    set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_BIN_PATH}/Debug)
-  else()
-    set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_LIB_PATH}/Release)
-    set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_BIN_PATH}/Release)
-  endif()
-endif()
+set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR}/${CMAKE_BUILD_TYPE})
 
 # Now set our paths
-set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
-set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
+set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_TARGET_DIR}/example)
+set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_TARGET_DIR}/test)
 
 # We want ALL libraries (event external ones)to build into the
 # SDK's library directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
+
+# Bakge options
+option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
+option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
 
 
 ########################################
@@ -110,15 +108,23 @@ if(UNIX AND APPLE)
 endif()
 
 if(WIN32)
+  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+
+  if(BUILD_SHARED_LIBS AND MSVC)
+    set(BAKGE_GLFW_LIB glfw3dll)
+  else()
+    set(BAKGE_GLFW_LIB glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
+	glew
     gdi32.lib
     user32.lib
     winmm.lib
-    glew
-    glfw3
-    lua
+	${BAKGE_GLFW_LIB}
+	lua
     glu32.lib
-    opengl32.lib
+    ${OPENGL_LIBRARY}
     ws2_32.lib
   )
 endif(WIN32)
@@ -152,10 +158,14 @@ add_subdirectory(lib)
 add_subdirectory(src)
 
 # Compiles Bakge unit tests
-add_subdirectory(test)
+if(BAKGE_BUILD_TESTS)
+  add_subdirectory(test)
+endif()
 
 # Compiles example Bakge programs
-add_subdirectory(example)
+if(BAKGE_BUILD_EXAMPLES)
+  add_subdirectory(example)
+endif()
 
 
 ########################################

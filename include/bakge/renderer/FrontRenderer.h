@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class FrontRenderer : public Renderer
+class BGE_API FrontRenderer : public Renderer
 {
 
 public:

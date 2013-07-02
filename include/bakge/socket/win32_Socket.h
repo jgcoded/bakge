@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class win32_Socket : api::Socket
+typedef class BGE_API win32_Socket : api::Socket
 {
     SOCKET SocketHandle;
     struct sockaddr_in ServerAddress;

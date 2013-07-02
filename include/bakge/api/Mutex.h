@@ -30,7 +30,7 @@ namespace bakge
 namespace api
 {
 
-class Mutex
+class BGE_API Mutex
 {
 
 protected:

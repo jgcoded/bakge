@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Cylinder : public Shape
+class BGE_API Cylinder : public Shape
 {
 
 protected:

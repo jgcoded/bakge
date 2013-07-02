@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Vector3
+class BGE_API Vector3
 {
     Scalar Val[3];
 

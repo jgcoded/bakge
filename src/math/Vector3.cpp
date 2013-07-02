@@ -35,6 +35,12 @@ Vector3::Vector3()
 }
 
 
+Vector3::Vector3(Vector3 BGE_NCP Other)
+{
+    *this = Other;
+}
+
+
 Vector3::Vector3(Scalar X, Scalar Y, Scalar Z)
 {
     Val[0] = X;

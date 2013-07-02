@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class win32_Thread : api::Thread
+typedef class BGE_API win32_Thread : api::Thread
 {
     /* Internal thread entry function */
     static DWORD WINAPI Entry(LPVOID Data);

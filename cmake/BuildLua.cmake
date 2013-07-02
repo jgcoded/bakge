@@ -46,6 +46,10 @@ if(LUA_TARGET)
   if(WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   endif()
+  
+  if(BUILD_SHARED_LIBS)
+    add_definitions(-DLUA_BUILD_AS_DLL)
+  endif()
 
   add_library(lua ${LUA_SOURCES})
   

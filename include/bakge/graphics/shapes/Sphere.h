@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Sphere : public Shape
+class BGE_API Sphere : public Shape
 {
     Scalar Radius;
     int Slices;

@@ -42,7 +42,7 @@ namespace bakge
  * multiplication. Dividing a point by a constant is meaningless. Dividing a
  * vector by a constant reduces its magnitude (length).
  * */
-class Vector4
+class BGE_API Vector4
 {
     Scalar Val[4];
 

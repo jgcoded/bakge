@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Shader
+class BGE_API Shader
 {
     GLuint Handle;
 

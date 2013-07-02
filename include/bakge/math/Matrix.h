@@ -41,7 +41,7 @@ namespace bakge
  *
  * Position and/or rotation data can be described with a Node or Pawn object.
  * */
-class Matrix
+class BGE_API Matrix
 {
     Scalar Val[16];
 

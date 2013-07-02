@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Pawn : public Node
+class BGE_API Pawn : public Node
 {
 
 public:
