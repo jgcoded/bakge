@@ -52,8 +52,8 @@ set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
 set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR}/${CMAKE_BUILD_TYPE})
 
 # Now set our paths
-set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
-set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
+set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_TARGET_DIR}/example)
+set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_TARGET_DIR}/test)
 
 # We want ALL libraries (event external ones)to build into the
 # SDK's library directory
