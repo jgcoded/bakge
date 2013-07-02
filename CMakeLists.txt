@@ -36,6 +36,7 @@ endif()
 # Bakge include/link directories
 set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
 set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
+set(CMAKE_INSTALL_PREFIX ${BAKGE_LIBRARY_DIRECTORIES})
 
 # Append library include directories
 # SDK build needs to copy them into the SDK directory
@@ -109,6 +110,7 @@ if(UNIX AND APPLE)
 endif()
 
 if(WIN32)
+  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
   set(BAKGE_LIBRARIES
     gdi32.lib
     user32.lib
@@ -117,7 +119,7 @@ if(WIN32)
     glfw3
     lua
     glu32.lib
-    opengl32.lib
+    ${OPENGL_LIBRARY}
     ws2_32.lib
   )
 endif(WIN32)
