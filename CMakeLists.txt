@@ -36,7 +36,6 @@ endif()
 # Bakge include/link directories
 set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
 set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
-set(CMAKE_INSTALL_PREFIX ${BAKGE_LIBRARY_DIRECTORIES})
 
 # Append library include directories
 # SDK build needs to copy them into the SDK directory
@@ -59,6 +58,7 @@ set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
 # We want ALL libraries (event external ones)to build into the
 # SDK's library directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 
 # Bakge options
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
