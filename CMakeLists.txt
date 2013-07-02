@@ -71,10 +71,17 @@ if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   include_directories(${X11_LIBRARY_DIR})
+
+  if(BUILD_SHARED_LIBS)
+    set(BAKGE_GLFW_LIBRARY glfw)
+  else()
+    set(BAKGE_GLFW_LIBRARY glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
     m
     glew
-    glfw3
+    ${BAKGE_GLFW_LIBRARY}
     lua
     GL
     GLU
@@ -110,19 +117,18 @@ endif()
 if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
+  # GLFW has some nuances when it comes to different builds/platforms
   if(BUILD_SHARED_LIBS AND MSVC)
-    set(BAKGE_GLFW_LIB glfw3dll)
-  else()
-    set(BAKGE_GLFW_LIB glfw3)
+      set(BAKGE_GLFW_LIB glfw3dll)
   endif()
 
   set(BAKGE_LIBRARIES
-	glew
+    glew
     gdi32.lib
     user32.lib
     winmm.lib
-	${BAKGE_GLFW_LIB}
-	lua
+    ${BAKGE_GLFW_LIB}
+    lua
     glu32.lib
     ${OPENGL_LIBRARY}
     ws2_32.lib
