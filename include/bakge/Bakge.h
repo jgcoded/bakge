@@ -45,7 +45,7 @@
 #endif /* __GNUC__  */
 
 /* MSVC pragmas */
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && defined(_DEBUG)
 /* Prevent library conflict warning */
 #pragma comment(linker, "/NODEFAULTLIB:MSVCRT")
 #ifdef bakge_EXPORTS

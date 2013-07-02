@@ -119,7 +119,9 @@ if(WIN32)
 
   # GLFW has some nuances when it comes to different builds/platforms
   if(BUILD_SHARED_LIBS AND MSVC)
-      set(BAKGE_GLFW_LIB glfw3dll)
+    set(BAKGE_GLFW_LIB glfw3dll)
+  else()
+    set(BAKGE_GLFW_LIB glfw)
   endif()
 
   set(BAKGE_LIBRARIES

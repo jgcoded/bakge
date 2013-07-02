@@ -58,7 +58,7 @@ if(LUA_TARGET)
   add_library(lua ${LUA_LIBRARY_TYPE} ${LUA_SOURCES})
 
   # Lua needs some other shared libraries
-  if(BUILD_SHARED_LIBS)
+  if(BUILD_SHARED_LIBS AND UNIX)
     target_link_libraries(lua m)
   endif()
   

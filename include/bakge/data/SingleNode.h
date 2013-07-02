@@ -53,6 +53,8 @@ protected:
 
 }; /* SingleNode */
 
+#if !defined(_MSC_VER) && !defined(bakge_EXPORTS)
+
 template<class T>
 SingleNode<T>::SingleNode()
 {
@@ -92,6 +94,8 @@ void SingleNode<T>::SetData(const T& Data)
 {
     this->Data = Data;
 }
+
+#endif
 
 } /* bakge */
 
