@@ -66,6 +66,9 @@
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
+#ifndef bakge_EXPORTS
+#define GLEW_STATIC
+#endif /* bakge_EXPORTS */
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"
