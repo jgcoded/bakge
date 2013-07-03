@@ -46,17 +46,14 @@ list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
 # Output all generated libraries and binaries to the SDK dir
 set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
 set(BAKGE_SDK_INC_PATH ${BAKGE_TARGET_DIR}/${BAKGE_INC_DIR})
-set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
+set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR}/${CMAKE_BUILD_TYPE})
 set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR}/${CMAKE_BUILD_TYPE})
-
-# Now set our paths
-set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_TARGET_DIR}/example)
-set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_TARGET_DIR}/test)
 
 # We want ALL libraries (event external ones)to build into the
 # SDK's library directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 
 # Bakge options
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
@@ -101,10 +98,17 @@ if(UNIX AND APPLE)
   FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
   include_directories(${Cocoa_INCLUDE_DIRS})
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+
+  if(BUILD_SHARED_LIBS)
+    set(BAKGE_GLFW_LIBRARY glfw)
+  else()
+    set(BAKGE_GLFW_LIBRARY glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
     m
     glew
-    glfw3
+    ${BAKGE_GLFW_LIBRARY}
     lua
     ${OPENGL_LIBRARY}
     ${COCOA_LIBRARY}
@@ -152,8 +156,12 @@ endforeach(directory)
 
 # Also add SDK paths
 include_directories(${BAKGE_SDK_INC_PATH})
-link_directories(${BAKGE_SDK_LIB_PATH})
 
+if(NOT BUILD_SHARED_LIBS)
+  link_directories(${BAKGE_SDK_LIB_PATH})
+else()
+  link_directories(${BAKGE_SDK_BIN_PATH})
+endif()
 
 ########################################
 # BAKGE CMAKE SUBDIRECTORIES
