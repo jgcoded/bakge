@@ -22,6 +22,13 @@ help:
 	@echo " - Debug: Build a debug configuration"
 	@echo " - Release: Build a release configuration"
 	@echo ""
+	@echo "Bakge Makefile options"
+	@echo "======================"
+	@echo " - Usage: $$ make <OPTION>=ON/OFF <TARGET>"
+	@echo " - BUILD_DYNAMIC: Build shared libraries. Default: OFF"
+	@echo " - BUILD_TESTS: Build Bakge's test suite. Default: ON"
+	@echo " - BUILD_ExAMPLES: Build Bakge's example programs. Default: ON"
+	@echo ""
 
 Debug:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS) -DCMAKE_BUILD_TYPE=Debug && make -s;
