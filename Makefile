@@ -8,6 +8,8 @@ BUILD_DYNAMIC?=OFF
 BUILD_TESTS?=ON
 BUILD_EXAMPLES?=ON
 
+export BUILD_DYNAMIC BUILD_TESTS BUILD_EXAMPLES
+
 GLFW_OPTIONS=-DGLFW_USE_EGL=OFF -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_TESTS=OFF
 
 BAKGE_OPTIONS=-DBAKGE_SDK_PATH=$(SDK) -DBAKGE_BUILD_TESTS=$(BUILD_TESTS) -DBAKGE_BUILD_EXAMPLES=$(BUILD_EXAMPLES) -DBUILD_SHARED_LIBS=$(BUILD_DYNAMIC)
@@ -19,6 +21,7 @@ help:
 	@echo ""
 	@echo "Bakge Makefile targets"
 	@echo "======================"
+	@echo " - All: Builds Debug & Release"
 	@echo " - Debug: Build a debug configuration"
 	@echo " - Release: Build a release configuration"
 	@echo " - clean: Delete all of Bakge's generated files"
@@ -30,6 +33,9 @@ help:
 	@echo " - BUILD_TESTS: Build Bakge's test suite. Default: ON"
 	@echo " - BUILD_ExAMPLES: Build Bakge's example programs. Default: ON"
 	@echo ""
+
+All:
+	@$(MAKE) -s Debug Release;
 
 Debug:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS) -DCMAKE_BUILD_TYPE=Debug && make -s;
