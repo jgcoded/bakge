@@ -98,10 +98,17 @@ if(UNIX AND APPLE)
   FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
   include_directories(${Cocoa_INCLUDE_DIRS})
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+
+  if(BUILD_SHARED_LIBS)
+    set(BAKGE_GLFW_LIBRARY glfw)
+  else()
+    set(BAKGE_GLFW_LIBRARY glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
     m
     glew
-    glfw3
+    ${BAKGE_GLFW_LIBRARY}
     lua
     ${OPENGL_LIBRARY}
     ${COCOA_LIBRARY}
@@ -149,8 +156,12 @@ endforeach(directory)
 
 # Also add SDK paths
 include_directories(${BAKGE_SDK_INC_PATH})
-link_directories(${BAKGE_SDK_LIB_PATH})
 
+if(NOT BUILD_SHARED_LIBS)
+  link_directories(${BAKGE_SDK_LIB_PATH})
+else()
+  link_directories(${BAKGE_SDK_BIN_PATH})
+endif()
 
 ########################################
 # BAKGE CMAKE SUBDIRECTORIES
