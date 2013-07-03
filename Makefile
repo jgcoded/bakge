@@ -21,6 +21,7 @@ help:
 	@echo "======================"
 	@echo " - Debug: Build a debug configuration"
 	@echo " - Release: Build a release configuration"
+	@echo " - clean: Delete all of Bakge's generated files"
 	@echo ""
 	@echo "Bakge Makefile options"
 	@echo "======================"
