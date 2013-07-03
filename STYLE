@@ -1,17 +1,12 @@
-Source Control Convention
-=========================
+SOURCE CONTROL CONVENTION
 
 When committing code to your git repository, it's important to remember that
 each commit should be a single distinguishable change, new feature, or
 deletion. Source control is not about backing up code in a remote repository,
 it's about leaving a bread crumb trail which tracks the development of
-the program in bite-sized chunks.
+the program's new features, changes and removals in distinguishable chunks.
 
-The better you are at managing your commits, the easier it is for me to
-review and add your patches to the codebase. But a little messiness can always
-be fixed with some git wizardry, so fear not!
-
-Some useful tips when committing code:
+Some tips on committing:
 
 1) Commit often. When you finish a change, commit it.
 
@@ -33,12 +28,12 @@ doing `$ git pull palistov <branch_name>` (assuming palistov is an alias
 for my remote repository https://github.com/palistov/bakge)
 
 
-Coding Style
-============
+CODING STYLE
 
 For consistency across the codebase, a certain coding style is recommended.
 If you commit code that doesn't meet the styling standards, no worries --
-I'll adjust it before finalizing the pull request.
+I'll adjust it before finalizing the pull request. Remember that you can
+always browse existing code for examples of proper style usage.
 
 Except for the following cases, code should match the Linux kernel coding
 style as described here: https://www.kernel.org/doc/Documentation/CodingStyle
@@ -47,14 +42,35 @@ If you have any questions about styling and convention that aren't answered
 here, feel free to e-mail me!
 
 
-Naming Conventions
-==================
+NAMING
 
 To maintain code readability, use succinct yet descriptive identifiers for
 variables, types and functions. All identifiers should be camel-cased.
+Certain abbreviations are allowed when appropriate, and easily understood.
+(e.g. Num instead of NumberOf)
 
 int nplayer; /* BAD */
 int NumPlayers; /* GOOD */
+
+
+Enumerations and macros should be in all caps.
+
+enum DRAW_TYPE /* GOOD */
+{
+    ...
+};
+
+#define bge_ASSERT ... /* BAD */
+
+
+Anything unable to be placed into the bakge namespace (Objective-C code,
+or macros) should be prefixed with bge and styled appropriately.
+
+#define BGE_MACRO_SYMBOL ...
+
+@implementation bgeObjectiveCClass
+...
+@end
 
 
 FUNCTIONS
@@ -97,26 +113,7 @@ void SetVelocity(Vector4 Direction, Meters PerSec)
 }
 
 
-VARIABLES
-
-Variables should be as succinct as possible without being too long. When
-placed into context the user should be quite clear as to the use of the
-variable. Where appropriate, certain abbreviations are acceptable (Num for
-Number, Prev for Previous)
-
-Degrees GetElevationAngle()
-{
-    float PreviousCameraElevationAngle; /* BAD */
-    float PrevElevation; /* GOOD */
-
-    ...
-
-    return ...;
-}
-
-
-Comment Styling
-===============
+COMMENT STYLE
 
 Comment your code! Use multi-line comments, even for a single-lined comment.
 
@@ -124,15 +121,13 @@ Comment your code! Use multi-line comments, even for a single-lined comment.
 /* GOOD */
 
 
-Indentation
-===========
+INDENTATION
 
 Indentation is done using 4 spaces. Please don't use tabs! Namespaces and
 class declarations should begin at column 0. Do not nest namespaces.
 
 
-General Convetion
-=================
+GENERAL CONVENTION
 
 * Avoid declaring typedefs or new data types inside classes.
 
@@ -148,7 +143,7 @@ General Convetion
 
 * Avoid using a lot of do-while loops. They can be confusing.
 
-* Empty loops are OK but put the semicolon on a new line, indented
+* Empty loops are OK but put the semicolon on a new line, indented 4 spaces
 
     e.g.   while(i < 20)
                ;
@@ -201,5 +196,4 @@ General Convetion
             default:
                 ...
             }
-
 
