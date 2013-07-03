@@ -58,11 +58,7 @@ Build on the commandline (Unix-like)
  $ make
 
 
-The makefile is simply for convenience. It has a few targets to speed up building/cleaning Bakge.
-
- - all: Build using Unix Makefiles
- - clean: Clean the build folder and sdk folder
- - codeblocks: Generate a CodeBlocks project using Unix Makefiles to build
+The makefile is simply for convenience. It has a few targets to speed up building/cleaning Bakge. Run $ make help to see the available build targets.
 
 
 Build with CMake GUI
