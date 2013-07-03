@@ -32,8 +32,6 @@ set(TESTS
   window
 )
 
-set(EXECUTABLE_OUTPUT_PATH ${BAKGE_SDK_TESTS_OUTPUT_PATH})
-
 if(NOT APPLE)
   foreach(test ${TESTS})
     add_executable(${test} ${test}.cpp)
