@@ -21,9 +21,9 @@ help:
 	@echo ""
 	@echo "Bakge Makefile targets"
 	@echo "======================"
-	@echo " - All: Builds Debug & Release"
-	@echo " - Debug: Build a debug configuration"
-	@echo " - Release: Build a release configuration"
+	@echo " - all: Builds Debug & Release"
+	@echo " - debug: Build a debug configuration"
+	@echo " - release: Build a release configuration"
 	@echo " - clean: Delete all of Bakge's generated files"
 	@echo ""
 	@echo "Bakge Makefile options"
@@ -34,13 +34,13 @@ help:
 	@echo " - BUILD_ExAMPLES: Build Bakge's example programs. Default: ON"
 	@echo ""
 
-All:
-	@$(MAKE) -s Debug Release;
+all:
+	@$(MAKE) -s debug release;
 
-Debug:
+debug:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS) -DCMAKE_BUILD_TYPE=Debug && make -s;
 
-Release:
+release:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS) -DCMAKE_BUILD_TYPE=Release && make -s;
 
 codeblocks:
