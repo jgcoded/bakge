@@ -24,6 +24,7 @@ help:
 	@echo " - all: Builds Debug & Release"
 	@echo " - debug: Build a debug configuration"
 	@echo " - release: Build a release configuration"
+	@echo " - sdk: Build the full SDK"
 	@echo " - clean: Delete all of Bakge's generated files"
 	@echo ""
 	@echo "Bakge Makefile options"
@@ -42,6 +43,10 @@ debug:
 
 release:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "Unix Makefiles" $(OPTIONS) -DCMAKE_BUILD_TYPE=Release && make -s;
+
+sdk:
+	@make -s BUILD_DYNAMIC=ON BUILD_TESTS=OFF all;
+	@make -s BUILD_TESTS=OFF BUILD_EXAMPLES=OFF all;
 
 codeblocks:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "CodeBlocks - Unix Makefiles" $(OPTIONS);
