@@ -30,6 +30,8 @@ namespace bakge
 
 typedef class BGE_API x11_Socket : api::Socket
 {
+    int SocketHandle;
+    struct sockaddr_in SocketIn;
 
     x11_Socket();
 
@@ -39,6 +41,9 @@ public:
     virtual ~x11_Socket();
 
     BGE_FACTORY x11_Socket* Create();
+
+    BGE_WUNUSED Packet* Receive();
+    Result Send(Packet* Data);
 
 } Socket; /* x11_Socket */
 

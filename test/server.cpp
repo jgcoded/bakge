@@ -22,19 +22,29 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_X11_BAKGE_H
-#define BAKGE_PLATFORM_X11_BAKGE_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <bakge/Bakge.h>
 
-#include <GL/glu.h>
-#include <sys/time.h>
-#include <time.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
+int main(int argc, char* argv[])
+{
+    bakge::Init(argc, argv);
 
-#include <bakge/mutex/x11_Mutex.h>
-#include <bakge/thread/x11_Thread.h>
-#include <bakge/socket/x11_Socket.h>
+    printf("Creating socket\n");
+    bakge::Socket* Sock = bakge::Socket::Create();
+    bakge::Packet* Pack;
 
-#endif /* BAKGE_PLATFORM_X11_BAKGE_H */
+    Pack = Sock->Receive();
+    printf("Received Packet\n");
+
+    printf("Deleting received packet\n");
+    if(Pack != NULL)
+        delete Pack;
+
+    printf("Deleting socket\n");
+    delete Sock;
+
+    bakge::Deinit();
+
+    return 0;
+}
