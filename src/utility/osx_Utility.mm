@@ -46,4 +46,3 @@ Result PlatformInit(int argc, char* argv[])
 }
 
 } /* bakge */
-

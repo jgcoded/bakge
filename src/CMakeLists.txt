@@ -102,4 +102,3 @@ add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
 if(BUILD_SHARED_LIBS)
   target_link_libraries(bakge ${BAKGE_LIBRARIES})
 endif()
-
