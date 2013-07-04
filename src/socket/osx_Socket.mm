@@ -29,17 +29,41 @@ namespace bakge
 
 osx_Socket::osx_Socket()
 {
+    SocketHandle = -1;
 }
 
 
 osx_Socket::~osx_Socket()
 {
+    if(SocketHandle >= 0) {
+        close(SocketHandle);
+    }
 }
 
 
 osx_Socket* osx_Socket::Create()
 {
+    osx_Socket* Sock = new osx_Socket;
+
+    Sock->SocketHandle = socket(0, SOCK_DGRAM, AF_INET);
+    if(Sock->SocketHandle < 0) {
+        delete Sock;
+        return NULL;
+    }
+
+    return Sock;
+}
+
+
+Packet* osx_Socket::Receive()
+{
     return NULL;
+}
+
+
+Result osx_Socket::Send(Packet* Data)
+{
+    return BGE_FAILURE;
 }
 
 } /* bakge */

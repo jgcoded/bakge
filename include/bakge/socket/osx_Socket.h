@@ -30,6 +30,7 @@ namespace bakge
 
 typedef class BGE_API osx_Socket : api::Socket
 {
+    int SocketHandle;
 
     osx_Socket();
 
@@ -39,6 +40,9 @@ public:
     virtual ~osx_Socket();
 
     BGE_FACTORY osx_Socket* Create();
+
+    BGE_WUNUSED Packet* Receive();
+    Result Send(Packet* Data);
 
 } Socket; /* osx_Socket */
 
