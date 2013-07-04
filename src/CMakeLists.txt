@@ -9,7 +9,6 @@ cmake_minimum_required (VERSION 2.6)
 
 set(MODULES
   api/Mutex
-  api/Packet
   api/Socket
   api/Thread
   data/SingleNode
@@ -37,6 +36,7 @@ set(MODULES
   math/Vector4
   math/Quaternion
   math/Matrix
+  network/Packet
   renderer/DeferredGeometryRenderer
   renderer/DeferredLightingRenderer
   renderer/FrontRenderer
@@ -74,7 +74,6 @@ endif()
 
 set(PLATFORM_MODULES
   clock/${PLATFORM_PREFIX}_Clock
-  packet/${PLATFORM_PREFIX}_Packet
   socket/${PLATFORM_PREFIX}_Socket
   thread/${PLATFORM_PREFIX}_Thread
   mutex/${PLATFORM_PREFIX}_Mutex
@@ -90,7 +89,6 @@ set(PLATFORM_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/mutex/${PLATFORM_PREFIX}_Mutex
   ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread
   ${BAKGE_SOURCE_DIR}/include/bakge/socket/${PLATFORM_PREFIX}_Socket
-  ${BAKGE_SOURCE_DIR}/include/bakge/packet/${PLATFORM_PREFIX}_Packet
 )
 
 # Extern libraries in the source tree

@@ -113,10 +113,12 @@ extern "C"
 #include <bakge/data/SingleNode.h>
 #include <bakge/data/LinkedList.h>
 
+/* Network modules */
+#include <bakge/network/Packet.h>
+
 /* Include API classes */
 #include <bakge/api/Mutex.h>
 #include <bakge/api/Thread.h>
-#include <bakge/api/Packet.h>
 #include <bakge/api/Socket.h>
 
 /* Platform headers (may depend on core Bakge classes) */
