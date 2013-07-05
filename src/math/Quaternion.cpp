@@ -110,37 +110,48 @@ Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 
 Quaternion Quaternion::operator+(Quaternion BGE_NCP Other) const
 {
-    return Quaternion();
+    return Quaternion(Axis + Other.Axis, Angle + Other.Angle);
 }
 
 
 Quaternion Quaternion::operator-(Quaternion BGE_NCP Other) const
 {
-    return Quaternion();
+    return Quaternion(Axis - Other.Axis, Angle - Other.Angle);
 }
 
 
 Quaternion Quaternion::operator*(Quaternion BGE_NCP Other) const
 {
-    return Quaternion();
+    return Quaternion(
+        Vector4(
+            Axis[0] * Other.Angle + Other.Axis[0] * Angle
+             + Axis[1] * Other.Axis[2] - Axis[2] * Other.Axis[1],
+            Axis[1] * Other.Angle + Other.Axis[1] * Angle
+             + Axis[2] * Other.Axis[0] - Axis[0] * Other.Axis[2],
+            Axis[2] * Other.Angle + Other.Axis[2] * Angle
+             + Axis[0] * Other.Axis[1] - Axis[1] * Other.Axis[0],
+            0
+        ),
+        Angle * Other.Angle - Dot(Axis, Other.Axis)
+    );
 }
 
 
 Quaternion Quaternion::operator/(Quaternion BGE_NCP Other) const
 {
-    return Quaternion();
+    return *this * Other.Inverted();
 }
 
 
 Quaternion Quaternion::operator*(Scalar BGE_NCP Value) const
 {
-    return Quaternion();
+    return Quaternion(Axis * Value, Angle * Value);
 }
 
 
 Quaternion Quaternion::operator/(Scalar BGE_NCP Value) const
 {
-    return Quaternion();
+    return Quaternion(Axis / Value, Angle / Value);
 }
 
 
