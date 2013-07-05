@@ -39,6 +39,12 @@ Quaternion::Quaternion(Vector4 BGE_NCP Axis, Scalar BGE_NCP Real)
 }
 
 
+Quaternion::Quaternion(Quaternion BGE_NCP Other)
+{
+    Val = Other.Val;
+}
+
+
 Quaternion::~Quaternion()
 {
 }

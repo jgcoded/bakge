@@ -52,6 +52,7 @@ public:
 
     Quaternion();
     Quaternion(Vector4 BGE_NCP Axis, Scalar BGE_NCP Real);
+    Quaternion(Quaternion BGE_NCP Other);
     ~Quaternion();
 
     Quaternion BGE_NCP operator+=(Quaternion BGE_NCP Other);
