@@ -63,12 +63,12 @@ public:
     Quaternion BGE_NCP operator*=(Scalar BGE_NCP Value);
     Quaternion BGE_NCP operator/=(Scalar BGE_NCP Value);
 
-    Quaternion BGE_NCP operator+(Quaternion BGE_NCP Other) const;
-    Quaternion BGE_NCP operator-(Quaternion BGE_NCP Other) const;
-    Quaternion BGE_NCP operator*(Quaternion BGE_NCP Other) const;
-    Quaternion BGE_NCP operator/(Quaternion BGE_NCP Other) const;
-    Quaternion BGE_NCP operator*(Scalar BGE_NCP Value) const;
-    Quaternion BGE_NCP operator/(Scalar BGE_NCP Value) const;
+    Quaternion operator+(Quaternion BGE_NCP Other) const;
+    Quaternion operator-(Quaternion BGE_NCP Other) const;
+    Quaternion operator*(Quaternion BGE_NCP Other) const;
+    Quaternion operator/(Quaternion BGE_NCP Other) const;
+    Quaternion operator*(Scalar BGE_NCP Value) const;
+    Quaternion operator/(Scalar BGE_NCP Value) const;
 
     Quaternion BGE_NCP Invert();
     Quaternion Inverted() const;

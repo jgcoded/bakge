@@ -108,39 +108,39 @@ Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 }
 
 
-Quaternion BGE_NCP Quaternion::operator+(Quaternion BGE_NCP Other) const
+Quaternion Quaternion::operator+(Quaternion BGE_NCP Other) const
 {
-    return *this;
+    return Quaternion();
 }
 
 
-Quaternion BGE_NCP Quaternion::operator-(Quaternion BGE_NCP Other) const
+Quaternion Quaternion::operator-(Quaternion BGE_NCP Other) const
 {
-    return *this;
+    return Quaternion();
 }
 
 
-Quaternion BGE_NCP Quaternion::operator*(Quaternion BGE_NCP Other) const
+Quaternion Quaternion::operator*(Quaternion BGE_NCP Other) const
 {
-    return *this;
+    return Quaternion();
 }
 
 
-Quaternion BGE_NCP Quaternion::operator/(Quaternion BGE_NCP Other) const
+Quaternion Quaternion::operator/(Quaternion BGE_NCP Other) const
 {
-    return *this;
+    return Quaternion();
 }
 
 
-Quaternion BGE_NCP Quaternion::operator*(Scalar BGE_NCP Value) const
+Quaternion Quaternion::operator*(Scalar BGE_NCP Value) const
 {
-    return *this;
+    return Quaternion();
 }
 
 
-Quaternion BGE_NCP Quaternion::operator/(Scalar BGE_NCP Value) const
+Quaternion Quaternion::operator/(Scalar BGE_NCP Value) const
 {
-    return *this;
+    return Quaternion();
 }
 
 
