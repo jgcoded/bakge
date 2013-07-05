@@ -53,36 +53,57 @@ Quaternion::~Quaternion()
 
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
+    Axis += Other.Axis;
+    Angle += Other.Angle;
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 {
+    Axis -= Other.Axis;
+    Angle -= Other.Angle;
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
 {
+    Vector4 Temp = Axis;
+    Angle *= Other.Angle;
+    Angle -= Axis[0] * Other.Axis[0];
+    Angle -= Axis[1] * Other.Axis[1];
+    Angle -= Axis[2] * Other.Axis[2];
+    Axis *= Other.Angle;
+    Axis[0] += Other.Axis[0] * Angle;
+    Axis[1] += Other.Axis[1] * Angle;
+    Axis[2] += Other.Axis[2] * Angle;
+    Axis[0] += Temp[1] * Other.Axis[2] - Temp[2] * Other.Axis[1];
+    Axis[1] += Temp[2] * Other.Axis[0] - Temp[0] * Other.Axis[2];
+    Axis[2] += Temp[0] * Other.Axis[1] - Temp[1] * Other.Axis[0];
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator/=(Quaternion BGE_NCP Other)
 {
+    *this = Other.Inverted();
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 {
+    Axis *= Value;
+    Angle *= Value;
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 {
+    Axis /= Value;
+    Angle /= Value;
     return *this;
 }
 
