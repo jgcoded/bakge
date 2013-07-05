@@ -45,13 +45,14 @@ namespace bakge
  * */
 class BGE_API Quaternion
 {
-    Vector4 Val; /* X, Y, Z - vector, W - real */
+    Vector4 Axis;
+    Scalar Angle;
 
 
 public:
 
     Quaternion();
-    Quaternion(Vector4 BGE_NCP Axis, Scalar BGE_NCP Real);
+    Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP Real);
     Quaternion(Quaternion BGE_NCP Other);
     ~Quaternion();
 
