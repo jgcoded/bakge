@@ -183,6 +183,9 @@ if(BAKGE_BUILD_EXAMPLES)
   add_subdirectory(example)
 endif()
 
+# Build the Bakge GDK
+add_subdirectory(gdk)
+
 
 ########################################
 # BAKGE SDK BUILD
