@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/GDKEngine.h>
+#include <bakge/gdk/engine/GDKEngine.h>
 
 namespace bakge
 {
