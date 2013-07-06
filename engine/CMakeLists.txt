@@ -19,6 +19,9 @@ set(BAKGE_GDK_ENGINE_SOURCES
 
 set(BAKGE_TARGETS lua bakge ${BAKGE_GLFW_LIBRARY} glew)
 
+# So Bakge engine executable can find shared libs in its directory
+# Without this dynamic linking won't work on Linux
+link_directories(${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
@@ -30,6 +33,16 @@ foreach(COPYLIB ${BAKGE_TARGETS})
   add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${COPYLIB}>
         ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
+
+  # If we're on Linux there may be other generated files
+  if(UNIX AND NOT APPLE)
+    add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_FILE:${COPYLIB}>
+        ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
+    add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_SONAME_FILE:${COPYLIB}>
+        ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
+  endif()
 endforeach()
 
 add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS})
