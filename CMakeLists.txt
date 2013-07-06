@@ -44,10 +44,10 @@ list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
 
 # Output all generated libraries and binaries to the SDK dir
-set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
-set(BAKGE_SDK_INC_PATH ${BAKGE_TARGET_DIR}/${BAKGE_INC_DIR})
-set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR}/${CMAKE_BUILD_TYPE})
-set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR}/${CMAKE_BUILD_TYPE})
+set(BAKGE_SDK_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
+set(BAKGE_SDK_INC_PATH ${BAKGE_SDK_DIR}/${BAKGE_INC_DIR})
+set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_DIR}/${BAKGE_LIB_DIR}/${CMAKE_BUILD_TYPE})
+set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_DIR}/${BAKGE_BIN_DIR}/${CMAKE_BUILD_TYPE})
 
 # We want ALL libraries (event external ones)to build into the
 # SDK's library directory
@@ -190,7 +190,7 @@ endif()
 
 # Copy Bakge headers and library headers to SDK dir
 # Doesn't copy OpenGL or platform-specific headres like windows.h or x11.h
-make_directory(${BAKGE_TARGET_DIR})
+make_directory(${BAKGE_SDK_DIR})
 make_directory(${BAKGE_SDK_INC_PATH})
 foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}
