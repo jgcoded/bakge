@@ -47,3 +47,4 @@ endforeach()
 
 add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS})
 add_dependencies(Bakge GDKEngineCopyLibs)
+
