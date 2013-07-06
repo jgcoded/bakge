@@ -17,17 +17,6 @@ set(BAKGE_GDK_ENGINE_SOURCES
   ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/GameEngine
 )
 
-if(UNIX AND NOT APPLE)
-  set(LIB_GLOB *.so*)
-endif()
-
-if(WIN32)
-  set(LIB_GLOB *.dll)
-endif()
-
-if(UNIX AND APPLE)
-  set(LIB_GLOB *.dylib*)
-endif()
 
 set(BAKGE_TARGETS lua bakge ${BAKGE_GLFW_LIB} glew)
 
