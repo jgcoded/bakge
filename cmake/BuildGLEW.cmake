@@ -1,9 +1,6 @@
 
 if(GLEW_TARGET)
 
-  set(BAKGE_GLEW_TARGET glew)
-  list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
-
   set(GLEW_SOURCES
     ${GLEW_TARGET}/src/glew
   )

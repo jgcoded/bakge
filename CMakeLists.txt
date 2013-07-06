@@ -137,12 +137,17 @@ if(WIN32)
   )
 endif(WIN32)
 
-
 # Create a list of all Bakge's build targets
 set(BAKGE_TARGET bakge)
 set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
 
+# Append library targets
+# BAKGE_GLFW_TARGET changes based on platform. Determined above.
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
+set(BAKGE_LUA_TARGET lua)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
+set(BAKGE_GLEW_TARGET glew)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS

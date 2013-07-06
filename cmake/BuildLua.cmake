@@ -2,9 +2,6 @@
 
 if(LUA_TARGET)
 
-  set(BAKGE_LUA_TARGET lua)
-  list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
-
   include_directories(${LUA_TARGET}/src)
 
   set(LUA_SOURCES
