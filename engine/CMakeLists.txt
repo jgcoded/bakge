@@ -17,8 +17,8 @@ set(BAKGE_GDK_ENGINE_SOURCES
   ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/GameEngine
 )
 
+set(BAKGE_TARGETS lua bakge ${BAKGE_GLFW_LIBRARY} glew)
 
-set(BAKGE_TARGETS lua bakge ${BAKGE_GLFW_LIB} glew)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
