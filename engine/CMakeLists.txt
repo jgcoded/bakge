@@ -28,21 +28,23 @@ target_link_libraries(Bakge bakge ${BAKGE_LIBRARIES})
 # Copy libraries over to GDK directory
 add_custom_target(GDKEngineCopyLibs)
 
-foreach(COPYLIB ${BAKGE_TARGETS_LIST})
-  add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
+if(BUILD_SHARED_LIBS)
+  foreach(COPYLIB ${BAKGE_TARGETS_LIST})
+    add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${COPYLIB}>
         ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
-  # If we're on Linux there may be other generated files
-  if(UNIX AND NOT APPLE)
-    add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
+    # If we're on Linux there may be other generated files
+    if(UNIX AND NOT APPLE)
+      add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_LINKER_FILE:${COPYLIB}>
         ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
-    add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
+      add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_SONAME_FILE:${COPYLIB}>
         ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
-  endif()
-endforeach()
+    endif()
+  endforeach()
+endif()
 
 add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS_LIST})
 add_dependencies(Bakge GDKEngineCopyLibs)
