@@ -2,6 +2,9 @@
 
 if(LUA_TARGET)
 
+  set(BAKGE_LUA_TARGET lua)
+  list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
+
   include_directories(${LUA_TARGET}/src)
 
   set(LUA_SOURCES
@@ -55,11 +58,11 @@ if(LUA_TARGET)
     endif()
   endif()
 
-  add_library(lua ${LUA_LIBRARY_TYPE} ${LUA_SOURCES})
+  add_library(${BAKGE_LUA_TARGET} ${LUA_LIBRARY_TYPE} ${LUA_SOURCES})
 
   # Lua needs some other shared libraries
   if(BUILD_SHARED_LIBS AND UNIX)
-    target_link_libraries(lua m)
+    target_link_libraries(${BAKGE_LUA_TARGET} m)
   endif()
   
   # Copy headers into SDK

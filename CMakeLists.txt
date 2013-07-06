@@ -66,15 +66,15 @@ if(UNIX AND NOT APPLE)
   include_directories(${X11_LIBRARY_DIR})
 
   if(BUILD_SHARED_LIBS)
-    set(BAKGE_GLFW_LIBRARY glfw)
+    set(BAKGE_GLFW_TARGET glfw)
   else()
-    set(BAKGE_GLFW_LIBRARY glfw3)
+    set(BAKGE_GLFW_TARGET glfw3)
   endif()
 
   set(BAKGE_LIBRARIES
     m
     glew
-    ${BAKGE_GLFW_LIBRARY}
+    ${BAKGE_GLFW_TARGET}
     lua
     GL
     GLU
@@ -96,15 +96,15 @@ if(UNIX AND APPLE)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
   if(BUILD_SHARED_LIBS)
-    set(BAKGE_GLFW_LIBRARY glfw)
+    set(BAKGE_GLFW_TARGET glfw)
   else()
-    set(BAKGE_GLFW_LIBRARY glfw3)
+    set(BAKGE_GLFW_TARGET glfw3)
   endif()
 
   set(BAKGE_LIBRARIES
     m
     glew
-    ${BAKGE_GLFW_LIBRARY}
+    ${BAKGE_GLFW_TARGET}
     lua
     ${OPENGL_LIBRARY}
     ${COCOA_LIBRARY}
@@ -119,9 +119,9 @@ if(WIN32)
 
   # GLFW has some nuances when it comes to different builds/platforms
   if(BUILD_SHARED_LIBS AND MSVC)
-    set(BAKGE_GLFW_LIB glfw3dll)
+    set(BAKGE_GLFW_TARGET glfw3dll)
   else()
-    set(BAKGE_GLFW_LIB glfw)
+    set(BAKGE_GLFW_TARGET glfw)
   endif()
 
   set(BAKGE_LIBRARIES
@@ -129,13 +129,20 @@ if(WIN32)
     gdi32.lib
     user32.lib
     winmm.lib
-    ${BAKGE_GLFW_LIB}
+    ${BAKGE_GLFW_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
     ws2_32.lib
   )
 endif(WIN32)
+
+
+# Create a list of all Bakge's build targets
+set(BAKGE_TARGET bakge)
+set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
+
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS

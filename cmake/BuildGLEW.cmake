@@ -1,6 +1,9 @@
 
 if(GLEW_TARGET)
 
+  set(BAKGE_GLEW_TARGET glew)
+  list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
+
   set(GLEW_SOURCES
     ${GLEW_TARGET}/src/glew
   )
@@ -11,10 +14,10 @@ if(GLEW_TARGET)
     add_definitions(-DGLEW_STATIC)
   endif()
 
-  add_library(glew ${GLEW_SOURCES})
+  add_library(${BAKGE_GLEW_TARGET} ${GLEW_SOURCES})
 
   if(BUILD_SHARED_LIBS)
-    target_link_libraries(glew ${OPENGL_LIBRARY})
+    target_link_libraries(${BAKGE_GLEW_TARGET} ${OPENGL_LIBRARY})
   endif()
   
 
