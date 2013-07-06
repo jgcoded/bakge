@@ -22,11 +22,13 @@ set(BAKGE_GDK_ENGINE_SOURCES
 link_directories(${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
-add_executable(Bakge ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES}.cpp)
+add_executable(Bakge ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES})
 target_link_libraries(Bakge bakge ${BAKGE_LIBRARIES})
 
+# Copy libraries over to GDK directory
 add_custom_target(GDKEngineCopyLibs)
-foreach(COPYLIB ${BAKGE_TARGETS})
+
+foreach(COPYLIB ${BAKGE_TARGETS_LIST})
   add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${COPYLIB}>
         ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
