@@ -48,11 +48,12 @@
 #if defined(_MSC_VER) && defined(_DEBUG)
 /* Prevent library conflict warning */
 #pragma comment(linker, "/NODEFAULTLIB:MSVCRT")
-#ifdef bakge_EXPORTS
+#ifdef BAKGE_EXPORTS
 #define BGE_API __declspec(dllexport)
 #else
 #define BGE_API __declspec(dllimport)
-#endif /* bakge_EXPORTS */
+#define GLEW_STATIC
+#endif /* BAKGE_EXPORTS */
 #else
 #define BGE_API
 #endif /* _MSC_VER */
@@ -66,9 +67,6 @@
 #define BGE_VER_MIN 0
 
 /* Include external library headers */
-#ifndef bakge_EXPORTS
-#define GLEW_STATIC
-#endif /* bakge_EXPORTS */
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"

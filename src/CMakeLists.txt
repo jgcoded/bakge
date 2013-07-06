@@ -97,6 +97,12 @@ set(PLATFORM_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/packet/${PLATFORM_PREFIX}_Packet
 )
 
+if(BUILD_SHARED_LIBS)
+  # It's a matter of taste
+  remove_definitions(-Dbakge_EXPORTS)
+  add_definitions(-DBAKGE_EXPORTS)
+endif()
+
 add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
                                         ${PLATFORM_HEADERS})
 if(BUILD_SHARED_LIBS)
