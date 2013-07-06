@@ -29,14 +29,19 @@ if(UNIX AND APPLE)
   set(LIB_GLOB *.dylib*)
 endif()
 
-file(GLOB BAKGE_GDK_COPY_LIBS ${BAKGE_SDK_BIN_PATH}/${LIB_GLOB})
+set(BAKGE_TARGETS lua bakge ${BAKGE_GLFW_LIB} glew)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
 add_executable(Bakge ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES}.cpp)
 target_link_libraries(Bakge bakge ${BAKGE_LIBRARIES})
 
-foreach(COPYLIB ${BAKGE_GDK_COPY_LIBS})
-  add_custom_command(TARGET Bakge POST_BUILD COMMAND
-    ${CMAKE_COMMAND} -E copy ${COPYLIB} ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
+add_custom_target(GDKEngineCopyLibs)
+foreach(COPYLIB ${BAKGE_TARGETS})
+  add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${COPYLIB}>
+        ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 endforeach()
+
+add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS})
+add_dependencies(Bakge GDKEngineCopyLibs)
