@@ -17,14 +17,11 @@ set(BAKGE_GDK_ENGINE_SOURCES
   ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/GameEngine
 )
 
-set(BAKGE_TARGETS lua bakge ${BAKGE_GLFW_LIBRARY} glew)
-
 # So Bakge engine executable can find shared libs in its directory
 # Without this dynamic linking won't work on Linux
 link_directories(${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
-
 add_executable(Bakge ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES}.cpp)
 target_link_libraries(Bakge bakge ${BAKGE_LIBRARIES})
 
@@ -45,6 +42,6 @@ foreach(COPYLIB ${BAKGE_TARGETS})
   endif()
 endforeach()
 
-add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS})
+add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS_LIST})
 add_dependencies(Bakge GDKEngineCopyLibs)
 
