@@ -3,6 +3,7 @@
 DEBUG?=ON
 TARGET=build
 SDK=sdk
+GDK=gdk
 
 BUILD_DYNAMIC?=OFF
 BUILD_TESTS?=ON
@@ -52,5 +53,5 @@ codeblocks:
 	@mkdir -p $(TARGET) && cd $(TARGET) && cmake .. -G "CodeBlocks - Unix Makefiles" $(OPTIONS);
 
 clean:
-	rm -rf $(TARGET) $(SDK);
+	rm -rf $(TARGET) $(SDK) $(GDK);
 
