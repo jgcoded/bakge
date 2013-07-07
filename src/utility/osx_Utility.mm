@@ -45,4 +45,10 @@ Result PlatformInit(int argc, char* argv[])
     return BGE_SUCCESS;
 }
 
+
+Result PlatformDeinit()
+{
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
