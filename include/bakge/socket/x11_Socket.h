@@ -43,7 +43,7 @@ public:
     BGE_FACTORY x11_Socket* Create(int Port);
 
     BGE_WUNUSED Packet* Receive();
-    Result Send(Packet* Data);
+    Result Send(Remote* Destination, Packet* Data);
 
 } Socket; /* x11_Socket */
 

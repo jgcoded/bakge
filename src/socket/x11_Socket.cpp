@@ -89,19 +89,13 @@ Packet* x11_Socket::Receive()
 }
 
 
-Result x11_Socket::Send(Packet* Data)
+Result x11_Socket::Send(Remote* Destination, Packet* Data)
 {
     struct sockaddr_in Dest;
     memset((void*)&Dest, 0, sizeof(Dest));
 
-    int a, b, c, d;
-    a = 72;
-    b = 129;
-    c = 81;
-    d = 23;
-
-    Dest.sin_addr.s_addr = htonl((a<<24)|(b<<16)|(c<<8)|d);
-    Dest.sin_port = htons(7000);
+    Dest.sin_addr.s_addr = htonl(Destination->GetAddress());
+    Dest.sin_port = htons(Destination->GetPort());
     Dest.sin_family = PF_INET;
 
     sendto(SocketHandle, NULL, 0, 0, (struct sockaddr*)&Dest,

@@ -33,11 +33,17 @@ int main(int argc, char* argv[])
     printf("Creating socket\n");
     bakge::Socket* Sock = bakge::Socket::Create(7001);
     bakge::Packet* Pack;
+    bakge::Remote Server;
 
-    printf("Sending packet...\n");
-    Sock->Send(Pack);
+    Pack = bakge::Packet::Create(NULL);
+    
+    Server.SetAddress(72, 129, 81, 23);
+    Server.SetPort(7000);
 
-    printf("Deleting received packet\n");
+    printf("Sending packet to %s...\n", Server.GetAddressString());
+    Sock->Send(&Server, Pack);
+
+    printf("Deleting sent packet\n");
     if(Pack != NULL)
         delete Pack;
 
