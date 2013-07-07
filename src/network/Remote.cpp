@@ -22,36 +22,68 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_TYPE_H
-#define BAKGE_CORE_TYPE_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-#define BGE_FAILURE 1
-#define BGE_SUCCESS 0
-typedef int Result;
+Remote::Remote()
+{
+    IP[0] = 0;
+    IP[1] = 0;
+    IP[2] = 0;
+    IP[3] = 0;
+    Port = 0;
+    FullAddress = 0;
+    Str[22] = '\0';
+}
 
-#ifndef _WIN32
-typedef uint64_t Uint64;
-#else
-typedef unsigned long long Uint64;
-#endif
 
-typedef char Byte;
-typedef unsigned char UByte;
-typedef Uint64 Microseconds;
-typedef double Seconds;
+Remote::~Remote()
+{
+}
 
-/* *
- * GLFW uses doubles for its mouse/scroll motion measurements.
- * Better to just deal with doubles than with casting to integral types
- * */
-typedef double DeviceMotion;
-typedef double DeviceCoord;
+
+Remote BGE_NCP Remote::SetAddress(UByte A, UByte B, UByte C, UByte D)
+{
+    memset((void*)Str, 0, 21);
+    snprintf(Str, 21, "%d.%d.%d.%d:%d", A, B, C, D, Port);
+
+    IP[0] = A;
+    IP[1] = B;
+    IP[2] = C;
+    IP[3] = D;
+
+    FullAddress = (IP[0] << 24) | (IP[1] << 16) | (IP[2] << 8) | IP[3];
+
+    return *this;
+}
+
+
+const char* Remote::GetAddressString() const
+{
+    return Str;
+}
+
+
+int Remote::GetAddress() const
+{
+    return FullAddress;
+}
+
+
+Remote BGE_NCP Remote::SetPort(int P)
+{
+    Port = P;
+    memset((void*)Str, 0, 21);
+    snprintf(Str, 21, "%d.%d.%d.%d:%d", IP[0], IP[1], IP[2], IP[3], Port);
+    return *this;
+}
+
+
+int Remote::GetPort() const
+{
+    return Port;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_CORE_TYPE_H */

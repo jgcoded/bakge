@@ -22,36 +22,35 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_CORE_TYPE_H
-#define BAKGE_CORE_TYPE_H
-
-#include <bakge/Bakge.h>
+#ifndef BAKGE_NETWORK_REMOTE_H
+#define BAKGE_NETWORK_REMOTE_H
 
 namespace bakge
 {
 
-#define BGE_FAILURE 1
-#define BGE_SUCCESS 0
-typedef int Result;
+class BGE_API Remote
+{
+    UByte IP[4]; /* IP parts A.B.C.D */
+    int FullAddress;
+    int Port;
 
-#ifndef _WIN32
-typedef uint64_t Uint64;
-#else
-typedef unsigned long long Uint64;
-#endif
+    char Str[22];
 
-typedef char Byte;
-typedef unsigned char UByte;
-typedef Uint64 Microseconds;
-typedef double Seconds;
 
-/* *
- * GLFW uses doubles for its mouse/scroll motion measurements.
- * Better to just deal with doubles than with casting to integral types
- * */
-typedef double DeviceMotion;
-typedef double DeviceCoord;
+public:
+
+    Remote();
+    ~Remote();
+
+    Remote BGE_NCP SetAddress(UByte A, UByte B, UByte C, UByte D);
+    const char* GetAddressString() const;
+    int GetAddress() const;
+
+    Remote BGE_NCP SetPort(int P);
+    int GetPort() const;
+
+}; /* Remote */
 
 } /* bakge */
 
-#endif /* BAKGE_CORE_TYPE_H */
+#endif /* BAKGE_NETWORK_REMOTE_H */

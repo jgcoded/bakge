@@ -114,6 +114,7 @@ extern "C"
 #include <bakge/data/LinkedList.h>
 
 /* Network modules */
+#include <bakge/network/Remote.h>
 #include <bakge/network/Packet.h>
 
 /* Include API classes */
