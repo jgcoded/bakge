@@ -63,6 +63,8 @@ Result PlatformInit(int argc, char* argv[])
 
 Result PlatformDeinit()
 {
+    WSACleanup();
+
     return BGE_SUCCESS;
 }
 
