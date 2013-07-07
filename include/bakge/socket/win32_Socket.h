@@ -40,7 +40,10 @@ public:
 
     virtual ~win32_Socket();
 
-    BGE_FACTORY win32_Socket* Create();
+    BGE_FACTORY win32_Socket* Create(int Port);
+
+    BGE_WUNUSED Packet* Receive();
+    Result Send(Remote* Destination, Packet* Data);
 
 } Socket; /* win32_Socket */
 

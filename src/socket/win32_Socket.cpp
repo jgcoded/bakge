@@ -36,12 +36,63 @@ win32_Socket::win32_Socket()
 
 win32_Socket::~win32_Socket()
 {
+    closesocket(SocketHandle);
 }
 
 
-win32_Socket* win32_Socket::Create()
+win32_Socket* win32_Socket::Create(int Port)
 {
-    return NULL;
+    win32_Socket* Sock = new win32_Socket;
+
+    Sock->SocketHandle = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+    Sock->ServerAddress.sin_family = AF_INET;
+    Sock->ServerAddress.sin_addr.s_addr = INADDR_ANY;
+    Sock->ServerAddress.sin_port = htons(Port);
+
+    if(bind(Sock->SocketHandle, (struct sockaddr*)&(Sock->ServerAddress),
+                        sizeof(Sock->ServerAddress)) == SOCKET_ERROR) {
+        perror("bind()");
+        delete Sock;
+        return NULL;
+    }
+
+    return Sock;
+}
+
+
+Packet* win32_Socket::Receive()
+{
+    struct sockaddr_in Receive;
+    Byte* Data = new Byte[512];
+    int Size = sizeof(Receive);
+
+    printf("Waiting for packet...\n");
+    if(recvfrom(SocketHandle, Data, 512, 0, (struct sockaddr*)&Receive,
+                                                        &Size) < 0) {
+        printf("Error receiving packet\n");
+        return NULL;
+    }
+
+    delete[] Data;
+
+    return Packet::Create(NULL);
+}
+
+
+Result win32_Socket::Send(Remote* Destination, Packet* Data)
+{
+    struct sockaddr_in Dest;
+    memset((void*)&Dest, 0, sizeof(Dest));
+
+    Dest.sin_addr.s_addr = htonl(Destination->GetAddress());
+    Dest.sin_port = htons(Destination->GetPort());
+    Dest.sin_family = PF_INET;
+
+    sendto(SocketHandle, NULL, 0, 0, (struct sockaddr*)&Dest,
+                                                sizeof(Dest));
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
