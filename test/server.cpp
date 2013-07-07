@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     bakge::Init(argc, argv);
 
     printf("Creating socket\n");
-    bakge::Socket* Sock = bakge::Socket::Create();
+    bakge::Socket* Sock = bakge::Socket::Create(7000);
     bakge::Packet* Pack;
 
     Pack = Sock->Receive();

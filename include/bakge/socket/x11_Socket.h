@@ -40,7 +40,7 @@ public:
 
     virtual ~x11_Socket();
 
-    BGE_FACTORY x11_Socket* Create();
+    BGE_FACTORY x11_Socket* Create(int Port);
 
     BGE_WUNUSED Packet* Receive();
     Result Send(Packet* Data);

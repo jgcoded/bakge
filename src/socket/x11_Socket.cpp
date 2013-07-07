@@ -41,11 +41,11 @@ x11_Socket::~x11_Socket()
 }
 
 
-x11_Socket* x11_Socket::Create()
+x11_Socket* x11_Socket::Create(int Port)
 {
     x11_Socket* Sock = new x11_Socket;
 
-    Sock->SocketHandle = socket(PF_INET, SOCK_DGRAM, 0);
+    Sock->SocketHandle = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if(Sock->SocketHandle < 0) {
         printf("Unable to attach socket\n");
         delete Sock;
@@ -56,12 +56,14 @@ x11_Socket* x11_Socket::Create()
 
     memset((void*)&(Sock->SocketIn), 0, sizeof(Sock->SocketIn));
     Sock->SocketIn.sin_family = AF_INET;
-    Sock->SocketIn.sin_port = htons(8080);
+    Sock->SocketIn.sin_port = htons(Port);
     Sock->SocketIn.sin_addr.s_addr = INADDR_ANY;
 
     if(bind(Sock->SocketHandle, (struct sockaddr*)&(Sock->SocketIn),
                                        sizeof(Sock->SocketIn)) < 0) {
         perror("bind()");
+        delete Sock;
+        return NULL;
     }
 
     return Sock;
@@ -81,14 +83,29 @@ Packet* x11_Socket::Receive()
         return NULL;
     }
 
+    delete[] Data;
+
     return Packet::Create(NULL);
 }
 
 
 Result x11_Socket::Send(Packet* Data)
 {
-    sendto(SocketHandle, NULL, 0, 0, (struct sockaddr*)&SocketIn,
-                                                sizeof(SocketIn));
+    struct sockaddr_in Dest;
+    memset((void*)&Dest, 0, sizeof(Dest));
+
+    int a, b, c, d;
+    a = 72;
+    b = 129;
+    c = 81;
+    d = 23;
+
+    Dest.sin_addr.s_addr = htonl((a<<24)|(b<<16)|(c<<8)|d);
+    Dest.sin_port = htons(7000);
+    Dest.sin_family = PF_INET;
+
+    sendto(SocketHandle, NULL, 0, 0, (struct sockaddr*)&Dest,
+                                                sizeof(Dest));
 
     return BGE_SUCCESS;
 }
