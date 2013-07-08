@@ -67,6 +67,7 @@
 #define BGE_INL inline
 #define BGE_VER_MAJ 0
 #define BGE_VER_MIN 0
+#define BGE_VER_REV 0
 
 /* Include external library headers */
 #include <GL/glew.h>
