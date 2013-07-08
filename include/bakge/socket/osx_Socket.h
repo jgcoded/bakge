@@ -31,6 +31,7 @@ namespace bakge
 typedef class BGE_API osx_Socket : api::Socket
 {
     int SocketHandle;
+    struct sockaddr_in SocketIn;
 
     osx_Socket();
 
@@ -39,10 +40,10 @@ public:
 
     virtual ~osx_Socket();
 
-    BGE_FACTORY osx_Socket* Create();
+    BGE_FACTORY osx_Socket* Create(int Port);
 
     BGE_WUNUSED Packet* Receive();
-    Result Send(Packet* Data);
+    Result Send(Remote* Destination, Packet* Data);
 
 } Socket; /* osx_Socket */
 

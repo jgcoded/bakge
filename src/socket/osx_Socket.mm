@@ -29,7 +29,7 @@ namespace bakge
 
 osx_Socket::osx_Socket()
 {
-    SocketHandle = -1;
+    SocketHandle = 0;
 }
 
 
@@ -41,12 +41,27 @@ osx_Socket::~osx_Socket()
 }
 
 
-osx_Socket* osx_Socket::Create()
+osx_Socket* osx_Socket::Create(int Port)
 {
     osx_Socket* Sock = new osx_Socket;
 
-    Sock->SocketHandle = socket(0, SOCK_DGRAM, AF_INET);
+    Sock->SocketHandle = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if(Sock->SocketHandle < 0) {
+        printf("Unable to attach socket\n");
+        delete Sock;
+        return Sock;
+    }
+
+    printf("Socket %d\n", Sock->SocketHandle);
+
+    memset((void*)&(Sock->SocketIn), 0, sizeof(Sock->SocketIn));
+    Sock->SocketIn.sin_family = AF_INET;
+    Sock->SocketIn.sin_port = htons(Port);
+    Sock->SocketIn.sin_addr.s_addr = INADDR_ANY;
+
+    if(bind(Sock->SocketHandle, (struct sockaddr*)&(Sock->SocketIn),
+                                       sizeof(Sock->SocketIn)) < 0) {
+        perror("bind()");
         delete Sock;
         return NULL;
     }
@@ -57,13 +72,36 @@ osx_Socket* osx_Socket::Create()
 
 Packet* osx_Socket::Receive()
 {
-    return NULL;
+    struct sockaddr_in ReceiveSocketIn;
+    Byte* Data = new Byte[512];
+    int Size = sizeof(ReceiveSocketIn);
+
+    printf("Waiting for packet...\n");
+    if(recvfrom(SocketHandle, Data, 512, 0, (struct sockaddr*)&ReceiveSocketIn,
+                                                    (socklen_t*)&Size) < 0) {
+        printf("Error receiving packet\n");
+        return NULL;
+    }
+
+    delete[] Data;
+
+    return Packet::Create(NULL);
 }
 
 
-Result osx_Socket::Send(Packet* Data)
+Result osx_Socket::Send(Remote* Destination, Packet* Data)
 {
-    return BGE_FAILURE;
+    struct sockaddr_in Dest;
+    memset((void*)&Dest, 0, sizeof(Dest));
+
+    Dest.sin_addr.s_addr = htonl(Destination->GetAddress());
+    Dest.sin_port = htons(Destination->GetPort());
+    Dest.sin_family = PF_INET;
+
+    sendto(SocketHandle, NULL, 0, 0, (struct sockaddr*)&Dest,
+                                                sizeof(Dest));
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
