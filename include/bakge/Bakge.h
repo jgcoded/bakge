@@ -45,9 +45,11 @@
 #endif /* __GNUC__  */
 
 /* MSVC pragmas */
-#if defined(_MSC_VER) && defined(_DEBUG)
+#ifdef _MSC_VER
 /* Prevent library conflict warning */
+#ifdef _DEBUG
 #pragma comment(linker, "/NODEFAULTLIB:MSVCRT")
+#endif /* _DEBUG */
 #ifdef BAKGE_EXPORTS
 #define BGE_API __declspec(dllexport)
 #else
