@@ -55,6 +55,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
 option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
 
+# External libraries included in the source tree
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
+
 
 ########################################
 # PLATFORM SPECIFIC LIBRARIES SETUP

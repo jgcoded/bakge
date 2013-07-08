@@ -80,6 +80,13 @@ extern "C"
 #include <lua/lauxlib.h>
 }
 
+/* Include other external libraries */
+#define STBI_HEADER_FILE_ONLY
+#include <stb/stb_image.c>
+#undef STBI_HEADER_FILE_ONLY
+#include <stb/stb_truetype.h>
+#define STB_TRUETYPE_IMPLEMENTATION
+
 /* Include core Bakge classes */
 #include <bakge/core/Type.h>
 #include <bakge/core/Input.h>

@@ -97,6 +97,12 @@ set(PLATFORM_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/packet/${PLATFORM_PREFIX}_Packet
 )
 
+# Extern libraries in the source tree
+set(EXTERN_SOURCES
+  ${BAKGE_SOURCE_DIR}/extern/stb/stb_image.c
+  ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.h
+)
+
 if(BUILD_SHARED_LIBS)
   # It's a matter of taste
   remove_definitions(-Dbakge_EXPORTS)
@@ -104,7 +110,7 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
-                                        ${PLATFORM_HEADERS})
+                                        ${PLATFORM_HEADERS} ${EXTERN_SOURCES})
 if(BUILD_SHARED_LIBS)
   target_link_libraries(bakge ${BAKGE_LIBRARIES})
 endif()

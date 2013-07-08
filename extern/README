@@ -1,0 +1,1 @@
+External libraries which are small enough to be included within the source tree. Unlike normal libraries, these are compiled and assembled into the Bakge library instead of individual assemblies.
