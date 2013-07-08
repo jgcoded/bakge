@@ -25,6 +25,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 add_executable(Bakge ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES})
 target_link_libraries(Bakge bakge ${BAKGE_LIBRARIES})
 
+if(UNIX AND APPLE)
+  list(APPEND CMAKE_CXX_FLAGS "-ObjC++")
+endif()
+
 # Copy libraries over to GDK directory
 add_custom_target(GDKEngineCopyLibs)
 
