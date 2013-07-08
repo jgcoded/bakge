@@ -2,10 +2,6 @@
 
 cmake_minimum_required (VERSION 2.6)
 
-include_directories(${BAKGE_SOURCE_DIR}/include)
-include_directories(${BAKGE_GLFW_PATH}/include)
-include_directories(${BAKGE_GLEW_PATH}/include)
-
 
 ########################################
 # COMMON HEADERS & MODULES
