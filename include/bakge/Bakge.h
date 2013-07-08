@@ -79,6 +79,7 @@ extern "C"
 #include <lua/lualib.h>
 #include <lua/lauxlib.h>
 }
+#include <physfs/physfs.h>
 
 /* Include other external libraries */
 #define STBI_HEADER_FILE_ONLY

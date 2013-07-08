@@ -36,8 +36,13 @@ set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 # Note: Lua has a special build and headers copy
 set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
 set(BAKGE_GLEW_PATH ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0)
+set(BAKGE_PHYSFS_PATH ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
+
+# Don't append BAKGE_PHYSFS_PATH to BAKGE_INCLUDE_DIRECTORIES
+# We need to copy the headers over manually below, there is no
+# physfs/include/ directory
 
 # Output all generated libraries and binaries to the SDK dir
 set(BAKGE_SDK_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
@@ -57,6 +62,13 @@ option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
 
 # External libraries included in the source tree
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
+
+# Copy PhysFS headers manually here
+file(GLOB BAKGE_PHYSFS_HEADERS ${BAKGE_PHYSFS_PATH}/*.h)
+make_directory(${BAKGE_SDK_INC_PATH}/physfs)
+foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
+  configure_file(${PHYSFS_HEADER} ${BAKGE_SDK_INC_PATH}/physfs/ COPYONLY)
+endforeach()
 
 
 ########################################
@@ -78,6 +90,7 @@ if(UNIX AND NOT APPLE)
     m
     glew
     ${BAKGE_GLFW_TARGET}
+    ${BAKGE_PHYSFS_TARGET}
     lua
     GL
     GLU
@@ -108,6 +121,7 @@ if(UNIX AND APPLE)
     m
     glew
     ${BAKGE_GLFW_TARGET}
+    ${BAKGE_PHYSFS_TARGET}
     lua
     ${OPENGL_LIBRARY}
     ${COCOA_LIBRARY}
@@ -133,6 +147,7 @@ if(WIN32)
     user32.lib
     winmm.lib
     ${BAKGE_GLFW_TARGET}
+    ${BAKGE_PHYSFS_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
@@ -151,6 +166,8 @@ set(BAKGE_LUA_TARGET lua)
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
 set(BAKGE_GLEW_TARGET glew)
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
+set(BAKGE_PHYSFS_TARGET physfs)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS
