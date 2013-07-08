@@ -67,7 +67,7 @@ list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
 file(GLOB BAKGE_PHYSFS_HEADERS ${BAKGE_PHYSFS_PATH}/*.h)
 make_directory(${BAKGE_SDK_INC_PATH}/physfs)
 foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
-  configure_file(${PHYSFS_HEADER} ${BAKGE_SDK_INC_PATH}/physfs/ COPYONLY)
+  configure_file(${PHYSFS_HEADER} ${BAKGE_SDK_INC_PATH}/physfs COPYONLY)
 endforeach()
 
 
