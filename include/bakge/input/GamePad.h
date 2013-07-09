@@ -32,7 +32,6 @@ namespace bakge
 
 class GamePad
 {
-
     int Handle;
     int NumAxes;
     const Scalar* AxesValues;
