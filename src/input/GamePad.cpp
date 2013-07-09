@@ -47,6 +47,10 @@ GamePad* GamePad::Detect()
             printf("Detected GamePad %d: %s\n", i, glfwGetJoystickName(i));
         }
     }
+
+    Pad->GetButtonPressed(0);
+    Pad->GetAxis(0);
+
     return Pad;
 }
 
