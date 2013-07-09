@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace api
-{
 
 Packet::Packet()
 {
@@ -38,5 +36,10 @@ Packet::~Packet()
 {
 }
 
-} /* api */
+
+Packet* Packet::Create(const Byte* Data)
+{
+    return NULL;
+}
+
 } /* bakge */

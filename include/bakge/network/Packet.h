@@ -22,24 +22,25 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/Bakge.h>
+#ifndef BAKGE_NETWORK_PACKET_H
+#define BAKGE_NETWORK_PACKET_H
 
 namespace bakge
 {
 
-osx_Packet::osx_Packet()
+class BGE_API Packet
 {
-}
+    Packet();
 
 
-osx_Packet::~osx_Packet()
-{
-}
+public:
 
+    virtual ~Packet();
 
-osx_Packet* osx_Packet::Create(const Byte* Data)
-{
-    return NULL;
-}
+    BGE_FACTORY Packet* Create(const Byte* Data);
+
+}; /* Packet */
 
 } /* bakge */
+
+#endif /* BAKGE_NETWORK_PACKET_H */
