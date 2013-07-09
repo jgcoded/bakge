@@ -39,7 +39,7 @@ Node::~Node()
 }
 
 
-Node* Node::Create(math::Scalar X, math::Scalar Y, math::Scalar Z)
+Node* Node::Create(Scalar X, Scalar Y, Scalar Z)
 {
     Node* N;
 
@@ -73,7 +73,7 @@ Result Node::Bind() const
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, "bge_Position");
+    Location = glGetUniformLocation(Program, BGE_POSITION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -86,7 +86,7 @@ Result Node::Bind() const
 
 Result Node::Unbind() const
 {
-    static const math::Vector4 Origin;
+    static const Vector4 Origin;
     GLint Program, Location;
 
     /* Retrieve current shader program */
@@ -95,7 +95,7 @@ Result Node::Unbind() const
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, "bge_Position");
+    Location = glGetUniformLocation(Program, BGE_POSITION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -118,7 +118,7 @@ Result Node::Draw() const
 }
 
 
-void Node::SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z)
+void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
 {
     Position[0] = X;
     Position[1] = Y;
@@ -126,10 +126,9 @@ void Node::SetPosition(math::Scalar X, math::Scalar Y, math::Scalar Z)
 }
 
 
-math::Vector4 BGE_NCP Node::GetPosition() const
+Vector4 BGE_NCP Node::GetPosition() const
 {
     return Position;
 }
 
 } /* bakge */
-

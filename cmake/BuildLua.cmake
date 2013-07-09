@@ -46,8 +46,21 @@ if(LUA_TARGET)
   if(WIN32)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   endif()
+  
+  if(BUILD_SHARED_LIBS)
+    if(WIN32)
+      add_definitions(-DLUA_BUILD_AS_DLL)
+    else()
+      set(LUA_LIBRARY_TYPE SHARED)
+    endif()
+  endif()
 
-  add_library(lua ${LUA_SOURCES})
+  add_library(${BAKGE_LUA_TARGET} ${LUA_LIBRARY_TYPE} ${LUA_SOURCES})
+
+  # Lua needs some other shared libraries
+  if(BUILD_SHARED_LIBS AND UNIX)
+    target_link_libraries(${BAKGE_LUA_TARGET} m)
+  endif()
   
   # Copy headers into SDK
   make_directory(${BAKGE_SDK_INC_PATH}/lua)

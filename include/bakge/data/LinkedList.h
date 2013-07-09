@@ -30,8 +30,8 @@
 namespace bakge
 {
 
-template<class T>
-class LinkedList
+template<class  T>
+class BGE_API LinkedList
 {
 
 public:
@@ -42,7 +42,10 @@ public:
     T Push(T Value);
     T Pop();
 
-	bool IsEmpty();
+	bool IsEmpty() const;
+
+	/* Delete the entire contents of the list */
+	void Clear();
 
 
 protected:
@@ -52,8 +55,90 @@ protected:
 
 }; /* LinkedList */
 
-} /* bakge */
+#if !defined(_MSC_VER) && !defined(bakge_EXPORTS)
 
-#include <../src/data/LinkedList.cpp> /* Include the implementation here */
+template<class T>
+LinkedList<T>::LinkedList()
+{
+    Head = NULL;
+    Tail = NULL;
+}
+
+
+template<class T>
+LinkedList<T>::~LinkedList()
+{
+    Clear();
+}
+
+
+template<class T>
+T LinkedList<T>::Push(T DataValue)
+{
+    SingleNode<T>* NewNode;
+
+    /* Create new node */
+    NewNode = new SingleNode<T>();
+    NewNode->SetData(DataValue);
+
+    /* Move pointers */
+    if (Head == NULL) {
+        Tail = Head = NewNode;
+        NewNode->SetNext(NULL);
+    } else {
+        NewNode->SetNext(Head);
+        Head = NewNode;
+    }
+
+    return DataValue;
+}
+
+
+template<class T>
+T LinkedList<T>::Pop()
+{
+    SingleNode<T>* TopNode;
+    T DataValue;
+
+    /* Memorize pointer to free memory */
+    TopNode = Head;
+
+    /* Move pointers */
+    Head = Head->GetNext();
+    if (Head == NULL) {
+        Tail = Head;
+    }
+
+    /* Memorize return value and free memory */
+    DataValue = TopNode->GetData();
+    delete TopNode;
+
+    return DataValue;
+}
+
+
+template<class T>
+bool LinkedList<T>::IsEmpty() const
+{
+    /* List is empty if Head pointer is NULL */
+    return (Head == NULL);
+}
+
+
+template<class T>
+void LinkedList<T>::Clear()
+{
+    /* Iterate list and free memory */
+    SingleNode<T>* Node;
+    while (Head != NULL) {
+        Node = Head;
+        Head = Head->GetNext();
+        delete Node;
+    }
+}
+
+#endif
+
+} /* bakge */
 
 #endif /* BAKGE_DATA_LINKEDLIST_H */

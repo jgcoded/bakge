@@ -100,6 +100,11 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
+    extern Result PlatformDeinit();
+
+    /* Run platform-specific deinitialization protocol */
+    PlatformDeinit();
+
     ShaderProgram::DeinitShaderLibrary();
 
     /* Destroy our shared context window */

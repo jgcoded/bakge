@@ -30,8 +30,8 @@
 namespace bakge
 {
 
-template<class T>
-class SingleNode
+template<class  T>
+class BGE_API SingleNode
 {
 
 public:
@@ -53,8 +53,50 @@ protected:
 
 }; /* SingleNode */
 
-} /* bakge */
+#if !defined(_MSC_VER) && !defined(bakge_EXPORTS)
 
-#include <../src/data/SingleNode.cpp> /* Include the implementation here */
+template<class T>
+SingleNode<T>::SingleNode()
+{
+    Next = NULL;
+}
+
+
+template<class T>
+SingleNode<T>::~SingleNode()
+{
+}
+
+
+template<class T>
+SingleNode<T>* SingleNode<T>::GetNext()
+{
+    return Next;
+}
+
+
+template<class T>
+void SingleNode<T>::SetNext(SingleNode<T>* Next)
+{
+    this->Next = Next;
+}
+
+
+template<class T>
+T SingleNode<T>::GetData()
+{
+    return Data;
+}
+
+
+template<class T>
+void SingleNode<T>::SetData(const T& Data)
+{
+    this->Data = Data;
+}
+
+#endif
+
+} /* bakge */
 
 #endif /* BAKGE_DATA_SINGLENODE_H */

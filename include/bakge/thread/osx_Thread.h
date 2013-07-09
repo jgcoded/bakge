@@ -28,7 +28,7 @@
 namespace bakge
 {
 
-typedef class osx_Thread : api::Thread
+typedef class BGE_API osx_Thread : api::Thread
 {
 
 public:

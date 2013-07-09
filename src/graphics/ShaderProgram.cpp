@@ -74,19 +74,22 @@ Result ShaderProgram::InitShaderLibrary()
 {
     /* Load the default plain vertex shader */
     GenericVertexShader = Shader::LoadVertexShaderString(
-                                    GenericVertexShaderSource);
+                                    GenericVertexShaderSource,
+                                    "GenericVertexShader");
     if(GenericVertexShader == NULL)
         return BGE_FAILURE;
 
     /* Load the default plain fragment shader */
     GenericFragmentShader = Shader::LoadFragmentShaderString(
-                                    GenericFragmentShaderSource);
+                                GenericFragmentShaderSource,
+                                "GenericFragmentShaderSource");
     if(GenericFragmentShader == NULL)
         return BGE_FAILURE;
 
     /* Load the shader library function bgeWorldTransform(vec4) */
     bgeWorldTransform = Shader::LoadVertexShaderString(
-                                    bgeWorldTransformSource);
+                                    bgeWorldTransformSource,
+                                    "bgeWorldTransform");
     if(bgeWorldTransform == NULL)
         return BGE_FAILURE;
 
@@ -113,12 +116,16 @@ ShaderProgram::ShaderProgram()
 ShaderProgram::~ShaderProgram()
 {
     if(ProgramHandle != 0) {
-
+        /* Detach shaders from our program and delete it */
         glDetachShader(ProgramHandle, VertexShader->GetHandle());
         glDetachShader(ProgramHandle, FragmentShader->GetHandle());
         glDetachShader(ProgramHandle, bgeWorldTransform->GetHandle());
         glDeleteProgram(ProgramHandle);
 
+        /* *
+         * We only want to delete the vertex/frag shaders if they are
+         * not the default generic shaders (part of the library)
+         * */
         if(VertexShader != GenericVertexShader)
             delete VertexShader;
 
@@ -142,13 +149,13 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
         return NULL;
     }
 
+    /* Alias for shader program's handle, for convenience */
     Handle = Program->ProgramHandle;
 
-    if(bgeWorldTransform != NULL)
-        glAttachShader(Handle, bgeWorldTransform->GetHandle());
-    else
-        printf("Can't attach bgeWorldTransform\n");
+    /* Attach library shaders */
+    glAttachShader(Handle, bgeWorldTransform->GetHandle());
 
+    /* If user passes NULL to vertex shader arg, use default generic one */
     if(Vertex == NULL) {
         glAttachShader(Handle, GenericVertexShader->GetHandle());
         Program->VertexShader = GenericVertexShader;
@@ -157,6 +164,7 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
         Program->VertexShader = Vertex;
     }
 
+    /* If user passes NULL to fragment shader arg, use default generic one */
     if(Fragment == NULL) {
         glAttachShader(Handle, GenericFragmentShader->GetHandle());
         Program->FragmentShader = GenericFragmentShader;
@@ -165,6 +173,7 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
         Program->FragmentShader = Fragment;
     }
 
+    /* Now link the shader program and bind it as active */
     glLinkProgram(Handle);
 
     glUseProgram(Handle);
@@ -187,4 +196,3 @@ Result ShaderProgram::Unbind() const
 }
 
 } /* bakge */
-

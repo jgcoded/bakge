@@ -30,17 +30,31 @@
 namespace bakge
 {
 
-class Shape : public Node
+enum BGE_SHAPE_STYLE
 {
+    BGE_SHAPE_STYLE_POINTS = 1,
+    BGE_SHAPE_STYLE_WIREFRAME,
+    BGE_SHAPE_STYLE_SOLID,
+    BGE_SHAPE_STYLE_EDGE
+};
+
+class BGE_API Shape : public Pawn
+{
+
+protected:
+
+    GLUquadric* Quadric;
+
 
 public:
 
     Shape();
     ~Shape();
 
+    Result DrawStyle(BGE_SHAPE_STYLE Style);
+
 }; /* Shape */
 
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHAPE_H */
-

@@ -8,6 +8,10 @@ endif()
 
 set(TESTS
   clock
+  cube
+  cone
+  cylinder
+  info
   linkedlist
   loadfile
   matrix
@@ -18,15 +22,15 @@ set(TESTS
   quaternion
   shaderprogram
   sharedcontext
+  sphere
   texture
   thread
   types
   vao
+  vector3
   vector4
   window
 )
-
-set(EXECUTABLE_OUTPUT_PATH ${BAKGE_SDK_TESTS_OUTPUT_PATH})
 
 if(NOT APPLE)
   foreach(test ${TESTS})

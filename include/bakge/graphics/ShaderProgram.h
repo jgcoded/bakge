@@ -27,13 +27,17 @@
 
 #include <bakge/Bakge.h>
 
+#define BGE_POSITION_UNIFORM "bge_Position"
+#define BGE_ROTATION_UNIFORM "bge_Rotation"
+#define BGE_SCALE_UNIFORM "bge_Scale"
+
 namespace bakge
 {
 
-class ShaderProgram : public Bindable
+class BGE_API ShaderProgram : public Bindable
 {
-    friend Result Init(int argc, char* argv[]);
-    friend Result Deinit();
+    friend BGE_API Result Init(int argc, char* argv[]);
+    friend BGE_API Result Deinit();
 
     /* Initialize all library Shaders */
     static Result InitShaderLibrary();
@@ -68,4 +72,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_SHADERPROGRAM_H */
-

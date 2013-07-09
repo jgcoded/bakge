@@ -1,50 +1,21 @@
 Bakge
 =====
 
-BAKersfield Game Engine -- A collaborative effort between CS students, hobby-learners and developers of all kinds. Bakge will support both 2D and 3D games, and include all the standard facilities of a game engine.
+BAKersfield Game Engine. Supports 2D and 3D games. Provides both an SDK and its own official engine application class; programmers can create their own customized engine using Bakge's core components or use the existing toolset and application to create a game at the highest level.
 
 Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file. Note that copyright holders include any and all contributors or authors. If you'd like your name left out, don't write your name into the AUTHORS file.
 
 Bakge is still in early development, and is extremely unstable. Its existing API is highly subject to change, and will be constantly and expanded and modified until the first stable release of Bakge, which will be version 1.0.
 
 
-Design Principles
-=================
+Build
+=====
 
-There are two primary goals for Bakge: First and foremost is to provide contributors with a rich and engaging environment for collaborative coding. There is PLENTY you can do. Secondly is the creation and maintenance of a simple and effective game and graphics engine.
-
-If you have any way to improve Bakge in either way, please feel free to share and improve the project.
-
-
-How to help
-===========
-
-The process of contributing code to Bakge may seem confusing and unnecessarily complex, but it's the best way to organize and keep track of various changes without accidentally breaking the master build or adding/removing files.
-
-There are plenty of ways you can help without having to program:
-- Run the test suite and report bugs to the issues page
-- Try out the latest SDK from http://www.cs.csubak.edu/~pholden/bakge/sdk/
-- Tell your friends about Bakge!
-- Look through the code and try to spot defects or bugs
-- Contribute your ideas to the design of Bakge's components and classes
-
-
-Check out the contribution guidelines here:
-http://github.com/palistov/bakge/blob/master/CONTRIBUTE.md
-
-
-Building Bakge
-==============
-
-Bakge is built with CMake. You can download the latest version (2.6+ is required to build Bakge) at http://www.cmake.org/cmake/resources/software.html.
+Bakge is built with CMake. You can download the latest version (2.6+ is required to build Bakge) at http://www.cmake.org/cmake/resources/software.html. The master branch build should always be stable. If you have any issues with a build, please raise an issue and provide information about your target build configuration, platform, IDE, CMake version, etc.
 
 I suggest you build into a separate folder, build/. This way you can easily clean up CMake's generated files, and the .gitignore file will prevent you from accidentally adding generated files to your fork.
 
-If you have any trouble or errors when building CMake, PLEASE CREATE AN ISSUE REPORT. It really helps to know what problems the build has, and that it works on all of the target platforms.
-
-Bakge builds as a static library. Unit testing is done in the test/ directory. Bakge's repo is very friendly, with lots of guidelines and tips on how you can contribute. Feel free to message a contributor if you have any questions about getting started.
-
-Note that Bakge doesn't include required external libraries in its source tree. Once Bakge requires external libraries, these will be downloaded and built with the CMake build as part of the project.
+Bakge depends on some external libraries. For a first-time build you must have an internet connection so CMake can download and install these libraries into your source tree. You do NOT need root access to build Bakge, everything is compiled and installed inside the source tree.
 
 
 Build on the commandline (Unix-like)
@@ -58,11 +29,7 @@ Build on the commandline (Unix-like)
  $ make
 
 
-The makefile is simply for convenience. It has a few targets to speed up building/cleaning Bakge.
-
- - all: Build using Unix Makefiles
- - clean: Clean the build folder and sdk folder
- - codeblocks: Generate a CodeBlocks project using Unix Makefiles to build
+The makefile is simply for convenience. It has a few targets to speed up building/cleaning Bakge. Run $ make help to see the available build targets.
 
 
 Build with CMake GUI
@@ -72,3 +39,18 @@ Build with CMake GUI
  4) Click 'Generate' at bottom left
  5) Open generated project file(s) with your IDE of choice and build
 
+
+SDK
+===
+
+Bakge's SDK will provide compiled static and dynamic libraries for you to use when compiling your program. Shared (dynamic) libraries are in the sdk/bin/ directory, while static libraries are in the sdk/lib/ directory. Bakge's example programs will also be in the sdk/bin/ directory, as they dynamically link to the shared libraries there.
+
+The SDK is intended primarily for programmers. You will have to create your own build, compile and debug your program on your own. The SDK also gives you the opportunity to create your own abstractions and systems on top of Bakge and its libraries, giving you more control and flexibility when creating your game.
+
+If you want to use Bakge's official engine application, you can get the GDK (game development kit), but even then you will need to know some basic Lua to create your game.
+
+
+GDK
+===
+
+Bakge's GDK is a ready-built engine and toolchain. It serves as an easy way for non-programmers to create games using Bakge without knowing more than some basic Lua (http://www.lua.org) and how to read wiki pages. Bakge's official engine will operate very similarly to the LOVE engine (http://www.love2d.org). You will build your game scripts in your own directory using Lua and the API bindings and run it through the Bakge application.

@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Renderer : public Bindable
+class BGE_API Renderer : public Bindable
 {
 
 public:
@@ -45,4 +45,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_CORE_RENDERER_H */
-

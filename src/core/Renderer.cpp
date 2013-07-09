@@ -37,4 +37,3 @@ Renderer::~Renderer()
 }
 
 } /* bakge */
-

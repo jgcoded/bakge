@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 /* *
  * 4x4 matrix. Used to store matrices for use in OpenGL
@@ -43,7 +41,7 @@ namespace math
  *
  * Position and/or rotation data can be described with a Node or Pawn object.
  * */
-class Matrix
+class BGE_API Matrix
 {
     Scalar Val[16];
 
@@ -54,6 +52,10 @@ public:
 
     Matrix();
     ~Matrix();
+
+    static Matrix CreateLookAt(Vector4 BGE_NCP CameraPos,
+                                    Vector4 BGE_NCP CameraTarget,
+                                    Vector4 BGE_NCP CameraUpVector);
 
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
@@ -75,8 +77,6 @@ public:
 
 }; /* Matrix */
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_MATRIX_H */
-

@@ -30,7 +30,7 @@ namespace bakge
 NSAutoreleasePool* NSPool;
 NSDate* StartTime;
 
-Result Init(int argc, char* argv[])
+Result PlatformInit(int argc, char* argv[])
 {
     NSPool = [[NSAutoreleasePool alloc] init];
 
@@ -46,14 +46,9 @@ Result Init(int argc, char* argv[])
 }
 
 
-Result Deinit()
+Result PlatformDeinit()
 {
-    glfwTerminate();
-
-    [NSPool release];
-
     return BGE_SUCCESS;
 }
 
 } /* bakge */
-

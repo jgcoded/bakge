@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 /* *
  * Quaternions are used to describe rotational orientations in 3D space.
@@ -45,7 +43,7 @@ namespace math
  * Quaternions also see use in animation keyframing, where joints' or bones'
  * rotations are relative to their parent joint.
  * */
-class Quaternion
+class BGE_API Quaternion
 {
     Vector4 Val; /* X, Y, Z - vector, W - real */
 
@@ -55,10 +53,28 @@ public:
     Quaternion();
     ~Quaternion();
 
+    Quaternion BGE_NCP operator+=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator-=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator*=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator/=(Quaternion BGE_NCP Other);
+    Quaternion BGE_NCP operator*=(Scalar BGE_NCP Value);
+    Quaternion BGE_NCP operator/=(Scalar BGE_NCP Value);
+
+    Quaternion BGE_NCP operator+(Quaternion BGE_NCP Other) const;
+    Quaternion BGE_NCP operator-(Quaternion BGE_NCP Other) const;
+    Quaternion BGE_NCP operator*(Quaternion BGE_NCP Other) const;
+    Quaternion BGE_NCP operator/(Quaternion BGE_NCP Other) const;
+    Quaternion BGE_NCP operator*(Scalar BGE_NCP Value) const;
+    Quaternion BGE_NCP operator/(Scalar BGE_NCP Value) const;
+
+    Quaternion BGE_NCP Invert();
+    Quaternion Inverted() const;
+
+    Quaternion BGE_NCP Normalize();
+    Quaternion Normalized() const;
+
 }; /* Quaternion */
 
-} /* math */
 } /* bakge */
 
 #endif /* BAKGE_MATH_QUATERNION_H */
-

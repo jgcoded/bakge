@@ -2,16 +2,15 @@
 
 cmake_minimum_required (VERSION 2.6)
 
-include_directories(${BAKGE_SOURCE_DIR}/include)
-include_directories(${BAKGE_GLFW_PATH}/include)
-include_directories(${BAKGE_GLEW_PATH}/include)
-
 
 ########################################
 # COMMON HEADERS & MODULES
 ########################################
 
 set(MODULES
+  api/Mutex
+  api/Packet
+  api/Socket
   api/Thread
   data/SingleNode
   data/LinkedList
@@ -30,6 +29,11 @@ set(MODULES
   graphics/ShaderProgram
   graphics/Shape
   graphics/Texture
+  graphics/shapes/Sphere
+  graphics/shapes/Cone
+  graphics/shapes/Cube
+  graphics/shapes/Cylinder
+  math/Vector3
   math/Vector4
   math/Quaternion
   math/Matrix
@@ -70,7 +74,10 @@ endif()
 
 set(PLATFORM_MODULES
   clock/${PLATFORM_PREFIX}_Clock
+  packet/${PLATFORM_PREFIX}_Packet
+  socket/${PLATFORM_PREFIX}_Socket
   thread/${PLATFORM_PREFIX}_Thread
+  mutex/${PLATFORM_PREFIX}_Mutex
   utility/${PLATFORM_PREFIX}_Utility
 )
 
@@ -80,9 +87,26 @@ set(PLATFORM_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/platform/${PLATFORM_PREFIX}_Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/system/Clock
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
+  ${BAKGE_SOURCE_DIR}/include/bakge/mutex/${PLATFORM_PREFIX}_Mutex
   ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread
+  ${BAKGE_SOURCE_DIR}/include/bakge/socket/${PLATFORM_PREFIX}_Socket
+  ${BAKGE_SOURCE_DIR}/include/bakge/packet/${PLATFORM_PREFIX}_Packet
 )
 
-add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
-                                        ${PLATFORM_HEADERS})
+# Extern libraries in the source tree
+set(EXTERN_SOURCES
+  ${BAKGE_SOURCE_DIR}/extern/stb/stb_image.c
+  ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.h
+)
 
+if(BUILD_SHARED_LIBS)
+  # It's a matter of taste
+  remove_definitions(-Dbakge_EXPORTS)
+  add_definitions(-DBAKGE_EXPORTS)
+endif()
+
+add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
+                                        ${PLATFORM_HEADERS} ${EXTERN_SOURCES})
+if(BUILD_SHARED_LIBS)
+  target_link_libraries(bakge ${BAKGE_LIBRARIES})
+endif()

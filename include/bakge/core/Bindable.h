@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Bindable
+class BGE_API Bindable
 {
 
 public:

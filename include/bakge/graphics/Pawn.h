@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class Pawn : public Node
+class BGE_API Pawn : public Node
 {
 
 public:
@@ -46,11 +46,11 @@ public:
 
 protected:
 
-    math::Quaternion Facing;
+    Quaternion Facing;
+    Vector4 Scale;
 
 }; /* Pawn */
 
 } /* bakge */
 
 #endif /* BAKGE_GRAPHICS_PAWN_H */
-

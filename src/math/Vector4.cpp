@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 const Vector4 Vector4::Origin;
 const Vector4 Vector4::ZeroVector(0, 0, 0, 0);
@@ -149,7 +147,7 @@ Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
     return *this;
 }
 
-bool Vector4::operator==(Vector4 BGE_NCP Other)
+bool Vector4::operator==(Vector4 BGE_NCP Other) const
 {
     return ScalarCompare(Val[0], Other.Val[0])
         && ScalarCompare(Val[1], Other.Val[1])
@@ -202,27 +200,27 @@ Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 }
 
 
-Vector4 Vector4::operator+(Vector4 BGE_NCP Other)
+Vector4 Vector4::operator+(Vector4 BGE_NCP Other) const
 {
     return Vector4(Val[0] + Other[0], Val[1] + Other[1], Val[2] + Other[2],
                                                         Val[3] + Other[3]);
 }
 
 
-Vector4 Vector4::operator-(Vector4 BGE_NCP Other)
+Vector4 Vector4::operator-(Vector4 BGE_NCP Other) const
 {
     return Vector4(Val[0] - Other[0], Val[1] - Other[1], Val[2] - Other[2],
                                                         Val[3] - Other[3]);
 }
 
 
-Vector4 Vector4::operator*(Scalar BGE_NCP Value)
+Vector4 Vector4::operator*(Scalar BGE_NCP Value) const
 {
     return Vector4(Val[0] * Value, Val[1] * Value, Val[2] * Value, Val[3]);
 }
 
 
-Vector4 Vector4::operator/(Scalar BGE_NCP Value)
+Vector4 Vector4::operator/(Scalar BGE_NCP Value) const
 {
     if(ScalarCompare(Value, 0)) {
         printf("Division by 0. Cancelling operation\n");
@@ -232,6 +230,4 @@ Vector4 Vector4::operator/(Scalar BGE_NCP Value)
     return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value, Val[3]);
 }
 
-} /* math */
 } /* bakge */
-

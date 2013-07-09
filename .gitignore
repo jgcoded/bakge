@@ -6,6 +6,7 @@ lib/*
 bakge.wiki/*
 *.swp
 sdk/*
+gdk/*
 resource/*
 
 # Includes

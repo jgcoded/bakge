@@ -26,7 +26,7 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
-void PrintMatrix(bakge::math::Matrix BGE_NCP M)
+void PrintMatrix(bakge::Matrix BGE_NCP M)
 {
     printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[0], M[4], M[8], M[12]);
     printf("[ %03.2f %03.2f %03.2f %03.2f ]\n", M[1], M[5], M[9], M[13]);
@@ -38,7 +38,13 @@ int main(int argc, char* argv[])
 {
     bakge::Init(argc, argv);
 
-    bakge::math::Matrix M;
+    bakge::Vector4 CameraPos(1, 0, 0, 1), TargetPos(1, 0, 1, 1),
+                                                CameraUp(0, 1, 0, 0);
+
+    /* Create Look At */
+    printf("Create Look At:\n");
+    bakge::Matrix M = bakge::Matrix::CreateLookAt(CameraPos,
+                                                    TargetPos, CameraUp);
 
     /* Test some operations */
     PrintMatrix(M);

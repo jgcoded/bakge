@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace math
-{
 
 const Matrix Matrix::Identity;
 
@@ -39,6 +37,42 @@ Matrix::Matrix()
 
 Matrix::~Matrix()
 {
+}
+
+
+Matrix Matrix::CreateLookAt(Vector4 BGE_NCP CameraPos,
+                            Vector4 BGE_NCP CameraTarget,
+                            Vector4 BGE_NCP CameraUpVector)
+{
+
+    Matrix mat;
+
+    Vector4 dPosition = CameraPos - CameraTarget;
+    Vector4 dPosUpX = Cross(dPosition, CameraUpVector);
+
+    dPosition.Normalize();
+    dPosUpX.Normalize();
+
+    Vector4 dPosOffX = Cross(dPosition, dPosUpX);
+
+    mat[0] = dPosUpX[0];
+    mat[1] = dPosOffX[0];
+    mat[2] = dPosition[0];
+    mat[3] = 0;
+    mat[4] = dPosUpX[1];
+    mat[5] = dPosOffX[1];
+    mat[6] = dPosition[1];
+    mat[7] = 0;
+    mat[8] = dPosUpX[2];
+    mat[9] = dPosOffX[2];
+    mat[10] = dPosition[2];
+    mat[11] = 0;
+    mat[12] = -Dot(dPosUpX, CameraPos);
+    mat[13] = -Dot(dPosOffX, CameraPos);
+    mat[14] = -Dot(dPosition, CameraPos);
+    mat[15] = 1;
+
+    return mat;
 }
 
 
@@ -74,6 +108,4 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
     return *this;
 }
 
-} /* math */
 } /* bakge */
-

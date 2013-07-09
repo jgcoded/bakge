@@ -40,15 +40,15 @@ Pawn::~Pawn()
 Result Pawn::Bind() const
 {
     GLint Program, Location;
-    math::Matrix Transform;
+    Matrix Transform;
 
-    /* Retrieve location of the bge_Position vec4 */
+    /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, "bge_Rotation");
+    Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -62,13 +62,13 @@ Result Pawn::Unbind() const
 {
     GLint Program, Location;
 
-    /* Retrieve location of the bge_Position vec4 */
+    /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, "bge_Rotation");
+    Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -92,4 +92,3 @@ Result Pawn::Draw() const
 }
 
 } /* bakge */
-

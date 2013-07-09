@@ -33,12 +33,12 @@
 #include <math.h>
 
 /* GCC & Clang attributes */
-#if defined __GNUC__ || defined __clang__
+#if defined __GNUC__ || defined __clang__ || defined __MINGW__
 /* Send compiler warning if function return result is not used */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
 /* Mark a variable as possibly unused in its function  */
 #define BGE_UNUSED __attribute__((unused))
-/* Factory functions are static class methods that return allocated memory  */
+/* Factory functions are static class BGE_API methods that return allocated memory  */
 #else /* Define them anyways to avoid compilation errors  */
 #define BGE_WUNUSED
 #define BGE_UNUSED
@@ -47,19 +47,29 @@
 /* MSVC pragmas */
 #ifdef _MSC_VER
 /* Prevent library conflict warning */
+#ifdef _DEBUG
 #pragma comment(linker, "/NODEFAULTLIB:MSVCRT")
+#endif /* _DEBUG */
+#ifdef BAKGE_EXPORTS
+#define BGE_API __declspec(dllexport)
+#else
+#define BGE_API __declspec(dllimport)
+#define GLEW_STATIC
+#endif /* BAKGE_EXPORTS */
+#else
+#define BGE_API
 #endif /* _MSC_VER */
 
 /* Common definitions */
-#define BGE_FUNC extern
+#define BGE_FUNC extern BGE_API
 #define BGE_FACTORY static BGE_WUNUSED
 #define BGE_NCP const&
 #define BGE_INL inline
 #define BGE_VER_MAJ 0
 #define BGE_VER_MIN 0
+#define BGE_VER_REV 0
 
 /* Include external library headers */
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 extern "C"
@@ -69,6 +79,14 @@ extern "C"
 #include <lua/lualib.h>
 #include <lua/lauxlib.h>
 }
+#include <physfs/physfs.h>
+
+/* Include other external libraries */
+#define STBI_HEADER_FILE_ONLY
+#include <stb/stb_image.c>
+#undef STBI_HEADER_FILE_ONLY
+#include <stb/stb_truetype.h>
+#define STB_TRUETYPE_IMPLEMENTATION
 
 /* Include core Bakge classes */
 #include <bakge/core/Type.h>
@@ -86,6 +104,7 @@ extern "C"
 
 /* Math modules */
 #include <bakge/math/Math.h>
+#include <bakge/math/Vector3.h>
 #include <bakge/math/Vector4.h>
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
@@ -95,7 +114,10 @@ extern "C"
 #include <bakge/data/LinkedList.h>
 
 /* Include API classes */
+#include <bakge/api/Mutex.h>
 #include <bakge/api/Thread.h>
+#include <bakge/api/Packet.h>
+#include <bakge/api/Socket.h>
 
 /* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
@@ -107,12 +129,16 @@ extern "C"
 #endif /* __linux__ */
 
 /* Additional Bakge classes */
+#include <bakge/graphics/Shader.h>
+#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
+#include <bakge/graphics/shapes/Sphere.h>
+#include <bakge/graphics/shapes/Cube.h>
+#include <bakge/graphics/shapes/Cylinder.h>
+#include <bakge/graphics/shapes/Cone.h>
 #include <bakge/graphics/Texture.h>
-#include <bakge/graphics/Shader.h>
-#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
@@ -120,4 +146,3 @@ extern "C"
 #include <bakge/engine/ScriptedEngine.h>
 
 #endif /* BAKGE_BAKGE_H */
-

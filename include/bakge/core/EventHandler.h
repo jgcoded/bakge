@@ -34,13 +34,13 @@ namespace bakge
  * EventHandler is really just a coupling interface class. Window classes
  * can be their own event handler, but can also link to an external handler.
  * This interface is used to ensure whatever the designated event handling
- * class is implements the proper methods for responding to events.
+ * class BGE_API is implements the proper methods for responding to events.
  *
- * Bakge will also have an ElectiveEventHandler class which lets you
+ * Bakge will also have an ElectiveEventHandler class BGE_API which lets you
  * "hook" into certain events and ignore others, with an easy way
  * to active/deactivate specific event types.
  * */
-class EventHandler
+class BGE_API EventHandler
 {
 
 public:
@@ -64,4 +64,3 @@ public:
 } /* bakge */
 
 #endif /* BAKGE_CORE_EVENTHANDLER_H */
-

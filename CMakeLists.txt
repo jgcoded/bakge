@@ -4,21 +4,28 @@ cmake_minimum_required (VERSION 2.6)
 
 project(BAKGE)
 
-# Version of GLFW we're using
-set(BAKGE_GLFW_VERSION "3.0")
-set(BAKGE_GLFW_VERSION_FULL "3.0.0")
-message("-- Bakge using GLFW version ${GLFW_VERSION_FULL}")
+# Prevent build attempts on any unsupported platform
+if(NOT APPLE AND NOT WIN32 AND NOT UNIX)
+  message(FATAL_ERROR "Bakge only builds on Windows, OS X or Linux")
+endif()
 
 set(BAKGE_SDK_PATH "sdk")
 set(BAKGE_LIB_DIR "lib")
 set(BAKGE_BIN_DIR "bin")
 set(BAKGE_INC_DIR "include")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-
 # Common required packages
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
+
+# Build option
+if(NOT MSVC)
+  if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
+                                      "MinSizeRel" "RelWithDebInfo")
+  endif()
+endif()
 
 # Bakge include/link directories
 set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
@@ -29,35 +36,40 @@ set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 # Note: Lua has a special build and headers copy
 set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
 set(BAKGE_GLEW_PATH ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0)
+set(BAKGE_PHYSFS_PATH ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
 
+# Don't append BAKGE_PHYSFS_PATH to BAKGE_INCLUDE_DIRECTORIES
+# We need to copy the headers over manually below, there is no
+# physfs/include/ directory
+
 # Output all generated libraries and binaries to the SDK dir
-set(BAKGE_TARGET_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
-set(BAKGE_SDK_INC_PATH ${BAKGE_TARGET_DIR}/${BAKGE_INC_DIR})
-set(BAKGE_SDK_LIB_PATH ${BAKGE_TARGET_DIR}/${BAKGE_LIB_DIR})
-set(BAKGE_SDK_BIN_PATH ${BAKGE_TARGET_DIR}/${BAKGE_BIN_DIR})
-
-# If not on Visual Studio, enable a simple debug/release build target
-if(NOT MSVC)
-  option(DEBUG_BUILD "Build with debug symbols and definitions" ON)
-  if(DEBUG_BUILD)
-    add_definitions(-D_DEBUG)
-    set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_LIB_PATH}/Debug)
-    set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_BIN_PATH}/Debug)
-  else()
-    set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_LIB_PATH}/Release)
-    set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_BIN_PATH}/Release)
-  endif()
-endif()
-
-# Now set our paths
-set(BAKGE_SDK_EXAMPLES_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/example)
-set(BAKGE_SDK_TESTS_OUTPUT_PATH ${BAKGE_SDK_BIN_PATH}/test)
+set(BAKGE_SDK_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
+set(BAKGE_SDK_INC_PATH ${BAKGE_SDK_DIR}/${BAKGE_INC_DIR})
+set(BAKGE_SDK_LIB_PATH ${BAKGE_SDK_DIR}/${BAKGE_LIB_DIR}/${CMAKE_BUILD_TYPE})
+set(BAKGE_SDK_BIN_PATH ${BAKGE_SDK_DIR}/${BAKGE_BIN_DIR}/${CMAKE_BUILD_TYPE})
 
 # We want ALL libraries (event external ones)to build into the
 # SDK's library directory
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
+
+# Bakge options
+option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
+option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
+
+# External libraries included in the source tree
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
+
+# Copy PhysFS headers manually here
+file(GLOB BAKGE_PHYSFS_HEADERS ${BAKGE_PHYSFS_PATH}/*.h)
+make_directory(${BAKGE_SDK_INC_PATH}/physfs)
+foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
+  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
+                                                ${BAKGE_SDK_INC_PATH}/physfs)
+endforeach()
 
 
 ########################################
@@ -68,10 +80,18 @@ if(UNIX AND NOT APPLE)
   find_package(X11 REQUIRED)
   include_directories(${X11_INCLUDE_DIR})
   include_directories(${X11_LIBRARY_DIR})
+
+  if(BUILD_SHARED_LIBS)
+    set(BAKGE_GLFW_TARGET glfw)
+  else()
+    set(BAKGE_GLFW_TARGET glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
     m
     glew
-    glfw3
+    ${BAKGE_GLFW_TARGET}
+    ${BAKGE_PHYSFS_TARGET}
     lua
     GL
     GLU
@@ -91,10 +111,18 @@ if(UNIX AND APPLE)
   FIND_LIBRARY(CORE_FOUNDATION_LIBRARY CoreFoundation)
   include_directories(${Cocoa_INCLUDE_DIRS})
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+
+  if(BUILD_SHARED_LIBS)
+    set(BAKGE_GLFW_TARGET glfw)
+  else()
+    set(BAKGE_GLFW_TARGET glfw3)
+  endif()
+
   set(BAKGE_LIBRARIES
     m
     glew
-    glfw3
+    ${BAKGE_GLFW_TARGET}
+    ${BAKGE_PHYSFS_TARGET}
     lua
     ${OPENGL_LIBRARY}
     ${COCOA_LIBRARY}
@@ -105,17 +133,42 @@ if(UNIX AND APPLE)
 endif()
 
 if(WIN32)
+  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
+
+  # GLFW has some nuances when it comes to different builds/platforms
+  if(BUILD_SHARED_LIBS AND MSVC)
+    set(BAKGE_GLFW_TARGET glfw3dll)
+  else()
+    set(BAKGE_GLFW_TARGET glfw)
+  endif()
+
   set(BAKGE_LIBRARIES
+    glew
     gdi32.lib
     user32.lib
     winmm.lib
-    glew
-    glfw3
+    ${BAKGE_GLFW_TARGET}
+    ${BAKGE_PHYSFS_TARGET}
     lua
     glu32.lib
-    opengl32.lib
+    ${OPENGL_LIBRARY}
+    ws2_32.lib
   )
 endif(WIN32)
+
+# Create a list of all Bakge's build targets
+set(BAKGE_TARGET bakge)
+set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
+
+# Append library targets
+# BAKGE_GLFW_TARGET changes based on platform. Determined above.
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
+set(BAKGE_LUA_TARGET lua)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
+set(BAKGE_GLEW_TARGET glew)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
+set(BAKGE_PHYSFS_TARGET physfs)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS
@@ -132,8 +185,12 @@ endforeach(directory)
 
 # Also add SDK paths
 include_directories(${BAKGE_SDK_INC_PATH})
-link_directories(${BAKGE_SDK_LIB_PATH})
 
+if(NOT BUILD_SHARED_LIBS)
+  link_directories(${BAKGE_SDK_LIB_PATH})
+else()
+  link_directories(${BAKGE_SDK_BIN_PATH})
+endif()
 
 ########################################
 # BAKGE CMAKE SUBDIRECTORIES
@@ -146,11 +203,17 @@ add_subdirectory(lib)
 add_subdirectory(src)
 
 # Compiles Bakge unit tests
-add_subdirectory(test)
+if(BAKGE_BUILD_TESTS)
+  add_subdirectory(test)
+endif()
 
 # Compiles example Bakge programs
-add_subdirectory(example)
+if(BAKGE_BUILD_EXAMPLES)
+  add_subdirectory(example)
+endif()
 
+# Build the Bakge GDK Engine
+add_subdirectory(engine)
 
 ########################################
 # BAKGE SDK BUILD
@@ -158,7 +221,7 @@ add_subdirectory(example)
 
 # Copy Bakge headers and library headers to SDK dir
 # Doesn't copy OpenGL or platform-specific headres like windows.h or x11.h
-make_directory(${BAKGE_TARGET_DIR})
+make_directory(${BAKGE_SDK_DIR})
 make_directory(${BAKGE_SDK_INC_PATH})
 foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}

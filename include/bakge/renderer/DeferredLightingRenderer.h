@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class DeferredLightingRenderer : public Renderer
+class BGE_API DeferredLightingRenderer : public Renderer
 {
 
 public:

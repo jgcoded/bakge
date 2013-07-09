@@ -37,4 +37,3 @@ BGE_FUNC Microseconds GetRunningTime();
 } /* bakge */
 
 #endif /* BAKGE_SYSTEM_CLOCK_H */
-

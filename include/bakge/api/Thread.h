@@ -30,7 +30,7 @@ namespace bakge
 namespace api
 {
 
-class Thread
+class BGE_API Thread
 {
 
 protected:
