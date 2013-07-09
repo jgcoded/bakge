@@ -33,6 +33,10 @@ namespace bakge
 class GamePad
 {
     int Handle;
+
+    int NumButtons;
+    const unsigned char* ButtonStates;
+
     int NumAxes;
     const Scalar* AxesValues;
 
@@ -46,6 +50,17 @@ public:
     ~GamePad();
 
     BGE_FACTORY GamePad* Detect();
+
+    BGE_INL int GetNumButtons() const
+    {
+        return NumButtons;
+    }
+
+    BGE_INL bool GetButtonPressed(int ButtonID)
+    {
+        ButtonStates = glfwGetJoystickButtons(Handle, &NumButtons);
+        return ButtonStates[ButtonID] == GLFW_PRESS;
+    }
 
     BGE_INL int GetNumAxes() const
     {
