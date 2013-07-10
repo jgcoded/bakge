@@ -59,6 +59,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 # Bakge options
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
 option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
+option(BAKGE_GDK_BUILD_ENGINE "Build the Bakge GDK engine" ON)
 
 # External libraries included in the source tree
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
@@ -213,7 +214,9 @@ if(BAKGE_BUILD_EXAMPLES)
 endif()
 
 # Build the Bakge GDK Engine
-add_subdirectory(engine)
+if(BAKGE_GDK_BUILD_ENGINE)
+  add_subdirectory(engine)
+endif()
 
 ########################################
 # BAKGE SDK BUILD
