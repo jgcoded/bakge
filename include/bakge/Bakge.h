@@ -58,6 +58,9 @@
 #endif /* BAKGE_EXPORTS */
 #else
 #define BGE_API
+#ifndef BAKGE_EXPORT
+#define GLEW_STATIC
+#endif
 #endif /* _MSC_VER */
 
 /* Common definitions */
