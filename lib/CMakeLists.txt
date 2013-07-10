@@ -4,6 +4,7 @@ cmake_minimum_required (VERSION 2.6)
 include(${BAKGE_SOURCE_DIR}/cmake/GetGLFW.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetLua.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetGLEW.cmake)
+include(${BAKGE_SOURCE_DIR}/cmake/GetOpenAL.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetPhysFS.cmake)
 
 # Build GLFW with our modified CMake build
