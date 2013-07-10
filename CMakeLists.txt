@@ -72,6 +72,18 @@ foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
                                                 ${BAKGE_SDK_INC_PATH}/physfs)
 endforeach()
 
+# Create a list of all Bakge's build targets
+set(BAKGE_TARGET bakge)
+set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
+
+# Append library targets
+set(BAKGE_LUA_TARGET lua)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
+set(BAKGE_GLEW_TARGET glew)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
+set(BAKGE_PHYSFS_TARGET physfs)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
+
 
 ########################################
 # PLATFORM SPECIFIC LIBRARIES SETUP
@@ -90,7 +102,7 @@ if(UNIX AND NOT APPLE)
 
   set(BAKGE_LIBRARIES
     m
-    glew
+    ${BAKGE_GLEW_TARGET}
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
     lua
@@ -121,7 +133,7 @@ if(UNIX AND APPLE)
 
   set(BAKGE_LIBRARIES
     m
-    glew
+    ${BAKGE_GLEW_TARGET}
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
     lua
@@ -144,12 +156,12 @@ if(WIN32)
   endif()
 
   set(BAKGE_LIBRARIES
-    glew
     gdi32.lib
     user32.lib
     winmm.lib
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
+    ${BAKGE_GLEW_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
@@ -157,19 +169,8 @@ if(WIN32)
   )
 endif(WIN32)
 
-# Create a list of all Bakge's build targets
-set(BAKGE_TARGET bakge)
-set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
-
-# Append library targets
 # BAKGE_GLFW_TARGET changes based on platform. Determined above.
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
-set(BAKGE_LUA_TARGET lua)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
-set(BAKGE_GLEW_TARGET glew)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
-set(BAKGE_PHYSFS_TARGET physfs)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS
