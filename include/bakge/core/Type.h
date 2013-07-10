@@ -41,6 +41,7 @@ typedef unsigned long long Uint64;
 #endif
 
 typedef char Byte;
+typedef unsigned char UByte;
 typedef Uint64 Microseconds;
 typedef double Seconds;
 

@@ -28,6 +28,8 @@
 #import <cocoa/Cocoa.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
+#include <unistd.h>
+#include <arpa/inet.h>
 #include <sys/socket.h>
 
 #include <bakge/mutex/osx_Mutex.h>

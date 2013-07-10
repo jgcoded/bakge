@@ -58,6 +58,9 @@
 #endif /* BAKGE_EXPORTS */
 #else
 #define BGE_API
+#ifndef BAKGE_EXPORT
+#define GLEW_STATIC
+#endif
 #endif /* _MSC_VER */
 
 /* Common definitions */
@@ -114,6 +117,7 @@ extern "C"
 #include <bakge/data/LinkedList.h>
 
 /* Network modules */
+#include <bakge/network/Remote.h>
 #include <bakge/network/Packet.h>
 
 /* Include API classes */

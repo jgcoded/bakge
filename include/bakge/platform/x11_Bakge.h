@@ -29,6 +29,9 @@
 #include <sys/time.h>
 #include <time.h>
 #include <pthread.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
 #include <bakge/mutex/x11_Mutex.h>
 #include <bakge/thread/x11_Thread.h>

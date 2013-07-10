@@ -7,6 +7,7 @@ if(BAKGE_BUILD_SDK)
 endif()
 
 set(TESTS
+  client
   clock
   cube
   cone
@@ -20,6 +21,7 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  server
   shaderprogram
   sharedcontext
   sphere

@@ -22,31 +22,35 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_THREAD_X11_SOCKET_H
-#define BAKGE_THREAD_X11_SOCKET_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <bakge/Bakge.h>
 
-namespace bakge
+int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
 
-typedef class BGE_API x11_Socket : api::Socket
-{
-    int SocketHandle;
-    struct sockaddr_in SocketIn;
+    printf("Creating socket\n");
+    bakge::Socket* Sock = bakge::Socket::Create(7001);
+    bakge::Packet* Pack;
+    bakge::Remote Server;
 
-    x11_Socket();
+    Pack = bakge::Packet::Create(NULL);
+    
+    Server.SetAddress(72, 129, 81, 23);
+    Server.SetPort(7000);
 
+    printf("Sending packet to %s...\n", Server.GetAddressString());
+    Sock->Send(&Server, Pack);
 
-public:
+    printf("Deleting sent packet\n");
+    if(Pack != NULL)
+        delete Pack;
 
-    virtual ~x11_Socket();
+    printf("Deleting socket\n");
+    delete Sock;
 
-    BGE_FACTORY x11_Socket* Create(int Port);
+    bakge::Deinit();
 
-    BGE_WUNUSED Packet* Receive();
-    Result Send(Remote* Destination, Packet* Data);
-
-} Socket; /* x11_Socket */
-
-} /* bakge */
-
-#endif /* BAKGE_THREAD_X11_SOCKET_H */
+    return 0;
+}

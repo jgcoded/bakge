@@ -44,7 +44,7 @@ public:
 
     /* Prototypes likely to change! */
     virtual Packet* Receive() = 0;
-    virtual Result Send(Packet* Data) = 0;
+    virtual Result Send(Remote* Destination, Packet* Data) = 0;
 
 }; /* Socket */
 

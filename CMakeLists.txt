@@ -59,6 +59,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 # Bakge options
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
 option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
+option(BAKGE_GDK_BUILD_ENGINE "Build the Bakge GDK engine" ON)
 
 # External libraries included in the source tree
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
@@ -70,6 +71,18 @@ foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
                                                 ${BAKGE_SDK_INC_PATH}/physfs)
 endforeach()
+
+# Create a list of all Bakge's build targets
+set(BAKGE_TARGET bakge)
+set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
+
+# Append library targets
+set(BAKGE_LUA_TARGET lua)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
+set(BAKGE_GLEW_TARGET glew)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
+set(BAKGE_PHYSFS_TARGET physfs)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 
 
 ########################################
@@ -89,7 +102,7 @@ if(UNIX AND NOT APPLE)
 
   set(BAKGE_LIBRARIES
     m
-    glew
+    ${BAKGE_GLEW_TARGET}
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
     lua
@@ -120,7 +133,7 @@ if(UNIX AND APPLE)
 
   set(BAKGE_LIBRARIES
     m
-    glew
+    ${BAKGE_GLEW_TARGET}
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
     lua
@@ -143,12 +156,12 @@ if(WIN32)
   endif()
 
   set(BAKGE_LIBRARIES
-    glew
     gdi32.lib
     user32.lib
     winmm.lib
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
+    ${BAKGE_GLEW_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
@@ -156,19 +169,8 @@ if(WIN32)
   )
 endif(WIN32)
 
-# Create a list of all Bakge's build targets
-set(BAKGE_TARGET bakge)
-set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
-
-# Append library targets
 # BAKGE_GLFW_TARGET changes based on platform. Determined above.
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
-set(BAKGE_LUA_TARGET lua)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
-set(BAKGE_GLEW_TARGET glew)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
-set(BAKGE_PHYSFS_TARGET physfs)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 
 ########################################
 # BAKGE INCLUDE/LIB PATHS
@@ -192,6 +194,19 @@ else()
   link_directories(${BAKGE_SDK_BIN_PATH})
 endif()
 
+option(PHYSFS_BUILD_STATIC "" OFF)
+option(PHYSFS_BUILD_SHARED "" OFF)
+set(PHYSFS_BUILD_STATIC OFF CACHE BOOL FORCE "")
+set(PHYSFS_BUILD_SHARED OFF CACHE BOOL FORCE "")
+
+if(BUILD_SHARED_LIBS)
+  set_property(CACHE PHYSFS_BUILD_STATIC PROPERTY VALUE OFF)
+  set_property(CACHE PHYSFS_BUILD_SHARED PROPERTY VALUE ON)
+else()
+  set_property(CACHE PHYSFS_BUILD_SHARED PROPERTY VALUE OFF)
+  set_property(CACHE PHYSFS_BUILD_STATIC PROPERTY VALUE ON)
+endif()
+
 ########################################
 # BAKGE CMAKE SUBDIRECTORIES
 ########################################
@@ -213,7 +228,9 @@ if(BAKGE_BUILD_EXAMPLES)
 endif()
 
 # Build the Bakge GDK Engine
-add_subdirectory(engine)
+if(BAKGE_GDK_BUILD_ENGINE)
+  add_subdirectory(engine)
+endif()
 
 ########################################
 # BAKGE SDK BUILD

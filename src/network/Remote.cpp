@@ -22,31 +22,68 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_THREAD_X11_SOCKET_H
-#define BAKGE_THREAD_X11_SOCKET_H
+#include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-typedef class BGE_API x11_Socket : api::Socket
+Remote::Remote()
 {
-    int SocketHandle;
-    struct sockaddr_in SocketIn;
+    IP[0] = 0;
+    IP[1] = 0;
+    IP[2] = 0;
+    IP[3] = 0;
+    Port = 0;
+    FullAddress = 0;
+    Str[22] = '\0';
+}
 
-    x11_Socket();
+
+Remote::~Remote()
+{
+}
 
 
-public:
+Remote BGE_NCP Remote::SetAddress(UByte A, UByte B, UByte C, UByte D)
+{
+    memset((void*)Str, 0, 21);
+    snprintf(Str, 21, "%d.%d.%d.%d:%d", A, B, C, D, Port);
 
-    virtual ~x11_Socket();
+    IP[0] = A;
+    IP[1] = B;
+    IP[2] = C;
+    IP[3] = D;
 
-    BGE_FACTORY x11_Socket* Create(int Port);
+    FullAddress = (IP[0] << 24) | (IP[1] << 16) | (IP[2] << 8) | IP[3];
 
-    BGE_WUNUSED Packet* Receive();
-    Result Send(Remote* Destination, Packet* Data);
+    return *this;
+}
 
-} Socket; /* x11_Socket */
+
+const char* Remote::GetAddressString() const
+{
+    return Str;
+}
+
+
+int Remote::GetAddress() const
+{
+    return FullAddress;
+}
+
+
+Remote BGE_NCP Remote::SetPort(int P)
+{
+    Port = P;
+    memset((void*)Str, 0, 21);
+    snprintf(Str, 21, "%d.%d.%d.%d:%d", IP[0], IP[1], IP[2], IP[3], Port);
+    return *this;
+}
+
+
+int Remote::GetPort() const
+{
+    return Port;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_THREAD_X11_SOCKET_H */

@@ -22,31 +22,35 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_THREAD_X11_SOCKET_H
-#define BAKGE_THREAD_X11_SOCKET_H
+#ifndef BAKGE_NETWORK_REMOTE_H
+#define BAKGE_NETWORK_REMOTE_H
 
 namespace bakge
 {
 
-typedef class BGE_API x11_Socket : api::Socket
+class BGE_API Remote
 {
-    int SocketHandle;
-    struct sockaddr_in SocketIn;
+    UByte IP[4]; /* IP parts A.B.C.D */
+    int FullAddress;
+    int Port;
 
-    x11_Socket();
+    char Str[22];
 
 
 public:
 
-    virtual ~x11_Socket();
+    Remote();
+    ~Remote();
 
-    BGE_FACTORY x11_Socket* Create(int Port);
+    Remote BGE_NCP SetAddress(UByte A, UByte B, UByte C, UByte D);
+    const char* GetAddressString() const;
+    int GetAddress() const;
 
-    BGE_WUNUSED Packet* Receive();
-    Result Send(Remote* Destination, Packet* Data);
+    Remote BGE_NCP SetPort(int P);
+    int GetPort() const;
 
-} Socket; /* x11_Socket */
+}; /* Remote */
 
 } /* bakge */
 
-#endif /* BAKGE_THREAD_X11_SOCKET_H */
+#endif /* BAKGE_NETWORK_REMOTE_H */

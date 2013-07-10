@@ -37,6 +37,7 @@ set(MODULES
   math/Quaternion
   math/Matrix
   network/Packet
+  network/Remote
   renderer/DeferredGeometryRenderer
   renderer/DeferredLightingRenderer
   renderer/FrontRenderer

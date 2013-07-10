@@ -29,17 +29,79 @@ namespace bakge
 
 x11_Socket::x11_Socket()
 {
+    SocketHandle = 0;
 }
 
 
 x11_Socket::~x11_Socket()
 {
+    if(SocketHandle >= 0) {
+        close(SocketHandle);
+    }
 }
 
 
-x11_Socket* x11_Socket::Create()
+x11_Socket* x11_Socket::Create(int Port)
 {
-    return NULL;
+    x11_Socket* Sock = new x11_Socket;
+
+    Sock->SocketHandle = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    if(Sock->SocketHandle < 0) {
+        printf("Unable to attach socket\n");
+        delete Sock;
+        return Sock;
+    }
+
+    printf("Socket %d\n", Sock->SocketHandle);
+
+    memset((void*)&(Sock->SocketIn), 0, sizeof(Sock->SocketIn));
+    Sock->SocketIn.sin_family = AF_INET;
+    Sock->SocketIn.sin_port = htons(Port);
+    Sock->SocketIn.sin_addr.s_addr = INADDR_ANY;
+
+    if(bind(Sock->SocketHandle, (struct sockaddr*)&(Sock->SocketIn),
+                                       sizeof(Sock->SocketIn)) < 0) {
+        perror("bind()");
+        delete Sock;
+        return NULL;
+    }
+
+    return Sock;
+}
+
+
+Packet* x11_Socket::Receive()
+{
+    struct sockaddr_in ReceiveSocketIn;
+    Byte* Data = new Byte[512];
+    int Size = sizeof(ReceiveSocketIn);
+
+    printf("Waiting for packet...\n");
+    if(recvfrom(SocketHandle, Data, 512, 0, (struct sockaddr*)&ReceiveSocketIn,
+                                                    (socklen_t*)&Size) < 0) {
+        printf("Error receiving packet\n");
+        return NULL;
+    }
+
+    delete[] Data;
+
+    return Packet::Create(NULL);
+}
+
+
+Result x11_Socket::Send(Remote* Destination, Packet* Data)
+{
+    struct sockaddr_in Dest;
+    memset((void*)&Dest, 0, sizeof(Dest));
+
+    Dest.sin_addr.s_addr = htonl(Destination->GetAddress());
+    Dest.sin_port = htons(Destination->GetPort());
+    Dest.sin_family = PF_INET;
+
+    sendto(SocketHandle, NULL, 0, 0, (struct sockaddr*)&Dest,
+                                                sizeof(Dest));
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
