@@ -41,8 +41,8 @@ Matrix::~Matrix()
 
 
 Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
-                            Vector4 BGE_NCP Target,
-                            Vector4 BGE_NCP UpVector)
+                                    Vector4 BGE_NCP Target,
+                                    Vector4 BGE_NCP UpVector)
 {
     Vector4 Forward = Target - Position;
     Forward.Normalize();

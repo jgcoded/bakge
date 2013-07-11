@@ -71,8 +71,9 @@ public:
     Matrix BGE_NCP SetPerspective(Scalar FOV, Scalar Aspect, Scalar NearClip,
                                                             Scalar FarClip);
 
+    /* Create a viewing matrix transform */
     Matrix BGE_NCP SetLookAt(Vector4 BGE_NCP Position, Vector4 BGE_NCP Target,
-                                                        Vector4 BGE_NCP Up);
+                                                    Vector4 BGE_NCP UpVector);
 
 }; /* Matrix */
 
