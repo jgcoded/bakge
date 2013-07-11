@@ -190,7 +190,7 @@ Scalar Vector4::LengthSquared() const
 
 Scalar Vector4::Length() const
 {
-    return sqrt(LengthSquared());
+    return sqrtf(LengthSquared());
 }
 
 
