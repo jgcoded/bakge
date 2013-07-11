@@ -64,4 +64,27 @@ Result Shape::DrawStyle(BGE_SHAPE_STYLE Style)
     return BGE_SUCCESS;
 }
 
+
+Result Shape::Bind() const
+{
+    GLint Program;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+
+    GLint PositionsAttrib = glGetAttribLocation(Program, "bge_VertexArray");
+
+    glBindVertexArray(MeshVAO);
+    glEnableVertexAttribArray(PositionsAttrib);
+    glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    return Pawn::Bind();
+}
+
+
+Result Shape::Unbind() const
+{
+    glBindVertexArray(0);
+
+    return Pawn::Unbind();
+}
+
 } /* bakge */
