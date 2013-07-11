@@ -53,10 +53,6 @@ public:
     Matrix();
     ~Matrix();
 
-    static Matrix CreateLookAt(Vector4 BGE_NCP CameraPos,
-                                    Vector4 BGE_NCP CameraTarget,
-                                    Vector4 BGE_NCP CameraUpVector);
-
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
         return Val[At];
@@ -74,6 +70,9 @@ public:
     /* Create a perspective matrix transform */
     Matrix BGE_NCP SetPerspective(Scalar FOV, Scalar Aspect, Scalar NearClip,
                                                             Scalar FarClip);
+
+    Matrix BGE_NCP SetLookAt(Vector4 BGE_NCP Position, Vector4 BGE_NCP Target,
+                                                        Vector4 BGE_NCP Up);
 
 }; /* Matrix */
 
