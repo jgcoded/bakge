@@ -32,6 +32,9 @@ int main(int argc, char* argv[])
     bakge::Node* Point;
     bakge::ShaderProgram* Program;
     bakge::Matrix Perspective;
+    bakge::Matrix View;
+
+    GLUquadric* Quadric = gluNewQuadric();
 
     printf("Initializing Bakge\n");
     if(bakge::Init(argc, argv) != BGE_SUCCESS) {
@@ -53,6 +56,7 @@ int main(int argc, char* argv[])
 
     /* Default shaders */
     Program = bakge::ShaderProgram::Create(NULL, NULL);
+    Program->Bind();
 
     /* Do some GL configuration */
     glClearColor(0, 0, 1, 1);
@@ -65,9 +69,16 @@ int main(int argc, char* argv[])
     /* Ghetto-set our shader's perspective matrix */
     GLint ShaderProgram, Location;
     Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
+    View.SetLookAt(
+        bakge::Point(0, 0, 3),
+        bakge::Point(0, 0, 0),
+        bakge::UnitVector(0, 1, 0)
+    );
     glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
     Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
+    Location = glGetUniformLocation(ShaderProgram, "bge_View");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
     while(1) {
         /* Poll events for all windows */
@@ -79,9 +90,7 @@ int main(int argc, char* argv[])
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glColor3f(1, 1, 1);
-        Point->Bind();
-        Point->Draw(); /* No renderer for now */
-        Point->Unbind();
+        gluSphere(Quadric, 0.5f, 16, 16);
         Win->SwapBuffers();
     }
 
@@ -97,6 +106,8 @@ int main(int argc, char* argv[])
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
+
+    gluDeleteQuadric(Quadric);
 
     return 0;
 }
