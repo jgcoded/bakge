@@ -38,4 +38,30 @@ Mesh::~Mesh()
 {
 }
 
+
+Result Mesh::CreateBuffers()
+{
+    /* If data already exists clear it */
+    if(MeshVAO != 0) {
+        ClearBuffers();
+    }
+
+    glGenVertexArrays(1, &MeshVAO);
+    glGenBuffers(NUM_MESH_BUFFERS, MeshBuffers);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Mesh::ClearBuffers()
+{
+    glDeleteVertexArrays(1, &MeshVAO);
+    MeshVAO = 0;
+
+    glDeleteBuffers(NUM_MESH_BUFFERS, MeshBuffers);
+    MeshBuffers[0] = 0;
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

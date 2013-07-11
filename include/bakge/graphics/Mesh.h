@@ -54,6 +54,12 @@ public:
 
     virtual ~Mesh();
 
+
+protected:
+
+    Result CreateBuffers();
+    Result ClearBuffers();
+
 }; /* Mesh */
 
 } /* bakge */
