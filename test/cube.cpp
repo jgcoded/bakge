@@ -30,9 +30,12 @@ int main(int argc, char* argv[])
 {
     bakge::Window* Win;
     bakge::Cube* Obj;
+    bakge::ShaderProgram* PlainShader;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
+
+    PlainShader = bakge::ShaderProgram::Create(NULL, NULL);
 
     Win = bakge::Window::Create(600, 400);
     if(Win == NULL) {
@@ -40,22 +43,36 @@ int main(int argc, char* argv[])
         return bakge::Deinit();
     }
 
-    Obj = bakge::Cube::Create(1, 1, 1);
+    Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
 
     Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
 
     glClearColor(0, 0, 1, 1);
-    glViewport(0, 0, 600, 400);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(50.0, 1.5, 0.1, 500.0);
 
     /* Make it easy to see our points */
     glEnable(GL_POINT_SMOOTH);
-    glPointSize(10);
+    glPointSize(2);
     glHint(GL_POINT_SMOOTH, GL_NICEST);
+
+    PlainShader->Bind();
+
+    bakge::Matrix Perspective;
+    bakge::Matrix View;
+
+    GLint ShaderProgram, Location;
+    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
+    View.SetLookAt(
+        bakge::Point(0, 0, 3),
+        bakge::Point(0, 0, 0),
+        bakge::UnitVector(0, 1, 0)
+    );
+    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
+    Location = glGetUniformLocation(ShaderProgram, "bge_View");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+
+    float Rot = 0;
 
     while(1) {
         /* Poll events for all windows */
@@ -68,12 +85,20 @@ int main(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
-        glColor3f(1, 1, 1);
+
+        Rot += 0.01f;
+        View.SetLookAt(
+            bakge::Point(0.4f, 0.2f, 0.9f),
+            bakge::Point(0.3f, 0, 0.2f),
+            bakge::UnitVector(0, 1, 0)
+        );
+        glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
+
         Obj->Bind();
         Obj->Draw(); /* No renderer for now */
         Obj->Unbind();
-        glMatrixMode(GL_PROJECTION);
+
         Win->SwapBuffers();
     }
 
@@ -82,6 +107,9 @@ int main(int argc, char* argv[])
 
     if(Obj != NULL)
         delete Obj;
+
+    if(PlainShader != NULL)
+        delete PlainShader;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
