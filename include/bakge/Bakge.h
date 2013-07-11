@@ -141,6 +141,7 @@ extern "C"
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>
 #include <bakge/graphics/ShaderProgram.h>
+#include <bakge/graphics/Mesh.h>
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Shape.h>
@@ -149,7 +150,6 @@ extern "C"
 #include <bakge/graphics/shapes/Cylinder.h>
 #include <bakge/graphics/shapes/Cone.h>
 #include <bakge/graphics/Texture.h>
-#include <bakge/graphics/Mesh.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>

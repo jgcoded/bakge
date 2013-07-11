@@ -38,7 +38,7 @@ enum BGE_SHAPE_STYLE
     BGE_SHAPE_STYLE_EDGE
 };
 
-class BGE_API Shape : public Pawn
+class BGE_API Shape : public Pawn, public Mesh
 {
 
 protected:
