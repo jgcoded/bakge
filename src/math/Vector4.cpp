@@ -62,6 +62,12 @@ Vector4::~Vector4()
 }
 
 
+Vector4 Vector4::operator-() const
+{
+    return Vector4(-Val[0], -Val[1], -Val[2], Val[3]);
+}
+
+
 Vector4 Point(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 1.0);
