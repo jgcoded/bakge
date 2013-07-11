@@ -151,12 +151,12 @@ if(WIN32)
   set(BAKGE_GLFW_TARGET glfw)
 
   set(BAKGE_LIBRARIES
+    ${BAKGE_GLEW_TARGET}
     gdi32.lib
     user32.lib
     winmm.lib
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
-    ${BAKGE_GLEW_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
