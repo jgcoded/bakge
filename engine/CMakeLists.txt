@@ -22,8 +22,8 @@ set(BAKGE_GDK_ENGINE_SOURCES
 link_directories(${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_GDK_DIR}/${CMAKE_BUILD_TYPE})
-add_executable(Bakge ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES})
-target_link_libraries(Bakge bakge ${BAKGE_LIBRARIES})
+add_executable(BakgeEngine ${BAKGE_GDK_ENGINE_HEADERS} ${BAKGE_GDK_ENGINE_SOURCES})
+target_link_libraries(BakgeEngine bakge ${BAKGE_LIBRARIES})
 
 if(UNIX AND APPLE)
   list(APPEND CMAKE_CXX_FLAGS "-ObjC++")
@@ -51,5 +51,5 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 add_dependencies(GDKEngineCopyLibs ${BAKGE_TARGETS_LIST})
-add_dependencies(Bakge GDKEngineCopyLibs)
+add_dependencies(BakgeEngine GDKEngineCopyLibs)
 
