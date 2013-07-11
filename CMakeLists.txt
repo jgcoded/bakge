@@ -148,12 +148,7 @@ endif()
 if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
-  # GLFW has some nuances when it comes to different builds/platforms
-  if(BUILD_SHARED_LIBS AND MSVC)
-    set(BAKGE_GLFW_TARGET glfw3dll)
-  else()
-    set(BAKGE_GLFW_TARGET glfw)
-  endif()
+  set(BAKGE_GLFW_TARGET glfw)
 
   set(BAKGE_LIBRARIES
     gdi32.lib
