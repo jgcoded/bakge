@@ -54,7 +54,7 @@ Result Pawn::Bind() const
 
     //glUniformMatrix4fv
 
-    return Node::Unbind();
+    return Node::Bind();
 }
 
 
