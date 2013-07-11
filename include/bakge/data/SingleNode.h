@@ -31,19 +31,38 @@ namespace bakge
 {
 
 template<class  T>
-class BGE_API SingleNode
+class SingleNode
 {
 
 public:
 
-    SingleNode();
-    ~SingleNode();
+    SingleNode()
+    {
+    }
 
-    SingleNode<T>* GetNext();
-    void SetNext(SingleNode<T>* Next);
+    ~SingleNode()
+    {
+    }
 
-    T GetData();
-    void SetData(const T& Data);
+    SingleNode<T>* GetNext()
+    {
+        return Next;
+    }
+
+    void SetNext(SingleNode<T>* Next)
+    {
+        this->Next = Next;
+    }
+
+    T GetData()
+    {
+        return Data;
+    }
+
+    void SetData(const T& Data)
+    {
+        this->Data = Data;
+    }
 
 
 protected:
@@ -52,50 +71,6 @@ protected:
     T Data;
 
 }; /* SingleNode */
-
-#if !defined(_MSC_VER) && !defined(bakge_EXPORTS)
-
-template<class T>
-SingleNode<T>::SingleNode()
-{
-    Next = NULL;
-}
-
-
-template<class T>
-SingleNode<T>::~SingleNode()
-{
-}
-
-
-template<class T>
-SingleNode<T>* SingleNode<T>::GetNext()
-{
-    return Next;
-}
-
-
-template<class T>
-void SingleNode<T>::SetNext(SingleNode<T>* Next)
-{
-    this->Next = Next;
-}
-
-
-template<class T>
-T SingleNode<T>::GetData()
-{
-    return Data;
-}
-
-
-template<class T>
-void SingleNode<T>::SetData(const T& Data)
-{
-    this->Data = Data;
-}
-
-#endif
 
 } /* bakge */
 

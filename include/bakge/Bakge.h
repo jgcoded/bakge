@@ -53,8 +53,12 @@
 #ifdef BAKGE_EXPORTS
 #define BGE_API __declspec(dllexport)
 #else
+#ifndef BAKGE_STATIC
 #define BGE_API __declspec(dllimport)
+#else
 #define GLEW_STATIC
+#define BGE_API
+#endif /* BAKGE_STATIC */
 #endif /* BAKGE_EXPORTS */
 #else
 #define BGE_API

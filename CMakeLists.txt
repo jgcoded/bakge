@@ -148,20 +148,15 @@ endif()
 if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
-  # GLFW has some nuances when it comes to different builds/platforms
-  if(BUILD_SHARED_LIBS AND MSVC)
-    set(BAKGE_GLFW_TARGET glfw3dll)
-  else()
-    set(BAKGE_GLFW_TARGET glfw)
-  endif()
+  set(BAKGE_GLFW_TARGET glfw)
 
   set(BAKGE_LIBRARIES
+    ${BAKGE_GLEW_TARGET}
     gdi32.lib
     user32.lib
     winmm.lib
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
-    ${BAKGE_GLEW_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
@@ -203,6 +198,7 @@ if(BUILD_SHARED_LIBS)
   set_property(CACHE PHYSFS_BUILD_STATIC PROPERTY VALUE OFF)
   set_property(CACHE PHYSFS_BUILD_SHARED PROPERTY VALUE ON)
 else()
+  add_definitions(-DBAKGE_STATIC)
   set_property(CACHE PHYSFS_BUILD_SHARED PROPERTY VALUE OFF)
   set_property(CACHE PHYSFS_BUILD_STATIC PROPERTY VALUE ON)
 endif()

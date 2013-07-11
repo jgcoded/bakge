@@ -44,6 +44,10 @@ Remote::~Remote()
 }
 
 
+#ifdef _MSC_VER /* Ew */
+#define snprintf _snprintf
+#endif
+
 Remote BGE_NCP Remote::SetAddress(UByte A, UByte B, UByte C, UByte D)
 {
     memset((void*)Str, 0, 21);

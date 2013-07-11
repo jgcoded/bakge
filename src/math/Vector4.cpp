@@ -62,6 +62,12 @@ Vector4::~Vector4()
 }
 
 
+Vector4 Vector4::operator-() const
+{
+    return Vector4(-Val[0], -Val[1], -Val[2], Val[3]);
+}
+
+
 Vector4 Point(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 1.0);
@@ -158,7 +164,12 @@ bool Vector4::operator==(Vector4 BGE_NCP Other) const
 
 Vector4 BGE_NCP Vector4::Normalize()
 {
-    return *this /= Length();
+    Scalar Len = Length();
+    Val[0] /= Len;
+    Val[1] /= Len;
+    Val[2] /= Len;
+
+    return *this;
 }
 
 
@@ -179,7 +190,7 @@ Scalar Vector4::LengthSquared() const
 
 Scalar Vector4::Length() const
 {
-    return sqrt(LengthSquared());
+    return sqrtf(LengthSquared());
 }
 
 

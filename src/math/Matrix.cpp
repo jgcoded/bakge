@@ -40,39 +40,38 @@ Matrix::~Matrix()
 }
 
 
-Matrix Matrix::CreateLookAt(Vector4 BGE_NCP CameraPos,
-                            Vector4 BGE_NCP CameraTarget,
-                            Vector4 BGE_NCP CameraUpVector)
+Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
+                                    Vector4 BGE_NCP Target,
+                                    Vector4 BGE_NCP UpVector)
 {
+    Vector4 Forward = Target - Position;
+    Forward.Normalize();
 
-    Matrix mat;
+    Vector4 Side = Cross(Forward, UpVector);
+    Side.Normalize();
 
-    Vector4 dPosition = CameraPos - CameraTarget;
-    Vector4 dPosUpX = Cross(dPosition, CameraUpVector);
+    Vector4 Up = Cross(Side, Forward);
+    Up.Normalize();
 
-    dPosition.Normalize();
-    dPosUpX.Normalize();
+    Val[0] = Side[0];
+    Val[4] = Side[1];
+    Val[8] = Side[2];
 
-    Vector4 dPosOffX = Cross(dPosition, dPosUpX);
+    Val[1] = Up[0];
+    Val[5] = Up[1];
+    Val[9] = Up[2];
 
-    mat[0] = dPosUpX[0];
-    mat[1] = dPosOffX[0];
-    mat[2] = dPosition[0];
-    mat[3] = 0;
-    mat[4] = dPosUpX[1];
-    mat[5] = dPosOffX[1];
-    mat[6] = dPosition[1];
-    mat[7] = 0;
-    mat[8] = dPosUpX[2];
-    mat[9] = dPosOffX[2];
-    mat[10] = dPosition[2];
-    mat[11] = 0;
-    mat[12] = -Dot(dPosUpX, CameraPos);
-    mat[13] = -Dot(dPosOffX, CameraPos);
-    mat[14] = -Dot(dPosition, CameraPos);
-    mat[15] = 1;
+    Val[2] = -Forward[0];
+    Val[6] = -Forward[1];
+    Val[10] = -Forward[2];
 
-    return mat;
+    Val[3] = Val[7] = Val[11] = 0;
+
+    Val[12] = -Dot(Side, Position);
+    Val[13] = -Dot(Up, Position);
+    Val[14] = Dot(Forward, Position);
+
+    return *this;
 }
 
 
