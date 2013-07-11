@@ -164,7 +164,12 @@ bool Vector4::operator==(Vector4 BGE_NCP Other) const
 
 Vector4 BGE_NCP Vector4::Normalize()
 {
-    return *this /= Length();
+    Scalar Len = Length();
+    Val[0] /= Len;
+    Val[1] /= Len;
+    Val[2] /= Len;
+
+    return *this;
 }
 
 
