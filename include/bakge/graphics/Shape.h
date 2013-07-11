@@ -51,6 +51,22 @@ public:
     Shape();
     ~Shape();
 
+    BGE_INL Result Bind() const
+    {
+        if(MeshVAO != 0)
+            glBindVertexArray(MeshVAO);
+        else
+            return BGE_FAILURE;
+
+        return Pawn::Bind();
+    }
+
+    BGE_INL Result Unbind() const
+    {
+        glBindVertexArray(0);
+        return Pawn::Unbind();
+    }
+
     Result DrawStyle(BGE_SHAPE_STYLE Style);
 
 }; /* Shape */
