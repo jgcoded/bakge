@@ -42,6 +42,12 @@ Cylinder::~Cylinder()
 }
 
 
+Cylinder* Cylinder::Create(Scalar Radius, Scalar Height)
+{
+    return NULL;
+}
+
+
 Result Cylinder::Draw() const
 {
     gluCylinder(Quadric, Radius, Radius, Height, Slices, Stacks);

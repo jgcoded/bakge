@@ -40,6 +40,12 @@ Cone::~Cone()
 }
 
 
+Cone* Cone::Create(Scalar BaseRadius, Scalar TopRadius, Scalar Height)
+{
+    return NULL;
+}
+
+
 Result Cone::Draw() const
 {
     gluCylinder(Quadric, Radius, TopRadius, Height, Slices, Stacks);

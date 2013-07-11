@@ -40,6 +40,12 @@ Cube::~Cube()
 }
 
 
+Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
+{
+    return NULL;
+}
+
+
 Result Cube::Draw() const
 {
     return BGE_SUCCESS;

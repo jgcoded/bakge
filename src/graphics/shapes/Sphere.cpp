@@ -40,6 +40,12 @@ Sphere::~Sphere()
 }
 
 
+Sphere* Sphere::Create(Scalar Radius)
+{
+    return NULL;
+}
+
+
 Result Sphere::Draw() const
 {
     gluSphere(Quadric, Radius, Slices, Stacks);

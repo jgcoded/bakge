@@ -45,10 +45,11 @@ protected:
 
     GLUquadric* Quadric;
 
+    Shape();
+
 
 public:
 
-    Shape();
     ~Shape();
 
     BGE_INL Result Bind() const

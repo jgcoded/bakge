@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
         return bakge::Deinit();
     }
 
-    Obj = new bakge::Cone();
+    Obj = bakge::Cone::Create(0.5f, 0, 1);
 
     Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
 

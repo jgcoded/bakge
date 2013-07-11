@@ -41,11 +41,14 @@ protected:
     int Slices;
     int Stacks;
 
+    Cylinder();
+
 
 public:
 
-    Cylinder();
     ~Cylinder();
+
+    BGE_FACTORY Cylinder* Create(Scalar Radius, Scalar Height);
 
     BGE_INL void SetHeight(Scalar ConeHeight)
     {

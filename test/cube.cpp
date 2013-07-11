@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
         return bakge::Deinit();
     }
 
-    Obj = new bakge::Cube();
+    Obj = bakge::Cube::Create(1, 1, 1);
 
     Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
 

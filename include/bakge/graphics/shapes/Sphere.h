@@ -37,10 +37,16 @@ class BGE_API Sphere : public Shape
     int Stacks;
 
 
-public:
+protected:
 
     Sphere();
+
+
+public:
+
     ~Sphere();
+
+    BGE_FACTORY Sphere* Create(Scalar Radius);
 
     BGE_INL Scalar BGE_NCP SetRadius(Scalar BGE_NCP R)
     {

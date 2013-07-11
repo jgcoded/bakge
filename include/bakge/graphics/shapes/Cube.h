@@ -35,10 +35,16 @@ class BGE_API Cube : public Shape
     Vector4 Dimensions;
 
 
-public:
+protected:
 
     Cube();
+
+
+public:
+
     ~Cube();
+
+    BGE_FACTORY Cube* Create(Scalar Length, Scalar Width, Scalar Height);
 
     BGE_INL void SetDimensions(Scalar X, Scalar Y, Scalar Z)
     {

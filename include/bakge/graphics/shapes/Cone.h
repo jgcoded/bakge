@@ -35,10 +35,16 @@ class BGE_API Cone : public Cylinder
     Scalar TopRadius;
 
 
-public:
+protected:
 
     Cone();
+
+
+public:
+
     ~Cone();
+
+    BGE_FACTORY Cone* Create(Scalar BaseRadius, Scalar TopRadius, Scalar Height);
 
     BGE_INL void SetTopRadius(Scalar Top)
     {
