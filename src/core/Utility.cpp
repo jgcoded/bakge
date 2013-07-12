@@ -120,6 +120,10 @@ Result Deinit()
 
 void SystemInfo()
 {
+    extern void PlatformSystemInfo();
+
+    PlatformSystemInfo();
+
     printf("OpenGL v%s\n", glGetString(GL_VERSION));
     printf("GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }

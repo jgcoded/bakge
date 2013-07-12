@@ -42,4 +42,9 @@ Result PlatformDeinit()
     return BGE_SUCCESS;
 }
 
+
+void PlatformSystemInfo()
+{
+}
+
 } /* bakge */
