@@ -70,8 +70,8 @@ Result Shape::Bind() const
     GLint Program;
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
 
-    GLint PositionsAttrib = glGetAttribLocation(Program, "bge_Vertex");
-    GLint NormalsAttrib = glGetAttribLocation(Program, "bge_Normal");
+    GLint PositionsAttrib = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
 
     glBindVertexArray(MeshVAO);
 

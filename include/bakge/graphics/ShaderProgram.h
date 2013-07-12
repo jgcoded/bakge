@@ -31,6 +31,12 @@
 #define BGE_ROTATION_UNIFORM "bge_Rotation"
 #define BGE_SCALE_UNIFORM "bge_Scale"
 
+#define BGE_VIEW_UNIFORM "bge_View"
+#define BGE_PERSPECTIVE_UNIFORM "bge_Perspective"
+
+#define BGE_VERTEX_ATTRIBUTE "bge_Vertex"
+#define BGE_NORMAL_ATTRIBUTE "bge_Normal"
+
 namespace bakge
 {
 
