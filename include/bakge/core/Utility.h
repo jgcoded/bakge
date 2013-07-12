@@ -54,6 +54,8 @@ namespace bakge
 BGE_FUNC Result Init(int argc, char* argv[]);
 BGE_FUNC Result Deinit();
 
+BGE_FUNC void SystemInfo();
+
 BGE_WUNUSED BGE_FUNC Byte* LoadFileContents(const char* Path);
 
 } /* bakge */

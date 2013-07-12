@@ -94,6 +94,8 @@ Result Init(int argc, char* argv[])
     if(PlatformInit(argc, argv) != BGE_SUCCESS)
         return BGE_FAILURE;
 
+    SystemInfo();
+
     return BGE_SUCCESS;
 }
 
@@ -113,6 +115,13 @@ Result Deinit()
     glfwTerminate();
 
     return BGE_SUCCESS;
+}
+
+
+void SystemInfo()
+{
+    printf("OpenGL v%s\n", glGetString(GL_VERSION));
+    printf("GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 
 } /* bakge */
