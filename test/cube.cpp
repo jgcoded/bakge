@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
 
     Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
 
-    glClearColor(1, 1, 1, 1);
+    glClearColor(1, 0, 1, 1);
 
     /* Make it easy to see our points */
     glEnable(GL_POINT_SMOOTH);

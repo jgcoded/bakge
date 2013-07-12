@@ -51,7 +51,9 @@ const char* bgeWorldTransformSource =
     "vec4 bgeColor()\n"
     "{\n"
     "    vec4 TransformedNormal = (bge_Perspective * bge_View) * vec4(bge_NormalArray.xyz, 1);\n"
-    "    return vec4(1.0f, 0.0f, 0.0f, 1.0f) * max(abs(dot(vec4(TransformedNormal.xyz, 0), vec4(0, 0, 1, 0))), 0.1f);"
+    "    float ShadeValue = dot(vec4(TransformedNormal.xyz, 0), vec4(0, 0, 1, 0));\n"
+    "    ShadeValue = pow(max(abs(ShadeValue), 0.1f), 0.15f);\n"
+    "    return vec4(1.0f, 1.0f, 1.0f, 1.0f) * ShadeValue;"
     "}\n"
     "\n";
 
