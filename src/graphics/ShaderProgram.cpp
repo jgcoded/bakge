@@ -30,6 +30,7 @@ namespace bakge
 Shader* ShaderProgram::GenericVertexShader = NULL;
 Shader* ShaderProgram::GenericFragmentShader = NULL;
 Shader* ShaderProgram::bgeWorldTransform = NULL;
+Shader* ShaderProgram::bgeFragmentShaderLib = NULL;
 
 const char* bgeWorldTransformSource =
     "#version 120\n"
@@ -43,17 +44,12 @@ const char* bgeWorldTransformSource =
     "attribute vec4 bge_VertexArray;\n"
     "attribute vec4 bge_NormalArray;\n"
     "\n"
+    "varying vec4 bge_TransformedNormal;\n"
+    "\n"
     "vec4 bgeWorldTransform()\n"
     "{\n"
+    "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_NormalArray;\n"
     "    return (bge_Perspective * bge_View) * bge_VertexArray;\n"
-    "}\n"
-    "\n"
-    "vec4 bgeColor()\n"
-    "{\n"
-    "    vec4 TransformedNormal = (bge_Perspective * bge_View) * vec4(bge_NormalArray.xyz, 1);\n"
-    "    float ShadeValue = dot(vec4(TransformedNormal.xyz, 0), vec4(0, 0, 1, 0));\n"
-    "    ShadeValue = pow(max(abs(ShadeValue), 0.1f), 0.15f);\n"
-    "    return vec4(1.0f, 1.0f, 1.0f, 1.0f) * ShadeValue;"
     "}\n"
     "\n";
 
@@ -61,13 +57,23 @@ const char* GenericVertexShaderSource =
     "#version 120\n"
     "\n"
     "vec4 bgeWorldTransform();\n"
-    "vec4 bgeColor();\n"
-    "varying vec4 EndColor;\n"
     "\n"
     "void main()\n"
     "{\n"
-    "    EndColor = bgeColor();\n"
     "    gl_Position = bgeWorldTransform();\n"
+    "}\n"
+    "\n";
+
+const char* bgeFragmentShaderLibSource =
+    "#version 120\n"
+    "\n"
+    "varying vec4 bge_TransformedNormal;\n"
+    "\n"
+    "vec4 bgeColor()\n"
+    "{\n"
+    "    float ShadeValue = dot(vec4(bge_TransformedNormal.xyz, 0), vec4(0, 0, 1, 0));\n"
+    "    ShadeValue = pow(max(abs(ShadeValue), 0.1f), 0.15f);\n"
+    "    return vec4(1.0f, 1.0f, 1.0f, 1.0f) * ShadeValue;"
     "}\n"
     "\n";
 
@@ -76,11 +82,11 @@ const char* GenericFragmentShaderSource =
     "\n"
     "uniform sampler2D bge_Diffuse;\n"
     "\n"
-    "varying vec4 EndColor;\n"
+    "vec4 bgeColor();\n"
     "\n"
     "void main()\n"
     "{\n"
-    "    gl_FragColor = EndColor;\n"
+    "    gl_FragColor = bgeColor();\n"
     "}\n"
     "\n";
 
@@ -107,6 +113,12 @@ Result ShaderProgram::InitShaderLibrary()
                                     "bgeWorldTransform");
     if(bgeWorldTransform == NULL)
         return BGE_FAILURE;
+    
+    bgeFragmentShaderLib = Shader::LoadFragmentShaderString(
+                                    bgeFragmentShaderLibSource,
+                                    "bgeFragmentShaderLib");
+    if(bgeFragmentShaderLib == NULL)
+        return BGE_FAILURE;
 
     return BGE_SUCCESS;
 }
@@ -117,6 +129,7 @@ Result ShaderProgram::DeinitShaderLibrary()
     delete GenericVertexShader;
     delete GenericFragmentShader;
     delete bgeWorldTransform;
+    delete bgeFragmentShaderLib;
 
     return BGE_SUCCESS;
 }
@@ -169,6 +182,7 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
 
     /* Attach library shaders */
     glAttachShader(Handle, bgeWorldTransform->GetHandle());
+    glAttachShader(Handle, bgeFragmentShaderLib->GetHandle());
 
     /* If user passes NULL to vertex shader arg, use default generic one */
     if(Vertex == NULL) {
