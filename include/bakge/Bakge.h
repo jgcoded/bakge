@@ -117,6 +117,7 @@ extern "C"
 #include <bakge/math/Quaternion.h>
 
 /* Data structure modules */
+#include <bakge/data/File.h>
 #include <bakge/data/SingleNode.h>
 #include <bakge/data/LinkedList.h>
 

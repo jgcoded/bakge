@@ -11,6 +11,7 @@ set(MODULES
   api/Mutex
   api/Socket
   api/Thread
+  data/File
   data/SingleNode
   data/LinkedList
   core/Bindable
