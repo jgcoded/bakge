@@ -6,8 +6,9 @@ include(${BAKGE_SOURCE_DIR}/cmake/GetLua.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetGLEW.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetPhysFS.cmake)
 
-# Build GLFW (has its own CMake build)
+# Build GLFW with our modified CMake build
 set(GLFW_CLIENT_LIBRARY "opengl")
+configure_file(${BAKGE_SOURCE_DIR}/cmake/BuildGLFW.cmake ${GLFW_TARGET}/CMakeLists.txt COPYONLY)
 add_subdirectory(glfw-3.0)
 
 # Build PhysFS 2.0.3 (has its own CMake build)

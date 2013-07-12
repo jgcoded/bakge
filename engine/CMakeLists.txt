@@ -32,7 +32,7 @@ endif()
 # Copy libraries over to GDK directory
 add_custom_target(GDKEngineCopyLibs)
 
-if(BUILD_SHARED_LIBS)
+if(BAKGE_BUILD_DYNAMIC)
   foreach(COPYLIB ${BAKGE_TARGETS_LIST})
     add_custom_command(TARGET GDKEngineCopyLibs POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${COPYLIB}>

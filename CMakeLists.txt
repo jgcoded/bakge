@@ -18,7 +18,7 @@ set(BAKGE_INC_DIR "include")
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
-# Build option
+# Build configuration
 if(NOT MSVC)
   if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build." FORCE)
@@ -26,6 +26,9 @@ if(NOT MSVC)
                                       "MinSizeRel" "RelWithDebInfo")
   endif()
 endif()
+
+# Build dynamic/static libraries
+option(BAKGE_BUILD_DYNAMIC "Build Bakge and all dependencies as shared libraries." ON)
 
 # Bakge include/link directories
 set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
@@ -86,7 +89,7 @@ if(UNIX AND NOT APPLE)
   include_directories(${X11_INCLUDE_DIR})
   include_directories(${X11_LIBRARY_DIR})
 
-  if(BUILD_SHARED_LIBS)
+  if(BAKGE_BUILD_DYNAMIC)
     set(BAKGE_GLFW_TARGET glfw)
   else()
     set(BAKGE_GLFW_TARGET glfw3)
@@ -117,7 +120,7 @@ if(UNIX AND APPLE)
   include_directories(${Cocoa_INCLUDE_DIRS})
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
-  if(BUILD_SHARED_LIBS)
+  if(BAKGE_BUILD_DYNAMIC)
     set(BAKGE_GLFW_TARGET glfw)
   else()
     set(BAKGE_GLFW_TARGET glfw3)
@@ -175,19 +178,22 @@ endforeach(directory)
 # Also add SDK paths
 include_directories(${BAKGE_SDK_INC_PATH})
 
-if(NOT BUILD_SHARED_LIBS)
+if(NOT BAKGE_BUILD_DYNAMIC)
   link_directories(${BAKGE_SDK_LIB_PATH})
 else()
   link_directories(${BAKGE_SDK_BIN_PATH})
 endif()
 
-if(BUILD_SHARED_LIBS)
-  set_property(CACHE PHYSFS_BUILD_STATIC PROPERTY VALUE OFF)
-  set_property(CACHE PHYSFS_BUILD_SHARED PROPERTY VALUE ON)
+# Configure libraries' options based on our dynamic/static option
+if(BAKGE_BUILD_DYNAMIC)
+  set(PHYSFS_BUILD_STATIC OFF)
+  set(PHYSFS_BUILD_SHARED ON)
+  set(BUILD_SHARED_LIBS ON)
 else()
   add_definitions(-DBAKGE_STATIC)
-  set_property(CACHE PHYSFS_BUILD_SHARED PROPERTY VALUE OFF)
-  set_property(CACHE PHYSFS_BUILD_STATIC PROPERTY VALUE ON)
+  set(PHYSFS_BUILD_STATIC ON)
+  set(PHYSFS_BUILD_SHARED OFF)
+  set(BUILD_SHARED_LIBS OFF)
 endif()
 
 ########################################

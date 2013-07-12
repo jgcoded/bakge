@@ -98,7 +98,7 @@ set(EXTERN_SOURCES
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.h
 )
 
-if(BUILD_SHARED_LIBS)
+if(BAKGE_BUILD_DYNAMIC)
   # It's a matter of taste
   remove_definitions(-Dbakge_EXPORTS)
   add_definitions(-DBAKGE_EXPORTS)
@@ -106,6 +106,6 @@ endif()
 
 add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
                                         ${PLATFORM_HEADERS} ${EXTERN_SOURCES})
-if(BUILD_SHARED_LIBS)
+if(BAKGE_BUILD_DYNAMIC)
   target_link_libraries(bakge ${BAKGE_LIBRARIES})
 endif()
