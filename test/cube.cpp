@@ -74,6 +74,8 @@ int main(int argc, char* argv[])
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
     float Rot = 0;
+    bakge::Microseconds NowTime;
+    bakge::Microseconds LastTime = bakge::GetRunningTime();
 
     while(1) {
         /* Poll events for all windows */
@@ -87,7 +89,11 @@ int main(int argc, char* argv[])
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        Rot += 0.01f;
+        NowTime = bakge::GetRunningTime();
+        float DeltaTime = (float)(NowTime - LastTime) / 1000000;
+        LastTime = NowTime;
+
+        Rot += 1.0f * DeltaTime;
         View.SetLookAt(
             bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
             bakge::Point(0.0f, 0, 0.0f),
