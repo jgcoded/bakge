@@ -47,6 +47,7 @@ Result Mesh::CreateBuffers()
     }
 
     glGenVertexArrays(1, &MeshVAO);
+    glBindVertexArray(MeshVAO);
     glGenBuffers(NUM_MESH_BUFFERS, MeshBuffers);
 
     return BGE_SUCCESS;
