@@ -47,15 +47,24 @@ const char* bgeWorldTransformSource =
     "{\n"
     "    return (bge_Perspective * bge_View) * bge_VertexArray;\n"
     "}\n"
+    "\n"
+    "vec4 bgeColor()\n"
+    "{\n"
+    "    vec4 TransformedNormal = (bge_Perspective * bge_View) * vec4(bge_NormalArray.xyz, 1);\n"
+    "    return vec4(1.0f, 0.0f, 0.0f, 1.0f) * max(abs(dot(vec4(TransformedNormal.xyz, 0), vec4(0, 0, 1, 0))), 0.1f);"
+    "}\n"
     "\n";
 
 const char* GenericVertexShaderSource =
     "#version 120\n"
     "\n"
     "vec4 bgeWorldTransform();\n"
+    "vec4 bgeColor();\n"
+    "varying vec4 EndColor;\n"
     "\n"
     "void main()\n"
     "{\n"
+    "    EndColor = bgeColor();\n"
     "    gl_Position = bgeWorldTransform();\n"
     "}\n"
     "\n";
@@ -65,9 +74,11 @@ const char* GenericFragmentShaderSource =
     "\n"
     "uniform sampler2D bge_Diffuse;\n"
     "\n"
+    "varying vec4 EndColor;\n"
+    "\n"
     "void main()\n"
     "{\n"
-    "    gl_FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
+    "    gl_FragColor = EndColor;\n"
     "}\n"
     "\n";
 

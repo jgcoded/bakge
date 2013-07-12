@@ -47,10 +47,11 @@ int main(int argc, char* argv[])
 
     Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
 
-    glClearColor(0, 0, 1, 1);
+    glClearColor(1, 1, 1, 1);
 
     /* Make it easy to see our points */
     glEnable(GL_POINT_SMOOTH);
+    glEnable(GL_DEPTH_TEST);
     glPointSize(2);
     glHint(GL_POINT_SMOOTH, GL_NICEST);
 
@@ -88,8 +89,8 @@ int main(int argc, char* argv[])
 
         Rot += 0.01f;
         View.SetLookAt(
-            bakge::Point(0.4f, 0.2f, 0.9f),
-            bakge::Point(0.3f, 0, 0.2f),
+            bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
+            bakge::Point(0.0f, 0, 0.0f),
             bakge::UnitVector(0, 1, 0)
         );
         glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
