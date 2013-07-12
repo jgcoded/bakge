@@ -71,10 +71,17 @@ Result Shape::Bind() const
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
 
     GLint PositionsAttrib = glGetAttribLocation(Program, "bge_VertexArray");
+    GLint NormalsAttrib = glGetAttribLocation(Program, "bge_NormalArray");
 
     glBindVertexArray(MeshVAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
     glEnableVertexAttribArray(PositionsAttrib);
     glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
+    glEnableVertexAttribArray(NormalsAttrib);
+    glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     return Pawn::Bind();
 }

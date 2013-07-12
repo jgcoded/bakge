@@ -41,6 +41,7 @@ const char* bgeWorldTransformSource =
     "uniform mat4x4 bge_View;\n"
     "\n"
     "attribute vec4 bge_VertexArray;\n"
+    "attribute vec4 bge_NormalArray;\n"
     "\n"
     "vec4 bgeWorldTransform()\n"
     "{\n"

@@ -58,7 +58,8 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
      * We only need 8 vertices (3 components for each vertex, 24 buffer size)
      * The indices buffer will create our triangles
      * */
-    Scalar Vertices[24];
+    Scalar Vertices[72];
+    Scalar Normals[72];
     unsigned int Indices[36];
 
     /* *
@@ -189,6 +190,10 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 
     glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 24, Vertices,
+                                                        GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 24, Normals,
                                                         GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_INDICES]);
