@@ -44,6 +44,8 @@ public:
 
     BGE_FACTORY File* Open(const char* Path);
 
+    Result Close();
+
 }; /* File */
 
 } /* bakge */

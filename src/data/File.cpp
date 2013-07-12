@@ -36,6 +36,8 @@ File::File()
 
 File::~File()
 {
+    Close();
+
     free(Path);
 }
 
@@ -50,6 +52,24 @@ File* File::Open(const char* Path)
     strncpy(F->Path, Path, Len);
 
     return F;
+}
+
+
+Result File::Close()
+{
+    /* File isn't opened */
+    if(Handle == NULL) {
+        return BGE_FAILURE;
+    }
+
+    /* Error occurred while closing file */
+    if(PHYSFS_close(Handle) == 0) {
+        return BGE_FAILURE;
+    } else {
+        Handle = NULL;
+    }
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
