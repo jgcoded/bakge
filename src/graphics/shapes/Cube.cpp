@@ -61,6 +61,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     int NumVertices = 4 * 6; /* 4 vertices per face */
     Scalar* Vertices = new Scalar[NumVertices * 3];
     Scalar* Normals = new Scalar[NumVertices * 3];
+    Scalar* TexCoords = new Scalar[NumVertices * 2];
     unsigned int* Indices = new unsigned int[36];
 
     /* *
@@ -79,6 +80,31 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
      * of the cube's faces.
      *
      * e.g. A corresponds to vertices A+Z, A-Y and A-X
+     *
+     * Texcoords
+     * Z and X faces: When the face normal is pointing towards you and
+     * the Y axis pointing up, texcoords are as follows
+     *    BL 0, 0    BR 1, 0
+     *    TL 0, 1    TR 1, 1
+     *    
+     *  e.g. +Z face:
+     *        A 0, 0
+     *        B 1, 0
+     *        D 0, 1
+     *        C 1, 1
+     *
+     * Y faces:
+     *   +Y:
+     *     D 0, 0
+     *     C 1, 0
+     *     H 0, 1
+     *     G 1, 1
+     *
+     *   -Y:
+     *     E 0, 0
+     *     F 1, 0
+     *     A 0, 1
+     *     B 1, 1
      * */
 
     /* *
@@ -90,6 +116,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     Height /= 2;
 
     memset((void*)Normals, 0, sizeof(Normals[0]) * NumVertices * 3);
+    memset((void*)TexCoords, 0, sizeof(TexCoords[0]) * NumVertices * 2);
 
     /* +Z */
     Indices[0] = 0;
@@ -149,22 +176,27 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     Vertices[4] = -Height;
     Vertices[5] = +Length;
     Normals[4] = -1.0f;
+    TexCoords[3] = 1;
     /* A-X */
     Vertices[6] = -Width;
     Vertices[7] = -Height;
     Vertices[8] = +Length;
     Normals[6] = -1.0f;
+    TexCoords[4] = 1;
 
     /* B+Z */
     Vertices[9] = +Width;
     Vertices[10] = -Height;
     Vertices[11] = +Length;
     Normals[11] = +1.0f;
+    TexCoords[6] = 1;
     /* B-Y */
     Vertices[12] = +Width;
     Vertices[13] = -Height;
     Vertices[14] = +Length;
     Normals[13] = -1.0f;
+    TexCoords[8] = 1;
+    TexCoords[9] = 1;
     /* B+X */
     Vertices[15] = +Width;
     Vertices[16] = -Height;
@@ -176,22 +208,27 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     Vertices[19] = +Height;
     Vertices[20] = +Length;
     Normals[20] = +1.0f;
+    TexCoords[12] = 1;
+    TexCoords[13] = 1;
     /* C+Y */
     Vertices[21] = +Width;
     Vertices[22] = +Height;
     Vertices[23] = +Length;
     Normals[22] = + 1.0f;
+    TexCoords[14] = 1;
     /* C+X */
     Vertices[24] = +Width;
     Vertices[25] = +Height;
     Vertices[26] = +Length;
     Normals[24] = +1.0f;
+    TexCoords[17] = 1;
 
     /* D+Z */
     Vertices[27] = -Width;
     Vertices[28] = +Height;
     Vertices[29] = +Length;
     Normals[29] = +1.0f;
+    TexCoords[19] = 1;
     /* D+Y */
     Vertices[30] = -Width;
     Vertices[31] = +Height;
@@ -202,12 +239,15 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     Vertices[34] = +Height;
     Vertices[35] = +Length;
     Normals[33] = -1.0f;
+    TexCoords[22] = 1;
+    TexCoords[23] = 1;
 
     /* E-Z */
     Vertices[36] = -Width;
     Vertices[37] = -Height;
     Vertices[38] = -Length;
     Normals[38] = -1.0f;
+    TexCoords[24] = 1;
     /* E-Y */
     Vertices[39] = -Width;
     Vertices[40] = -Height;
@@ -229,43 +269,54 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     Vertices[49] = -Height;
     Vertices[50] = -Length;
     Normals[49] = -1.0f;
+    TexCoords[32] = 1;
     /* F+X */
     Vertices[51] = +Width;
     Vertices[52] = -Height;
     Vertices[53] = -Length;
     Normals[51] = +1.0f;
+    TexCoords[34] = 1;
 
     /* G-Z */
     Vertices[54] = +Width;
     Vertices[55] = +Height;
     Vertices[56] = -Length;
     Normals[56] = -1.0f;
+    TexCoords[37] = 1;
     /* G+Y */
     Vertices[57] = +Width;
     Vertices[58] = +Height;
     Vertices[59] = -Length;
     Normals[58] = +1.0f;
+    TexCoords[38] = 1;
+    TexCoords[39] = 1;
     /* G+X */
     Vertices[60] = +Width;
     Vertices[61] = +Height;
     Vertices[62] = -Length;
     Normals[60] = +1.0f;
+    TexCoords[40] = 1;
+    TexCoords[41] = 1;
 
     /* H-Z */
     Vertices[63] = -Width;
     Vertices[64] = +Height;
     Vertices[65] = -Length;
     Normals[65] = -1.0f;
+    TexCoords[42] = 1;
+    TexCoords[43] = 1;
     /* H+Y */
     Vertices[66] = -Width;
     Vertices[67] = +Height;
     Vertices[68] = -Length;
     Normals[67] = +1.0f;
+    TexCoords[45] = 1;
     /* H-X */
     Vertices[69] = -Width;
     Vertices[70] = +Height;
     Vertices[71] = -Length;
     Normals[69] = -1.0f;
+    TexCoords[47] = 1;
 
     glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 72, Vertices,
@@ -273,6 +324,10 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 
     glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 72, Normals,
+                                                        GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 48, TexCoords,
                                                         GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_INDICES]);

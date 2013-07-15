@@ -31,9 +31,12 @@ int main(int argc, char* argv[])
     bakge::Window* Win;
     bakge::Cube* Obj;
     bakge::ShaderProgram* PlainShader;
+    bakge::Texture* Tex;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
+
+    GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
 
     PlainShader = bakge::ShaderProgram::Create(NULL, NULL);
 
@@ -42,18 +45,41 @@ int main(int argc, char* argv[])
         printf("Error creating window\n");
         return bakge::Deinit();
     }
+    
+    glClearColor(1, 0, 1, 1);
+
+    /* Make it easy to see our points */
+    glEnable(GL_DEPTH_TEST);
+
+    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
+
+    /* Create simple texture */
+    for(int i=0;i<256;++i) {
+        for(int j=0;j<256;++j) {
+            Bitmap[3*(i*512+j)] = 255;
+            Bitmap[3*(i*512+j)+1] = 255;
+            Bitmap[3*(i*512+j)+2] = 255;
+        }
+    }
+    
+    /* Create simple texture */
+    for(int i=256;i<512;++i) {
+        for(int j=256;j<512;++j) {
+            Bitmap[3*(i*512+j)] = 255;
+            Bitmap[3*(i*512+j)+1] = 255;
+            Bitmap[3*(i*512+j)+2] = 255;
+        }
+    }
+
+    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 3);
+
+    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
+                                                    (void*)Bitmap);
+
 
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
 
     Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
-
-    glClearColor(1, 0, 1, 1);
-
-    /* Make it easy to see our points */
-    glEnable(GL_POINT_SMOOTH);
-    glEnable(GL_DEPTH_TEST);
-    glPointSize(2);
-    glHint(GL_POINT_SMOOTH, GL_NICEST);
 
     PlainShader->Bind();
 
@@ -102,9 +128,11 @@ int main(int argc, char* argv[])
         glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
         glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
 
+        Tex->Bind();
         Obj->Bind();
         Obj->Draw(); /* No renderer for now */
         Obj->Unbind();
+        Tex->Unbind();
 
         Win->SwapBuffers();
     }
@@ -118,8 +146,13 @@ int main(int argc, char* argv[])
     if(PlainShader != NULL)
         delete PlainShader;
 
+    if(Tex != NULL)
+        delete Tex;
+
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
+
+    delete[] Bitmap;
 
     return 0;
 }
