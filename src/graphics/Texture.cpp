@@ -29,6 +29,7 @@ namespace bakge
 
 Texture::Texture()
 {
+    Location = GL_TEXTURE0;
     TextureID = 0;
 }
 
@@ -42,6 +43,7 @@ Texture::~Texture()
 
 Result Texture::Bind() const
 {
+    glActiveTexture(Location);
     glBindTexture(GL_TEXTURE_2D, TextureID);
     return BGE_SUCCESS;
 }
@@ -49,6 +51,7 @@ Result Texture::Bind() const
 
 Result Texture::Unbind() const
 {
+    glActiveTexture(Location);
     glBindTexture(GL_TEXTURE_2D, 0);
     return BGE_SUCCESS;
 }
