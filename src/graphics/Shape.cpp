@@ -72,6 +72,9 @@ Result Shape::Bind() const
 
     GLint PositionsAttrib = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
     GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
+    GLint TexCoordsAttrib = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(TexCoordsAttrib < 0)
+        printf("Attribute %s not found!\n", BGE_TEXCOORD_ATTRIBUTE);
 
     glBindVertexArray(MeshVAO);
 

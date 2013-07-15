@@ -33,9 +33,11 @@
 
 #define BGE_VIEW_UNIFORM "bge_View"
 #define BGE_PERSPECTIVE_UNIFORM "bge_Perspective"
+#define BGE_DIFFUSE_UNIFORM "bge_Diffuse"
 
 #define BGE_VERTEX_ATTRIBUTE "bge_Vertex"
 #define BGE_NORMAL_ATTRIBUTE "bge_Normal"
+#define BGE_TEXCOORD_ATTRIBUTE "bge_TexCoord"
 
 namespace bakge
 {

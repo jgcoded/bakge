@@ -44,11 +44,15 @@ const char* bgeWorldTransformSource =
     "attribute vec4 bge_Vertex;\n"
     "attribute vec4 bge_Normal;\n"
     "\n"
+    "attribute vec2 bge_TexCoord;\n"
+    "varying vec2 bge_TexCoord0;\n"
+    "\n"
     "varying vec4 bge_TransformedNormal;\n"
     "\n"
     "vec4 bgeWorldTransform()\n"
     "{\n"
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
+    "    bge_TexCoord0 = bge_TexCoord;\n"
     "    return (bge_Perspective * bge_View) * bge_Vertex;\n"
     "}\n"
     "\n";
@@ -68,20 +72,21 @@ const char* bgeFragmentShaderLibSource =
     "#version 120\n"
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
+    "varying vec2 bge_TexCoord0;\n"
+    "\n"
+    "uniform sampler2D bge_Diffuse;\n"
     "\n"
     "vec4 bgeColor()\n"
     "{\n"
     "    float ShadeValue = dot(vec4(bge_TransformedNormal.xyz, 0),"
     "                                           vec4(0, 0, 1, 0));\n"
     "    ShadeValue = pow(max(abs(ShadeValue), 0.1f), 0.15f);\n"
-    "    return vec4(1.0f, 1.0f, 1.0f, 1.0f) * ShadeValue;"
+    "    return texture2D(bge_Diffuse, bge_TexCoord0) * ShadeValue;"
     "}\n"
     "\n";
 
 const char* GenericFragmentShaderSource =
     "#version 120\n"
-    "\n"
-    "uniform sampler2D bge_Diffuse;\n"
     "\n"
     "vec4 bgeColor();\n"
     "\n"
@@ -215,6 +220,17 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
 Result ShaderProgram::Bind() const
 {
     glUseProgram(ProgramHandle);
+
+    GLint DiffuseLocation;
+
+    DiffuseLocation = glGetUniformLocation(ProgramHandle, BGE_DIFFUSE_UNIFORM);
+    if(DiffuseLocation < 0) {
+        printf("Invalid uniform requested\n");
+        return BGE_FAILURE;
+    }
+
+    glUniform1i(DiffuseLocation, 0);
+
     return BGE_SUCCESS;
 }
 
