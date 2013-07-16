@@ -39,6 +39,43 @@ Mesh::~Mesh()
 }
 
 
+Result Mesh::Bind() const
+{
+    GLint Program;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+
+    GLint PositionsAttrib = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
+    GLint TexCoordsAttrib = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(TexCoordsAttrib < 0)
+        printf("Attribute %s not found!\n", BGE_TEXCOORD_ATTRIBUTE);
+
+    glBindVertexArray(MeshVAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
+    glEnableVertexAttribArray(PositionsAttrib);
+    glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
+    glEnableVertexAttribArray(TexCoordsAttrib);
+    glVertexAttribPointer(TexCoordsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
+    glEnableVertexAttribArray(NormalsAttrib);
+    glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Mesh::Unbind() const
+{
+    glBindVertexArray(0);
+
+    return BGE_SUCCESS;
+}
+
+
 Result Mesh::CreateBuffers()
 {
     /* If data already exists clear it */

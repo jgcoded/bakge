@@ -68,36 +68,22 @@ Result Shape::SetDrawStyle(BGE_SHAPE_STYLE Style)
 
 Result Shape::Bind() const
 {
-    GLint Program;
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    Result Errors = BGE_SUCCESS;
 
-    GLint PositionsAttrib = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
-    GLint TexCoordsAttrib = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
-    if(TexCoordsAttrib < 0)
-        printf("Attribute %s not found!\n", BGE_TEXCOORD_ATTRIBUTE);
+    if(Mesh::Bind() == BGE_FAILURE)
+        Errors = BGE_FAILURE;
 
-    glBindVertexArray(MeshVAO);
+    if(Pawn::Bind() == BGE_FAILURE)
+        Errors = BGE_FAILURE;
 
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glEnableVertexAttribArray(PositionsAttrib);
-    glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glEnableVertexAttribArray(TexCoordsAttrib);
-    glVertexAttribPointer(TexCoordsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-    glEnableVertexAttribArray(NormalsAttrib);
-    glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    return Pawn::Bind();
+     return Errors;
 }
 
 
 Result Shape::Unbind() const
 {
-    glBindVertexArray(0);
+    /* Always successful, no worries */
+    Mesh::Unbind();
 
     return Pawn::Unbind();
 }

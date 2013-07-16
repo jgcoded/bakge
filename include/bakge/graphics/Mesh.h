@@ -54,6 +54,9 @@ public:
 
     virtual ~Mesh();
 
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
 
 protected:
 
