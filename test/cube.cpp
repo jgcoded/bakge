@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
 
-    Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
+    Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
 
     PlainShader->Bind();
 
