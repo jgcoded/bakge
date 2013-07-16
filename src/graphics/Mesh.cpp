@@ -41,14 +41,45 @@ Mesh::~Mesh()
 
 Result Mesh::Bind() const
 {
-    GLint Program;
+    GLint Program = -1;
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+
+#ifdef DEBUG
+    if(Program < 0) {
+        printf("Unable to find current shader\n");
+        return BGE_FAILURE;
+    }
+#endif /* _DEBUG */
 
     GLint PositionsAttrib = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
     GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
     GLint TexCoordsAttrib = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
-    if(TexCoordsAttrib < 0)
-        printf("Attribute %s not found!\n", BGE_TEXCOORD_ATTRIBUTE);
+
+#ifdef _DEBUG
+    /* Check each of our attributes' locations to ensure they exist */
+    if(PositionsAttrib < 0) {
+        printf("Unable to locate attribute %s in current shader\n",
+                                                BGE_VERTEX_ATTRIBUTE);
+        return BGE_FAILURE;
+    }
+    if(NormalsAttrib < 0) {
+        printf("Unable to locate attribute %s in current shader\n",
+                                                BGE_NORMAL_ATTRIBUTE);
+        return BGE_FAILURE;
+    }
+    if(TexCoordsAttrib < 0) {
+        printf("Unable to locate attribute %s in current shader\n",
+                                                BGE_TEXCOORD_ATTRIBUTE);
+        return BGE_FAILURE;
+    }
+#endif /* _DEBUG */
+
+#ifdef _DEBUG
+    if(MeshVAO == 0) {
+        printf("Invalid vertex array object\n");
+        return BGE_FAILURE;
+    }
+#endif /* _DEBUG */
 
     glBindVertexArray(MeshVAO);
 
