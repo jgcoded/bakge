@@ -41,6 +41,43 @@ Mesh::~Mesh()
 
 Result Mesh::Bind() const
 {
+    Result Errors = BGE_SUCCESS;
+
+    if(BindVAO() == BGE_FAILURE)
+        Errors = BGE_FAILURE;
+
+    if(BindBuffers() == BGE_FAILURE)
+        Errors = BGE_FAILURE;
+
+    return Errors;
+}
+
+
+Result Mesh::Unbind() const
+{
+    glBindVertexArray(0);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Mesh::BindVAO() const
+{
+#ifdef _DEBUG
+    if(MeshVAO == 0) {
+        printf("Invalid vertex array object\n");
+        return BGE_FAILURE;
+    }
+#endif /* _DEBUG */
+
+    glBindVertexArray(MeshVAO);
+
+    return BGE_FAILURE;
+}
+
+
+Result Mesh::BindBuffers() const
+{
     GLint Program = -1;
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
 
@@ -74,15 +111,6 @@ Result Mesh::Bind() const
     }
 #endif /* _DEBUG */
 
-#ifdef _DEBUG
-    if(MeshVAO == 0) {
-        printf("Invalid vertex array object\n");
-        return BGE_FAILURE;
-    }
-#endif /* _DEBUG */
-
-    glBindVertexArray(MeshVAO);
-
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
     glEnableVertexAttribArray(PositionsAttrib);
     glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
@@ -94,14 +122,6 @@ Result Mesh::Bind() const
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
     glEnableVertexAttribArray(NormalsAttrib);
     glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::Unbind() const
-{
-    glBindVertexArray(0);
 
     return BGE_SUCCESS;
 }

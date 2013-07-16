@@ -49,7 +49,8 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
         return NULL;
     }
 
-    glBindVertexArray(C->MeshVAO);
+    /* So following changes affect our cube's VAO */
+    C->BindVAO();
 
     printf("MeshVAO at %d\n", C->MeshVAO);
 
@@ -334,7 +335,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 36,
                                             Indices, GL_STATIC_DRAW);
 
-    glBindVertexArray(0);
+    C->Unbind();
 
     delete[] Vertices;
     delete[] Normals;

@@ -47,6 +47,12 @@ protected:
     GLuint MeshVAO;
     GLuint MeshBuffers[NUM_MESH_BUFFERS];
 
+    /* Bind just the OpenGL vertex object */
+    Result BindVAO() const;
+
+    /* Bind the mesh data buffers */
+    Result BindBuffers() const;
+
     Mesh();
 
 
