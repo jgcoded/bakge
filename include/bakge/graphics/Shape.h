@@ -43,7 +43,7 @@ class BGE_API Shape : public Pawn, public Mesh
 
 protected:
 
-    GLUquadric* Quadric;
+    GLenum DrawStyle;
 
     Shape();
 
@@ -55,7 +55,7 @@ public:
     Result Bind() const;
     Result Unbind() const;
 
-    Result DrawStyle(BGE_SHAPE_STYLE Style);
+    Result SetDrawStyle(BGE_SHAPE_STYLE Style);
 
 }; /* Shape */
 

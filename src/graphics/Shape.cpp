@@ -29,36 +29,37 @@ namespace bakge
 
 Shape::Shape()
 {
-    Quadric = gluNewQuadric();
+    DrawStyle = GL_TRIANGLES;
 }
 
 
 Shape::~Shape()
 {
-    if(Quadric != NULL)
-        gluDeleteQuadric(Quadric);
 }
 
 
-Result Shape::DrawStyle(BGE_SHAPE_STYLE Style)
+Result Shape::SetDrawStyle(BGE_SHAPE_STYLE Style)
 {
     switch(Style) {
 
     case BGE_SHAPE_STYLE_EDGE:
-        gluQuadricDrawStyle(Quadric, GLU_SILHOUETTE);
+        DrawStyle = GL_LINE_LOOP;
         break;
 
     case BGE_SHAPE_STYLE_SOLID:
-        gluQuadricDrawStyle(Quadric, GLU_FILL);
+        DrawStyle = GL_TRIANGLES;
         break;
 
     case BGE_SHAPE_STYLE_WIREFRAME:
-        gluQuadricDrawStyle(Quadric, GLU_LINE);
+        DrawStyle = GL_LINE_LOOP;
         break;
 
     case BGE_SHAPE_STYLE_POINTS:
-        gluQuadricDrawStyle(Quadric, GLU_POINT);
+        DrawStyle = GL_POINTS;
         break;
+
+    default:
+        return BGE_FAILURE;
     }
 
     return BGE_SUCCESS;

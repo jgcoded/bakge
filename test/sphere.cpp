@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 
     Obj = bakge::Sphere::Create(0.5f);
 
-    Obj->DrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
+    Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_WIREFRAME);
 
     glClearColor(0, 0, 1, 1);
     glViewport(0, 0, 600, 400);

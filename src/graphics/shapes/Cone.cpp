@@ -48,7 +48,6 @@ Cone* Cone::Create(Scalar BaseRadius, Scalar TopRadius, Scalar Height)
 
 Result Cone::Draw() const
 {
-    gluCylinder(Quadric, Radius, TopRadius, Height, Slices, Stacks);
     return BGE_SUCCESS;
 }
 

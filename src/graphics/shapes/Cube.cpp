@@ -346,7 +346,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 
 Result Cube::Draw() const
 {
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (GLvoid*)0);
+    glDrawElements(DrawStyle, 36, GL_UNSIGNED_INT, (GLvoid*)0);
 
     return BGE_SUCCESS;
 }

@@ -48,7 +48,6 @@ Sphere* Sphere::Create(Scalar Radius)
 
 Result Sphere::Draw() const
 {
-    gluSphere(Quadric, Radius, Slices, Stacks);
     return BGE_SUCCESS;
 }
 

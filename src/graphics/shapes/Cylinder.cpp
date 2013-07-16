@@ -50,7 +50,6 @@ Cylinder* Cylinder::Create(Scalar Radius, Scalar Height)
 
 Result Cylinder::Draw() const
 {
-    gluCylinder(Quadric, Radius, Radius, Height, Slices, Stacks);
     return BGE_SUCCESS;
 }
 
