@@ -86,7 +86,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
      * the Y axis pointing up, texcoords are as follows
      *    BL 0, 0    BR 1, 0
      *    TL 0, 1    TR 1, 1
-     *    
+     *
      *  e.g. +Z face:
      *        A 0, 0
      *        B 1, 0

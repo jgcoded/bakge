@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
         printf("Error creating window\n");
         return bakge::Deinit();
     }
-    
+
     glClearColor(1, 0, 1, 1);
 
     /* Make it easy to see our points */
@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
             Bitmap[3*(i*512+j)+2] = 255;
         }
     }
-    
+
     /* Create simple texture */
     for(int i=256;i<512;++i) {
         for(int j=256;j<512;++j) {

@@ -119,7 +119,7 @@ Result ShaderProgram::InitShaderLibrary()
                                     "bgeWorldTransform");
     if(bgeWorldTransform == NULL)
         return BGE_FAILURE;
-    
+
     bgeFragmentShaderLib = Shader::LoadFragmentShaderString(
                                     bgeFragmentShaderLibSource,
                                     "bgeFragmentShaderLib");
