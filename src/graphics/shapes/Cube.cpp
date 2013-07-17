@@ -340,6 +340,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     delete[] Vertices;
     delete[] Normals;
     delete[] Indices;
+    delete[] TexCoords;
 
     return C;
 }
