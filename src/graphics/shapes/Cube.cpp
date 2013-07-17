@@ -344,12 +344,4 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     return C;
 }
 
-
-Result Cube::Draw() const
-{
-    glDrawElements(DrawStyle, 36, GL_UNSIGNED_INT, (GLvoid*)0);
-
-    return BGE_SUCCESS;
-}
-
 } /* bakge */

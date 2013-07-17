@@ -57,6 +57,8 @@ public:
 
     Result SetDrawStyle(BGE_SHAPE_STYLE Style);
 
+    virtual Result Draw() const;
+
 }; /* Shape */
 
 } /* bakge */

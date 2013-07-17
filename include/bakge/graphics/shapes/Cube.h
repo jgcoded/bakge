@@ -58,8 +58,6 @@ public:
         return Dimensions;
     }
 
-    Result Draw() const;
-
 }; /* Cube */
 
 } /* bakge */
