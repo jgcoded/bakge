@@ -52,8 +52,6 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     /* So following changes affect our cube's VAO */
     C->BindVAO();
 
-    printf("MeshVAO at %d\n", C->MeshVAO);
-
     /* *
      * A cube has 6 faces, each composed of two triangles.
      * We only need 8 vertices (3 components for each vertex, 24 buffer size)
