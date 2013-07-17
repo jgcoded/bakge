@@ -29,6 +29,9 @@ namespace bakge
 
 Mesh::Mesh()
 {
+    NumVertices = 0;
+    NumFaces = 0;
+    NumIndices = 0;
     MeshVAO = 0;
     MeshBuffers[0] = 0;
 }
