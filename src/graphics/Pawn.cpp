@@ -86,11 +86,7 @@ Result Pawn::Draw() const
 {
     Node::Draw();
 
-    glBegin(GL_LINES);
-    /* Matrix is translated and rotated from Bind() */
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 1); /* Draw line straight forward */
-    glEnd();
+    /* No Pawn::Draw implementation yet */
 
     return BGE_SUCCESS;
 }
