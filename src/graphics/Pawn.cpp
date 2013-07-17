@@ -39,22 +39,26 @@ Pawn::~Pawn()
 
 Result Pawn::Bind() const
 {
+    Result Errors = BGE_SUCCESS;
     GLint Program, Location;
     Matrix Transform;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
-        return BGE_FAILURE;
+        Errors = BGE_FAILURE;
 
     /* Retrieve location of the bge_Position vec4 */
     Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
     if(Location < 0)
-        return BGE_FAILURE;
+        Errors = BGE_FAILURE;
 
     //glUniformMatrix4fv
 
-    return Node::Bind();
+    if(Node::Bind() == BGE_SUCCESS)
+        Errors = BGE_FAILURE;
+
+    return Errors;
 }
 
 
