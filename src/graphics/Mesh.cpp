@@ -39,6 +39,7 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
+    ClearBuffers();
 }
 
 
@@ -133,9 +134,7 @@ Result Mesh::BindBuffers() const
 Result Mesh::CreateBuffers()
 {
     /* If data already exists clear it */
-    if(MeshVAO != 0) {
-        ClearBuffers();
-    }
+    ClearBuffers();
 
     glGenVertexArrays(1, &MeshVAO);
     glBindVertexArray(MeshVAO);
@@ -147,11 +146,15 @@ Result Mesh::CreateBuffers()
 
 Result Mesh::ClearBuffers()
 {
-    glDeleteVertexArrays(1, &MeshVAO);
-    MeshVAO = 0;
+    if(MeshVAO != 0) {
+        glDeleteVertexArrays(1, &MeshVAO);
+        MeshVAO = 0;
+    }
 
-    glDeleteBuffers(NUM_MESH_BUFFERS, MeshBuffers);
-    MeshBuffers[0] = 0;
+    if(MeshBuffers[0] != 0) {
+        glDeleteBuffers(NUM_MESH_BUFFERS, MeshBuffers);
+        MeshBuffers[0] = 0;
+    }
 
     return BGE_SUCCESS;
 }
