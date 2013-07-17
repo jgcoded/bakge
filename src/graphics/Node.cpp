@@ -111,7 +111,7 @@ Result Node::Draw() const
     unsigned int Indices[] = { 1 };
 
     glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
-    glDrawElements(GL_POINTS, 1, GL_UNSIGNED_INT, (void*)Indices);
+    glDrawElements(GL_POINTS, 1, GL_UNSIGNED_INT, (void*)0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
