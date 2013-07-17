@@ -59,10 +59,12 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
      * We only need 8 vertices (3 components for each vertex, 24 buffer size)
      * The indices buffer will create our triangles
      * */
-    int NumVertices = 4 * 6; /* 4 vertices per face */
-    Scalar* Vertices = new Scalar[NumVertices * 3];
-    Scalar* Normals = new Scalar[NumVertices * 3];
-    Scalar* TexCoords = new Scalar[NumVertices * 2];
+    C->NumFaces = 6;
+    C->NumVertices = 4 * 6; /* 4 vertices per face */
+    C->NumIndices = 36; /* 2 triangles per face, 3 vertices per triangle */
+    Scalar* Vertices = new Scalar[72];
+    Scalar* Normals = new Scalar[72];
+    Scalar* TexCoords = new Scalar[48];
     unsigned int* Indices = new unsigned int[36];
 
     /* *
@@ -116,8 +118,8 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     Length /= 2;
     Height /= 2;
 
-    memset((void*)Normals, 0, sizeof(Normals[0]) * NumVertices * 3);
-    memset((void*)TexCoords, 0, sizeof(TexCoords[0]) * NumVertices * 2);
+    memset((void*)Normals, 0, sizeof(Normals[0]) * 72);
+    memset((void*)TexCoords, 0, sizeof(TexCoords[0]) * 48);
 
     /* +Z */
     Indices[0] = 0;
