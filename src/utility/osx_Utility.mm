@@ -34,11 +34,6 @@ Result PlatformInit(int argc, char* argv[])
 {
     NSPool = [[NSAutoreleasePool alloc] init];
 
-    if(!glfwInit()) {
-        printf("Unable to initialize GLFW 3.0\n");
-        return BGE_FAILURE;
-    }
-
     /* Set start date of app */
     StartTime = [NSDate date];
 
