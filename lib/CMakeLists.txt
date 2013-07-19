@@ -12,6 +12,8 @@ configure_file(${BAKGE_SOURCE_DIR}/cmake/BuildGLFW.cmake ${GLFW_TARGET}/CMakeLis
 add_subdirectory(glfw-3.0)
 
 # Build PhysFS 2.0.3 (has its own CMake build)
+configure_file(${BAKGE_SOURCE_DIR}/cmake/BuildPhysFS.cmake
+                    ${PHYSFS_TARGET}/CMakeLists.txt COPYONLY)
 add_subdirectory(physfs-2.0.3)
 
 # Builds external libraries
