@@ -35,7 +35,7 @@ Result PlatformInit(int argc, char* argv[])
     NSPool = [[NSAutoreleasePool alloc] init];
 
     /* Set start date of app */
-    StartTime = [NSDate date];
+    StartTime = [[NSDate date] retain];
 
     return BGE_SUCCESS;
 }
@@ -43,6 +43,8 @@ Result PlatformInit(int argc, char* argv[])
 
 Result PlatformDeinit()
 {
+    [StartTime release];
+
     return BGE_SUCCESS;
 }
 
