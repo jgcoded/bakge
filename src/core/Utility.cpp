@@ -81,6 +81,7 @@ Result Init(int argc, char* argv[])
     /* So future GLFW windows are visible */
     glfwWindowHint(GLFW_VISIBLE, GL_TRUE);
 
+    glewExperimental = GL_TRUE;
     if(glewInit() != GLEW_OK) {
         printf("Error initializing GLEW\n");
         return BGE_FAILURE;
