@@ -64,14 +64,6 @@ option(BAKGE_GDK_BUILD_ENGINE "Build the Bakge GDK engine" ON)
 # External libraries included in the source tree
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
 
-# Copy PhysFS headers manually here
-file(GLOB BAKGE_PHYSFS_HEADERS ${BAKGE_PHYSFS_PATH}/*.h)
-make_directory(${BAKGE_SDK_INC_PATH}/physfs)
-foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
-  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
-                                                ${BAKGE_SDK_INC_PATH}/physfs)
-endforeach()
-
 # Create a list of all Bakge's build targets
 set(BAKGE_TARGET bakge)
 set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
@@ -240,6 +232,19 @@ foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}
                                                     ${BAKGE_SDK_INC_PATH})
 endforeach(include_dir)
+
+# Copy PhysFS headers manually here
+set(BAKGE_PHYSFS_HEADERS
+  ${BAKGE_PHYSFS_PATH}/physfs.h
+  ${BAKGE_PHYSFS_PATH}/physfs_casefolding.h
+  ${BAKGE_PHYSFS_PATH}/physfs_internal.h
+  ${BAKGE_PHYSFS_PATH}/physfs_platforms.h
+)
+make_directory(${BAKGE_SDK_INC_PATH}/physfs)
+foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
+  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
+                                                ${BAKGE_SDK_INC_PATH}/physfs)
+endforeach()
 
 ###
 # ! NOTE: Lua headers are copied separately before the build, since
