@@ -137,8 +137,40 @@ Result Mesh::CreateBuffers()
     ClearBuffers();
 
     glGenVertexArrays(1, &MeshVAO);
+
+#ifdef _DEBUG
+    if(MeshVAO == 0) {
+        printf("Error creating vertex array object\n");
+        return BGE_FAILURE;
+    }
+#endif /* _DEBUG */
+
     glBindVertexArray(MeshVAO);
+
     glGenBuffers(NUM_MESH_BUFFERS, MeshBuffers);
+
+#ifdef _DEBUG
+    /* Check to make sure each of our mesh's buffers was created properly */
+    if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0) {
+        printf("Error creating positions buffer\n");
+        return BGE_FAILURE;
+    }
+
+    if(MeshBuffers[MESH_BUFFER_NORMALS] == 0) {
+        printf("Error creating normals buffer\n");
+        return BGE_FAILURE;
+    }
+
+    if(MeshBuffers[MESH_BUFFER_TEXCOORDS] == 0) {
+        printf("Error creating texture coordinates buffer\n");
+        return BGE_FAILURE;
+    }
+
+    if(MeshBuffers[MESH_BUFFER_INDICES] == 0) {
+        printf("Error creating triangle indices buffer\n");
+        return BGE_FAILURE;
+    }
+#endif /* _DEBUG */
 
     return BGE_SUCCESS;
 }
