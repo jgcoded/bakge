@@ -62,29 +62,26 @@ Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
 {
     Texture* NewTexture = new Texture;
 
-    /* Generate an "ID" that we can reference */
+    /* Generate an OpenGL texture */
     glGenTextures(1, &(NewTexture->TextureID));
 
-    /* Check if Generate worked */
+    /* Check if error occured while generating the texture */
     if(NewTexture->TextureID == 0) {
-        printf("GL Generate Texture Error\n");
+        printf("Error generating texture\n");
         delete NewTexture;
         return NULL;
     }
 
-    /* Bind the texture, code below applies only to this texture */
+    /* Bind the texture so we can set its parameters below */
     NewTexture->Bind();
 
     /* *
-     * START TEXTURE PARAMETERS CONFIG
-     * See: http://www.opengl.org/sdk/docs/man/xhtml/glTexParameter.xml
-     * For definitions of the parameters in glTexParamterf
+     * Set some parameters for our texture.
      * */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    /* END TEXTURE PARAMETERS */
 
     glTexImage2D(GL_TEXTURE_2D, 0, Format, Width, Height, 0, Format, Type,
                                                                     Data);
