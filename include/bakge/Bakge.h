@@ -130,6 +130,9 @@ extern "C"
 #include <bakge/api/Thread.h>
 #include <bakge/api/Socket.h>
 
+/* Utility headers */
+#include <bakge/input/XBoxController.h>
+
 /* Platform headers (may depend on core Bakge classes) */
 #ifdef __linux__
 #include <bakge/platform/x11_Bakge.h>
