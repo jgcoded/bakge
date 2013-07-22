@@ -65,12 +65,14 @@ Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
     /* Generate an OpenGL texture */
     glGenTextures(1, &(NewTexture->TextureID));
 
+#ifdef _DEBUG
     /* Check if error occured while generating the texture */
     if(NewTexture->TextureID == 0) {
         printf("Error generating texture\n");
         delete NewTexture;
         return NULL;
     }
+#endif /* _DEBUG */
 
     /* Bind the texture so we can set its parameters below */
     NewTexture->Bind();
