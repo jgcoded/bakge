@@ -12,8 +12,6 @@ set(MODULES
   api/Socket
   api/Thread
   data/File
-  data/SingleNode
-  data/LinkedList
   core/Bindable
   core/Drawable
   core/Engine
@@ -50,6 +48,8 @@ set(HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/math/Math
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Type
+  ${BAKGE_SOURCE_DIR}/include/bakge/data/LinkedList
+  ${BAKGE_SOURCE_DIR}/include/bakge/data/SingleNode
 )
 
 foreach(module ${MODULES})
