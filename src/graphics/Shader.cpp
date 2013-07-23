@@ -43,10 +43,10 @@ Shader::~Shader()
 Shader* Shader::LoadFromFile(GLenum Type, const char* FilePath)
 {
     Shader* S;
-    Byte* Source;
+    char* Source;
 
     /* Load the contents of the shader file */
-    Source = LoadFileContents(FilePath);
+    /* Source = LoadFileContents(FilePath); */
     if(Source == NULL) {
         printf("Unable to load shader source \"%s\"\n", FilePath);
         return NULL;
@@ -65,7 +65,7 @@ Shader* Shader::LoadFromString(GLenum Type, const char* Source,
 {
     Shader* S;
     GLint Status, Length;
-    Byte* Info;
+    char* Info;
 
     /* Allocate memory for the new Shader */
     S = new Shader;
@@ -101,7 +101,7 @@ Shader* Shader::LoadFromString(GLenum Type, const char* Source,
     /* Print out any warnings or errors in the info log */
     glGetShaderiv(S->Handle, GL_INFO_LOG_LENGTH, &Length);
     if(Length > 1) {
-        Info =  new Byte[Length];
+        Info =  new char[Length];
         glGetShaderInfoLog(S->Handle, Length, &Length, Info);
         printf("%s", Info);
         delete[] Info;

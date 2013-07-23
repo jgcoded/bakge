@@ -30,7 +30,7 @@ namespace bakge
 
 class BGE_API Remote
 {
-    UByte IP[4]; /* IP parts A.B.C.D */
+    Byte IP[4]; /* IP parts A.B.C.D */
     int FullAddress;
     int Port;
 
@@ -42,7 +42,7 @@ public:
     Remote();
     ~Remote();
 
-    Remote BGE_NCP SetAddress(UByte A, UByte B, UByte C, UByte D);
+    Remote BGE_NCP SetAddress(Byte A, Byte B, Byte C, Byte D);
     const char* GetAddressString() const;
     int GetAddress() const;
 

@@ -62,7 +62,7 @@
 #endif /* BAKGE_EXPORTS */
 #else
 #define BGE_API
-#ifndef BAKGE_EXPORT
+#ifndef BAKGE_EXPORTS
 #define GLEW_STATIC
 #endif
 #endif /* _MSC_VER */

@@ -64,7 +64,7 @@ win32_Socket* win32_Socket::Create(int Port)
 Packet* win32_Socket::Receive()
 {
     struct sockaddr_in Receive;
-    Byte* Data = new Byte[512];
+    char* Data = new char[512];
     int Size = sizeof(Receive);
 
     printf("Waiting for packet...\n");

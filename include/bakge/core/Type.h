@@ -34,16 +34,14 @@ namespace bakge
 #define BGE_SUCCESS 0
 typedef int Result;
 
-#ifndef _WIN32
-typedef uint64_t Uint64;
-#else
-typedef unsigned long long Uint64;
-#endif
-
-typedef char Byte;
-typedef unsigned char UByte;
-typedef Uint64 Microseconds;
+typedef unsigned char Byte;
 typedef double Seconds;
+
+#ifdef _WIN32
+typedef unsigned long long Microseconds;
+#else
+typedef uint64_t Microseconds;
+#endif
 
 /* *
  * GLFW uses doubles for its mouse/scroll motion measurements.

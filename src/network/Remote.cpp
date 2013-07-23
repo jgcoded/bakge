@@ -48,7 +48,7 @@ Remote::~Remote()
 #define snprintf _snprintf
 #endif
 
-Remote BGE_NCP Remote::SetAddress(UByte A, UByte B, UByte C, UByte D)
+Remote BGE_NCP Remote::SetAddress(Byte A, Byte B, Byte C, Byte D)
 {
     memset((void*)Str, 0, 21);
     snprintf(Str, 21, "%d.%d.%d.%d:%d", A, B, C, D, Port);
