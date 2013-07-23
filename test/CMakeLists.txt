@@ -14,7 +14,6 @@ set(TESTS
   cylinder
   info
   linkedlist
-  loadfile
   matrix
   minlua
   node
