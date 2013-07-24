@@ -15,3 +15,9 @@ if(NOT EXISTS ${GLFW_TARGET} AND EXISTS ${GLFW_ARCHIVE})
   file(REMOVE ${GLFW_ARCHIVE})
 endif()
 
+# Modify their CMakeLists file to fix a minor naming inconsistency
+# Their output file on MSVC is postfixed with 'dll'. We don't want this!
+SET(SEARCH_REGEX "dll")
+FILE(READ ${GLFW_TARGET}/src/CMakeLists.txt FILE_CONTENT)
+STRING(REGEX REPLACE "${SEARCH_REGEX}" "" MODIFIED_FILE_CONTENT "${FILE_CONTENT}")
+FILE(WRITE ${GLFW_TARGET}/src/CMakeLists.txt "${MODIFIED_FILE_CONTENT}")
