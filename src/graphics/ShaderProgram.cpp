@@ -161,16 +161,6 @@ ShaderProgram::~ShaderProgram()
         glDetachShader(ProgramHandle, FragmentShader->GetHandle());
         glDetachShader(ProgramHandle, bgeWorldTransform->GetHandle());
         glDeleteProgram(ProgramHandle);
-
-        /* *
-         * We only want to delete the vertex/frag shaders if they are
-         * not the default generic shaders (part of the library)
-         * */
-        if(VertexShader != GenericVertexShader)
-            delete VertexShader;
-
-        if(FragmentShader != GenericFragmentShader)
-            delete FragmentShader;
     }
 }
 
