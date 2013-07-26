@@ -155,6 +155,12 @@ Quaternion Quaternion::operator/(Scalar BGE_NCP Value) const
 }
 
 
+Quaternion Quaternion::operator-() const
+{
+    return Quaternion(-Axis, -Angle);
+}
+
+
 Quaternion BGE_NCP Quaternion::Invert()
 {
     return *this;
