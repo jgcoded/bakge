@@ -169,13 +169,22 @@ Quaternion Quaternion::Inverted() const
 
 Quaternion BGE_NCP Quaternion::Normalize()
 {
+    Scalar Len = Length();
+
+    /* Don't divide by 0 */
+    if(ScalarCompare(Len, 0))
+        return *this;
+
+    Angle /= Len;
+    Axis /= Len;
+
     return *this;
 }
 
 
 Quaternion Quaternion::Normalized() const
 {
-    return Quaternion();
+    return Quaternion(*this).Normalize();
 }
 
 
