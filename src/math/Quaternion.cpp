@@ -178,4 +178,16 @@ Quaternion Quaternion::Normalized() const
     return Quaternion();
 }
 
+
+Scalar Quaternion::Length() const
+{
+    return sqrt(LengthSq());
+}
+
+
+Scalar Quaternion::LengthSq() const
+{
+    return Scalar(Angle * Angle + pow(Axis.Length(), 2));
+}
+
 } /* bakge */

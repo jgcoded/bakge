@@ -76,6 +76,9 @@ public:
     Quaternion BGE_NCP Normalize();
     Quaternion Normalized() const;
 
+    Scalar Length() const;
+    Scalar LengthSq() const;
+
 }; /* Quaternion */
 
 } /* bakge */
