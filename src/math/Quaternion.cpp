@@ -84,6 +84,27 @@ Vector4 Quaternion::GetAxis() const
 }
 
 
+Quaternion Quaternion::FromEulerAngles(Radians X, Radians Y, Radians Z)
+{
+    Scalar SinX = sinf(X / 2.0f);
+    Scalar SinY = sinf(Y / 2.0f);
+    Scalar SinZ = sinf(Z / 2.0f);
+    Scalar CosX = cosf(X / 2.0f);
+    Scalar CosY = cosf(Y / 2.0f);
+    Scalar CosZ = cosf(Z / 2.0f);
+
+    return Quaternion(
+        Vector4(
+            SinX * CosY * CosZ - CosX * SinY * SinZ,
+            CosX * SinY * CosZ + SinX * CosY * SinZ,
+            CosX * CosY * SinZ - SinX * SinY * CosZ,
+            0
+        ),
+        CosX  * CosY * CosZ + SinX * SinY * SinZ
+    );
+}
+
+
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
     Axis += Other.Axis;
