@@ -51,6 +51,26 @@ Quaternion::~Quaternion()
 }
 
 
+Matrix Quaternion::ToMatrix() const
+{
+    return Matrix(
+        1 - 2 * (Axis[1] * Axis[1] + Axis[2] * Axis[2]),
+        2 * (Axis[0] * Axis[1] + Angle * Axis[2]),
+        2 * (Axis[0] * Axis[2] - Angle * Axis[1]),
+        0,
+        2 * (Axis[0] * Axis[1] - Angle * Axis[2]),
+        1 - 2 * (Axis[0] * Axis[0] + Axis[2] * Axis[2]),
+        2 * (Axis[1] * Axis[2] + Angle * Axis[0]),
+        0,
+        2 * (Axis[0] * Axis[2] + Angle * Axis[1]),
+        2 * (Axis[1] * Axis[2] - Angle * Axis[0]),
+        1 - 2 * (Axis[0] * Axis[0] + Axis[1] * Axis[1]),
+        0,
+        0, 0, 0, 1
+    );
+}
+
+
 Scalar Quaternion::GetAngle() const
 {
     return acos(Angle) * 2.0f;

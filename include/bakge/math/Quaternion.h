@@ -56,6 +56,8 @@ public:
     Quaternion(Quaternion BGE_NCP Other);
     ~Quaternion();
 
+    Matrix ToMatrix() const;
+
     Scalar GetAngle() const;
     Vector4 GetAxis() const;
 
