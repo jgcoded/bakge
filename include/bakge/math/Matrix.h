@@ -52,6 +52,10 @@ public:
 
     Matrix();
     ~Matrix();
+    Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
+           Scalar E, Scalar F, Scalar G, Scalar H,
+           Scalar I, Scalar J, Scalar K, Scalar L,
+           Scalar M, Scalar N, Scalar O, Scalar P);
 
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {

@@ -40,6 +40,30 @@ Matrix::~Matrix()
 }
 
 
+Matrix::Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
+           Scalar E, Scalar F, Scalar G, Scalar H,
+           Scalar I, Scalar J, Scalar K, Scalar L,
+           Scalar M, Scalar N, Scalar O, Scalar P)
+{
+    Val[0] = A;
+    Val[1] = B;
+    Val[2] = C;
+    Val[3] = D;
+    Val[4] = E;
+    Val[5] = F;
+    Val[6] = G;
+    Val[7] = H;
+    Val[8] = I;
+    Val[9] = J;
+    Val[10] = K;
+    Val[11] = L;
+    Val[12] = M;
+    Val[13] = N;
+    Val[14] = O;
+    Val[15] = P;
+}
+
+
 Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
                                     Vector4 BGE_NCP Target,
                                     Vector4 BGE_NCP UpVector)
