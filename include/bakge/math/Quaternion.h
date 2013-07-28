@@ -56,6 +56,9 @@ public:
     Quaternion(Quaternion BGE_NCP Other);
     ~Quaternion();
 
+    Scalar GetAngle() const;
+    Vector4 GetAxis() const;
+
     Quaternion BGE_NCP operator+=(Quaternion BGE_NCP Other);
     Quaternion BGE_NCP operator-=(Quaternion BGE_NCP Other);
     Quaternion BGE_NCP operator*=(Quaternion BGE_NCP Other);

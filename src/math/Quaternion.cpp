@@ -51,6 +51,19 @@ Quaternion::~Quaternion()
 }
 
 
+Scalar Quaternion::GetAngle() const
+{
+    return acos(Angle) * 2.0f;
+}
+
+
+Vector4 Quaternion::GetAxis() const
+{
+    Scalar Inv = 1.0f / sin(GetAngle() / 2.0f);
+    return Vector4(Axis[0] * Inv, Axis[1] * Inv, Axis[2] * Inv, 0);
+}
+
+
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
     Axis += Other.Axis;
