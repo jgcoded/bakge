@@ -34,15 +34,15 @@ Quaternion::Quaternion()
 
 Quaternion::Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP Real)
 {
-    Axis = Vec;
-    Angle = Real;
+    this->Vec = Vec;
+    this->Real = Real;
 }
 
 
 Quaternion::Quaternion(Quaternion BGE_NCP Other)
 {
-    Axis = Other.Axis;
-    Angle = Other.Angle;
+    Vec = Other.Vec;
+    Real = Other.Real;
 }
 
 
@@ -54,17 +54,17 @@ Quaternion::~Quaternion()
 Matrix Quaternion::ToMatrix() const
 {
     return Matrix(
-        1 - 2 * (Axis[1] * Axis[1] + Axis[2] * Axis[2]),
-        2 * (Axis[0] * Axis[1] + Angle * Axis[2]),
-        2 * (Axis[0] * Axis[2] - Angle * Axis[1]),
+        1 - 2 * (Vec[1] * Vec[1] + Vec[2] * Vec[2]),
+        2 * (Vec[0] * Vec[1] + Real * Vec[2]),
+        2 * (Vec[0] * Vec[2] - Real * Vec[1]),
         0,
-        2 * (Axis[0] * Axis[1] - Angle * Axis[2]),
-        1 - 2 * (Axis[0] * Axis[0] + Axis[2] * Axis[2]),
-        2 * (Axis[1] * Axis[2] + Angle * Axis[0]),
+        2 * (Vec[0] * Vec[1] - Real * Vec[2]),
+        1 - 2 * (Vec[0] * Vec[0] + Vec[2] * Vec[2]),
+        2 * (Vec[1] * Vec[2] + Real * Vec[0]),
         0,
-        2 * (Axis[0] * Axis[2] + Angle * Axis[1]),
-        2 * (Axis[1] * Axis[2] - Angle * Axis[0]),
-        1 - 2 * (Axis[0] * Axis[0] + Axis[1] * Axis[1]),
+        2 * (Vec[0] * Vec[2] + Real * Vec[1]),
+        2 * (Vec[1] * Vec[2] - Real * Vec[0]),
+        1 - 2 * (Vec[0] * Vec[0] + Vec[1] * Vec[1]),
         0,
         0, 0, 0, 1
     );
@@ -73,14 +73,14 @@ Matrix Quaternion::ToMatrix() const
 
 Scalar Quaternion::GetAngle() const
 {
-    return acos(Angle) * 2.0f;
+    return acos(Real) * 2.0f;
 }
 
 
 Vector4 Quaternion::GetAxis() const
 {
     Scalar Inv = 1.0f / sin(GetAngle() / 2.0f);
-    return Vector4(Axis[0] * Inv, Axis[1] * Inv, Axis[2] * Inv, 0);
+    return Vector4(Vec[0] * Inv, Vec[1] * Inv, Vec[2] * Inv, 0);
 }
 
 
@@ -107,34 +107,34 @@ Quaternion Quaternion::FromEulerAngles(Radians X, Radians Y, Radians Z)
 
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
-    Axis += Other.Axis;
-    Angle += Other.Angle;
+    Vec += Other.Vec;
+    Real += Other.Real;
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 {
-    Axis -= Other.Axis;
-    Angle -= Other.Angle;
+    Vec -= Other.Vec;
+    Real -= Other.Real;
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
 {
-    Vector4 Temp = Axis;
-    Angle *= Other.Angle;
-    Angle -= Axis[0] * Other.Axis[0];
-    Angle -= Axis[1] * Other.Axis[1];
-    Angle -= Axis[2] * Other.Axis[2];
-    Axis *= Other.Angle;
-    Axis[0] += Other.Axis[0] * Angle;
-    Axis[1] += Other.Axis[1] * Angle;
-    Axis[2] += Other.Axis[2] * Angle;
-    Axis[0] += Temp[1] * Other.Axis[2] - Temp[2] * Other.Axis[1];
-    Axis[1] += Temp[2] * Other.Axis[0] - Temp[0] * Other.Axis[2];
-    Axis[2] += Temp[0] * Other.Axis[1] - Temp[1] * Other.Axis[0];
+    Vector4 Temp = Vec;
+    Real *= Other.Real;
+    Real -= Vec[0] * Other.Vec[0];
+    Real -= Vec[1] * Other.Vec[1];
+    Real -= Vec[2] * Other.Vec[2];
+    Vec *= Other.Real;
+    Vec[0] += Other.Vec[0] * Real;
+    Vec[1] += Other.Vec[1] * Real;
+    Vec[2] += Other.Vec[2] * Real;
+    Vec[0] += Temp[1] * Other.Vec[2] - Temp[2] * Other.Vec[1];
+    Vec[1] += Temp[2] * Other.Vec[0] - Temp[0] * Other.Vec[2];
+    Vec[2] += Temp[0] * Other.Vec[1] - Temp[1] * Other.Vec[0];
     return *this;
 }
 
@@ -148,29 +148,29 @@ Quaternion BGE_NCP Quaternion::operator/=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 {
-    Axis *= Value;
-    Angle *= Value;
+    Vec *= Value;
+    Real *= Value;
     return *this;
 }
 
 
 Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 {
-    Axis /= Value;
-    Angle /= Value;
+    Vec /= Value;
+    Real /= Value;
     return *this;
 }
 
 
 Quaternion Quaternion::operator+(Quaternion BGE_NCP Other) const
 {
-    return Quaternion(Axis + Other.Axis, Angle + Other.Angle);
+    return Quaternion(Vec + Other.Vec, Real + Other.Real);
 }
 
 
 Quaternion Quaternion::operator-(Quaternion BGE_NCP Other) const
 {
-    return Quaternion(Axis - Other.Axis, Angle - Other.Angle);
+    return Quaternion(Vec - Other.Vec, Real - Other.Real);
 }
 
 
@@ -178,15 +178,15 @@ Quaternion Quaternion::operator*(Quaternion BGE_NCP Other) const
 {
     return Quaternion(
         Vector4(
-            Axis[0] * Other.Angle + Other.Axis[0] * Angle
-             + Axis[1] * Other.Axis[2] - Axis[2] * Other.Axis[1],
-            Axis[1] * Other.Angle + Other.Axis[1] * Angle
-             + Axis[2] * Other.Axis[0] - Axis[0] * Other.Axis[2],
-            Axis[2] * Other.Angle + Other.Axis[2] * Angle
-             + Axis[0] * Other.Axis[1] - Axis[1] * Other.Axis[0],
+            Vec[0] * Other.Real + Other.Vec[0] * Real
+             + Vec[1] * Other.Vec[2] - Vec[2] * Other.Vec[1],
+            Vec[1] * Other.Real + Other.Vec[1] * Real
+             + Vec[2] * Other.Vec[0] - Vec[0] * Other.Vec[2],
+            Vec[2] * Other.Real + Other.Vec[2] * Real
+             + Vec[0] * Other.Vec[1] - Vec[1] * Other.Vec[0],
             0
         ),
-        Angle * Other.Angle - Dot(Axis, Other.Axis)
+        Real * Other.Real - Dot(Vec, Other.Vec)
     );
 }
 
@@ -199,19 +199,19 @@ Quaternion Quaternion::operator/(Quaternion BGE_NCP Other) const
 
 Quaternion Quaternion::operator*(Scalar BGE_NCP Value) const
 {
-    return Quaternion(Axis * Value, Angle * Value);
+    return Quaternion(Vec * Value, Real * Value);
 }
 
 
 Quaternion Quaternion::operator/(Scalar BGE_NCP Value) const
 {
-    return Quaternion(Axis / Value, Angle / Value);
+    return Quaternion(Vec / Value, Real / Value);
 }
 
 
 Quaternion Quaternion::operator-() const
 {
-    return Quaternion(-Axis, -Angle);
+    return Quaternion(-Vec, -Real);
 }
 
 
@@ -237,8 +237,8 @@ Quaternion BGE_NCP Quaternion::Normalize()
     if(ScalarCompare(Len, 0))
         return *this;
 
-    Angle /= Len;
-    Axis /= Len;
+    Real /= Len;
+    Vec /= Len;
 
     return *this;
 }
@@ -258,7 +258,7 @@ Scalar Quaternion::Length() const
 
 Scalar Quaternion::LengthSq() const
 {
-    return Scalar(Angle * Angle + pow(Axis.Length(), 2));
+    return Scalar(Real * Real + pow(Vec.Length(), 2));
 }
 
 } /* bakge */

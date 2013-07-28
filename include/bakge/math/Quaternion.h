@@ -45,8 +45,8 @@ namespace bakge
  * */
 class BGE_API Quaternion
 {
-    Vector4 Axis;
-    Scalar Angle;
+    Vector4 Vec;
+    Scalar Real;
 
 
 public:
