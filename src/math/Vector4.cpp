@@ -104,6 +104,7 @@ Vector4 BGE_NCP Vector4::operator=(Vector4 BGE_NCP Other)
     Val[0] = Other[0];
     Val[1] = Other[1];
     Val[2] = Other[2];
+    Val[3] = Other[3];
 
     return *this;
 }
