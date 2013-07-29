@@ -73,13 +73,13 @@ Matrix Quaternion::ToMatrix() const
 
 Scalar Quaternion::GetAngle() const
 {
-    return acos(Real) * 2.0f;
+    return acosf(Real) * 2.0f;
 }
 
 
 Vector4 Quaternion::GetAxis() const
 {
-    Scalar Inv = 1.0f / sin(GetAngle() / 2.0f);
+    Scalar Inv = 1.0f / sinf(GetAngle() / 2.0f);
 
     return Vector4(Vec[0] * Inv, Vec[1] * Inv, Vec[2] * Inv, 0);
 }
