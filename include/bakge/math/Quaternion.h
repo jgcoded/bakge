@@ -62,6 +62,7 @@ public:
     Vector4 GetAxis() const;
 
     static Quaternion FromEulerAngles(Radians X, Radians Y, Radians Z);
+    static Quaternion FromAxisAndAngle(Vector4 BGE_NCP Axis, Scalar Angle);
 
     Quaternion BGE_NCP operator+=(Quaternion BGE_NCP Other);
     Quaternion BGE_NCP operator-=(Quaternion BGE_NCP Other);

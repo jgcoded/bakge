@@ -105,6 +105,11 @@ Quaternion Quaternion::FromEulerAngles(Radians X, Radians Y, Radians Z)
 }
 
 
+Quaternion Quaternion::FromAxisAndAngle(Vector4 BGE_NCP Axis, Scalar Angle)
+{
+    return Quaternion(Axis * sinf(Angle / 2.0f), cosf(Angle / 2.0f));
+}
+
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
     Vec += Other.Vec;
