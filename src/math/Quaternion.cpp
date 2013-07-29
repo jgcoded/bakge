@@ -80,6 +80,7 @@ Scalar Quaternion::GetAngle() const
 Vector4 Quaternion::GetAxis() const
 {
     Scalar Inv = 1.0f / sin(GetAngle() / 2.0f);
+
     return Vector4(Vec[0] * Inv, Vec[1] * Inv, Vec[2] * Inv, 0);
 }
 
@@ -114,6 +115,7 @@ Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
     Vec += Other.Vec;
     Real += Other.Real;
+
     return *this;
 }
 
@@ -122,6 +124,7 @@ Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 {
     Vec -= Other.Vec;
     Real -= Other.Real;
+
     return *this;
 }
 
@@ -140,6 +143,7 @@ Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
     Vec[0] += Temp[1] * Other.Vec[2] - Temp[2] * Other.Vec[1];
     Vec[1] += Temp[2] * Other.Vec[0] - Temp[0] * Other.Vec[2];
     Vec[2] += Temp[0] * Other.Vec[1] - Temp[1] * Other.Vec[0];
+
     return *this;
 }
 
@@ -147,6 +151,7 @@ Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
 Quaternion BGE_NCP Quaternion::operator/=(Quaternion BGE_NCP Other)
 {
     *this = Other.Inverted();
+
     return *this;
 }
 
@@ -155,6 +160,7 @@ Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 {
     Vec *= Value;
     Real *= Value;
+
     return *this;
 }
 
@@ -163,6 +169,7 @@ Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 {
     Vec /= Value;
     Real /= Value;
+
     return *this;
 }
 
@@ -224,6 +231,7 @@ Quaternion BGE_NCP Quaternion::Invert()
 {
     operator-();
     Normalize();
+
     return *this;
 }
 
