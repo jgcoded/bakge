@@ -54,6 +54,24 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 
 Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
 {
+    static const Scalar Normals[] = {
+        0, 0, +1.0f, 0, -1.0f, 0, -1.0f, 0, 0, 0, 0, +1.0f, 0, -1.0f, 0, +1.0f,
+        0, 0, 0, 0, +1.0f, 0, +1.0f, 0, +1.0f, 0, 0, 0, 0, +1.0f, 0, +1.0f, 0,
+        -1.0f, 0, 0, 0, 0, -1.0f, 0, -1.0f, 0, -1.0f, 0, 0, 0, 0, -1.0f, 0,
+        -1.0f, 0, +1.0f, 0, 0, 0, 0, -1.0f, 0, +1.0f, 0, +1.0f, 0, 0, 0, 0,
+        -1.0f, 0, +1.0f, 0, 0, -1.0f, 0, 0
+    };
+
+    static const unsigned int Indices[] = {
+        0, 9, 6, 0, 3, 6, 15, 18, 21, 15, 12, 21, 14, 23, 11, 14, 2, 11, 5, 8,
+        20, 5, 17, 20, 10, 22, 19, 10, 7, 19, 1, 13, 16, 1, 4, 16
+    };
+
+    static const Scalar TexCoords[] = {
+        0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1,
+        1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1
+    };
+
     /* Pass < 0 to leave dimension unchanged */
     if(X < 0)
         X = Dimensions[0];
@@ -82,9 +100,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
     NumVertices = 4 * 6; /* 4 vertices per face */
     NumIndices = 36; /* 2 triangles per face, 3 vertices per triangle */
     Scalar Vertices[72];
-    Scalar Normals[72];
-    Scalar TexCoords[48];
-    unsigned int Indices[36];
 
     Scalar Width = X / 2;
     Scalar Height = Y / 2;
@@ -132,57 +147,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
      *     A 0, 1
      *     B 1, 1
      * */
-
-    memset((void*)Normals, 0, sizeof(Normals[0]) * 72);
-    memset((void*)TexCoords, 0, sizeof(TexCoords[0]) * 48);
-
-    /* +Z */
-    Indices[0] = 0;
-    Indices[1] = 9;
-    Indices[2] = 6;
-    Indices[3] = 0;
-    Indices[4] = 3;
-    Indices[5] = 6;
-
-    /* -Z */
-    Indices[6] = 15;
-    Indices[7] = 18;
-    Indices[8] = 21;
-    Indices[9] = 15;
-    Indices[10] = 12;
-    Indices[11] = 21;
-
-    /* -X */
-    Indices[12] = 14;
-    Indices[13] = 23;
-    Indices[14] = 11;
-    Indices[15] = 14;
-    Indices[16] = 2;
-    Indices[17] = 11;
-
-    /* +X */
-    Indices[18] = 5;
-    Indices[19] = 8;
-    Indices[20] = 20;
-    Indices[21] = 5;
-    Indices[22] = 17;
-    Indices[23] = 20;
-
-    /* +Y */
-    Indices[24] = 10;
-    Indices[25] = 22;
-    Indices[26] = 19;
-    Indices[27] = 10;
-    Indices[28] = 7;
-    Indices[29] = 19;
-
-    /* -Y */
-    Indices[30] = 1;
-    Indices[31] = 13;
-    Indices[32] = 16;
-    Indices[33] = 1;
-    Indices[34] = 4;
-    Indices[35] = 16;
 
     /* A+Z */
     Vertices[0] = -Width;
@@ -287,56 +251,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
     Vertices[69] = -Width;
     Vertices[70] = +Height;
     Vertices[71] = -Length;
-
-    Normals[2] = +1.0f;
-    Normals[4] = -1.0f;
-    Normals[6] = -1.0f;
-    Normals[11] = +1.0f;
-    Normals[13] = -1.0f;
-    Normals[15] = + 1.0f;
-    Normals[20] = +1.0f;
-    Normals[22] = + 1.0f;
-    Normals[24] = +1.0f;
-    Normals[29] = +1.0f;
-    Normals[31] = +1.0f;
-    Normals[33] = -1.0f;
-    Normals[38] = -1.0f;
-    Normals[40] = -1.0f;
-    Normals[42] = -1.0f;
-    Normals[47] = -1.0f;
-    Normals[49] = -1.0f;
-    Normals[51] = +1.0f;
-    Normals[56] = -1.0f;
-    Normals[58] = +1.0f;
-    Normals[60] = +1.0f;
-    Normals[65] = -1.0f;
-    Normals[67] = +1.0f;
-    Normals[69] = -1.0f;
-
-    TexCoords[3] = 1;
-    TexCoords[4] = 1;
-    TexCoords[6] = 1;
-    TexCoords[8] = 1;
-    TexCoords[9] = 1;
-    TexCoords[12] = 1;
-    TexCoords[13] = 1;
-    TexCoords[14] = 1;
-    TexCoords[17] = 1;
-    TexCoords[19] = 1;
-    TexCoords[22] = 1;
-    TexCoords[23] = 1;
-    TexCoords[24] = 1;
-    TexCoords[32] = 1;
-    TexCoords[34] = 1;
-    TexCoords[37] = 1;
-    TexCoords[38] = 1;
-    TexCoords[39] = 1;
-    TexCoords[40] = 1;
-    TexCoords[41] = 1;
-    TexCoords[42] = 1;
-    TexCoords[43] = 1;
-    TexCoords[45] = 1;
-    TexCoords[47] = 1;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 72, Vertices,
