@@ -42,18 +42,6 @@ Cube::~Cube()
 
 Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 {
-    Cube* C = new Cube;
-    if(C->SetDimensions(Width, Height, Length) != BGE_SUCCESS) {
-        delete C;
-        return NULL;
-    }
-
-    return C;
-}
-
-
-Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
-{
     static const Scalar Normals[] = {
         0, 0, +1.0f, 0, -1.0f, 0, -1.0f, 0, 0, 0, 0, +1.0f, 0, -1.0f, 0, +1.0f,
         0, 0, 0, 0, +1.0f, 0, +1.0f, 0, +1.0f, 0, 0, 0, 0, +1.0f, 0, +1.0f, 0,
@@ -72,6 +60,40 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
         1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1
     };
 
+    Cube* C = new Cube;
+
+    if(C->CreateBuffers() != BGE_SUCCESS) {
+        delete C;
+        return NULL;
+    }
+
+    if(C->SetDimensions(Width, Height, Length) != BGE_SUCCESS) {
+        delete C;
+        return NULL;
+    }
+
+    C->BindVAO();
+
+    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 72, Normals,
+                                                        GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 48, TexCoords,
+                                                        GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_INDICES]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 36,
+                                            Indices, GL_STATIC_DRAW);
+
+    C->Unbind();
+
+    return C;
+}
+
+
+Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
+{
     /* Pass < 0 to leave dimension unchanged */
     if(X < 0)
         X = Dimensions[0];
@@ -84,12 +106,11 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
 
     Dimensions = Vector4(X, Y, Z, 0);
 
-    if(CreateBuffers() != BGE_SUCCESS) {
-        return BGE_FAILURE;
-    }
-
     /* So following changes affect our cube's VAO */
     BindVAO();
+
+    glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
+    glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
 
     /* *
      * A cube has 6 faces, each composed of two triangles.
@@ -255,18 +276,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 72, Vertices,
                                                         GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 72, Normals,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 48, TexCoords,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 36,
-                                            Indices, GL_STATIC_DRAW);
 
     Unbind();
 
