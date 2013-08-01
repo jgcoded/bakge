@@ -39,8 +39,8 @@ Result Camera::Bind() const
 
 
 Vector4 Camera::GetEyeTarget()
-{
-    return Vector4::ZeroVector;
+{    
+    return Position + Facing.GetAxis();
 }
 
 
