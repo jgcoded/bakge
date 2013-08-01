@@ -81,10 +81,10 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
     NumFaces = 6;
     NumVertices = 4 * 6; /* 4 vertices per face */
     NumIndices = 36; /* 2 triangles per face, 3 vertices per triangle */
-    Scalar* Vertices = new Scalar[72];
-    Scalar* Normals = new Scalar[72];
-    Scalar* TexCoords = new Scalar[48];
-    unsigned int* Indices = new unsigned int[36];
+    Scalar Vertices[72];
+    Scalar Normals[72];
+    Scalar TexCoords[48];
+    unsigned int Indices[36];
 
     Scalar Width = X / 2;
     Scalar Height = Y / 2;
@@ -363,11 +363,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
                                             Indices, GL_STATIC_DRAW);
 
     Unbind();
-
-    delete[] Vertices;
-    delete[] Normals;
-    delete[] Indices;
-    delete[] TexCoords;
 
     return BGE_SUCCESS;
 }
