@@ -67,11 +67,13 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
         return NULL;
     }
 
+    /* This sets the positions buffer */
     if(C->SetDimensions(Width, Height, Length) != BGE_SUCCESS) {
         delete C;
         return NULL;
     }
 
+    /* Now rebind the VAO and set the normals, texcoords and indices buffers */
     C->BindVAO();
 
     glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_NORMALS]);
