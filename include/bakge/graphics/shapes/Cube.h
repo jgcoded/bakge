@@ -46,6 +46,13 @@ public:
 
     BGE_FACTORY Cube* Create(Scalar Length, Scalar Width, Scalar Height);
 
+    /* *
+     * Change dimensions of the cube. If one of the sizes is below 0
+     * the dimension remains unchaged.
+     *   X: Width
+     *   Y: Height
+     *   Z: Length
+     * */
     BGE_INL void SetDimensions(Scalar X, Scalar Y, Scalar Z)
     {
         Dimensions[0] = X;
