@@ -32,6 +32,24 @@ Camera::Camera()
 }
 
 
+Result Camera::Bind() const
+{
+    return BGE_SUCCESS;
+}
+
+
+Vector4 Camera::GetEyeTarget()
+{
+    return Vector4::ZeroVector;
+}
+
+
+Result Camera::Unbind() const
+{
+    return BGE_SUCCESS;
+}
+
+
 Camera::~Camera()
 {
 }
