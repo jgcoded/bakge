@@ -133,14 +133,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
      *     B 1, 1
      * */
 
-    /* *
-     * Convenience. Dimensions are full edge measurements and the cube is
-     * formed around the origin (0, 0, 0) anyways
-     * */
-    Width /= 2;
-    Length /= 2;
-    Height /= 2;
-
     memset((void*)Normals, 0, sizeof(Normals[0]) * 72);
     memset((void*)TexCoords, 0, sizeof(TexCoords[0]) * 48);
 
