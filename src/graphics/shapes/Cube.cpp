@@ -346,4 +346,11 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     return C;
 }
 
+
+Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
+{
+    Dimensions = Vector4(X, Y, Z, 0);
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

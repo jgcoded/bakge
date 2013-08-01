@@ -53,12 +53,7 @@ public:
      *   Y: Height
      *   Z: Length
      * */
-    BGE_INL void SetDimensions(Scalar X, Scalar Y, Scalar Z)
-    {
-        Dimensions[0] = X;
-        Dimensions[1] = Y;
-        Dimensions[2] = Z;
-    }
+    Result SetDimensions(Scalar X, Scalar Y, Scalar Z);
 
     BGE_INL Vector4 BGE_NCP GetDimensions() const
     {
