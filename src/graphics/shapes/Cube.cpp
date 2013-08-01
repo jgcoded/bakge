@@ -43,7 +43,10 @@ Cube::~Cube()
 Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 {
     Cube* C = new Cube;
-    C->SetDimensions(Width, Height, Length);
+    if(C->SetDimensions(Width, Height, Length) != BGE_SUCCESS) {
+        delete C;
+        return NULL;
+    }
 
     return C;
 }
