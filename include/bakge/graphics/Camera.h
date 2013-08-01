@@ -35,8 +35,10 @@ class BGE_API Camera : public Pawn
     
 public:
     Camera();
+    virtual Result Bind() const;
+    Vector4 GetEyeTarget();
+    virtual Result Unbind() const;
     ~Camera();
-
 
 } /* Camera */
  
