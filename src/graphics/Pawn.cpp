@@ -65,7 +65,7 @@ Result Pawn::Bind() const
     if(Program == 0)
         Errors = BGE_FAILURE;
 
-    /* Retrieve location of the bge_Position vec4 */
+    /* Get location of bge_Rotation uniform */
     Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
     if(Location < 0)
         Errors = BGE_FAILURE;
@@ -94,7 +94,7 @@ Result Pawn::Unbind() const
     if(Program == 0)
         return BGE_FAILURE;
 
-    /* Retrieve location of the bge_Position vec4 */
+    /* Get location of bge_Rotation uniform */
     Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
