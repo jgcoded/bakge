@@ -37,6 +37,22 @@ Pawn::~Pawn()
 }
 
 
+Result Pawn::SetScale(Scalar X, Scalar Y, Scalar Z)
+{
+    Scale[0] = X;
+    Scale[1] = Y;
+    Scale[2] = Z;
+
+    return BGE_SUCCESS;
+}
+
+
+Vector4 BGE_NCP Pawn::GetScale() const
+{
+    return Scale;
+}
+
+
 Result Pawn::Bind() const
 {
     Result Errors = BGE_SUCCESS;
