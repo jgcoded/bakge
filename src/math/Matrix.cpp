@@ -142,4 +142,15 @@ Matrix Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
     );
 }
 
+
+Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
+{
+    return Matrix(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        X, Y, Z, 1
+    );
+}
+
 } /* bakge */

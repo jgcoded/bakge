@@ -80,6 +80,7 @@ public:
                                                     Vector4 BGE_NCP UpVector);
 
     static Matrix Scale(Scalar X, Scalar Y, Scalar Z);
+    static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
 
 }; /* Matrix */
 
