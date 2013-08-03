@@ -77,8 +77,7 @@ Result Pawn::Bind() const
     if(Location < 0)
         Errors = BGE_FAILURE;
 
-    Matrix ScaleMatrix = Matrix::Scale(Scale[0], Scale[1], Scale[2]);
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &ScaleMatrix[0]);
+    glUniform4fv(Location, 1, &Scale[0]);
 
     if(Node::Bind() == BGE_SUCCESS)
         Errors = BGE_FAILURE;
@@ -108,7 +107,7 @@ Result Pawn::Unbind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
+    glUniform4fv(Location, 1, &Vector4::Origin[0]);
 
     return Node::Unbind();
 }
