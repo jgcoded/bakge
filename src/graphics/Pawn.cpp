@@ -70,6 +70,8 @@ Result Pawn::Bind() const
     if(Location < 0)
         Errors = BGE_FAILURE;
 
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
+
     /* Get location of bge_Scale uniform */
     Location = glGetUniformLocation(Program, BGE_SCALE_UNIFORM);
     if(Location < 0)
@@ -98,6 +100,8 @@ Result Pawn::Unbind() const
     Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
+
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
     /* Get location of bge_Scale uniform */
     Location = glGetUniformLocation(Program, BGE_SCALE_UNIFORM);
