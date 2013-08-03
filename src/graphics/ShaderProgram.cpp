@@ -57,7 +57,7 @@ const char* bgeWorldTransformSource =
     "    bge_Model[2] = vec4(0, 0, 1, 0),\n"
     "    bge_Model[3] = bge_Position;\n"
     "\n"
-    "    bge_Model = bge_Model * bge_Scale;\n"
+    "    bge_Model = bge_Model * bge_Rotation * bge_Scale;\n"
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
     "    return (bge_Perspective * bge_View * bge_Model) * bge_Vertex;\n"
