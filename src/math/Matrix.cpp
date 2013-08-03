@@ -131,4 +131,15 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
     return *this;
 }
 
+
+Matrix Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
+{
+    return Matrix(
+        X, 0, 0, 0,
+        0, Y, 0, 0,
+        0, 0, Z, 0,
+        0, 0, 0, 1
+    );
+}
+
 } /* bakge */
