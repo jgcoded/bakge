@@ -29,6 +29,7 @@ namespace bakge
 
 Pawn::Pawn()
 {
+    Scale = Vector4(1, 1, 1, 0);
 }
 
 
