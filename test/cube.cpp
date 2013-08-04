@@ -37,6 +37,7 @@ int main(int argc, char* argv[])
     bakge::Init(argc, argv);
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
+    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
 
     PlainShader = bakge::ShaderProgram::Create(NULL, NULL);
 
@@ -47,13 +48,9 @@ int main(int argc, char* argv[])
     }
 
     glClearColor(1, 0, 1, 1);
-
-    /* Make it easy to see our points */
     glEnable(GL_DEPTH_TEST);
 
-    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
-
-    /* Create simple texture */
+    /* Create simple checkerboard texture */
     for(int i=0;i<256;++i) {
         for(int j=0;j<256;++j) {
             Bitmap[3*(i*512+j)] = 255;
@@ -62,7 +59,6 @@ int main(int argc, char* argv[])
         }
     }
 
-    /* Create simple texture */
     for(int i=256;i<512;++i) {
         for(int j=256;j<512;++j) {
             Bitmap[3*(i*512+j)] = 255;
