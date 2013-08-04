@@ -34,8 +34,6 @@ class BGE_API Remote
     int FullAddress;
     int Port;
 
-    char Str[22];
-
 
 public:
 
@@ -43,7 +41,7 @@ public:
     ~Remote();
 
     Remote BGE_NCP SetAddress(Byte A, Byte B, Byte C, Byte D);
-    const char* GetAddressString() const;
+    void GetAddressParts(Byte* A, Byte* B, Byte* C, Byte* D) const;
     int GetAddress() const;
 
     Remote BGE_NCP SetPort(int P);

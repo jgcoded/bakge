@@ -35,7 +35,6 @@ Remote::Remote()
     IP[3] = 0;
     Port = 0;
     FullAddress = 0;
-    Str[22] = '\0';
 }
 
 
@@ -44,15 +43,8 @@ Remote::~Remote()
 }
 
 
-#ifdef _MSC_VER /* Ew */
-#define snprintf _snprintf
-#endif
-
 Remote BGE_NCP Remote::SetAddress(Byte A, Byte B, Byte C, Byte D)
 {
-    memset((void*)Str, 0, 21);
-    snprintf(Str, 21, "%d.%d.%d.%d:%d", A, B, C, D, Port);
-
     IP[0] = A;
     IP[1] = B;
     IP[2] = C;
@@ -64,9 +56,12 @@ Remote BGE_NCP Remote::SetAddress(Byte A, Byte B, Byte C, Byte D)
 }
 
 
-const char* Remote::GetAddressString() const
+void Remote::GetAddressParts(Byte* A, Byte* B, Byte* C, Byte* D) const
 {
-    return Str;
+    *A = IP[0];
+    *B = IP[1];
+    *C = IP[2];
+    *D = IP[3];
 }
 
 
@@ -79,8 +74,7 @@ int Remote::GetAddress() const
 Remote BGE_NCP Remote::SetPort(int P)
 {
     Port = P;
-    memset((void*)Str, 0, 21);
-    snprintf(Str, 21, "%d.%d.%d.%d:%d", IP[0], IP[1], IP[2], IP[3], Port);
+
     return *this;
 }
 
