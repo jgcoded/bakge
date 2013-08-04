@@ -63,12 +63,12 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
 
-    /* Initialize our Bakge shader library */
-    if(ShaderProgram::InitShaderLibrary() != BGE_SUCCESS)
-        return BGE_FAILURE;
-
     /* Run platform-specific initialization protocol */
     if(PlatformInit(argc, argv) != BGE_SUCCESS)
+        return BGE_FAILURE;
+
+    /* Initialize our Bakge shader library */
+    if(ShaderProgram::InitShaderLibrary() != BGE_SUCCESS)
         return BGE_FAILURE;
 
     SystemInfo();
