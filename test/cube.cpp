@@ -108,8 +108,6 @@ int main(int argc, char* argv[])
             break;
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
 
         NowTime = bakge::GetRunningTime();
         float DeltaTime = (float)(NowTime - LastTime) / 1000000;
