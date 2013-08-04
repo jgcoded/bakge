@@ -47,7 +47,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
         0, 0, 0, 0, +1.0f, 0, +1.0f, 0, +1.0f, 0, 0, 0, 0, +1.0f, 0, +1.0f, 0,
         -1.0f, 0, 0, 0, 0, -1.0f, 0, -1.0f, 0, -1.0f, 0, 0, 0, 0, -1.0f, 0,
         -1.0f, 0, +1.0f, 0, 0, 0, 0, -1.0f, 0, +1.0f, 0, +1.0f, 0, 0, 0, 0,
-        -1.0f, 0, +1.0f, 0, 0, -1.0f, 0, 0
+        -1.0f, 0, +1.0f, 0, -1.0f, 0, 0
     };
 
     static const unsigned int Indices[] = {
