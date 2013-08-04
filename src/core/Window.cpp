@@ -231,7 +231,13 @@ Result Window::Close()
 
 bool Window::IsOpen()
 {
-    return WindowHandle != NULL && !glfwWindowShouldClose(WindowHandle);
+    if(WindowHandle == NULL)
+        return false;
+
+    if(glfwWindowShouldClose(WindowHandle))
+        return false;
+
+    return true;
 }
 
 
