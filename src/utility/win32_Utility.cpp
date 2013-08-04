@@ -35,14 +35,11 @@ WSADATA WSA;
 
 Result PlatformInit(int argc, char* argv[])
 {
-    HANDLE CurrentThread;
-    DWORD_PTR OldThreadMask;
-
     /* Grab current thread handle */
-    CurrentThread = GetCurrentThread();
+    HANDLE CurrentThread = GetCurrentThread();
 
     /* Run clock stuff on processor 1 only */
-    OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
+    DWORD_PTR OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
 
     /* Get PerformanceCounter frequency and start tick count */
     QueryPerformanceFrequency(&ClockFreq);
