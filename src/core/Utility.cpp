@@ -63,6 +63,16 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
 
+    /* Check if required extensions are supported */
+    if(!glewIsSupported(VERTEX_BUFFER_OBJECT_EXT)) {
+        printf("Extension %s required.\n", VERTEX_BUFFER_OBJECT_EXT);
+        return BGE_FAILURE;
+    }
+
+    if(!glewIsSupported(UNIFORM_BUFFER_OBJECT_EXT)) {
+        printf("Extension %s not supported.\n", UNIFORM_BUFFER_OBJECT_EXT);
+    }
+
     /* Run platform-specific initialization protocol */
     if(PlatformInit(argc, argv) != BGE_SUCCESS)
         return BGE_FAILURE;
