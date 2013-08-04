@@ -158,9 +158,8 @@ Window* Window::Create(int Width, int Height)
     Window* Win;
 
     Handle = glfwCreateWindow(Width, Height, "Bakge", NULL, SharedContext);
-    if(Handle == NULL) {
+    if(Handle == NULL)
         return NULL;
-    }
 
     /* Set all of our window's GLFW callbacks */
     glfwSetWindowCloseCallback(Handle, Window::Closed);
@@ -196,6 +195,7 @@ Window* Window::Create(int Width, int Height)
 Result Window::SwapBuffers()
 {
     glfwSwapBuffers(WindowHandle);
+
     return BGE_SUCCESS;
 }
 
@@ -203,6 +203,7 @@ Result Window::SwapBuffers()
 Result Window::Bind() const
 {
     glfwMakeContextCurrent(WindowHandle);
+
     return BGE_SUCCESS;
 }
 
@@ -210,22 +211,22 @@ Result Window::Bind() const
 Result Window::Unbind() const
 {
     glfwMakeContextCurrent(NULL);
+
     return BGE_SUCCESS;
 }
 
 
 Result Window::Close()
 {
-    if(IsOpen()) {
-        /* Destroy the GLFW window */
-        GLFWwindow* Handle = WindowHandle;
-        WindowHandle = NULL;
-        glfwDestroyWindow(Handle);
-
-        return BGE_SUCCESS;
-    } else {
+    if(!IsOpen())
         return BGE_FAILURE;
-    }
+
+    /* Destroy the GLFW window */
+    GLFWwindow* Handle = WindowHandle;
+    WindowHandle = NULL;
+    glfwDestroyWindow(Handle);
+
+    return BGE_SUCCESS;
 }
 
 
