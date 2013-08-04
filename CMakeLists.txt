@@ -95,7 +95,7 @@ if(UNIX AND NOT APPLE)
   if(BAKGE_BUILD_DYNAMIC)
     set(BAKGE_GLFW_TARGET glfw)
   else()
-    set(BAKGE_GLFW_TARGET glfw3)
+    set(BAKGE_GLFW_TARGET glfw)
   endif()
 
   set(BAKGE_LIBRARIES
