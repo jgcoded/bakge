@@ -76,7 +76,7 @@ Result Mesh::BindVAO() const
 
     glBindVertexArray(MeshVAO);
 
-    return BGE_FAILURE;
+    return BGE_SUCCESS;
 }
 
 
