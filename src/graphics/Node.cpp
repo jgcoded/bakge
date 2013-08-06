@@ -72,12 +72,12 @@ Result Node::Bind() const
     if(Program < 0)
         return BGE_FAILURE;
 
-    /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, BGE_POSITION_UNIFORM);
+    /* Retrieve location of the bge_Translation vec4 */
+    Location = glGetUniformLocation(Program, BGE_TRANSLATION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
-    /* Assign this node's position as bge_Position */
+    /* Assign this node's position as bge_Translation */
     glUniform4fv(Location, 1, &Position[0]);
 
     return BGE_SUCCESS;
@@ -94,12 +94,12 @@ Result Node::Unbind() const
     if(Program < 0)
         return BGE_FAILURE;
 
-    /* Retrieve location of the bge_Position vec4 */
-    Location = glGetUniformLocation(Program, BGE_POSITION_UNIFORM);
+    /* Retrieve location of the bge_Translation vec4 */
+    Location = glGetUniformLocation(Program, BGE_TRANSLATION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
-    /* Assign origin position as bge_Position */
+    /* Assign origin position as bge_Translation */
     glUniform4fv(Location, 1, &Origin[0]);
 
     return BGE_SUCCESS;

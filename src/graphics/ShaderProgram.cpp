@@ -35,7 +35,7 @@ Shader* ShaderProgram::bgeFragmentShaderLib = NULL;
 const char* bgeWorldTransformSource =
     "#version 120\n"
     "\n"
-    "uniform vec4 bge_Position;\n"
+    "uniform vec4 bge_Translation;\n"
     "uniform mat4x4 bge_Rotation;\n"
     "uniform vec4 bge_Scale;\n"
     "uniform mat4x4 bge_Perspective;\n"
@@ -55,7 +55,7 @@ const char* bgeWorldTransformSource =
     "    bge_Model[0] = vec4(1, 0, 0, 0);\n"
     "    bge_Model[1] = vec4(0, 1, 0, 0);\n"
     "    bge_Model[2] = vec4(0, 0, 1, 0);\n"
-    "    bge_Model[3] = bge_Position;\n"
+    "    bge_Model[3] = bge_Translation;\n"
     "\n"
     "    mat4x4 bge_ScaleMatrix;\n"
     "    bge_ScaleMatrix[0] = vec4(bge_Scale[0], 0, 0, 0);\n"
