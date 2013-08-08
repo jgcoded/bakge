@@ -45,7 +45,7 @@ public:
     virtual Result Bind() const;
     virtual Result Unbind() const;
 
-    void SetPosition(Scalar X, Scalar Y, Scalar Z);
+    Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y, Scalar Z);
     Vector4 BGE_NCP GetPosition() const;
 
 

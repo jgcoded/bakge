@@ -79,7 +79,7 @@ Result Node::Unbind() const
 }
 
 
-void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
+Vector4 BGE_NCP Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
 {
     Position[0] = X;
     Position[1] = Y;
@@ -91,6 +91,8 @@ void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
                                                             GL_DYNAMIC_DRAW);
+
+    return Position;
 }
 
 
