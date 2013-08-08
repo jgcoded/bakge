@@ -109,14 +109,12 @@ void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
     Position[1] = Y;
     Position[2] = Z;
 
-    Matrix Translation = Matrix::Translation(Position[0], Position[1],
-                                                        Position[2]);
+    Matrix Translation = Matrix::Translation(X, Y, Z);
 
     /* Update the buffer with the new position */
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
                                                             GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
