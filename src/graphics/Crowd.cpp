@@ -29,11 +29,14 @@ namespace bakge
 
 Crowd::Crowd()
 {
+    CrowdBuffer = 0;
 }
 
 
 Crowd::~Crowd()
 {
+    if(CrowdBuffer != 0)
+        glDeleteBuffers(1, &CrowdBuffer);
 }
 
 
