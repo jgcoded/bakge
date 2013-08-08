@@ -29,13 +29,13 @@ namespace bakge
 
 Node::Node()
 {
-    glGenBuffers(1, &PositionBuffer);
+    glGenBuffers(1, &ModelMatrixBuffer);
 }
 
 
 Node::~Node()
 {
-    glDeleteBuffers(1, &PositionBuffer);
+    glDeleteBuffers(1, &ModelMatrixBuffer);
 }
 
 
@@ -69,7 +69,7 @@ Result Node::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
 
     /* *
      * Each attribute pointer has a stride of 4. Since mat4x4 are composed 
@@ -113,7 +113,7 @@ void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
                                                         Position[2]);
 
     /* Update the buffer with the new position */
-    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
                                                             GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

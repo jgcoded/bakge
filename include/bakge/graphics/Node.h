@@ -56,7 +56,7 @@ public:
 protected:
 
     Vector4 Position;
-    GLuint PositionBuffer;
+    GLuint ModelMatrixBuffer;
 
 }; /* Node */
 
