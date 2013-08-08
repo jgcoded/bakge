@@ -44,6 +44,9 @@ public:
 
     BGE_FACTORY Crowd* Create(int ReserveMembers);
 
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
 }; /* Crowd */
 
 } /* bakge */

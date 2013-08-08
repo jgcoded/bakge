@@ -42,4 +42,16 @@ Crowd* Crowd::Create(int ReserveMembers)
     return NULL;
 }
 
+
+Result Crowd::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result Crowd::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */
