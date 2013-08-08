@@ -64,6 +64,12 @@ Matrix::Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
 }
 
 
+Matrix::Matrix(Matrix BGE_NCP Other)
+{
+    *this = Other;
+}
+
+
 Matrix BGE_NCP Matrix::operator=(Matrix BGE_NCP Other)
 {
     for(int i=0;i<16;++i)

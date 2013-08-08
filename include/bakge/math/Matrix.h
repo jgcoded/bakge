@@ -52,6 +52,7 @@ public:
 
     Matrix();
     ~Matrix();
+    Matrix(Matrix BGE_NCP Other);
     Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
            Scalar E, Scalar F, Scalar G, Scalar H,
            Scalar I, Scalar J, Scalar K, Scalar L,
