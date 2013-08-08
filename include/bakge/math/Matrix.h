@@ -71,6 +71,10 @@ public:
 
     Matrix BGE_NCP operator=(Matrix BGE_NCP Other);
 
+    Matrix operator*(Matrix BGE_NCP Other) const;
+
+    Matrix BGE_NCP operator*=(Matrix BGE_NCP Other);
+
     /* Set to an identity matrix */
     Matrix BGE_NCP SetIdentity();
 

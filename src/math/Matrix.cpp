@@ -79,6 +79,35 @@ Matrix BGE_NCP Matrix::operator=(Matrix BGE_NCP Other)
 }
 
 
+Matrix Matrix::operator*(Matrix BGE_NCP Other) const
+{
+    Matrix Result = *this;
+    Result *= Other;
+    return Result;
+}
+
+
+Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
+{
+    /* Naive solution until SIMD code can be implemented */
+    Matrix Result;
+    memset((void*)&Result[0], 0, sizeof(Scalar) * 16);
+
+    for(int i=0;i<4;++i) {
+        for(int j=0;j<4;++j) {
+            for(int k=0;k<4;++k) {
+                Result[i*4+k] += Val[i*4+j] * Other.Val[j*4+k];
+            }
+        }
+    }
+
+    for(int i=0;i<16;++i)
+        Val[i] = Result[i];
+
+    return *this;
+}
+
+
 Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
                                     Vector4 BGE_NCP Target,
                                     Vector4 BGE_NCP UpVector)
