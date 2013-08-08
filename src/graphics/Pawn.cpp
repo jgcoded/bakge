@@ -58,7 +58,6 @@ Result Pawn::Bind() const
 {
     Result Errors = BGE_SUCCESS;
     GLint Program, Location;
-    Matrix Transform;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
@@ -75,7 +74,7 @@ Result Pawn::Bind() const
     if(Location < 0)
         Errors = BGE_FAILURE;
 
-    if(Node::Bind() == BGE_SUCCESS)
+    if(Node::Bind() != BGE_SUCCESS)
         Errors = BGE_FAILURE;
 
     return Errors;
