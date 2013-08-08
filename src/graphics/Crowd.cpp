@@ -36,4 +36,10 @@ Crowd::~Crowd()
 {
 }
 
+
+Crowd* Crowd::Create(int ReserveMembers)
+{
+    return NULL;
+}
+
 } /* bakge */

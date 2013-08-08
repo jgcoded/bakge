@@ -42,6 +42,8 @@ public:
 
     virtual ~Crowd();
 
+    BGE_FACTORY Crowd* Create(int ReserveMembers);
+
 }; /* Crowd */
 
 } /* bakge */
