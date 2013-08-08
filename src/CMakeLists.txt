@@ -20,6 +20,7 @@ set(MODULES
   core/Utility
   core/Window
   engine/ScriptedEngine
+  graphics/Crowd
   graphics/Mesh
   graphics/Node
   graphics/Pawn

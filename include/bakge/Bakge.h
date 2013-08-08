@@ -148,6 +148,7 @@ extern "C"
 #include <bakge/graphics/Mesh.h>
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
+#include <bakge/graphics/Crowd.h>
 #include <bakge/graphics/Shape.h>
 #include <bakge/graphics/shapes/Sphere.h>
 #include <bakge/graphics/shapes/Cube.h>
