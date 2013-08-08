@@ -93,14 +93,4 @@ Result Pawn::Unbind() const
     return Node::Unbind();
 }
 
-
-Result Pawn::Draw() const
-{
-    Node::Draw();
-
-    /* No Pawn::Draw implementation yet */
-
-    return BGE_SUCCESS;
-}
-
 } /* bakge */

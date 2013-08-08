@@ -39,22 +39,6 @@ Node::~Node()
 }
 
 
-Node* Node::Create(Scalar X, Scalar Y, Scalar Z)
-{
-    Node* N;
-
-    N = new Node;
-    if(N == NULL) {
-        printf("Error allocating new node\n");
-        return NULL;
-    }
-
-    N->SetPosition(X, Y, Z);
-
-    return N;
-}
-
-
 Result Node::Bind() const
 {
     GLint Program, Location;
@@ -90,14 +74,6 @@ Result Node::Bind() const
 Result Node::Unbind() const
 {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Node::Draw() const
-{
-    /* Draw implementation wasn't doing anything. Remove it for now */
 
     return BGE_SUCCESS;
 }

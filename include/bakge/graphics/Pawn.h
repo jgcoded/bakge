@@ -41,8 +41,6 @@ public:
     virtual Result Bind() const;
     virtual Result Unbind() const;
 
-    virtual Result Draw() const;
-
     virtual Result SetScale(Scalar X, Scalar Y, Scalar Z);
     virtual Vector4 BGE_NCP GetScale() const;
 

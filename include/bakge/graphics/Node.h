@@ -42,12 +42,8 @@ public:
 
     virtual ~Node();
 
-    BGE_FACTORY Node* Create(Scalar X, Scalar Y, Scalar Z);
-
     virtual Result Bind() const;
     virtual Result Unbind() const;
-
-    virtual Result Draw() const;
 
     void SetPosition(Scalar X, Scalar Y, Scalar Z);
     Vector4 BGE_NCP GetPosition() const;
