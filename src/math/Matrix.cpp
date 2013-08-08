@@ -197,4 +197,14 @@ Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
     );
 }
 
+
+Matrix BGE_NCP Matrix::Translate(Scalar X, Scalar Y, Scalar Z)
+{
+    Val[12] += X;
+    Val[13] += Y;
+    Val[14] += Z;
+
+    return *this;
+}
+
 } /* bakge */

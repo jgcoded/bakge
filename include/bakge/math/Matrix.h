@@ -89,6 +89,8 @@ public:
     static Matrix Scale(Scalar X, Scalar Y, Scalar Z);
     static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
 
+    Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
+
 }; /* Matrix */
 
 } /* bakge */
