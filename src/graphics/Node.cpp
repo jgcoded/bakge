@@ -65,15 +65,23 @@ Result Node::Bind() const
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Translation vec4 */
-    Location = glGetAttribLocation(Program, BGE_TRANSLATION_ATTRIBUTE);
+    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0)
         return BGE_FAILURE;
 
     glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
-    glEnableVertexAttribArray(Location);
-    glVertexAttribPointer(Location, 4, GL_FLOAT, GL_FALSE, 0, 0);
-    /* So the attribute is updated per instance, not per vertex */
-    glVertexAttribDivisor(Location, 1);
+
+    /* *
+     * Each attribute pointer has a stride of 4. Since mat4x4 are composed 
+     * of 4 vec4 components, set each of these individually
+     * */
+    for(int i=0;i<4;++i) {
+        glEnableVertexAttribArray(Location + i);
+        glVertexAttribPointer(Location + i, 4, GL_FLOAT, GL_FALSE, 0,
+                                (const GLvoid*)(sizeof(Position[0]) * 4 * i));
+        /* So the attribute is updated per instance, not per vertex */
+        glVertexAttribDivisor(Location + i, 1);
+    }
 
     return BGE_SUCCESS;
 }
@@ -81,7 +89,7 @@ Result Node::Bind() const
 
 Result Node::Unbind() const
 {
-    /* For now, unbinding won't do anything */
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
 }
@@ -101,10 +109,13 @@ void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
     Position[1] = Y;
     Position[2] = Z;
 
+    Matrix Translation = Matrix::Translation(Position[0], Position[1],
+                                                        Position[2]);
+
     /* Update the buffer with the new position */
     glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Position[0]) * 4, &Position[0],
-                                                        GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
+                                                            GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

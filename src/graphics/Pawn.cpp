@@ -65,12 +65,7 @@ Result Pawn::Bind() const
         Errors = BGE_FAILURE;
 
     /* Get location of bge_Rotation uniform */
-    Location = glGetAttribLocation(Program, BGE_ROTATION_ATTRIBUTE);
-    if(Location < 0)
-        Errors = BGE_FAILURE;
-
-    /* Get location of bge_Scale uniform */
-    Location = glGetAttribLocation(Program, BGE_SCALE_ATTRIBUTE);
+    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0)
         Errors = BGE_FAILURE;
 
@@ -91,7 +86,7 @@ Result Pawn::Unbind() const
         return BGE_FAILURE;
 
     /* Get location of bge_Rotation uniform */
-    Location = glGetAttribLocation(Program, BGE_ROTATION_ATTRIBUTE);
+    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0)
         return BGE_FAILURE;
 
