@@ -66,18 +66,14 @@ Result Pawn::Bind() const
         Errors = BGE_FAILURE;
 
     /* Get location of bge_Rotation uniform */
-    Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
+    Location = glGetAttribLocation(Program, BGE_ROTATION_ATTRIBUTE);
     if(Location < 0)
         Errors = BGE_FAILURE;
-
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
     /* Get location of bge_Scale uniform */
-    Location = glGetUniformLocation(Program, BGE_SCALE_UNIFORM);
+    Location = glGetAttribLocation(Program, BGE_SCALE_ATTRIBUTE);
     if(Location < 0)
         Errors = BGE_FAILURE;
-
-    glUniform4fv(Location, 1, &Scale[0]);
 
     if(Node::Bind() == BGE_SUCCESS)
         Errors = BGE_FAILURE;
@@ -96,18 +92,9 @@ Result Pawn::Unbind() const
         return BGE_FAILURE;
 
     /* Get location of bge_Rotation uniform */
-    Location = glGetUniformLocation(Program, BGE_ROTATION_UNIFORM);
+    Location = glGetAttribLocation(Program, BGE_ROTATION_ATTRIBUTE);
     if(Location < 0)
         return BGE_FAILURE;
-
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
-
-    /* Get location of bge_Scale uniform */
-    Location = glGetUniformLocation(Program, BGE_SCALE_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
-
-    glUniform4fv(Location, 1, &Vector4::Origin[0]);
 
     return Node::Unbind();
 }

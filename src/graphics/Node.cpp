@@ -49,14 +49,6 @@ Node* Node::Create(Scalar X, Scalar Y, Scalar Z)
         return NULL;
     }
 
-    /* *
-     * Set buffer data. Nodes are drawn at 0, 0, 0 because the shader
-     * library will translate them in the vertex shader
-     * */
-    glBindBuffer(GL_ARRAY_BUFFER, N->PositionBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(N->Position[0]) * 4, &N->Position[0],
-                                                            GL_DYNAMIC_DRAW);
-
     N->SetPosition(X, Y, Z);
 
     return N;
@@ -73,12 +65,15 @@ Result Node::Bind() const
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Translation vec4 */
-    Location = glGetUniformLocation(Program, BGE_TRANSLATION_UNIFORM);
+    Location = glGetAttribLocation(Program, BGE_TRANSLATION_ATTRIBUTE);
     if(Location < 0)
         return BGE_FAILURE;
 
-    /* Assign this node's position as bge_Translation */
-    glUniform4fv(Location, 1, &Position[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
+    glEnableVertexAttribArray(Location);
+    glVertexAttribPointer(Location, 4, GL_FLOAT, GL_FALSE, 0, 0);
+    /* So the attribute is updated per instance, not per vertex */
+    glVertexAttribDivisor(Location, 1);
 
     return BGE_SUCCESS;
 }
@@ -86,21 +81,7 @@ Result Node::Bind() const
 
 Result Node::Unbind() const
 {
-    static const Vector4 Origin;
-    GLint Program, Location;
-
-    /* Retrieve current shader program */
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program < 0)
-        return BGE_FAILURE;
-
-    /* Retrieve location of the bge_Translation vec4 */
-    Location = glGetUniformLocation(Program, BGE_TRANSLATION_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
-
-    /* Assign origin position as bge_Translation */
-    glUniform4fv(Location, 1, &Origin[0]);
+    /* For now, unbinding won't do anything */
 
     return BGE_SUCCESS;
 }
@@ -108,11 +89,7 @@ Result Node::Unbind() const
 
 Result Node::Draw() const
 {
-    unsigned int Indices[] = { 1 };
-
-    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
-    glDrawElements(GL_POINTS, 1, GL_UNSIGNED_INT, (void*)0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    /* Draw implementation wasn't doing anything. Remove it for now */
 
     return BGE_SUCCESS;
 }
@@ -123,6 +100,12 @@ void Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
     Position[0] = X;
     Position[1] = Y;
     Position[2] = Z;
+
+    /* Update the buffer with the new position */
+    glBindBuffer(GL_ARRAY_BUFFER, PositionBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Position[0]) * 4, &Position[0],
+                                                        GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 

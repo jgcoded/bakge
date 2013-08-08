@@ -27,14 +27,13 @@
 
 #include <bakge/Bakge.h>
 
-#define BGE_TRANSLATION_UNIFORM "bge_Translation"
-#define BGE_ROTATION_UNIFORM "bge_Rotation"
-#define BGE_SCALE_UNIFORM "bge_Scale"
-
 #define BGE_VIEW_UNIFORM "bge_View"
 #define BGE_PERSPECTIVE_UNIFORM "bge_Perspective"
 #define BGE_DIFFUSE_UNIFORM "bge_Diffuse"
 
+#define BGE_TRANSLATION_ATTRIBUTE "bge_Translation"
+#define BGE_ROTATION_ATTRIBUTE "bge_Rotation"
+#define BGE_SCALE_ATTRIBUTE "bge_Scale"
 #define BGE_VERTEX_ATTRIBUTE "bge_Vertex"
 #define BGE_NORMAL_ATTRIBUTE "bge_Normal"
 #define BGE_TEXCOORD_ATTRIBUTE "bge_TexCoord"
