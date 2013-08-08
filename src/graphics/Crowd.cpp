@@ -42,7 +42,19 @@ Crowd::~Crowd()
 
 Crowd* Crowd::Create(int ReserveMembers)
 {
-    return NULL;
+    Crowd* C = new Crowd;
+
+    glGenBuffers(1, &(C->CrowdBuffer));
+
+#ifdef _DEBUG
+    if(C->CrowdBuffer == 0) {
+        printf("Error allocating crowd vertex buffer\n");
+        delete C;
+        return NULL;
+    }
+#endif
+
+    return C;
 }
 
 
