@@ -64,6 +64,15 @@ Matrix::Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
 }
 
 
+Matrix BGE_NCP Matrix::operator=(Matrix BGE_NCP Other)
+{
+    for(int i=0;i<16;++i)
+        Val[i] = Other.Val[i];
+
+    return *this;
+}
+
+
 Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
                                     Vector4 BGE_NCP Target,
                                     Vector4 BGE_NCP UpVector)

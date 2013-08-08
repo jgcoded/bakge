@@ -68,6 +68,8 @@ public:
         return Val[At];
     }
 
+    Matrix BGE_NCP operator=(Matrix BGE_NCP Other);
+
     /* Set to an identity matrix */
     Matrix BGE_NCP SetIdentity();
 
