@@ -33,9 +33,13 @@ namespace bakge
 class BGE_API Crowd : public Pawn
 {
 
-public:
+protected:
 
     Crowd();
+
+
+public:
+
     virtual ~Crowd();
 
 }; /* Crowd */
