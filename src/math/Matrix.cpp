@@ -176,7 +176,7 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
 }
 
 
-Matrix Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
+Matrix Matrix::ScaleMatrix(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
         X, 0, 0, 0,
