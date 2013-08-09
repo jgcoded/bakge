@@ -90,6 +90,7 @@ public:
     static Matrix TranslationMatrix(Scalar X, Scalar Y, Scalar Z);
 
     Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
+    Matrix BGE_NCP Scale(Scalar X, Scalar Y, Scalar Z);
 
 }; /* Matrix */
 
