@@ -57,6 +57,18 @@ Crowd* Crowd::Create(int ReserveMembers)
 
     C->NumMembers = ReserveMembers;
 
+    /* *
+     * Generate `ReserveMembers` instances' model matrices
+     * Will use glBufferSubData in the future, to avoid generating an entire
+     * Matrix array
+     * */
+    Matrix* Transformations = new Matrix[ReserveMembers];
+    glBindBuffer(GL_ARRAY_BUFFER, C->CrowdBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * ReserveMembers,
+                                    Transformations, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    delete[] Transformations;
+
     return C;
 }
 
