@@ -29,6 +29,7 @@ namespace bakge
 
 Crowd::Crowd()
 {
+    NumMembers = 0;
     CrowdBuffer = 0;
 }
 
@@ -53,6 +54,8 @@ Crowd* Crowd::Create(int ReserveMembers)
         return NULL;
     }
 #endif
+
+    C->NumMembers = ReserveMembers;
 
     return C;
 }
