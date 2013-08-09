@@ -48,8 +48,8 @@ class BGE_API ShaderProgram : public Bindable
     static Result InitShaderLibrary();
     static Result DeinitShaderLibrary();
 
-    static Shader* bgeWorldTransform;
-    static Shader* bgeFragmentShaderLib;
+    static Shader* VertexShaderLib;
+    static Shader* FragmentShaderLib;
     static Shader* GenericVertexShader;
     static Shader* GenericFragmentShader;
 
