@@ -75,6 +75,11 @@ public:
 
     Matrix BGE_NCP operator*=(Matrix BGE_NCP Other);
 
+    Matrix BGE_NCP Invert();
+    Matrix Inverted() const;
+
+    Scalar Determinant() const;
+
     /* Set to an identity matrix */
     Matrix BGE_NCP SetIdentity();
 

@@ -216,4 +216,22 @@ Matrix BGE_NCP Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
     return *this;
 }
 
+
+Matrix BGE_NCP Matrix::Invert()
+{
+    return *this;
+}
+
+
+Matrix Matrix::Inverted() const
+{
+    return Matrix();
+}
+
+
+Scalar Matrix::Determinant() const
+{
+    return Scalar(0);
+}
+
 } /* bakge */
