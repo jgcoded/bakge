@@ -87,7 +87,7 @@ public:
                                                     Vector4 BGE_NCP UpVector);
 
     static Matrix ScaleMatrix(Scalar X, Scalar Y, Scalar Z);
-    static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
+    static Matrix TranslationMatrix(Scalar X, Scalar Y, Scalar Z);
 
     Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
 

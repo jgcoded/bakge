@@ -187,7 +187,7 @@ Matrix Matrix::ScaleMatrix(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
+Matrix Matrix::TranslationMatrix(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
         1, 0, 0, 0,
