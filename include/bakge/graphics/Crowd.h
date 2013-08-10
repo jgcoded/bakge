@@ -65,6 +65,8 @@ public:
         return Population;
     }
 
+    Result Clear();
+
 }; /* Crowd */
 
 } /* bakge */

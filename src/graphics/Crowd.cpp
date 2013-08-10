@@ -81,4 +81,15 @@ Result Crowd::Unbind() const
     return BGE_FAILURE;
 }
 
+
+Result Crowd::Clear()
+{
+    if(CrowdBuffer != 0) {
+        glDeleteBuffers(1, &CrowdBuffer);
+        return BGE_SUCCESS;
+    } else {
+        return BGE_FAILURE;
+    }
+}
+
 } /* bakge */
