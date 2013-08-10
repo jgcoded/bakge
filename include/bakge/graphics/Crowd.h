@@ -55,6 +55,16 @@ public:
     virtual Result Bind() const;
     virtual Result Unbind() const;
 
+    BGE_INL int GetCapacity() const
+    {
+        return Capacity;
+    }
+
+    BGE_INL int GetPopulation() const
+    {
+        return Population;
+    }
+
 }; /* Crowd */
 
 } /* bakge */
