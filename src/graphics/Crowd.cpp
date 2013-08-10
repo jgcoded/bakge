@@ -67,7 +67,13 @@ Result Crowd::Unbind() const
 
 Result Crowd::Clear()
 {
-    return BGE_FAILURE;
+    if(Members == NULL)
+        return BGE_FAILURE;
+
+    delete[] Members;
+    Members = NULL;
+
+    return BGE_SUCCESS;
 }
 
 
