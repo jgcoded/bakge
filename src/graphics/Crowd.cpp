@@ -51,7 +51,8 @@ Crowd* Crowd::Create(int ReserveMembers)
 
 Result Crowd::Bind() const
 {
-    return BGE_FAILURE;
+    /* Node::Bind sets up attribute pointers, etc */
+    return Node::Bind();
 }
 
 
