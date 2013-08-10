@@ -41,8 +41,6 @@ protected:
     /* Maximum number of members without resizing the buffer */
     int Capacity;
 
-    GLuint CrowdBuffer;
-
     Crowd();
 
 

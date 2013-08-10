@@ -31,30 +31,17 @@ Crowd::Crowd()
 {
     Population = 0;
     Capacity = 0;
-    CrowdBuffer = 0;
 }
 
 
 Crowd::~Crowd()
 {
-    if(CrowdBuffer != 0)
-        glDeleteBuffers(1, &CrowdBuffer);
 }
 
 
 Crowd* Crowd::Create(int ReserveMembers)
 {
     Crowd* C = new Crowd;
-
-    glGenBuffers(1, &(C->CrowdBuffer));
-
-#ifdef _DEBUG
-    if(C->CrowdBuffer == 0) {
-        printf("Error allocating crowd vertex buffer\n");
-        delete C;
-        return NULL;
-    }
-#endif
 
     C->Reserve(ReserveMembers);
 
@@ -76,13 +63,7 @@ Result Crowd::Unbind() const
 
 Result Crowd::Clear()
 {
-    if(CrowdBuffer == 0)
-        return BGE_FAILURE;
-
-    glDeleteBuffers(1, &CrowdBuffer);
-    CrowdBuffer = 0;
-
-    return BGE_SUCCESS;
+    return BGE_FAILURE;
 }
 
 
@@ -90,7 +71,7 @@ Result Crowd::Reserve(int Members)
 {
     Clear();
 
-    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * Members, NULL,
                                                     GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
