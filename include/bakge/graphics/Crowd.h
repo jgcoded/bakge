@@ -35,7 +35,8 @@ class BGE_API Crowd : public Pawn
 
 protected:
 
-    int NumMembers;
+    /* Number of active members in Crowd */
+    int Population;
 
     GLuint CrowdBuffer;
 
