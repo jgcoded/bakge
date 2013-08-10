@@ -37,8 +37,7 @@ Crowd::Crowd()
 
 Crowd::~Crowd()
 {
-    if(Members != NULL)
-        delete[] Members;
+    Clear();
 }
 
 
