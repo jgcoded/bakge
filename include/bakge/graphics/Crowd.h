@@ -66,6 +66,7 @@ public:
     }
 
     Result Clear();
+    Result Reserve(int Members);
 
 }; /* Crowd */
 

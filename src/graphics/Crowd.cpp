@@ -56,15 +56,7 @@ Crowd* Crowd::Create(int ReserveMembers)
     }
 #endif
 
-    C->Capacity = ReserveMembers;
-
-    /* *
-     * Generate `ReserveMembers` instances' model matrices.
-     * */
-    glBindBuffer(GL_ARRAY_BUFFER, C->CrowdBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * ReserveMembers,
-                                    NULL, GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    C->Reserve(ReserveMembers);
 
     return C;
 }
@@ -90,6 +82,21 @@ Result Crowd::Clear()
     } else {
         return BGE_FAILURE;
     }
+}
+
+
+Result Crowd::Reserve(int Members)
+{
+    Clear();
+
+    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * Members, NULL,
+                                                    GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    Capacity = Members;
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
