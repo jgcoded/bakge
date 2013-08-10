@@ -78,6 +78,7 @@ Result Crowd::Clear()
 {
     if(CrowdBuffer != 0) {
         glDeleteBuffers(1, &CrowdBuffer);
+        CrowdBuffer = 0;
         return BGE_SUCCESS;
     } else {
         return BGE_FAILURE;
