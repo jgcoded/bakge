@@ -38,6 +38,9 @@ protected:
     /* Number of active members in Crowd */
     int Population;
 
+    /* Maximum number of members without resizing the buffer */
+    int Capacity;
+
     GLuint CrowdBuffer;
 
     Crowd();

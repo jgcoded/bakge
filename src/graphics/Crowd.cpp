@@ -30,6 +30,7 @@ namespace bakge
 Crowd::Crowd()
 {
     Population = 0;
+    Capacity = 0;
     CrowdBuffer = 0;
 }
 
@@ -55,7 +56,7 @@ Crowd* Crowd::Create(int ReserveMembers)
     }
 #endif
 
-    C->Population = ReserveMembers;
+    C->Capacity = ReserveMembers;
 
     /* *
      * Generate `ReserveMembers` instances' model matrices.
