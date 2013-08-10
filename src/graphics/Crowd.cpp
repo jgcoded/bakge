@@ -31,11 +31,14 @@ Crowd::Crowd()
 {
     Population = 0;
     Capacity = 0;
+    Members = NULL;
 }
 
 
 Crowd::~Crowd()
 {
+    if(Members != NULL)
+        delete[] Members;
 }
 
 
@@ -68,16 +71,17 @@ Result Crowd::Clear()
 }
 
 
-Result Crowd::Reserve(int Members)
+Result Crowd::Reserve(int NumMembers)
 {
     Clear();
 
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * Members, NULL,
-                                                    GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers, NULL,
+                                                        GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    Capacity = Members;
+    Capacity = NumMembers;
+    Members = new Matrix[NumMembers];
 
     return BGE_SUCCESS;
 }

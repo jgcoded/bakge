@@ -41,6 +41,9 @@ protected:
     /* Maximum number of members without resizing the buffer */
     int Capacity;
 
+    /* Pointer to dynamically allocated array of the Crowd's members */
+    Matrix* Members;
+
     Crowd();
 
 
@@ -64,7 +67,7 @@ public:
     }
 
     Result Clear();
-    Result Reserve(int Members);
+    Result Reserve(int NumMembers);
 
 }; /* Crowd */
 
