@@ -76,13 +76,13 @@ Result Crowd::Unbind() const
 
 Result Crowd::Clear()
 {
-    if(CrowdBuffer != 0) {
-        glDeleteBuffers(1, &CrowdBuffer);
-        CrowdBuffer = 0;
-        return BGE_SUCCESS;
-    } else {
+    if(CrowdBuffer == 0)
         return BGE_FAILURE;
-    }
+
+    glDeleteBuffers(1, &CrowdBuffer);
+    CrowdBuffer = 0;
+
+    return BGE_SUCCESS;
 }
 
 
