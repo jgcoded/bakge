@@ -158,7 +158,7 @@ Matrix BGE_NCP Matrix::SetIdentity()
 Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
                                 Scalar NearClip, Scalar FarClip)
 {
-    Scalar Max = NearClip * tan(FOV * BGE_RAD_PER_DEG);
+    Scalar Max = NearClip * tan(FOV * 0.5f * BGE_RAD_PER_DEG);
     Scalar YMin = -Max;
     Scalar XMin = -Max;
     Scalar Width = Max - XMin;
