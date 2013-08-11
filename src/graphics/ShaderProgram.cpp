@@ -29,10 +29,10 @@ namespace bakge
 
 Shader* ShaderProgram::GenericVertexShader = NULL;
 Shader* ShaderProgram::GenericFragmentShader = NULL;
-Shader* ShaderProgram::bgeWorldTransform = NULL;
-Shader* ShaderProgram::bgeFragmentShaderLib = NULL;
+Shader* ShaderProgram::VertexShaderLib = NULL;
+Shader* ShaderProgram::FragmentShaderLib = NULL;
 
-const char* bgeWorldTransformSource =
+const char* VertexShaderLibSource =
     "#version 120\n"
     "\n"
     "attribute mat4x4 bge_Model;\n"
@@ -48,7 +48,7 @@ const char* bgeWorldTransformSource =
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
     "\n"
-    "vec4 bgeWorldTransform()\n"
+    "vec4 VertexShaderLib()\n"
     "{\n"
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
@@ -59,15 +59,15 @@ const char* bgeWorldTransformSource =
 const char* GenericVertexShaderSource =
     "#version 120\n"
     "\n"
-    "vec4 bgeWorldTransform();\n"
+    "vec4 VertexShaderLib();\n"
     "\n"
     "void main()\n"
     "{\n"
-    "    gl_Position = bgeWorldTransform();\n"
+    "    gl_Position = VertexShaderLib();\n"
     "}\n"
     "\n";
 
-const char* bgeFragmentShaderLibSource =
+const char* FragmentShaderLibSource =
     "#version 120\n"
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
@@ -112,17 +112,17 @@ Result ShaderProgram::InitShaderLibrary()
     if(GenericFragmentShader == NULL)
         return BGE_FAILURE;
 
-    /* Load the shader library function bgeWorldTransform(vec4) */
-    bgeWorldTransform = Shader::LoadVertexShaderString(
-                                    bgeWorldTransformSource,
-                                    "bgeWorldTransform");
-    if(bgeWorldTransform == NULL)
+    /* Load the vertex shader library */
+    VertexShaderLib = Shader::LoadVertexShaderString(
+                                    VertexShaderLibSource,
+                                    "VertexShaderLib");
+    if(VertexShaderLib == NULL)
         return BGE_FAILURE;
 
-    bgeFragmentShaderLib = Shader::LoadFragmentShaderString(
-                                    bgeFragmentShaderLibSource,
-                                    "bgeFragmentShaderLib");
-    if(bgeFragmentShaderLib == NULL)
+    FragmentShaderLib = Shader::LoadFragmentShaderString(
+                                    FragmentShaderLibSource,
+                                    "FragmentShaderLib");
+    if(FragmentShaderLib == NULL)
         return BGE_FAILURE;
 
     return BGE_SUCCESS;
@@ -133,8 +133,8 @@ Result ShaderProgram::DeinitShaderLibrary()
 {
     delete GenericVertexShader;
     delete GenericFragmentShader;
-    delete bgeWorldTransform;
-    delete bgeFragmentShaderLib;
+    delete VertexShaderLib;
+    delete FragmentShaderLib;
 
     return BGE_SUCCESS;
 }
@@ -152,7 +152,7 @@ ShaderProgram::~ShaderProgram()
         /* Detach shaders from our program and delete it */
         glDetachShader(ProgramHandle, VertexShader->GetHandle());
         glDetachShader(ProgramHandle, FragmentShader->GetHandle());
-        glDetachShader(ProgramHandle, bgeWorldTransform->GetHandle());
+        glDetachShader(ProgramHandle, VertexShaderLib->GetHandle());
         glDeleteProgram(ProgramHandle);
     }
 }
@@ -176,8 +176,8 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
     Handle = Program->ProgramHandle;
 
     /* Attach library shaders */
-    glAttachShader(Handle, bgeWorldTransform->GetHandle());
-    glAttachShader(Handle, bgeFragmentShaderLib->GetHandle());
+    glAttachShader(Handle, VertexShaderLib->GetHandle());
+    glAttachShader(Handle, FragmentShaderLib->GetHandle());
 
     /* If user passes NULL to vertex shader arg, use default generic one */
     if(Vertex == NULL) {
