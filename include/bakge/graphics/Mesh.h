@@ -67,6 +67,8 @@ public:
     virtual Result Bind() const;
     virtual Result Unbind() const;
 
+    virtual Result DrawInstanced(int Count) const;
+
 
 protected:
 
