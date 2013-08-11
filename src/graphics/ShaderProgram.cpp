@@ -48,7 +48,7 @@ const char* VertexShaderLibSource =
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
     "\n"
-    "vec4 VertexShaderLib()\n"
+    "vec4 bgeWorldTransform()\n"
     "{\n"
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
@@ -59,11 +59,11 @@ const char* VertexShaderLibSource =
 const char* GenericVertexShaderSource =
     "#version 120\n"
     "\n"
-    "vec4 VertexShaderLib();\n"
+    "vec4 bgeWorldTransform();\n"
     "\n"
     "void main()\n"
     "{\n"
-    "    gl_Position = VertexShaderLib();\n"
+    "    gl_Position = bgeWorldTransform();\n"
     "}\n"
     "\n";
 
