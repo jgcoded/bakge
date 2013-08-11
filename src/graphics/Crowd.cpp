@@ -91,4 +91,16 @@ Result Crowd::Reserve(int NumMembers)
     return BGE_SUCCESS;
 }
 
+
+Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
+{
+    /* Prevent out-of-bounds transformations */
+    if(MemberIndex < 0 || MemberIndex >= Capacity)
+        return BGE_FAILURE;
+
+    Members[MemberIndex].Translate(X, Y, Z);
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

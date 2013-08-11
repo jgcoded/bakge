@@ -69,6 +69,8 @@ public:
     Result Clear();
     Result Reserve(int NumMembers);
 
+    Result Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
+
 }; /* Crowd */
 
 } /* bakge */
