@@ -103,4 +103,16 @@ Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
     return BGE_SUCCESS;
 }
 
+
+Result Crowd::Rotate(int MemberIndex, Quaternion Rotation)
+{
+    /* Prevent out-of-bounds transformations */
+    if(MemberIndex < 0 || MemberIndex >= Capacity)
+        return BGE_FAILURE;
+
+    Members[MemberIndex] *= Rotation.ToMatrix();
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
