@@ -32,6 +32,7 @@ int main(int argc, char* argv[])
     bakge::Cube* Obj;
     bakge::ShaderProgram* PlainShader;
     bakge::Texture* Tex;
+    bakge::Crowd* Group;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
@@ -74,6 +75,8 @@ int main(int argc, char* argv[])
 
 
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
+    Group = bakge::Crowd::Create(2);
+    Group->Translate(0, 1, 0, 0);
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
 
@@ -124,7 +127,9 @@ int main(int argc, char* argv[])
 
         Tex->Bind();
         Obj->Bind();
-        Obj->Draw(); /* No renderer for now */
+        Group->Bind();
+        Obj->DrawInstanced(Group->GetPopulation()); /* No renderer for now */
+        Group->Unbind();
         Obj->Unbind();
         Tex->Unbind();
 
@@ -142,6 +147,9 @@ int main(int argc, char* argv[])
 
     if(Tex != NULL)
         delete Tex;
+
+    if(Group != NULL)
+        delete Group;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();

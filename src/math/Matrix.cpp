@@ -64,6 +64,50 @@ Matrix::Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
 }
 
 
+Matrix::Matrix(Matrix BGE_NCP Other)
+{
+    *this = Other;
+}
+
+
+Matrix BGE_NCP Matrix::operator=(Matrix BGE_NCP Other)
+{
+    for(int i=0;i<16;++i)
+        Val[i] = Other.Val[i];
+
+    return *this;
+}
+
+
+Matrix Matrix::operator*(Matrix BGE_NCP Other) const
+{
+    Matrix Result = *this;
+    Result *= Other;
+    return Result;
+}
+
+
+Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
+{
+    /* Naive solution until SIMD code can be implemented */
+    Matrix Result;
+    memset((void*)&Result[0], 0, sizeof(Scalar) * 16);
+
+    for(int i=0;i<4;++i) {
+        for(int j=0;j<4;++j) {
+            for(int k=0;k<4;++k) {
+                Result[i*4+k] += Val[i*4+j] * Other.Val[j*4+k];
+            }
+        }
+    }
+
+    for(int i=0;i<16;++i)
+        Val[i] = Result[i];
+
+    return *this;
+}
+
+
 Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
                                     Vector4 BGE_NCP Target,
                                     Vector4 BGE_NCP UpVector)
@@ -143,7 +187,7 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
 }
 
 
-Matrix Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
+Matrix Matrix::ScaleMatrix(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
         X, 0, 0, 0,
@@ -154,7 +198,7 @@ Matrix Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
+Matrix Matrix::TranslationMatrix(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
         1, 0, 0, 0,
@@ -162,6 +206,43 @@ Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
         0, 0, 1, 0,
         X, Y, Z, 1
     );
+}
+
+
+Matrix BGE_NCP Matrix::Translate(Scalar X, Scalar Y, Scalar Z)
+{
+    Val[12] += X;
+    Val[13] += Y;
+    Val[14] += Z;
+
+    return *this;
+}
+
+
+Matrix BGE_NCP Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
+{
+    /* May change in the future */
+    *this *= ScaleMatrix(X, Y, Z);
+
+    return *this;
+}
+
+
+Matrix BGE_NCP Matrix::Invert()
+{
+    return *this;
+}
+
+
+Matrix Matrix::Inverted() const
+{
+    return Matrix();
+}
+
+
+Scalar Matrix::Determinant() const
+{
+    return Scalar(0);
 }
 
 } /* bakge */

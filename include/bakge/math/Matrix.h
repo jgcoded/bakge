@@ -52,6 +52,7 @@ public:
 
     Matrix();
     ~Matrix();
+    Matrix(Matrix BGE_NCP Other);
     Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
            Scalar E, Scalar F, Scalar G, Scalar H,
            Scalar I, Scalar J, Scalar K, Scalar L,
@@ -68,6 +69,17 @@ public:
         return Val[At];
     }
 
+    Matrix BGE_NCP operator=(Matrix BGE_NCP Other);
+
+    Matrix operator*(Matrix BGE_NCP Other) const;
+
+    Matrix BGE_NCP operator*=(Matrix BGE_NCP Other);
+
+    Matrix BGE_NCP Invert();
+    Matrix Inverted() const;
+
+    Scalar Determinant() const;
+
     /* Set to an identity matrix */
     Matrix BGE_NCP SetIdentity();
 
@@ -79,8 +91,11 @@ public:
     Matrix BGE_NCP SetLookAt(Vector4 BGE_NCP Position, Vector4 BGE_NCP Target,
                                                     Vector4 BGE_NCP UpVector);
 
-    static Matrix Scale(Scalar X, Scalar Y, Scalar Z);
-    static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
+    static Matrix ScaleMatrix(Scalar X, Scalar Y, Scalar Z);
+    static Matrix TranslationMatrix(Scalar X, Scalar Y, Scalar Z);
+
+    Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
+    Matrix BGE_NCP Scale(Scalar X, Scalar Y, Scalar Z);
 
 }; /* Matrix */
 

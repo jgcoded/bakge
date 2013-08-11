@@ -191,4 +191,13 @@ Result Mesh::ClearBuffers()
     return BGE_SUCCESS;
 }
 
+
+Result Mesh::DrawInstanced(int Count) const
+{
+    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumIndices,
+                            GL_UNSIGNED_INT, (void*)0, Count, 0);
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

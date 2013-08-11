@@ -73,19 +73,13 @@ Result Shape::Bind() const
     if(Mesh::Bind() == BGE_FAILURE)
         Errors = BGE_FAILURE;
 
-    if(Pawn::Bind() == BGE_FAILURE)
-        Errors = BGE_FAILURE;
-
      return Errors;
 }
 
 
 Result Shape::Unbind() const
 {
-    /* Always successful, no worries */
-    Mesh::Unbind();
-
-    return Pawn::Unbind();
+    return Mesh::Unbind();
 }
 
 

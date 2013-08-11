@@ -38,26 +38,17 @@ int main(int argc, char* argv[])
 {
     bakge::Init(argc, argv);
 
-    bakge::Vector4 CameraPos(0, 1, 3, 0), TargetPos(0, 0, 0, 0),
-                                                CameraUp(0, 1, 0, 0);
-
-    GLfloat gluMatrix[16];
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0, 1, 3, 0, 0, 0, 0, 1, 0);
-    glGetFloatv(GL_MODELVIEW_MATRIX, gluMatrix);
-
-    /* Create Look At */
-    printf("Create Look At:\n");
     bakge::Matrix M;
-    M.SetLookAt(CameraPos, TargetPos, CameraUp);
+    bakge::Microseconds Time = bakge::GetRunningTime();
 
-    /* Test some operations */
-    PrintMatrix(M);
+    M.SetIdentity();
+    for(int i=0;i<50000;++i)
+        M *= bakge::Matrix::Identity;
 
-    for(int i=0;i<16;++i) M[i] = gluMatrix[i];
+    Time = bakge::GetRunningTime() - Time;
+    printf("Running for %ul microseconds\n", Time);
 
-    printf("\n");
+    M.Translate(1, 1, 1);
     PrintMatrix(M);
 
     bakge::Deinit();

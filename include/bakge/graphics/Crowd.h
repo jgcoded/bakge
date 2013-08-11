@@ -33,10 +33,45 @@ namespace bakge
 class BGE_API Crowd : public Pawn
 {
 
-public:
+protected:
+
+    /* Number of active members in Crowd */
+    int Population;
+
+    /* Maximum number of members without resizing the buffer */
+    int Capacity;
+
+    /* Pointer to dynamically allocated array of the Crowd's members */
+    Matrix* Members;
 
     Crowd();
+
+
+public:
+
     virtual ~Crowd();
+
+    BGE_FACTORY Crowd* Create(int ReserveMembers);
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
+    BGE_INL int GetCapacity() const
+    {
+        return Capacity;
+    }
+
+    BGE_INL int GetPopulation() const
+    {
+        return Population;
+    }
+
+    Result Clear();
+    Result Reserve(int NumMembers);
+
+    Result Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
+    Result Rotate(int MemberIndex, Quaternion Rotation);
+    Result Scale(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
 
 }; /* Crowd */
 
