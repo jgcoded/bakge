@@ -53,8 +53,33 @@ Crowd* Crowd::Create(int ReserveMembers)
 
 Result Crowd::Bind() const
 {
-    /* Node::Bind sets up attribute pointers, etc */
-    return Node::Bind();
+    GLint Program, Location;
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program < 0)
+        return BGE_FAILURE;
+
+    /* Retrieve location of the bge_Translation vec4 */
+    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+
+    /* *
+     * Each attribute pointer has a stride of 4. Since mat4x4 are composed
+     * of 4 vec4 components, set each of these individually
+     * */
+    for(int i=0;i<4;++i) {
+        glEnableVertexAttribArray(Location + i);
+        glVertexAttribPointer(Location + i, 4, GL_FLOAT, GL_FALSE, 0,
+                                (const GLvoid*)(sizeof(Scalar) * 4 * i));
+        /* So the attribute is updated per instance, not per vertex */
+        glVertexAttribDivisor(Location + i, 1);
+    }
+
+    return BGE_SUCCESS;
 }
 
 
