@@ -81,6 +81,7 @@ Result Crowd::Reserve(int NumMembers)
     Clear();
 
     Capacity = NumMembers;
+    Population = NumMembers;
     Members = new Matrix[NumMembers];
 
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
