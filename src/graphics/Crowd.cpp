@@ -72,11 +72,12 @@ Result Crowd::Bind() const
      * of 4 vec4 components, set each of these individually
      * */
     for(int i=0;i<4;++i) {
-        glEnableVertexAttribArray(Location + i);
-        glVertexAttribPointer(Location + i, 4, GL_FLOAT, GL_FALSE, 0,
-                                (const GLvoid*)(sizeof(Scalar) * 4 * i));
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 4, GL_FLOAT, GL_FALSE, sizeof(Matrix),
+                                    (const GLvoid*)(sizeof(Scalar) * 4 * i));
         /* So the attribute is updated per instance, not per vertex */
-        glVertexAttribDivisor(Location + i, 1);
+        glVertexAttribDivisor(Location, 1);
+        ++Location;
     }
 
     return BGE_SUCCESS;
