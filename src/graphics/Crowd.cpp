@@ -101,6 +101,13 @@ Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 
     Members[MemberIndex].Translate(X, Y, Z);
 
+    GLint Stride = sizeof(Scalar) * 16;
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
+                            (const GLvoid*)&Members[MemberIndex]);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
     return BGE_SUCCESS;
 }
 
