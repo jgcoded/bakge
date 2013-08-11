@@ -80,13 +80,13 @@ Result Crowd::Reserve(int NumMembers)
 {
     Clear();
 
-    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers, NULL,
-                                                        GL_DYNAMIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-
     Capacity = NumMembers;
     Members = new Matrix[NumMembers];
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers, Members,
+                                                            GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
 }
