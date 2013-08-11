@@ -105,7 +105,7 @@ Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
     glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                            (const GLvoid*)&Members[MemberIndex]);
+                            (const GLvoid*)&Members[MemberIndex][0]);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
