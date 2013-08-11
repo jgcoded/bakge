@@ -71,6 +71,7 @@ public:
 
     Result Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
     Result Rotate(int MemberIndex, Quaternion Rotation);
+    Result Scale(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
 
 }; /* Crowd */
 

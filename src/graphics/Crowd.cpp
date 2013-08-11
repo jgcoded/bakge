@@ -115,4 +115,16 @@ Result Crowd::Rotate(int MemberIndex, Quaternion Rotation)
     return BGE_SUCCESS;
 }
 
+
+Result Crowd::Scale(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
+{
+    /* Prevent out-of-bounds transformations */
+    if(MemberIndex < 0 || MemberIndex >= Capacity)
+        return BGE_FAILURE;
+
+    Members[MemberIndex].Scale(X, Y, Z);
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
