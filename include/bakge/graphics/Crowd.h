@@ -44,6 +44,9 @@ protected:
     /* Pointer to dynamically allocated array of the Crowd's members */
     Matrix* Members;
 
+    /* Buffer for the Crowd's members' model matrices */
+    GLuint CrowdBuffer;
+
     Crowd();
 
 

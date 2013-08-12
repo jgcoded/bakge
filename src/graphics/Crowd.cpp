@@ -65,7 +65,7 @@ Result Crowd::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
 
     /* *
      * Each attribute pointer has a stride of 4. Since mat4x4 are composed
@@ -110,7 +110,7 @@ Result Crowd::Reserve(int NumMembers)
     Population = NumMembers;
     Members = new Matrix[NumMembers];
 
-    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers, Members,
                                                             GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -129,7 +129,7 @@ Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 
     GLint Stride = sizeof(Scalar) * 16;
 
-    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
     glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
                             (const GLvoid*)&Members[MemberIndex][0]);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
