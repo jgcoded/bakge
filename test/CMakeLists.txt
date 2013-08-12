@@ -11,6 +11,7 @@ set(TESTS
   clock
   cube
   cone
+  crowd
   cylinder
   info
   linkedlist
