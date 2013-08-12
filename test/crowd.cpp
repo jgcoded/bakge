@@ -88,11 +88,6 @@ int main(int argc, char* argv[])
 
     GLint ShaderProgram, Location;
     Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
-    View.SetLookAt(
-        bakge::Point(0, 0, 3),
-        bakge::Point(0, 0, 0),
-        bakge::UnitVector(0, 1, 0)
-    );
     glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
     Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
@@ -119,7 +114,7 @@ int main(int argc, char* argv[])
 
         Rot += 1.0f * DeltaTime;
         View.SetLookAt(
-            bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
+            bakge::Point(1, 0.5f, 0),
             bakge::Point(0.0f, 0, 0.0f),
             bakge::UnitVector(0, 1, 0)
         );
