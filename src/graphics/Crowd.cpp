@@ -166,7 +166,27 @@ Result Crowd::Rotate(int MemberIndex, Quaternion Rotation)
     if(MemberIndex < 0 || MemberIndex >= Capacity)
         return BGE_FAILURE;
 
+    /* First figure out the translation */
+    Vector4 Translated(Members[MemberIndex][12], Members[MemberIndex][13],
+                                                Members[MemberIndex][14], 0);
+
+    /* Now translate back to the origin first */
+    Members[MemberIndex].Translate(-Translated[0], -Translated[1],
+                                                    -Translated[2]);
+
+    /* Apply rotation */
     Members[MemberIndex] *= Rotation.ToMatrix();
+
+    /* Translate back to original position */
+    Members[MemberIndex].Translate(Translated[0], Translated[1],
+                                                    Translated[2]);
+
+    GLint Stride = sizeof(Scalar) * 16;
+
+    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
+    glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
+                            (const GLvoid*)&Members[MemberIndex][0]);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
 }
