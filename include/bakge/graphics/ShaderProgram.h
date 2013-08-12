@@ -30,6 +30,7 @@
 #define BGE_VIEW_UNIFORM "bge_View"
 #define BGE_PERSPECTIVE_UNIFORM "bge_Perspective"
 #define BGE_DIFFUSE_UNIFORM "bge_Diffuse"
+#define BGE_CROWD_UNIFORM "bge_Crowd"
 
 #define BGE_MODEL_ATTRIBUTE "bge_Model"
 #define BGE_VERTEX_ATTRIBUTE "bge_Vertex"

@@ -80,13 +80,35 @@ Result Crowd::Bind() const
         ++Location;
     }
 
+    Location = glGetUniformLocation(Program, BGE_CROWD_UNIFORM);
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    Matrix CrowdTransform;
+    CrowdTransform.Translate(Position[0], Position[1], Position[2]);
+
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &CrowdTransform[0]);
+
     return BGE_SUCCESS;
 }
 
 
 Result Crowd::Unbind() const
 {
-    return BGE_FAILURE;
+    GLint Program, Location;
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program < 0)
+        return BGE_FAILURE;
+
+    Location = glGetUniformLocation(Program, BGE_CROWD_UNIFORM);
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
+
+    return BGE_SUCCESS;
 }
 
 

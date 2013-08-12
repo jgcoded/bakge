@@ -40,6 +40,8 @@ const char* VertexShaderLibSource =
     "uniform mat4x4 bge_Perspective;\n"
     "uniform mat4x4 bge_View;\n"
     "\n"
+    "uniform mat4x4 bge_Crowd;\n"
+    "\n"
     "attribute vec4 bge_Vertex;\n"
     "attribute vec4 bge_Normal;\n"
     "\n"
@@ -50,9 +52,10 @@ const char* VertexShaderLibSource =
     "\n"
     "vec4 VertexShaderLib()\n"
     "{\n"
+    "    mat4x4 bge_ModelMatrix = bge_Crowd * bge_Model;\n"
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
-    "    return (bge_Perspective * bge_View * bge_Model) * bge_Vertex;\n"
+    "    return (bge_Perspective * bge_View * bge_ModelMatrix) * bge_Vertex;\n"
     "}\n"
     "\n";
 
