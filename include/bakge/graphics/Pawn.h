@@ -44,6 +44,9 @@ public:
     virtual Result SetScale(Scalar X, Scalar Y, Scalar Z);
     virtual Vector4 BGE_NCP GetScale() const;
 
+    Quaternion BGE_NCP SetRotation(Quaternion Rotation);
+    Quaternion BGE_NCP GetRotation() const;
+
 
 protected:
 

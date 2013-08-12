@@ -93,4 +93,18 @@ Result Pawn::Unbind() const
     return Node::Unbind();
 }
 
+
+Quaternion BGE_NCP Pawn::SetRotation(Quaternion Rotation)
+{
+    Facing = Rotation;
+
+    return Facing;
+}
+
+
+Quaternion BGE_NCP Pawn::GetRotation() const
+{
+    return Facing;
+}
+
 } /* bakge */
