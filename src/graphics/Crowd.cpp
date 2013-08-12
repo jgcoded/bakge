@@ -85,6 +85,7 @@ Result Crowd::Bind() const
         return BGE_FAILURE;
 
     Matrix CrowdTransform;
+    CrowdTransform *= Facing.ToMatrix();
     CrowdTransform.Translate(Position[0], Position[1], Position[2]);
 
     glUniformMatrix4fv(Location, 1, GL_FALSE, &CrowdTransform[0]);
