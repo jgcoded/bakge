@@ -8,7 +8,11 @@ the program's new features, changes and removals in distinguishable chunks.
 
 Some tips on committing:
 
-1) Commit often. When you finish a change, commit it.
+1) Commit often. Break down changes into unique and distinguishable changes
+relating to a class, test or file. Your message should begin with the name of
+the file or class that you modified.
+
+    e.g. "Pawn: Fix Size default value"
 
 2) Amend your commits if you find an error. `$ git commit --amend` lets you
 modify your latest commit. You can do this to unstage files or stage new
