@@ -57,6 +57,15 @@ int nplayer; /* BAD */
 int NumPlayers; /* GOOD */
 
 
+Iterators or sentinels in for or while loops can be single lowercase characters
+instead of full words.
+
+for(int Value=0;Value<5;++Value) /* Ehh, passable */
+    ...
+for(int i=0;i<5;++i) /* Just fine */
+    ...
+
+
 Enumerations and macros should be in all caps.
 
 enum DRAW_TYPE /* GOOD */
