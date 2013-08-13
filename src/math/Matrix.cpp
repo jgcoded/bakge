@@ -89,20 +89,71 @@ Matrix Matrix::operator*(Matrix BGE_NCP Other) const
 
 Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
 {
-    /* Naive solution until SIMD code can be implemented */
-    Matrix Result;
-    memset((void*)&Result[0], 0, sizeof(Scalar) * 16);
+    /* Temp vectors */
+    __m128 T1, T2;
 
-    for(int i=0;i<4;++i) {
-        for(int j=0;j<4;++j) {
-            for(int k=0;k<4;++k) {
-                Result[i*4+k] += Val[i*4+j] * Other.Val[j*4+k];
-            }
-        }
-    }
+    /* Matrix may not be properly aligned. So we'll use a "messenger" */
+    BGE_ALIGN(16) Vector4 Messenger;
 
-    for(int i=0;i<16;++i)
-        Val[i] = Result[i];
+    T1 = _mm_set1_ps(Val[0]);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(Val[4]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(Val[8]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(Val[12]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Val[0] = Messenger[0];
+    Val[1] = Messenger[1];
+    Val[2] = Messenger[2];
+    Val[3] = Messenger[3];
+
+    T1 = _mm_set1_ps(Val[1]);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(Val[5]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(Val[9]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(Val[13]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Val[4] = Messenger[0];
+    Val[5] = Messenger[1];
+    Val[6] = Messenger[2];
+    Val[7] = Messenger[3];
+
+    T1 = _mm_set1_ps(Val[2]);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(Val[6]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(Val[10]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(Val[14]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Val[8] = Messenger[0];
+    Val[9] = Messenger[1];
+    Val[10] = Messenger[2];
+    Val[11] = Messenger[3];
+
+    T1 = _mm_set1_ps(Val[3]);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(Val[7]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(Val[11]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(Val[15]);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Val[12] = Messenger[0];
+    Val[13] = Messenger[1];
+    Val[14] = Messenger[2];
+    Val[15] = Messenger[3];
 
     return *this;
 }

@@ -32,6 +32,11 @@
 #include <time.h>
 #include <math.h>
 
+/* SSE and SSE2 instructions headers */
+#include <mmintrin.h>
+#include <xmmintrin.h>
+#include <emmintrin.h>
+
 /* GCC & Clang attributes */
 #if defined __GNUC__ || defined __clang__ || defined __MINGW__
 /* Send compiler warning if function return result is not used */
@@ -66,6 +71,13 @@
 #define GLEW_STATIC
 #endif
 #endif /* _MSC_VER */
+
+/* Auxiliary definitions */
+#ifdef _MSC_VER
+#define BGE_ALIGN(X) __declspec(align(X))
+#else
+#define BGE_ALIGN(X) __attribute__((aligned(X)))
+#endif
 
 /* Common definitions */
 #define BGE_FUNC extern BGE_API
@@ -113,13 +125,6 @@ extern "C"
 /* System modules */
 #include <bakge/system/Clock.h>
 
-/* Math modules */
-#include <bakge/math/Math.h>
-#include <bakge/math/Vector3.h>
-#include <bakge/math/Vector4.h>
-#include <bakge/math/Matrix.h>
-#include <bakge/math/Quaternion.h>
-
 /* Data structure modules */
 #include <bakge/data/File.h>
 #include <bakge/data/SingleNode.h>
@@ -145,6 +150,13 @@ extern "C"
 #elif defined(__APPLE__)
 #include <bakge/platform/osx_Bakge.h>
 #endif /* __linux__ */
+
+/* Math modules */
+#include <bakge/math/Math.h>
+#include <bakge/math/Vector3.h>
+#include <bakge/math/Vector4.h>
+#include <bakge/math/Matrix.h>
+#include <bakge/math/Quaternion.h>
 
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>
