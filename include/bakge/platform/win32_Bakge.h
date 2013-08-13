@@ -34,9 +34,6 @@
 #define WIN32_LEAN_AND_MEAN
 #endif /* WIN32_LEAN_AND_MEAN */
 
-#define VERTEX_BUFFER_OBJECT_EXT "GL_ARB_vertex_buffer_object"
-#define UNIFORM_BUFFER_OBJECT_EXT "GL_ARB_uniform_buffer_object"
-
 #include <windows.h>
 #include <winsock2.h>
 #include <GL/gl.h>

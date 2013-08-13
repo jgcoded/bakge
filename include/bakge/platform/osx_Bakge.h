@@ -32,10 +32,6 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 
-
-#define VERTEX_BUFFER_OBJECT_EXT "GL_ARB_vertex_buffer_object"
-#define UNIFORM_BUFFER_OBJECT_EXT "GL_ARB_uniform_buffer_object"
-
 #include <bakge/mutex/osx_Mutex.h>
 #include <bakge/thread/osx_Thread.h>
 #include <bakge/socket/osx_Socket.h>
