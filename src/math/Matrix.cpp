@@ -89,20 +89,52 @@ Matrix Matrix::operator*(Matrix BGE_NCP Other) const
 
 Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
 {
-    /* Naive solution until SIMD code can be implemented */
-    Matrix Result;
-    memset((void*)&Result[0], 0, sizeof(Scalar) * 16);
+    /* Temp vectors */
+    __m128 T1, T2;
 
-    for(int i=0;i<4;++i) {
-        for(int j=0;j<4;++j) {
-            for(int k=0;k<4;++k) {
-                Result[i*4+k] += Val[i*4+j] * Other.Val[j*4+k];
-            }
-        }
-    }
+    T1 = _mm_set1_ps(M11);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(M12);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(M13);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(M14);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
-    for(int i=0;i<16;++i)
-        Val[i] = Result[i];
+    _mm_store_ps(&Val[0], T2);
+
+    T1 = _mm_set1_ps(M21);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(M22);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(M23);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(M24);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Val[4], T2);
+
+    T1 = _mm_set1_ps(M31);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(M32);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(M33);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(M34);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Val[8], T2);
+
+    T1 = _mm_set1_ps(M41);
+    T2 = _mm_mul_ps(Other.C1, T1);
+    T1 =_mm_set1_ps(M42);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
+    T1 =_mm_set1_ps(M43);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
+    T1 =_mm_set1_ps(M44);
+    T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
+
+    _mm_store_ps(&Val[12], T2);
 
     return *this;
 }

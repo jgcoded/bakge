@@ -34,6 +34,11 @@
 #define WIN32_LEAN_AND_MEAN
 #endif /* WIN32_LEAN_AND_MEAN */
 
+/* SSE and SSE2 instructions headers */
+#include <mmintrin.h>
+#include <xmmintrin.h>
+#include <emmintrin.h>
+
 #define VERTEX_BUFFER_OBJECT_EXT "GL_ARB_vertex_buffer_object"
 #define UNIFORM_BUFFER_OBJECT_EXT "GL_ARB_uniform_buffer_object"
 

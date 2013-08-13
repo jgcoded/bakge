@@ -109,13 +109,6 @@ extern "C"
 /* System modules */
 #include <bakge/system/Clock.h>
 
-/* Math modules */
-#include <bakge/math/Math.h>
-#include <bakge/math/Vector3.h>
-#include <bakge/math/Vector4.h>
-#include <bakge/math/Matrix.h>
-#include <bakge/math/Quaternion.h>
-
 /* Data structure modules */
 #include <bakge/data/File.h>
 #include <bakge/data/SingleNode.h>
@@ -141,6 +134,13 @@ extern "C"
 #elif defined(__APPLE__)
 #include <bakge/platform/osx_Bakge.h>
 #endif /* __linux__ */
+
+/* Math modules */
+#include <bakge/math/Math.h>
+#include <bakge/math/Vector3.h>
+#include <bakge/math/Vector4.h>
+#include <bakge/math/Matrix.h>
+#include <bakge/math/Quaternion.h>
 
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>
