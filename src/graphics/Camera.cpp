@@ -32,15 +32,14 @@ Camera::Camera()
 }
 
 
-Result Camera::Bind() const
+Camera::~Camera()
 {
-    return BGE_SUCCESS;
 }
 
 
-Vector4 Camera::GetEyeTarget()
+Result Camera::Bind() const
 {
-    return Position + Facing.GetAxis();
+    return BGE_SUCCESS;
 }
 
 
@@ -50,8 +49,9 @@ Result Camera::Unbind() const
 }
 
 
-Camera::~Camera()
+Vector4 Camera::GetEyeTarget()
 {
+    return Position + Facing.GetAxis();
 }
 
 } /* bakge */
