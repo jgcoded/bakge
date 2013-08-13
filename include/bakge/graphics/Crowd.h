@@ -72,9 +72,9 @@ public:
     Result Clear();
     Result Reserve(int NumMembers);
 
-    Result Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
-    Result Rotate(int MemberIndex, Quaternion Rotation);
-    Result Scale(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
+    Result TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
+    Result RotateMember(int MemberIndex, Quaternion Rotation);
+    Result ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
 
 }; /* Crowd */
 

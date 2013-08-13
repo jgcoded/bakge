@@ -142,7 +142,7 @@ Result Crowd::Reserve(int NumMembers)
 }
 
 
-Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
+Result Crowd::TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 {
     /* Prevent out-of-bounds transformations */
     if(MemberIndex < 0 || MemberIndex >= Capacity)
@@ -161,7 +161,7 @@ Result Crowd::Translate(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Result Crowd::Rotate(int MemberIndex, Quaternion Rotation)
+Result Crowd::RotateMember(int MemberIndex, Quaternion Rotation)
 {
     /* Prevent out-of-bounds transformations */
     if(MemberIndex < 0 || MemberIndex >= Capacity)
@@ -193,7 +193,7 @@ Result Crowd::Rotate(int MemberIndex, Quaternion Rotation)
 }
 
 
-Result Crowd::Scale(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
+Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 {
     /* Prevent out-of-bounds transformations */
     if(MemberIndex < 0 || MemberIndex >= Capacity)

@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
     Group = bakge::Crowd::Create(2);
-    Group->Translate(0, 1, 0, 0);
+    Group->TranslateMember(0, 1, 0, 0);
     Group->SetPosition(0, -0.25f, 0);
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
