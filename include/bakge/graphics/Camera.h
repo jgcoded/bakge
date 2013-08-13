@@ -33,6 +33,15 @@ namespace bakge
 class BGE_API Camera : public Pawn
 {
 
+protected:
+
+    Vector4 Target;
+    Degrees FOV;
+    Scalar Aspect;
+    Scalar NearClip;
+    Scalar FarClip;
+
+
 public:
 
     Camera();

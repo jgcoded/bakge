@@ -29,6 +29,10 @@ namespace bakge
 
 Camera::Camera()
 {
+    NearClip = 0.1f;
+    FarClip = 500.0f;
+    Aspect = 1.5f;
+    FOV = 80.0f;
 }
 
 
