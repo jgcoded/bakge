@@ -92,8 +92,8 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     /* Temp vectors */
     __m128 T1, T2;
 
-    /* *this may not be properly aligned. So we'll use a "messenger" */
-    __declspec(align(16)) Vector4 Messenger;
+    /* Matrix may not be properly aligned. So we'll use a "messenger" */
+    BGE_ALIGN(16) Vector4 Messenger;
 
     T1 = _mm_set1_ps(M11);
     T2 = _mm_mul_ps(Other.C1, T1);
