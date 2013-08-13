@@ -43,6 +43,7 @@ namespace bakge
  * */
 class BGE_API Matrix
 {
+    /* Even though __m128 is 16B aligned, this union ISN'T */
     union
     {
         struct

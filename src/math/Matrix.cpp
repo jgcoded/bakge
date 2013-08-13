@@ -92,6 +92,9 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     /* Temp vectors */
     __m128 T1, T2;
 
+    /* *this may not be properly aligned. So we'll use a "messenger" */
+    __declspec(align(16)) Vector4 Messenger;
+
     T1 = _mm_set1_ps(M11);
     T2 = _mm_mul_ps(Other.C1, T1);
     T1 =_mm_set1_ps(M12);
@@ -101,7 +104,8 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T1 =_mm_set1_ps(M14);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
-    _mm_store_ps(&Val[0], T2);
+    _mm_store_ps(&Messenger[0], T2);
+    Vec[0] = Messenger;
 
     T1 = _mm_set1_ps(M21);
     T2 = _mm_mul_ps(Other.C1, T1);
@@ -112,7 +116,8 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T1 =_mm_set1_ps(M24);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
-    _mm_store_ps(&Val[4], T2);
+    _mm_store_ps(&Messenger[0], T2);
+    Vec[1] = Messenger;
 
     T1 = _mm_set1_ps(M31);
     T2 = _mm_mul_ps(Other.C1, T1);
@@ -123,7 +128,8 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T1 =_mm_set1_ps(M34);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
-    _mm_store_ps(&Val[8], T2);
+    _mm_store_ps(&Messenger[0], T2);
+    Vec[2] = Messenger;
 
     T1 = _mm_set1_ps(M41);
     T2 = _mm_mul_ps(Other.C1, T1);
@@ -134,7 +140,8 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T1 =_mm_set1_ps(M44);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
-    _mm_store_ps(&Val[12], T2);
+    _mm_store_ps(&Messenger[0], T2);
+    Vec[3] = Messenger;
 
     return *this;
 }
