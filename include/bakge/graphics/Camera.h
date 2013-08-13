@@ -43,7 +43,7 @@ public:
     virtual Result Bind() const;
     virtual Result Unbind() const;
 
-} /* Camera */
+}; /* Camera */
 
 } /* bakge */
 
