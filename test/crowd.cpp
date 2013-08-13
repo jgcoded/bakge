@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 
     PlainShader = bakge::ShaderProgram::Create(NULL, NULL);
 
-    Win = bakge::Window::Create(600, 400);
+    Win = bakge::Window::Create(1024, 768);
     if(Win == NULL) {
         printf("Error creating window\n");
         return bakge::Deinit();
@@ -74,10 +74,21 @@ int main(int argc, char* argv[])
                                                     (void*)Bitmap);
 
 
-    Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
-    Group = bakge::Crowd::Create(2);
-    Group->TranslateMember(0, 1, 0, 0);
-    Group->SetPosition(0, -0.25f, 0);
+    Obj = bakge::Cube::Create(0.15f, 0.15f, 0.15f);
+
+#define CROWD_SIZE 5000
+    Group = bakge::Crowd::Create(CROWD_SIZE);
+
+    srand(time(0));
+
+#define TRAND ((((float)(rand() % 1000) / 1000) * 5) - 2.5f)
+#define RRAND (((float)(rand() % 1000) / 1000) * 6.28f)
+#define SRAND (((float)(rand() % 1000) / 1000.0f) + 0.5f)
+    for(int i=0;i<CROWD_SIZE;++i) {
+        Group->ScaleMember(i, SRAND, SRAND, SRAND);
+        Group->TranslateMember(i, TRAND, TRAND, TRAND);
+        Group->RotateMember(i, bakge::Quaternion::FromEulerAngles(RRAND, RRAND, RRAND));
+    }
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
 
@@ -87,7 +98,7 @@ int main(int argc, char* argv[])
     bakge::Matrix View;
 
     GLint ShaderProgram, Location;
-    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
+    Perspective.SetPerspective(80.0f, 1024.0f / 768.0f, 0.1f, 500.0f);
     glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
     Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
