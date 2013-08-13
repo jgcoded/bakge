@@ -29,20 +29,22 @@
 
 namespace bakge
 {
- 
+
 class BGE_API Camera : public Pawn
 {
-    
+
 public:
+
     Camera();
-    virtual Result Bind() const;
-    Vector4 GetEyeTarget();
-    virtual Result Unbind() const;
     ~Camera();
 
+    Vector4 GetEyeTarget();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
 } /* Camera */
- 
+
 } /* bakge */
 
  #endif
- 
