@@ -105,7 +105,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Vec[0] = Messenger;
+    Val[0] = Messenger[0];
+    Val[1] = Messenger[1];
+    Val[2] = Messenger[2];
+    Val[3] = Messenger[3];
 
     T1 = _mm_set1_ps(Val[1]);
     T2 = _mm_mul_ps(Other.C1, T1);
@@ -117,7 +120,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Vec[1] = Messenger;
+    Val[4] = Messenger[0];
+    Val[5] = Messenger[1];
+    Val[6] = Messenger[2];
+    Val[7] = Messenger[3];
 
     T1 = _mm_set1_ps(Val[2]);
     T2 = _mm_mul_ps(Other.C1, T1);
@@ -129,7 +135,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Vec[2] = Messenger;
+    Val[8] = Messenger[0];
+    Val[9] = Messenger[1];
+    Val[10] = Messenger[2];
+    Val[11] = Messenger[3];
 
     T1 = _mm_set1_ps(Val[3]);
     T2 = _mm_mul_ps(Other.C1, T1);
@@ -141,7 +150,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Vec[3] = Messenger;
+    Val[12] = Messenger[0];
+    Val[13] = Messenger[1];
+    Val[14] = Messenger[2];
+    Val[15] = Messenger[3];
 
     return *this;
 }
