@@ -43,21 +43,16 @@ namespace bakge
  * */
 class BGE_API Matrix
 {
-    /* Even though __m128 is 16B aligned, this union ISN'T */
+    /* *
+     * Even though __m128 is 16B aligned, this union ISN'T
+     * Use a union to provide some aliases for the Matrix components
+     * */
     union
     {
         struct
         {
             /* Individual columns using SSE vectors */
             __m128 C1, C2, C3, C4;
-        };
-
-        struct
-        {
-            Scalar M11, M12, M13, M14; /* Column 1 */
-            Scalar M21, M22, M23, M24; /* Column 2 */
-            Scalar M31, M32, M33, M34; /* Column 3 */
-            Scalar M41, M42, M43, M44; /* Column 4 */
         };
 
         struct

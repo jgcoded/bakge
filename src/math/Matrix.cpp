@@ -95,49 +95,49 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     /* Matrix may not be properly aligned. So we'll use a "messenger" */
     BGE_ALIGN(16) Vector4 Messenger;
 
-    T1 = _mm_set1_ps(M11);
+    T1 = _mm_set1_ps(Val[0]);
     T2 = _mm_mul_ps(Other.C1, T1);
-    T1 =_mm_set1_ps(M12);
+    T1 =_mm_set1_ps(Val[4]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
-    T1 =_mm_set1_ps(M13);
+    T1 =_mm_set1_ps(Val[8]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
-    T1 =_mm_set1_ps(M14);
+    T1 =_mm_set1_ps(Val[12]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
     Vec[0] = Messenger;
 
-    T1 = _mm_set1_ps(M21);
+    T1 = _mm_set1_ps(Val[1]);
     T2 = _mm_mul_ps(Other.C1, T1);
-    T1 =_mm_set1_ps(M22);
+    T1 =_mm_set1_ps(Val[5]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
-    T1 =_mm_set1_ps(M23);
+    T1 =_mm_set1_ps(Val[9]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
-    T1 =_mm_set1_ps(M24);
+    T1 =_mm_set1_ps(Val[13]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
     Vec[1] = Messenger;
 
-    T1 = _mm_set1_ps(M31);
+    T1 = _mm_set1_ps(Val[2]);
     T2 = _mm_mul_ps(Other.C1, T1);
-    T1 =_mm_set1_ps(M32);
+    T1 =_mm_set1_ps(Val[6]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
-    T1 =_mm_set1_ps(M33);
+    T1 =_mm_set1_ps(Val[10]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
-    T1 =_mm_set1_ps(M34);
+    T1 =_mm_set1_ps(Val[14]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
     Vec[2] = Messenger;
 
-    T1 = _mm_set1_ps(M41);
+    T1 = _mm_set1_ps(Val[3]);
     T2 = _mm_mul_ps(Other.C1, T1);
-    T1 =_mm_set1_ps(M42);
+    T1 =_mm_set1_ps(Val[7]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C2, T1), T2);
-    T1 =_mm_set1_ps(M43);
+    T1 =_mm_set1_ps(Val[11]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C3, T1), T2);
-    T1 =_mm_set1_ps(M44);
+    T1 =_mm_set1_ps(Val[15]);
     T2 = _mm_add_ps(_mm_mul_ps(Other.C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
