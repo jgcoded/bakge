@@ -40,7 +40,6 @@ int main(int argc, char* argv[])
     Server.SetAddress(72, 129, 81, 23);
     Server.SetPort(7000);
 
-    printf("Sending packet to %s...\n", Server.GetAddressString());
     Sock->Send(&Server, Pack);
 
     printf("Deleting sent packet\n");

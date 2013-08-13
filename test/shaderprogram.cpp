@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
         return bakge::Deinit();
     }
 
-    Point = bakge::Node::Create(0, 0, 0);
+    Point = NULL;
     if(Point == NULL) {
         printf("Unable to create Node\n");
         return 1;

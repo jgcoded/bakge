@@ -40,8 +40,6 @@ int main(int argc, char* argv[])
         return bakge::Deinit();
     }
 
-    Point = bakge::Node::Create(0, 0, 0);
-
     glClearColor(0, 0, 1, 1);
     glViewport(0, 0, 600, 400);
     glMatrixMode(GL_MODELVIEW);
@@ -54,20 +52,6 @@ int main(int argc, char* argv[])
     glEnable(GL_POINT_SMOOTH);
     glPointSize(10);
     glHint(GL_POINT_SMOOTH, GL_NICEST);
-
-    /* *
-     * Test out node position setting/getting uses OpenGL buffers
-     * */
-    Point->Bind();
-    /* Test this node's position */
-    bakge::Vector4 Pos = Point->GetPosition();
-    printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
-
-    /* Test at a new position */
-    Point->SetPosition(3, 3, 1);
-    Pos = Point->GetPosition();
-    printf("%02.2lf %02.2lf %02.2lf\n", Pos[0], Pos[1], Pos[2]);
-    Point->Unbind();
 
     while(1) {
         /* Poll events for all windows */
@@ -82,18 +66,12 @@ int main(int argc, char* argv[])
         glLoadIdentity();
         gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
         glColor3f(1, 1, 1);
-        Point->Bind();
-        Point->Draw(); /* No renderer for now */
-        Point->Unbind();
         glMatrixMode(GL_PROJECTION);
         Win->SwapBuffers();
     }
 
     if(Win != NULL)
         delete Win;
-
-    if(Point != NULL)
-        delete Point;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();

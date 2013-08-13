@@ -29,7 +29,6 @@
 int main(int argc, char* argv[])
 {
     bakge::Window* Win;
-    bakge::Pawn Line;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
@@ -61,9 +60,6 @@ int main(int argc, char* argv[])
         glLoadIdentity();
         gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
         glColor3f(1, 1, 1);
-        Line.Bind();
-        Line.Draw(); /* No renderer for now */
-        Line.Unbind();
         glMatrixMode(GL_PROJECTION);
         Win->SwapBuffers();
     }
