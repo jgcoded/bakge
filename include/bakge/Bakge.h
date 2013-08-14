@@ -69,7 +69,7 @@
 #define BGE_API
 #ifndef BAKGE_EXPORTS
 #define GLEW_STATIC
-#endif
+#endif /* BAKGE_EXPORTS */
 #endif /* _MSC_VER */
 
 /* Auxiliary definitions */
@@ -111,7 +111,7 @@ extern "C"
 #include <stb/stb_truetype.h>
 #define STB_TRUETYPE_IMPLEMENTATION
 
-/* Include core Bakge classes */
+/* Include core Bakge classes and headers */
 #include <bakge/core/Type.h>
 #include <bakge/core/Input.h>
 #include <bakge/core/Utility.h>
