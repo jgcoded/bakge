@@ -29,13 +29,14 @@ namespace bakge
 
 Node::Node()
 {
-    glGenBuffers(1, &ModelMatrixBuffer);
+    ModelMatrixBuffer = 0;
 }
 
 
 Node::~Node()
 {
-    glDeleteBuffers(1, &ModelMatrixBuffer);
+    if(ModelMatrixBuffer != 0)
+        glDeleteBuffers(1, &ModelMatrixBuffer);
 }
 
 

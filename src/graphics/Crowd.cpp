@@ -45,6 +45,13 @@ Crowd* Crowd::Create(int ReserveMembers)
 {
     Crowd* C = new Crowd;
 
+    glGenBuffers(1, &C->ModelMatrixBuffer);
+    if(C->ModelMatrixBuffer == 0) {
+        printf("Error creating model matrix buffer\n");
+        delete C;
+        return NULL;
+    }
+
     C->Reserve(ReserveMembers);
 
     return C;
