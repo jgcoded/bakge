@@ -171,6 +171,7 @@ extern "C"
 #include <bakge/graphics/shapes/Cylinder.h>
 #include <bakge/graphics/shapes/Cone.h>
 #include <bakge/graphics/Texture.h>
+#include <bakge/graphics/Camera.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
