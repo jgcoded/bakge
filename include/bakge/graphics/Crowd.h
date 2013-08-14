@@ -41,8 +41,10 @@ protected:
     /* Maximum number of members without resizing the buffer */
     int Capacity;
 
-    /* Pointer to dynamically allocated array of the Crowd's members */
-    Matrix* Members;
+    /* Dynamically allocated arrays - members' transforms */
+    Scalar* Positions;
+    Quaternion* Rotations;
+    Scalar* Scales;
 
     /* Buffer for the Crowd's members' model matrices */
     GLuint CrowdBuffer;

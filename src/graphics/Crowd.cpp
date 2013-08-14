@@ -31,7 +31,9 @@ Crowd::Crowd()
 {
     Population = 0;
     Capacity = 0;
-    Members = NULL;
+    Positions = NULL;
+    Rotations = NULL;
+    Scales = NULL;
 }
 
 
@@ -122,11 +124,12 @@ Result Crowd::Unbind() const
 
 Result Crowd::Clear()
 {
-    if(Members == NULL)
-        return BGE_FAILURE;
-
-    delete[] Members;
-    Members = NULL;
+    delete[] Positions;
+    delete[] Rotations;
+    delete[] Scales;
+    Positions = NULL;
+    Rotations = NULL;
+    Scales = NULL;
 
     return BGE_SUCCESS;
 }
@@ -138,11 +141,30 @@ Result Crowd::Reserve(int NumMembers)
 
     Capacity = NumMembers;
     Population = NumMembers;
-    Members = new Matrix[NumMembers];
 
+    Positions = new Scalar[NumMembers * 3];
+    Rotations = new Quaternion[NumMembers];
+    Scales = new Scalar[NumMembers * 3];
+
+    memset((void*)Positions, 0, sizeof(Scalar) * NumMembers * 3);
+    for(int i=0;i<NumMembers;++i) {
+        Scales[i * 3 + 0] = 1;
+        Scales[i * 3 + 1] = 1;
+        Scales[i * 3 + 2] = 1;
+    }
+
+    /* Allocates the buffer */
     glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers, Members,
-                                                            GL_DYNAMIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers,
+                                            NULL, GL_DYNAMIC_DRAW);
+
+    /* Now set each matrix in the buffer to identity */
+    GLint Stride = sizeof(Scalar) * 16;
+    for(int i=0;i<NumMembers;++i) {
+        glBufferSubData(GL_ARRAY_BUFFER, Stride * i, Stride,
+                        (const GLvoid*)&Matrix::Identity[0]);
+    }
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -155,13 +177,25 @@ Result Crowd::TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
     if(MemberIndex < 0 || MemberIndex >= Capacity)
         return BGE_FAILURE;
 
-    Members[MemberIndex].Translate(X, Y, Z);
+    Positions[MemberIndex * 3 + 0] += X;
+    Positions[MemberIndex * 3 + 1] += Y;
+    Positions[MemberIndex * 3 + 2] += Z;
+
+    /* Create a new model matrix to copy into the buffer */
+    Matrix Transformation;
+    Transformation.Scale(Scales[MemberIndex * 3 + 0],
+                        Scales[MemberIndex * 3 + 1],
+                        Scales[MemberIndex * 3 + 2]);
+    Transformation *= Rotations[MemberIndex].ToMatrix();
+    Transformation.Translate(Positions[MemberIndex * 3 + 0],
+                            Positions[MemberIndex * 3 + 1],
+                            Positions[MemberIndex * 3 + 2]);
 
     GLint Stride = sizeof(Scalar) * 16;
 
     glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
     glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                            (const GLvoid*)&Members[MemberIndex][0]);
+                                (const GLvoid*)&Transformation[0]);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -174,26 +208,24 @@ Result Crowd::RotateMember(int MemberIndex, Quaternion Rotation)
     if(MemberIndex < 0 || MemberIndex >= Capacity)
         return BGE_FAILURE;
 
-    /* First figure out the translation */
-    Vector4 Translated(Members[MemberIndex][12], Members[MemberIndex][13],
-                                                Members[MemberIndex][14], 0);
+    /* Rotate the member */
+    Rotations[MemberIndex] *= Rotation;
 
-    /* Now translate back to the origin first */
-    Members[MemberIndex].Translate(-Translated[0], -Translated[1],
-                                                    -Translated[2]);
-
-    /* Apply rotation */
-    Members[MemberIndex] *= Rotation.ToMatrix();
-
-    /* Translate back to original position */
-    Members[MemberIndex].Translate(Translated[0], Translated[1],
-                                                    Translated[2]);
+    /* Create a new model matrix to copy into the buffer */
+    Matrix Transformation;
+    Transformation.Scale(Scales[MemberIndex * 3 + 0],
+                        Scales[MemberIndex * 3 + 1],
+                        Scales[MemberIndex * 3 + 2]);
+    Transformation *= Rotations[MemberIndex].ToMatrix();
+    Transformation.Translate(Positions[MemberIndex * 3 + 0],
+                            Positions[MemberIndex * 3 + 1],
+                            Positions[MemberIndex * 3 + 2]);
 
     GLint Stride = sizeof(Scalar) * 16;
 
     glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
     glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                            (const GLvoid*)&Members[MemberIndex][0]);
+                                (const GLvoid*)&Transformation[0]);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -206,26 +238,26 @@ Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
     if(MemberIndex < 0 || MemberIndex >= Capacity)
         return BGE_FAILURE;
 
-    /* First figure out the translation */
-    Vector4 Translated(Members[MemberIndex][12], Members[MemberIndex][13],
-                                                Members[MemberIndex][14], 0);
+    /* Scale the member */
+    Scales[MemberIndex * 3 + 0] *= X;
+    Scales[MemberIndex * 3 + 1] *= Y;
+    Scales[MemberIndex * 3 + 2] *= Z;
 
-    /* Translate back to the origin first */
-    Members[MemberIndex].Translate(-Translated[0], -Translated[1],
-                                                    -Translated[2]);
-
-    /* Apply scale transformation */
-    Members[MemberIndex].Scale(X, Y, Z);
-
-    /* Translate back to original position */
-    Members[MemberIndex].Translate(Translated[0], Translated[1],
-                                                    Translated[2]);
+    /* Create a new model matrix to copy into the buffer */
+    Matrix Transformation;
+    Transformation.Scale(Scales[MemberIndex * 3 + 0],
+                        Scales[MemberIndex * 3 + 1],
+                        Scales[MemberIndex * 3 + 2]);
+    Transformation *= Rotations[MemberIndex].ToMatrix();
+    Transformation.Translate(Positions[MemberIndex * 3 + 0],
+                            Positions[MemberIndex * 3 + 1],
+                            Positions[MemberIndex * 3 + 2]);
 
     GLint Stride = sizeof(Scalar) * 16;
 
     glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
     glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                            (const GLvoid*)&Members[MemberIndex][0]);
+                                (const GLvoid*)&Transformation[0]);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
