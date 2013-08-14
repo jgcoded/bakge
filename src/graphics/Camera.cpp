@@ -78,6 +78,16 @@ Result Camera::Unbind() const
 }
 
 
+Vector4 BGE_NCP Camera::SetTarget(Scalar X, Scalar Y, Scalar Z)
+{
+    Target[0] = X;
+    Target[1] = Y;
+    Target[2] = Z;
+
+    return Target;
+}
+
+
 Vector4 BGE_NCP Camera::GetTarget() const
 {
     return Target;

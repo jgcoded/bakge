@@ -47,6 +47,7 @@ public:
     Camera();
     ~Camera();
 
+    Vector4 BGE_NCP SetTarget(Scalar X, Scalar Y, Scalar Z);
     Vector4 BGE_NCP GetTarget() const;
 
     virtual Result Bind() const;
