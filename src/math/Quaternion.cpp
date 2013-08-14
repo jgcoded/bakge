@@ -29,6 +29,8 @@ namespace bakge
 
 Quaternion::Quaternion()
 {
+    /* Default to axis <0, 1, 0>, angle 0 radians */
+    Real = 1.0f;
 }
 
 
