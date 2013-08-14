@@ -78,9 +78,9 @@ Result Camera::Unbind() const
 }
 
 
-Vector4 Camera::GetEyeTarget()
+Vector4 BGE_NCP Camera::GetTarget() const
 {
-    return Position + Facing.GetAxis();
+    return Target;
 }
 
 } /* bakge */

@@ -47,7 +47,7 @@ public:
     Camera();
     ~Camera();
 
-    Vector4 GetEyeTarget();
+    Vector4 BGE_NCP GetTarget() const;
 
     virtual Result Bind() const;
     virtual Result Unbind() const;
