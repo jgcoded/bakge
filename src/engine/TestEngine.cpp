@@ -228,4 +228,34 @@ void TestEngine::SetPostRenderCallback(GenericCallback Callback)
 	PostRenderCB = Callback;
 }
 
+
+void TestEngine::SetKeyEventCallback(KeyEventCallback Callback)
+{
+	KeyEventCB = Callback;
+}
+
+
+void TestEngine::SetMouseEventCallback(MouseEventCallback Callback)
+{
+	MouseEventCB = Callback;
+}
+
+
+void TestEngine::SetMotionEventCallback(MotionEventCallback Callback)
+{
+	MotionEventCB = Callback;
+}
+
+
+void TestEngine::ScrollEventCallback(ScrollEventCallback Callback)
+{
+	ScrollEventCB = Callback;
+}
+
+
+void TestEngine::SetCloseEventCallback(GenericCallback Callback)
+{
+	CloseEventCB = Callback;
+}
+
 } /* bakge */
