@@ -64,29 +64,158 @@ class BGE_API TestEngine : public Engine, public EventHandler
      * */
 
     /* Initialize/Clean up components */
-    Result Initialize();
-    Result ShutDown();
+    Result Initialize()
+    {
+
+        EngineWindow = Window::Create(600, 400);
+        if(EngineWindow == NULL)
+            return BGE_FAILURE;
+
+        glClearColor(0, 0.3f, 0.5f, 1);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluPerspective(50.0, 1.5, 0.1, 500.0);
+
+        EngineWindow->SetEventHandler(&this);
+        EngineWindow->Bind();
+
+        if(InitCB != NULL)
+            InitCB();
+
+        return BGE_SUCCESS;
+    }
+
+
+    Result ShutDown()
+    {
+
+        EngineWindow->Unbind();
+        delete EngineWindow;
+
+        if(ShutDownCB != NULL)
+            ShutDownCB();
+    }
 
     /* Run will have no callback */
-    int Run();
+    int Run()
+    {
+            int ExitCode;
 
-    Result Update(Seconds DeltaTime);
+        while(1)
+        {
 
-    Result PreRenderStage();
-    Result RenderStage();
-    Result PostRenderStage();
+            Window::PollEvents();
+
+            if(EngineWindow->IsOpen() == false) {
+
+                ExitCode = 0;
+
+                if(CloseEventCB != NULL)
+                    CloseEventCB();
+
+                break;
+            }
+
+
+            Update(0);
+            if(UpdateCB != NULL)
+                UpdateCB();
+
+            PreRenderStage();
+            if(PreRenderCB != NULL)
+                PreRenderCB();
+
+            RenderStage();
+            if(RenderCB != NULL)
+                RenderCB();
+
+            PostRenderStage();
+            if(PostRenderCB != NULL)
+                PostRenderCB();
+        }
+
+        return ExitCode;
+    }
+
+
+    Result Update(Seconds DeltaTime)
+    {
+        /* Reserved for future logic */
+        return BGE_SUCCESS;
+    }
+
+
+    Result PreRenderStage()
+    {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+        gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
+        return BGE_SUCCESS;
+    }
+
+
+    Result RenderStage()
+    {
+        /* Reserved for future logic */
+        return BGE_SUCCESS;
+    }
+
+
+    Result PostRenderStage()
+    {
+        glMatrixMode(GL_PROJECTION);
+        EngineWindow->SwapBuffers();
+        return BGE_SUCCESS;
+    }
 
     /* Input callbacks */
     /* Key press/release and mouse button click/release events */
-    Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M);
-    Result MouseEvent(ButtonID B, ButtonState S, ModField M);
+    Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M)
+    {
+        if(KeyEventCB != NULL)
+            return KeyEventCB(K, S, C, M);
+
+        return BGE_FAILURE;
+    }
+
+
+    Result MouseEvent(ButtonID B, ButtonState S, ModField M)
+    {
+        if(MouseEventCB != NULL)
+            return MouseEventCB(B, S, M);
+
+        return BGE_FAILURE;
+    }
 
     /* Relative device motion events */
-    Result MotionEvent(DeviceMotion X, DeviceMotion Y);
-    Result ScrollEvent(DeviceMotion X, DeviceMotion Y);
+    Result MotionEvent(DeviceMotion X, DeviceMotion Y)
+    {
+        if(MotionEventCB != NULL)
+            MotionEventCB(X, Y);
+
+        return BGE_FAILURE;
+    }
+
+
+    Result ScrollEvent(DeviceMotion X, DeviceMotion Y)
+    {
+        if(ScrollEventCB != NULL)
+            ScrollEventCB(X, Y);
+
+        return BGE_FAILURE;
+    }
 
     /* Called just before the window is closed */
-    Result CloseEvent();
+    Result CloseEvent()
+    {
+        if(CloseEventCB != NULL)
+            return CloseEventCB();
+
+        return BGE_FAILURE;
+    }
 
     Window* EngineWindow;
 
@@ -107,23 +236,80 @@ class BGE_API TestEngine : public Engine, public EventHandler
 
 public:
 
-    TestEngine();
-    ~TestEngine();
+    TestEngine()
+    {
+    }
 
-    void SetInitializeCallback(GenericCallback Callback);
-    void SetShutDownCallback(GenericCallback Callback);
 
-    void SetUpdateCallback(UpdateCallback Callback);
+    ~TestEngine()
+    {
+    }
 
-    void SetPreRenderCallback(GenericCallback Callback);
-    void SetRenderCallback(GenericCallback Callback);
-    void SetPostRenderCallback(GenericCallback Callback);
 
-    void SetKeyEventCallback(KeyEventCallback Callback);
-    void SetMouseEventCallback(MouseEventCallback Callback);
-    void SetMotionEventCallback(MotionEventCallback Callback);
-    void ScrollEventCallback(ScrollEventCallback Callback);
-    void SetCloseEventCallback(GenericCallback Callback);
+    void SetInitializeCallback(GenericCallback Callback)
+    {
+        InitCB = Callback;
+    }
+
+
+    void SetShutDownCallback(GenericCallback Callback)
+    {
+        ShutDownCB = Callback;
+    }
+
+
+    void SetUpdateCallback(UpdateCallback Callback)
+    {
+        UpdateCB = Callback;
+    }
+
+
+    void SetPreRenderCallback(GenericCallback Callback)
+    {
+        PreRenderCB = Callback;
+    }
+
+
+    void SetRenderCallback(GenericCallback Callback)
+    {
+        RenderCB = Callback;
+    }
+
+
+    void SetPostRenderCallback(GenericCallback Callback)
+    {
+        PostRenderCB = Callback;
+    }
+
+
+    void SetKeyEventCallback(KeyEventCallback Callback)
+    {
+        KeyEventCB = Callback;
+    }
+
+
+    void SetMouseEventCallback(MouseEventCallback Callback)
+    {
+        MouseEventCB = Callback;
+    }
+
+
+    void SetMotionEventCallback(MotionEventCallback Callback)
+    {
+        MotionEventCB = Callback;
+    }
+
+
+    void ScrollEventCallback(ScrollEventCallback Callback)
+    {
+        ScrollEventCB = Callback;
+    }
+
+
+    void SetCloseEventCallback(GenericCallback Callback)
+    {
+        CloseEventCB = Callback;
+    }
 
 }; /* TestEngine */
 
