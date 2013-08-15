@@ -90,6 +90,21 @@ class BGE_API TestEngine : public Engine, public EventHandler
 
     Window* EngineWindow;
 
+    GenericCallback InitCB;
+    GenericCallback ShutDownCB;
+
+    UpdateCallback UpdateCB;
+
+    GenericCallback PreRenderCB;
+    GenericCallback RenderCB;
+    GenericCallback PostRenderCB;
+
+    KeyEventCallback KeyEventCB;
+    MouseEventCallback MouseEventCB;
+    MotionEventCallback MotionEventCB;
+    ScrollEventCallback ScrollEventCB;
+    GenericCallback CloseEventCB;
+
 public:
 
     TestEngine();
