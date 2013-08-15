@@ -192,4 +192,16 @@ Result TestEngine::CloseEvent()
 	return BGE_FAILURE;
 }
 
+
+void TestEngine::SetInitializeCallback(GenericCallback Callback)
+{
+	InitCB = Callback;
+}
+
+
+void TestEngine::SetShutDownCallback(GenericCallback Callback)
+{
+	ShutDownCB = Callback;
+}
+
 } /* bakge */
