@@ -20,6 +20,7 @@ set(MODULES
   core/Utility
   core/Window
   engine/ScriptedEngine
+  engine/TestEngine
   graphics/Camera
   graphics/Mesh
   graphics/Node
