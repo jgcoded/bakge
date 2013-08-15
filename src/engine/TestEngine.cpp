@@ -204,4 +204,28 @@ void TestEngine::SetShutDownCallback(GenericCallback Callback)
 	ShutDownCB = Callback;
 }
 
+
+void TestEngine::SetUpdateCallback(UpdateCallback Callback)
+{
+	UpdateCB = Callback;
+}
+
+
+void TestEngine::SetPreRenderCallback(GenericCallback Callback)
+{
+	PreRenderCB = Callback;
+}
+
+
+void TestEngine::SetRenderCallback(GenericCallback Callback)
+{
+	RenderCB = Callback;
+}
+
+
+void TestEngine::SetPostRenderCallback(GenericCallback Callback)
+{
+	PostRenderCB = Callback;
+}
+
 } /* bakge */
