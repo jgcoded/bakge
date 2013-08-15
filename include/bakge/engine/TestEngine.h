@@ -30,6 +30,19 @@
 namespace bakge
 {
 
+/* * 
+ * A Generic Callback does not take a parameter.
+ * It is used for Initialize, Shutdown, Pre/On/Post
+ * RenderStage, etc.
+ * */
+typedef void (*GenericCallback)(void*);
+
+typedef void (*UpdateCallback)(Seconds DeltaTime);
+typedef void (*KeyEventCallback)(KeyID K, KeyState S, ScanCode C, ModField M);
+typedef void (*MouseEventCallback)(ButtonID B, ButtonState S, ModField M);
+typedef void (*MotionEventCallback)(DeviceMotion X, DeviceMotion Y);
+typedef void (*ScrollEventCallback)(DeviceMotion X, DeviceMotion Y);
+
 class BGE_API TestEngine : public Engine, public EventHandler
 {
 
@@ -75,11 +88,12 @@ class BGE_API TestEngine : public Engine, public EventHandler
     /* Called just before the window is closed */
     Result CloseEvent();
 
+    Window* EngineWindow;
+
 public:
 
     TestEngine();
     ~TestEngine();
-
 
 }; /* TestEngine */
 
