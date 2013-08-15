@@ -1,7 +1,7 @@
 Bakge
 =====
 
-BAKersfield Game Engine. Supports 2D and 3D games. Provides both an SDK and its own official engine application class; programmers can create their own customized engine using Bakge's core components or use the existing toolset and application to create a game at the highest level.
+BAKersfield Game Engine. Bakge is a partial abstraction over OpenGL and its libraries, intended to simplify programmatic approaches to game and engine development, but comes with its own development kit and engine for creating games using Lua.
 
 Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file. Note that copyright holders include any and all contributors or authors. If you'd like your name left out, don't write your name into the AUTHORS file.
 
