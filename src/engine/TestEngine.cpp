@@ -36,4 +36,26 @@ TestEngine::~TestEngine()
 {
 }
 
+
+Result TestEngine::Initialize()
+{
+
+	EngineWindow = Window::Create(600, 400);
+	if(EngineWindow == NULL)
+		return BGE_FAILURE;
+
+	glClearColor(0, 0.3f, 0.5f, 1);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(50.0, 1.5, 0.1, 500.0);
+
+    EngineWindow->SetEventHandler(this);
+    EngineWindow->Bind();
+
+    if(InitCB != NULL)
+    	InitCB();
+}
+
 } /* bakge */
