@@ -51,9 +51,12 @@ class BGE_API ShaderProgram : public Bindable
 
     static Shader* VertexShaderLib;
     static Shader* FragmentShaderLib;
+
     static Shader* GenericVertexShader;
     static Shader* GenericFragmentShader;
+    static ShaderProgram* GenericShader;
 
+    /* Shaders attached to the program */
     Shader* VertexShader;
     Shader* FragmentShader;
 

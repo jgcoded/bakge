@@ -27,6 +27,7 @@
 namespace bakge
 {
 
+ShaderProgram* ShaderProgram::GenericShader = NULL;
 Shader* ShaderProgram::GenericVertexShader = NULL;
 Shader* ShaderProgram::GenericFragmentShader = NULL;
 Shader* ShaderProgram::VertexShaderLib = NULL;
@@ -50,7 +51,7 @@ const char* VertexShaderLibSource =
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
     "\n"
-    "vec4 VertexShaderLib()\n"
+    "vec4 bgeWorldTransform()\n"
     "{\n"
     "    mat4x4 bge_ModelMatrix = bge_Crowd * bge_Model;\n"
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
@@ -62,11 +63,11 @@ const char* VertexShaderLibSource =
 const char* GenericVertexShaderSource =
     "#version 120\n"
     "\n"
-    "vec4 VertexShaderLib();\n"
+    "vec4 bgeWorldTransform();\n"
     "\n"
     "void main()\n"
     "{\n"
-    "    gl_Position = VertexShaderLib();\n"
+    "    gl_Position = bgeWorldTransform();\n"
     "}\n"
     "\n";
 
@@ -128,12 +129,18 @@ Result ShaderProgram::InitShaderLibrary()
     if(FragmentShaderLib == NULL)
         return BGE_FAILURE;
 
+    GenericShader = ShaderProgram::Create(GenericVertexShader,
+                                        GenericFragmentShader);
+    if(GenericShader == NULL)
+        return BGE_FAILURE;
+
     return BGE_SUCCESS;
 }
 
 
 Result ShaderProgram::DeinitShaderLibrary()
 {
+    delete GenericShader;
     delete GenericVertexShader;
     delete GenericFragmentShader;
     delete VertexShaderLib;
@@ -156,6 +163,7 @@ ShaderProgram::~ShaderProgram()
         glDetachShader(ProgramHandle, VertexShader->GetHandle());
         glDetachShader(ProgramHandle, FragmentShader->GetHandle());
         glDetachShader(ProgramHandle, VertexShaderLib->GetHandle());
+        glDetachShader(ProgramHandle, FragmentShaderLib->GetHandle());
         glDeleteProgram(ProgramHandle);
     }
 }
@@ -163,10 +171,7 @@ ShaderProgram::~ShaderProgram()
 
 ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
 {
-    ShaderProgram* Program;
-    GLuint Handle;
-
-    Program = new ShaderProgram;
+    ShaderProgram* Program = new ShaderProgram;
 
     Program->ProgramHandle = glCreateProgram();
     if(Program->ProgramHandle == 0) {
@@ -176,29 +181,17 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
     }
 
     /* Alias for shader program's handle, for convenience */
-    Handle = Program->ProgramHandle;
+    GLuint Handle = Program->ProgramHandle;
 
     /* Attach library shaders */
     glAttachShader(Handle, VertexShaderLib->GetHandle());
     glAttachShader(Handle, FragmentShaderLib->GetHandle());
 
-    /* If user passes NULL to vertex shader arg, use default generic one */
-    if(Vertex == NULL) {
-        glAttachShader(Handle, GenericVertexShader->GetHandle());
-        Program->VertexShader = GenericVertexShader;
-    } else {
-        glAttachShader(Handle, Vertex->GetHandle());
-        Program->VertexShader = Vertex;
-    }
-
-    /* If user passes NULL to fragment shader arg, use default generic one */
-    if(Fragment == NULL) {
-        glAttachShader(Handle, GenericFragmentShader->GetHandle());
-        Program->FragmentShader = GenericFragmentShader;
-    } else {
-        glAttachShader(Handle, Fragment->GetHandle());
-        Program->FragmentShader = Fragment;
-    }
+    /* Attach user's shaders */
+    glAttachShader(Handle, Vertex->GetHandle());
+    glAttachShader(Handle, Fragment->GetHandle());
+    Program->VertexShader = Vertex;
+    Program->FragmentShader = Fragment;
 
     /* Now link the shader program and bind it as active */
     glLinkProgram(Handle);
@@ -229,8 +222,7 @@ Result ShaderProgram::Bind() const
 
 Result ShaderProgram::Unbind() const
 {
-    glUseProgram(0);
-    return BGE_SUCCESS;
+    return GenericShader->Bind();
 }
 
 } /* bakge */
