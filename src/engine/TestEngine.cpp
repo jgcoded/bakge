@@ -165,4 +165,22 @@ Result TestEngine::MouseEvent(ButtonID B, ButtonState S, ModField M)
 	return BGE_FAILURE;
 }
 
+
+Result TestEngine::MotionEvent(DeviceMotion X, DeviceMotion Y)
+{
+	if(MotionEventCB != NULL)
+		MotionEventCB(X, Y);
+
+	return BGE_FAILURE;
+}
+
+
+Result TestEngine::ScrollEvent(DeviceMotion X, DeviceMotion Y)
+{
+	if(ScrollEventCB != NULL)
+		ScrollEventCB(X, Y);
+
+	return BGE_FAILURE;
+}
+
 } /* bakge */
