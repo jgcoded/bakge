@@ -51,7 +51,7 @@ Result TestEngine::Initialize()
     glLoadIdentity();
     gluPerspective(50.0, 1.5, 0.1, 500.0);
 
-    EngineWindow->SetEventHandler(this);
+    EngineWindow->SetEventHandler(&this);
     EngineWindow->Bind();
 
     if(InitCB != NULL)
@@ -69,7 +69,48 @@ Result TestEngine::ShutDown()
 
 	if(ShutDownCB != NULL)
 		ShutDownCB();
+}
 
+
+int TestEngine::Run()
+{
+
+	int ExitCode;
+
+	while(1)
+	{
+
+		Window::PollEvents();
+
+		if(EngineWindow->IsOpen() == false) {
+
+			ExitCode = 0;
+
+			if(CloseEventCB != NULL)
+				CloseEventCB();
+
+			break;
+		}
+
+
+		Update(0);
+		if(UpdateCB != NULL)
+			UpdateCB();
+
+		PreRenderStage();
+		if(PreRenderCB != NULL)
+			PreRenderCB();
+
+		RenderStage();
+		if(RenderCB != NULL)
+			RenderCB();
+
+		PostRenderStage();
+		if(PostRenderCB != NULL)
+			PostRenderCB();
+	}
+
+	return ExitCode;
 }
 
 } /* bakge */
