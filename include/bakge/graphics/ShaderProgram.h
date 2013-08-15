@@ -54,7 +54,10 @@ class BGE_API ShaderProgram : public Bindable
 
     static Shader* GenericVertexShader;
     static Shader* GenericFragmentShader;
+
     static ShaderProgram* GenericShader;
+    /* When a new window is created, GenericShader must be bound internally */
+    friend Window* Window::Create(int, int);
 
     /* Shaders attached to the program */
     Shader* VertexShader;

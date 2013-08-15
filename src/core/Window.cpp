@@ -181,6 +181,9 @@ Window* Window::Create(int Width, int Height)
     Win->WindowHandle = Handle;
     Win->Bind();
 
+    /* Bind default shader to new window's context */
+    ShaderProgram::GenericShader->Bind();
+
     /* *
      * Store pointer to Bakge window so global callbacks can access it.
      * They are static Window class methods, so they have full access
