@@ -90,7 +90,6 @@
 
 /* Required extensions to run Bakge */
 #define VERTEX_BUFFER_OBJECT_EXT "GL_ARB_vertex_buffer_object"
-#define UNIFORM_BUFFER_OBJECT_EXT "GL_ARB_uniform_buffer_object"
 
 /* Include external library headers */
 #include <GL/glew.h>
