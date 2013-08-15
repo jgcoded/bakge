@@ -183,4 +183,13 @@ Result TestEngine::ScrollEvent(DeviceMotion X, DeviceMotion Y)
 	return BGE_FAILURE;
 }
 
+
+Result TestEngine::CloseEvent()
+{
+	if(CloseEventCB != NULL)
+		return CloseEventCB();
+
+	return BGE_FAILURE;
+}
+
 } /* bakge */
