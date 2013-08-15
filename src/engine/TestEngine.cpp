@@ -113,4 +113,38 @@ int TestEngine::Run()
 	return ExitCode;
 }
 
+
+Result TestEngine::Update(Seconds DeltaTime)
+{
+	/* Reserved for future logic */
+	return BGE_SUCCESS;
+}
+
+
+Result TestEngine::PreRenderStage()
+{
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
+	return BGE_SUCCESS;
+}
+
+
+Result TestEngine::RenderStage()
+{
+	/* Reserved for future logic */
+	return BGE_SUCCESS;
+}
+
+
+Result TestEngine::PostRenderStage()
+{
+
+	glMatrixMode(GL_PROJECTION);
+	EngineWindow->SwapBuffers();
+	return BGE_SUCCESS;
+}
+
 } /* bakge */
