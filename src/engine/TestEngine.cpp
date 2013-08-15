@@ -147,4 +147,22 @@ Result TestEngine::PostRenderStage()
 	return BGE_SUCCESS;
 }
 
+
+Result TestEngine::KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M)
+{
+	if(KeyEventCB != NULL)
+		return KeyEventCB(K, S, C, M);
+
+	return BGE_FAILURE;
+}
+
+
+Result TestEngine::MouseEvent(ButtonID B, ButtonState S, ModField M)
+{
+	if(MouseEventCB != NULL)
+		return MouseEventCB(B, S, M);
+
+	return BGE_FAILURE;
+}
+
 } /* bakge */
