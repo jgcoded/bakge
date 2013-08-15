@@ -33,10 +33,53 @@ namespace bakge
 class BGE_API TestEngine : public Engine, public EventHandler
 {
 
+    /* *
+     * Internal engine logic is private. TestEngine will provide
+     * callbacks to the user so that different parts of his/her
+     * code can be ran independent of the functionality of the
+     * entire engine.
+     *
+     * All callbacks that are provided to TestEngine will be invoked
+     * after TestEngine's internal logic has executed. If a callback
+     * a certain callback is not provided, TestEngine will continue
+     * running as if the callback did not exist. The idea is that
+     * now the user is able to focus on the parts of the code that
+     * require testing, without needing to write unrelated code.
+     *
+     * Input callbacks can be subscribed to by the user by setting
+     * a callback.
+     * */
+
+    /* Initialize/Clean up components */
+    Result Initialize();
+    Result ShutDown();
+
+    /* Run will have no callback */
+    int Run();
+
+    Result Update(Seconds DeltaTime);
+
+    Result PreRenderStage();
+    Result RenderStage();
+    Result PostRenderStage();
+
+    /* Input callbacks */
+    /* Key press/release and mouse button click/release events */
+    Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M);
+    Result MouseEvent(ButtonID B, ButtonState S, ModField M);
+
+    /* Relative device motion events */
+    Result MotionEvent(DeviceMotion X, DeviceMotion Y);
+    Result ScrollEvent(DeviceMotion X, DeviceMotion Y);
+
+    /* Called just before the window is closed */
+    Result CloseEvent();
+
 public:
-    
+
     TestEngine();
     ~TestEngine();
+
 
 }; /* TestEngine */
 
