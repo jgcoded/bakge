@@ -56,6 +56,20 @@ Result TestEngine::Initialize()
 
     if(InitCB != NULL)
     	InitCB();
+
+    return BGE_SUCCESS;
+}
+
+
+Result TestEngine::ShutDown()
+{
+
+	EngineWindow->Unbind();
+	delete EngineWindow;
+
+	if(ShutDownCB != NULL)
+		ShutDownCB();
+
 }
 
 } /* bakge */
