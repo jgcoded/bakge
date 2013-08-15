@@ -159,6 +159,5 @@ extern "C"
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
 #include <bakge/engine/ScriptedEngine.h>
-#include <bakge/engine/TestEngine.h>
 
 #endif /* BAKGE_BAKGE_H */
