@@ -35,13 +35,13 @@ namespace bakge
  * It is used for Initialize, Shutdown, Pre/On/Post
  * RenderStage, etc.
  * */
-typedef void (*GenericCallback)(void*);
+typedef Result (*GenericCallback)(void*);
 
-typedef void (*UpdateCallback)(Seconds DeltaTime);
-typedef void (*KeyEventCallback)(KeyID K, KeyState S, ScanCode C, ModField M);
-typedef void (*MouseEventCallback)(ButtonID B, ButtonState S, ModField M);
-typedef void (*MotionEventCallback)(DeviceMotion X, DeviceMotion Y);
-typedef void (*ScrollEventCallback)(DeviceMotion X, DeviceMotion Y);
+typedef Result (*UpdateCallback)(Seconds DeltaTime);
+typedef Result (*KeyEventCallback)(KeyID K, KeyState S, ScanCode C, ModField M);
+typedef Result (*MouseEventCallback)(ButtonID B, ButtonState S, ModField M);
+typedef Result (*MotionEventCallback)(DeviceMotion X, DeviceMotion Y);
+typedef Result (*ScrollEventCallback)(DeviceMotion X, DeviceMotion Y);
 
 class BGE_API TestEngine : public Engine, public EventHandler
 {
@@ -94,6 +94,21 @@ public:
 
     TestEngine();
     ~TestEngine();
+
+    void SetInitializeCallback(GenericCallback Callback);
+    void SetShutDownCallback(GenericCallback Callback);
+
+    void SetUpdateCallback(UpdateCallback Callback);
+
+    void SetPreRenderCallback(GenericCallback Callback);
+    void SetRenderCallback(GenericCallback Callback);
+    void SetPostRenderCallback(GenericCallback Callback);
+
+    void SetKeyEventCallback(KeyEventCallback Callback);
+    void SetMouseEventCallback(MouseEventCallback Callback);
+    void SetMotionEventCallback(MotionEventCallback Callback);
+    void ScrollEventCallback(ScrollEventCallback Callback);
+    void SetCloseEventCallback(GenericCallback Callback);
 
 }; /* TestEngine */
 
