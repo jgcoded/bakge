@@ -18,7 +18,7 @@ configure_file(${BAKGE_SOURCE_DIR}/cmake/BuildPhysFS.cmake
 add_subdirectory(physfs-2.0.3)
 
 # OpenAL thinks CMAKE_SOURCE_DIR is its root dir. Trick it!
-set(CMAKE_SOURCE_DIR ${BAKGE_SOURCE_DIR}/lib/openal-1.13)
+set(CMAKE_SOURCE_DIR ${BAKGE_SOURCE_DIR}/lib/openal-1.15.1)
 add_subdirectory(${OPENAL_TARGET})
 set(CMAKE_SOURCE_DIR ${BAKGE_SOURCE_DIR})
 
