@@ -78,11 +78,11 @@ class BGE_API TestEngine : public Engine, public EventHandler
         glLoadIdentity();
         gluPerspective(50.0, 1.5, 0.1, 500.0);
 
-        EngineWindow->SetEventHandler(&this);
+        EngineWindow->SetEventHandler(this);
         EngineWindow->Bind();
 
         if(InitCB != NULL)
-            InitCB();
+            InitCB(0);
 
         return BGE_SUCCESS;
     }
@@ -95,7 +95,7 @@ class BGE_API TestEngine : public Engine, public EventHandler
         delete EngineWindow;
 
         if(ShutDownCB != NULL)
-            ShutDownCB();
+            ShutDownCB(0);
     }
 
     /* Run will have no callback */
@@ -113,7 +113,7 @@ class BGE_API TestEngine : public Engine, public EventHandler
                 ExitCode = 0;
 
                 if(CloseEventCB != NULL)
-                    CloseEventCB();
+                    CloseEventCB(0);
 
                 break;
             }
@@ -121,19 +121,19 @@ class BGE_API TestEngine : public Engine, public EventHandler
 
             Update(0);
             if(UpdateCB != NULL)
-                UpdateCB();
+                UpdateCB(0);
 
             PreRenderStage();
             if(PreRenderCB != NULL)
-                PreRenderCB();
+                PreRenderCB(0);
 
             RenderStage();
             if(RenderCB != NULL)
-                RenderCB();
+                RenderCB(0);
 
             PostRenderStage();
             if(PostRenderCB != NULL)
-                PostRenderCB();
+                PostRenderCB(0);
         }
 
         return ExitCode;
@@ -212,7 +212,7 @@ class BGE_API TestEngine : public Engine, public EventHandler
     Result CloseEvent()
     {
         if(CloseEventCB != NULL)
-            return CloseEventCB();
+            return CloseEventCB(0);
 
         return BGE_FAILURE;
     }
