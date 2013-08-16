@@ -246,6 +246,20 @@ public:
     }
 
 
+    void StartEngine()
+    {
+        Initialize();
+        Run();
+    }
+
+
+    void StopEngine()
+    {
+        EngineWindow->Close();
+        ShutDown();
+    }
+
+
     void SetInitializeCallback(GenericCallback Callback)
     {
         InitCB = Callback;
