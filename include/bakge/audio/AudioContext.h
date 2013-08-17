@@ -32,6 +32,9 @@ namespace bakge
 
 class BGE_API AudioContext : public Bindable
 {
+    ALCdevice* Device;
+    ALCcontext* Context;
+
 
 protected:
 

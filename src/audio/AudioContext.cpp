@@ -29,17 +29,40 @@ namespace bakge
 
 AudioContext::AudioContext()
 {
+    Device = NULL;
+    Context = NULL;
 }
 
 
 AudioContext::~AudioContext()
 {
+    if(Context != NULL)
+        alcDestroyContext(Context);
+
+    if(Device != NULL)
+        alcCloseDevice(Device);
 }
 
 
 AudioContext* AudioContext::Create()
 {
-    return NULL;
+    AudioContext* AC = new AudioContext;
+
+    AC->Device = alcOpenDevice(NULL);
+    if(AC->Device == NULL) {
+        printf("Error creating OpenAL device\n");
+        delete AC;
+        return NULL;
+    }
+
+    Context = alcCreateContext(AC->Device, NULL);
+    if(AC->Context == NULL) {
+        printf("Error creating OpenAL context\n");
+        delete AC;
+        return NULL;
+    }
+
+    return AC;
 }
 
 } /* bakge */
