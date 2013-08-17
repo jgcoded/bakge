@@ -11,6 +11,7 @@ set(MODULES
   api/Mutex
   api/Socket
   api/Thread
+  audio/AudioContext
   data/File
   core/Bindable
   core/Drawable

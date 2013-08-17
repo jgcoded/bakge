@@ -102,6 +102,9 @@ extern "C"
 #include <lua/lauxlib.h>
 }
 #include <physfs/physfs.h>
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/alext.h>
 
 /* Include other external libraries */
 #define STBI_HEADER_FILE_ONLY
@@ -156,6 +159,9 @@ extern "C"
 #include <bakge/math/Vector4.h>
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
+
+/* Audio classes */
+#include <bakge/audio/AudioContext.h>
 
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>

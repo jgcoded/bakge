@@ -39,9 +39,11 @@ set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 # Note: Lua has a special build and headers copy
 set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
 set(BAKGE_GLEW_PATH ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0)
+set(BAKGE_OPENAL_PATH ${BAKGE_SOURCE_DIR}/lib/openal-1.15.1)
 set(BAKGE_PHYSFS_PATH ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_OPENAL_PATH}/include)
 
 # Don't append BAKGE_PHYSFS_PATH to BAKGE_INCLUDE_DIRECTORIES
 # We need to copy the headers over manually below, there is no
@@ -151,6 +153,7 @@ if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
   set(BAKGE_GLFW_TARGET glfw)
+  set(BAKGE_OPENAL_TARGET OpenAL32)
 
   set(BAKGE_LIBRARIES
     ${BAKGE_GLEW_TARGET}
@@ -159,6 +162,7 @@ if(WIN32)
     winmm.lib
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
+    ${BAKGE_OPENAL_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
