@@ -32,7 +32,6 @@ Mesh::Mesh()
     NumVertices = 0;
     NumFaces = 0;
     NumIndices = 0;
-    MeshVAO = 0;
     MeshBuffers[0] = 0;
 }
 
@@ -47,9 +46,6 @@ Result Mesh::Bind() const
 {
     Result Errors = BGE_SUCCESS;
 
-    if(BindVAO() == BGE_FAILURE)
-        Errors = BGE_FAILURE;
-
     if(BindBuffers() == BGE_FAILURE)
         Errors = BGE_FAILURE;
 
@@ -60,21 +56,6 @@ Result Mesh::Bind() const
 Result Mesh::Unbind() const
 {
     glBindVertexArray(0);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::BindVAO() const
-{
-#ifdef _DEBUG
-    if(MeshVAO == 0) {
-        printf("Invalid vertex array object\n");
-        return BGE_FAILURE;
-    }
-#endif /* _DEBUG */
-
-    glBindVertexArray(MeshVAO);
 
     return BGE_SUCCESS;
 }
@@ -127,6 +108,8 @@ Result Mesh::BindBuffers() const
     glEnableVertexAttribArray(NormalsAttrib);
     glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
+
     return BGE_SUCCESS;
 }
 
@@ -135,17 +118,6 @@ Result Mesh::CreateBuffers()
 {
     /* If data already exists clear it */
     ClearBuffers();
-
-    glGenVertexArrays(1, &MeshVAO);
-
-#ifdef _DEBUG
-    if(MeshVAO == 0) {
-        printf("Error creating vertex array object\n");
-        return BGE_FAILURE;
-    }
-#endif /* _DEBUG */
-
-    glBindVertexArray(MeshVAO);
 
     glGenBuffers(NUM_MESH_BUFFERS, MeshBuffers);
 
@@ -178,11 +150,6 @@ Result Mesh::CreateBuffers()
 
 Result Mesh::ClearBuffers()
 {
-    if(MeshVAO != 0) {
-        glDeleteVertexArrays(1, &MeshVAO);
-        MeshVAO = 0;
-    }
-
     if(MeshBuffers[0] != 0) {
         glDeleteBuffers(NUM_MESH_BUFFERS, MeshBuffers);
         MeshBuffers[0] = 0;
