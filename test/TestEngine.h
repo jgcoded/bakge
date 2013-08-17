@@ -95,7 +95,9 @@ class TestEngine : public Engine, public EventHandler
         delete EngineWindow;
 
         if(ShutDownCB != NULL)
-            ShutDownCB(0);
+            return ShutDownCB(0);
+
+        return BGE_FAILURE;
     }
 
     /* Run will have no callback */
