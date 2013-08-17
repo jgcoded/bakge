@@ -240,6 +240,17 @@ public:
 
     TestEngine()
     {
+        InitCB = NULL;
+        ShutDownCB = NULL;
+        UpdateCB = NULL;
+        PreRenderCB = NULL;
+        RenderCB = NULL;
+        PostRenderCB = NULL;
+        KeyEventCB = NULL;
+        MouseEventCB = NULL;
+        MotionEventCB = NULL;
+        ScrollEventCB = NULL;
+        CloseEventCB = NULL;
     }
 
 
