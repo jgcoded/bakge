@@ -43,7 +43,7 @@ typedef Result (*MouseEventCallback)(ButtonID B, ButtonState S, ModField M);
 typedef Result (*MotionEventCallback)(DeviceMotion X, DeviceMotion Y);
 typedef Result (*ScrollEventCallback)(DeviceMotion X, DeviceMotion Y);
 
-class BGE_API TestEngine : public Engine, public EventHandler
+class TestEngine : public Engine, public EventHandler
 {
 
     /* *
