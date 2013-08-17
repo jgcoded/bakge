@@ -85,8 +85,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 36,
                                             Indices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    C->Unbind();
 
     C->SetPosition(0, 0, 0);
 
