@@ -73,7 +73,7 @@ Result Shape::Bind() const
     if(Mesh::Bind() == BGE_FAILURE)
         Errors = BGE_FAILURE;
 
-     return Errors;
+    return Errors;
 }
 
 
