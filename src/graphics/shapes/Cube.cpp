@@ -73,9 +73,6 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
         return NULL;
     }
 
-    /* Now rebind the VAO and set the normals, texcoords and indices buffers */
-    C->BindVAO();
-
     glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 72, Normals,
                                                         GL_STATIC_DRAW);
@@ -88,7 +85,8 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 36,
                                             Indices, GL_STATIC_DRAW);
 
-    C->Unbind();
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     C->SetPosition(0, 0, 0);
 
@@ -109,9 +107,6 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
         Z = Dimensions[2];
 
     Dimensions = Vector4(X, Y, Z, 0);
-
-    /* So following changes affect our cube's VAO */
-    BindVAO();
 
     glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
     glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
