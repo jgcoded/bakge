@@ -30,7 +30,6 @@ int main(int argc, char* argv[])
 {
     bakge::Window* Win;
     bakge::Cube* Obj;
-    bakge::ShaderProgram* PlainShader;
     bakge::Texture* Tex;
     bakge::Pawn* It;
 
@@ -39,8 +38,6 @@ int main(int argc, char* argv[])
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
     memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
-
-    PlainShader = bakge::ShaderProgram::Create(NULL, NULL);
 
     Win = bakge::Window::Create(600, 400);
     if(Win == NULL) {
@@ -79,8 +76,6 @@ int main(int argc, char* argv[])
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
     It->SetPosition(0, 0, 0);
-
-    PlainShader->Bind();
 
     bakge::Matrix Perspective;
     bakge::Matrix View;
@@ -141,9 +136,6 @@ int main(int argc, char* argv[])
 
     if(Obj != NULL)
         delete Obj;
-
-    if(PlainShader != NULL)
-        delete PlainShader;
 
     if(Tex != NULL)
         delete Tex;
