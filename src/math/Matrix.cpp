@@ -26,6 +26,7 @@
 
 /* SSE and SSE2 instructions headers */
 #include <mmintrin.h>
+#include <xmmintrin.h>
 #include <emmintrin.h>
 
 namespace bakge
