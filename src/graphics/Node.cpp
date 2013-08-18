@@ -63,7 +63,7 @@ Result Node::Bind() const
     for(int i=0;i<4;++i) {
         glEnableVertexAttribArray(Location + i);
         glVertexAttribPointer(Location + i, 4, GL_FLOAT, GL_FALSE, 0,
-                                (const GLvoid*)(sizeof(Position[0]) * 4 * i));
+                            (const GLvoid*)(sizeof(Scalar) * 4 * i));
         /* So the attribute is updated per instance, not per vertex */
         glVertexAttribDivisor(Location + i, 1);
     }
