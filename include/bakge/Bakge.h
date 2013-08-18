@@ -32,11 +32,6 @@
 #include <time.h>
 #include <math.h>
 
-/* SSE and SSE2 instructions headers */
-#include <mmintrin.h>
-#include <xmmintrin.h>
-#include <emmintrin.h>
-
 /* GCC & Clang attributes */
 #if defined __GNUC__ || defined __clang__ || defined __MINGW__
 /* Send compiler warning if function return result is not used */
