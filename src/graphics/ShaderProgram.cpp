@@ -206,15 +206,21 @@ Result ShaderProgram::Bind() const
 {
     glUseProgram(ProgramHandle);
 
-    GLint DiffuseLocation;
+    GLint Location;
 
-    DiffuseLocation = glGetUniformLocation(ProgramHandle, BGE_DIFFUSE_UNIFORM);
-    if(DiffuseLocation < 0) {
+    Location = glGetUniformLocation(ProgramHandle, BGE_DIFFUSE_UNIFORM);
+    if(Location < 0) {
         printf("Invalid uniform requested\n");
         return BGE_FAILURE;
     }
 
-    glUniform1i(DiffuseLocation, 0);
+    glUniform1i(Location, 0);
+
+    Location = glGetUniformLocation(ProgramHandle, BGE_CROWD_UNIFORM);
+    if(Location < 0)
+        return BGE_FAILURE;
+
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
     return BGE_SUCCESS;
 }
