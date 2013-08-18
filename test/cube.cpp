@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 
 
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
-    It = new bakge::Pawn;
+    It = bakge::Pawn::Create();
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
     It->SetPosition(0, 0, 0);

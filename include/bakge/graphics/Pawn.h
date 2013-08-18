@@ -33,10 +33,16 @@ namespace bakge
 class BGE_API Pawn : public Node
 {
 
-public:
+protected:
 
     Pawn();
+
+
+public:
+
     virtual ~Pawn();
+
+    BGE_FACTORY Pawn* Create();
 
     virtual Result Bind() const;
     virtual Result Unbind() const;
