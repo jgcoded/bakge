@@ -22,6 +22,10 @@
  * THE SOFTWARE.
  * */
 
+ /* SSE and SSE2 instructions headers */
+#include <mmintrin.h>
+#include <emmintrin.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <bakge/Bakge.h>

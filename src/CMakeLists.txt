@@ -65,6 +65,7 @@ endforeach(module)
 
 if(UNIX AND NOT APPLE)
   set(PLATFORM_PREFIX "x11")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -msse -msse2 -march=native -mfpmath='sse'")
 endif()
 
 if(UNIX AND APPLE)
