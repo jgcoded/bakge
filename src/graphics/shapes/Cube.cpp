@@ -193,16 +193,16 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
      * e.g. A corresponds to vertices A+Z, A-Y and A-X
      *
      * Texcoords
-     * Z and X faces: When the face normal is pointing towards you and
+     *
+     * X face: When the face normal is pointing towards you and
      * the Y axis pointing up, texcoords are as follows
      *    BL 0, 0    BR 1, 0
      *    TL 0, 1    TR 1, 1
      *
-     *  e.g. +Z face:
-     *        A 0, 0
-     *        B 1, 0
-     *        D 0, 1
-     *        C 1, 1
+     * Z face: Same as X face, but mirrored across the t axis
+     *    BL 1, 0    BR 0, 0
+     *    TL 1, 1    TR 0, 1
+     *
      *
      * Y faces:
      *   +Y:
