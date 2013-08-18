@@ -113,6 +113,7 @@ if(UNIX AND NOT APPLE)
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
+    Xxf86vm
     Xrandr
     Xi
     pthread
