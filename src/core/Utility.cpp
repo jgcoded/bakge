@@ -77,6 +77,9 @@ Result Init(int argc, char* argv[])
     if(ShaderProgram::InitShaderLibrary() != BGE_SUCCESS)
         return BGE_FAILURE;
 
+    printf("Bakersfield Game Engine v%d.%d.%d\n", BGE_VER_MAJ, BGE_VER_MIN,
+                                                                BGE_VER_REV);
+
     SystemInfo();
 
     return BGE_SUCCESS;
