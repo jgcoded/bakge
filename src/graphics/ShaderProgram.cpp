@@ -40,8 +40,7 @@ const char* bgeWorldTransformSource =
     "uniform mat4x4 bge_Scale;\n"
     "uniform mat4x4 bge_Perspective;\n"
     "uniform mat4x4 bge_View;\n"
-    "\n"
-<<<<<<< HEAD
++
     "attribute vec4 bge_Vertex;\n"
     "attribute vec4 bge_Normal;\n"
     "\n"
@@ -61,13 +60,6 @@ const char* bgeWorldTransformSource =
     "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
     "    return (bge_Perspective * bge_View * bge_Model) * bge_Vertex;\n"
-=======
-    "attribute vec4 bge_VertexArray;\n"
-    "\n"
-    "vec4 bgeWorldTransform()\n"
-    "{\n"
-    "    return (bge_Perspective * bge_View) * bge_VertexArray;\n"
->>>>>>> 36805c3f0e2e38c518a7a828cc3129774b68363b
     "}\n"
     "\n";
 
@@ -106,11 +98,9 @@ const char* GenericFragmentShaderSource =
     "\n"
     "void main()\n"
     "{\n"
-<<<<<<< HEAD
-    "    gl_FragColor = bgeColor();\n"
-=======
+
     "    gl_FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
->>>>>>> 36805c3f0e2e38c518a7a828cc3129774b68363b
+
     "}\n"
     "\n";
 
