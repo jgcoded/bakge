@@ -39,9 +39,6 @@ bakge::Result InitTest(void*)
     printf("Initializing ShapesTest\n");
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
 
-    PlainShader = bakge::ShaderProgram::Create(NULL, NULL);
-    PlainShader->Bind();
-
     glEnable(GL_DEPTH_TEST);
 
     memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);

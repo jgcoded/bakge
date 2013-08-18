@@ -23,6 +23,7 @@ set(TESTS
   quaternion
   rectangle
   server
+  shapestest
   shaderprogram
   sharedcontext
   sphere
