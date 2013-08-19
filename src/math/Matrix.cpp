@@ -71,6 +71,16 @@ Matrix::Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
 }
 
 
+Matrix::Matrix(Vector4 BGE_NCP A, Vector4 BGE_NCP B, Vector4 BGE_NCP C,
+                                                    Vector4 BGE_NCP D)
+{
+    Col[0] = A;
+    Col[1] = B;
+    Col[2] = C;
+    Col[3] = D;
+}
+
+
 Matrix::Matrix(Matrix BGE_NCP Other)
 {
     *this = Other;

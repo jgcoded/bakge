@@ -68,6 +68,8 @@ public:
            Scalar E, Scalar F, Scalar G, Scalar H,
            Scalar I, Scalar J, Scalar K, Scalar L,
            Scalar M, Scalar N, Scalar O, Scalar P);
+    Matrix(Vector4 BGE_NCP A, Vector4 BGE_NCP B, Vector4 BGE_NCP C,
+                                                Vector4 BGE_NCP D);
 
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
