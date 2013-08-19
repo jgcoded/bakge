@@ -27,42 +27,55 @@
  namespace bakge
  {
 
- 	Rectangle::Rectangle()
- 	{
- 	}
+    Rectangle::Rectangle()
+    {
+    }
 
- 	Rectangle::~Rectangle()
- 	{
- 	}
+    Rectangle::~Rectangle()
+    {
+    }
 
- 	Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
- 	{
+    Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
+    {
 
- 		static const Scalar Vertices[] = {
- 			-Width / 2.0f, -Height / 2.0f,
- 			-Width / 2.0f, +Height / 2.0f,
- 			+Width / 2.0f, +Height / 2.0f,
- 			+Width / 2.0f, -Height / 2.0f
- 		};
+        Rectangle* R = new Rectangle;
 
- 		Rectangle* R = new Rectangle;
+        if(R->CreateBuffers() != BGE_SUCCESS) {
+            delete R;
+            return NULL;
+        }
 
- 		if(R->CreateBuffers() != BGE_SUCCESS) {
- 			delete R;
- 			return NULL;
- 		}
+        if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
+            delete R;
+            return NULL;
+        }
 
- 		if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
- 			delete R;
- 			return NULL;
- 		}
+    }
 
+    Result Rectangle::SetDimensions(Scalar X, Scalar Y)
+    {
+        Scalar* Vertices[] = new Vertices[4 * 3];
+    
+        Vertices[0] = -Width / 2.0f;
+        Vertices[1] = -Height / 2.0f;
+        Vertices[2] = 0;
+        Vertices[3] = -Width / 2.0f;
+        Vertices[4] = +Height / 2.0f;
+        Vertices[5] = 0;
+        Vertices[6] = +Width / 2.0f;
+        Vertices[7] = +Height / 2.0f;
+        Vertices[8] = 0;
+        Vertices[9] = +Width / 2.0;
+        Vertices[10] = -Height / 2.0f;
+        Vertices[11] = 0;
 
+        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 12, Vertices,
+                                                            GL_STATIC_DRAW);
+    
+        Unbind()
 
- 	}
-
- 	Result Cube::SetDimensions(Scalar X, Scalar Y)
- 	{
- 	}
+        return BGE_SUCCESS;
+    }
 
  } /* bakge */
