@@ -54,9 +54,10 @@ const char* VertexShaderLibSource =
     "vec4 bgeWorldTransform()\n"
     "{\n"
     "    mat4x4 bge_ModelMatrix = bge_Crowd * bge_Model;\n"
-    "    bge_TransformedNormal = (bge_Perspective * bge_View) * bge_Normal;\n"
+    "    mat4x4 bge_ViewProjectionMatrix = bge_Perspective * bge_View;\n"
+    "    bge_TransformedNormal = bge_ViewProjectionMatrix * vec4(bge_Normal.xyz, 0);\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
-    "    return (bge_Perspective * bge_View * bge_ModelMatrix) * bge_Vertex;\n"
+    "    return bge_ViewProjectionMatrix* bge_ModelMatrix * bge_Vertex;\n"
     "}\n"
     "\n";
 
