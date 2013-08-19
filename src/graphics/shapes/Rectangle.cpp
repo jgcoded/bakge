@@ -39,10 +39,10 @@
  	{
 
  		static const Scalar Vertices[] = {
- 			-Width, -Height,
- 			-Width, +Height,
- 			+Width, +Height,
- 			+Width, -Height
+ 			-Width / 2.0f, -Height / 2.0f,
+ 			-Width / 2.0f, +Height / 2.0f,
+ 			+Width / 2.0f, +Height / 2.0f,
+ 			+Width / 2.0f, -Height / 2.0f
  		};
 
  		Rectangle* R = new Rectangle;
