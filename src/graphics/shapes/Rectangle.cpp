@@ -54,6 +54,10 @@
 
     Result Rectangle::SetDimensions(Scalar X, Scalar Y)
     {
+
+        glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
+        glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
+        
         Scalar* Vertices[] = new Vertices[4 * 3];
     
         Vertices[0] = -Width / 2.0f;
