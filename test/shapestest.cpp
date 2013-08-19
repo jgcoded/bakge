@@ -161,6 +161,8 @@ bakge::Result ShutDownTest()
         delete It;
 
     delete[] Bitmap;
+
+    return BGE_SUCCESS;
 }
 
 
@@ -173,7 +175,7 @@ int main(int argc, char* argv[])
     ShapesTest->SetInitializeCallback(InitTest);
     ShapesTest->SetUpdateCallback(UpdateTest);
     ShapesTest->SetPreRenderCallback(PreRenderTest);
-    ShapesTest->SetPreRenderCallback(RenderTest);
+    ShapesTest->SetRenderCallback(RenderTest);
     ShapesTest->SetPostRenderCallback(PostRenderTest);
     ShapesTest->SetShutDownCallback(ShutDownTest);
 
