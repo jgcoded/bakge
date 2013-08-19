@@ -21,3 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  * */
+
+ #include <bakge/Bakge.h>
+
+ namespace bakge
+ {
+
+ 	Rectangle::Rectangle()
+ 	{
+ 	}
+
+ 	Rectangle::~Rectangle()
+ 	{
+ 	}
+
+ 	Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
+ 	{
+
+ 		static const Scalar Vertices[] = {
+ 			-Width, -Height,
+ 			-Width, +Height,
+ 			+Width, +Height,
+ 			+Width, -Height
+ 		};
+
+ 		Rectangle* R = new Rectangle;
+
+ 		if(R->CreateBuffers() != BGE_SUCCESS) {
+ 			delete R;
+ 			return NULL;
+ 		}
+
+ 		if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
+ 			delete R;
+ 			return NULL;
+ 		}
+
+
+
+ 	}
+
+ 	Result Cube::SetDimensions(Scalar X, Scalar Y)
+ 	{
+ 	}
+
+ } /* bakge */
