@@ -24,10 +24,12 @@
 
 #include <bakge/Bakge.h>
 
+#ifdef BGE_USE_SIMD
 /* SSE and SSE2 instructions headers */
 #include <mmintrin.h>
 #include <xmmintrin.h>
 #include <emmintrin.h>
+#endif /* BGE_USE_SIMD */
 
 namespace bakge
 {
