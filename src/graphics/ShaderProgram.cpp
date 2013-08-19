@@ -84,7 +84,7 @@ const char* FragmentShaderLibSource =
     "{\n"
     "    float ShadeValue = dot(vec4(bge_TransformedNormal.xyz, 0),"
     "                                           vec4(0, 0, 1, 0));\n"
-    "    ShadeValue = pow(max(abs(ShadeValue), 0.1f), 0.15f);\n"
+    "    ShadeValue = pow(max(abs(ShadeValue), 0.1f), 0.65f);\n"
     "    return texture2D(bge_Diffuse, bge_TexCoord0) * ShadeValue;"
     "}\n"
     "\n";
