@@ -38,7 +38,7 @@ float Rot;
 bakge::Microseconds NowTime;
 bakge::Microseconds LastTime;
 
-bakge::Result InitTest(void*)
+bakge::Result InitTest()
 {
     printf("Initializing ShapesTest\n");
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
@@ -82,7 +82,7 @@ bakge::Result InitTest(void*)
 
     It->SetPosition(0, 0, 0);
 
-    GLint ShaderProgram, Location;
+    GLint Location;
 
     Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
     View.SetLookAt(
@@ -100,6 +100,23 @@ bakge::Result InitTest(void*)
 }
 
 
+bakge::Result UpdateTest(bakge::Seconds Delta)
+{
+    NowTime = bakge::GetRunningTime();
+    float DeltaTime = (float)(NowTime - LastTime) / 1000000;
+    LastTime = NowTime;
+
+    Rot += 1.0f * DeltaTime;
+    View.SetLookAt(
+        bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
+        bakge::Point(0.0f, 0, 0.0f),
+        bakge::UnitVector(0, 1, 0)
+    );
+    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+    glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
+}
+
+
 int main(int argc, char* argv[])
 {
     bakge::TestEngine* ShapesTest = new bakge::TestEngine;
@@ -107,6 +124,7 @@ int main(int argc, char* argv[])
     bakge::Init(argc, argv);
 
     ShapesTest->SetInitializeCallback(InitTest);
+    ShapesTest->SetUpdateCallback(UpdateTest);
 
     ShapesTest->StartEngine();
     ShapesTest->StopEngine();

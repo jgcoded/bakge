@@ -35,7 +35,7 @@ namespace bakge
  * It is used for Initialize, Shutdown, Pre/On/Post
  * RenderStage, etc.
  * */
-typedef Result (*GenericCallback)(void*);
+typedef Result (*GenericCallback)();
 
 typedef Result (*UpdateCallback)(Seconds DeltaTime);
 typedef Result (*KeyEventCallback)(KeyID K, KeyState S, ScanCode C, ModField M);
@@ -82,7 +82,7 @@ class TestEngine : public Engine, public EventHandler
         EngineWindow->Bind();
 
         if(InitCB != NULL)
-            InitCB(0);
+            InitCB();
 
         return BGE_SUCCESS;
     }
@@ -95,7 +95,7 @@ class TestEngine : public Engine, public EventHandler
         delete EngineWindow;
 
         if(ShutDownCB != NULL)
-            return ShutDownCB(0);
+            return ShutDownCB();
 
         return BGE_FAILURE;
     }
@@ -115,7 +115,7 @@ class TestEngine : public Engine, public EventHandler
                 ExitCode = 0;
 
                 if(CloseEventCB != NULL)
-                    CloseEventCB(0);
+                    CloseEventCB();
 
                 break;
             }
@@ -127,15 +127,15 @@ class TestEngine : public Engine, public EventHandler
 
             PreRenderStage();
             if(PreRenderCB != NULL)
-                PreRenderCB(0);
+                PreRenderCB();
 
             RenderStage();
             if(RenderCB != NULL)
-                RenderCB(0);
+                RenderCB();
 
             PostRenderStage();
             if(PostRenderCB != NULL)
-                PostRenderCB(0);
+                PostRenderCB();
         }
 
         return ExitCode;
@@ -214,7 +214,7 @@ class TestEngine : public Engine, public EventHandler
     Result CloseEvent()
     {
         if(CloseEventCB != NULL)
-            return CloseEventCB(0);
+            return CloseEventCB();
 
         return BGE_FAILURE;
     }
