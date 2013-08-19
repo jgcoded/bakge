@@ -94,6 +94,7 @@ Matrix Matrix::operator*(Matrix BGE_NCP Other) const
 
 Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
 {
+#ifdef BGE_USE_SIMD
     /* Temp vectors */
     __m128 T1, T2, C1, C2, C3, C4;
 
@@ -153,6 +154,21 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
 
     _mm_store_ps(&Messenger[0], T2);
     Col[3] = Messenger;
+#else
+    Matrix Result;
+    memset((void*)&Result[0], 0, sizeof(Scalar) * 16);
+
+    for(int i=0;i<4;++i) {
+        for(int j=0;j<4;++j) {
+            for(int k=0;k<4;++k) {
+                Result[i*4+k] += Val[i*4+j] * Other.Val[j*4+k];
+            }
+        }
+    }
+
+    for(int i=0;i<16;++i)
+        Val[i] = Result[i];
+#endif /* BGE_USE_SIMD */
 
     return *this;
 }
