@@ -327,7 +327,7 @@ public:
     }
 
 
-    void ScrollEventCallback(ScrollEventCallback Callback)
+    void SetScrollEventCallback(ScrollEventCallback Callback)
     {
         ScrollEventCB = Callback;
     }

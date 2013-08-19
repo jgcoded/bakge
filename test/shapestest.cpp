@@ -28,16 +28,24 @@
 #include "TestEngine.h"
 
 bakge::Cube* Obj;
-bakge::ShaderProgram* PlainShader;
+bakge::Pawn* It;
 bakge::Texture* Tex;
 GLint ShaderProgram;
 bakge::Matrix Perspective;
 bakge::Matrix View;
 
+float Rot;
+bakge::Microseconds NowTime;
+bakge::Microseconds LastTime;
+
 bakge::Result InitTest(void*)
 {
     printf("Initializing ShapesTest\n");
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
+
+    Rot = 0;
+
+    LastTime = bakge::GetRunningTime();
 
     glEnable(GL_DEPTH_TEST);
 
@@ -67,14 +75,14 @@ bakge::Result InitTest(void*)
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                     (void*)Bitmap);
 
-
+    It = bakge::Pawn::Create();
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
 
+    It->SetPosition(0, 0, 0);
 
-
-    GLint Location;
+    GLint ShaderProgram, Location;
 
     Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
     View.SetLookAt(
