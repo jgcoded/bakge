@@ -44,7 +44,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         0, 0, +1.0f
     };
 
-    static const unsigned int Indices[] {
+    static const unsigned int Indices[] = {
         0, 1, 2,
         0, 2, 3
     };
@@ -88,13 +88,13 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 }
 
 
-Result Rectangle::SetDimensions(Scalar X, Scalar Y)
+Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
 
     glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
     glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
 
-    Scalar* Vertices[] = new Vertices[4 * 3];
+    Scalar Vertices[12];
 
     Vertices[0] = -Width / 2.0f;
     Vertices[1] = -Height / 2.0f;
@@ -113,7 +113,7 @@ Result Rectangle::SetDimensions(Scalar X, Scalar Y)
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 12, Vertices,
                                                         GL_STATIC_DRAW);
 
-    Unbind()
+    Unbind();
 
     return BGE_SUCCESS;
 }
