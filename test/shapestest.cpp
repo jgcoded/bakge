@@ -33,6 +33,7 @@ bakge::Texture* Tex;
 GLint ShaderProgram;
 bakge::Matrix Perspective;
 bakge::Matrix View;
+GLubyte* Bitmap;
 
 float Rot;
 bakge::Microseconds NowTime;
@@ -41,7 +42,7 @@ bakge::Microseconds LastTime;
 bakge::Result InitTest()
 {
     printf("Initializing ShapesTest\n");
-    GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
+    Bitmap = new GLubyte[512 * 512 * 3];
 
     Rot = 0;
 
@@ -114,6 +115,50 @@ bakge::Result UpdateTest(bakge::Seconds Delta)
     );
     glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
     glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result PreRenderTest()
+{
+    Tex->Bind();
+    Obj->Bind();
+    It->Bind();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result RenderTest()
+{
+    Obj->Draw();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result PostRenderTest()
+{
+    It->Unbind();
+    Obj->Unbind();
+    Tex->Unbind();
+}
+
+
+bakge::Result ShutDownTest()
+{
+
+    if(Obj != NULL)
+        delete Obj;
+
+    if(Tex != NULL)
+        delete Tex;
+
+    if(It != NULL)
+        delete It;
+
+    delete[] Bitmap;
 }
 
 
@@ -125,9 +170,12 @@ int main(int argc, char* argv[])
 
     ShapesTest->SetInitializeCallback(InitTest);
     ShapesTest->SetUpdateCallback(UpdateTest);
+    ShapesTest->SetPreRenderCallback(PreRenderTest);
+    ShapesTest->SetPreRenderCallback(RenderTest);
+    ShapesTest->SetPostRenderCallback(PostRenderTest);
+    ShapesTest->SetShutDownCallback(ShutDownTest);
 
     ShapesTest->StartEngine();
-    ShapesTest->StopEngine();
 
     delete ShapesTest;
 
