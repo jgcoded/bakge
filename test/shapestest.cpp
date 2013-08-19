@@ -143,6 +143,8 @@ bakge::Result PostRenderTest()
     It->Unbind();
     Obj->Unbind();
     Tex->Unbind();
+
+    return BGE_SUCCESS;
 }
 
 
