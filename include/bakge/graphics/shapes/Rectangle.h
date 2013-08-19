@@ -1,4 +1,4 @@
-* *
+/* *
 * The MIT License (MIT)
 *
 * Copyright (c) 2013 Paul Holden et al. (See AUTHORS)
@@ -32,6 +32,7 @@ namespace bakge
 
 class BGE_API Rectangle : public Shape
 {
+	Vector4 Dimensions;
 
 protected:
 	Rectangle();
@@ -48,7 +49,7 @@ public:
 		return Dimensions;
 	}
 
-} /* Rectangle */ 
+}; /* Rectangle */ 
 
 } /* bakge */
 #endif
