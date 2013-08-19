@@ -9,7 +9,6 @@ endif()
 set(TESTS
   client
   clock
-  cube
   cone
   crowd
   cylinder
