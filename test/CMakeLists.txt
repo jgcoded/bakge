@@ -21,6 +21,7 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  rectangle
   server
   shaderprogram
   sharedcontext
