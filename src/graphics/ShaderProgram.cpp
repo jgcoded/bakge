@@ -159,14 +159,8 @@ ShaderProgram::ShaderProgram()
 
 ShaderProgram::~ShaderProgram()
 {
-    if(ProgramHandle != 0) {
-        /* Detach shaders from our program and delete it */
-        glDetachShader(ProgramHandle, VertexShader->GetHandle());
-        glDetachShader(ProgramHandle, FragmentShader->GetHandle());
-        glDetachShader(ProgramHandle, VertexShaderLib->GetHandle());
-        glDetachShader(ProgramHandle, FragmentShaderLib->GetHandle());
+    if(ProgramHandle != 0)
         glDeleteProgram(ProgramHandle);
-    }
 }
 
 
@@ -191,8 +185,6 @@ ShaderProgram* ShaderProgram::Create(Shader* Vertex, Shader* Fragment)
     /* Attach user's shaders */
     glAttachShader(Handle, Vertex->GetHandle());
     glAttachShader(Handle, Fragment->GetHandle());
-    Program->VertexShader = Vertex;
-    Program->FragmentShader = Fragment;
 
     /* Now link the shader program and bind it as active */
     glLinkProgram(Handle);

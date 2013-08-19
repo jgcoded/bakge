@@ -59,10 +59,6 @@ class BGE_API ShaderProgram : public Bindable
     /* When a new window is created, GenericShader must be bound internally */
     friend Window* Window::Create(int, int);
 
-    /* Shaders attached to the program */
-    Shader* VertexShader;
-    Shader* FragmentShader;
-
     GLuint ProgramHandle;
 
 
