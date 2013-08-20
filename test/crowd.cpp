@@ -79,9 +79,7 @@ int main(int argc, char* argv[])
 #define RRAND (((float)(rand() % 1000) / 1000) * 6.28f)
 #define SRAND (((float)(rand() % 1000) / 1000.0f) + 0.5f)
     for(int i=0;i<CROWD_SIZE;++i) {
-        Group->ScaleMember(i, SRAND, SRAND, SRAND);
         Group->TranslateMember(i, TRAND, TRAND, TRAND);
-        Group->RotateMember(i, bakge::Quaternion::FromEulerAngles(RRAND, RRAND, RRAND));
     }
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
@@ -117,12 +115,16 @@ int main(int argc, char* argv[])
 
         Rot += 1.0f * DeltaTime;
         View.SetLookAt(
-            bakge::Point(1, 0.5f, 0),
+            bakge::Point(0, 0.5f, 1.25f),
             bakge::Point(0.0f, 0, 0.0f),
             bakge::UnitVector(0, 1, 0)
         );
         glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
         glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
+
+        for(int i=0;i<CROWD_SIZE;++i)
+            Group->RotateMember(i, bakge::Quaternion::FromEulerAngles(0,
+                                                        DeltaTime, 0));
 
         Tex->Bind();
         Obj->Bind();
