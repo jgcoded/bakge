@@ -154,7 +154,6 @@ extern "C"
 
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>
-#include <bakge/graphics/ShaderProgram.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
