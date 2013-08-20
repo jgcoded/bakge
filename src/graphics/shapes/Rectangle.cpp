@@ -41,6 +41,9 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 {
 
     static const Scalar Normals[] = {
+        0, 0, +1.0f,
+        0, 0, +1.0f,
+        0, 0, +1.0f,
         0, 0, +1.0f
     };
 
@@ -69,7 +72,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_NORMALS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3, Normals,
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
                                                         GL_STATIC_DRAW);
 
     glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_TEXCOORDS]);
