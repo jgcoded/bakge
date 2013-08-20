@@ -65,8 +65,6 @@ int main(int argc, char* argv[])
         }
     }
 
-    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 3);
-
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                     (void*)Bitmap);
 
