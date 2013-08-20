@@ -57,7 +57,7 @@ bakge::Result InitTest()
         }
     }
 
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE, 
+    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                     (void*)Bitmap);
 
     It = bakge::Pawn::Create();

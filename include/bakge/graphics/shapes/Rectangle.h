@@ -32,24 +32,24 @@ namespace bakge
 
 class BGE_API Rectangle : public Shape
 {
-	Vector4 Dimensions;
+    Vector4 Dimensions;
 
 protected:
-	Rectangle();
+    Rectangle();
 
 public:
-	~Rectangle();
+    ~Rectangle();
 
-	BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
+    BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
 
-	Result SetDimensions(Scalar X, Scalar Y);
+    Result SetDimensions(Scalar X, Scalar Y);
 
-	BGE_INL Vector4 BGE_NCP GetDimensions() const
-	{
-		return Dimensions;
-	}
+    BGE_INL Vector4 BGE_NCP GetDimensions() const
+    {
+        return Dimensions;
+    }
 
-}; /* Rectangle */ 
+}; /* Rectangle */
 
 } /* bakge */
 #endif

@@ -57,7 +57,7 @@ Result Node::Bind() const
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
 
     /* *
-     * Each attribute pointer has a stride of 4. Since mat4x4 are composed 
+     * Each attribute pointer has a stride of 4. Since mat4x4 are composed
      * of 4 vec4 components, set each of these individually
      * */
     for(int i=0;i<4;++i) {
