@@ -182,7 +182,7 @@ Window* Window::Create(int Width, int Height)
     Win->Bind();
 
     /* Bind default shader to new window's context */
-    ShaderProgram::GenericShader->Bind();
+    Shader::GenericShader->Bind();
 
     /* *
      * Store pointer to Bakge window so global callbacks can access it.

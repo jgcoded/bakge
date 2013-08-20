@@ -74,7 +74,7 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
 
     /* Initialize our Bakge shader library */
-    if(ShaderProgram::InitShaderLibrary() != BGE_SUCCESS)
+    if(Shader::InitShaderLibrary() != BGE_SUCCESS)
         return BGE_FAILURE;
 
     printf("Bakersfield Game Engine v%d.%d.%d\n", BGE_VER_MAJ, BGE_VER_MIN,
@@ -93,7 +93,7 @@ Result Deinit()
     /* Run platform-specific deinitialization protocol */
     PlatformDeinit();
 
-    ShaderProgram::DeinitShaderLibrary();
+    Shader::DeinitShaderLibrary();
 
     /* Destroy our shared context window */
     glfwDestroyWindow(Window::SharedContext);

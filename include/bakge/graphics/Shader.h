@@ -27,21 +27,43 @@
 
 #include <bakge/Bakge.h>
 
+#define BGE_VIEW_UNIFORM "bge_View"
+#define BGE_PERSPECTIVE_UNIFORM "bge_Perspective"
+#define BGE_DIFFUSE_UNIFORM "bge_Diffuse"
+#define BGE_CROWD_UNIFORM "bge_Crowd"
+
+#define BGE_MODEL_ATTRIBUTE "bge_Model"
+#define BGE_VERTEX_ATTRIBUTE "bge_Vertex"
+#define BGE_NORMAL_ATTRIBUTE "bge_Normal"
+#define BGE_TEXCOORD_ATTRIBUTE "bge_TexCoord"
+
 namespace bakge
 {
 
-class BGE_API Shader
+class BGE_API Shader : public Bindable
 {
-    GLuint Handle;
+    static Shader* GenericShader;
+    friend Window* Window::Create(int, int);
+
+    static Result InitShaderLibrary();
+    static Result DeinitShaderLibrary();
+    friend BGE_API Result Init(int, char*[]);
+    friend BGE_API Result Deinit();
+
+    GLuint Vertex;
+    GLuint Fragment;
+    GLuint Program;
+
+    Result Link();
+    Result Unlink();
+    Result DeleteShaders();
+    Result DeleteProgram();
 
     /* *
-     * Private version of the shader factory. The public
-     * static methods are really just for convenience. This
-     * function does all the heavy lifting.
+     * Compile a shader and report any errors or warnings
+     * Returns BGE_FAILURE if compilation failed
      * */
-    static Shader* LoadFromFile(GLenum Type, const char* FilePath);
-    static Shader* LoadFromString(GLenum Type, const char* Source,
-                                                const char* Name);
+    static Result Compile(GLuint Handle);
 
 
 public:
@@ -49,20 +71,12 @@ public:
     Shader();
     ~Shader();
 
-    /* *
-     * Loads the vertex and fragment shaders from provided paths.
-     * Shaders can then be attached to a ShaderProgram object
-     * */
-    BGE_FACTORY Shader* LoadVertexShaderFile(const char* FilePath);
-    BGE_FACTORY Shader* LoadFragmentShaderFile(const char* FilePath);
+    BGE_FACTORY Shader* LoadFromStrings(int NumVertex, int NumFragment,
+                                            const char** VertexShaders,
+                                            const char** FragmentShaders);
 
-    /* Name helps identify a shader when compiling it */
-    BGE_FACTORY Shader* LoadVertexShaderString(const char* Source,
-                                               const char* Name);
-    BGE_FACTORY Shader* LoadFragmentShaderString(const char* Source,
-                                                 const char* Name);
-
-    GLuint GetHandle() const;
+    Result Bind() const;
+    Result Unbind() const;
 
 }; /* Shader */
 

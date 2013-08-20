@@ -27,45 +27,194 @@
 namespace bakge
 {
 
+Shader* Shader::GenericShader = NULL;
+
+const char* VertexShaderLibSource =
+    "#version 120\n"
+    "\n"
+    "attribute mat4x4 bge_Model;\n"
+    "\n"
+    "uniform mat4x4 bge_Perspective;\n"
+    "uniform mat4x4 bge_View;\n"
+    "\n"
+    "uniform mat4x4 bge_Crowd;\n"
+    "\n"
+    "attribute vec4 bge_Vertex;\n"
+    "attribute vec4 bge_Normal;\n"
+    "\n"
+    "attribute vec2 bge_TexCoord;\n"
+    "varying vec2 bge_TexCoord0;\n"
+    "\n"
+    "varying vec4 bge_TransformedNormal;\n"
+    "\n"
+    "vec4 bgeWorldTransform()\n"
+    "{\n"
+    "    mat4x4 bge_ModelMatrix = bge_Crowd * bge_Model;\n"
+    "    mat4x4 bge_ViewProjectionMatrix = bge_Perspective * bge_View;\n"
+    "\n"
+    "    mat4x4 bge_ModelViewProjectionMatrix = bge_ViewProjectionMatrix\n"
+    "                                                * bge_ModelMatrix;\n"
+    "    bge_TransformedNormal = transpose(inverse(\n"
+    "           bge_ModelViewProjectionMatrix)) * vec4(bge_Normal.xyz, 0);\n"
+    "\n"
+    "    bge_TexCoord0 = bge_TexCoord;\n"
+    "\n"
+    "    return bge_View * bge_ModelMatrix * bge_Vertex;\n"
+    "}\n"
+    "\n"
+    "mat4x4 bgeProjection()\n"
+    "{\n"
+    "    return bge_Perspective;\n"
+    "}\n"
+    "\n";
+
+const char* GenericVertexShaderSource =
+    "varying vec4 bge_Position;\n"
+    "\n"
+    "void main()\n"
+    "{\n"
+    "    bge_Position = bgeWorldTransform();\n"
+    "    gl_Position = bgeProjection() * bge_Position;\n"
+    "}\n"
+    "\n";
+
+const char* FragmentShaderLibSource =
+    "#version 120\n"
+    "\n"
+    "varying vec4 bge_TransformedNormal;\n"
+    "varying vec2 bge_TexCoord0;\n"
+    "varying vec4 bge_Position;\n"
+    "\n"
+    "uniform sampler2D bge_Diffuse;\n"
+    "\n"
+    "vec4 bgeColor()\n"
+    "{\n"
+    "    float ShadeValue = dot(normalize(vec4(bge_TransformedNormal.xyz, 0)),"
+    "                                                   vec4(0, 0, -1, 0));\n"
+    "    ShadeValue = pow(min(ShadeValue, 1.0), 8.0f);\n"
+    "    return texture2D(bge_Diffuse, bge_TexCoord0) * ShadeValue;"
+    "}\n"
+    "\n";
+
+const char* GenericFragmentShaderSource =
+    "void main()\n"
+    "{\n"
+    "    gl_FragColor = bgeColor();\n"
+    "}\n"
+    "\n";
+
+Result Shader::InitShaderLibrary()
+{
+    GenericShader = Shader::LoadFromStrings(1, 1, &GenericVertexShaderSource,
+                                                &GenericFragmentShaderSource);
+    if(GenericShader == NULL) {
+        printf("Error creating generic shader\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shader::DeinitShaderLibrary()
+{
+    if(GenericShader == NULL)
+        return BGE_FAILURE;
+
+    delete GenericShader;
+    GenericShader = NULL;
+
+    return BGE_SUCCESS;
+}
+
+
 Shader::Shader()
 {
-    Handle = 0;
+    Program = 0;
+    Vertex = 0;
+    Fragment = 0;
 }
 
 
 Shader::~Shader()
 {
-    if(Handle != 0)
-        glDeleteShader(Handle);
+    Unlink();
+    DeleteShaders();
+    DeleteProgram();
 }
 
 
-Shader* Shader::LoadFromFile(GLenum Type, const char* FilePath)
+Result Shader::Link()
 {
-    Shader* S;
-    char* Source;
+    if(Program == 0)
+        return BGE_FAILURE;
 
-    /* Load the contents of the shader file */
-    /* Source = LoadFileContents(FilePath); */
-    if(Source == NULL) {
-        printf("Unable to load shader source \"%s\"\n", FilePath);
-        return NULL;
+    if(Vertex == 0 || Fragment == 0)
+        return BGE_FAILURE;
+
+    glAttachShader(Program, Vertex);
+    glAttachShader(Program, Fragment);
+
+    glLinkProgram(Program);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shader::Unlink()
+{
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    if(Vertex == 0 || Fragment == 0)
+        return BGE_FAILURE;
+
+    glDetachShader(Program, Vertex);
+    glDetachShader(Program, Fragment);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shader::DeleteShaders()
+{
+    Result Errors = BGE_SUCCESS;
+
+    if(Vertex != 0) {
+        glDeleteShader(Vertex);
+        Vertex = 0;
+    } else {
+        Errors = BGE_FAILURE;
     }
 
-    S = Shader::LoadFromString(Type, Source, FilePath);
+    if(Fragment != 0) {
+        glDeleteShader(Fragment);
+        Vertex = 0;
+    } else {
+        Errors = BGE_FAILURE;
+    }
 
-    delete[] Source;
-
-    return S;
+    return Errors;
 }
 
 
-Shader* Shader::LoadFromString(GLenum Type, const char* Source,
-                                                const char* Name)
+Result Shader::DeleteProgram()
+{
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    glDeleteProgram(Program);
+    Program = 0;
+
+    return BGE_SUCCESS;
+}
+
+
+Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
+                                    const char** VertexShaders,
+                                    const char** FragmentShaders)
 {
     Shader* S;
-    GLint Status, Length;
-    char* Info;
 
     /* Allocate memory for the new Shader */
     S = new Shader;
@@ -74,75 +223,112 @@ Shader* Shader::LoadFromString(GLenum Type, const char* Source,
         return NULL;
     }
 
-    /* Allocate a shader resource of provided type (vertex or fragment) */
-    S->Handle = glCreateShader(Type);
-    if(S->Handle == 0) {
-        printf("Unable to create vertex shader resource\n");
+    S->Program = glCreateProgram();
+    if(S->Program == 0) {
+        printf("Error creating shader program\n");
         delete S;
         return NULL;
     }
 
-    /* *
-     * Set source for shader resource. Do the const cast since
-     * compiler whines when passing non-const char*
-     * */
-    glShaderSource(S->Handle, 1, &Source, NULL);
+    // Allocate a vertex shader
+    S->Vertex = glCreateShader(GL_VERTEX_SHADER);
+    if(S->Vertex == 0) {
+        printf("Error creating vertex shader\n");
+        delete S;
+        return NULL;
+    }
 
-    /* Compile the shader source */
-    glCompileShader(S->Handle);
+    // Allocate a fragment shader
+    S->Fragment = glCreateShader(GL_FRAGMENT_SHADER);
+    if(S->Fragment == 0) {
+        printf("Error creating fragment shader\n");
+        delete S;
+        return NULL;
+    }
 
-    /* Now get any errors or warnings */
-    glGetShaderiv(S->Handle, GL_COMPILE_STATUS, &Status);
-    if(Status == GL_FALSE)
-        printf("%s shader %s compilation failed\n",
-            Type == GL_VERTEX_SHADER ? "Vertex" : "Fragment",
-            Name != NULL ? Name : "from string");
+    // Create new buffers which contain the shader libraries as well
+    const char** VertexShaderBuffer = new const char*[NumVertex + 1];
+    const char** FragmentShaderBuffer = new const char*[NumFragment + 1];
 
-    /* Print out any warnings or errors in the info log */
-    glGetShaderiv(S->Handle, GL_INFO_LOG_LENGTH, &Length);
-    if(Length > 1) {
-        Info =  new char[Length];
-        glGetShaderInfoLog(S->Handle, Length, &Length, Info);
-        printf("%s", Info);
-        delete[] Info;
-        /* Don't return shader if compilation failed */
-        if(Status == GL_FALSE) {
-            delete S;
-            S = NULL;
-        }
+    for(int i=1;i<=NumVertex;++i)
+        VertexShaderBuffer[i] = VertexShaders[i-1];
+
+    for(int i=1;i<=NumFragment;++i)
+        FragmentShaderBuffer[i] = FragmentShaders[i-1];
+
+    FragmentShaderBuffer[0] = FragmentShaderLibSource;
+    VertexShaderBuffer[0] = VertexShaderLibSource;
+
+    // Set our shaders' sources
+    glShaderSource(S->Vertex, NumVertex + 1, VertexShaderBuffer, NULL);
+    glShaderSource(S->Fragment, NumFragment + 1, FragmentShaderBuffer, NULL);
+
+    // Compile vertex shader and check for errors
+    if(Compile(S->Vertex) == BGE_FAILURE) {
+        printf("Vertex shader compilation failed\n");
+        delete S;
+        return NULL;
+    }
+
+    // Compile fragment shader and check for errors
+    if(Compile(S->Fragment) == BGE_FAILURE) {
+        printf("Fragment shader compilation failed\n");
+        delete S;
+        return NULL;
+    }
+
+    if(S->Link() == BGE_FAILURE) {
+        printf("Shader link failed\n");
+        delete S;
+        return NULL;
     }
 
     return S;
 }
 
 
-Shader* Shader::LoadVertexShaderFile(const char* FilePath)
+
+Result Shader::Compile(GLuint Handle)
 {
-    return Shader::LoadFromFile(GL_VERTEX_SHADER, FilePath);
+    if(Handle == 0)
+        return BGE_FAILURE;
+
+    Result Errors = BGE_SUCCESS;
+
+    glCompileShader(Handle);
+
+    GLint Status, Length;
+
+    glGetShaderiv(Handle, GL_COMPILE_STATUS, &Status);
+    if(Status == GL_FALSE)
+        Errors = BGE_FAILURE;
+
+    glGetShaderiv(Handle, GL_INFO_LOG_LENGTH, &Length);
+    if(Length > 1) {
+        char* Info = new char[Length];
+        glGetShaderInfoLog(Handle, Length, NULL, Info);
+        printf("%s\n", Info);
+        delete[] Info;
+    }
+
+    return Errors;
 }
 
 
-Shader* Shader::LoadFragmentShaderFile(const char* FilePath)
+Result Shader::Bind() const
 {
-    return Shader::LoadFromFile(GL_FRAGMENT_SHADER, FilePath);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    glUseProgram(Program);
+
+    return BGE_SUCCESS;
 }
 
 
-Shader* Shader::LoadVertexShaderString(const char* Source, const char* Name)
+Result Shader::Unbind() const
 {
-    return Shader::LoadFromString(GL_VERTEX_SHADER, Source, Name);
-}
-
-
-Shader* Shader::LoadFragmentShaderString(const char* Source, const char* Name)
-{
-    return Shader::LoadFromString(GL_FRAGMENT_SHADER, Source, Name);
-}
-
-
-GLuint Shader::GetHandle() const
-{
-    return Handle;
+    return GenericShader->Bind();
 }
 
 } /* bakge */

@@ -26,7 +26,6 @@ set(MODULES
   graphics/Node
   graphics/Pawn
   graphics/Shader
-  graphics/ShaderProgram
   graphics/Shape
   graphics/Texture
   graphics/shapes/Sphere
