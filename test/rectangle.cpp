@@ -27,10 +27,80 @@
 #include <bakge/Bakge.h>
 #include "TestEngine.h"
 
-int main(int argc, char* argv)
+bakge::Rectangle* Obj;
+bakge::Pawn* It;
+bakge::Texture* Tex;
+GLint ShaderProgram;
+bakge::Matrix Perspective;
+bakge::Matrix View;
+GLubyte* Bitmap;
+
+float Rot;
+bakge::Microseconds NowTime;
+bakge::Microseconds LastTime;
+
+bakge::Result InitTest()
+{
+    Bitmap = new GLubyte[512 * 512 * 3];
+    Rot = 0;
+    LastTime = bakge::GetRunningTime();
+
+    glEnable(GL_DEPTH_TEST);
+
+    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 2);
+
+    for(int i=0;i<512;++i) {
+        for(int j=0;j<512;++j){
+            Bitmap[3 * (i*512+j)] = i % 100;
+            Bitmap[3 * (i*512+j) + 1] = i % 75;
+            Bitmap[3 * (i*512+j)] = i % 50;
+        }
+    }
+
+    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE, 
+                                                    (void*)Bitmap);
+
+    It = bakge::Pawn::Create();
+    Obj = bakge::Rectangle::Create(0.8f, 0.5f);
+
+    Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
+
+    It->SetPosition(0, 0, 0);
+
+    GLint Location;
+
+    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
+    View.SetLookAt(
+        bakge::Point(0, 0, 3),
+        bakge::Point(0, 0, 0),
+        bakge::UnitVector(0, 1, 0)
+    );
+
+    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
+    Location = glGetUniformLocation(ShaderProgram, "bge_View");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+
+    return BGE_SUCCESS;
+}
+
+int main(int argc, char* argv[])
 {
 
+    bakge::TestEngine* RectTest = new bakge::TestEngine;
+
+    bakge::Init(argc, argv);
+
+    RectTest->SetInitializeCallback(InitTest);
 
 
-	return 0;
+    RectTest->StartEngine();
+
+    delete RectTest;
+
+    bakge::Deinit();
+
+
+    return 0;
 }
