@@ -67,6 +67,14 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         return NULL;
     }
 
+    /* *
+     * Allocate buffer space here so SetDimensions doesn't attempt to
+     * modify it while unallocated
+     * */
+    glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * 4, NULL,
+                                                GL_DYNAMIC_DRAW);
+
     R->SetDimensions(Width, Height);
 
     glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_NORMALS]);
@@ -94,9 +102,6 @@ Vector4 BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
     Dimensions[0] = Width;
     Dimensions[1] = Height;
 
-    glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
-
     Scalar Vertices[12];
 
     Vertices[0] = -Width / 2.0f;
@@ -113,8 +118,7 @@ Vector4 BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
     Vertices[11] = 0;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 12, Vertices,
-                                                        GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vertices[0]) * 12, Vertices);
 
     Unbind();
 
