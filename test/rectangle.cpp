@@ -85,6 +85,55 @@ bakge::Result InitTest()
     return BGE_SUCCESS;
 }
 
+
+bakge::Result PreRenderTest()
+{
+
+    Tex->Bind();
+    Obj->Bind();
+    It->Bind();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result RenderTest()
+{
+
+    Obj->Draw();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result PostRenderTest()
+{
+
+    It->Unbind();
+    Obj->Unbind();
+    Tex->Unbind();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result ShutDownTest()
+{
+
+    if(Obj != NULL)
+        delete Obj;
+
+    if(Tex != NULL)
+        delete Tex;
+
+    if(It != NULL)
+        delete It;
+
+    delete[] Bitmap;
+
+    return BGE_SUCCESS;
+}
+
 int main(int argc, char* argv[])
 {
 
@@ -93,7 +142,10 @@ int main(int argc, char* argv[])
     bakge::Init(argc, argv);
 
     RectTest->SetInitializeCallback(InitTest);
-
+    RectTest->SetPreRenderCallback(PreRenderTest);
+    RectTest->SetRenderCallback(RenderTest);
+    RectTest->SetPostRenderCallback(PostRenderTest);
+    RectTest->SetShutDownCallback(ShutDownTest);
 
     RectTest->StartEngine();
 
