@@ -93,8 +93,6 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     R->Unbind();
 
-    R->SetPosition(0, 0, 0);
-
     return R;
 }
 

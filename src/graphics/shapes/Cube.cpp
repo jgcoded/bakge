@@ -138,8 +138,6 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
 
     C->Unbind();
 
-    C->SetPosition(0, 0, 0);
-
     return C;
 }
 
