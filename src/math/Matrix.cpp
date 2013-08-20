@@ -287,6 +287,35 @@ Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
 }
 
 
+Matrix Matrix::Rotation(Radians X, Radians Y, Radians Z)
+{
+    return Quaternion::FromEulerAngles(X, Y, Z).ToMatrix();
+}
+
+
+Matrix Matrix::Rotation(Radians Angle, Radians X, Radians Y, Radians Z)
+{
+    Scalar Cos = cosf(Angle);
+    Scalar Sin = sinf(Angle);
+
+    return Matrix(
+        Cos + (X * X * (1 - Cos)),
+        (X * Y * (1 - Cos)) + (Z * Sin),
+        (X * Z * (1 - Cos)) - (Y * Sin),
+        0,
+        (X * Y * (1 - Cos)) - (Z * Sin),
+        Cos + (Y * Y * (1 - Cos)),
+        (Y * Z * (1 - Cos)) + (X * Sin),
+        0,
+        (X * Z * (1 - Cos)) + (Y * Sin),
+        (Y * Z * (1 - Cos)) - (X * Sin),
+        Cos + (Z * Z * (1 - Cos)),
+        0,
+        0, 0, 0, 1
+    );
+}
+
+
 Matrix BGE_NCP Matrix::Translate(Scalar X, Scalar Y, Scalar Z)
 {
     Val[12] += X;
@@ -301,6 +330,22 @@ Matrix BGE_NCP Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
 {
     /* May change in the future */
     *this *= Scaling(X, Y, Z);
+
+    return *this;
+}
+
+
+Matrix BGE_NCP Matrix::Rotate(Radians X, Radians Y, Radians Z)
+{
+    *this *= Rotation(X, Y, Z);
+
+    return *this;
+}
+
+
+Matrix BGE_NCP Matrix::Rotate(Radians Angle, Scalar X, Scalar Y, Scalar Z)
+{
+    *this *= Rotation(Angle, X, Y, Z);
 
     return *this;
 }

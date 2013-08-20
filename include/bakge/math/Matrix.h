@@ -109,9 +109,13 @@ public:
 
     static Matrix Scaling(Scalar X, Scalar Y, Scalar Z);
     static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
+    static Matrix Rotation(Scalar X, Scalar Y, Scalar Z);
+    static Matrix Rotation(Radians Angle, Scalar X, Scalar Y, Scalar Z);
 
     Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
     Matrix BGE_NCP Scale(Scalar X, Scalar Y, Scalar Z);
+    Matrix BGE_NCP Rotate(Radians X, Radians Y, Radians Z);
+    Matrix BGE_NCP Rotate(Radians Angle, Scalar X, Scalar Y, Scalar Z);
 
 }; /* Matrix */
 
