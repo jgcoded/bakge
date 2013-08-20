@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
     Obj = bakge::Cube::Create(0.15f, 0.15f, 0.15f);
 
-#define CROWD_SIZE 5000
+#define CROWD_SIZE 50
     Group = bakge::Crowd::Create(CROWD_SIZE);
 
     srand(time(0));
