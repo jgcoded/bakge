@@ -61,6 +61,8 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     Rectangle* R = new Rectangle;
 
     R->NumIndices = 6;
+    R->NumFaces = 1;
+    R->NumVertices = 4;
 
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
