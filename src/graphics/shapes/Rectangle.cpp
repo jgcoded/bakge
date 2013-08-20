@@ -84,7 +84,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     R->SetPosition(0, 0, 0);
 
-    return BGE_SUCCESS;
+    return R;
 }
 
 
