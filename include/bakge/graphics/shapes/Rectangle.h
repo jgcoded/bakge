@@ -32,10 +32,10 @@ namespace bakge
 
 class BGE_API Rectangle : public Shape
 {
-    Vector4 Dimensions;
-
 
 protected:
+
+    Vector4 Dimensions;
 
     Rectangle();
 
