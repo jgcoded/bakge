@@ -236,29 +236,19 @@ Matrix BGE_NCP Matrix::SetIdentity()
 Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
                                 Scalar NearClip, Scalar FarClip)
 {
-    Scalar Max = NearClip * tan(FOV * 0.5f * BGE_RAD_PER_DEG);
-    Scalar YMin = -Max;
-    Scalar XMin = -Max;
-    Scalar Width = Max - XMin;
-    Scalar Height = Max - YMin;
-    Scalar Depth = FarClip - NearClip;
-    Scalar Q = (NearClip + FarClip) / -Depth;
-    Scalar QN = 2 * (NearClip * FarClip) / -Depth;
-    Scalar W = 2 * NearClip / Width;
-    Scalar H = 2 * NearClip / Height;
+    Scalar Height = 1.0f / tanf(FOV * 0.5f * BGE_RAD_PER_DEG);
+    Scalar Depth = NearClip - FarClip;
 
     if(ScalarCompare(Aspect, 0)) {
         return *this;
     }
 
-    W /= Aspect;
-
     SetIdentity();
-    Val[0] = W;
-    Val[5] = H;
-    Val[10] = Q;
+    Val[0] = Height / Aspect;
+    Val[5] = Height;
+    Val[10] = (NearClip + FarClip) / Depth;
     Val[11] = -1;
-    Val[14] = QN;
+    Val[14] = (2.0f * NearClip * FarClip) / Depth;
     Val[15] = 0;
 
     return *this;
