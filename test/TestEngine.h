@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-/* * 
+/* *
  * A Generic Callback does not take a parameter.
  * It is used for Initialize, Shutdown, Pre/On/Post
  * RenderStage, etc.

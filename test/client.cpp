@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     bakge::Remote Server;
 
     Pack = bakge::Packet::Create(NULL);
-    
+
     Server.SetAddress(72, 129, 81, 23);
     Server.SetPort(7000);
 

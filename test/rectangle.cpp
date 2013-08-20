@@ -57,7 +57,7 @@ bakge::Result InitTest()
         }
     }
 
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE, 
+    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                     (void*)Bitmap);
 
     It = bakge::Pawn::Create();
@@ -88,7 +88,6 @@ bakge::Result InitTest()
 
 bakge::Result PreRenderTest()
 {
-
     Tex->Bind();
     Obj->Bind();
     It->Bind();
@@ -99,7 +98,6 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
-
     Obj->Draw();
 
     return BGE_SUCCESS;
@@ -108,7 +106,6 @@ bakge::Result RenderTest()
 
 bakge::Result PostRenderTest()
 {
-
     It->Unbind();
     Obj->Unbind();
     Tex->Unbind();
@@ -119,7 +116,6 @@ bakge::Result PostRenderTest()
 
 bakge::Result ShutDownTest()
 {
-
     if(Obj != NULL)
         delete Obj;
 
@@ -134,12 +130,12 @@ bakge::Result ShutDownTest()
     return BGE_SUCCESS;
 }
 
+
 int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
 
     bakge::TestEngine* RectTest = new bakge::TestEngine;
-
-    bakge::Init(argc, argv);
 
     RectTest->SetInitializeCallback(InitTest);
     RectTest->SetPreRenderCallback(PreRenderTest);
@@ -152,7 +148,6 @@ int main(int argc, char* argv[])
     delete RectTest;
 
     bakge::Deinit();
-
 
     return 0;
 }

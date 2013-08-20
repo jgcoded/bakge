@@ -39,7 +39,6 @@ Rectangle::~Rectangle()
 
 Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 {
-
     static const Scalar Normals[] = {
         0, 0, +1.0f,
         0, 0, +1.0f,
@@ -62,16 +61,23 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     Rectangle* R = new Rectangle;
 
     R->NumIndices = 6;
+    R->NumTriangles = 2;
+    R->NumVertices = 4;
 
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
         return NULL;
     }
 
-    if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
+    /* *
+     * Allocate buffer space here so SetDimensions doesn't attempt to
+     * modify it while unallocated
+     * */
+    glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * 4, NULL,
+                                                GL_DYNAMIC_DRAW);
+
+    R->SetDimensions(Width, Height);
 
     glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
@@ -93,34 +99,35 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 }
 
 
-Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
+Vector4 BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
-
-    glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
+    Dimensions[0] = Width;
+    Dimensions[1] = Height;
 
     Scalar Vertices[12];
 
-    Vertices[0] = -Width / 2.0f;
-    Vertices[1] = -Height / 2.0f;
+    Width /= 2;
+    Height /= 2;
+
+    Vertices[0] = -Width;
+    Vertices[1] = -Height;
     Vertices[2] = 0;
-    Vertices[3] = -Width / 2.0f;
-    Vertices[4] = +Height / 2.0f;
+    Vertices[3] = -Width;
+    Vertices[4] = +Height;
     Vertices[5] = 0;
-    Vertices[6] = +Width / 2.0f;
-    Vertices[7] = +Height / 2.0f;
+    Vertices[6] = +Width;
+    Vertices[7] = +Height;
     Vertices[8] = 0;
-    Vertices[9] = +Width / 2.0;
-    Vertices[10] = -Height / 2.0f;
+    Vertices[9] = +Width;
+    Vertices[10] = -Height;
     Vertices[11] = 0;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 12, Vertices,
-                                                        GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vertices[0]) * 12, Vertices);
 
     Unbind();
 
-    return BGE_SUCCESS;
+    return Dimensions;
 }
 
 } /* bakge */
