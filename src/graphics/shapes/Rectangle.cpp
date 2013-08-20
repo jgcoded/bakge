@@ -67,10 +67,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         return NULL;
     }
 
-    if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
+    R->SetDimensions(Width, Height);
 
     glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
@@ -92,8 +89,11 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 }
 
 
-Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
+Vector4 BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
+    Dimensions[0] = Width;
+    Dimensions[1] = Height;
+
     glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
     glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
 
@@ -108,7 +108,7 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
     Vertices[6] = +Width / 2.0f;
     Vertices[7] = +Height / 2.0f;
     Vertices[8] = 0;
-    Vertices[9] = +Width / 2.0;
+    Vertices[9] = +Width / 2.0f;
     Vertices[10] = -Height / 2.0f;
     Vertices[11] = 0;
 
@@ -118,7 +118,7 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
 
     Unbind();
 
-    return BGE_SUCCESS;
+    return Dimensions;
 }
 
 } /* bakge */
