@@ -130,12 +130,12 @@ bakge::Result ShutDownTest()
     return BGE_SUCCESS;
 }
 
+
 int main(int argc, char* argv[])
 {
+    bakge::Init(argc, argv);
 
     bakge::TestEngine* RectTest = new bakge::TestEngine;
-
-    bakge::Init(argc, argv);
 
     RectTest->SetInitializeCallback(InitTest);
     RectTest->SetPreRenderCallback(PreRenderTest);
