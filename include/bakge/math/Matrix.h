@@ -107,8 +107,8 @@ public:
     Matrix BGE_NCP SetLookAt(Vector4 BGE_NCP Position, Vector4 BGE_NCP Target,
                                                     Vector4 BGE_NCP UpVector);
 
-    static Matrix ScaleMatrix(Scalar X, Scalar Y, Scalar Z);
-    static Matrix TranslationMatrix(Scalar X, Scalar Y, Scalar Z);
+    static Matrix Scaling(Scalar X, Scalar Y, Scalar Z);
+    static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
 
     Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
     Matrix BGE_NCP Scale(Scalar X, Scalar Y, Scalar Z);

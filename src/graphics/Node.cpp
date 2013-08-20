@@ -86,7 +86,7 @@ Vector4 BGE_NCP Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
     Position[1] = Y;
     Position[2] = Z;
 
-    Matrix Translation = Matrix::TranslationMatrix(X, Y, Z);
+    Matrix Translation = Matrix::Translation(X, Y, Z);
 
     /* Update the buffer with the new position */
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);

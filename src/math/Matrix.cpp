@@ -265,7 +265,7 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
 }
 
 
-Matrix Matrix::ScaleMatrix(Scalar X, Scalar Y, Scalar Z)
+Matrix Matrix::Scaling(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
         X, 0, 0, 0,
@@ -276,7 +276,7 @@ Matrix Matrix::ScaleMatrix(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Matrix Matrix::TranslationMatrix(Scalar X, Scalar Y, Scalar Z)
+Matrix Matrix::Translation(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
         1, 0, 0, 0,
@@ -300,7 +300,7 @@ Matrix BGE_NCP Matrix::Translate(Scalar X, Scalar Y, Scalar Z)
 Matrix BGE_NCP Matrix::Scale(Scalar X, Scalar Y, Scalar Z)
 {
     /* May change in the future */
-    *this *= ScaleMatrix(X, Y, Z);
+    *this *= Scaling(X, Y, Z);
 
     return *this;
 }
