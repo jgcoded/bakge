@@ -61,6 +61,8 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     Rectangle* R = new Rectangle;
 
+    R->NumIndices = 6;
+
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
         return NULL;
@@ -79,8 +81,8 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 8, TexCoords,
                                                         GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Indices[0]) * 6, Indices,
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_INDICES]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 6, Indices,
                                                         GL_STATIC_DRAW);
 
     R->Unbind();
