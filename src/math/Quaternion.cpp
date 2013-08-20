@@ -34,16 +34,16 @@ Quaternion::Quaternion()
 }
 
 
-Quaternion::Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP Real)
+Quaternion::Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP R)
 {
-    this->Vec = Vec;
-    this->Real = Real;
+    Components = Vec;
+    Real = R;
 }
 
 
 Quaternion::Quaternion(Quaternion BGE_NCP Other)
 {
-    Vec = Other.Vec;
+    Components = Other.Components;
     Real = Other.Real;
 }
 
@@ -56,17 +56,17 @@ Quaternion::~Quaternion()
 Matrix Quaternion::ToMatrix() const
 {
     return Matrix(
-        1 - 2 * (Vec[1] * Vec[1] + Vec[2] * Vec[2]),
-        2 * (Vec[0] * Vec[1] + Real * Vec[2]),
-        2 * (Vec[0] * Vec[2] - Real * Vec[1]),
+        1 - (2 * Y * Y) - (2 * Z * Z),
+        (2 * X * Y) + (2 * Z * W),
+        (2 * X * Z) - (2 * Y * W),
         0,
-        2 * (Vec[0] * Vec[1] - Real * Vec[2]),
-        1 - 2 * (Vec[0] * Vec[0] + Vec[2] * Vec[2]),
-        2 * (Vec[1] * Vec[2] + Real * Vec[0]),
+        (2 * X * Y) - (2 * Z * W),
+        1 - (2 * X * X) - (2 * Z * Z),
+        (2 * Vec[1] * Vec[2]) + (2 * Real * Vec[0]),
         0,
-        2 * (Vec[0] * Vec[2] + Real * Vec[1]),
-        2 * (Vec[1] * Vec[2] - Real * Vec[0]),
-        1 - 2 * (Vec[0] * Vec[0] + Vec[1] * Vec[1]),
+        (2 * X * Z) + (2 * Y * W),
+        (2 * Y * Z) - (2 * X * W),
+        1 - (2 * X * X) - (2 * Y * Y),
         0,
         0, 0, 0, 1
     );
@@ -115,8 +115,8 @@ Quaternion Quaternion::FromAxisAndAngle(Vector4 BGE_NCP Axis, Scalar Angle)
 
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
-    Vec += Other.Vec;
-    Real += Other.Real;
+    /* Vector addition/subtraction affects homogeneous coord also */
+    Components += Other.Components;
 
     return *this;
 }
@@ -124,8 +124,8 @@ Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 {
-    Vec -= Other.Vec;
-    Real -= Other.Real;
+    /* Vector addition/subtraction affects homogeneous coord also */
+    Components -= Other.Components;
 
     return *this;
 }
@@ -133,12 +133,12 @@ Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
 {
-    Vector4 Temp = Vec;
+    Vector4 Temp = Components;
     Real *= Other.Real;
     Real -= Vec[0] * Other.Vec[0];
     Real -= Vec[1] * Other.Vec[1];
     Real -= Vec[2] * Other.Vec[2];
-    Vec *= Other.Real;
+    Components *= Other.Real;
     Vec[0] += Other.Vec[0] * Real;
     Vec[1] += Other.Vec[1] * Real;
     Vec[2] += Other.Vec[2] * Real;
@@ -160,7 +160,7 @@ Quaternion BGE_NCP Quaternion::operator/=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 {
-    Vec *= Value;
+    Components *= Value;
     Real *= Value;
 
     return *this;
@@ -169,7 +169,7 @@ Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 
 Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 {
-    Vec /= Value;
+    Components /= Value;
     Real /= Value;
 
     return *this;
@@ -178,13 +178,13 @@ Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 
 Quaternion Quaternion::operator+(Quaternion BGE_NCP Other) const
 {
-    return Quaternion(Vec + Other.Vec, Real + Other.Real);
+    return Quaternion(Components + Other.Components, Real + Other.Real);
 }
 
 
 Quaternion Quaternion::operator-(Quaternion BGE_NCP Other) const
 {
-    return Quaternion(Vec - Other.Vec, Real - Other.Real);
+    return Quaternion(Components - Other.Components, Real - Other.Real);
 }
 
 
@@ -200,7 +200,7 @@ Quaternion Quaternion::operator*(Quaternion BGE_NCP Other) const
              + Vec[0] * Other.Vec[1] - Vec[1] * Other.Vec[0],
             0
         ),
-        Real * Other.Real - Dot(Vec, Other.Vec)
+        Real * Other.Real - Dot(Components, Other.Components)
     );
 }
 
@@ -213,19 +213,19 @@ Quaternion Quaternion::operator/(Quaternion BGE_NCP Other) const
 
 Quaternion Quaternion::operator*(Scalar BGE_NCP Value) const
 {
-    return Quaternion(Vec * Value, Real * Value);
+    return Quaternion(Components * Value, Real * Value);
 }
 
 
 Quaternion Quaternion::operator/(Scalar BGE_NCP Value) const
 {
-    return Quaternion(Vec / Value, Real / Value);
+    return Quaternion(Components / Value, Real / Value);
 }
 
 
 Quaternion Quaternion::operator-() const
 {
-    return Quaternion(-Vec, -Real);
+    return Quaternion(-Components, -Real);
 }
 
 
@@ -253,7 +253,7 @@ Quaternion BGE_NCP Quaternion::Normalize()
         return *this;
 
     Real /= Len;
-    Vec /= Len;
+    Components /= Len;
 
     return *this;
 }
@@ -273,7 +273,7 @@ Scalar Quaternion::Length() const
 
 Scalar Quaternion::LengthSq() const
 {
-    return Scalar(Real * Real + pow(Vec.Length(), 2));
+    return Scalar(Real * Real + pow(Components.Length(), 2));
 }
 
 } /* bakge */
