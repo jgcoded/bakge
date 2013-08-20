@@ -81,7 +81,7 @@ Scalar Quaternion::GetAngle() const
 
 Vector4 Quaternion::GetAxis() const
 {
-    Scalar Inv = 1.0f / sinf(GetAngle() / 2.0f);
+    Scalar Inv = 1.0f / sinf(acosf(Real));
 
     return Vector4(Vec[0] * Inv, Vec[1] * Inv, Vec[2] * Inv, 0);
 }
