@@ -166,7 +166,7 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
      * We only need 8 vertices (3 components for each vertex, 24 buffer size)
      * The indices buffer will create our triangles
      * */
-    NumFaces = 6;
+    NumTriangles = 12;
     NumVertices = 4 * 6; /* 4 vertices per face */
     NumIndices = 36; /* 2 triangles per face, 3 vertices per triangle */
     Scalar Vertices[72];

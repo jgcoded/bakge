@@ -9,7 +9,6 @@ endif()
 set(TESTS
   client
   clock
-  cube
   cone
   crowd
   cylinder
@@ -21,7 +20,9 @@ set(TESTS
   pawn
   frontrenderer
   quaternion
+  rectangle
   server
+  shapestest
   shaderprogram
   sharedcontext
   sphere

@@ -25,30 +25,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <bakge/Bakge.h>
+#include "TestEngine.h"
 
-int main(int argc, char* argv[])
+bakge::Cube* Obj;
+bakge::Pawn* It;
+bakge::Texture* Tex;
+GLint ShaderProgram;
+bakge::Matrix Perspective;
+bakge::Matrix View;
+GLubyte* Bitmap;
+
+float Rot;
+bakge::Microseconds NowTime;
+bakge::Microseconds LastTime;
+
+bakge::Result InitTest()
 {
-    bakge::Window* Win;
-    bakge::Cube* Obj;
-    bakge::Texture* Tex;
-    bakge::Pawn* It;
+    printf("Initializing ShapesTest\n");
+    Bitmap = new GLubyte[512 * 512 * 3];
 
-    printf("Initializing Bakge\n");
-    bakge::Init(argc, argv);
+    Rot = 0;
 
-    GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
-    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
+    LastTime = bakge::GetRunningTime();
 
-    Win = bakge::Window::Create(600, 400);
-    if(Win == NULL) {
-        printf("Error creating window\n");
-        return bakge::Deinit();
-    }
-
-    glClearColor(1, 0, 1, 1);
     glEnable(GL_DEPTH_TEST);
 
-    /* Create simple checkerboard texture */
+    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
+
+
+    /* Create simple texture */
     for(int i=0;i<256;++i) {
         for(int j=0;j<256;++j) {
             Bitmap[3*(i*512+j)] = 255;
@@ -57,6 +62,7 @@ int main(int argc, char* argv[])
         }
     }
 
+    /* Create simple texture */
     for(int i=256;i<512;++i) {
         for(int j=256;j<512;++j) {
             Bitmap[3*(i*512+j)] = 255;
@@ -70,17 +76,15 @@ int main(int argc, char* argv[])
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                     (void*)Bitmap);
 
-
-    Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
     It = bakge::Pawn::Create();
+    Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
+
     It->SetPosition(0, 0, 0);
 
-    bakge::Matrix Perspective;
-    bakge::Matrix View;
+    GLint Location;
 
-    GLint ShaderProgram, Location;
     Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
     View.SetLookAt(
         bakge::Point(0, 0, 3),
@@ -93,46 +97,59 @@ int main(int argc, char* argv[])
     Location = glGetUniformLocation(ShaderProgram, "bge_View");
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
-    float Rot = 0;
-    bakge::Microseconds NowTime;
-    bakge::Microseconds LastTime = bakge::GetRunningTime();
+    return BGE_SUCCESS;
+}
 
-    while(1) {
-        /* Poll events for all windows */
-        bakge::Window::PollEvents();
 
-        /* Don't draw if the window has closed */
-        if(Win->IsOpen() == false)
-            break;
+bakge::Result UpdateTest(bakge::Seconds Delta)
+{
+    NowTime = bakge::GetRunningTime();
+    float DeltaTime = (float)(NowTime - LastTime) / 1000000;
+    LastTime = NowTime;
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    Rot += 1.0f * DeltaTime;
+    View.SetLookAt(
+        bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
+        bakge::Point(0.0f, 0, 0.0f),
+        bakge::UnitVector(0, 1, 0)
+    );
+    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+    glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
 
-        NowTime = bakge::GetRunningTime();
-        float DeltaTime = (float)(NowTime - LastTime) / 1000000;
-        LastTime = NowTime;
+    return BGE_SUCCESS;
+}
 
-        Rot += 1.0f * DeltaTime;
-        View.SetLookAt(
-            bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
-            bakge::Point(0.0f, 0, 0.0f),
-            bakge::UnitVector(0, 1, 0)
-        );
-        glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
 
-        Tex->Bind();
-        Obj->Bind();
-        It->Bind();
-        Obj->Draw(); /* No renderer for now */
-        It->Unbind();
-        Obj->Unbind();
-        Tex->Unbind();
+bakge::Result PreRenderTest()
+{
+    Tex->Bind();
+    Obj->Bind();
+    It->Bind();
 
-        Win->SwapBuffers();
-    }
+    return BGE_SUCCESS;
+}
 
-    if(Win != NULL)
-        delete Win;
+
+bakge::Result RenderTest()
+{
+    Obj->Draw();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result PostRenderTest()
+{
+    It->Unbind();
+    Obj->Unbind();
+    Tex->Unbind();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result ShutDownTest()
+{
 
     if(Obj != NULL)
         delete Obj;
@@ -143,10 +160,28 @@ int main(int argc, char* argv[])
     if(It != NULL)
         delete It;
 
-    printf("Deinitializing Bakge\n");
-    bakge::Deinit();
-
     delete[] Bitmap;
 
-    return 0;
+    return BGE_SUCCESS;
+}
+
+
+int main(int argc, char* argv[])
+{
+    bakge::TestEngine* ShapesTest = new bakge::TestEngine;
+
+    bakge::Init(argc, argv);
+
+    ShapesTest->SetInitializeCallback(InitTest);
+    ShapesTest->SetUpdateCallback(UpdateTest);
+    ShapesTest->SetPreRenderCallback(PreRenderTest);
+    ShapesTest->SetRenderCallback(RenderTest);
+    ShapesTest->SetPostRenderCallback(PostRenderTest);
+    ShapesTest->SetShutDownCallback(ShutDownTest);
+
+    ShapesTest->StartEngine();
+
+    delete ShapesTest;
+
+    bakge::Deinit();
 }
