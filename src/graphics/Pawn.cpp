@@ -84,6 +84,14 @@ Result Pawn::Bind() const
     if(Location < 0)
         Errors = BGE_FAILURE;
 
+    Matrix Transformation;
+    Transformation *= Facing.ToMatrix();
+    Transformation.Translate(Position[0], Position[1], Position[2]);
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Transformation[0]) * 16,
+                            &Transformation[0], GL_DYNAMIC_DRAW);
+
     if(Node::Bind() != BGE_SUCCESS)
         Errors = BGE_FAILURE;
 
