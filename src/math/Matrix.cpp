@@ -121,45 +121,45 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
 
     T1 = _mm_set1_ps(Val[0]);
     T2 = _mm_mul_ps(C1, T1);
-    T1 =_mm_set1_ps(Val[4]);
+    T1 =_mm_set1_ps(Val[1]);
     T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
-    T1 =_mm_set1_ps(Val[8]);
+    T1 =_mm_set1_ps(Val[2]);
     T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
-    T1 =_mm_set1_ps(Val[12]);
+    T1 =_mm_set1_ps(Val[3]);
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
     Col[0] = Messenger;
 
-    T1 = _mm_set1_ps(Val[1]);
+    T1 = _mm_set1_ps(Val[4]);
     T2 = _mm_mul_ps(C1, T1);
     T1 =_mm_set1_ps(Val[5]);
     T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
-    T1 =_mm_set1_ps(Val[9]);
+    T1 =_mm_set1_ps(Val[6]);
     T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
-    T1 =_mm_set1_ps(Val[13]);
+    T1 =_mm_set1_ps(Val[7]);
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
     Col[1] = Messenger;
 
-    T1 = _mm_set1_ps(Val[2]);
+    T1 = _mm_set1_ps(Val[8]);
     T2 = _mm_mul_ps(C1, T1);
-    T1 =_mm_set1_ps(Val[6]);
+    T1 =_mm_set1_ps(Val[9]);
     T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
     T1 =_mm_set1_ps(Val[10]);
     T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
-    T1 =_mm_set1_ps(Val[14]);
+    T1 =_mm_set1_ps(Val[11]);
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
     Col[2] = Messenger;
 
-    T1 = _mm_set1_ps(Val[3]);
+    T1 = _mm_set1_ps(Val[12]);
     T2 = _mm_mul_ps(C1, T1);
-    T1 =_mm_set1_ps(Val[7]);
+    T1 =_mm_set1_ps(Val[13]);
     T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
-    T1 =_mm_set1_ps(Val[11]);
+    T1 =_mm_set1_ps(Val[14]);
     T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
     T1 =_mm_set1_ps(Val[15]);
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
