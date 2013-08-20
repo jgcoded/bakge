@@ -39,7 +39,6 @@ Rectangle::~Rectangle()
 
 Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 {
-
     static const Scalar Normals[] = {
         0, 0, +1.0f,
         0, 0, +1.0f,
@@ -95,7 +94,6 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
 Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
-
     glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
     glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
 

@@ -34,10 +34,14 @@ class BGE_API Rectangle : public Shape
 {
     Vector4 Dimensions;
 
+
 protected:
+
     Rectangle();
 
+
 public:
+
     ~Rectangle();
 
     BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
@@ -52,4 +56,5 @@ public:
 }; /* Rectangle */
 
 } /* bakge */
-#endif
+
+#endif /* BAKGE_GRAPHICS_SHAPES_RECTANGLE_H */
