@@ -323,4 +323,16 @@ Scalar Matrix::Determinant() const
     return Scalar(0);
 }
 
+
+Matrix Matrix::Transposed() const
+{
+    return *this;
+}
+
+
+Matrix BGE_NCP Matrix::Transpose()
+{
+    return *this;
+}
+
 } /* bakge */

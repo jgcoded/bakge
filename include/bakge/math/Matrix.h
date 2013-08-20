@@ -91,6 +91,9 @@ public:
     Matrix BGE_NCP Invert();
     Matrix Inverted() const;
 
+    Matrix Transposed() const;
+    Matrix BGE_NCP Transpose();
+
     Scalar Determinant() const;
 
     /* Set to an identity matrix */
