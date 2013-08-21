@@ -36,6 +36,7 @@ class BGE_API Rectangle : public Shape
 
 protected:
 	Rectangle();
+	BGE_FACTORY void AllocateGLBuffers(GLuint Normals, GLuint TexCoords, GLuint Indices);
 
 public:
 	~Rectangle();

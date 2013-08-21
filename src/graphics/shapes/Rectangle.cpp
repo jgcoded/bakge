@@ -40,6 +40,37 @@ Rectangle::~Rectangle()
 Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 {
 
+
+
+    Rectangle* R = new Rectangle;
+
+    R->NumIndices = 6;
+
+    if(R->CreateBuffers() != BGE_SUCCESS) {
+        delete R;
+        return NULL;
+    }
+
+    if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
+        delete R;
+        return NULL;
+    }
+
+    AllocateGLBuffers(R->MeshBuffers[MESH_BUFFER_NORMALS],
+                      R->MeshBuffers[MESH_BUFFER_TEXCOORDS],
+                      R->MeshBuffers[MESH_BUFFER_INDICES]);
+
+    R->Unbind();
+
+    R->SetPosition(0, 0, 0);
+
+    return R;
+}
+
+
+void Rectangle::AllocateGLBuffers(GLuint NormalsBuffer, GLuint TexCoordsBuffer, GLuint IndicesBuffer)
+{
+
     static const Scalar Normals[] = {
         0, 0, +1.0f,
         0, 0, +1.0f,
@@ -59,37 +90,17 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         1, 0
     };
 
-    Rectangle* R = new Rectangle;
-
-    R->NumIndices = 6;
-
-    if(R->CreateBuffers() != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
-
-    if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
-
-    glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_NORMALS]);
+    glBindBuffer(GL_ARRAY_BUFFER, NormalsBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
                                                         GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 8, TexCoords,
+    glBindBuffer(GL_ARRAY_BUFFER, TexCoordsBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 8, TexCoords,
                                                         GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, R->MeshBuffers[MESH_BUFFER_INDICES]);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndicesBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 6, Indices,
                                                         GL_STATIC_DRAW);
-
-    R->Unbind();
-
-    R->SetPosition(0, 0, 0);
-
-    return R;
 }
 
 
