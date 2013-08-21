@@ -34,6 +34,7 @@ set(MODULES
   graphics/shapes/Cube
   graphics/shapes/Cylinder
   graphics/shapes/Rectangle
+  ui/UIElement
   math/Vector3
   math/Vector4
   math/Quaternion
