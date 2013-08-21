@@ -32,10 +32,14 @@ namespace bakge
 
 /*! @brief Bindables must be bound before use, and unbound after use.
  *
- * Bindables are typically involved in graphics rendering. Calling Bind
+ * Bindables are typically involved in graphics and rendering. Calling Bind
  * sets up the OpenGL state so that the object can be properly used
  * for rendering. Bindables range from objects such as Renderers, Pawns
  * or Meshes.
+ *
+ * Bindables come in many different forms, and each implementation of
+ * Bind and Unbind has a specific purpose. See individual implementations
+ * for details on when and why objects must be bound and unbound.
  */
 class BGE_API Bindable
 {
@@ -55,7 +59,9 @@ public:
 
     /*! @brief Unbind the object after use
      *
-     * Unbind always returns BGE_SUCCESS.
+     * Unbind will seldom return BGE_FAILURE. Unbind usually resets OpenGL
+     * state to an arbitrary default. It is always a good idea to Unbind an
+     * object after use, to prevent unintentionally modifying objects.
      */
     virtual Result Unbind() const = 0;
 
