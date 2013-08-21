@@ -30,16 +30,16 @@
 namespace bakge
 {
 
-/* *
- * EventHandler is really just a coupling interface class. Window classes
- * can be their own event handler, but can also link to an external handler.
- * This interface is used to ensure whatever the designated event handling
- * class BGE_API is implements the proper methods for responding to events.
+/*! @brief Interface for objects able to process Window events
  *
- * Bakge will also have an ElectiveEventHandler class BGE_API which lets you
- * "hook" into certain events and ignore others, with an easy way
- * to active/deactivate specific event types.
- * */
+ * When a window event is processed, the appropriate callback is run
+ * if an event handler exists for that window. The event is received
+ * and processed internally; users need only implement methods for
+ * responding to events.
+ *
+ * Certain events are only processed for the active window, such as key and
+ * mouse input.
+ */
 class BGE_API EventHandler
 {
 
@@ -48,15 +48,32 @@ public:
     EventHandler();
     virtual ~EventHandler();
 
-    /* Key press/release and mouse button click/release events */
+    /*! @brief Called when a keyboard key is pressed or released
+     *
+     * @param[in] K The GLFW key identifier.
+     * @param[in] S The key state. Can be BGE_PRESS, BGE_RELEASE or BGE_REPEAT.
+     * @param[in] C The OS-specific key scan-code.
+     * @param[in] M Active modifiers bitfield.
+     * 
+     * @see http://www.glfw.org/docs/latest/glfw3_8h.html
+     * @see ShiftPressed, AltPressed, ControlPressed, SuperPressed
+     */
     virtual Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M) = 0;
+
+    /*! @brief Called when a mouse button is pressed or released
+     */
     virtual Result MouseEvent(ButtonID B, ButtonState S, ModField M) = 0;
 
-    /* Relative device motion events */
+    /*! @brief Called when mouse motion is detected
+     */
     virtual Result MotionEvent(DeviceMotion X, DeviceMotion Y) = 0;
+
+    /*! @brief Called when the mouse wheel is scrolled
+     */
     virtual Result ScrollEvent(DeviceMotion X, DeviceMotion Y) = 0;
 
-    /* Called just before the window is closed */
+    /*! @brief Called just before the Window closes
+     */
     virtual Result CloseEvent() = 0;
 
 }; /* EventHandler */
