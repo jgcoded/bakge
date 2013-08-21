@@ -106,7 +106,7 @@ void Rectangle::AllocateGLBuffers(GLuint NormalsBuffer, GLuint TexCoordsBuffer, 
 }
 
 
-Vector4 BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
+Result BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
     Dimensions[0] = Width;
     Dimensions[1] = Height;
@@ -134,7 +134,7 @@ Vector4 BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
 
     Unbind();
 
-    return Dimensions;
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

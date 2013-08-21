@@ -37,20 +37,50 @@ UIElement::~UIElement()
 }
 
 
+UIElement* UIElement::Create(Scalar Width, Scalar Height)
+{
+    UIElement* U = new UIElement;
+
+    U->NumIndices = 6;
+    U->NumTriangles = 2;
+    U->NumVertices = 4;
+
+    if(U->CreateBuffers() != BGE_SUCCESS) {
+        delete U;
+        return NULL;
+    }
+
+    if(U->SetDimensions(Width, Height) != BGE_SUCCESS) {
+        delete U;
+        return NULL;
+    }
+
+    AllocateGLBuffers(U->MeshBuffers[MESH_BUFFER_NORMALS],
+                  U->MeshBuffers[MESH_BUFFER_TEXCOORDS],
+                  U->MeshBuffers[MESH_BUFFER_INDICES]);
+
+    U->Unbind();
+
+    U->SetPosition(0, 0);
+
+    return U;
+}
+
+
 Vector4 BGE_NCP UIElement::SetPosition(Scalar X, Scalar Y)
 {
 
-	Position[0] = X;
-	Position[1] = Y;
-	Position[2] = 0;
+    Position[0] = X;
+    Position[1] = Y;
+    Position[2] = 0;
 
-	Matrix Translation = Matrix::TranslationMatrix(X, Y, 0);
+    Matrix Translation = Matrix::TranslationMatrix(X, Y, 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
                                                             GL_DYNAMIC_DRAW);
 
-	return Position;
+    return Position;
 }
 
 } /* bakge */

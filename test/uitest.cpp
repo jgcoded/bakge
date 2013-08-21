@@ -48,12 +48,12 @@ bakge::Result InitTest()
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
 
-    memset((void*)Bitmap, 255, sizeof(Bitmap[0]) * 512 * 512 * 3);
+    memset((void*)Bitmap, 100, sizeof(Bitmap[0]) * 512 * 512 * 3);
 
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                 (void*)Bitmap);
 
-    E = bakge::Rectangle::Create(512, 512);
+    E = bakge::UIElement::Create(512, 512);
 
     GLint Location;
 

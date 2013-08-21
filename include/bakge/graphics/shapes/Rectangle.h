@@ -35,6 +35,7 @@ class BGE_API Rectangle : public Shape
 
 protected:
 
+	Vector4 Dimensions;
 	Rectangle();
 	BGE_FACTORY void AllocateGLBuffers(GLuint Normals, GLuint TexCoords, GLuint Indices);
 
@@ -45,7 +46,7 @@ public:
 
     BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
 
-    Vector4 BGE_NCP SetDimensions(Scalar X, Scalar Y);
+    Result BGE_NCP SetDimensions(Scalar X, Scalar Y);
 
     BGE_INL Vector4 BGE_NCP GetDimensions() const
     {
