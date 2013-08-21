@@ -40,13 +40,7 @@ typedef int ModField;
 /* Platform code for the key */
 typedef int ScanCode;
 
-#define KEY_STATE_PRESSED GLFW_PRESS
-#define KEY_STATE_RELEASED GLFW_RELEASE
-#define KEY_STATE_REPEAT GLFW_REPEAT
 typedef int KeyState;
-
-#define BUTTON_STATE_PRESSED GLFW_PRESS
-#define BUTTON_STATE_RELEASED GLFW_RELEASE
 typedef int ButtonState;
 
 

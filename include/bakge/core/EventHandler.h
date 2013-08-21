@@ -51,7 +51,7 @@ public:
     /*! @brief Called when a keyboard key is pressed or released
      *
      * @param[in] K The GLFW key identifier.
-     * @param[in] S The key state. Can be BGE_PRESS, BGE_RELEASE or BGE_REPEAT.
+     * @param[in] S The GLFW key state identifier.
      * @param[in] C The OS-specific key scan-code.
      * @param[in] M Active modifiers bitfield.
      * 
