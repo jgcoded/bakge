@@ -28,6 +28,8 @@ namespace bakge
 {
 
 Shader* Shader::GenericShader = NULL;
+GLuint Shader::VertexLib = 0;
+GLuint Shader::FragmentLib = 0;
 
 const char* VertexShaderLibSource =
     "#version 120\n"
@@ -103,8 +105,45 @@ const char* GenericFragmentShaderSource =
     "}\n"
     "\n";
 
+const char* FragmentShaderLibHeader =
+    "#version 120\n"
+    "\n"
+    "vec4 bgeColor();\n"
+    "\n";
+
+const char* VertexShaderLibHeader =
+    "#version 120\n"
+    "\n"
+    "vec4 bgeWorldTransform();\n"
+    "mat4x4 bgeProjection();\n";
+
 Result Shader::InitShaderLibrary()
 {
+    VertexLib = glCreateShader(GL_VERTEX_SHADER);
+    if(VertexLib == 0) {
+        printf("Error creating library vertex shader\n");
+        return BGE_FAILURE;
+    }
+
+    FragmentLib = glCreateShader(GL_FRAGMENT_SHADER);
+    if(FragmentLib == 0) {
+        printf("Error creating library fragment shader\n");
+        return BGE_FAILURE;
+    }
+
+    glShaderSource(VertexLib, 1, &VertexShaderLibSource, NULL);
+    glShaderSource(FragmentLib, 1, &FragmentShaderLibSource, NULL);
+
+    if(Compile(VertexLib) == BGE_FAILURE) {
+        printf("Error compiling library vertex shader\n");
+        return BGE_FAILURE;
+    }
+
+    if(Compile(FragmentLib) == BGE_FAILURE) {
+        printf("Error compiling library fragment shader\n");
+        return BGE_FAILURE;
+    }
+
     GenericShader = Shader::LoadFromStrings(1, 1, &GenericVertexShaderSource,
                                                 &GenericFragmentShaderSource);
     if(GenericShader == NULL) {
@@ -123,6 +162,9 @@ Result Shader::DeinitShaderLibrary()
 
     delete GenericShader;
     GenericShader = NULL;
+
+    glDeleteShader(VertexLib);
+    glDeleteShader(FragmentLib);
 
     return BGE_SUCCESS;
 }
@@ -155,6 +197,10 @@ Result Shader::Link()
     glAttachShader(Program, Vertex);
     glAttachShader(Program, Fragment);
 
+    // Attach library shaders
+    glAttachShader(Program, VertexLib);
+    glAttachShader(Program, FragmentLib);
+
     glLinkProgram(Program);
 
     return BGE_SUCCESS;
@@ -171,6 +217,10 @@ Result Shader::Unlink()
 
     glDetachShader(Program, Vertex);
     glDetachShader(Program, Fragment);
+
+    // Detach library shaders
+    glDetachShader(Program, VertexLib);
+    glDetachShader(Program, FragmentLib);
 
     return BGE_SUCCESS;
 }
@@ -256,8 +306,8 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     for(int i=1;i<=NumFragment;++i)
         FragmentShaderBuffer[i] = FragmentShaders[i-1];
 
-    FragmentShaderBuffer[0] = FragmentShaderLibSource;
-    VertexShaderBuffer[0] = VertexShaderLibSource;
+    FragmentShaderBuffer[0] = FragmentShaderLibHeader;
+    VertexShaderBuffer[0] = VertexShaderLibHeader;
 
     // Set our shaders' sources
     glShaderSource(S->Vertex, NumVertex + 1, VertexShaderBuffer, NULL);
