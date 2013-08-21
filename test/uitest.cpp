@@ -23,8 +23,15 @@
 * */
 
 #include <bakge/Bakge.h>
+#include "TestEngine.h"
 
 using bakge::UIElement;
+
+UIElement* E;
+bakge::Matrix View;
+bakge::Matrix Perspective;
+bakge::Texture* Tex;
+GLint ShaderProgram;
 
 void printVector(bakge::Vector4 vec)
 {
@@ -34,23 +41,86 @@ void printVector(bakge::Vector4 vec)
 }
 
 
+bakge::Result InitTest()
+{
+
+    E = new UIElement;
+
+    GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
+
+    memset((void*)Bitmap, 255, sizeof(Bitmap[0]) * 512 * 512 * 3);
+
+    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
+                                                (void*)Bitmap);
+
+    E = bakge::Rectangle::Create(512, 512);
+
+    GLint Location;
+
+    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
+    View.SetLookAt(bakge::Point(0, 0, 3),
+                   bakge::Point(0, 0, 0),
+                   bakge::UnitVector(0, 1, 0));
+
+    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
+    Location = glGetUniformLocation(GL_CURRENT_PROGRAM, "bge_Perspective");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
+    Location = glGetUniformLocation(GL_CURRENT_PROGRAM, "bge_View");
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result PreRenderTest()
+{
+    Tex->Bind();
+    E->Bind();
+
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result RenderTest()
+{
+    E->Draw();
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result PostRenderTest()
+{
+    Tex->Unbind();
+    E->Unbind();
+    return BGE_SUCCESS;
+}
+
+
+bakge::Result ShutDownTest()
+{
+    E->Unbind();
+    delete E;
+    return BGE_SUCCESS;
+}
+
+
 int main(int argc, char* argv[])
 {
 
-	bakge::Init(argc, argv);
+    bakge::Init(argc, argv);
 
-	UIElement* E = new UIElement;
-	E->Bind();
+    bakge::TestEngine* Engine = new bakge::TestEngine;
 
-	bakge::Vector4 Pos = E->SetPosition(1, 1);
+    Engine->SetInitializeCallback(InitTest);
+    Engine->SetPreRenderCallback(PreRenderTest);
+    Engine->SetRenderCallback(RenderTest);
+    Engine->SetPostRenderCallback(PostRenderTest);
+    Engine->SetShutDownCallback(ShutDownTest);
 
-	E->Unbind();
+    Engine->StartEngine();
 
-	printVector(Pos);
 
-	delete E;
+    bakge::Deinit();
 
-	bakge::Deinit();
-
-	return 0;
+    return 0;
 }
