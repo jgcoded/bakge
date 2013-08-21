@@ -30,17 +30,28 @@
 namespace bakge
 {
 
-/* GLFW key or button symbol */
+/*! @brief GLFW key identifier
+ */
 typedef int KeyID;
+
+/*! @brief GLFW mouse button identifier
+ */
 typedef int ButtonID;
 
-/* Bitfield containing active key modifiers */
+/*! @brief Bitfield containing pressed key modifiers
+ */
 typedef int ModField;
 
-/* Platform code for the key */
+/*! @brief Platform-specific code for a key
+ */
 typedef int ScanCode;
 
+/*! @brief Pressed, released or repeated key state
+ */
 typedef int KeyState;
+
+/*! @brief Pressed or released mouse button state
+ */
 typedef int ButtonState;
 
 /*! Check if shift key is pressed in modfield.
@@ -54,7 +65,6 @@ inline bool ShiftPressed(ModField M)
     return (M & GLFW_MOD_SHIFT) > 0 ? true : false;
 }
 
-
 /*! Check if alt key is pressed in modfield.
  *
  * @param[in] M The bitfield containing modifier states
@@ -66,7 +76,6 @@ inline bool AltPressed(ModField M)
     return (M & GLFW_MOD_ALT) > 0 ? true : false;
 }
 
-
 /*! Check if control key is pressed in modfield.
  *
  * @param[in] M The bitfield containing modifier states
@@ -77,7 +86,6 @@ inline bool ControlPressed(ModField M)
 {
     return (M & GLFW_MOD_CONTROL) > 0 ? true : false;
 }
-
 
 /*! Check if super key is pressed in modfield.
  *
