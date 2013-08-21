@@ -24,7 +24,24 @@
 
 #include <bakge/Bakge.h>
 
+using bakge::UIElement;
+
+void printVector(bakge::Vector4 vec)
+{
+    for(int i = 0; i < 3; ++i)
+        printf("[%d] = %f\n", i, vec[i]);
+    printf("\n");
+}
+
+
 int main(int argc, char* argv[])
 {
+
+	UIElement* E = new UIElement;
+
+	bakge::Vector4 Pos = E->SetPosition(1, 1);
+
+	printVector(Pos);
+
 	return 0;
 }
