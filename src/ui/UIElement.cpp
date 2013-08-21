@@ -46,9 +46,9 @@ Vector4 BGE_NCP UIElement::SetPosition(Scalar X, Scalar Y)
 
 	Matrix Translation = Matrix::TranslationMatrix(X, Y, 0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
-															   GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
+                                                            GL_DYNAMIC_DRAW);
 
 	return Position;
 }

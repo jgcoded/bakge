@@ -37,11 +37,20 @@ void printVector(bakge::Vector4 vec)
 int main(int argc, char* argv[])
 {
 
+	bakge::Init(argc, argv);
+
 	UIElement* E = new UIElement;
+	E->Bind();
 
 	bakge::Vector4 Pos = E->SetPosition(1, 1);
 
+	E->Unbind();
+
 	printVector(Pos);
+
+	delete E;
+
+	bakge::Deinit();
 
 	return 0;
 }
