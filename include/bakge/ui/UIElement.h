@@ -38,6 +38,8 @@ public:
     UIElement();
     ~UIElement();
 
+    Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
+
 }; /* UIElement */
 
 } /* bakge */
