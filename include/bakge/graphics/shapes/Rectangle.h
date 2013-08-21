@@ -35,9 +35,8 @@ class BGE_API Rectangle : public Shape
 
 protected:
 
-    Vector4 Dimensions;
-
-    Rectangle();
+	Rectangle();
+	BGE_FACTORY void AllocateGLBuffers(GLuint Normals, GLuint TexCoords, GLuint Indices);
 
 
 public:
