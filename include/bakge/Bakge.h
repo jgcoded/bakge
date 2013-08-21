@@ -168,6 +168,7 @@ extern "C"
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Camera.h>
 #include <bakge/ui/UIElement.h>
+#include <bakge/ui/UIHoverable.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
