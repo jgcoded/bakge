@@ -8,12 +8,10 @@ include(${BAKGE_SOURCE_DIR}/cmake/GetPhysFS.cmake)
 
 # Build GLFW with our modified CMake build
 set(GLFW_CLIENT_LIBRARY "opengl")
-configure_file(${BAKGE_SOURCE_DIR}/cmake/BuildGLFW.cmake ${GLFW_TARGET}/CMakeLists.txt COPYONLY)
 add_subdirectory(glfw-3.0)
 
 # Build PhysFS 2.0.3 (has its own CMake build)
-configure_file(${BAKGE_SOURCE_DIR}/cmake/BuildPhysFS.cmake
-                    ${PHYSFS_TARGET}/CMakeLists.txt COPYONLY)
+SET(PHYSFS_BUILD_TEST CACHE BOOL FALSE FORCE)
 add_subdirectory(physfs-2.0.3)
 
 # Builds external libraries
