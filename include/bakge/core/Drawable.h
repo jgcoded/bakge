@@ -30,6 +30,12 @@
 namespace bakge
 {
 
+/*! @brief Drawables must be bound before they can be drawn.
+ *
+ * A Drawable object implements the method Draw. This interface is typically
+ * used to pass objects to arbitrary Renderers so they can be drawn into the
+ * world.
+ */
 class BGE_API Drawable : public Bindable
 {
 
@@ -38,6 +44,11 @@ public:
     Drawable();
     virtual ~Drawable();
 
+    /*! @brief Draw the object after it has been bound.
+     *
+     * Draws the object to the screen. If other framebuffers are set they are
+     * instead drawn there.
+     */
     virtual Result Draw() const = 0;
 
 }; /* Drawable */
