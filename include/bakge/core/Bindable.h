@@ -30,6 +30,13 @@
 namespace bakge
 {
 
+/*! @brief Bindables must be bound before use, and unbound after use.
+ *
+ * Bindables are typically involved in graphics rendering. Calling Bind
+ * sets up the OpenGL state so that the object can be properly used
+ * for rendering. Bindables range from objects such as Renderers, Pawns
+ * or Meshes.
+ */
 class BGE_API Bindable
 {
 
@@ -38,11 +45,18 @@ public:
     Bindable();
     virtual ~Bindable();
 
-    /* *
-     * Bind and Unbind return results. A failed Bind means you shouldn't
-     * use the resource, as it is unsafe and can cause errors
-     * */
+    /*! @brief Bind the object for use
+     *
+     * Bind returns BGE_SUCCESS if the object can safely be used as intended.
+     * A BGE_FAILURE result means the object was not successfully bound,
+     * and use results in undefined behavior.
+     */
     virtual Result Bind() const = 0;
+
+    /*! @brief Unbind the object after use
+     *
+     * Unbind always returns BGE_SUCCESS.
+     */
     virtual Result Unbind() const = 0;
 
 }; /* Bindable */

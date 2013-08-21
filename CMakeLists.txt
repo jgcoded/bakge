@@ -4,6 +4,8 @@ cmake_minimum_required (VERSION 2.6)
 
 project(BAKGE)
 
+SET(BAKGE_VERSION_FULL "0.0.0")
+
 # Prevent build attempts on any unsupported platform
 if(NOT APPLE AND NOT WIN32 AND NOT UNIX)
   message(FATAL_ERROR "Bakge only builds on Windows, OS X or Linux")
@@ -260,6 +262,17 @@ foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
                                                 ${BAKGE_SDK_INC_PATH}/physfs)
 endforeach()
+
+# Build documentation target
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  # Generate a configured Doxyfile
+  set(BAKGE_DOC_DIR ${BAKGE_SDK_DIR}/doc)
+  configure_file(${BAKGE_SOURCE_DIR}/Doxyfile.in ${BAKGE_DOC_DIR}/Doxyfile @ONLY)
+  file(MAKE_DIRECTORY ${BAKGE_DOC_DIR})
+  add_custom_target(bakge_doc ALL ${DOXYGEN_EXECUTABLE} WORKING_DIRECTORY
+    ${BAKGE_DOC_DIR} COMMENT "Generating documentation for Bakge" VERBATIM)
+endif(DOXYGEN_FOUND)
 
 ###
 # ! NOTE: Lua headers are copied separately before the build, since
