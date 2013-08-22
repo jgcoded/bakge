@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Type.h
+ * @brief Contains Bakge type definitions and relevant defined symbols.
+ */
+
 #ifndef BAKGE_CORE_TYPE_H
 #define BAKGE_CORE_TYPE_H
 
@@ -30,24 +35,53 @@
 namespace bakge
 {
 
+/*! @brief Compare with a Result value to determine failure.
+ */
 #define BGE_FAILURE 1
+
+/*! @brief Compare with a Result value to determine success.
+ */
 #define BGE_SUCCESS 0
+
+/*! @brief Returned from many Bakge functions to describe operation results.
+ *
+ * Compare with BGE_FAILURE or BGE_SUCCESS to determine if the method succeeded
+ * or failed due to arbitrary errors.
+ */
 typedef int Result;
 
+/*! @brief An 8-bit type definition. Is not necessarily a printable character.
+ */
 typedef unsigned char Byte;
+
+/*! @brief Seconds are described as double-precision floating point numbers
+ */
 typedef double Seconds;
 
+/*! \cond HIDDEN_SYMBOLS
+ */
 #ifdef _WIN32
-typedef unsigned long long Microseconds;
+typedef unsigned long long __bge_uint64;
 #else
-typedef uint64_t Microseconds;
-#endif
+typedef uint64_t __bge_uint64;
+#endif /* _WIN32 */
+/*! \endcond
+ */
 
-/* *
- * GLFW uses doubles for its mouse/scroll motion measurements.
- * Better to just deal with doubles than with casting to integral types
- * */
+/*! @brief An unsigned 64-bit integral type.
+ *
+ * A Microsecond is 1 millionth (1 E -6) of a second. The largest duration
+ * that can be stored is around 600,000 years, as compared to around 1 minute
+ * with a 32 bit unsigned integer.
+ */
+typedef __bge_uint64 Microseconds;
+
+/*! @brief Used to describe mouse/joystick motion or positions.
+ */
 typedef double DeviceMotion;
+
+/*! @brief Used to describe a mouse or screen position
+ */
 typedef double DeviceCoord;
 
 } /* bakge */
