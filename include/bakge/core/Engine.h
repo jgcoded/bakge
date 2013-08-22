@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Engine.h
+ * @brief Contains Engine interface declaration.
+ */
+
 #ifndef BAKGE_CORE_ENGINE_H
 #define BAKGE_CORE_ENGINE_H
 

@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Bakge.h
+ * @brief Common header. Includes all Bakge public classes and API
+ */
+
 #ifndef BAKGE_BAKGE_H
 #define BAKGE_BAKGE_H
 

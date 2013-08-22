@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Drawable.h
+ * @brief Contains Drawable interface declaration.
+ */
+
 #ifndef BAKGE_API_DRAWABLE_H
 #define BAKGE_API_DRAWABLE_H
 

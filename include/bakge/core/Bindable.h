@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Bindable.h
+ * @brief Contains Bindable interface declaration.
+ */
+
 #ifndef BAKGE_CORE_BINDABLE_H
 #define BAKGE_CORE_BINDABLE_H
 
