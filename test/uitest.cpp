@@ -31,33 +31,25 @@ UIElement* E;
 bakge::Matrix View;
 bakge::Matrix Perspective;
 bakge::Texture* Tex;
+bakge::Pawn* It;
 GLint ShaderProgram;
-
-void printVector(bakge::Vector4 vec)
-{
-    for(int i = 0; i < 3; ++i)
-        printf("[%d] = %f\n", i, vec[i]);
-    printf("\n");
-}
-
 
 bakge::Result InitTest()
 {
 
-    E = new UIElement;
+    glEnable(GL_DEPTH_TEST);
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
 
-    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
+    memset((void*)Bitmap, 255, sizeof(Bitmap[0]) * 512 * 512 * 3);
 
-    for(int i=0;i< 512*512*3;++i)
-        Bitmap[i] = 255;
-
+    It = bakge::Pawn::Create();
+    It->SetPosition(0, 0, 0);
 
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                 (void*)Bitmap);
 
-    E = bakge::UIElement::Create(512, 512);
+    E = bakge::UIElement::Create(0.8f, 0.5f);
 
     GLint Location;
 
@@ -67,10 +59,12 @@ bakge::Result InitTest()
                    bakge::UnitVector(0, 1, 0));
 
     glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    Location = glGetUniformLocation(GL_CURRENT_PROGRAM, "bge_Perspective");
+    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
-    Location = glGetUniformLocation(GL_CURRENT_PROGRAM, "bge_View");
+    Location = glGetUniformLocation(ShaderProgram, "bge_View");
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+
+    delete[] Bitmap;
 
     return BGE_SUCCESS;
 }
@@ -80,6 +74,7 @@ bakge::Result PreRenderTest()
 {
     Tex->Bind();
     E->Bind();
+    It->Bind();
 
     return BGE_SUCCESS;
 }
@@ -94,6 +89,7 @@ bakge::Result RenderTest()
 
 bakge::Result PostRenderTest()
 {
+    It->Unbind();
     E->Unbind();
     Tex->Unbind();
     return BGE_SUCCESS;
@@ -102,8 +98,15 @@ bakge::Result PostRenderTest()
 
 bakge::Result ShutDownTest()
 {
-    E->Unbind();
-    delete E;
+    if(E != NULL)
+        delete E;
+
+    if(Tex != NULL)
+        delete Tex;
+
+    if(It != NULL)
+        delete It;
+
     return BGE_SUCCESS;
 }
 
