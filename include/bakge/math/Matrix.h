@@ -49,11 +49,6 @@ class BGE_API Matrix
         {
             Scalar Val[16];
         };
-
-        struct
-        {
-            Vector4 Col[4];
-        };
     };
 
 

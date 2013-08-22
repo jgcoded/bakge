@@ -74,10 +74,22 @@ Matrix::Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
 Matrix::Matrix(Vector4 BGE_NCP A, Vector4 BGE_NCP B, Vector4 BGE_NCP C,
                                                     Vector4 BGE_NCP D)
 {
-    Col[0] = A;
-    Col[1] = B;
-    Col[2] = C;
-    Col[3] = D;
+    Val[0] = A[0];
+    Val[1] = A[1];
+    Val[2] = A[2];
+    Val[3] = A[3];
+    Val[4] = B[0];
+    Val[5] = B[1];
+    Val[6] = B[2];
+    Val[7] = B[3];
+    Val[8] = C[0];
+    Val[9] = C[1];
+    Val[10] = C[2];
+    Val[11] = C[3];
+    Val[12] = D[0];
+    Val[13] = D[1];
+    Val[14] = D[2];
+    Val[15] = D[3];
 }
 
 
@@ -129,7 +141,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Col[0] = Messenger;
+    Val[0] = Messenger[0];
+    Val[1] = Messenger[1];
+    Val[2] = Messenger[2];
+    Val[3] = Messenger[3];
 
     T1 = _mm_set1_ps(Val[4]);
     T2 = _mm_mul_ps(C1, T1);
@@ -141,7 +156,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Col[1] = Messenger;
+    Val[4] = Messenger[0];
+    Val[5] = Messenger[1];
+    Val[6] = Messenger[2];
+    Val[7] = Messenger[3];
 
     T1 = _mm_set1_ps(Val[8]);
     T2 = _mm_mul_ps(C1, T1);
@@ -153,7 +171,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Col[2] = Messenger;
+    Val[8] = Messenger[0];
+    Val[9] = Messenger[1];
+    Val[10] = Messenger[2];
+    Val[11] = Messenger[3];
 
     T1 = _mm_set1_ps(Val[12]);
     T2 = _mm_mul_ps(C1, T1);
@@ -165,7 +186,10 @@ Matrix BGE_NCP Matrix::operator*=(Matrix BGE_NCP Other)
     T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
 
     _mm_store_ps(&Messenger[0], T2);
-    Col[3] = Messenger;
+    Val[12] = Messenger[0];
+    Val[13] = Messenger[1];
+    Val[14] = Messenger[2];
+    Val[15] = Messenger[3];
 #else
     Matrix Result;
     memset((void*)&Result[0], 0, sizeof(Scalar) * 16);

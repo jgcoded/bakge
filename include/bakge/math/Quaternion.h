@@ -49,11 +49,6 @@ class BGE_API Quaternion
     {
         struct
         {
-            Vector4 Components;
-        };
-
-        struct
-        {
             Scalar Vec[3];
             Scalar Real;
         };
@@ -70,6 +65,7 @@ public:
     Quaternion();
     Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP Real);
     Quaternion(Quaternion BGE_NCP Other);
+    Quaternion(Scalar X, Scalar Y, Scalar Z, Scalar W);
     ~Quaternion();
 
     Matrix ToMatrix() const;
