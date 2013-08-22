@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Renderer.h
+ * @brief Contains Renderer interface declaration.
+ */
+
 #ifndef BAKGE_CORE_RENDERER_H
 #define BAKGE_CORE_RENDERER_H
 
@@ -30,6 +35,12 @@
 namespace bakge
 {
 
+/*! @brief Renderers are objects which render scene objects.
+ *
+ * Some renderers may have subcomponents which internally manage OpenGL
+ * state for their rendering. A simple renderer may simply render directly
+ * to the screen or render to texture, such as a deferred renderer.
+ */
 class BGE_API Renderer : public Bindable
 {
 
@@ -38,6 +49,8 @@ public:
     Renderer();
     virtual ~Renderer();
 
+    /*! @brief Render a Drawable object
+     */
     virtual Result Draw(Drawable* Obj) = 0;
 
 }; /* Renderer */
