@@ -43,9 +43,6 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     Rectangle* R = new Rectangle;
 
     R->NumIndices = 6;
-    R->NumTriangles = 2;
-    R->NumVertices = 4;
-
 
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
@@ -108,29 +105,27 @@ void Rectangle::AllocateGLBuffers(GLuint NormalsBuffer, GLuint TexCoordsBuffer, 
 
 Result BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
-    Dimensions[0] = Width;
-    Dimensions[1] = Height;
+    glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
+    glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
 
     Scalar Vertices[12];
 
-    Width /= 2;
-    Height /= 2;
-
-    Vertices[0] = -Width;
-    Vertices[1] = -Height;
+    Vertices[0] = -Width / 2.0f;
+    Vertices[1] = -Height / 2.0f;
     Vertices[2] = 0;
-    Vertices[3] = -Width;
-    Vertices[4] = +Height;
+    Vertices[3] = -Width / 2.0f;
+    Vertices[4] = +Height / 2.0f;
     Vertices[5] = 0;
-    Vertices[6] = +Width;
-    Vertices[7] = +Height;
+    Vertices[6] = +Width / 2.0f;
+    Vertices[7] = +Height / 2.0f;
     Vertices[8] = 0;
-    Vertices[9] = +Width;
-    Vertices[10] = -Height;
+    Vertices[9] = +Width / 2.0;
+    Vertices[10] = -Height / 2.0f;
     Vertices[11] = 0;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(Vertices[0]) * 12, Vertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 12, Vertices,
+                                                        GL_STATIC_DRAW);
 
     Unbind();
 

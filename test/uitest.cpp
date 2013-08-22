@@ -48,7 +48,11 @@ bakge::Result InitTest()
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
 
-    memset((void*)Bitmap, 100, sizeof(Bitmap[0]) * 512 * 512 * 3);
+    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
+
+    for(int i=0;i< 512*512*3;++i)
+        Bitmap[i] = 255;
+
 
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                 (void*)Bitmap);
@@ -90,8 +94,8 @@ bakge::Result RenderTest()
 
 bakge::Result PostRenderTest()
 {
-    Tex->Unbind();
     E->Unbind();
+    Tex->Unbind();
     return BGE_SUCCESS;
 }
 

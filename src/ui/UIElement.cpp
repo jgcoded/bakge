@@ -39,11 +39,10 @@ UIElement::~UIElement()
 
 UIElement* UIElement::Create(Scalar Width, Scalar Height)
 {
+    
     UIElement* U = new UIElement;
 
     U->NumIndices = 6;
-    U->NumTriangles = 2;
-    U->NumVertices = 4;
 
     if(U->CreateBuffers() != BGE_SUCCESS) {
         delete U;

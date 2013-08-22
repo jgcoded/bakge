@@ -38,7 +38,7 @@ public:
     UIElement();
     ~UIElement();
 
-    BGE_FACTORY UIElement* Create(Scalar X, Scalar Y);
+    BGE_FACTORY UIElement* Create(Scalar Width, Scalar Height);
     Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
 
 }; /* UIElement */
