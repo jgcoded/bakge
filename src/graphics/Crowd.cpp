@@ -153,6 +153,8 @@ Result Crowd::Reserve(int NumMembers)
         Scales[i * 3 + 2] = 1;
     }
 
+    glGenBuffers(1, &CrowdBuffer);
+
     /* Allocates the buffer */
     glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 16 * NumMembers,
