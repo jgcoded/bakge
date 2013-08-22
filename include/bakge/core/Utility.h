@@ -22,12 +22,22 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Utility.h
+ * @brief Contains utility functions and macros declarations.
+ */
 #ifndef BAKGE_CORE_UTILITY_H
 #define BAKGE_CORE_UTILITY_H
 
 #include <bakge/Bakge.h>
 
 #ifdef _DEBUG
+/*! @brief Simple assert macro.
+ *
+ * If predicate PRED evaluates to false, an error message is sent to
+ * stderr with the file and line location of the failed assertion, and the
+ * program exits.
+ */
 #define BGE_ASSERT(PRED) \
     if(!(PRED)) { \
         fprintf(stderr, "Assertion failed at line %d in file %s\n" \
@@ -36,6 +46,12 @@
         exit(-1); \
     }
 
+/*! @brief Extended assert macro.
+ *
+ * If predicate PRED evaluates to false, the message MSG is sent to
+ * stderr with the file and line location of the failed assertion, and the
+ * program exits.
+ */
 #define BGE_ASSERT_EX(PRED, MSG) \
     if(!(PRED)) { \
         fprintf(stderr, "%s: at line %d in file %s\n" \
@@ -51,9 +67,25 @@
 namespace bakge
 {
 
+/*! @brief Initialize Bakge and all its components.
+ *
+ * Init must be called before any Bakge class or method can safely be used.
+ * Calling Init twice or failing to match it with a corresponding Deinit call
+ * before your program exits can cause crashes or memory leaks.
+ */
 BGE_FUNC Result Init(int argc, char* argv[]);
+
+/*! @brief Deinitialize Bakge and clean up any resources allocated by Init.
+ *
+ * Deinit must be called before your program exits. This function cleans up
+ * internal resources that were allocated when Init was called. Calling
+ * Deinit when not preceded by an Init call may result in crashes or memory
+ * leaks.
+ */
 BGE_FUNC Result Deinit();
 
+/*! @brief Print computer system and OpenGL version info to stdou
+ */
 BGE_FUNC void SystemInfo();
 
 BGE_WUNUSED BGE_FUNC Byte* LoadFileContents(const char* Path);
