@@ -22,7 +22,8 @@
  * THE SOFTWARE.
  * */
 
-/*! @file Input.h
+/*!
+ * @file Input.h
  * @brief Contains typedefs and methods for processing key and mouse input
  */
 
