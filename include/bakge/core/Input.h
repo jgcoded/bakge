@@ -58,7 +58,7 @@ typedef int KeyState;
  */
 typedef int ButtonState;
 
-/*! Check if shift key is pressed in modfield.
+/*! @brief Check if shift key is pressed in modfield.
  *
  * @param[in] M The bitfield containing modifier states
  *
@@ -69,7 +69,7 @@ inline bool ShiftPressed(ModField M)
     return (M & GLFW_MOD_SHIFT) > 0 ? true : false;
 }
 
-/*! Check if alt key is pressed in modfield.
+/*! @brief Check if alt key is pressed in modfield.
  *
  * @param[in] M The bitfield containing modifier states
  *
@@ -80,7 +80,7 @@ inline bool AltPressed(ModField M)
     return (M & GLFW_MOD_ALT) > 0 ? true : false;
 }
 
-/*! Check if control key is pressed in modfield.
+/*! @brief Check if control key is pressed in modfield.
  *
  * @param[in] M The bitfield containing modifier states
  *
@@ -91,7 +91,7 @@ inline bool ControlPressed(ModField M)
     return (M & GLFW_MOD_CONTROL) > 0 ? true : false;
 }
 
-/*! Check if super key is pressed in modfield.
+/*! @brief Check if super key is pressed in modfield.
  *
  * The super key differs in appearance and name across hardware and operating
  * systems. On Windows, the super key is the Windows key; on OS it is the
