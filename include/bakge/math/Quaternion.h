@@ -45,19 +45,7 @@ namespace bakge
  * */
 class BGE_API Quaternion
 {
-    union
-    {
-        struct
-        {
-            Scalar Vec[3];
-            Scalar Real;
-        };
-
-        struct
-        {
-            Scalar X, Y, Z, W;
-        };
-    };
+    Vector4 Val;
 
 
 public:
