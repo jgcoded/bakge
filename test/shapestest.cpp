@@ -31,8 +31,7 @@ bakge::Cube* Obj;
 bakge::Pawn* It;
 bakge::Texture* Tex;
 GLint ShaderProgram;
-bakge::Matrix Perspective;
-bakge::Matrix View;
+bakge::Camera* TestCam;
 GLubyte* Bitmap;
 
 float Rot;
@@ -83,19 +82,8 @@ bakge::Result InitTest()
 
     It->SetPosition(0, 0, 0);
 
-    GLint Location;
-
-    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
-    View.SetLookAt(
-        bakge::Point(0, 0, 3),
-        bakge::Point(0, 0, 0),
-        bakge::UnitVector(0, 1, 0)
-    );
-    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
-    Location = glGetUniformLocation(ShaderProgram, "bge_View");
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+    TestCam = new bakge::Camera;
+    TestCam->SetPosition(0, 0, 3);
 
     return BGE_SUCCESS;
 }
@@ -108,13 +96,7 @@ bakge::Result UpdateTest(bakge::Seconds Delta)
     LastTime = NowTime;
 
     Rot += 1.0f * DeltaTime;
-    View.SetLookAt(
-        bakge::Point(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f),
-        bakge::Point(0.0f, 0, 0.0f),
-        bakge::UnitVector(0, 1, 0)
-    );
-    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
+    TestCam->SetPosition(cosf(Rot) * 0.9f, 0.5f, sinf(Rot) * 0.9f);
 
     return BGE_SUCCESS;
 }
@@ -122,6 +104,7 @@ bakge::Result UpdateTest(bakge::Seconds Delta)
 
 bakge::Result PreRenderTest()
 {
+    TestCam->Bind();
     Tex->Bind();
     Obj->Bind();
     It->Bind();
@@ -143,7 +126,7 @@ bakge::Result PostRenderTest()
     It->Unbind();
     Obj->Unbind();
     Tex->Unbind();
-
+    TestCam->Unbind();
     return BGE_SUCCESS;
 }
 
