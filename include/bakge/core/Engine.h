@@ -49,7 +49,19 @@ class BGE_API Engine
 
 public:
 
+    /*! @brief Default Engine constructor
+     *
+     * Most classes in Bakge are not explicitly instantiable. You must create
+     * one using an appropriate factory function. As this interface is simply
+     * a guide when creating your engine class, you can implement your own
+     * techniques for allocating and configuring new instances.
+     */
     Engine();
+
+    /*! @brief Pure-virtual Engine destructor
+     *
+     * Engine is an abstract interface class.
+     */
     virtual ~Engine() = 0;
 
     /*! @brief Initialize the Engine and its components
