@@ -24,7 +24,7 @@
 
 /*!
  * @file Input.h
- * @brief Contains typedefs and methods for processing key and mouse input
+ * @brief Contains typedefs and methods for processing key and mouse input.
  */
 
 #ifndef BAKGE_CORE_INPUT_H
