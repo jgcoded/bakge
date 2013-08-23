@@ -22,11 +22,21 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_OSX_BAKGE_H
-#define BAKGE_PLATFORM_OSX_BAKGE_H
+#ifndef BAKGE_PLATFORM_WIN32_H
+#define BAKGE_PLATFORM_WIN32_H
 
-#include <bakge/mutex/osx_Mutex.h>
-#include <bakge/thread/osx_Thread.h>
-#include <bakge/socket/osx_Socket.h>
+/* Disable some pesky MSVC warnings */
+#pragma warning(disable : 4193)
+#pragma warning(disable : 4005)
+#define _CRT_SECURE_NO_WARNINGS
 
-#endif /* BAKGE_PLATFORM_OSX_BAKGE_H */
+#ifndef WIN32_LEAN_AND_MEAN /* Really? */
+#define WIN32_LEAN_AND_MEAN
+#endif /* WIN32_LEAN_AND_MEAN */
+
+#include <windows.h>
+#include <winsock2.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+
+#endif /* BAKGE_PLATFORM_WIN32 */

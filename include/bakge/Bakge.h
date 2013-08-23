@@ -110,6 +110,15 @@ extern "C"
 #include <stb/stb_truetype.h>
 #define STB_TRUETYPE_IMPLEMENTATION
 
+/* Platform headers */
+#ifdef __linux__
+#include <bakge/platform/x11.h>
+#elif defined(_WIN32)
+#include <bakge/platform/win32.h>
+#elif defined(__APPLE__)
+#include <bakge/platform/osx.h>
+#endif /* __linux__ */
+
 /* Include core Bakge classes and headers */
 #include <bakge/core/Type.h>
 #include <bakge/core/Input.h>
@@ -141,7 +150,7 @@ extern "C"
 /* Utility headers */
 #include <bakge/input/XBoxController.h>
 
-/* Platform headers (may depend on core Bakge classes) */
+/* Platform implementation classes */
 #ifdef __linux__
 #include <bakge/platform/x11_Bakge.h>
 #elif defined(_WIN32)

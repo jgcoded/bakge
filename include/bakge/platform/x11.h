@@ -22,11 +22,15 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_PLATFORM_OSX_BAKGE_H
-#define BAKGE_PLATFORM_OSX_BAKGE_H
+#ifndef BAKGE_PLATFORM_X11_H
+#define BAKGE_PLATFORM_X11_H
 
-#include <bakge/mutex/osx_Mutex.h>
-#include <bakge/thread/osx_Thread.h>
-#include <bakge/socket/osx_Socket.h>
+#include <GL/glu.h>
+#include <sys/time.h>
+#include <time.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
 
-#endif /* BAKGE_PLATFORM_OSX_BAKGE_H */
+#endif /* BAKGE_PLATFORM_X11 */

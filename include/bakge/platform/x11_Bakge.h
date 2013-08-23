@@ -25,14 +25,6 @@
 #ifndef BAKGE_PLATFORM_X11_BAKGE_H
 #define BAKGE_PLATFORM_X11_BAKGE_H
 
-#include <GL/glu.h>
-#include <sys/time.h>
-#include <time.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-
 #include <bakge/mutex/x11_Mutex.h>
 #include <bakge/thread/x11_Thread.h>
 #include <bakge/socket/x11_Socket.h>
