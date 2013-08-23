@@ -38,6 +38,17 @@ enum BGE_SHAPE_STYLE
     BGE_SHAPE_STYLE_EDGE
 };
 
+/*! @brief Shapes are special mesh objects with configurable dimensions.
+ *
+ * Shapes' dimensions modifiable at run-time, unlike a typical Mesh whose
+ * dimensions are stored in a file and loaded into memory. Shape is simply
+ * a base class from which instantiable sub-classes such as Cube or Sphere
+ * inherit. Each shape type implements unique interfaces for modifying or
+ * accessing its data.
+ *
+ * @note Future versions may see the removal of the Shape class, as it
+ * currently implements functionality which Mesh may implement.
+ */
 class BGE_API Shape : public Mesh
 {
 
