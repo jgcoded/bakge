@@ -50,7 +50,16 @@ class BGE_API EventHandler
 
 public:
 
+    /*! @brief Default EventHandler constructor
+     *
+     * Default EventHandler constructor
+     */
     EventHandler();
+
+    /*! @brief Pure-virtual EventHandler destructor
+     *
+     * EventHandler is an abstract interface class.
+     */
     virtual ~EventHandler();
 
     /*! @brief Called when a keyboard key is pressed or released
