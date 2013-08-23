@@ -57,12 +57,18 @@ public:
      * Engines require starting. Implementations of this method should
      * initialize all of the engine's components such as Renderers, UIs
      * and scene managers.
+     *
+     * @retval BGE_SUCCESS if engine initialization was successful, BGE_FAILURE
+     * otherwise.
      */
     virtual Result Initialize() = 0;
 
     /*! @brief Shut down the engine and do clean up
      *
      * Clean up code should be done in this method instead of the destructor.
+     *
+     * @retval BGE_SUCCESS if the engine was successfully shut down,
+     * BGE_FAILURE if any errors occurred.
      */
     virtual Result ShutDown() = 0;
 
@@ -70,6 +76,9 @@ public:
      *
      * The Run method should house the engine's main loop, which updates the
      * game world and renders it to the screen.
+     *
+     * @retval The exit code for the engine. Typically zero means no error
+     * while any non-zero represents an arbitrary error.
      */
     virtual int Run() = 0;
 
@@ -78,6 +87,9 @@ public:
      * Time between Update calls should be measured and sent to the next
      * call as the DeltaTime parameter. This keeps the world updated at
      * a constant speed.
+     *
+     * @retval BGE_SUCCESS if the application successfully updated, and
+     * BGE_FAILURE if any error occurred.
      */
     virtual Result Update(Seconds DeltaTime) = 0;
 
@@ -85,12 +97,18 @@ public:
      *
      * This method will typically clear framebuffers and set up state for
      * rendering objects from the scene.
+     *
+     * @retval BGE_SUCCESS if the engine is ready for the RenderStage, or
+     * BGE_FAILURE if any error occurred.
      */
     virtual Result PreRenderStage() = 0;
 
     /*! @brief Render the scene
      *
      * Render the scene's objects in this method.
+     *
+     * @retval BGE_SUCCESS if rendering completed successfully, and BGE_FAILURE
+     * if any errors occurred.
      */
     virtual Result RenderStage() = 0;
 
@@ -99,6 +117,9 @@ public:
      * This method will typically do things like blitting framebuffers,
      * swapping window buffers or setting default OpenGL state to protect
      * data from unintentional modification.
+     *
+     * @retval BGE_SUCCESS if the post-render stage completed successfully,
+     * and BGE_FAILURE if any errors occurred.
      */
     virtual Result PostRenderStage() = 0;
 
