@@ -83,6 +83,7 @@ Vector4 Vector(Scalar X, Scalar Y, Scalar Z)
 Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
 {
     Scalar Len = sqrt(X * X + Y * Y + Z * Z);
+
     return Vector4(X / Len, Y / Len, Z / Len, 0);
 }
 
