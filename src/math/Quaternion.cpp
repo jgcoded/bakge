@@ -34,11 +34,11 @@ Quaternion::Quaternion()
 }
 
 
-Quaternion::Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP R)
+Quaternion::Quaternion(Vector4 BGE_NCP V, Scalar BGE_NCP R)
 {
-    X = Vec[0];
-    Y = Vec[1];
-    Z = Vec[2];
+    X = V[0];
+    Y = V[1];
+    Z = V[2];
     W = R;
 }
 
