@@ -43,6 +43,8 @@ namespace bakge
 class BGE_API Shader : public Bindable
 {
     static Shader* GenericShader;
+    static GLuint VertexLib;
+    static GLuint FragmentLib;
     friend Window* Window::Create(int, int);
 
     static Result InitShaderLibrary();
