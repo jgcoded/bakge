@@ -69,12 +69,23 @@ class BGE_API Window : public Bindable
         double Y;
     } ScrollCache;
 
+    /*! @brief Default Window constructor
+     *
+     * Windows are not explicitly instantiable. The factory function Create
+     * allocates and configures a new Window instance.
+     *
+     * @see Window::Create
+     */
     Window();
 
 
 public:
 
-    ~Window();
+    /*! @brief Virtual Window destructor
+     *
+     * Virtual Window destructor
+     */
+    virtual ~Window();
 
     /*! @brief Create and initialize a Window
      *
