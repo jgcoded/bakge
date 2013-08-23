@@ -87,7 +87,9 @@ public:
     /*! @brief Run the Engine, entering the main loop
      *
      * The Run method should house the engine's main loop, which updates the
-     * game world and renders it to the screen.
+     * game world and renders it to the screen. Bakge does not control your
+     * engine's main loop. You will have to measure time between updates and
+     * dispatch Update and render stage calls yourself.
      *
      * @retval The exit code for the engine. Typically zero means no error
      * while any non-zero represents an arbitrary error.
@@ -99,6 +101,8 @@ public:
      * Time between Update calls should be measured and sent to the next
      * call as the DeltaTime parameter. This keeps the world updated at
      * a constant speed.
+     *
+     * @param[in] DeltaTime Time in seconds since the last update call.
      *
      * @retval BGE_SUCCESS if the application successfully updated, and
      * BGE_FAILURE if any error occurred.
