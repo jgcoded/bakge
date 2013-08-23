@@ -39,6 +39,12 @@ Quaternion::Quaternion(Vector4 BGE_NCP V, Scalar BGE_NCP R)
 }
 
 
+Quaternion::Quaternion(Vector4 BGE_NCP Components)
+{
+    Val = Components;
+}
+
+
 Quaternion::Quaternion(Scalar X, Scalar Y, Scalar Z, Scalar W)
 {
     Val[0] = X;

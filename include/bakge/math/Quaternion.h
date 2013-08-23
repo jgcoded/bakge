@@ -53,6 +53,7 @@ public:
     Quaternion();
     Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP Real);
     Quaternion(Quaternion BGE_NCP Other);
+    Quaternion(Vector4 BGE_NCP Components);
     Quaternion(Scalar X, Scalar Y, Scalar Z, Scalar W);
     ~Quaternion();
 
