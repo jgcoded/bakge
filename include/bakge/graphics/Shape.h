@@ -45,18 +45,57 @@ protected:
 
     GLenum DrawStyle;
 
+    /*! @brief Default Shape constructor.
+     *
+     * Shape is not explicitly instantiable. Different types of shapes such as
+     * cubes and spheres have different interfaces for setting, manipulating
+     * and accessing dimension data. As such, only these sub-classes will be
+     * able to create new instances through appropriate factory functions.
+     */
     Shape();
 
 
 public:
 
-    ~Shape();
+    /*! @brief Pure-virtual Shape destructor.
+     *
+     * Pure-virtual Shape destructor.
+     */
+    virtual ~Shape() = 0;
 
+    /*! @brief Bind the Shape for use in drawing.
+     *
+     * Bind the Shape for use in drawing.
+     *
+     * @retval BGE_SUCCESS if the shape is ready to be drawn, or BGE_FAILURE
+     * if any errors occurred.
+     */
     Result Bind() const;
+
+    /*! @brief Unbind the shape.
+     *
+     * Unbind the shape.
+     *
+     * @retval BGE_SUCCESS if the shape was successfully unbound, or
+     * BGE_FAILURE if any errors occurred.
+     */
     Result Unbind() const;
 
+    /*! @brief Change the draw mode of the shape
+     *
+     * Shapes may be drawn in different styles: a point cloud, wireframe mesh
+     * or solid mesh.
+     *
+     * @retval BGE_SUCCESS if the shape's draw style was successfully changed,
+     * or BGE_FAILURE if any errors occurred.
+     */
     Result SetDrawStyle(BGE_SHAPE_STYLE Style);
 
+    /*! @brief Draw the shape.
+     *
+     * @retval BGE_SUCCESS if the shape was successfully drawn, or BGE_FAILURE
+     * if any errors occurred.
+     */
     virtual Result Draw() const;
 
 }; /* Shape */
