@@ -69,6 +69,9 @@ class BGE_API Window : public Bindable
         double Y;
     } ScrollCache;
 
+
+protected:
+
     /*! @brief Default Window constructor
      *
      * Windows are not explicitly instantiable. The factory function Create
