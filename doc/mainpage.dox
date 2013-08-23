@@ -1,0 +1,12 @@
+/*!
+ * @mainpage
+ *
+ * @section intro Introduction
+ *
+ * Bakge is a game engine and software project with two major goals. The first 
+ * and foremost is to provide a partial and compact abstraction over OpenGL and 
+ * other third-party libraries, to simplify programmatic approaches to game and 
+ * game engine development using C++. The second is to provide a development
+ * kit with which developers can create a 2D or 3D game using Lua, similar to
+ * [Love2D](http://www.love2d.org).
+ */
