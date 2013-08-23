@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Window.h
+ * @brief Contains Window class declaration.
+ */
+
 #ifndef BAKGE_CORE_WINDOW_H
 #define BAKGE_CORE_WINDOW_H
 
