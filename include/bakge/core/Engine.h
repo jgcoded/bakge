@@ -39,7 +39,10 @@ namespace bakge
  *
  * This interface serves as a guide and framework when designing your
  * engine class. By no means is it required, but many typical game engines
- * will be implemented very similarly to this.
+ * will be implemented very similarly to this. By no means does your engine
+ * implementation have to implement this interface, and even if you do
+ * your implementation is entirely up to you, including how to handle errors
+ * and determine how to report Results from each of the methods.
  */
 class BGE_API Engine
 {
