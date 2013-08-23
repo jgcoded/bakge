@@ -64,7 +64,7 @@ Vector4::~Vector4()
 
 Vector4 Vector4::operator-() const
 {
-    return Vector4(-Val[0], -Val[1], -Val[2], Val[3]);
+    return Vector4(-Val[0], -Val[1], -Val[2], -Val[3]);
 }
 
 
@@ -115,6 +115,7 @@ Vector4 BGE_NCP Vector4::operator+=(Vector4 BGE_NCP Other)
     Val[0] += Other[0];
     Val[1] += Other[1];
     Val[2] += Other[2];
+    Val[3] += Other[3];
 
     return *this;
 }
@@ -125,6 +126,7 @@ Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
     Val[0] -= Other[0];
     Val[1] -= Other[1];
     Val[2] -= Other[2];
+    Val[3] -= Other[3];
 
     return *this;
 }
@@ -135,6 +137,7 @@ Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
     Val[0] *= Value;
     Val[1] *= Value;
     Val[2] *= Value;
+    Val[3] *= Value;
 
     return *this;
 }
@@ -150,6 +153,7 @@ Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
     Val[0] /= Value;
     Val[1] /= Value;
     Val[2] /= Value;
+    Val[3] /= Value;
 
     return *this;
 }
@@ -169,6 +173,7 @@ Vector4 BGE_NCP Vector4::Normalize()
     Val[0] /= Len;
     Val[1] /= Len;
     Val[2] /= Len;
+    Val[3] /= Len;
 
     return *this;
 }
@@ -179,13 +184,14 @@ Vector4 Vector4::Normalized() const
     Scalar Len;
 
     Len = Length();
-    return Vector4(Val[0] / Len, Val[1] / Len, Val[2] / Len, 0);
+    return Vector4(Val[0] / Len, Val[1] / Len, Val[2] / Len, Val[3] / Len);
 }
 
 
 Scalar Vector4::LengthSquared() const
 {
-    return Scalar(Val[0] * Val[0] + Val[1] * Val[1] + Val[2] * Val[2]);
+    return Scalar(Val[0] * Val[0] + Val[1] * Val[1] + Val[2] * Val[2]
+                                                + Val[3] * Val[3]);
 }
 
 
@@ -197,7 +203,8 @@ Scalar Vector4::Length() const
 
 Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
-    return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2];
+    return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2]
+                                                    + Left[3] * Right[3];
 }
 
 
@@ -228,7 +235,8 @@ Vector4 Vector4::operator-(Vector4 BGE_NCP Other) const
 
 Vector4 Vector4::operator*(Scalar BGE_NCP Value) const
 {
-    return Vector4(Val[0] * Value, Val[1] * Value, Val[2] * Value, Val[3]);
+    return Vector4(Val[0] * Value, Val[1] * Value, Val[2] * Value,
+                                                    Val[3] * Value);
 }
 
 
@@ -239,7 +247,8 @@ Vector4 Vector4::operator/(Scalar BGE_NCP Value) const
         return *this;
     }
 
-    return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value, Val[3]);
+    return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value,
+                                                    Val[3] / Value);
 }
 
 } /* bakge */
