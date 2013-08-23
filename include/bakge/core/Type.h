@@ -35,6 +35,22 @@
 namespace bakge
 {
 
+/*! @cond HIDDEN_SYMBOLS
+ */
+#ifdef _WIN32
+typedef UINT64 uint64;
+typedef INT64 int64;
+typedef UINT32 uint32;
+typedef INT32 int32;
+#else
+typedef uint64_t uint64;
+typedef int64_t int64;
+typedef uint32_t uint32;
+typedef int32_t int32;
+#endif /* _WIN32 */
+/*! @endcond
+ */
+
 /*! @brief Compare with a Result value to determine failure.
  */
 #define BGE_FAILURE 1
@@ -58,23 +74,13 @@ typedef unsigned char Byte;
  */
 typedef double Seconds;
 
-/*! \cond HIDDEN_SYMBOLS
- */
-#ifdef _WIN32
-typedef unsigned long long __bge_uint64;
-#else
-typedef uint64_t __bge_uint64;
-#endif /* _WIN32 */
-/*! \endcond
- */
-
 /*! @brief An unsigned 64-bit integral type.
  *
  * A Microsecond is 1 millionth (1 E -6) of a second. The largest duration
  * that can be stored is around 600,000 years, as compared to around 1 minute
  * with a 32 bit unsigned integer.
  */
-typedef __bge_uint64 Microseconds;
+typedef uint64 Microseconds;
 
 /*! @brief Used to describe mouse/joystick motion or positions.
  */
