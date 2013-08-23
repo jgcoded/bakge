@@ -31,8 +31,7 @@ bakge::Rectangle* Obj;
 bakge::Pawn* It;
 bakge::Texture* Tex;
 GLint ShaderProgram;
-bakge::Matrix Perspective;
-bakge::Matrix View;
+bakge::Camera* TestCam;
 GLubyte* Bitmap;
 
 float Rot;
@@ -69,18 +68,9 @@ bakge::Result InitTest()
 
     GLint Location;
 
-    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
-    View.SetLookAt(
-        bakge::Point(0, 0, 3),
-        bakge::Point(0, 0, 0),
-        bakge::UnitVector(0, 1, 0)
-    );
-
-    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
-    Location = glGetUniformLocation(ShaderProgram, "bge_View");
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+    TestCam = new bakge::Camera;
+    TestCam->SetPosition(0, 0, 3);
+    TestCam->Bind();
 
     return BGE_SUCCESS;
 }
