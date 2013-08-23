@@ -284,6 +284,7 @@ Scalar Quaternion::Length() const
 Scalar Quaternion::LengthSq() const
 {
     Vector4 Us(Val[0], Val[1], Val[2], 0);
+
     return Scalar(Val[3] * Val[3] + pow(Us.Length(), 2));
 }
 
