@@ -50,7 +50,7 @@ class BGE_API Engine
 public:
 
     Engine();
-    virtual ~Engine() { } = 0;
+    virtual ~Engine() = 0;
 
     /*! @brief Initialize the Engine and its components
      *
