@@ -292,15 +292,25 @@ Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
 }
 
 
-void Window::Show()
+Result Window::Show()
 {
+    if(glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE))
+        return BGE_FAILURE;
+
     glfwShowWindow(WindowHandle);
+
+    return BGE_SUCCESS;
 }
 
 
-void Window::Hide()
+Result Window::Hide()
 {
+    if(!glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE))
+        return BGE_FAILURE;
+
     glfwHideWindow(WindowHandle);
+
+    return BGE_SUCCESS;
 }
 
 

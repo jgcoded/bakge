@@ -217,14 +217,20 @@ public:
     /*! @brief Hide a window, making it invisible.
      *
      * Hide a window, making it invisible.
+     *
+     * @retval BGE_SUCCESS if window was successfully hidden, or BGE_FAILURE
+     * if the window is already hidden or any errors occurred.
      */
-    void Hide();
+    Result Hide();
 
     /*! @brief Show a window, making it visible.
      *
      * Show a window, making it visible.
+     *
+     * @retval BGE_SUCCESS if window was successfully shown, or BGE_FAILURE
+     * if the window is already shown or any errors occurred.
      */
-    void Show();
+    Result Show();
 
 }; /* Window */
 
