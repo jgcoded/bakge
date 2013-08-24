@@ -50,43 +50,86 @@ class BGE_API EventHandler
 
 public:
 
-    /*! @brief Default EventHandler constructor
+    /*! @brief Default EventHandler constructor.
      *
-     * Default EventHandler constructor
+     * Default EventHandler constructor.
      */
     EventHandler();
 
-    /*! @brief Pure-virtual EventHandler destructor
+    /*! @brief Pure-virtual EventHandler destructor.
      *
-     * EventHandler is an abstract interface class.
+     * EventHandler is an abstract interface class, only inheriting classes
+     * will be instantiable.
      */
     virtual ~EventHandler();
 
-    /*! @brief Called when a keyboard key is pressed or released
+    /*! @brief Called when a keyboard key is pressed or released.
      *
-     * @param[in] K The GLFW key identifier.
-     * @param[in] S The GLFW key state identifier.
-     * @param[in] C The OS-specific key scan-code.
+     * Called when a keyboard key is pressed or released.
+     *
+     * @param[in] K GLFW key identifier.
+     * @param[in] S GLFW key state identifier.
+     * @param[in] C OS-specific key scan-code.
      * @param[in] M Active modifiers bitfield.
+     *
+     * @retval BGE_FAILURE if any errors occurred while processing the key
+     * event, otherwise BGE_SUCCESS.
      * 
      * @see http://www.glfw.org/docs/latest/glfw3_8h.html
      * @see ShiftPressed, AltPressed, ControlPressed, SuperPressed
      */
     virtual Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M) = 0;
 
-    /*! @brief Called when a mouse button is pressed or released
+    /*! @brief Called when a mouse button is pressed or released.
+     *
+     * Called when a mouse button is pressed or released.
+     *
+     * @param[in] B GLFW mouse button identifier.
+     * @param[in] S GLFW key state identifier.
+     * @param[in] M Active modifiers bitfield.
+     *
+     * @retval BGE_FAILURE if any errors occurred while processing the mouse
+     * button event, otherwise BGE_SUCCESS.
      */
     virtual Result MouseEvent(ButtonID B, ButtonState S, ModField M) = 0;
 
-    /*! @brief Called when mouse motion is detected
+    /*! @brief Called when mouse motion is detected.
+     *
+     * Called when mouse motion is detected.
+     *
+     * @param[in] X Horizontal mouse motion.
+     * @param[in] Y Vertical mouse motion.
+     *
+     * @retval BGE_FAILURE if any errors occurred while processing the mouse
+     * motion event, otherwise BGE_SUCCESS.
      */
     virtual Result MotionEvent(DeviceMotion X, DeviceMotion Y) = 0;
 
-    /*! @brief Called when the mouse wheel is scrolled
+    /*! @brief Called when the mouse wheel is scrolled.
+     *
+     * Called when the mouse wheel is scrolled.
+     *
+     * @param[in] X Horizontal scroll wheel motion.
+     * @param[in] Y Vertical scroll wheel motion.
+     *
+     * @retval BGE_FAILURE if any errors occurred while processing the mouse
+     * scroll wheel event, otherwise BGE_SUCCESS.
+     *
+     * @note It doesn't appear horizontal scroll wheel motion is relevant.
+     * Some mouses do have scroll wheels which can "click" left and right.
+     * However, it is unclear whether GLFW detects these mouse actions and
+     * processes them as scroll wheel events.
      */
     virtual Result ScrollEvent(DeviceMotion X, DeviceMotion Y) = 0;
 
-    /*! @brief Called just before the Window closes
+    /*! @brief Called just before the Window closes.
+     *
+     * Typically this event means the entire application has been requested
+     * to exit. This function is a great place to do memory clean up and
+     * deinitialization of other components.
+     *
+     * @retval BGE_FAILURE if any errors occurred while processing the window
+     * close event, otherwise BGE_SUCCESS.
      */
     virtual Result CloseEvent() = 0;
 
