@@ -164,7 +164,7 @@ Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator/=(Quaternion BGE_NCP Other)
 {
-    *this = Other.Inverted();
+    *this *= Other.Inverted();
 
     return *this;
 }
