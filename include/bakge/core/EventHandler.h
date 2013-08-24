@@ -61,7 +61,7 @@ public:
      * EventHandler is an abstract interface class, only inheriting classes
      * will be instantiable.
      */
-    virtual ~EventHandler();
+    virtual ~EventHandler() = 0;
 
     /*! @brief Called when a keyboard key is pressed or released.
      *
