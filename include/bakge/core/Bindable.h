@@ -51,7 +51,17 @@ class BGE_API Bindable
 
 public:
 
+    /*! @brief Default Bindable constructor.
+     *
+     * Default Bindable constructor.
+     */
     Bindable();
+
+    /*! @brief Pure-virtual Bindable destructor
+     *
+     * Bindable is an abstract interface class. Only inheriting classes will
+     * be instantiable.
+     */
     virtual ~Bindable() = 0;
 
     /*! @brief Bind the object for use
