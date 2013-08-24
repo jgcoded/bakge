@@ -251,7 +251,7 @@ bool Window::IsActive()
     if(!IsOpen())
         return false;
 
-    if(glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED))
+    if(IsIconified())
         return false;
 
     /* Windows are only active if they have input focus */
@@ -265,6 +265,12 @@ bool Window::IsActive()
 bool Window::IsVisible() const
 {
     return glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE) != 0;
+}
+
+
+bool Window::IsIconified() const
+{
+    return glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED) != 0;
 }
 
 
@@ -328,6 +334,28 @@ EventHandler* Window::SetEventHandler(EventHandler* Who)
     Handler = Who;
 
     return Previous;
+}
+
+
+Result Window::Iconify()
+{
+    if(IsIconified())
+        return BGE_FAILURE;
+
+    glfwIconifyWindow(WindowHandle);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Window::Deiconify()
+{
+    if(!IsIconified())
+        return BGE_FAILURE;
+
+    glfwRestoreWindow(WindowHandle);
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

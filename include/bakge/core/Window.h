@@ -143,6 +143,14 @@ public:
      */
     bool IsActive();
 
+    /*! @brief Check if window is iconified.
+     *
+     * Check if window is iconified.
+     *
+     * @retval true if window is currently iconified; false otherwise.
+     */
+    bool IsIconified() const;
+
     /*! @brief Mark a window for closing.
      *
      * @retval BGE_SUCCESS if the window was successfully closed, or
@@ -239,6 +247,24 @@ public:
      * if the window is already shown or any errors occurred.
      */
     Result Show();
+
+    /*! @brief Iconify (minimize) the window.
+     *
+     * Iconify (minimize) the window.
+     *
+     * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if already
+     * iconified or any errors occurred.
+     */
+    Result Iconify();
+
+    /*! @brief Deiconify (restore) the window.
+     *
+     * Deiconify (restore) the window.
+     *
+     * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if window
+     * is not currently iconified or any errors occurred.
+     */
+    Result Deiconify();
 
 }; /* Window */
 
