@@ -47,7 +47,7 @@ class BGE_API Drawable : public Bindable
 public:
 
     Drawable();
-    virtual ~Drawable();
+    virtual ~Drawable() = 0;
 
     /*! @brief Draw the object after it has been bound.
      *
