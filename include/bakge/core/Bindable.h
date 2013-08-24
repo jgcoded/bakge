@@ -52,7 +52,7 @@ class BGE_API Bindable
 public:
 
     Bindable();
-    virtual ~Bindable();
+    virtual ~Bindable() = 0;
 
     /*! @brief Bind the object for use
      *
