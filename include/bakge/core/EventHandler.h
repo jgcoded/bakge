@@ -24,7 +24,7 @@
 
 /*!
  * @file EventHandler.h
- * @brief Contains EventHandler interface declaration.
+ * @brief EventHandler interface declaration.
  */
 
 #ifndef BAKGE_CORE_EVENTHANDLER_H

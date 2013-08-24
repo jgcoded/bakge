@@ -24,8 +24,8 @@
 
 /*!
  * @file Bakge.h
- * @brief Common header. Includes all Bakge public classes, namespaces,
- * type definitions and API.
+ * @brief Includes all Bakge classes, namespaces, type definitions and
+ * public API.
  */
 
 #ifndef BAKGE_BAKGE_H

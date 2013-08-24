@@ -24,7 +24,7 @@
 
 /*!
  * @file Window.h
- * @brief Contains Window class declaration.
+ * @brief Window class declaration.
  */
 
 #ifndef BAKGE_CORE_WINDOW_H
@@ -35,7 +35,7 @@
 namespace bakge
 {
 
-/*! @brief GLFW window wrapper class
+/*! @brief GLFW window wrapper class.
  *
  * Windows in Bakge have their own contexts, but have a shared context
  * across which they can share resources such as meshes, textures and
@@ -77,7 +77,7 @@ class BGE_API Window : public Bindable
 
 protected:
 
-    /*! @brief Default Window constructor
+    /*! @brief Default Window constructor.
      *
      * Windows are not explicitly instantiable. The factory function Create
      * allocates and configures a new Window instance.
@@ -89,13 +89,13 @@ protected:
 
 public:
 
-    /*! @brief Virtual Window destructor
+    /*! @brief Virtual Window destructor.
      *
      * Virtual Window destructor
      */
     virtual ~Window();
 
-    /*! @brief Create and initialize a Window
+    /*! @brief Create and initialize a Window.
      *
      * This factory function creates and initializes a window. If any errors
      * occur, Create returns NULL.
@@ -107,7 +107,7 @@ public:
      */
     BGE_FACTORY Window* Create(int Width, int Height);
 
-    /*! @brief Poll all events for all existing windows
+    /*! @brief Poll all events for all existing windows.
      *
      * GLFW polls all window events at the same time, calling a given
      * callback for each event.
@@ -125,7 +125,6 @@ public:
      */
     bool IsOpen();
 
-    /* Active windows are open, visible and in focus. */
     /*! @brief Check if a window is open, visible and in focus.
      *
      * Active windows are open and visible and currently have input focus,
@@ -191,7 +190,7 @@ public:
      */
     EventHandler* SetEventHandler(EventHandler* Who);
 
-    /*! @brief Get the mouse's position
+    /*! @brief Get the mouse's position.
      *
      * @param[out] X Set to mouse's X position relative to the window.
      * @param[out] Y Set to mouse's Y position relative to the window.
@@ -203,7 +202,7 @@ public:
      */
     Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
 
-    /*! @brief Set the mouse's position
+    /*! @brief Set the mouse's position.
      *
      * @param[in] X New X position of the mouse, relative to the window.
      * @param[in] Y New Y position of the mouse, relative to the window.

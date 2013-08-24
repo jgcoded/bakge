@@ -24,7 +24,7 @@
 
 /*!
  * @file Drawable.h
- * @brief Contains Drawable interface declaration.
+ * @brief Drawable interface declaration.
  */
 
 #ifndef BAKGE_API_DRAWABLE_H

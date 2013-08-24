@@ -24,7 +24,7 @@
 
 /*!
  * @file Renderer.h
- * @brief Contains Renderer interface declaration.
+ * @brief Renderer interface declaration.
  */
 
 #ifndef BAKGE_CORE_RENDERER_H

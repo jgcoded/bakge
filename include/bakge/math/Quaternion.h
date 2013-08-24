@@ -24,7 +24,7 @@
 
 /*!
  * @file Quaternion.h
- * @brief Contains the Quaternion class declaration.
+ * @brief Quaternion class declaration.
  */
 
 #ifndef BAKGE_MATH_QUATERNION_H
