@@ -111,6 +111,8 @@ public:
      *
      * GLFW polls all window events at the same time, calling a given
      * callback for each event.
+     *
+     * @warning May only be called from the main thread.
      */
     static void PollEvents();
 
@@ -236,6 +238,8 @@ public:
      *
      * @retval BGE_SUCCESS if window was successfully hidden, or BGE_FAILURE
      * if the window is already hidden or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
      */
     Result Hide();
 
@@ -245,6 +249,8 @@ public:
      *
      * @retval BGE_SUCCESS if window was successfully shown, or BGE_FAILURE
      * if the window is already shown or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
      */
     Result Show();
 
@@ -254,6 +260,8 @@ public:
      *
      * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if already
      * iconified or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
      */
     Result Iconify();
 
@@ -263,6 +271,8 @@ public:
      *
      * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if window
      * is not currently iconified or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
      */
     Result Deiconify();
 
