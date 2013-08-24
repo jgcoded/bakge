@@ -85,7 +85,7 @@ public:
      * Called when a mouse button is pressed or released.
      *
      * @param[in] B GLFW mouse button identifier.
-     * @param[in] S GLFW key state identifier.
+     * @param[in] S GLFW button state identifier.
      * @param[in] M Active modifiers bitfield.
      *
      * @retval BGE_FAILURE if any errors occurred while processing the mouse
