@@ -24,7 +24,8 @@
 
 /*!
  * @file Bakge.h
- * @brief Common header. Includes all Bakge public classes and API
+ * @brief Common header. Includes all Bakge public classes, namespaces,
+ * type definitions and API.
  */
 
 #ifndef BAKGE_BAKGE_H
@@ -103,6 +104,27 @@ extern "C"
 }
 #include <physfs/physfs.h>
 
+/*! @brief All Bakge types, classes and API are declared and defined in this
+ * namespace.
+ */
+namespace bakge
+{
+/*! @brief Contains abstract interface classes which platform implementations
+ * inherit from.
+ *
+ * Classes like mutexes and threads will have different implementations
+ * across Bakge's supported platforms. Dubbed "API classes", all interfaces
+ * declared in this namespace are pure-virtual and exist only to ensure
+ * different implementations have the same public API. When allocating an
+ * instance, it is recommended you do not use a pointer from an interface
+ * in the \ref api namespace. Use the appropriate interface from the
+ * \ref bakge namespace.
+ */
+namespace api
+{
+}
+}
+
 /* Include other external libraries */
 #define STBI_HEADER_FILE_ONLY
 #include <stb/stb_image.c>
@@ -141,13 +163,6 @@ extern "C"
 /* Network modules */
 #include <bakge/network/Remote.h>
 #include <bakge/network/Packet.h>
-
-/*! @brief Contains abstract interface classes which platform implementations
- * inherit from.
- */
-namespace bakge::api
-{
-}
 
 /* Include API classes */
 #include <bakge/api/Mutex.h>
