@@ -46,7 +46,17 @@ class BGE_API Drawable : public Bindable
 
 public:
 
+    /*! @brief Default Drawable constructor.
+     *
+     * Default Drawable constructor.
+     */
     Drawable();
+
+    /*! @brief Pure-virtual Drawable destructor.
+     *
+     * Drawable is an abstract interface class. Only inheriting classes will
+     * be instantiable.
+     */
     virtual ~Drawable() = 0;
 
     /*! @brief Draw the object after it has been bound.
