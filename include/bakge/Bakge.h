@@ -142,6 +142,13 @@ extern "C"
 #include <bakge/network/Remote.h>
 #include <bakge/network/Packet.h>
 
+/*! @brief Contains abstract interface classes which platform implementations
+ * inherit from.
+ */
+namespace bakge::api
+{
+}
+
 /* Include API classes */
 #include <bakge/api/Mutex.h>
 #include <bakge/api/Thread.h>
