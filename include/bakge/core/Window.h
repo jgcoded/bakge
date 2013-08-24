@@ -125,6 +125,14 @@ public:
      */
     bool IsOpen();
 
+    /*! @brief Check if a window is currently visible.
+     *
+     * Check if a window is currently visible.
+     *
+     * @retval true if window is visible; false if hidden.
+     */
+    bool IsVisible() const;
+
     /*! @brief Check if a window is open, visible and in focus.
      *
      * Active windows are open and visible and currently have input focus,

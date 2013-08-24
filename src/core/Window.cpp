@@ -262,6 +262,12 @@ bool Window::IsActive()
 }
 
 
+bool Window::IsVisible() const
+{
+    return glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE) != 0;
+}
+
+
 void Window::PollEvents()
 {
     glfwPollEvents();
@@ -294,7 +300,7 @@ Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
 
 Result Window::Show()
 {
-    if(glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE))
+    if(IsVisible())
         return BGE_FAILURE;
 
     glfwShowWindow(WindowHandle);
@@ -305,7 +311,7 @@ Result Window::Show()
 
 Result Window::Hide()
 {
-    if(!glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE))
+    if(!IsVisible())
         return BGE_FAILURE;
 
     glfwHideWindow(WindowHandle);
