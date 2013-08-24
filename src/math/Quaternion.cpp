@@ -85,7 +85,7 @@ Matrix Quaternion::ToMatrix() const
 }
 
 
-Scalar Quaternion::GetAngle() const
+Radians Quaternion::GetAngle() const
 {
     return acosf(Val[3]) * 2.0f;
 }
@@ -120,7 +120,7 @@ Quaternion Quaternion::FromEulerAngles(Radians X, Radians Y, Radians Z)
 }
 
 
-Quaternion Quaternion::FromAxisAndAngle(Vector4 BGE_NCP Axis, Scalar Angle)
+Quaternion Quaternion::FromAxisAndAngle(Vector4 BGE_NCP Axis, Radians Angle)
 {
     return Quaternion(Axis * sinf(Angle / 2.0f), cosf(Angle / 2.0f));
 }

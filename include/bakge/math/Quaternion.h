@@ -129,7 +129,7 @@ public:
      *
      * @retval Scalar representing rotation in radians.
      */
-    Scalar GetAngle() const;
+    Radians GetAngle() const;
 
     /*! @brief Extract the axis from the quaternion's rotation.
      *
@@ -164,7 +164,7 @@ public:
      *
      * @retval Quaternion describing rotation about an arbitrary axis.
      */
-    static Quaternion FromAxisAndAngle(Vector4 BGE_NCP Axis, Scalar Angle);
+    static Quaternion FromAxisAndAngle(Vector4 BGE_NCP Axis, Radians Angle);
 
     /*! @brief Component-wise addition compound assignment.
      *
