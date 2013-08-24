@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Quaternion.h
+ * @brief Contains the Quaternion class declaration.
+ */
+
 #ifndef BAKGE_MATH_QUATERNION_H
 #define BAKGE_MATH_QUATERNION_H
 
