@@ -30,19 +30,27 @@
 namespace bakge
 {
 
-/* *
- * Quaternions are used to describe rotational orientations in 3D space.
- * They consist of four parts - Three which represent an axis, and the fourth
- * which represents a rotation about that axis (right-handed rule).
- * Quaternions are extremely useful because they avoid gimbal lock, a problem
- * that can arise from the use of Euler angles to store info.
- * Not only that, but quaternions are easy to turn into 4x4 matrices, split
- * into the individual parts (axis and angle) and can easily be created
- * from Euler angles.
+/*! @brief Quaternions are used to describe rotations in 3D Cartesian space
  *
- * Quaternions also see use in animation keyframing, where joints' or bones'
- * rotations are relative to their parent joint.
- * */
+ * Quaternions describe rotations in space using an axis <i, j, k> and
+ * a rotation theta around that axis. Quaternions are composed of 4 parts,
+ * one real (or scalar) part and 3 imaginary (or vector) parts.
+ *
+ * Quaternions are the preferred method of describing rotations in space.
+ * Using quaternions protects you from gimbal lock -- an issue that may arise
+ * from using Euler angles to describe rotations. It is also quite easy
+ * to extract a rotation matrix from a quaternion, which can then be used
+ * by OpenGL or elsewhere to perform rotation transformations.
+ *
+ * Quaternions are almost like numbers. They can be used together in all sorts
+ * of operations such as multiplication, division, scalar multiplication and
+ * division, normalization and more. The catch is that quaternion-quaternion
+ * multiplication is non-commutative.
+ *
+ * Multiplying a quaternion by another rotates the first by the second. This
+ * is useful for compounding rotations upon each other without building
+ * rotation matrices and multiplying them instead.
+ */
 class BGE_API Quaternion
 {
     Vector4 Val;
