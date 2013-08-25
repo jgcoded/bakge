@@ -22,22 +22,22 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UIHOVERABLE_H
-#define BAKGE_UI_UIHOVERABLE_H
+#ifndef BAKGE_UI_UIRESIZEABLE_H
+#define BAKGE_UI_UIRESIZEABLE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class UIHoverable
+class UIResizable
 {
 
 public:
 
-	virtual bool OnHover(DeviceCoord* X, DeviceCoord* Y)=0;
+	virtual bool OnResize(DeviceCoord* X, DeviceCoord* Y)=0;
 
-}; /* UIHoverable */
+}; /* UIResizable */
 
 } /* bakge */
 

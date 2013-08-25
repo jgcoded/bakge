@@ -22,22 +22,22 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UIHOVERABLE_H
-#define BAKGE_UI_UIHOVERABLE_H
+#ifndef BAKGE_UI_UICLICKABLE_H
+#define BAKGE_UI_UICLICKABLE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class UIHoverable
+class UIClickable
 {
 
 public:
 
-	virtual bool OnHover(DeviceCoord* X, DeviceCoord* Y)=0;
+	virtual bool OnClick(DeviceCoord* X, DeviceCoord* Y)=0;
 
-}; /* UIHoverable */
+}; /* UIClickable */
 
 } /* bakge */
 
