@@ -279,6 +279,29 @@ Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
 }
 
 
+Matrix BGE_NCP Matrix::SetOrthographic(Scalar Width, Scalar Height,
+                                    Scalar NearClip, Scalar FarClip)
+{
+    if(ScalarCompare(Width, 0) || ScalarCompare(Height, 0))
+        return *this;
+
+    SetIdentity();
+
+    Val[0] = 2 / Width;
+    Val[5] = 2 / Height;
+
+    Scalar Depth = FarClip - NearClip;
+
+    if(ScalarCompare(Depth, 0))
+        return *this;
+
+    Val[10] = -2 / Depth;
+    Val[14] = (FarClip + NearClip) / -Depth;
+
+    return *this;
+}
+
+
 Matrix Matrix::Scaling(Scalar X, Scalar Y, Scalar Z)
 {
     return Matrix(
