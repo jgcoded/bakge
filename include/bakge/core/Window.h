@@ -145,6 +145,14 @@ public:
      */
     bool IsActive();
 
+    /*! @brief Check if a window is currently focused.
+     *
+     * Check if a window is currently focused.
+     *
+     * @retval true if window has input focus; false otherwise.
+     */
+    bool IsFocused() const;
+
     /*! @brief Check if window is iconified.
      *
      * Check if window is iconified.

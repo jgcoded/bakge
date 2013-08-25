@@ -256,7 +256,7 @@ bool Window::IsActive()
         return false;
 
     /* Windows are only active if they have input focus */
-    if(glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) == 0)
+    if(!IsFocused())
         return false;
 
     return true;
@@ -272,6 +272,12 @@ bool Window::IsVisible() const
 bool Window::IsIconified() const
 {
     return glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED) != 0;
+}
+
+
+bool Window::IsFocused() const
+{
+    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) != 0;
 }
 
 
