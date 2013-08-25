@@ -39,7 +39,7 @@ Camera2D::~Camera2D()
 
 void Camera2D::SetDimensions(Scalar W, Scalar H)
 {
-    Ortho.SetOrthographic(W, H, -1.0f, 1.0f);
+    Ortho.SetOrthographic(0, W, 0, H, -1.0f, 1.0f);
 }
 
 

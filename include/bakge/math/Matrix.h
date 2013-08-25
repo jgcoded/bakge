@@ -98,8 +98,8 @@ public:
     Matrix BGE_NCP SetPerspective(Scalar FOV, Scalar Aspect, Scalar NearClip,
                                                             Scalar FarClip);
 
-    Matrix BGE_NCP SetOrthographic(Scalar Width, Scalar Height,
-                                Scalar NearClip, Scalar FarClip);
+    Matrix BGE_NCP SetOrthographic(Scalar Left, Scalar Right, Scalar Bottom,
+                                        Scalar Top, Scalar Near, Scalar Far);
 
     /* Create a viewing matrix transform */
     Matrix BGE_NCP SetLookAt(Vector4 BGE_NCP Position, Vector4 BGE_NCP Target,
