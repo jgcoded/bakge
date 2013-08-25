@@ -47,6 +47,8 @@ public:
 
 	virtual Result Unbind();
 
+	UIElement BGE_NCP operator[](int BGE_NCP At) const;
+
 }; /* UIContainer */
 
 } /* bakge */
