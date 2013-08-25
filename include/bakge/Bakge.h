@@ -202,6 +202,7 @@ namespace api
 #include <bakge/graphics/shapes/Rectangle.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Camera.h>
+#include <bakge/graphics/Camera2D.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>

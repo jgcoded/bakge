@@ -21,6 +21,7 @@ set(MODULES
   core/Window
   engine/ScriptedEngine
   graphics/Camera
+  graphics/Camera2D
   graphics/Crowd
   graphics/Mesh
   graphics/Node
