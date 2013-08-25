@@ -38,6 +38,15 @@ public:
 	UIContainer();
 	~UIContainer();
 
+	void AddUIElement();
+	void RemoveUIElement();
+
+	BGE_FACTORY UIContainer* Create(Scalar Width, Scalar Height);
+
+	virtual Result Bind();
+
+	virtual Result Unbind();
+
 }; /* UIContainer */
 
 } /* bakge */
