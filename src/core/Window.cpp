@@ -221,7 +221,8 @@ Result Window::Unbind() const
 
 Result Window::Close()
 {
-    if(!IsOpen())
+    /* If window is already closed */
+    if(WindowHandle == NULL)
         return BGE_FAILURE;
 
     /* Destroy the GLFW window */
