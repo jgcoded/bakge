@@ -70,7 +70,8 @@ bakge::Result InitTest()
 
     It->SetPosition(0, 0, 0);
 
-    UICam->SetDimensions(600.0f, 400.0f);
+    UICam->SetPosition(0, 0, 0);
+    UICam->SetSpan(600.0f, 400.0f);
 
     return BGE_SUCCESS;
 }

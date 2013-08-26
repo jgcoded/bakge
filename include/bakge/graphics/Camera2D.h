@@ -30,9 +30,12 @@
 namespace bakge
 {
 
-class BGE_API Camera2D : public Bindable
+class BGE_API Camera2D : public Camera
 {
-    Matrix Ortho;
+
+protected:
+
+    Vector4 Span;
 
 
 public:
@@ -40,10 +43,22 @@ public:
     Camera2D();
     ~Camera2D();
 
-    void SetDimensions(Scalar W, Scalar H);
-
     virtual Result Bind() const;
     virtual Result Unbind() const;
+
+    BGE_INL Vector4 BGE_NCP SetSpan(Scalar Width, Scalar Height, Scalar Far)
+    {
+        Span[0] = Width;
+        Span[1] = Height;
+        Span[2] = Far;
+
+        return Span;
+    }
+
+    BGE_INL Vector4 BGE_NCP GetSpan() const
+    {
+        return Span;
+    }
 
 }; /* Camera2D */
 

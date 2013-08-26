@@ -37,15 +37,10 @@ Camera2D::~Camera2D()
 }
 
 
-void Camera2D::SetDimensions(Scalar W, Scalar H)
-{
-    Ortho.SetOrthographic(0, W, 0, H, -1.0f, 1.0f);
-}
-
-
 Result Camera2D::Bind() const
 {
     GLint Location, Program = 0;
+    Matrix Mat;
 
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
@@ -56,7 +51,11 @@ Result Camera2D::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Ortho[0]);
+    Mat.SetOrthographic(Position[0], Position[0] + Span[0], Position[1],
+                                    Position[1] + Span[1], Position[2],
+                                                Position[2] + Span[2]);
+
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Mat[0]);
 
     /* Now the view transform */
     Location = glGetUniformLocation(Program, "bge_View");
