@@ -279,7 +279,7 @@ public:
      *
      * @retval Rotation matrix.
      */
-    static Matrix Rotation(Scalar X, Scalar Y, Scalar Z);
+    static Matrix Rotation(Radians X, Radians Y, Radians Z);
 
     /*! @brief Generate a rotation matrix from an axis and angle.
      *
