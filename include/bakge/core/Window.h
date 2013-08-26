@@ -218,8 +218,8 @@ public:
 
     /*! @brief Get the mouse's position.
      *
-     * @param[out] X Set to mouse's X position relative to the window.
-     * @param[out] Y Set to mouse's Y position relative to the window.
+     * @param[out] X Sets pointee to mouse's X position relative to the window.
+     * @param[out] Y Sets pointee to mouse's Y position relative to the window.
      *
      * @retval BGE_SUCCESS if the device coordinates were successfully set. If
      * the window is not currently active, returns BGE_FAILURE.
