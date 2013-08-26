@@ -88,7 +88,7 @@ public:
      *
      * Matrix component constructor.
      *
-     * @warn May be removed or deprecated in the near future.
+     * @warning May be removed or deprecated in the near future.
      */
     Matrix(Scalar A, Scalar B, Scalar C, Scalar D,
            Scalar E, Scalar F, Scalar G, Scalar H,
