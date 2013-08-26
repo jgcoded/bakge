@@ -212,7 +212,7 @@ public:
      * @retval const reference to the Matrix after being set to a perspective
      * projection.
      */
-    Matrix BGE_NCP SetPerspective(Scalar FOV, Scalar Aspect, Scalar NearClip,
+    Matrix BGE_NCP SetPerspective(Degrees FOV, Scalar Aspect, Scalar NearClip,
                                                             Scalar FarClip);
 
     /*! @brief Set the Matrix to an orthographic projection matrix.

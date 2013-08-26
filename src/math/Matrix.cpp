@@ -257,7 +257,7 @@ Matrix BGE_NCP Matrix::SetIdentity()
 }
 
 
-Matrix BGE_NCP Matrix::SetPerspective(Scalar FOV, Scalar Aspect,
+Matrix BGE_NCP Matrix::SetPerspective(Degrees FOV, Scalar Aspect,
                                 Scalar NearClip, Scalar FarClip)
 {
     Scalar Height = 1.0f / tanf(FOV * 0.5f * BGE_RAD_PER_DEG);
