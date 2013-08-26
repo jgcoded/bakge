@@ -39,7 +39,7 @@ public:
 	~UIContainer();
 
 	void AddUIElement();
-	void RemoveUIElement();
+	void RemoveUIElement(int BGE_NCP At);
 
 	BGE_FACTORY UIContainer* Create(Scalar Width, Scalar Height);
 
