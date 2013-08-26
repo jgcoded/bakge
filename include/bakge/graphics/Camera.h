@@ -30,31 +30,16 @@
 namespace bakge
 {
 
-class BGE_API Camera : public Pawn
+class BGE_API Camera : public Node
 {
-
-protected:
-
-    Vector4 Target;
-    Degrees FOV;
-    Scalar Aspect;
-    Scalar NearClip;
-    Scalar FarClip;
-
 
 public:
 
     Camera();
-    ~Camera();
-
-    Vector4 BGE_NCP SetTarget(Scalar X, Scalar Y, Scalar Z);
-    Vector4 BGE_NCP GetTarget() const;
-
-    virtual Result Bind() const;
-    virtual Result Unbind() const;
+    virtual ~Camera() = 0;
 
 }; /* Camera */
 
 } /* bakge */
 
- #endif
+#endif /* BAKGE_GRAPHICS_CAMERA_H */

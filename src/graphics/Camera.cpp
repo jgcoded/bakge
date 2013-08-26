@@ -29,68 +29,11 @@ namespace bakge
 
 Camera::Camera()
 {
-    NearClip = 0.1f;
-    FarClip = 500.0f;
-    Aspect = 1.5f;
-    FOV = 80.0f;
 }
 
 
 Camera::~Camera()
 {
-}
-
-
-Result Camera::Bind() const
-{
-    GLint Location, Program = 0;
-
-    Matrix Projection, View;
-
-    Projection.SetPerspective(FOV, Aspect, NearClip, FarClip);
-    View.SetLookAt(Position, Target, Vector4(0, 1, 0, 0));
-
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0)
-        return BGE_FAILURE;
-
-    /* First we'll set the perspective */
-    Location = glGetUniformLocation(Program, "bge_Perspective");
-    if(Location < 0)
-        return BGE_FAILURE;
-
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Projection[0]);
-
-    /* Now the view transform */
-    Location = glGetUniformLocation(Program, "bge_View");
-    if(Location < 0)
-        return BGE_FAILURE;
-
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Camera::Unbind() const
-{
-    return BGE_SUCCESS;
-}
-
-
-Vector4 BGE_NCP Camera::SetTarget(Scalar X, Scalar Y, Scalar Z)
-{
-    Target[0] = X;
-    Target[1] = Y;
-    Target[2] = Z;
-
-    return Target;
-}
-
-
-Vector4 BGE_NCP Camera::GetTarget() const
-{
-    return Target;
 }
 
 } /* bakge */
