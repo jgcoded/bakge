@@ -30,12 +30,29 @@
 namespace bakge
 {
 
+/*! @brief Base class for cameras representing view and projection transforms.
+ *
+ * A Camera is an object representing an arbitrary point in space from which
+ * the world is viewed. Camera is an abstract interface class which
+ * implements common functionality between 2D and 3D cameras.
+ *
+ * @see Camera2D, Camera3D
+ */
 class BGE_API Camera : public Node
 {
 
 public:
 
+    /*! @brief Default Camera constructor.
+     *
+     * Default Camera constructor.
+     */
     Camera();
+
+    /*! @brief Pure-virtual Camera destructor.
+     *
+     * Pure-virtual Camera destructor.
+     */
     virtual ~Camera() = 0;
 
 }; /* Camera */
