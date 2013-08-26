@@ -35,19 +35,16 @@ class UIContainer : public UIElement
 
 public:
 
-	UIContainer();
-	~UIContainer();
+	virtual void AddUIElement(UIElement* Element)=0;
+	virtual void RemoveUIElement(int BGE_NCP At)=0;
 
-	void AddUIElement();
-	void RemoveUIElement(int BGE_NCP At);
+	virtual Result Bind()=0;
 
-	BGE_FACTORY UIContainer* Create(Scalar Width, Scalar Height);
+	virtual Result Unbind()=0;
 
-	virtual Result Bind();
+	virtual Result DrawElements()=0;
 
-	virtual Result Unbind();
-
-	UIElement BGE_NCP operator[](int BGE_NCP At) const;
+	virtual UIElement* BGE_NCP operator[](int BGE_NCP At) const=0;
 
 }; /* UIContainer */
 

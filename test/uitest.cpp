@@ -24,14 +24,86 @@
 
 #include <bakge/Bakge.h>
 #include "TestEngine.h"
+#include <vector>
 
+using std::vector;
 using bakge::UIElement;
 
-UIElement* E;
 bakge::Camera* TestCam;
 bakge::Texture* Tex;
 bakge::Pawn* It;
 GLint ShaderProgram;
+
+
+class ElementContainer : public bakge::UIContainer
+{
+
+private:
+
+    vector<UIElement*> container;
+
+
+public:
+
+    ElementContainer()
+    {
+    }
+
+
+    ~ElementContainer()
+    {
+    }
+
+
+    void AddUIElement(UIElement* Element)
+    {
+        container.push_back(Element);
+    }
+
+
+    void RemoveUIElement(int BGE_NCP At)
+    {
+        container.erase(container.begin() + At);
+    }
+
+
+    bakge::Result Bind()
+    {
+        for(int i = 0; i < container.size(); ++i) {
+            container[i]->Bind();
+        }
+
+        return BGE_SUCCESS;
+    }
+
+    bakge::Result Unbind()
+    {
+        for(int i = container.size() - 1; i >= 0; --i) {
+            container[i]->Unbind();
+        }
+
+        return BGE_SUCCESS;
+    }
+
+
+    UIElement* BGE_NCP operator[](int BGE_NCP At) const
+    {
+        return container[At];
+    }
+
+
+    bakge::Result DrawElements()
+    {
+        for(int i = 0; i < container.size(); i++)
+        {
+            container[i]->Draw();
+        }
+
+        return BGE_SUCCESS;
+    }
+
+} MyContainer; /* Element Container */
+
 
 bakge::Result InitTest()
 {
@@ -48,9 +120,9 @@ bakge::Result InitTest()
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                 (void*)Bitmap);
 
-    E = bakge::UIElement::Create(0.8f, 0.5f);
+    UIElement* E = bakge::UIElement::Create(0.8f, 0.5f);
 
-    GLint Location;
+    MyContainer.AddUIElement(E);
 
     TestCam = new bakge::Camera;
 
@@ -66,7 +138,7 @@ bakge::Result InitTest()
 bakge::Result PreRenderTest()
 {
     Tex->Bind();
-    E->Bind();
+    MyContainer.Bind();
     It->Bind();
 
     return BGE_SUCCESS;
@@ -75,7 +147,7 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
-    E->Draw();
+    MyContainer.DrawElements();
     return BGE_SUCCESS;
 }
 
@@ -83,7 +155,7 @@ bakge::Result RenderTest()
 bakge::Result PostRenderTest()
 {
     It->Unbind();
-    E->Unbind();
+    MyContainer.Unbind();
     Tex->Unbind();
     return BGE_SUCCESS;
 }
@@ -91,8 +163,6 @@ bakge::Result PostRenderTest()
 
 bakge::Result ShutDownTest()
 {
-    if(E != NULL)
-        delete E;
 
     if(Tex != NULL)
         delete Tex;

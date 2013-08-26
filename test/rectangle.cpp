@@ -74,7 +74,7 @@ bakge::Result InitTest()
 
     return BGE_SUCCESS;
 }
-1
+
 
 bakge::Result PreRenderTest()
 {
