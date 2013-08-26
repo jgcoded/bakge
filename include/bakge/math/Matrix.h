@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Matrix.h
+ * @brief Matrix class declaration.
+ */
+
 #ifndef BAKGE_MATH_MATRIX_H
 #define BAKGE_MATH_MATRIX_H
 
