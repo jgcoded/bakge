@@ -39,8 +39,9 @@ namespace bakge
  *
  * Since Camera2D is used for rendering 2-dimensional scenes, the third
  * field in the position corresponds to the Z location of the near clipping
- * plane, and the third field in the span corresponds to the Z location of
- * the far clipping plane.
+ * plane, and the third field in the span corresponds distance to the far
+ * clipping plane from the near clipping plane. The suggested clipping plane
+ * position and span are -1.0f and 2.0f respectively.
  */
 class BGE_API Camera2D : public Camera
 {
@@ -78,6 +79,13 @@ public:
      */
     virtual Result Unbind() const;
 
+    /*! @brief Change the span of the 2D scene view.
+     *
+     * Change the span of the 2D scene. The span of the scene is measured in
+     * pixels.
+     *
+     * @retval const reference to the Camera2D's span after assignment.
+     */
     BGE_INL Vector4 BGE_NCP SetSpan(Scalar Width, Scalar Height, Scalar Far)
     {
         Span[0] = Width;
@@ -87,6 +95,13 @@ public:
         return Span;
     }
 
+    /*! @brief Get the span of the 2D scene view.
+     *
+     * Get the span of the 2D scene. The span of the scene is measured in
+     * pixels.
+     *
+     * @retval const reference to the Camera2D's span.
+     */
     BGE_INL Vector4 BGE_NCP GetSpan() const
     {
         return Span;
