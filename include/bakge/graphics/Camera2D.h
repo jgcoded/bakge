@@ -30,6 +30,18 @@
 namespace bakge
 {
 
+/*! @brief Used for rendering 2D scenes.
+ *
+ * Camera2D objects are used for rendering 2D scenes. The position of the
+ * camera corresponds to the bottom left corner of the viewport. The span
+ * of the scene are width and height of the scene. The top right corner
+ * is located at position + span.
+ *
+ * Since Camera2D is used for rendering 2-dimensional scenes, the third
+ * field in the position corresponds to the Z location of the near clipping
+ * plane, and the third field in the span corresponds to the Z location of
+ * the far clipping plane.
+ */
 class BGE_API Camera2D : public Camera
 {
 
@@ -40,10 +52,30 @@ protected:
 
 public:
 
+    /*! @brief Default Camera2D constructor.
+     *
+     * Default Camera2D constructor.
+     */
     Camera2D();
+
+    /*! @brief Camera2D destructor.
+     *
+     * Camera2D destructor.
+     */
     ~Camera2D();
 
+    /*! @brief Bind viewing and projection transforms in OpenGL.
+     *
+     * Binding a Camera2D sets up OpenGL state so that the scene is rendered
+     * from the camera's position and span. The camera's position and span
+     * are measured in pixels.
+     */
     virtual Result Bind() const;
+
+    /*! @brief Set viewing and projection transforms to defaults.
+     *
+     * Set viewing and projection transforms to defaults.
+     */
     virtual Result Unbind() const;
 
     BGE_INL Vector4 BGE_NCP SetSpan(Scalar Width, Scalar Height, Scalar Far)
