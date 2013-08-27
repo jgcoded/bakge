@@ -24,7 +24,7 @@
 
 /*!
  * @file Utility.h
- * @brief Contains utility functions and macros declarations.
+ * @brief Utility functions and macros declarations.
  */
 #ifndef BAKGE_CORE_UTILITY_H
 #define BAKGE_CORE_UTILITY_H

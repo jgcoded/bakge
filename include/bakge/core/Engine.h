@@ -24,7 +24,7 @@
 
 /*!
  * @file Engine.h
- * @brief Contains Engine interface declaration.
+ * @brief Engine interface declaration.
  */
 
 #ifndef BAKGE_CORE_ENGINE_H

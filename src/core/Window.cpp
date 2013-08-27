@@ -221,7 +221,8 @@ Result Window::Unbind() const
 
 Result Window::Close()
 {
-    if(!IsOpen())
+    /* If window is already closed */
+    if(WindowHandle == NULL)
         return BGE_FAILURE;
 
     /* Destroy the GLFW window */
@@ -251,14 +252,32 @@ bool Window::IsActive()
     if(!IsOpen())
         return false;
 
-    if(glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED))
+    if(IsIconified())
         return false;
 
     /* Windows are only active if they have input focus */
-    if(glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) == 0)
+    if(!IsFocused())
         return false;
 
     return true;
+}
+
+
+bool Window::IsVisible() const
+{
+    return glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE) != 0;
+}
+
+
+bool Window::IsIconified() const
+{
+    return glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED) != 0;
+}
+
+
+bool Window::IsFocused() const
+{
+    return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) != 0;
 }
 
 
@@ -292,15 +311,25 @@ Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
 }
 
 
-void Window::Show()
+Result Window::Show()
 {
+    if(IsVisible())
+        return BGE_FAILURE;
+
     glfwShowWindow(WindowHandle);
+
+    return BGE_SUCCESS;
 }
 
 
-void Window::Hide()
+Result Window::Hide()
 {
+    if(!IsVisible())
+        return BGE_FAILURE;
+
     glfwHideWindow(WindowHandle);
+
+    return BGE_SUCCESS;
 }
 
 
@@ -312,6 +341,28 @@ EventHandler* Window::SetEventHandler(EventHandler* Who)
     Handler = Who;
 
     return Previous;
+}
+
+
+Result Window::Iconify()
+{
+    if(IsIconified())
+        return BGE_FAILURE;
+
+    glfwIconifyWindow(WindowHandle);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Window::Deiconify()
+{
+    if(!IsIconified())
+        return BGE_FAILURE;
+
+    glfwRestoreWindow(WindowHandle);
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

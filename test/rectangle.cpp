@@ -33,6 +33,7 @@ bakge::Texture* Tex;
 GLint ShaderProgram;
 bakge::Matrix Perspective;
 bakge::Matrix View;
+bakge::Camera2D* UICam;
 GLubyte* Bitmap;
 
 float Rot;
@@ -41,6 +42,8 @@ bakge::Microseconds LastTime;
 
 bakge::Result InitTest()
 {
+    UICam = new bakge::Camera2D;
+
     Bitmap = new GLubyte[512 * 512 * 3];
     Rot = 0;
     LastTime = bakge::GetRunningTime();
@@ -61,26 +64,14 @@ bakge::Result InitTest()
                                                     (void*)Bitmap);
 
     It = bakge::Pawn::Create();
-    Obj = bakge::Rectangle::Create(0.8f, 0.5f);
+    Obj = bakge::Rectangle::Create(200, 200);
 
     Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
 
     It->SetPosition(0, 0, 0);
 
-    GLint Location;
-
-    Perspective.SetPerspective(80.0f, 1.5f, 0.1f, 500.0f);
-    View.SetLookAt(
-        bakge::Point(0, 0, 3),
-        bakge::Point(0, 0, 0),
-        bakge::UnitVector(0, 1, 0)
-    );
-
-    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
-    Location = glGetUniformLocation(ShaderProgram, "bge_View");
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+    UICam->SetPosition(0, 0, 0);
+    UICam->SetSpan(600.0f, 400.0f);
 
     return BGE_SUCCESS;
 }
@@ -88,6 +79,7 @@ bakge::Result InitTest()
 
 bakge::Result PreRenderTest()
 {
+    UICam->Bind();
     Tex->Bind();
     Obj->Bind();
     It->Bind();
@@ -109,6 +101,7 @@ bakge::Result PostRenderTest()
     It->Unbind();
     Obj->Unbind();
     Tex->Unbind();
+    UICam->Unbind();
 
     return BGE_SUCCESS;
 }
@@ -124,6 +117,9 @@ bakge::Result ShutDownTest()
 
     if(It != NULL)
         delete It;
+
+    if(UICam != NULL)
+        delete UICam;
 
     delete[] Bitmap;
 

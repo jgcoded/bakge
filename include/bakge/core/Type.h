@@ -24,7 +24,7 @@
 
 /*!
  * @file Type.h
- * @brief Contains Bakge type definitions and relevant defined symbols.
+ * @brief Bakge type definitions and relevant defined symbols.
  */
 
 #ifndef BAKGE_CORE_TYPE_H

@@ -30,6 +30,12 @@
 namespace bakge
 {
 
+/*! @brief X-Box axes enumerations
+ *
+ * The X-Box controller scheme has 5 axes. Each axis ranges from -1.0 to 1.0.
+ * The two analog sticks correspond to 4 axes -- an X and Y axis for each
+ * stick. The fifth axis is controlled by the left and right trigger keys.
+ */
 enum XBOX_AXES
 {
     XBOX_AXIS_LEFT_ANALOG_X = 0,
@@ -40,6 +46,13 @@ enum XBOX_AXES
     NUM_XBOX_AXES
 };
 
+/*! @brief X-Box button enumerations
+ *
+ * The X-Box controller has 14 buttons. The standard button pad on the right
+ * side, the left and right bumper keys, start and back buttons and the
+ * directional pad. Both analog sticks may also be pressed, bringing the total
+ * to 14.
+ */
 enum XBOX_BUTTONS
 {
     XBOX_BUTTON_A = 0,

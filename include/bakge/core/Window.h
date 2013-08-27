@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Window.h
+ * @brief Window class declaration.
+ */
+
 #ifndef BAKGE_CORE_WINDOW_H
 #define BAKGE_CORE_WINDOW_H
 
@@ -30,7 +35,7 @@
 namespace bakge
 {
 
-/*! @brief GLFW window wrapper class
+/*! @brief GLFW window wrapper class.
  *
  * Windows in Bakge have their own contexts, but have a shared context
  * across which they can share resources such as meshes, textures and
@@ -72,7 +77,7 @@ class BGE_API Window : public Bindable
 
 protected:
 
-    /*! @brief Default Window constructor
+    /*! @brief Default Window constructor.
      *
      * Windows are not explicitly instantiable. The factory function Create
      * allocates and configures a new Window instance.
@@ -84,13 +89,13 @@ protected:
 
 public:
 
-    /*! @brief Virtual Window destructor
+    /*! @brief Virtual Window destructor.
      *
      * Virtual Window destructor
      */
     virtual ~Window();
 
-    /*! @brief Create and initialize a Window
+    /*! @brief Create and initialize a Window.
      *
      * This factory function creates and initializes a window. If any errors
      * occur, Create returns NULL.
@@ -102,10 +107,12 @@ public:
      */
     BGE_FACTORY Window* Create(int Width, int Height);
 
-    /*! @brief Poll all events for all existing windows
+    /*! @brief Poll all events for all existing windows.
      *
      * GLFW polls all window events at the same time, calling a given
      * callback for each event.
+     *
+     * @warning May only be called from the main thread.
      */
     static void PollEvents();
 
@@ -120,7 +127,14 @@ public:
      */
     bool IsOpen();
 
-    /* Active windows are open, visible and in focus. */
+    /*! @brief Check if a window is currently visible.
+     *
+     * Check if a window is currently visible.
+     *
+     * @retval true if window is visible; false if hidden.
+     */
+    bool IsVisible() const;
+
     /*! @brief Check if a window is open, visible and in focus.
      *
      * Active windows are open and visible and currently have input focus,
@@ -130,6 +144,22 @@ public:
      * @retval true if window is open, visible and in focus. false otherwise.
      */
     bool IsActive();
+
+    /*! @brief Check if a window is currently focused.
+     *
+     * Check if a window is currently focused.
+     *
+     * @retval true if window has input focus; false otherwise.
+     */
+    bool IsFocused() const;
+
+    /*! @brief Check if window is iconified.
+     *
+     * Check if window is iconified.
+     *
+     * @retval true if window is currently iconified; false otherwise.
+     */
+    bool IsIconified() const;
 
     /*! @brief Mark a window for closing.
      *
@@ -186,10 +216,10 @@ public:
      */
     EventHandler* SetEventHandler(EventHandler* Who);
 
-    /*! @brief Get the mouse's position
+    /*! @brief Get the mouse's position.
      *
-     * @param[out] X Set to mouse's X position relative to the window.
-     * @param[out] Y Set to mouse's Y position relative to the window.
+     * @param[out] X Sets pointee to mouse's X position relative to the window.
+     * @param[out] Y Sets pointee to mouse's Y position relative to the window.
      *
      * @retval BGE_SUCCESS if the device coordinates were successfully set. If
      * the window is not currently active, returns BGE_FAILURE.
@@ -198,7 +228,7 @@ public:
      */
     Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
 
-    /*! @brief Set the mouse's position
+    /*! @brief Set the mouse's position.
      *
      * @param[in] X New X position of the mouse, relative to the window.
      * @param[in] Y New Y position of the mouse, relative to the window.
@@ -213,14 +243,46 @@ public:
     /*! @brief Hide a window, making it invisible.
      *
      * Hide a window, making it invisible.
+     *
+     * @retval BGE_SUCCESS if window was successfully hidden, or BGE_FAILURE
+     * if the window is already hidden or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
      */
-    void Hide();
+    Result Hide();
 
     /*! @brief Show a window, making it visible.
      *
      * Show a window, making it visible.
+     *
+     * @retval BGE_SUCCESS if window was successfully shown, or BGE_FAILURE
+     * if the window is already shown or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
      */
-    void Show();
+    Result Show();
+
+    /*! @brief Iconify (minimize) the window.
+     *
+     * Iconify (minimize) the window.
+     *
+     * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if already
+     * iconified or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
+     */
+    Result Iconify();
+
+    /*! @brief Deiconify (restore) the window.
+     *
+     * Deiconify (restore) the window.
+     *
+     * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if window
+     * is not currently iconified or any errors occurred.
+     *
+     * @warning May only be called from the main thread.
+     */
+    Result Deiconify();
 
 }; /* Window */
 

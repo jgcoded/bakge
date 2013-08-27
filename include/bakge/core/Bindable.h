@@ -24,7 +24,7 @@
 
 /*!
  * @file Bindable.h
- * @brief Contains Bindable interface declaration.
+ * @brief Bindable interface declaration.
  */
 
 #ifndef BAKGE_CORE_BINDABLE_H
@@ -51,22 +51,38 @@ class BGE_API Bindable
 
 public:
 
+    /*! @brief Default Bindable constructor.
+     *
+     * Default Bindable constructor.
+     */
     Bindable();
-    virtual ~Bindable();
+
+    /*! @brief Pure-virtual Bindable destructor
+     *
+     * Bindable is an abstract interface class. Only inheriting classes will
+     * be instantiable.
+     */
+    virtual ~Bindable() = 0;
 
     /*! @brief Bind the object for use
      *
-     * Bind returns BGE_SUCCESS if the object can safely be used as intended.
-     * A BGE_FAILURE result means the object was not successfully bound,
-     * and use results in undefined behavior.
+     * Binding an object is necessary before it can be safely used for its
+     * designated purpose.
+     *
+     * @retval BGE_SUCCESS if binding was successful and the object is ready
+     * for use, or BGE_FAILURE if any errors occurred and the object is not
+     * safe to use.
      */
     virtual Result Bind() const = 0;
 
     /*! @brief Unbind the object after use
      *
-     * Unbind will seldom return BGE_FAILURE. Unbind usually resets OpenGL
-     * state to an arbitrary default. It is always a good idea to Unbind an
-     * object after use, to prevent unintentionally modifying objects.
+     * Unbinding an object is almost always necessary to prevent unwanted
+     * changes to the object's internal data, which is tied to the OpenGL
+     * state.
+     *
+     * @retval BGE_SUCCESS if unbinding was successful, or BGE_FAILURE if any
+     * errors occurred.
      */
     virtual Result Unbind() const = 0;
 

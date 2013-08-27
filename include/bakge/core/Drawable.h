@@ -24,7 +24,7 @@
 
 /*!
  * @file Drawable.h
- * @brief Contains Drawable interface declaration.
+ * @brief Drawable interface declaration.
  */
 
 #ifndef BAKGE_API_DRAWABLE_H
@@ -46,13 +46,26 @@ class BGE_API Drawable : public Bindable
 
 public:
 
+    /*! @brief Default Drawable constructor.
+     *
+     * Default Drawable constructor.
+     */
     Drawable();
-    virtual ~Drawable();
+
+    /*! @brief Pure-virtual Drawable destructor.
+     *
+     * Drawable is an abstract interface class. Only inheriting classes will
+     * be instantiable.
+     */
+    virtual ~Drawable() = 0;
 
     /*! @brief Draw the object after it has been bound.
      *
      * Draws the object to the screen. If other framebuffers are set they are
      * instead drawn there.
+     *
+     * @retval BGE_SUCCESS if the object was successfully drawn, or
+     * BGE_FAILURE if any errors occurred.
      */
     virtual Result Draw() const = 0;
 
