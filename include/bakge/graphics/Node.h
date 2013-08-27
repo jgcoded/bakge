@@ -55,8 +55,7 @@ public:
      *
      * Pure-virtual destructor.
      */
-    virtual ~Node();
-
+    virtual ~Node() = 0;
 
     /*! @brief Set OpenGL state so objects are rendered from this node's
      * position.
