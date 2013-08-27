@@ -30,22 +30,65 @@
 namespace bakge
 {
 
+/*! @brief Nodes are objects that have an arbitrary position in Cartesian
+ * space.
+ *
+ * Nodes are used to represent positions in space. When bound, they set OpenGL
+ * state so objects are drawn in that position. Node is an abstract interface
+ * class, and is only instantiable by sub-classes.
+ */
 class BGE_API Node : public Bindable
 {
 
 protected:
 
+    /*! @brief Default constructor.
+     *
+     * Default constructor.
+     */
     Node();
 
 
 public:
 
+    /*! @brief Pure-virtual destructor.
+     *
+     * Pure-virtual destructor.
+     */
     virtual ~Node();
 
+
+    /*! @brief Set OpenGL state so objects are rendered from this node's
+     * position.
+     *
+     * Set OpenGL state so objects are rendered from this node's position.
+     */
     virtual Result Bind() const;
+
+    /*! @brief Set OpenGL state so objects are rendered from the origin.
+     *
+     * Set OpenGL state so objects are rendered from the origin.
+     */
     virtual Result Unbind() const;
 
+    /*! @brief Set this object's position in Cartesian space.
+     *
+     * Set this object's position in Cartesian space.
+     *
+     * @param[in] X New position along the X axis.
+     * @param[in] Y New position along the Y axis.
+     * @param[in] Z New position along the Z axis.
+     *
+     * @retval const reference to the Node's position after assignment.
+     */
     Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y, Scalar Z);
+
+    /*! @brief Get this object's position in Cartesian space.
+     *
+     * Get this object's position in Cartesian space.
+     *
+     * @retval const reference to this Node's position.
+     */
     Vector4 BGE_NCP GetPosition() const;
 
 
