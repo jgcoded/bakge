@@ -71,12 +71,18 @@ public:
      * Binding a Camera2D sets up OpenGL state so that the scene is rendered
      * from the camera's position and span. The camera's position and span
      * are measured in pixels.
+     *
+     * @retval BGE_SUCCESS if the Camera2D's view and projection transforms
+     * were set in OpenGL; BGE_FAILURE if any errors occurred.
      */
     virtual Result Bind() const;
 
     /*! @brief Set viewing and projection transforms to defaults.
      *
      * Set viewing and projection transforms to defaults.
+     *
+     * @retval BGE_SUCCESS if default view and projection transforms were
+     * set in OpenGL; BGE_FAILURE if any errors occurred.
      */
     virtual Result Unbind() const;
 
@@ -84,6 +90,10 @@ public:
      *
      * Change the span of the 2D scene. The span of the scene is measured in
      * pixels.
+     *
+     * @param[in] Width Span of the scene along the X axis.
+     * @param[in] Height Span of the scene along the Y axis.
+     * @param[in] Far Span of the scene along the Z axis.
      *
      * @retval const reference to the Camera2D's span after assignment.
      */
