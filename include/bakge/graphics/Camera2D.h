@@ -30,7 +30,8 @@
 namespace bakge
 {
 
-/*! @brief Used for rendering 2D scenes.
+/*! @brief Represents arbitrary view and projection transforms for rendering
+ * in 2D Cartesian space.
  *
  * Camera2D objects are used for rendering 2D scenes. The position of the
  * camera corresponds to the bottom left corner of the viewport. The span
