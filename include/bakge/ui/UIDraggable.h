@@ -35,7 +35,7 @@ class BGE_API UIDraggable
 
 public:
 
-    virtual bool OnDrag(DeviceCoord* X, DeviceCoord* Y)=0;
+    virtual bool OnDrag(DeviceCoord* X, DeviceCoord* Y) = 0;
 
 }; /* UIDraggable */
 

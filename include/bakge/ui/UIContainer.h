@@ -30,13 +30,13 @@
 namespace bakge
 {
 
-class BGE_API UIContainer : public UIElement
+class BGE_API UIContainer
 {
 
 public:
 
-    virtual void AddUIElement(UIElement* Element)=0;
-    virtual void RemoveUIElement(int BGE_NCP At)=0;
+    virtual void AddElement(UIElement* Element) = 0;
+    virtual void RemoveElement(int BGE_NCP At) = 0;
 
     virtual Result Bind()=0;
 
@@ -44,7 +44,7 @@ public:
 
     virtual Result DrawElements()=0;
 
-    virtual UIElement* BGE_NCP operator[](int BGE_NCP At) const=0;
+    virtual UIElement* BGE_NCP operator[](int BGE_NCP At) const = 0;
 
 }; /* UIContainer */
 
