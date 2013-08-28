@@ -36,9 +36,9 @@ class BGE_API UIContainer
 public:
 
     virtual void AddElement(UIElement* Element) = 0;
-    virtual void RemoveElement(int BGE_NCP At) = 0;
+    virtual void RemoveElement(int At) = 0;
 
-    virtual UIElement* BGE_NCP operator[](int BGE_NCP At) const = 0;
+    virtual UIElement* BGE_NCP operator[](int At) const = 0;
 
 }; /* UIContainer */
 
