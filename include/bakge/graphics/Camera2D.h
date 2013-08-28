@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Camera2D.h
+ * @brief Camera2D class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_CAMERA2D_H
 #define BAKGE_GRAPHICS_CAMERA2D_H
 

@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Camera3D.h
+ * @brief Camera3D class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_CAMERA3D_H
 #define BAKGE_GRAPHICS_CAMERA3D_H
 
