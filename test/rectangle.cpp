@@ -68,16 +68,8 @@ bakge::Result InitTest()
 
     It->SetPosition(0, 0, 0);
 
-<<<<<<< HEAD
     UICam->SetPosition(0, 0, -1.0f);
     UICam->SetSpan(600.0f, 400.0f, 2.0f);
-=======
-    GLint Location;
-
-    TestCam = new bakge::Camera;
-    TestCam->SetPosition(0, 0, 3);
-    TestCam->Bind();
->>>>>>> jgcode-ui
 
     return BGE_SUCCESS;
 }
