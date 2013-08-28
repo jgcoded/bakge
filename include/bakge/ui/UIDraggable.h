@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class UIDraggable
+class BGE_API UIDraggable
 {
 
 public:

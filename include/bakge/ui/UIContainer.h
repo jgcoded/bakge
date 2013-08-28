@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class UIContainer : public UIElement
+class BGE_API UIContainer : public UIElement
 {
 
 public:

@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class UIElement : public Rectangle
+class BGE_API UIElement : public Rectangle
 {
 
 public:

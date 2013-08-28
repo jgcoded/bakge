@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class UIHoverable
+class BGE_API UIHoverable
 {
 
 public:
