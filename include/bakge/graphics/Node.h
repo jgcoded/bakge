@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Node.h
+ * @brief Node class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_NODE_H
 #define BAKGE_GRAPHICS_NODE_H
 
