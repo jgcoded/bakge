@@ -35,7 +35,7 @@ class BGE_API UIHoverable
 
 public:
 
-    virtual bool OnHover(DeviceCoord* X, DeviceCoord* Y) = 0;
+    virtual bool OnHover(DeviceCoord X, DeviceCoord Y) = 0;
 
 }; /* UIHoverable */
 
