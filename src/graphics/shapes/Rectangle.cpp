@@ -88,7 +88,6 @@ void Rectangle::AllocateGLBuffers(GLuint NormalsBuffer, GLuint TexCoordsBuffer, 
         1, 0
     };
 
-
     glBindBuffer(GL_ARRAY_BUFFER, NormalsBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
                                                         GL_STATIC_DRAW);
