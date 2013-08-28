@@ -30,13 +30,16 @@
 namespace bakge
 {
 
-class BGE_API UIElement : public Rectangle
+class BGE_API UIElement : public Rectangle, public Node
 {
 
 public:
 
     UIElement();
     ~UIElement();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
 
     BGE_FACTORY UIElement* Create(Scalar Width, Scalar Height);
     Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
