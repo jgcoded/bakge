@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class BGE_API UIDraggable
+class BGE_API UIDraggable : public UIClickable
 {
 
 public:

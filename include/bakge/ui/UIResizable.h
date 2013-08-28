@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-class BGE_API UIResizable
+class BGE_API UIResizable : public UIDraggable
 {
 
 public:
