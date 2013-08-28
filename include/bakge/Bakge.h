@@ -40,11 +40,12 @@
 
 /* GCC & Clang attributes */
 #if defined __GNUC__ || defined __clang__ || defined __MINGW__
-/* Send compiler warning if function return result is not used */
+/*! @brief Send compiler warning if function return result is not used.
+ */
 #define BGE_WUNUSED __attribute__((warn_unused_result))
-/* Mark a variable as possibly unused in its function  */
+/*! @brief Mark a variable as possibly unused in its function.
+ */
 #define BGE_UNUSED __attribute__((unused))
-/* Factory functions are static class BGE_API methods that return allocated memory  */
 #else /* Define them anyways to avoid compilation errors  */
 #define BGE_WUNUSED
 #define BGE_UNUSED
@@ -77,16 +78,44 @@
 #ifdef _MSC_VER
 #define BGE_ALIGN(X) __declspec(align(X))
 #else
+/*! @brief Align memory to provided boundaries.
+ *
+ * See your compiler/platform manuals or documentation for more information on
+ * memory alignment.
+ */
 #define BGE_ALIGN(X) __attribute__((aligned(X)))
 #endif
 
-/* Common definitions */
+/*! @brief Declaration for Bakge global API.
+ */
 #define BGE_FUNC extern BGE_API
+
+/*! @brief Factory functions are static methods which allocate heap memory.
+ *
+ * If available, compilers will raise warnings when the result from a factory
+ * function is unused (often leading to memory leaks).
+ */
 #define BGE_FACTORY static BGE_WUNUSED
+
+/*! @brief No-copy const reference qualifier. Commonly used for passing math
+ * classes.
+ */
 #define BGE_NCP const&
+
+/*! @brief Inline hint macro.
+ */
 #define BGE_INL inline
+
+/*! @brief Current release major version number.
+ */
 #define BGE_VER_MAJ 0
+
+/*! @brief Current release minor version number.
+ */
 #define BGE_VER_MIN 0
+
+/*! @brief Current release revision version number.
+ */
 #define BGE_VER_REV 0
 
 /* Required extensions to run Bakge */
