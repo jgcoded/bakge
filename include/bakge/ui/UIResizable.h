@@ -22,40 +22,26 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
-#define BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
+#ifndef BAKGE_UI_UIRESIZEABLE_H
+#define BAKGE_UI_UIRESIZEABLE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API Rectangle : public Shape
+class BGE_API UIResizable : public UIDraggable
 {
-
-protected:
-
-	Vector4 Dimensions;
-	Rectangle();
-
-	void AllocateGLBuffers();
-
 
 public:
 
-    ~Rectangle();
+    UIResizable();
+    virtual ~UIResizable() = 0;
 
-    BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
+    virtual bool OnResize(DeviceCoord X, DeviceCoord Y) = 0;
 
-    Result BGE_NCP SetDimensions(Scalar X, Scalar Y);
-
-    BGE_INL Vector4 BGE_NCP GetDimensions() const
-    {
-        return Dimensions;
-    }
-
-}; /* Rectangle */
+}; /* UIResizable */
 
 } /* bakge */
 
-#endif /* BAKGE_GRAPHICS_SHAPES_RECTANGLE_H */
+#endif /* BAKGE_UI_UIRESIZEABLE_H */

@@ -233,6 +233,12 @@ namespace api
 #include <bakge/graphics/Camera.h>
 #include <bakge/graphics/Camera2D.h>
 #include <bakge/graphics/Camera3D.h>
+#include <bakge/ui/UIElement.h>
+#include <bakge/ui/UIContainer.h>
+#include <bakge/ui/UIHoverable.h>
+#include <bakge/ui/UIClickable.h>
+#include <bakge/ui/UIDraggable.h>
+#include <bakge/ui/UIResizable.h>
 #include <bakge/renderer/DeferredGeometryRenderer.h>
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>

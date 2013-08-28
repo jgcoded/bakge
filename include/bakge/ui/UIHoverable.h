@@ -22,40 +22,26 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
-#define BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
+#ifndef BAKGE_UI_UIHOVERABLE_H
+#define BAKGE_UI_UIHOVERABLE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API Rectangle : public Shape
+class BGE_API UIHoverable
 {
-
-protected:
-
-	Vector4 Dimensions;
-	Rectangle();
-
-	void AllocateGLBuffers();
-
 
 public:
 
-    ~Rectangle();
+    UIHoverable();
+    virtual ~UIHoverable() = 0;
 
-    BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
+    virtual bool OnHover(DeviceCoord X, DeviceCoord Y) = 0;
 
-    Result BGE_NCP SetDimensions(Scalar X, Scalar Y);
-
-    BGE_INL Vector4 BGE_NCP GetDimensions() const
-    {
-        return Dimensions;
-    }
-
-}; /* Rectangle */
+}; /* UIHoverable */
 
 } /* bakge */
 
-#endif /* BAKGE_GRAPHICS_SHAPES_RECTANGLE_H */
+#endif /* BAKGE_UI_UIHOVERABLE_H */

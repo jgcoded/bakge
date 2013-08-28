@@ -31,8 +31,6 @@ bakge::Rectangle* Obj;
 bakge::Pawn* It;
 bakge::Texture* Tex;
 GLint ShaderProgram;
-bakge::Matrix Perspective;
-bakge::Matrix View;
 bakge::Camera2D* UICam;
 GLubyte* Bitmap;
 
@@ -70,8 +68,16 @@ bakge::Result InitTest()
 
     It->SetPosition(0, 0, 0);
 
+<<<<<<< HEAD
     UICam->SetPosition(0, 0, -1.0f);
     UICam->SetSpan(600.0f, 400.0f, 2.0f);
+=======
+    GLint Location;
+
+    TestCam = new bakge::Camera;
+    TestCam->SetPosition(0, 0, 3);
+    TestCam->Bind();
+>>>>>>> jgcode-ui
 
     return BGE_SUCCESS;
 }

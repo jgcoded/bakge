@@ -22,40 +22,62 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
-#define BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API Rectangle : public Shape
+UIElement::UIElement()
+{
+}
+
+
+UIElement::~UIElement()
+{
+}
+
+
+UIElement* UIElement::Create(Scalar Width, Scalar Height)
 {
 
-protected:
+    UIElement* U = new UIElement;
 
-	Vector4 Dimensions;
-	Rectangle();
+    U->NumIndices = 6;
 
-	void AllocateGLBuffers();
-
-
-public:
-
-    ~Rectangle();
-
-    BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
-
-    Result BGE_NCP SetDimensions(Scalar X, Scalar Y);
-
-    BGE_INL Vector4 BGE_NCP GetDimensions() const
-    {
-        return Dimensions;
+    if(U->CreateBuffers() != BGE_SUCCESS) {
+        delete U;
+        return NULL;
     }
 
-}; /* Rectangle */
+    if(U->SetDimensions(Width, Height) != BGE_SUCCESS) {
+        delete U;
+        return NULL;
+    }
+
+    U->AllocateGLBuffers();
+
+    U->Unbind();
+
+    U->SetPosition(0, 0);
+
+    return U;
+}
+
+
+Vector4 BGE_NCP UIElement::SetPosition(Scalar X, Scalar Y)
+{
+
+    Position[0] = X;
+    Position[1] = Y;
+    Position[2] = 0;
+
+    Matrix Translation = Matrix::TranslationMatrix(X, Y, 0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
+                                                            GL_DYNAMIC_DRAW);
+
+    return Position;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_GRAPHICS_SHAPES_RECTANGLE_H */

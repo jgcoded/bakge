@@ -22,40 +22,27 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
-#define BAKGE_GRAPHICS_SHAPES_RECTANGLE_H
+#ifndef BAKGE_UI_UIELEMENT_H
+#define BAKGE_UI_UIELEMENT_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API Rectangle : public Shape
+class BGE_API UIElement : public Rectangle
 {
-
-protected:
-
-	Vector4 Dimensions;
-	Rectangle();
-
-	void AllocateGLBuffers();
-
 
 public:
 
-    ~Rectangle();
+    UIElement();
+    ~UIElement();
 
-    BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
+    BGE_FACTORY UIElement* Create(Scalar Width, Scalar Height);
+    Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
 
-    Result BGE_NCP SetDimensions(Scalar X, Scalar Y);
-
-    BGE_INL Vector4 BGE_NCP GetDimensions() const
-    {
-        return Dimensions;
-    }
-
-}; /* Rectangle */
+}; /* UIElement */
 
 } /* bakge */
 
-#endif /* BAKGE_GRAPHICS_SHAPES_RECTANGLE_H */
+#endif /* BAKGE_UI_UIELEMENT_H */
