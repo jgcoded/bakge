@@ -71,6 +71,11 @@ protected:
     Result CreateBuffers();
     Result ClearBuffers();
 
+    Result PositionData(int NumPositions, Scalar* Data);
+    Result NormalData(int NumNormals, Scalar* Data);
+    Result IndexData(int NumIndices, int* Data);
+    Result TexCoordData(int NumTexCoords, Scalar* Data);
+
 }; /* Mesh */
 
 } /* bakge */

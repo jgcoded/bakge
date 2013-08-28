@@ -168,4 +168,28 @@ Result Mesh::DrawInstanced(int Count) const
     return BGE_SUCCESS;
 }
 
+
+Result Mesh::PositionData(int NumPositions, Scalar* Data)
+{
+    return BGE_FAILURE;
+}
+
+
+Result Mesh::NormalData(int NumNormals, Scalar* Data)
+{
+    return BGE_FAILURE;
+}
+
+
+Result Mesh::IndexData(int NumIndices, int* Data)
+{
+    return BGE_FAILURE;
+}
+
+
+Result Mesh::TexCoordData(int NumTexCoords, Scalar* Data)
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */
