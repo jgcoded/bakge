@@ -38,12 +38,6 @@ public:
     virtual void AddElement(UIElement* Element) = 0;
     virtual void RemoveElement(int BGE_NCP At) = 0;
 
-    virtual Result Bind()=0;
-
-    virtual Result Unbind()=0;
-
-    virtual Result DrawElements()=0;
-
     virtual UIElement* BGE_NCP operator[](int BGE_NCP At) const = 0;
 
 }; /* UIContainer */
