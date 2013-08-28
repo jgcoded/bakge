@@ -35,6 +35,9 @@ class BGE_API UIClickable : public UIHoverable
 
 public:
 
+    UIClickable();
+    virtual ~UIClickable() = 0;
+
     virtual bool OnClick(DeviceCoord X, DeviceCoord Y) = 0;
 
 }; /* UIClickable */

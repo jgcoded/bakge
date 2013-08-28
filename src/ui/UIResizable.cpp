@@ -22,26 +22,18 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UIRESIZEABLE_H
-#define BAKGE_UI_UIRESIZEABLE_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API UIResizable : public UIDraggable
+UIResizable::UIResizable()
 {
+}
 
-public:
 
-    UIResizable();
-    virtual ~UIResizable() = 0;
-
-    virtual bool OnResize(DeviceCoord X, DeviceCoord Y) = 0;
-
-}; /* UIResizable */
+UIResizable::~UIResizable()
+{
+}
 
 } /* bakge */
-
-#endif /* BAKGE_UI_UIRESIZEABLE_H */

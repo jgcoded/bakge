@@ -35,6 +35,9 @@ class BGE_API UIContainer
 
 public:
 
+    UIContainer();
+    virtual ~UIContainer() = 0;
+
     virtual void AddElement(UIElement* Element) = 0;
     virtual void RemoveElement(int At) = 0;
 

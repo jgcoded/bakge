@@ -35,6 +35,9 @@ class BGE_API UIDraggable : public UIClickable
 
 public:
 
+    UIDraggable();
+    virtual ~UIDraggable() = 0;
+
     virtual bool OnDrag(DeviceCoord X, DeviceCoord Y) = 0;
 
 }; /* UIDraggable */
