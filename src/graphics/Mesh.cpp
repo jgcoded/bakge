@@ -32,7 +32,7 @@ Mesh::Mesh()
     NumVertices = 0;
     NumTriangles = 0;
     NumIndices = 0;
-    MeshBuffers[0] = 0;
+    memset((void*)MeshBuffers, 0, sizeof(GLuint) * NUM_MESH_BUFFERS);
 }
 
 
@@ -153,7 +153,7 @@ Result Mesh::ClearBuffers()
 {
     if(MeshBuffers[0] != 0) {
         glDeleteBuffers(NUM_MESH_BUFFERS, MeshBuffers);
-        MeshBuffers[0] = 0;
+        memset((void*)MeshBuffers, 0, sizeof(GLuint) * NUM_MESH_BUFFERS);
     }
 
     return BGE_SUCCESS;
@@ -171,25 +171,61 @@ Result Mesh::DrawInstanced(int Count) const
 
 Result Mesh::PositionData(int NumPositions, Scalar* Data)
 {
-    return BGE_FAILURE;
+    if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0)
+        return BGE_FAILURE;
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
+                                            (const GLvoid*)Data,
+                                                GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
 }
 
 
 Result Mesh::NormalData(int NumNormals, Scalar* Data)
 {
-    return BGE_FAILURE;
+    if(MeshBuffers[MESH_BUFFER_NORMALS] == 0)
+        return BGE_FAILURE;
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
+                                            (const GLvoid*)Data,
+                                                GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
 }
 
 
 Result Mesh::IndexData(int NumIndices, int* Data)
 {
-    return BGE_FAILURE;
+    if(MeshBuffers[MESH_BUFFER_INDICES] == 0)
+        return BGE_FAILURE;
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumIndices * 3,
+                                            (const GLvoid*)Data,
+                                                GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
 }
 
 
 Result Mesh::TexCoordData(int NumTexCoords, Scalar* Data)
 {
-    return BGE_FAILURE;
+    if(MeshBuffers[MESH_BUFFER_TEXCOORDS] == 0)
+        return BGE_FAILURE;
+
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
+                                                (const GLvoid*)Data,
+                                                    GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
