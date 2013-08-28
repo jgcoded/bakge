@@ -45,6 +45,12 @@ namespace bakge
  * Bindables come in many different forms, and each implementation of
  * Bind and Unbind has a specific purpose. See individual implementations
  * for details on when and why objects must be bound and unbound.
+ *
+ * Very often, related Bindable sub-classes are interchangeable in your code.
+ * For example, switching between rendering a single Pawn object or a large
+ * Crowd of objects is done by simply binding the Crowd instead of the Pawn.
+ * This lets programmers focus on managing components instead of directly
+ * managing OpenGL state with its many and oftentimes nuanced behaviors.
  */
 class BGE_API Bindable
 {
@@ -79,7 +85,7 @@ public:
      *
      * Unbinding an object is almost always necessary to prevent unwanted
      * changes to the object's internal data, which is tied to the OpenGL
-     * state.
+     * state or to set previously modified state to an arbitrary default.
      *
      * @retval BGE_SUCCESS if unbinding was successful, or BGE_FAILURE if any
      * errors occurred.
