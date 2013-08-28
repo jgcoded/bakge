@@ -55,13 +55,13 @@ public:
     }
 
 
-    void AddUIElement(UIElement* Element)
+    void AddElement(UIElement* Element)
     {
         container.push_back(Element);
     }
 
 
-    void RemoveUIElement(int BGE_NCP At)
+    void RemoveElement(int BGE_NCP At)
     {
         container.erase(container.begin() + At);
     }
