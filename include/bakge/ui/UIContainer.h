@@ -50,4 +50,4 @@ public:
 
 } /* bakge */
 
-#endif
+#endif /* BAKGE_UI_UICONTAINER_H */

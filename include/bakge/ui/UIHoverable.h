@@ -41,4 +41,4 @@ public:
 
 } /* bakge */
 
-#endif
+#endif /* BAKGE_UI_UIHOVERABLE_H */

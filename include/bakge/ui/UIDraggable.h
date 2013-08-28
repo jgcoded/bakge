@@ -41,4 +41,4 @@ public:
 
 } /* bakge */
 
-#endif
+#endif /* BAKGE_UI_UIDRAGGABLE_H */

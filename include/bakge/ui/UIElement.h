@@ -45,4 +45,4 @@ public:
 
 } /* bakge */
 
-#endif
+#endif /* BAKGE_UI_UIELEMENT_H */
