@@ -35,7 +35,7 @@ class UIResizable
 
 public:
 
-	virtual bool OnResize(DeviceCoord* X, DeviceCoord* Y)=0;
+    virtual bool OnResize(DeviceCoord* X, DeviceCoord* Y)=0;
 
 }; /* UIResizable */
 

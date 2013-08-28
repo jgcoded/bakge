@@ -39,7 +39,7 @@ UIElement::~UIElement()
 
 UIElement* UIElement::Create(Scalar Width, Scalar Height)
 {
-    
+
     UIElement* U = new UIElement;
 
     U->NumIndices = 6;

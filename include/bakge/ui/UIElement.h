@@ -34,7 +34,7 @@ class UIElement : public Rectangle
 {
 
 public:
-    
+
     UIElement();
     ~UIElement();
 

@@ -35,7 +35,7 @@ class UIClickable
 
 public:
 
-	virtual bool OnClick(DeviceCoord* X, DeviceCoord* Y)=0;
+    virtual bool OnClick(DeviceCoord* X, DeviceCoord* Y)=0;
 
 }; /* UIClickable */
 
