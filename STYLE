@@ -152,13 +152,35 @@ class declarations should begin at column 0. Do not nest namespaces.
 
 GENERAL CONVENTION
 
+* Tag your endif preprocessor symbols with the corresponding if's predicate.
+
+    e.g.   #ifdef DEFINED_SYMBOL
+               ...
+           #endif /* DEFINED_SYMBOL */
+
+* Always have a newline at the end of a file.
+
 * Avoid declaring typedefs or new data types inside classes.
 
 * Avoid the use of unnamed namespaces.
 
-* Declaring global variables in headers is NOT OK.
+* Avoid declaring extern or even static global variables in headers. Use static
+  class members with protected or private access instead. This is to protect
+  these variables from being modified by unwarranted means.
 
-* Declaring variables inside source files (hidden vars) is OK.
+* Declaring extern or static variables inside source files (hidden vars) is OK.
+  Do the same for internal functions that are not public API.
+
+* Declaring extern functions inside other functions, then defining them
+  elsewhere is OK.
+
+    e.g.   void PublicAPIMethod(int X)
+           {
+               extern void InternalAPIMethod(int); /* OK */
+
+               InternalAPIMethod(X); /* Defined in SomeOtherSource.cpp */
+               ...
+           }
 
 * Put one newline between function definitions and namespace declarations
 
