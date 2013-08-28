@@ -37,7 +37,8 @@ protected:
 
 	Vector4 Dimensions;
 	Rectangle();
-	BGE_FACTORY void AllocateGLBuffers(GLuint Normals, GLuint TexCoords, GLuint Indices);
+
+	void AllocateGLBuffers();
 
 
 public:

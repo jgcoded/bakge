@@ -54,9 +54,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         return NULL;
     }
 
-    AllocateGLBuffers(R->MeshBuffers[MESH_BUFFER_NORMALS],
-                      R->MeshBuffers[MESH_BUFFER_TEXCOORDS],
-                      R->MeshBuffers[MESH_BUFFER_INDICES]);
+    R->AllocateGLBuffers();
 
     R->Unbind();
 
@@ -66,9 +64,8 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 }
 
 
-void Rectangle::AllocateGLBuffers(GLuint NormalsBuffer, GLuint TexCoordsBuffer, GLuint IndicesBuffer)
+void Rectangle::AllocateGLBuffers()
 {
-
     static const Scalar Normals[] = {
         0, 0, +1.0f,
         0, 0, +1.0f,
@@ -88,15 +85,15 @@ void Rectangle::AllocateGLBuffers(GLuint NormalsBuffer, GLuint TexCoordsBuffer, 
         1, 0
     };
 
-    glBindBuffer(GL_ARRAY_BUFFER, NormalsBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
                                                         GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ARRAY_BUFFER, TexCoordsBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 8, TexCoords,
                                                         GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndicesBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 6, Indices,
                                                         GL_STATIC_DRAW);
 }

@@ -54,9 +54,7 @@ UIElement* UIElement::Create(Scalar Width, Scalar Height)
         return NULL;
     }
 
-    AllocateGLBuffers(U->MeshBuffers[MESH_BUFFER_NORMALS],
-                  U->MeshBuffers[MESH_BUFFER_TEXCOORDS],
-                  U->MeshBuffers[MESH_BUFFER_INDICES]);
+    U->AllocateGLBuffers();
 
     U->Unbind();
 
