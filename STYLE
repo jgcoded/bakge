@@ -128,10 +128,20 @@ void SetVelocity(Vector4 Direction, Meters PerSec)
 
 COMMENT STYLE
 
-Comment your code! Use multi-line comments, even for a single-lined comment.
+Comment your code! Use the following comment styles as appropriate.
 
-// BAD
-/* GOOD */
+// Single-line comment.
+
+/* Single-line comment. */
+
+/* *
+ * Multi-line comment.
+ * Second line of multi-line comment.
+ * */
+
+/*!
+ * Doxygen documentation comment (header files only).
+ */
 
 
 INDENTATION
