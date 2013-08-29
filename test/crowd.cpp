@@ -76,9 +76,12 @@ int main(int argc, char* argv[])
     srand(time(0));
 
 #define TRAND ((((float)(rand() % 1000) / 1000) * 5) - 2.5f)
-#define RRAND (((float)(rand() % 1000) / 1000) * 6.28f)
+#define RRAND (((float)(rand() % 1000)) / 1000) * 6.28f
 #define SRAND (((float)(rand() % 1000) / 1000.0f) + 0.5f)
     for(int i=0;i<CROWD_SIZE;++i) {
+        Group->ScaleMember(i, SRAND, SRAND, SRAND);
+        Group->RotateMember(i, bakge::Quaternion::FromEulerAngles(RRAND,
+                                                        RRAND, RRAND));
         Group->TranslateMember(i, TRAND, TRAND, TRAND);
     }
 
