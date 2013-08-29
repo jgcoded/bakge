@@ -29,7 +29,7 @@
 using std::vector;
 using bakge::UIElement;
 
-bakge::Camera* TestCam;
+bakge::Camera2D* TestCam;
 bakge::Texture* Tex;
 bakge::Pawn* It;
 GLint ShaderProgram;
@@ -61,15 +61,15 @@ public:
     }
 
 
-    void RemoveElement(int BGE_NCP At)
+    void RemoveElement(int At)
     {
         container.erase(container.begin() + At);
     }
 
 
-    bakge::Result Bind()
+    bakge::Result Bind() const
     {
-        for(int i = 0; i < container.size(); ++i) {
+        for(unsigned int i = 0; i < container.size(); ++i) {
             container[i]->Bind();
         }
 
@@ -86,7 +86,7 @@ public:
     }
 
 
-    UIElement* BGE_NCP operator[](int BGE_NCP At) const
+    UIElement* BGE_NCP operator[](int At) const
     {
         return container[At];
     }
@@ -94,7 +94,7 @@ public:
 
     bakge::Result DrawElements()
     {
-        for(int i = 0; i < container.size(); i++)
+        for(unsigned int i = 0; i < container.size(); i++)
         {
             container[i]->Draw();
         }
@@ -122,9 +122,9 @@ bakge::Result InitTest()
 
     UIElement* E = bakge::UIElement::Create(0.8f, 0.5f);
 
-    MyContainer.AddUIElement(E);
+    MyContainer.AddElement(E);
 
-    TestCam = new bakge::Camera;
+    TestCam = new bakge::Camera2D;
 
     TestCam->SetPosition(0, 0, 3);
     TestCam->Bind();

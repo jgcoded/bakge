@@ -38,7 +38,7 @@ EngineAsEventHandler::~EngineAsEventHandler()
 bakge::Result EngineAsEventHandler::KeyEvent(bakge::KeyID K, bakge::ScanCode C,
                                         bakge::KeyState S, bakge::ModField M)
 {
-    printf("You %s %c\n", S == KEY_STATE_PRESSED ? "pressed" : "released", K);
+    printf("You %s %c\n", S == GLFW_PRESS ? "pressed" : "released", K);
     return BGE_SUCCESS;
 }
 
@@ -46,7 +46,7 @@ bakge::Result EngineAsEventHandler::KeyEvent(bakge::KeyID K, bakge::ScanCode C,
 bakge::Result EngineAsEventHandler::MouseEvent(bakge::ButtonID B,
                             bakge::ButtonState S, bakge::ModField M)
 {
-    printf("You %s mouse button %d\n", S == KEY_STATE_PRESSED ? "pressed" :
+    printf("You %s mouse button %d\n", S == GLFW_PRESS ? "pressed" :
                                                         "released", B);
     return BGE_SUCCESS;
 }

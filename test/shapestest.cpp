@@ -31,7 +31,7 @@ bakge::Cube* Obj;
 bakge::Pawn* It;
 bakge::Texture* Tex;
 GLint ShaderProgram;
-bakge::Camera* TestCam;
+bakge::Camera3D* TestCam;
 GLubyte* Bitmap;
 
 float Rot;
@@ -82,7 +82,7 @@ bakge::Result InitTest()
 
     It->SetPosition(0, 0, 0);
 
-    TestCam = new bakge::Camera;
+    TestCam = new bakge::Camera3D;
     TestCam->SetPosition(0, 0, 3);
 
     return BGE_SUCCESS;
