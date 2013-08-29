@@ -23,7 +23,6 @@ set(TESTS
   rectangle
   server
   shapestest
-  shaderprogram
   sharedcontext
   sphere
   texture
