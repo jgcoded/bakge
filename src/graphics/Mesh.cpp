@@ -44,26 +44,6 @@ Mesh::~Mesh()
 
 Result Mesh::Bind() const
 {
-    Result Errors = BGE_SUCCESS;
-
-    if(BindBuffers() == BGE_FAILURE)
-        Errors = BGE_FAILURE;
-
-    return Errors;
-}
-
-
-Result Mesh::Unbind() const
-{
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::BindBuffers() const
-{
     GLint Program = -1;
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
 
@@ -110,6 +90,15 @@ Result Mesh::BindBuffers() const
     glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Mesh::Unbind() const
+{
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
 }

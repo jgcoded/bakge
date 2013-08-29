@@ -50,9 +50,6 @@ protected:
 
     GLuint MeshBuffers[NUM_MESH_BUFFERS];
 
-    /* Bind the mesh data buffers */
-    Result BindBuffers() const;
-
     Mesh();
 
 
