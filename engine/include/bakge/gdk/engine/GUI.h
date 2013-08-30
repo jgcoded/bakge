@@ -32,7 +32,7 @@ namespace bakge
 namespace gdk
 {
 
-class GUI : public UIContainer, public UIHoverable
+class GUI : public Container, public Hoverable
 {
 
 public:
