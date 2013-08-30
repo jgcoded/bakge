@@ -498,12 +498,41 @@ Scalar Matrix::Determinant() const
 
 Matrix Matrix::Transposed() const
 {
-    return *this;
+    return Matrix(
+        Val[0], Val[4], Val[8], Val[12],
+        Val[1], Val[5], Val[9], Val[13],
+        Val[2], Val[6], Val[10], Val[14],
+        Val[3], Val[7], Val[11], Val[15]
+    );
 }
 
 
 Matrix BGE_NCP Matrix::Transpose()
 {
+    Scalar Temp = Val[4];
+    Val[4] = Val[1];
+    Val[1] = Temp;
+
+    Temp = Val[8];
+    Val[8] = Val[2];
+    Val[2] = Temp;
+
+    Temp = Val[12];
+    Val[12] = Val[3];
+    Val[3] = Temp;
+
+    Temp = Val[9];
+    Val[9] = Val[6];
+    Val[6] = Temp;
+
+    Temp = Val[13];
+    Val[13] = Val[7];
+    Val[7] = Temp;
+
+    Temp = Val[14];
+    Val[14] = Val[11];
+    Val[11] = Temp;
+
     return *this;
 }
 
