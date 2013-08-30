@@ -27,7 +27,7 @@
 #include <vector>
 
 using std::vector;
-using bakge::UIElement;
+using bakge::Frame;
 
 bakge::Camera2D* TestCam;
 bakge::Texture* Tex;
@@ -35,12 +35,12 @@ bakge::Pawn* It;
 GLint ShaderProgram;
 
 
-class ElementContainer : public bakge::UIContainer
+class ElementContainer : public bakge::Container
 {
 
 private:
 
-    vector<UIElement*> container;
+    vector<Frame*> container;
 
 
 public:
@@ -55,7 +55,7 @@ public:
     }
 
 
-    void AddElement(UIElement* Element)
+    void AddElement(Frame* Element)
     {
         container.push_back(Element);
     }
@@ -86,7 +86,7 @@ public:
     }
 
 
-    UIElement* BGE_NCP operator[](int At) const
+    Frame* BGE_NCP operator[](int At) const
     {
         return container[At];
     }
@@ -120,7 +120,7 @@ bakge::Result InitTest()
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
                                                 (void*)Bitmap);
 
-    UIElement* E = bakge::UIElement::Create(0.8f, 0.5f);
+    Frame* E = bakge::Frame::Create(0.8f, 0.5f);
 
     MyContainer.AddElement(E);
 

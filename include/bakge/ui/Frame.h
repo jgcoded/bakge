@@ -22,18 +22,30 @@
 * THE SOFTWARE.
 * */
 
+#ifndef BAKGE_UI_FRAME_H
+#define BAKGE_UI_FRAME_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-UIContainer::UIContainer()
+class BGE_API Frame : public Rectangle, public Node
 {
-}
 
+public:
 
-UIContainer::~UIContainer()
-{
-}
+    Frame();
+    ~Frame();
+
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
+    BGE_FACTORY Frame* Create(Scalar Width, Scalar Height);
+    Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
+
+}; /* Frame */
 
 } /* bakge */
+
+#endif /* BAKGE_UI_FRAME_H */

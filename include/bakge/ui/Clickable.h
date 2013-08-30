@@ -22,26 +22,26 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UIDRAGGABLE_H
-#define BAKGE_UI_UIDRAGGABLE_H
+#ifndef BAKGE_UI_CLICKABLE_H
+#define BAKGE_UI_CLICKABLE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API UIDraggable : public UIClickable
+class BGE_API Clickable : public Hoverable
 {
 
 public:
 
-    UIDraggable();
-    virtual ~UIDraggable() = 0;
+    Clickable();
+    virtual ~Clickable() = 0;
 
-    virtual bool OnDrag(DeviceCoord X, DeviceCoord Y) = 0;
+    virtual bool OnClick(DeviceCoord X, DeviceCoord Y) = 0;
 
-}; /* UIDraggable */
+}; /* Clickable */
 
 } /* bakge */
 
-#endif /* BAKGE_UI_UIDRAGGABLE_H */
+#endif /* BAKGE_UI_CLICKABLE_H */

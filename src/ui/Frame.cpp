@@ -22,29 +22,80 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UICONTAINER_H
-#define BAKGE_UI_UICONTAINER_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API UIContainer
+Frame::Frame()
+{
+}
+
+
+Frame::~Frame()
+{
+}
+
+
+Frame* Frame::Create(Scalar Width, Scalar Height)
 {
 
-public:
+    Frame* U = new Frame;
 
-    UIContainer();
-    virtual ~UIContainer() = 0;
+    U->NumIndices = 6;
 
-    virtual void AddElement(UIElement* Element) = 0;
-    virtual void RemoveElement(int At) = 0;
+    if(U->CreateBuffers() != BGE_SUCCESS) {
+        delete U;
+        return NULL;
+    }
 
-    virtual UIElement* BGE_NCP operator[](int At) const = 0;
+    if(U->SetDimensions(Width, Height) != BGE_SUCCESS) {
+        delete U;
+        return NULL;
+    }
 
-}; /* UIContainer */
+    U->AllocateGLBuffers();
+
+    U->Unbind();
+
+    U->SetPosition(0, 0);
+
+    return U;
+}
+
+
+Vector4 BGE_NCP Frame::SetPosition(Scalar X, Scalar Y)
+{
+
+    Position[0] = X;
+    Position[1] = Y;
+    Position[2] = 0;
+
+    Matrix Translation = Matrix::Translation(X, Y, 0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
+                                                            GL_DYNAMIC_DRAW);
+
+    return Position;
+}
+
+
+Result Frame::Bind() const
+{
+    Node::Bind();
+    Rectangle::Bind();
+
+    return BGE_SUCCESS;
+}
+
+
+Result Frame::Unbind() const
+{
+    Node::Unbind();
+    Rectangle::Unbind();
+
+    return BGE_SUCCESS;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_UI_UICONTAINER_H */

@@ -22,26 +22,26 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UIHOVERABLE_H
-#define BAKGE_UI_UIHOVERABLE_H
+#ifndef BAKGE_UI_RESIZEABLE_H
+#define BAKGE_UI_RESIZEABLE_H
 
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API UIHoverable
+class BGE_API Resizable : public Draggable
 {
 
 public:
 
-    UIHoverable();
-    virtual ~UIHoverable() = 0;
+    Resizable();
+    virtual ~Resizable() = 0;
 
-    virtual bool OnHover(DeviceCoord X, DeviceCoord Y) = 0;
+    virtual bool OnResize(DeviceCoord X, DeviceCoord Y) = 0;
 
-}; /* UIHoverable */
+}; /* Resizable */
 
 } /* bakge */
 
-#endif /* BAKGE_UI_UIHOVERABLE_H */
+#endif /* BAKGE_UI_RESIZEABLE_H */

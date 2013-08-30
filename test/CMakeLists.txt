@@ -31,7 +31,7 @@ set(TESTS
   vao
   vector3
   vector4
-  uitest
+  ui
   window
 )
 
