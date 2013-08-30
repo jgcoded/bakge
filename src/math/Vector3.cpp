@@ -54,6 +54,12 @@ Vector3::~Vector3()
 }
 
 
+Vector3 Vector3::operator-() const
+{
+    return Vector3(-Val[0], -Val[1], -Val[2]);
+}
+
+
 Scalar& Vector3::operator[](int BGE_NCP At)
 {
     return Val[At];

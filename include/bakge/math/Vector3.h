@@ -42,6 +42,8 @@ public:
     Vector3(Vector3 BGE_NCP Other);
     ~Vector3();
 
+    Vector3 operator-() const;
+
     Scalar& operator[](int BGE_NCP At);
     Scalar BGE_NCP operator[](int BGE_NCP At) const;
 
