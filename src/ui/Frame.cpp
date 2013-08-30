@@ -58,26 +58,9 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
 
     U->Unbind();
 
-    U->SetPosition(0, 0);
+    U->SetPosition(0, 0, 0);
 
     return U;
-}
-
-
-Vector4 BGE_NCP Frame::SetPosition(Scalar X, Scalar Y)
-{
-
-    Position[0] = X;
-    Position[1] = Y;
-    Position[2] = 0;
-
-    Matrix Translation = Matrix::Translation(X, Y, 0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
-                                                            GL_DYNAMIC_DRAW);
-
-    return Position;
 }
 
 

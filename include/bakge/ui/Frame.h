@@ -42,7 +42,6 @@ public:
     virtual Result Unbind() const;
 
     BGE_FACTORY Frame* Create(Scalar Width, Scalar Height);
-    Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
 
 }; /* Frame */
 
