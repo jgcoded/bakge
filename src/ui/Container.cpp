@@ -27,12 +27,12 @@
 namespace bakge
 {
 
-UIResizable::UIResizable()
+Container::Container()
 {
 }
 
 
-UIResizable::~UIResizable()
+Container::~Container()
 {
 }
 

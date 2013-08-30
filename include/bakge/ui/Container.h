@@ -22,18 +22,29 @@
 * THE SOFTWARE.
 * */
 
+#ifndef BAKGE_UI_CONTAINER_H
+#define BAKGE_UI_CONTAINER_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-UIDraggable::UIDraggable()
+class BGE_API Container
 {
-}
 
+public:
 
-UIDraggable::~UIDraggable()
-{
-}
+    Container();
+    virtual ~Container() = 0;
+
+    virtual void AddElement(Frame* Element) = 0;
+    virtual void RemoveElement(int At) = 0;
+
+    virtual Frame* BGE_NCP operator[](int At) const = 0;
+
+}; /* Container */
 
 } /* bakge */
+
+#endif /* BAKGE_UI_CCONTAINER_H */

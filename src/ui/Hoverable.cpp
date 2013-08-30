@@ -27,12 +27,12 @@
 namespace bakge
 {
 
-UIHoverable::UIHoverable()
+Hoverable::Hoverable()
 {
 }
 
 
-UIHoverable::~UIHoverable()
+Hoverable::~Hoverable()
 {
 }
 

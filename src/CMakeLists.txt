@@ -35,12 +35,12 @@ set(MODULES
   graphics/shapes/Cube
   graphics/shapes/Cylinder
   graphics/shapes/Rectangle
-  ui/UIClickable
-  ui/UIContainer
-  ui/UIDraggable
-  ui/UIElement
-  ui/UIHoverable
-  ui/UIResizable
+  ui/Clickable
+  ui/Container
+  ui/Draggable
+  ui/Frame
+  ui/Hoverable
+  ui/Resizable
   math/Vector3
   math/Vector4
   math/Quaternion

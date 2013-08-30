@@ -27,12 +27,12 @@
 namespace bakge
 {
 
-UIClickable::UIClickable()
+Clickable::Clickable()
 {
 }
 
 
-UIClickable::~UIClickable()
+Clickable::~Clickable()
 {
 }
 

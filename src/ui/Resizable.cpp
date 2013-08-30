@@ -22,30 +22,18 @@
 * THE SOFTWARE.
 * */
 
-#ifndef BAKGE_UI_UIELEMENT_H
-#define BAKGE_UI_UIELEMENT_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API UIElement : public Rectangle, public Node
+Resizable::Resizable()
 {
+}
 
-public:
 
-    UIElement();
-    ~UIElement();
-
-    virtual Result Bind() const;
-    virtual Result Unbind() const;
-
-    BGE_FACTORY UIElement* Create(Scalar Width, Scalar Height);
-    Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y);
-
-}; /* UIElement */
+Resizable::~Resizable()
+{
+}
 
 } /* bakge */
-
-#endif /* BAKGE_UI_UIELEMENT_H */
