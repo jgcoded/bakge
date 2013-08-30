@@ -47,8 +47,6 @@ const char* VertexShaderLibSource =
     "attribute vec2 bge_TexCoord;\n"
     "varying vec2 bge_TexCoord0;\n"
     "\n"
-    "varying vec4 bge_TransformedNormal;\n"
-    "\n"
     "vec4 bgeWorldTransform()\n"
     "{\n"
     "    mat4x4 bge_ModelMatrix = bge_Crowd * bge_Model;\n"
@@ -56,8 +54,6 @@ const char* VertexShaderLibSource =
     "\n"
     "    mat4x4 bge_ModelViewProjectionMatrix = bge_ViewProjectionMatrix\n"
     "                                                * bge_ModelMatrix;\n"
-    "    bge_TransformedNormal = transpose(inverse(\n"
-    "           bge_ModelViewProjectionMatrix)) * vec4(bge_Normal.xyz, 0);\n"
     "\n"
     "    bge_TexCoord0 = bge_TexCoord;\n"
     "\n"
@@ -71,12 +67,17 @@ const char* VertexShaderLibSource =
     "\n";
 
 const char* GenericVertexShaderSource =
-    "varying vec4 bge_Position;\n"
+    "\n"
+    "varying float LightIntensity;\n"
     "\n"
     "void main()\n"
     "{\n"
-    "    bge_Position = bgeWorldTransform();\n"
-    "    gl_Position = bgeProjection() * bge_Position;\n"
+    "    vec4 VertexPosition = bgeWorldTransform();\n"
+    "\n"
+    "    vec4 VertexNormal = bge_Normal * inverse(bge_View * bge_Model);\n"
+    "    LightIntensity = dot(normalize(VertexNormal), normalize(vec4(VertexPosition.xyz, 0)));\n"
+    "\n"
+    "    gl_Position = bgeProjection() * VertexPosition;\n"
     "}\n"
     "\n";
 
@@ -85,34 +86,51 @@ const char* FragmentShaderLibSource =
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
     "varying vec2 bge_TexCoord0;\n"
-    "varying vec4 bge_Position;\n"
     "\n"
     "uniform sampler2D bge_Diffuse;\n"
     "\n"
-    "vec4 bgeColor()\n"
+    "vec4 bgeDiffuse()\n"
     "{\n"
-    "    float ShadeValue = dot(normalize(vec4(bge_TransformedNormal.xyz, 0)),"
-    "                                                   vec4(0, 0, 1, 0));\n"
-    "    ShadeValue = pow(min(abs(ShadeValue), 1.0f), 5.0f);\n"
-    "    return texture2D(bge_Diffuse, bge_TexCoord0) * ShadeValue;"
+    "    return texture2D(bge_Diffuse, bge_TexCoord0);"
     "}\n"
     "\n";
 
 const char* GenericFragmentShaderSource =
+    "varying float LightIntensity;\n"
+    "\n"
     "void main()\n"
     "{\n"
-    "    gl_FragColor = bgeColor();\n"
+    "    float ShadeValue = pow(min(abs(LightIntensity), 1.0f), 0.1f);\n"
+    "    gl_FragColor = bgeDiffuse() * ShadeValue;\n"
     "}\n"
     "\n";
 
 const char* FragmentShaderLibHeader =
     "#version 120\n"
     "\n"
-    "vec4 bgeColor();\n"
+    "varying vec4 bge_TransformedNormal;\n"
+    "varying vec2 bge_TexCoord0;\n"
+    "\n"
+    "uniform sampler2D bge_Diffuse;\n"
+    "\n"
+    "vec4 bgeDiffuse();\n"
     "\n";
 
 const char* VertexShaderLibHeader =
     "#version 120\n"
+    "\n"
+    "attribute mat4x4 bge_Model;\n"
+    "\n"
+    "uniform mat4x4 bge_Perspective;\n"
+    "uniform mat4x4 bge_View;\n"
+    "\n"
+    "uniform mat4x4 bge_Crowd;\n"
+    "\n"
+    "attribute vec4 bge_Vertex;\n"
+    "attribute vec4 bge_Normal;\n"
+    "\n"
+    "attribute vec2 bge_TexCoord;\n"
+    "varying vec2 bge_TexCoord0;\n"
     "\n"
     "vec4 bgeWorldTransform();\n"
     "mat4x4 bgeProjection();\n";
