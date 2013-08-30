@@ -72,7 +72,6 @@ Vector3 BGE_NCP Vector3::operator=(Vector3 BGE_NCP Other)
     Val[1] = Other[1];
     Val[2] = Other[2];
 
-    /* Cascading assignment */
     return *this;
 }
 
@@ -115,7 +114,6 @@ Vector3 BGE_NCP Vector3::operator*=(Scalar BGE_NCP Value)
 Vector3 BGE_NCP Vector3::operator/=(Scalar BGE_NCP Value)
 {
     if(ScalarCompare(Value, 0)){
-        printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
@@ -147,7 +145,6 @@ Vector3 Vector3::operator*(Scalar BGE_NCP Value) const
 Vector3 Vector3::operator/(Scalar BGE_NCP Value) const
 {
     if(ScalarCompare(Value, 0)){
-        printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
@@ -158,6 +155,7 @@ Vector3 Vector3::operator/(Scalar BGE_NCP Value) const
 Vector3 Vector3::Normalized() const
 {
     Scalar Len = Length();
+
     return Vector3(Val[0] / Len, Val[1] / Len, Val[2]);
 }
 
@@ -183,6 +181,7 @@ static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
 static Vector3 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
 {
     Scalar Len = sqrt(X * X + Y * Y);
+
     return Vector3(X / Len, Y / Len, Z);
 }
 
