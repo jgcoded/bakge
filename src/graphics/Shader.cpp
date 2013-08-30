@@ -88,11 +88,6 @@ const char* FragmentShaderLibSource =
     "varying vec2 bge_TexCoord0;\n"
     "\n"
     "uniform sampler2D bge_Diffuse;\n"
-    "\n"
-    "vec4 bgeDiffuse()\n"
-    "{\n"
-    "    return texture2D(bge_Diffuse, bge_TexCoord0);"
-    "}\n"
     "\n";
 
 const char* GenericFragmentShaderSource =
@@ -102,7 +97,7 @@ const char* GenericFragmentShaderSource =
     "{\n"
     "    float ShadeValue = pow(min(abs(LightIntensity), 1.0f), 0.1f);\n"
     "\n"
-    "    gl_FragColor = bgeDiffuse() * ShadeValue;\n"
+    "    gl_FragColor = texture2D(bge_Diffuse, bge_TexCoord0) * ShadeValue;\n"
     "}\n"
     "\n";
 
@@ -113,8 +108,6 @@ const char* FragmentShaderLibHeader =
     "varying vec2 bge_TexCoord0;\n"
     "\n"
     "uniform sampler2D bge_Diffuse;\n"
-    "\n"
-    "vec4 bgeDiffuse();\n"
     "\n";
 
 const char* VertexShaderLibHeader =
