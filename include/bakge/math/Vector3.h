@@ -60,6 +60,7 @@ public:
     Vector3 operator*(Scalar BGE_NCP Other) const;
     Vector3 operator/(Scalar BGE_NCP Value) const;
 
+    Vector3 BGE_NCP Normalize();
     Vector3 Normalized() const;
 
     Scalar Length() const;

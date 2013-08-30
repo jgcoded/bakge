@@ -162,6 +162,22 @@ Vector3 Vector3::operator/(Scalar BGE_NCP Value) const
 }
 
 
+Vector3 BGE_NCP Vector3::Normalize()
+{
+    Scalar Len = Length();
+
+    if(ScalarCompare(Len, 0)) {
+        return *this;
+    }
+
+    Val[0] /= Len;
+    Val[1] /= Len;
+    Val[2] /= Len;
+
+    return *this;
+}
+
+
 Vector3 Vector3::Normalized() const
 {
     Scalar Len = Length();
