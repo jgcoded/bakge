@@ -147,7 +147,6 @@ Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
 Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
 {
     if(ScalarCompare(Value, 0)) {
-        printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
@@ -173,7 +172,6 @@ Vector4 BGE_NCP Vector4::Normalize()
     Scalar Len = Length();
 
     if(ScalarCompare(Len, 0)) {
-        printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
@@ -191,7 +189,6 @@ Vector4 Vector4::Normalized() const
     Scalar Len = Length();
 
     if(ScalarCompare(Len, 0)) {
-        printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
@@ -254,7 +251,6 @@ Vector4 Vector4::operator*(Scalar BGE_NCP Value) const
 Vector4 Vector4::operator/(Scalar BGE_NCP Value) const
 {
     if(ScalarCompare(Value, 0)) {
-        printf("Division by 0. Cancelling operation\n");
         return *this;
     }
 
