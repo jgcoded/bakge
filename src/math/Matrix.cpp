@@ -110,8 +110,92 @@ Matrix BGE_NCP Matrix::operator=(Matrix BGE_NCP Other)
 
 Matrix Matrix::operator*(Matrix BGE_NCP Other) const
 {
-    Matrix Result = *this;
-    Result *= Other;
+    Matrix Result;
+
+#ifdef BGE_USE_SIMD
+    /* Temp vectors */
+    __m128 T1, T2, C1, C2, C3, C4;
+
+    /* Set columns of other matrix */
+    C1 = _mm_setr_ps(Other[0], Other[1], Other[2], Other[3]);
+    C2 = _mm_setr_ps(Other[4], Other[5], Other[6], Other[7]);
+    C3 = _mm_setr_ps(Other[8], Other[9], Other[10], Other[11]);
+    C4 = _mm_setr_ps(Other[12], Other[13], Other[14], Other[15]);
+
+    /* Matrix may not be properly aligned. So we'll use a "messenger" */
+    BGE_ALIGN(16) Vector4 Messenger;
+
+    T1 = _mm_set1_ps(Val[0]);
+    T2 = _mm_mul_ps(C1, T1);
+    T1 =_mm_set1_ps(Val[1]);
+    T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
+    T1 =_mm_set1_ps(Val[2]);
+    T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
+    T1 =_mm_set1_ps(Val[3]);
+    T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Result[0] = Messenger[0];
+    Result[1] = Messenger[1];
+    Result[2] = Messenger[2];
+    Result[3] = Messenger[3];
+
+    T1 = _mm_set1_ps(Val[4]);
+    T2 = _mm_mul_ps(C1, T1);
+    T1 =_mm_set1_ps(Val[5]);
+    T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
+    T1 =_mm_set1_ps(Val[6]);
+    T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
+    T1 =_mm_set1_ps(Val[7]);
+    T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Result[4] = Messenger[0];
+    Result[5] = Messenger[1];
+    Result[6] = Messenger[2];
+    Result[7] = Messenger[3];
+
+    T1 = _mm_set1_ps(Val[8]);
+    T2 = _mm_mul_ps(C1, T1);
+    T1 =_mm_set1_ps(Val[9]);
+    T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
+    T1 =_mm_set1_ps(Val[10]);
+    T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
+    T1 =_mm_set1_ps(Val[11]);
+    T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Result[8] = Messenger[0];
+    Result[9] = Messenger[1];
+    Result[10] = Messenger[2];
+    Result[11] = Messenger[3];
+
+    T1 = _mm_set1_ps(Val[12]);
+    T2 = _mm_mul_ps(C1, T1);
+    T1 =_mm_set1_ps(Val[13]);
+    T2 = _mm_add_ps(_mm_mul_ps(C2, T1), T2);
+    T1 =_mm_set1_ps(Val[14]);
+    T2 = _mm_add_ps(_mm_mul_ps(C3, T1), T2);
+    T1 =_mm_set1_ps(Val[15]);
+    T2 = _mm_add_ps(_mm_mul_ps(C4, T1), T2);
+
+    _mm_store_ps(&Messenger[0], T2);
+    Result[12] = Messenger[0];
+    Result[13] = Messenger[1];
+    Result[14] = Messenger[2];
+    Result[15] = Messenger[3];
+#else
+    memset((void*)&Result[0], 0, sizeof(Scalar) * 16);
+
+    for(int i=0;i<4;++i) {
+        for(int j=0;j<4;++j) {
+            for(int k=0;k<4;++k) {
+                Result[i*4+k] += Val[i*4+j] * Other.Val[j*4+k];
+            }
+        }
+    }
+#endif /* BGE_USE_SIMD */
+
     return Result;
 }
 
