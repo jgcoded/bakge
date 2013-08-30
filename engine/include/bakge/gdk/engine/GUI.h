@@ -22,11 +22,27 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_GDK_ENGINE_COMMON_H
-#define BAKGE_GDK_ENGINE_COMMON_H
+#ifndef BAKGE_GDK_ENGINE_GUI_H
+#define BAKGE_GDK_ENGINE_GUI_H
 
-#include <bakge/Bakge.h>
-#include <bakge/gdk/engine/Application.h>
-#include <bakge/gdk/engine/GUI.h>
+#include <bakge/gdk/engine/Common.h>
 
-#endif /* BAKGE_GDK_ENGINE_COMMON_H */
+namespace bakge
+{
+namespace gdk
+{
+
+class GUI : public UIContainer, public UIHoverable
+{
+
+public:
+
+    GUI();
+    ~GUI();
+
+}; /* GUI */
+
+} /* gdk */
+} /* bakge */
+
+#endif /* BAKGE_GDK_ENGINE_GUI_H */
