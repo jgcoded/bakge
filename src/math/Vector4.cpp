@@ -88,13 +88,13 @@ Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Scalar& Vector4::operator[](int BGE_NCP At)
+Scalar& Vector4::operator[](int At)
 {
     return Val[At];
 }
 
 
-Scalar BGE_NCP Vector4::operator[](int BGE_NCP At) const
+Scalar BGE_NCP Vector4::operator[](int At) const
 {
     return Val[At];
 }
@@ -133,7 +133,7 @@ Vector4 BGE_NCP Vector4::operator-=(Vector4 BGE_NCP Other)
 }
 
 
-Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
+Vector4 BGE_NCP Vector4::operator*=(Scalar Value)
 {
     Val[0] *= Value;
     Val[1] *= Value;
@@ -144,7 +144,7 @@ Vector4 BGE_NCP Vector4::operator*=(Scalar BGE_NCP Value)
 }
 
 
-Vector4 BGE_NCP Vector4::operator/=(Scalar BGE_NCP Value)
+Vector4 BGE_NCP Vector4::operator/=(Scalar Value)
 {
     if(ScalarCompare(Value, 0)) {
         return *this;
@@ -241,14 +241,14 @@ Vector4 Vector4::operator-(Vector4 BGE_NCP Other) const
 }
 
 
-Vector4 Vector4::operator*(Scalar BGE_NCP Value) const
+Vector4 Vector4::operator*(Scalar Value) const
 {
     return Vector4(Val[0] * Value, Val[1] * Value, Val[2] * Value,
                                                     Val[3] * Value);
 }
 
 
-Vector4 Vector4::operator/(Scalar BGE_NCP Value) const
+Vector4 Vector4::operator/(Scalar Value) const
 {
     if(ScalarCompare(Value, 0)) {
         return *this;

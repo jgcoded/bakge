@@ -60,13 +60,13 @@ Vector3 Vector3::operator-() const
 }
 
 
-Scalar& Vector3::operator[](int BGE_NCP At)
+Scalar& Vector3::operator[](int At)
 {
     return Val[At];
 }
 
 
-Scalar BGE_NCP Vector3::operator[](int BGE_NCP At) const
+Scalar BGE_NCP Vector3::operator[](int At) const
 {
     return Val[At];
 }
@@ -110,7 +110,7 @@ Vector3 BGE_NCP Vector3::operator-=(Vector3 BGE_NCP Other)
 }
 
 
-Vector3 BGE_NCP Vector3::operator*=(Scalar BGE_NCP Value)
+Vector3 BGE_NCP Vector3::operator*=(Scalar Value)
 {
     Val[0] /= Value;
     Val[1] /= Value;
@@ -120,7 +120,7 @@ Vector3 BGE_NCP Vector3::operator*=(Scalar BGE_NCP Value)
 }
 
 
-Vector3 BGE_NCP Vector3::operator/=(Scalar BGE_NCP Value)
+Vector3 BGE_NCP Vector3::operator/=(Scalar Value)
 {
     if(ScalarCompare(Value, 0)){
         return *this;
@@ -146,13 +146,13 @@ Vector3 Vector3::operator-(Vector3 BGE_NCP Other) const
 }
 
 
-Vector3 Vector3::operator*(Scalar BGE_NCP Value) const
+Vector3 Vector3::operator*(Scalar Value) const
 {
     return Vector3(Val[0] * Value, Val[1] * Value, Val[2] * Value);
 }
 
 
-Vector3 Vector3::operator/(Scalar BGE_NCP Value) const
+Vector3 Vector3::operator/(Scalar Value) const
 {
     if(ScalarCompare(Value, 0)){
         return *this;
@@ -208,7 +208,7 @@ static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right)
 }
 
 
-static Vector3 UnitVector(Scalar BGE_NCP X, Scalar  BGE_NCP Y, Scalar BGE_NCP Z)
+static Vector3 UnitVector(Scalar X, Scalar  BGE_NCP Y, Scalar Z)
 {
     Scalar Len = sqrt(X * X + Y * Y + Z * Z);
 

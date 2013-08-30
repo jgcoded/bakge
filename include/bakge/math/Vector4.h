@@ -59,21 +59,21 @@ public:
 
     Vector4 operator-() const;
 
-    Scalar& operator[](int BGE_NCP At);
-    Scalar BGE_NCP operator[](int BGE_NCP At) const;
+    Scalar& operator[](int At);
+    Scalar BGE_NCP operator[](int At) const;
 
     Vector4 BGE_NCP operator=(Vector4 BGE_NCP Other);
     bool operator==(Vector4 BGE_NCP Other) const;
 
     Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
     Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
-    Vector4 BGE_NCP operator*=(Scalar BGE_NCP Value);
-    Vector4 BGE_NCP operator/=(Scalar BGE_NCP Value);
+    Vector4 BGE_NCP operator*=(Scalar Value);
+    Vector4 BGE_NCP operator/=(Scalar Value);
 
     Vector4 operator+(Vector4 BGE_NCP Other) const;
     Vector4 operator-(Vector4 BGE_NCP Other) const;
-    Vector4 operator*(Scalar BGE_NCP Value) const;
-    Vector4 operator/(Scalar BGE_NCP Value) const;
+    Vector4 operator*(Scalar Value) const;
+    Vector4 operator/(Scalar Value) const;
 
     Vector4 BGE_NCP Normalize();
     Vector4 Normalized() const;

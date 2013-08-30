@@ -44,21 +44,21 @@ public:
 
     Vector3 operator-() const;
 
-    Scalar& operator[](int BGE_NCP At);
-    Scalar BGE_NCP operator[](int BGE_NCP At) const;
+    Scalar& operator[](int At);
+    Scalar BGE_NCP operator[](int At) const;
 
     Vector3 BGE_NCP operator=(Vector3 BGE_NCP Other);
     bool operator==(Vector3 BGE_NCP Other) const;
 
     Vector3 BGE_NCP operator+=(Vector3 BGE_NCP Other);
     Vector3 BGE_NCP operator-=(Vector3 BGE_NCP Other);
-    Vector3 BGE_NCP operator*=(Scalar BGE_NCP Value);
-    Vector3 BGE_NCP operator/=(Scalar BGE_NCP Value);
+    Vector3 BGE_NCP operator*=(Scalar Value);
+    Vector3 BGE_NCP operator/=(Scalar Value);
 
     Vector3 operator+(Vector3 BGE_NCP Other) const;
     Vector3 operator-(Vector3 BGE_NCP Other) const;
-    Vector3 operator*(Scalar BGE_NCP Other) const;
-    Vector3 operator/(Scalar BGE_NCP Value) const;
+    Vector3 operator*(Scalar Other) const;
+    Vector3 operator/(Scalar Value) const;
 
     Vector3 BGE_NCP Normalize();
     Vector3 Normalized() const;
@@ -67,8 +67,8 @@ public:
     Scalar LengthSquared() const;
 
     static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
-    static Vector3 UnitVector(Scalar BGE_NCP X, Scalar BGE_NCP Y,
-                                                Scalar BGE_NCP Z);
+    static Vector3 UnitVector(Scalar X, Scalar Y,
+                                                Scalar Z);
 
 }; /* Vector3 */
 
