@@ -182,6 +182,10 @@ Vector3 Vector3::Normalized() const
 {
     Scalar Len = Length();
 
+    if(ScalarCompare(Len, 0)) {
+        return *this;
+    }
+
     return Vector3(Val[0] / Len, Val[1] / Len, Val[2] / Len);
 }
 
