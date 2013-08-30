@@ -38,5 +38,17 @@ GUI::~GUI()
 {
 }
 
+
+Result GUI::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result GUI::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
 } /* gdk */
 } /* bakge */

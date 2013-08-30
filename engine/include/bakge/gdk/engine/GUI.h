@@ -40,6 +40,9 @@ public:
     GUI();
     ~GUI();
 
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
 }; /* GUI */
 
 } /* gdk */
