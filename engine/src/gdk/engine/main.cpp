@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_GDK_GDKENGINE_H
-#define BAKGE_GDK_GDKENGINE_H
+#include <bakge/gdk/engine/Common.h>
 
-#include <bakge/Bakge.h>
-#include <bakge/gdk/engine/GameEngine.h>
-
-#endif /* BAKGE_GDK_GDKENGINE_H */
+int main(int argc, char* argv[])
+{
+    return 0;
+}

@@ -8,13 +8,13 @@ set(BAKGE_GDK_ENGINE_DIR ${CMAKE_SOURCE_DIR}/engine)
 include_directories(${BAKGE_GDK_ENGINE_DIR}/include)
 
 set(BAKGE_GDK_ENGINE_HEADERS
-  ${BAKGE_SOURCE_DIR}/engine/include/bakge/gdk/engine/GDKEngine
-  ${BAKGE_SOURCE_DIR}/engine/include/bakge/gdk/engine/GameEngine
+  ${BAKGE_SOURCE_DIR}/engine/include/bakge/gdk/engine/Common
+  ${BAKGE_SOURCE_DIR}/engine/include/bakge/gdk/engine/Application
 )
 
 set(BAKGE_GDK_ENGINE_SOURCES
-  ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/GDKEngine
-  ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/GameEngine
+  ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/main
+  ${BAKGE_SOURCE_DIR}/engine/src/gdk/engine/Application
 )
 
 # So Bakge engine executable can find shared libs in its directory

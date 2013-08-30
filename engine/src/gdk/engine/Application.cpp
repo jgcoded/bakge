@@ -22,9 +22,21 @@
  * THE SOFTWARE.
  * */
 
-#include <bakge/gdk/engine/GDKEngine.h>
+#include <bakge/gdk/engine/Common.h>
 
-int main(int argc, char* argv[])
+namespace bakge
 {
-    return 0;
+namespace gdk
+{
+
+Application::Application()
+{
 }
+
+
+Application::~Application()
+{
+}
+
+} /* gdk */
+} /* bakge */

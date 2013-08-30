@@ -22,27 +22,27 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_GDK_GAMEENGINE_H
-#define BAKGE_GDK_GAMEENGINE_H
+#ifndef BAKGE_GDK_ENGINE_APPLICATION_H
+#define BAKGE_GDK_ENGINE_APPLICATION_H
 
-#include <bakge/gdk/engine/GDKEngine.h>
+#include <bakge/gdk/engine/Common.h>
 
 namespace bakge
 {
 namespace gdk
 {
 
-class GameEngine : public Engine
+class Application : public Engine
 {
 
 public:
 
-    GameEngine();
-    ~GameEngine();
+    Application();
+    ~Application();
 
-}; /* GameEngine */
+}; /* Application */
 
 } /* gdk */
 } /* bakge */
 
-#endif /* BAKGE_GDK_GAMEENGINE_H */
+#endif /* BAKGE_GDK_ENGINE_APPLICATION_H */
