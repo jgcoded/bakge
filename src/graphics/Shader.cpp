@@ -101,6 +101,7 @@ const char* GenericFragmentShaderSource =
     "void main()\n"
     "{\n"
     "    float ShadeValue = pow(min(abs(LightIntensity), 1.0f), 0.1f);\n"
+    "\n"
     "    gl_FragColor = bgeDiffuse() * ShadeValue;\n"
     "}\n"
     "\n";
@@ -133,7 +134,8 @@ const char* VertexShaderLibHeader =
     "varying vec2 bge_TexCoord0;\n"
     "\n"
     "vec4 bgeWorldTransform();\n"
-    "mat4x4 bgeProjection();\n";
+    "mat4x4 bgeProjection();\n"
+    "\n";
 
 Result Shader::InitShaderLibrary()
 {
