@@ -59,11 +59,6 @@ const char* VertexShaderLibSource =
     "\n"
     "    return bge_View * bge_ModelMatrix * bge_Vertex;\n"
     "}\n"
-    "\n"
-    "mat4x4 bgeProjection()\n"
-    "{\n"
-    "    return bge_Perspective;\n"
-    "}\n"
     "\n";
 
 const char* GenericVertexShaderSource =
@@ -75,10 +70,10 @@ const char* GenericVertexShaderSource =
     "{\n"
     "    vec4 VertexPosition = bgeWorldTransform();\n"
     "\n"
-    "    vec4 VertexNormal = vec4(bge_Normal.xyz, 0) * inverse(bge_View * bge_Model);\n"
+    "    vec4 VertexNormal = transpose(inverse(bge_View * bge_Model)) * vec4(bge_Normal.xyz, 0);\n"
     "    LightIntensity = dot(normalize(VertexNormal), normalize(vec4(VertexPosition.xyz, 0)));\n"
     "\n"
-    "    gl_Position = bgeProjection() * VertexPosition;\n"
+    "    gl_Position = bge_Perspective * VertexPosition;\n"
     "}\n"
     "\n";
 
@@ -128,7 +123,6 @@ const char* VertexShaderLibHeader =
     "varying vec2 bge_TexCoord0;\n"
     "\n"
     "vec4 bgeWorldTransform();\n"
-    "mat4x4 bgeProjection();\n"
     "\n";
 
 Result Shader::InitShaderLibrary()
