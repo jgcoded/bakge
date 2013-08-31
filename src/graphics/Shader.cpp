@@ -67,6 +67,7 @@ const char* VertexShaderLibSource =
     "\n";
 
 const char* GenericVertexShaderSource =
+    "#extension GL_ARB_gpu_shader5 : enable"
     "\n"
     "varying float LightIntensity;\n"
     "\n"
@@ -74,7 +75,7 @@ const char* GenericVertexShaderSource =
     "{\n"
     "    vec4 VertexPosition = bgeWorldTransform();\n"
     "\n"
-    "    vec4 VertexNormal = bge_Normal * inverse(bge_View * bge_Model);\n"
+    "    vec4 VertexNormal = vec4(bge_Normal.xyz, 0) * inverse(bge_View * bge_Model);\n"
     "    LightIntensity = dot(normalize(VertexNormal), normalize(vec4(VertexPosition.xyz, 0)));\n"
     "\n"
     "    gl_Position = bgeProjection() * VertexPosition;\n"
