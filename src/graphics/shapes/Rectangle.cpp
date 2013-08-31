@@ -97,7 +97,7 @@ void Rectangle::AllocateGLBuffers()
 }
 
 
-Result BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
+Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
 {
     glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
     glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
@@ -113,7 +113,7 @@ Result BGE_NCP Rectangle::SetDimensions(Scalar Width, Scalar Height)
     Vertices[6] = +Width / 2.0f;
     Vertices[7] = +Height / 2.0f;
     Vertices[8] = 0;
-    Vertices[9] = +Width / 2.0;
+    Vertices[9] = +Width / 2.0f;
     Vertices[10] = -Height / 2.0f;
     Vertices[11] = 0;
 

@@ -47,7 +47,7 @@ public:
 
     BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
 
-    Result BGE_NCP SetDimensions(Scalar X, Scalar Y);
+    Result SetDimensions(Scalar X, Scalar Y);
 
     BGE_INL Vector4 BGE_NCP GetDimensions() const
     {
