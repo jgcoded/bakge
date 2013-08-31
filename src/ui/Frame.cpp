@@ -66,8 +66,11 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
 
 Result Frame::Bind() const
 {
-    Node::Bind();
-    Rectangle::Bind();
+    if(Node::Bind() == BGE_FAILURE)
+        return BGE_FAILURE;
+
+    if(Rectangle::Bind() == BGE_FAILURE)
+        return BGE_FAILURE;
 
     return BGE_SUCCESS;
 }
@@ -75,8 +78,11 @@ Result Frame::Bind() const
 
 Result Frame::Unbind() const
 {
-    Node::Unbind();
-    Rectangle::Unbind();
+    if(Node::Unbind() == BGE_FAILURE)
+        return BGE_FAILURE;
+
+    if(Rectangle::Unbind() == BGE_FAILURE)
+        return BGE_FAILURE;
 
     return BGE_SUCCESS;
 }
