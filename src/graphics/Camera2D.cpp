@@ -47,7 +47,7 @@ Result Camera2D::Bind() const
         return BGE_FAILURE;
 
     /* First we'll set the perspective */
-    Location = glGetUniformLocation(Program, "bge_Perspective");
+    Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -58,7 +58,7 @@ Result Camera2D::Bind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Mat[0]);
 
     /* Now the view transform */
-    Location = glGetUniformLocation(Program, "bge_View");
+    Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
@@ -77,14 +77,14 @@ Result Camera2D::Unbind() const
         return BGE_FAILURE;
 
     /* First we'll set the perspective */
-    Location = glGetUniformLocation(Program, "bge_Perspective");
+    Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
     /* Now the view transform */
-    Location = glGetUniformLocation(Program, "bge_View");
+    Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 

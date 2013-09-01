@@ -93,9 +93,9 @@ int main(int argc, char* argv[])
     GLint ShaderProgram, Location;
     Perspective.SetPerspective(80.0f, 1024.0f / 768.0f, 0.1f, 500.0f);
     glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    Location = glGetUniformLocation(ShaderProgram, "bge_Perspective");
+    Location = glGetUniformLocation(ShaderProgram, BGE_PROJECTION_UNIFORM);
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
-    Location = glGetUniformLocation(ShaderProgram, "bge_View");
+    Location = glGetUniformLocation(ShaderProgram, BGE_VIEW_UNIFORM);
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
     float Rot = 0;

@@ -28,7 +28,7 @@
 #include <bakge/Bakge.h>
 
 #define BGE_VIEW_UNIFORM "bge_View"
-#define BGE_PERSPECTIVE_UNIFORM "bge_Perspective"
+#define BGE_PROJECTION_UNIFORM "bge_Projection"
 #define BGE_DIFFUSE_UNIFORM "bge_Diffuse"
 #define BGE_CROWD_UNIFORM "bge_Crowd"
 
