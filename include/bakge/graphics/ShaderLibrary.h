@@ -40,9 +40,9 @@
  * @{
  */
 
-/*! @brief Represents model transformation of vertices.
+/*! @brief Model transformation of vertices.
  *
- * Divisor is always 1, so this uniform does not change until the entire mesh
+ * Divisor is always 1, so this attribute does not change until the entire mesh
  * instance has been drawn.
  */
 attribute mat4x4 bge_Model;
