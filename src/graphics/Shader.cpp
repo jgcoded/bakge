@@ -118,9 +118,6 @@ const char* VertexShaderLibHeader =
     "\n"
     "attribute vec2 bge_TexCoord;\n"
     "varying vec2 bge_TexCoord0;\n"
-    "\n"
-    "vec4 bgeWorldTransform();\n"
-    "mat3x3 bgeNormalMatrix();\n"
     "\n";
 
 Result Shader::InitShaderLibrary()
