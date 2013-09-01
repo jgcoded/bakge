@@ -59,6 +59,16 @@ const char* VertexShaderLibSource =
     "\n"
     "    return bge_View * bge_ModelMatrix * bge_Vertex;\n"
     "}\n"
+    "\n"
+    "mat3x3 bgeNormalMatrix()\n"
+    "{\n"
+    "    mat4x4 ModelView = bge_View * bge_Model;\n"
+    "    return mat3x3(\n"
+    "        normalize(vec3(ModelView[0].xyz)),\n"
+    "        normalize(vec3(ModelView[1].xyz)),\n"
+    "        normalize(vec3(ModelView[2].xyz))\n"
+    "    );\n"
+    "}\n"
     "\n";
 
 const char* GenericVertexShaderSource =
@@ -70,13 +80,8 @@ const char* GenericVertexShaderSource =
     "{\n"
     "    vec4 VertexPosition = bgeWorldTransform();\n"
     "\n"
-    "    mat3x3 NormalMatrix;\n"
     "    mat4x4 ModelViewMatrix = bge_View * bge_Model;\n"
-    "    NormalMatrix[0] = vec3(ModelViewMatrix[0].xyz);\n"
-    "    NormalMatrix[1] = vec3(ModelViewMatrix[1].xyz);\n"
-    "    NormalMatrix[2] = vec3(ModelViewMatrix[2].xyz);\n"
-    "    NormalMatrix = transpose(inverse(NormalMatrix));\n"
-    "    vec3 VertexNormal = NormalMatrix * vec3(bge_Normal.xyz);\n"
+    "    vec3 VertexNormal = bgeNormalMatrix() * vec3(bge_Normal.xyz);\n"
     "    LightIntensity = dot(normalize(VertexNormal), vec3(0, 0, 1));\n"
     "\n"
     "    gl_Position = bge_Perspective * VertexPosition;\n"
@@ -131,6 +136,7 @@ const char* VertexShaderLibHeader =
     "varying vec2 bge_TexCoord0;\n"
     "\n"
     "vec4 bgeWorldTransform();\n"
+    "mat3x3 bgeNormalMatrix();\n"
     "\n";
 
 Result Shader::InitShaderLibrary()
