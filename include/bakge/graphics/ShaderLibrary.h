@@ -30,13 +30,25 @@
 #ifndef BAKGE_GRAPHICS_SHADERLIBRARY_H
 #define BAKGE_GRAPHICS_SHADERLIBRARY_H
 
-/*! @brief Get vertex position after world and view transformations.
+/*! @defgroup VertexLib
  *
- * bgeWorldTransform applies world and view transformations to vertices passed
- * to the shader via vertex attributes.
+ * @brief Bakge vertex shader library.
  *
- * @retval vec4 vertex position.
+ * Contains shader uniforms and attributes needed by Bakge to properly render
+ * objects in the world.
+ *
+ * @{
  */
-vec4 bgeWorldTransform();
+
+/*! @brief Represents model transformation of vertices.
+ *
+ * Divisor is always 1, so this uniform does not change until the entire mesh
+ * instance has been drawn.
+ */
+attribute mat4x4 bge_Model;
+
+/*! // End group VertexLib
+ * @}
+ */
 
 #endif /* BAKGE_GRAPHICS_SHADERLIBRARY_H */
