@@ -39,8 +39,6 @@ const char* VertexShaderLibSource =
     "uniform mat4x4 bge_Perspective;\n"
     "uniform mat4x4 bge_View;\n"
     "\n"
-    "uniform mat4x4 bge_Crowd;\n"
-    "\n"
     "attribute vec4 bge_Vertex;\n"
     "attribute vec4 bge_Normal;\n"
     "\n"
