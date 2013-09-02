@@ -46,6 +46,18 @@ Font::~Font()
 }
 
 
+Result Font::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result Font::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
+
 Font* Font::Load(const char* FontData, Scalar FontHeight)
 {
     return NULL;

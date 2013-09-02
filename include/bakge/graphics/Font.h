@@ -51,6 +51,9 @@ public:
 
     BGE_FACTORY Font* Load(const char* FontData, Scalar FontHeight);
 
+    virtual Result Bind() const;
+    virtual Result Unbind() const;
+
 }; /* Font */
 
 } /* bakge */
