@@ -34,6 +34,7 @@ class BGE_API Font : public Bindable
 {
     Font();
 
+
 public:
 
     ~Font();
