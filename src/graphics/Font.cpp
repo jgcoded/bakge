@@ -37,6 +37,9 @@ Font::Font()
 
 Font::~Font()
 {
+    if(GlyphData != NULL)
+        delete[] GlyphData;
+
     if(Glyphs != NULL)
         delete Glyphs;
 }
