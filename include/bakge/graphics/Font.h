@@ -32,6 +32,12 @@ namespace bakge
 
 class BGE_API Font : public Bindable
 {
+    // Number of glpyhs
+    int NumGlyphs;
+
+    // Array of baked glyph data
+    stbtt_bakedchar* GlyphData;
+
     Font();
 
 

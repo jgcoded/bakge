@@ -29,6 +29,8 @@ namespace bakge
 
 Font::Font()
 {
+    NumGlyphs = 0;
+    GlyphData = NULL;
 }
 
 
