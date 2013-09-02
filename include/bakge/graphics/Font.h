@@ -32,6 +32,8 @@ namespace bakge
 
 class BGE_API Font : public Bindable
 {
+    Scalar ScaleValue;
+
     // Number of glpyhs
     int NumGlyphs;
 

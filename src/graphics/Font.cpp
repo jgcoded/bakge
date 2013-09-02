@@ -32,6 +32,7 @@ Font::Font()
     NumGlyphs = 0;
     GlyphData = NULL;
     Glyphs = NULL;
+    ScaleValue = 0;
 }
 
 
