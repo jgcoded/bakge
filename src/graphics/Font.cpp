@@ -31,11 +31,14 @@ Font::Font()
 {
     NumGlyphs = 0;
     GlyphData = NULL;
+    Glyphs = NULL;
 }
 
 
 Font::~Font()
 {
+    if(Glyphs != NULL)
+        delete Glyphs;
 }
 
 

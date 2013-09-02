@@ -38,6 +38,8 @@ class BGE_API Font : public Bindable
     // Array of baked glyph data
     stbtt_bakedchar* GlyphData;
 
+    Texture* Glyphs;
+
     Font();
 
 
