@@ -24,6 +24,7 @@ set(MODULES
   graphics/Camera2D
   graphics/Camera3D
   graphics/Crowd
+  graphics/Font
   graphics/Mesh
   graphics/Node
   graphics/Pawn
