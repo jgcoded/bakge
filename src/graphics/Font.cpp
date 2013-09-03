@@ -128,6 +128,7 @@ Font* Font::Load(const char* FileName, Scalar FontHeight)
     // Cleanup
     PHYSFS_close(FontFile);
     delete[] GlyphsAlpha;
+    delete[] Data;
 
     return F;
 }
