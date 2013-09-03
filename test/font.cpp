@@ -61,6 +61,7 @@ bakge::Result InitTest()
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
+    PHYSFS_addToSearchPath("C:/", 0);
     F = bakge::Font::Load("arial.ttf", 64.0f);
 
     Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
