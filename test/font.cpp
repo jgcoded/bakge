@@ -33,7 +33,6 @@ bakge::Texture* Tex;
 GLint ShaderProgram;
 bakge::Camera2D* UICam;
 bakge::Font* F;
-GLubyte* Bitmap;
 
 float Rot;
 bakge::Microseconds NowTime;
@@ -43,29 +42,18 @@ bakge::Result InitTest()
 {
     UICam = new bakge::Camera2D;
 
-    Bitmap = new GLubyte[512 * 512 * 3];
     Rot = 0;
     LastTime = bakge::GetRunningTime();
 
     glEnable(GL_DEPTH_TEST);
-
-    memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 2);
-
-    for(int i=0;i<512;++i) {
-        for(int j=0;j<512;++j){
-            Bitmap[3 * (i*512+j)] = i % 100;
-            Bitmap[3 * (i*512+j) + 1] = i % 75;
-            Bitmap[3 * (i*512+j)] = i % 50;
-        }
-    }
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
     PHYSFS_addToSearchPath("C:/", 0);
     F = bakge::Font::Load("arial.ttf", 64.0f);
 
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
-                                                    (void*)Bitmap);
+    int R = F->Bake(&Tex, 36, 132, 64.0f);
+    printf("Bake result %d\n", R);
 
     It = bakge::Pawn::Create();
     Obj = bakge::Rectangle::Create(512, 512);
@@ -127,8 +115,6 @@ bakge::Result ShutDownTest()
 
     if(F != NULL)
         delete F;
-
-    delete[] Bitmap;
 
     return BGE_SUCCESS;
 }
