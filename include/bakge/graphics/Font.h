@@ -34,7 +34,7 @@ class BGE_API Font : public Bindable
 {
     Scalar ScaleValue;
 
-    // Number of glpyhs
+    // Number of glyphs
     int NumGlyphs;
 
     // Array of baked glyph data
