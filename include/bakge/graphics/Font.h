@@ -43,7 +43,7 @@ public:
 
     BGE_FACTORY Font* Load(const char* FontData, int FontHeight);
 
-    int Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height);
+    int Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight);
 
     Result BakeString(Texture** Target, const char* Str, Scalar Height);
 

@@ -97,7 +97,7 @@ Font* Font::Load(const char* FileName, int FontHeight)
 }
 
 
-int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height)
+int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
 {
     int NumChars = GlyphEnd - GlyphStart;
     if(NumChars < 1) {
@@ -114,8 +114,10 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height)
     // Temporary. GlyphMap class (TODO!) will hold bakedchar data
     stbtt_bakedchar* GlyphData = new stbtt_bakedchar[NumChars];
 
+    Scalar Scale = stbtt_ScaleForPixelHeight(&FontInfo, PixelHeight);
+
     // Bake into bitmap
-    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, Height,
+    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, Scale,
                                             GlyphBitmap, 512, 512,
                                             GlyphStart, NumChars,
                                                         GlyphData);
