@@ -60,8 +60,6 @@ Result Font::Unbind() const
 
 Font* Font::Load(const char* FileName, Scalar FontHeight)
 {
-    PHYSFS_addToSearchPath("C:/", 0);
-
     if(PHYSFS_exists(FileName) == 0) {
         printf("Unable to locate file %s\n", FileName);
         return NULL;
