@@ -32,6 +32,7 @@ namespace bakge
 
 class BGE_API Font
 {
+    // Pixel scale value
     Scalar ScaleValue;
 
     // Number of glyphs
