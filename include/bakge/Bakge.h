@@ -161,7 +161,7 @@ namespace api
 #ifdef STB_TRUETYPE_IMPLEMENTATION
 #undef STB_TRUETYPE_IMPLEMENTATION
 #endif /* STB_TRUETYPE_IMPLEMENTATION */
-#include <stb/stb_truetype.h>
+#include <stb/stb_truetype.c>
 #define STB_TRUETYPE_IMPLEMENTATION
 
 /* Platform headers */
