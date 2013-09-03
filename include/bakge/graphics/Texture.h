@@ -37,6 +37,7 @@ class BGE_API Texture : public Bindable
 
     GLenum Location;
 
+
 public:
 
     Texture();

@@ -47,6 +47,7 @@ Result Texture::Bind() const
 {
     glActiveTexture(Location);
     glBindTexture(GL_TEXTURE_2D, TextureID);
+
     return BGE_SUCCESS;
 }
 
@@ -55,6 +56,7 @@ Result Texture::Unbind() const
 {
     glActiveTexture(Location);
     glBindTexture(GL_TEXTURE_2D, 0);
+
     return BGE_SUCCESS;
 }
 
