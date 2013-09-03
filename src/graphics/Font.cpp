@@ -30,11 +30,14 @@ namespace bakge
 Font::Font()
 {
     ScaleValue = 0;
+    Data = NULL;
 }
 
 
 Font::~Font()
 {
+    if(Data != NULL)
+        delete[] Data;
 }
 
 
@@ -85,10 +88,10 @@ Font* Font::Load(const char* FileName, Scalar FontHeight)
     stbtt_InitFont(&(F->FontInfo), Data, 0);
 
     F->ScaleValue = stbtt_ScaleForPixelHeight(&(F->FontInfo), FontHeight);
+    F->Data = Data;
 
     // Cleanup
     PHYSFS_close(FontFile);
-    delete[] Data;
 
     return F;
 }

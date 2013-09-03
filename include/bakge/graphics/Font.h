@@ -37,6 +37,8 @@ class BGE_API Font
 
     stbtt_fontinfo FontInfo;
 
+    unsigned char* Data;
+
     Font();
 
 
