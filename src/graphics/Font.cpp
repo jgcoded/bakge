@@ -30,7 +30,6 @@ namespace bakge
 Font::Font()
 {
     ScaleValue = 0;
-    Data = NULL;
 }
 
 
@@ -119,7 +118,7 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height)
     stbtt_bakedchar* GlyphData = new stbtt_bakedchar[NumChars];
 
     // Bake into bitmap
-    int BakeResult = stbtt_BakeFontBitmap(Data, 0, Height,
+    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, Height,
                                             GlyphBitmap, 512, 512,
                                             GlyphStart, NumChars,
                                                         GlyphData);
