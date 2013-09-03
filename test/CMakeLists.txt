@@ -19,6 +19,7 @@ set(TESTS
   node
   pawn
   frontrenderer
+  font
   quaternion
   rectangle
   server
