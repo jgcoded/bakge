@@ -60,48 +60,57 @@ Result Font::Unbind() const
 
 Font* Font::Load(const char* FileName, Scalar FontHeight)
 {
+    // Verify the font file exists
     if(PHYSFS_exists(FileName) == 0) {
         printf("Unable to locate file %s\n", FileName);
         return NULL;
     }
 
+    // Open the font file for reading
     PHYSFS_file* FontFile = PHYSFS_openRead(FileName);
     if(FontFile == NULL) {
         printf("Unable to load font file\n");
         return NULL;
     }
 
+    // Determine size of data in the file
     PHYSFS_sint64 Size = PHYSFS_fileLength(FontFile);
     if(Size < 0) {
         printf("Unable to get file length\n");
         return NULL;
     }
 
+    // Allocate buffer for the data
     unsigned char* Data = new unsigned char[Size];
     if(Data == NULL) {
         printf("Error allocating file data buffer\n");
         return NULL;
     }
 
+    // Read font file data into buffer
     int BytesRead = PHYSFS_read(FontFile, (void*)Data, 1, Size);
     if(BytesRead < 0) {
         printf("Error reading file data\n");
         return NULL;
     }
 
+    // Fill font info struct
     stbtt_fontinfo FontInfo;
     stbtt_InitFont(&FontInfo, Data, 0);
 
+    // Allocate a new Font instance
     Font* F = new Font;
     if(F == NULL) {
         printf("Error allocating Font memory\n");
         return NULL;
     }
 
+    // Fill data fields of Font instance
     F->NumGlyphs = FontInfo.numGlyphs;
     F->GlyphData = new stbtt_bakedchar[F->NumGlyphs];
     F->ScaleValue = stbtt_ScaleForPixelHeight(&FontInfo, FontHeight);
 
+    // Glyphs are stored in 512x512 textures
     Byte* GlyphsAlpha = new Byte[512 * 512];
 
     int BakeResult = stbtt_BakeFontBitmap(Data, 0, FontHeight, GlyphsAlpha,
