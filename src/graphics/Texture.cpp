@@ -31,6 +31,8 @@ Texture::Texture()
 {
     Location = GL_TEXTURE0;
     TextureID = 0;
+    Width = 0;
+    Height = 0;
 }
 
 
@@ -61,6 +63,9 @@ Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
                                                               void* Data)
 {
     Texture* NewTexture = new Texture;
+
+    NewTexture->Width = Width;
+    NewTexture->Height = Height;
 
     /* Generate an OpenGL texture */
     glGenTextures(1, &(NewTexture->TextureID));
