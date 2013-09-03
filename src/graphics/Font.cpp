@@ -48,19 +48,91 @@ Font::~Font()
 
 Result Font::Bind() const
 {
-    return BGE_FAILURE;
+    return Glyphs->Bind();
 }
 
 
 Result Font::Unbind() const
 {
-    return BGE_FAILURE;
+    return Glyphs->Unbind();
 }
 
 
 Font* Font::Load(const char* FontData, Scalar FontHeight)
 {
-    return NULL;
+    PHYSFS_addToSearchPath("C:/", 0);
+
+    if(PHYSFS_exists(FontData) == 0) {
+        printf("Unable to locate file %s\n", FontData);
+        return NULL;
+    }
+
+    PHYSFS_file* FontFile = PHYSFS_openRead(FontData);
+    if(FontFile == NULL) {
+        printf("Unable to load font file\n");
+        return NULL;
+    }
+
+    PHYSFS_sint64 Size = PHYSFS_fileLength(FontFile);
+    if(Size < 0) {
+        printf("Unable to get file length\n");
+        return NULL;
+    }
+
+    unsigned char* Data = new unsigned char[Size];
+    if(Data == NULL) {
+        printf("Error allocating file data buffer\n");
+        return NULL;
+    }
+
+    int BytesRead = PHYSFS_read(FontFile, (void*)Data, 1, Size);
+    if(BytesRead < 0) {
+        printf("Error reading file data\n");
+        return NULL;
+    }
+
+    stbtt_fontinfo FontInfo;
+    stbtt_InitFont(&FontInfo, Data, 0);
+
+    Font* F = new Font;
+    if(F == NULL) {
+        printf("Error allocating Font memory\n");
+        return NULL;
+    }
+
+    F->NumGlyphs = FontInfo.numGlyphs;
+    F->GlyphData = new stbtt_bakedchar[F->NumGlyphs];
+    F->ScaleValue = stbtt_ScaleForPixelHeight(&FontInfo, FontHeight);
+
+    Byte* GlyphsBitmap;
+
+    GlyphsBitmap = new Byte[512 * 512];
+    int BakeResult = stbtt_BakeFontBitmap(Data, 0, FontHeight, GlyphsBitmap,
+                                                            512, 512, 36, 96,
+                                                            (F->GlyphData));
+
+    if(BakeResult == 0) {
+        printf("Unable to bake any characters to texture\n");
+        delete F;
+        return NULL;
+    } else if(BakeResult > 0) {
+        printf("Baked %d of %d glyphs to texture\n", 96, 96);
+    } else {
+        printf("Baked %d of %d glyphs to texture\n", 96 - BakeResult, 96);
+    }
+
+    F->Glyphs = bakge::Texture::Create(512, 512, GL_ALPHA, GL_UNSIGNED_BYTE,
+                                                            GlyphsBitmap);
+    if(F->Glyphs == NULL) {
+        printf("Error creating font glyphs texture\n");
+        delete F;
+        return NULL;
+    }
+
+    PHYSFS_close(FontFile);
+    delete[] GlyphsBitmap;
+
+    return F;
 }
 
 } /* bakge */
