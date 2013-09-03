@@ -92,6 +92,9 @@ Result Pawn::Bind() const
     glBufferData(GL_ARRAY_BUFFER, sizeof(Transformation[0]) * 16,
                             &Transformation[0], GL_DYNAMIC_DRAW);
 
+    if(Node::Bind() == BGE_FAILURE)
+        Errors = BGE_FAILURE;
+
     return Errors;
 }
 
