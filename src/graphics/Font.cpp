@@ -114,13 +114,11 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
     // Temporary. GlyphMap class (TODO!) will hold bakedchar data
     stbtt_bakedchar* GlyphData = new stbtt_bakedchar[NumChars];
 
-    Scalar Scale = stbtt_ScaleForPixelHeight(&FontInfo, PixelHeight);
-
     // Bake into bitmap
-    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, Scale,
-                                            GlyphBitmap, 512, 512,
-                                            GlyphStart, NumChars,
-                                                        GlyphData);
+    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, PixelHeight,
+                                                    GlyphBitmap, 512, 512,
+                                                    GlyphStart, NumChars,
+                                                                GlyphData);
     // TODO: Clean this up. Perhaps a goto
     if(BakeResult == 0) {
         delete[] GlyphBitmap;
