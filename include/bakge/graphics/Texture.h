@@ -54,6 +54,16 @@ public:
     Result Bind() const;
     Result Unbind() const;
 
+    BGE_INL int GetWidth() const
+    {
+        return Width;
+    }
+
+    BGE_INL int GetHeight() const
+    {
+        return Height;
+    }
+
 
 private:
 
