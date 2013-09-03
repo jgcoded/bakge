@@ -32,9 +32,6 @@ namespace bakge
 
 class BGE_API Font
 {
-    // Pixel scale value
-    Scalar ScaleValue;
-
     stbtt_fontinfo FontInfo;
 
     Font();

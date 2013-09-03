@@ -29,7 +29,6 @@ namespace bakge
 
 Font::Font()
 {
-    ScaleValue = 0;
 }
 
 
@@ -85,8 +84,6 @@ Font* Font::Load(const char* FileName, int FontHeight)
 
     // Fill font info struct
     stbtt_InitFont(&(F->FontInfo), Data, 0);
-
-    F->ScaleValue = stbtt_ScaleForPixelHeight(&(F->FontInfo), FontHeight);
 
     // Cleanup
     PHYSFS_close(FontFile);
