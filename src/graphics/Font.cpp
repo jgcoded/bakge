@@ -36,8 +36,8 @@ Font::Font()
 
 Font::~Font()
 {
-    if(Data != NULL)
-        delete[] Data;
+    if(FontInfo.data != NULL)
+        delete[] FontInfo.data;
 }
 
 
@@ -88,10 +88,14 @@ Font* Font::Load(const char* FileName, Scalar FontHeight)
     stbtt_InitFont(&(F->FontInfo), Data, 0);
 
     F->ScaleValue = stbtt_ScaleForPixelHeight(&(F->FontInfo), FontHeight);
-    F->Data = Data;
 
     // Cleanup
     PHYSFS_close(FontFile);
+
+    /* *
+     * Don't need to cleanup Data, it is stored in FontInfo struct and cleaned
+     * up in the destructor.
+     * */
 
     return F;
 }
