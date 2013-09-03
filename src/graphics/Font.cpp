@@ -104,33 +104,36 @@ Font* Font::Load(const char* FontData, Scalar FontHeight)
     F->GlyphData = new stbtt_bakedchar[F->NumGlyphs];
     F->ScaleValue = stbtt_ScaleForPixelHeight(&FontInfo, FontHeight);
 
-    Byte* GlyphsBitmap;
+#define FSZ 512
+    Byte* GlyphsAlpha = new Byte[FSZ * FSZ];
 
-    GlyphsBitmap = new Byte[512 * 512];
-    int BakeResult = stbtt_BakeFontBitmap(Data, 0, FontHeight, GlyphsBitmap,
-                                                            512, 512, 36, 96,
+    int BakeResult = stbtt_BakeFontBitmap(Data, 0, FontHeight, GlyphsAlpha,
+                                                            FSZ, FSZ, 0,
+                                                            F->NumGlyphs,
                                                             (F->GlyphData));
-
     if(BakeResult == 0) {
         printf("Unable to bake any characters to texture\n");
         delete F;
         return NULL;
     } else if(BakeResult > 0) {
-        printf("Baked %d of %d glyphs to texture\n", 96, 96);
+        printf("Baked all %d glyphs to texture\n", F->NumGlyphs);
     } else {
-        printf("Baked %d of %d glyphs to texture\n", 96 - BakeResult, 96);
+        printf("Baked %d of %d glyphs to texture\n", -BakeResult,
+                                                    F->NumGlyphs);
     }
 
-    F->Glyphs = bakge::Texture::Create(512, 512, GL_ALPHA, GL_UNSIGNED_BYTE,
-                                                            GlyphsBitmap);
+    // Create glyphs alpha-only texture. Use a special shader to render text.
+    F->Glyphs = bakge::Texture::Create(FSZ, FSZ, GL_ALPHA, GL_UNSIGNED_BYTE,
+                                                            GlyphsAlpha);
     if(F->Glyphs == NULL) {
         printf("Error creating font glyphs texture\n");
         delete F;
         return NULL;
     }
 
+    // Cleanup
     PHYSFS_close(FontFile);
-    delete[] GlyphsBitmap;
+    delete[] GlyphsAlpha;
 
     return F;
 }
