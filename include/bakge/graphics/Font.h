@@ -35,13 +35,7 @@ class BGE_API Font
     // Pixel scale value
     Scalar ScaleValue;
 
-    // Number of glyphs
-    int NumGlyphs;
-
-    // Array of baked glyph data
-    stbtt_bakedchar* GlyphData;
-
-    Texture* Glyphs;
+    stbtt_fontinfo FontInfo;
 
     Font();
 

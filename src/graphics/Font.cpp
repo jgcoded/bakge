@@ -29,20 +29,12 @@ namespace bakge
 
 Font::Font()
 {
-    NumGlyphs = 0;
-    GlyphData = NULL;
-    Glyphs = NULL;
     ScaleValue = 0;
 }
 
 
 Font::~Font()
 {
-    if(GlyphData != NULL)
-        delete[] GlyphData;
-
-    if(Glyphs != NULL)
-        delete Glyphs;
 }
 
 
@@ -82,10 +74,6 @@ Font* Font::Load(const char* FileName, Scalar FontHeight)
         return NULL;
     }
 
-    // Fill font info struct
-    stbtt_fontinfo FontInfo;
-    stbtt_InitFont(&FontInfo, Data, 0);
-
     // Allocate a new Font instance
     Font* F = new Font;
     if(F == NULL) {
@@ -93,41 +81,13 @@ Font* Font::Load(const char* FileName, Scalar FontHeight)
         return NULL;
     }
 
-    // Fill data fields of Font instance
-    F->NumGlyphs = FontInfo.numGlyphs;
-    F->GlyphData = new stbtt_bakedchar[F->NumGlyphs];
-    F->ScaleValue = stbtt_ScaleForPixelHeight(&FontInfo, FontHeight);
+    // Fill font info struct
+    stbtt_InitFont(&(F->FontInfo), Data, 0);
 
-    // Glyphs are stored in 512x512 textures
-    Byte* GlyphsAlpha = new Byte[512 * 512];
-
-    int BakeResult = stbtt_BakeFontBitmap(Data, 0, FontHeight, GlyphsAlpha,
-                                                            512, 512, 0,
-                                                            F->NumGlyphs,
-                                                            (F->GlyphData));
-    if(BakeResult == 0) {
-        printf("Unable to bake any characters to texture\n");
-        delete F;
-        return NULL;
-    } else if(BakeResult > 0) {
-        printf("Baked all %d glyphs to texture\n", F->NumGlyphs);
-    } else {
-        printf("Baked %d of %d glyphs to texture\n", -BakeResult,
-                                                    F->NumGlyphs);
-    }
-
-    // Create glyphs alpha-only texture. Use a special shader to render text.
-    F->Glyphs = bakge::Texture::Create(512, 512, GL_ALPHA, GL_UNSIGNED_BYTE,
-                                                            GlyphsAlpha);
-    if(F->Glyphs == NULL) {
-        printf("Error creating font glyphs texture\n");
-        delete F;
-        return NULL;
-    }
+    F->ScaleValue = stbtt_ScaleForPixelHeight(&(F->FontInfo), FontHeight);
 
     // Cleanup
     PHYSFS_close(FontFile);
-    delete[] GlyphsAlpha;
     delete[] Data;
 
     return F;
