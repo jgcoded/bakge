@@ -48,6 +48,8 @@ public:
 
     int Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height);
 
+    Result BakeString(Texture** Target, const char* Str, Scalar Height);
+
 }; /* Font */
 
 } /* bakge */

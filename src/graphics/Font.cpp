@@ -154,4 +154,10 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height)
         return NumChars;
 }
 
+
+Result Font::BakeString(Texture** Target, const char* Str, Scalar Height)
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */
