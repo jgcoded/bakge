@@ -104,11 +104,10 @@ Font* Font::Load(const char* FontData, Scalar FontHeight)
     F->GlyphData = new stbtt_bakedchar[F->NumGlyphs];
     F->ScaleValue = stbtt_ScaleForPixelHeight(&FontInfo, FontHeight);
 
-#define FSZ 512
-    Byte* GlyphsAlpha = new Byte[FSZ * FSZ];
+    Byte* GlyphsAlpha = new Byte[512 * 512];
 
     int BakeResult = stbtt_BakeFontBitmap(Data, 0, FontHeight, GlyphsAlpha,
-                                                            FSZ, FSZ, 0,
+                                                            512, 512, 0,
                                                             F->NumGlyphs,
                                                             (F->GlyphData));
     if(BakeResult == 0) {
@@ -123,7 +122,7 @@ Font* Font::Load(const char* FontData, Scalar FontHeight)
     }
 
     // Create glyphs alpha-only texture. Use a special shader to render text.
-    F->Glyphs = bakge::Texture::Create(FSZ, FSZ, GL_ALPHA, GL_UNSIGNED_BYTE,
+    F->Glyphs = bakge::Texture::Create(512, 512, GL_ALPHA, GL_UNSIGNED_BYTE,
                                                             GlyphsAlpha);
     if(F->Glyphs == NULL) {
         printf("Error creating font glyphs texture\n");
