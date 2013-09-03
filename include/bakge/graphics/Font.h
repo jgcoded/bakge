@@ -44,7 +44,7 @@ public:
 
     ~Font();
 
-    BGE_FACTORY Font* Load(const char* FontData, Scalar FontHeight);
+    BGE_FACTORY Font* Load(const char* FontData, int FontHeight);
 
     int Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height);
 
