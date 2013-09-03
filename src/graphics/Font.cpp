@@ -96,4 +96,59 @@ Font* Font::Load(const char* FileName, Scalar FontHeight)
     return F;
 }
 
+
+int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height)
+{
+    int NumChars = GlyphEnd - GlyphStart;
+    if(NumChars < 1) {
+        printf("Error baking glyph texture: GlyphStart >= GlyphEnd\n");
+        return -1;
+    }
+
+    unsigned char* GlyphBitmap = new unsigned char[512 * 512];
+    if(GlyphBitmap == NULL) {
+        printf("Error allocating glyph bitmap buffer\n");
+        return -1;
+    }
+
+    // Temporary. GlyphMap class (TODO!) will hold bakedchar data
+    stbtt_bakedchar* GlyphData = new stbtt_bakedchar[NumChars];
+
+    // Bake into bitmap
+    int BakeResult = stbtt_BakeFontBitmap(Data, 0, Height,
+                                            GlyphBitmap, 512, 512,
+                                            GlyphStart, NumChars,
+                                                        GlyphData);
+    // TODO: Clean this up. Perhaps a goto
+    if(BakeResult == 0) {
+        delete[] GlyphBitmap;
+        delete[] GlyphData;
+        return 0;
+    }
+
+    // Create temp texture. If error occurs we don't want to change *Target
+    Texture* GlyphMap = bakge::Texture::Create(512, 512, GL_ALPHA,
+                                                GL_UNSIGNED_BYTE,
+                                                (void*)GlyphBitmap);
+
+    printf("%d\n", glGetError());
+
+    // Delete these, no longer needed.
+    delete[] GlyphBitmap;
+    delete[] GlyphData;
+
+    if(GlyphMap == NULL) {
+        printf("Error creating glyph texture\n");
+        return -1;
+    }
+
+    *Target = GlyphMap;
+
+    // Negative result is -1 * number of baked glyphs
+    if(BakeResult < 0)
+        return -BakeResult;
+    else
+        return NumChars;
+}
+
 } /* bakge */

@@ -48,6 +48,8 @@ public:
 
     BGE_FACTORY Font* Load(const char* FontData, Scalar FontHeight);
 
+    int Bake(Texture** Target, int GlyphStart, int GlyphEnd, Scalar Height);
+
 }; /* Font */
 
 } /* bakge */
