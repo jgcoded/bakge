@@ -84,7 +84,7 @@ bakge::Result InitTest()
 bakge::Result PreRenderTest()
 {
     UICam->Bind();
-    F->Bind();
+    Tex->Bind();
     Obj->Bind();
     It->Bind();
 
@@ -104,7 +104,7 @@ bakge::Result PostRenderTest()
 {
     It->Unbind();
     Obj->Unbind();
-    F->Unbind();
+    Tex->Unbind();
     UICam->Unbind();
 
     return BGE_SUCCESS;

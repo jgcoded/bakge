@@ -46,18 +46,6 @@ Font::~Font()
 }
 
 
-Result Font::Bind() const
-{
-    return Glyphs->Bind();
-}
-
-
-Result Font::Unbind() const
-{
-    return Glyphs->Unbind();
-}
-
-
 Font* Font::Load(const char* FileName, Scalar FontHeight)
 {
     // Verify the font file exists
