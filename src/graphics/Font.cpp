@@ -58,16 +58,16 @@ Result Font::Unbind() const
 }
 
 
-Font* Font::Load(const char* FontData, Scalar FontHeight)
+Font* Font::Load(const char* FileName, Scalar FontHeight)
 {
     PHYSFS_addToSearchPath("C:/", 0);
 
-    if(PHYSFS_exists(FontData) == 0) {
-        printf("Unable to locate file %s\n", FontData);
+    if(PHYSFS_exists(FileName) == 0) {
+        printf("Unable to locate file %s\n", FileName);
         return NULL;
     }
 
-    PHYSFS_file* FontFile = PHYSFS_openRead(FontData);
+    PHYSFS_file* FontFile = PHYSFS_openRead(FileName);
     if(FontFile == NULL) {
         printf("Unable to load font file\n");
         return NULL;
