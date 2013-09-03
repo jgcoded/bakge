@@ -108,7 +108,7 @@ set(PLATFORM_HEADERS
 # Extern libraries in the source tree
 set(EXTERN_SOURCES
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_image.c
-  ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.h
+  ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.c
 )
 
 if(BAKGE_BUILD_DYNAMIC)
@@ -117,8 +117,9 @@ if(BAKGE_BUILD_DYNAMIC)
   add_definitions(-DBAKGE_EXPORTS)
 endif()
 
-add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
-                                        ${PLATFORM_HEADERS} ${EXTERN_SOURCES})
+add_definitions(-DSTB_TRUETYPE_IMPLEMENTATION)
+add_library(bakge ${EXTERN_SOURCES} ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
+                                        ${PLATFORM_HEADERS})
 if(BAKGE_BUILD_DYNAMIC)
   target_link_libraries(bakge ${BAKGE_LIBRARIES})
 endif()

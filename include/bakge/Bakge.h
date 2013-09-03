@@ -158,6 +158,9 @@ namespace api
 #define STBI_HEADER_FILE_ONLY
 #include <stb/stb_image.c>
 #undef STBI_HEADER_FILE_ONLY
+#ifdef STB_TRUETYPE_IMPLEMENTATION
+#undef STB_TRUETYPE_IMPLEMENTATION
+#endif /* STB_TRUETYPE_IMPLEMENTATION */
 #include <stb/stb_truetype.h>
 #define STB_TRUETYPE_IMPLEMENTATION
 
