@@ -30,6 +30,12 @@
 namespace bakge
 {
 
+/*! @brief OpenGL texture wrapper class
+ *
+ * Textures are used to color meshes and other polygons drawn with OpenGL,
+ * such as meshes or a GUI. They can also be used to hold framebuffers to
+ * which OpenGL renders to.
+ */
 class BGE_API Texture : public Bindable
 {
     int Width;
