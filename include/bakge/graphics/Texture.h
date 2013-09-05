@@ -46,7 +46,16 @@ class BGE_API Texture : public Bindable
 
 public:
 
+    /*! @brief Default Texture constructor.
+     *
+     * Default Texture constructor.
+     */
     Texture();
+
+    /*! @brief Default Texture destructor.
+     *
+     * Default Texture destructor.
+     */
     ~Texture();
 
     /*! @brief Create a texture instance and upload texture data to OpenGL.
