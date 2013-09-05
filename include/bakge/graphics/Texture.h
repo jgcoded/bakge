@@ -49,11 +49,21 @@ public:
     Texture();
     ~Texture();
 
-    /* *
-     * Accepts metadata and raw image data to create an OpenGL texture
-     * Width, Height, Format and Type are metadata, while Data is the
-     * raw image data.
-     * */
+    /*! @brief Create a texture instance and upload texture data to OpenGL.
+     *
+     * This factory method accepts texture data and metadata and creates
+     * and uploads to a new OpenGL texture.
+     *
+     * @param[in] Width Width of the texture in pixels.
+     * @param[in] Height Height of the texture in pixels.
+     * @param[in] Format OpenGL format of the data to upload.
+     * @param[in] Type Type of data being uploaded.
+     * @param[in] Data The texture data to upload.
+     *
+     * @retval Pointer to newly created texture; NULL if any errors occurred.
+     *
+     * @see http://www.opengl.org/wiki/Texture
+     */
     BGE_FACTORY Texture* Create(int Width, int Height, GLint Format,
                                             GLenum Type, void* Data);
 
