@@ -42,6 +42,7 @@ class BGE_API Texture : public Bindable
     int Height;
 
     GLenum Location;
+    GLuint TextureID;
 
 
 public:
@@ -119,11 +120,6 @@ public:
     {
         return Height;
     }
-
-
-private:
-
-    GLuint TextureID;
 
 }; /* Texture */
 
