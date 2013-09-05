@@ -67,14 +67,45 @@ public:
     BGE_FACTORY Texture* Create(int Width, int Height, GLint Format,
                                             GLenum Type, void* Data);
 
+    /*! @brief Bind the texture as active in its assigned location.
+     *
+     * Binding the texture sets it as the active texture for its assigned
+     * location. Color information can be extracted from the texture using
+     * the texture (or texture2D) call in your GLSL shader using the
+     * appropriate uniform location and texture coordinates.
+     *
+     * @retval BGE_SUCCESS if the texture was successfully bound; BGE_FAILURE
+     * if any errors occurred.
+     */
     Result Bind() const;
+
+    /*! @brief Unbind the texture from its assigned location.
+     *
+     * Unbinding a texture is important so future texture-related OpenGL
+     * calls don't affect it.
+     *
+     * @retval BGE_SUCCESS if the texture was successfully unbound; BGE_FAILURE
+     * if any errors occurred.
+     */
     Result Unbind() const;
 
+    /*! @brief Get the width of the texture in pixels.
+     *
+     * Get the width of the texture in pixels.
+     *
+     * @retval Width of the texture in pixels.
+     */
     BGE_INL int GetWidth() const
     {
         return Width;
     }
 
+    /*! @brief Get the height of the texture in pixels.
+     *
+     * Get the height of the texture in pixels.
+     *
+     * @retval Height of the texture in pixels.
+     */
     BGE_INL int GetHeight() const
     {
         return Height;
