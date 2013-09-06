@@ -39,7 +39,7 @@ Font::~Font()
 }
 
 
-Font* Font::Load(const char* FileName, int FontHeight)
+Font* Font::Load(const char* FileName)
 {
     // Verify the font file exists
     if(PHYSFS_exists(FileName) == 0) {
