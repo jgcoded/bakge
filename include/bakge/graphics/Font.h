@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Font.h
+ * @brief Font class delcaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_FONT_H
 #define BAKGE_GRAPHICS_FONT_H
 
