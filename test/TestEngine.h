@@ -93,15 +93,13 @@ class TestEngine : public Engine, public EventHandler
     /* Run will have no callback */
     int Run()
     {
-        int ExitCode;
+        int ExitCode = 0;
 
         while(1)
         {
             Window::PollEvents();
 
             if(EngineWindow->IsOpen() == false) {
-                ExitCode = 0;
-
                 if(CloseEventCB != NULL)
                     CloseEventCB();
 
