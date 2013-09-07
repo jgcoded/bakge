@@ -49,8 +49,9 @@ bakge::Result InitTest()
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
+
     PHYSFS_addToSearchPath("C:/", 0);
-    F = bakge::Font::Load("arial.ttf", 64.0f);
+    F = bakge::Font::Load("arial.ttf");
 
     int R = F->Bake(&Tex, 36, 132, 64.0f);
     printf("Bake result %d\n", R);
