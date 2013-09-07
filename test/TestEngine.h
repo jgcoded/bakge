@@ -36,7 +36,6 @@ namespace bakge
  * RenderStage, etc.
  * */
 typedef Result (*GenericCallback)();
-
 typedef Result (*UpdateCallback)(Seconds DeltaTime);
 typedef Result (*KeyEventCallback)(KeyID K, KeyState S, ScanCode C, ModField M);
 typedef Result (*MouseEventCallback)(ButtonID B, ButtonState S, ModField M);
@@ -45,7 +44,6 @@ typedef Result (*ScrollEventCallback)(DeviceMotion X, DeviceMotion Y);
 
 class TestEngine : public Engine, public EventHandler
 {
-
     /* *
      * Internal engine logic is private. TestEngine will provide
      * callbacks to the user so that different parts of his/her
@@ -66,7 +64,6 @@ class TestEngine : public Engine, public EventHandler
     /* Initialize/Clean up components */
     Result Initialize()
     {
-
         EngineWindow = Window::Create(600, 400);
         if(EngineWindow == NULL)
             return BGE_FAILURE;
@@ -82,10 +79,8 @@ class TestEngine : public Engine, public EventHandler
         return BGE_SUCCESS;
     }
 
-
     Result ShutDown()
     {
-
         EngineWindow->Unbind();
         delete EngineWindow;
 
@@ -98,15 +93,13 @@ class TestEngine : public Engine, public EventHandler
     /* Run will have no callback */
     int Run()
     {
-            int ExitCode;
+        int ExitCode;
 
         while(1)
         {
-
             Window::PollEvents();
 
             if(EngineWindow->IsOpen() == false) {
-
                 ExitCode = 0;
 
                 if(CloseEventCB != NULL)
@@ -114,7 +107,6 @@ class TestEngine : public Engine, public EventHandler
 
                 break;
             }
-
 
             Update(0);
             if(UpdateCB != NULL)
@@ -136,20 +128,18 @@ class TestEngine : public Engine, public EventHandler
         return ExitCode;
     }
 
-
     Result Update(Seconds DeltaTime)
     {
         /* Reserved for future logic */
         return BGE_SUCCESS;
     }
 
-
     Result PreRenderStage()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         return BGE_SUCCESS;
     }
-
 
     Result RenderStage()
     {
@@ -157,10 +147,10 @@ class TestEngine : public Engine, public EventHandler
         return BGE_SUCCESS;
     }
 
-
     Result PostRenderStage()
     {
         EngineWindow->SwapBuffers();
+
         return BGE_SUCCESS;
     }
 
@@ -173,7 +163,6 @@ class TestEngine : public Engine, public EventHandler
 
         return BGE_FAILURE;
     }
-
 
     Result MouseEvent(ButtonID B, ButtonState S, ModField M)
     {
@@ -191,7 +180,6 @@ class TestEngine : public Engine, public EventHandler
 
         return BGE_FAILURE;
     }
-
 
     Result ScrollEvent(DeviceMotion X, DeviceMotion Y)
     {
@@ -227,6 +215,7 @@ class TestEngine : public Engine, public EventHandler
     ScrollEventCallback ScrollEventCB;
     GenericCallback CloseEventCB;
 
+
 public:
 
     TestEngine()
@@ -244,11 +233,9 @@ public:
         CloseEventCB = NULL;
     }
 
-
     ~TestEngine()
     {
     }
-
 
     void StartEngine()
     {
@@ -256,73 +243,61 @@ public:
         Run();
     }
 
-
     void StopEngine()
     {
         EngineWindow->Close();
         ShutDown();
     }
 
-
     void SetInitializeCallback(GenericCallback Callback)
     {
         InitCB = Callback;
     }
-
 
     void SetShutDownCallback(GenericCallback Callback)
     {
         ShutDownCB = Callback;
     }
 
-
     void SetUpdateCallback(UpdateCallback Callback)
     {
         UpdateCB = Callback;
     }
-
 
     void SetPreRenderCallback(GenericCallback Callback)
     {
         PreRenderCB = Callback;
     }
 
-
     void SetRenderCallback(GenericCallback Callback)
     {
         RenderCB = Callback;
     }
-
 
     void SetPostRenderCallback(GenericCallback Callback)
     {
         PostRenderCB = Callback;
     }
 
-
     void SetKeyEventCallback(KeyEventCallback Callback)
     {
         KeyEventCB = Callback;
     }
-
 
     void SetMouseEventCallback(MouseEventCallback Callback)
     {
         MouseEventCB = Callback;
     }
 
-
     void SetMotionEventCallback(MotionEventCallback Callback)
     {
         MotionEventCB = Callback;
     }
 
-
     void SetScrollEventCallback(ScrollEventCallback Callback)
     {
         ScrollEventCB = Callback;
     }
-
 
     void SetCloseEventCallback(GenericCallback Callback)
     {
