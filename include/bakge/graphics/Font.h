@@ -30,6 +30,23 @@
 namespace bakge
 {
 
+/*! @brief Wrapper class for TrueType fonts.
+ *
+ * The Font class serves as a wrapper for font metadata. It has a public API
+ * for getting key information about a font such as vertical line spacing,
+ * kerning advance, and more. It also provides an API for baking glyph maps
+ * into a bakge::Texture.
+ *
+ * This class does not serve to render text in any way. Baking glyph map
+ * textures simply collects glyph bitmaps into a large texture and uploads
+ * them into OpenGL textures. Text rendering itself is usually done with
+ * quads drawn on the screen; managing different glyph maps as well as
+ * determining positioning and metrics of these quads is left to end-users.
+ *
+ * The glyph maps are uploaded as alphamaps; the raw data sent to OpenGL
+ * contains only alpha values with no color information. As such it is
+ * recommended you use a specialized text rendering shader.
+ */
 class BGE_API Font
 {
     stbtt_fontinfo FontInfo;
