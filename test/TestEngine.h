@@ -72,11 +72,6 @@ class TestEngine : public Engine, public EventHandler
             return BGE_FAILURE;
 
         glClearColor(0, 0.3f, 0.5f, 1);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        gluPerspective(50.0, 1.5, 0.1, 500.0);
 
         EngineWindow->SetEventHandler(this);
         EngineWindow->Bind();
@@ -152,9 +147,6 @@ class TestEngine : public Engine, public EventHandler
     Result PreRenderStage()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(1, 2, 3, 0, 0, 0, 0, 1, 0);
         return BGE_SUCCESS;
     }
 
@@ -168,7 +160,6 @@ class TestEngine : public Engine, public EventHandler
 
     Result PostRenderStage()
     {
-        glMatrixMode(GL_PROJECTION);
         EngineWindow->SwapBuffers();
         return BGE_SUCCESS;
     }
