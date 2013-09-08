@@ -50,6 +50,7 @@ set(BAKGE_GLEW_PATH ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0)
 set(BAKGE_PHYSFS_PATH ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
 list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
+list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SDK_INC_PATH}/bullet)
 
 # Don't append BAKGE_PHYSFS_PATH to BAKGE_INCLUDE_DIRECTORIES
 # We need to copy the headers over manually below, there is no
@@ -93,7 +94,9 @@ else()
   set(BAKGE_PHYSFS_TARGET physfs-static)
 endif()
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
-
+set(BAKGE_BULLET_TARGETS LinearMath BulletDynamics BulletSoftBody BulletCollision
+                                                    BulletMultiThreaded)
+list(APPEND BAKGE_TARGETS_LIST ${BAKGE_BULLET_TARGETS})
 
 ########################################
 # PLATFORM SPECIFIC LIBRARIES SETUP
@@ -172,6 +175,7 @@ if(WIN32)
     glu32.lib
     ${OPENGL_LIBRARY}
     ws2_32.lib
+    ${BAKGE_BULLET_TARGETS}
   )
 endif(WIN32)
 
@@ -261,6 +265,21 @@ make_directory(${BAKGE_SDK_INC_PATH}/physfs)
 foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
                                                 ${BAKGE_SDK_INC_PATH}/physfs)
+endforeach()
+
+# Copy Bullet headers manually
+# Bullet's authors neglected to separate headers from source, and use
+# relative include paths. wat
+make_directory(${BAKGE_SDK_INC_PATH}/bullet)
+file(GLOB_RECURSE BAKGE_BULLET_HEADERS "${BAKGE_LIB_DIR}/bullet-2.81-rev2613/src/*.h")
+# Maybe creating this var out here will speed things up?
+set(MOD_HEADER "")
+foreach(BULLET_HEADER ${BAKGE_BULLET_HEADERS})
+  set(PATH_REGEX "${BAKGE_SOURCE_DIR}/lib/bullet-2.81-rev2613/src")
+  STRING(REGEX REPLACE ${PATH_REGEX}
+                "${BAKGE_SDK_INC_PATH}/bullet" MOD_HEADER
+                ${BULLET_HEADER})
+  configure_file(${BULLET_HEADER} ${MOD_HEADER} COPYONLY)
 endforeach()
 
 # Build documentation target

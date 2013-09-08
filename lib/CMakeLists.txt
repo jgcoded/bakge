@@ -15,6 +15,9 @@ add_subdirectory(glfw-3.0)
 SET(PHYSFS_BUILD_TEST CACHE BOOL FALSE FORCE)
 add_subdirectory(physfs-2.0.3)
 
+# Build Bullet physics
+add_subdirectory(bullet-2.81-rev2613)
+
 # Builds external libraries
 include(${BAKGE_SOURCE_DIR}/cmake/BuildLua.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/BuildGLEW.cmake)
