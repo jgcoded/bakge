@@ -36,6 +36,8 @@ typedef class BGE_API x11_Mutex : api::Mutex
 public:
 
 	static x11_Mutex* Create();
+	int Lock();
+	int Unlock();
     virtual ~x11_Mutex();
 
 } Mutex; /* x11_Mutex */

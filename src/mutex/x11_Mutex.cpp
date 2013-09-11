@@ -52,4 +52,17 @@ x11_Mutex* x11_Mutex::Create()
     return M;
 }
 
+
+int x11_Mutex::Lock()
+{
+    /* 0 == Success, else returns error */
+    return pthread_mutex_lock(&MutexHandle);
+}
+
+
+int x11_Mutex::Unlock()
+{
+    return pthread_mutex_unlock(&MutexHandle);
+}
+
 } /* bakge */
