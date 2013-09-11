@@ -26,15 +26,26 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
+int[] TestArray = { 5, 3 52, 25 ,3 2, 5}
+bakge::Mutex* Mut;
+
 int ThreadFunc(void* Data)
 {
     bakge::Window* Win;
 
     Win = (bakge::Window*)Data;
-    /* While window is open, print dots from this thread */
+
     while(Win->IsOpen()) {
         bakge::Delay(100000);
-        printf(".");
+        printf("First value of the array is: ");
+        printf("%d\n\n", TestArray[0]);
+
+        Mut->Lock();
+        for(int i = 0; i < TestArray.length; ++i) {
+            TestArray[i]+= 1;
+        }
+        Mut->Unlock();
+
         fflush(0);
     }
     printf("\n");
@@ -51,6 +62,7 @@ int main(int argc, char* argv[])
     bakge::Window* Win;
     bakge::Thread* Thr;
 
+    Mut = bakge::Mutex::Create();
     Win = bakge::Window::Create(600, 400);
     Thr = bakge::Thread::Create(ThreadFunc, (void*)Win);
 
@@ -79,6 +91,9 @@ int main(int argc, char* argv[])
 
 
 CLEANUP:
+
+    if(Mut != NULL)
+        delete MUT;
 
     if(Thr != NULL)
         delete Thr;
