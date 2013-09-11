@@ -34,6 +34,22 @@ x11_Mutex::x11_Mutex()
 
 x11_Mutex::~x11_Mutex()
 {
+    pthread_mutex_destroy(&MutexHandle);
+}
+
+
+x11_Mutex* x11_Mutex::Create()
+{
+
+    x11_Mutex* M = new x11_Mutex;
+
+    if(pthread_mutex_init(&(M->MutexHandle), NULL) != 0) {
+        /* Mutex creation failed */
+        printf("Mutex creation failed");
+        exit(1);
+    }
+
+    return M;
 }
 
 } /* bakge */
