@@ -57,8 +57,8 @@ public:
     bakge::Result MouseEvent(bakge::ButtonID B, bakge::ButtonState S,
                                                     bakge::ModField M);
 
-    bakge::Result MotionEvent(bakge::DeviceMotion X, bakge::DeviceMotion Y);
-    bakge::Result ScrollEvent(bakge::DeviceMotion X, bakge::DeviceMotion Y);
+    bakge::Result MotionEvent(bakge::Motion X, bakge::Motion Y);
+    bakge::Result ScrollEvent(bakge::Motion X, bakge::Motion Y);
 
     bakge::Result CloseEvent();
 

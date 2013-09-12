@@ -226,7 +226,7 @@ public:
      *
      * @see Window::IsActive()
      */
-    Result GetMousePosition(DeviceCoord* X, DeviceCoord* Y);
+    Result GetMousePosition(Coord* X, Coord* Y);
 
     /*! @brief Set the mouse's position.
      *
@@ -238,7 +238,7 @@ public:
      *
      * @see Window::IsActive()
      */
-    Result SetMousePosition(DeviceCoord X, DeviceCoord Y);
+    Result SetMousePosition(Coord X, Coord Y);
 
     /*! @brief Hide a window, making it invisible.
      *

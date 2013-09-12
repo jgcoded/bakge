@@ -39,8 +39,8 @@ typedef Result (*GenericCallback)();
 typedef Result (*UpdateCallback)(Seconds DeltaTime);
 typedef Result (*KeyEventCallback)(KeyID K, KeyState S, ScanCode C, ModField M);
 typedef Result (*MouseEventCallback)(ButtonID B, ButtonState S, ModField M);
-typedef Result (*MotionEventCallback)(DeviceMotion X, DeviceMotion Y);
-typedef Result (*ScrollEventCallback)(DeviceMotion X, DeviceMotion Y);
+typedef Result (*MotionEventCallback)(Motion X, Motion Y);
+typedef Result (*ScrollEventCallback)(Motion X, Motion Y);
 
 class TestEngine : public Engine, public EventHandler
 {
@@ -171,7 +171,7 @@ class TestEngine : public Engine, public EventHandler
     }
 
     /* Relative device motion events */
-    Result MotionEvent(DeviceMotion X, DeviceMotion Y)
+    Result MotionEvent(Motion X, Motion Y)
     {
         if(MotionEventCB != NULL)
             MotionEventCB(X, Y);
@@ -179,7 +179,7 @@ class TestEngine : public Engine, public EventHandler
         return BGE_FAILURE;
     }
 
-    Result ScrollEvent(DeviceMotion X, DeviceMotion Y)
+    Result ScrollEvent(Motion X, Motion Y)
     {
         if(ScrollEventCB != NULL)
             ScrollEventCB(X, Y);

@@ -84,11 +84,11 @@ typedef uint64 Microseconds;
 
 /*! @brief Used to describe mouse/joystick motion or positions.
  */
-typedef double DeviceMotion;
+typedef double Motion;
 
 /*! @brief Used to describe a mouse or screen position
  */
-typedef double DeviceCoord;
+typedef double Coord;
 
 } /* bakge */
 

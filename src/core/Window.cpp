@@ -287,7 +287,7 @@ void Window::PollEvents()
 }
 
 
-Result Window::GetMousePosition(DeviceCoord* X, DeviceCoord* Y)
+Result Window::GetMousePosition(Coord* X, Coord* Y)
 {
     /* Can't access mouse if window isn't active */
     if(!IsActive())
@@ -299,7 +299,7 @@ Result Window::GetMousePosition(DeviceCoord* X, DeviceCoord* Y)
 }
 
 
-Result Window::SetMousePosition(DeviceCoord X, DeviceCoord Y)
+Result Window::SetMousePosition(Coord X, Coord Y)
 {
     /* Can't change mouse position if window isn't active */
     if(!IsActive())

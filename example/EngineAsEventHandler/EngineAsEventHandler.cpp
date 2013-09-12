@@ -52,16 +52,16 @@ bakge::Result EngineAsEventHandler::MouseEvent(bakge::ButtonID B,
 }
 
 
-bakge::Result EngineAsEventHandler::MotionEvent(bakge::DeviceMotion X,
-                                                bakge::DeviceMotion Y)
+bakge::Result EngineAsEventHandler::MotionEvent(bakge::Motion X,
+                                                bakge::Motion Y)
 {
     printf("You moved the mouse %lf, %lf\n", X, Y);
     return BGE_SUCCESS;
 }
 
 
-bakge::Result EngineAsEventHandler::ScrollEvent(bakge::DeviceMotion X,
-                                                bakge::DeviceMotion Y)
+bakge::Result EngineAsEventHandler::ScrollEvent(bakge::Motion X,
+                                                bakge::Motion Y)
 {
     printf("You scrolled the mouse wheel %lf, %lf\n", X, Y);
     return BGE_SUCCESS;

@@ -74,7 +74,7 @@ public:
      *
      * @retval BGE_FAILURE if any errors occurred while processing the key
      * event, otherwise BGE_SUCCESS.
-     * 
+     *
      * @see http://www.glfw.org/docs/latest/glfw3_8h.html
      * @see ShiftPressed, AltPressed, ControlPressed, SuperPressed
      */
@@ -103,7 +103,7 @@ public:
      * @retval BGE_FAILURE if any errors occurred while processing the mouse
      * motion event, otherwise BGE_SUCCESS.
      */
-    virtual Result MotionEvent(DeviceMotion X, DeviceMotion Y) = 0;
+    virtual Result MotionEvent(Motion X, Motion Y) = 0;
 
     /*! @brief Called when the mouse wheel is scrolled.
      *
@@ -120,7 +120,7 @@ public:
      * However, it is unclear whether GLFW detects these mouse actions and
      * processes them as scroll wheel events.
      */
-    virtual Result ScrollEvent(DeviceMotion X, DeviceMotion Y) = 0;
+    virtual Result ScrollEvent(Motion X, Motion Y) = 0;
 
     /*! @brief Called just before the Window closes.
      *

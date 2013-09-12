@@ -38,7 +38,7 @@ public:
     Draggable();
     virtual ~Draggable() = 0;
 
-    virtual bool OnDrag(DeviceCoord X, DeviceCoord Y) = 0;
+    virtual bool OnDrag(Coord X, Coord Y) = 0;
 
 }; /* Draggable */
 
