@@ -16,7 +16,11 @@ SET(PHYSFS_BUILD_TEST CACHE BOOL FALSE FORCE)
 add_subdirectory(physfs-2.0.3)
 
 # Build Bullet physics
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH} CACHE STRING "" FORCE)
+set(_BUILD_TYPE ${BUILD_SHARED_LIBS})
+set(BUILD_SHARED_LIBS OFF)
 add_subdirectory(bullet-2.81-rev2613)
+set(BUILD_SHARED_LIBS ${_BUILD_TYPE})
 
 # Builds external libraries
 include(${BAKGE_SOURCE_DIR}/cmake/BuildLua.cmake)

@@ -68,9 +68,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BAKGE_SDK_LIB_PATH})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BAKGE_SDK_BIN_PATH})
 
-# Postfix debug builds to distinguish them.
-set(CMAKE_DEBUG_POSTFIX "d")
-
 # Bakge options
 option(BAKGE_BUILD_TESTS "Build the Bakge test suite" ON)
 option(BAKGE_BUILD_EXAMPLES "Build the Bakge examples suite" ON)
@@ -171,7 +168,6 @@ if(WIN32)
     glu32.lib
     ${OPENGL_LIBRARY}
     ws2_32.lib
-    ${BAKGE_BULLET_TARGETS}
   )
 endif(WIN32)
 
