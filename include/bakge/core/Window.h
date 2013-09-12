@@ -64,14 +64,14 @@ class BGE_API Window : public Bindable
 
     /* Store last mouse position */
     struct {
-        double X;
-        double Y;
+        Coord X;
+        Coord Y;
     } MouseCache;
 
     /* Store last scroll positions */
     struct {
-        double X;
-        double Y;
+        Coord X;
+        Coord Y;
     } ScrollCache;
 
 

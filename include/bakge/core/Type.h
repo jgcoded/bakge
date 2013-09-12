@@ -96,11 +96,11 @@ typedef uint64 Microseconds;
 
 /*! @brief Used to describe mouse/joystick motion or positions.
  */
-typedef double Motion;
+typedef Scalar Motion;
 
 /*! @brief Used to describe a mouse or screen position
  */
-typedef double Coord;
+typedef Scalar Coord;
 
 } /* bakge */
 

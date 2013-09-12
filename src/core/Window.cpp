@@ -112,9 +112,10 @@ void Window::MouseMotion(GLFWwindow* Handle, double X, double Y)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        Handler->MotionEvent(X - Win->MouseCache.X, Y - Win->MouseCache.Y);
-        Win->MouseCache.X = X;
-        Win->MouseCache.Y = Y;
+        Handler->MotionEvent((Motion)X - Win->MouseCache.X,
+                            (Motion)Y - Win->MouseCache.Y);
+        Win->MouseCache.X = (Coord)X;
+        Win->MouseCache.Y = (Coord)Y;
     }
 }
 
@@ -128,9 +129,10 @@ void Window::Scroll(GLFWwindow* Handle, double X, double Y)
     Handler = Win->Handler;
 
     if(Handler != NULL) {
-        Handler->ScrollEvent(X - Win->ScrollCache.X, Y - Win->ScrollCache.Y);
-        Win->ScrollCache.X = X;
-        Win->ScrollCache.Y = Y;
+        Handler->ScrollEvent((Motion)X - Win->ScrollCache.X,
+                            (Motion)Y - Win->ScrollCache.Y);
+        Win->ScrollCache.X = (Coord)X;
+        Win->ScrollCache.Y = (Coord)Y;
     }
 }
 
@@ -293,7 +295,11 @@ Result Window::GetMousePosition(Coord* X, Coord* Y)
     if(!IsActive())
         return BGE_FAILURE;
 
-    glfwGetCursorPos(WindowHandle, X, Y);
+    double PX, PY;
+    glfwGetCursorPos(WindowHandle, &PX, &PY);
+
+    *X = (Coord)PX;
+    *Y = (Coord)PY;
 
     return BGE_SUCCESS;
 }
