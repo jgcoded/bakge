@@ -73,8 +73,8 @@ int main(int argc, char* argv[])
         TestThreads[i] = bakge::Thread::Create(ThreadFunc, (void*)Win);
     }
 
-    if(Win == NULL || Thr == NULL) {
-        printf("Error initializing window and thread\n");
+    if(Win == NULL) {
+        printf("Error initializing window\n");
         goto CLEANUP;
     }
 
