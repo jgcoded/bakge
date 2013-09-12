@@ -35,12 +35,43 @@
 namespace bakge
 {
 
+/*! @brief Mesh buffer enumeration.
+ *
+ * Meshes contain several OpenGL buffers used for storing various data such
+ * as vertex positions and texture coordinates. For convenience and clarity
+ * the indices of the buffers are enumerated here.
+ */
 enum MESH_BUFFERS
 {
+    /*! @brief Vertex positions buffer index.
+     *
+     * Stores vertex positions in 3D Cartesian space.
+     */
     MESH_BUFFER_POSITIONS = 0,
+
+    /*! @brief Vertex normal vectors buffer index.
+     *
+     * Stores vertex normals as unit vectors in 3D Cartesian space.
+     */
     MESH_BUFFER_NORMALS,
+
+    /*! @brief Vertex texture coordinates buffer index.
+     *
+     * Stores a vertex's texture coordinates in 2D Cartesian space.
+     */
     MESH_BUFFER_TEXCOORDS,
+
+    /*! @brief Triangle indices buffer index.
+     *
+     * Stores triangles' vertex indices. A Mesh is drawn as a series of
+     * triangles, using every 3 indices in this buffer as one triangle.
+     */
     MESH_BUFFER_INDICES,
+
+    /*! @brief Total number of mesh buffers for any given Mesh.
+     *
+     * This value can be used to iterate through all Mesh buffers.
+     */
     NUM_MESH_BUFFERS
 };
 
