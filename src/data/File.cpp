@@ -46,10 +46,9 @@ File* File::Open(const char* Path)
 {
     File* F = new File;
 
-    /* Since strncpy doesn't guarantee null-termination, do it ourselves */
     int Len = strlen(Path);
     F->Path = (char*)malloc(Len + 1);
-    strncpy(F->Path, Path, Len);
+    memcpy((void*)F->Path, (const void*)Path, Len);
     F->Path[Len] = '\0';
 
     return F;
