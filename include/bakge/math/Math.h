@@ -30,14 +30,6 @@
 namespace bakge
 {
 
-#define BGE_SCALAR_EPSILON 0.000001f
-#define BGE_RAD_PER_DEG 0.0174532925f
-#define BGE_DEG_PER_RAD 57.2957795f
-typedef float Scalar;
-typedef Scalar Degrees;
-typedef Scalar Radians;
-
-
 BGE_INL Radians ToRadians(Degrees BGE_NCP Deg)
 {
     return (Deg * BGE_RAD_PER_DEG);
