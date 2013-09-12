@@ -66,16 +66,29 @@ typedef int32_t int32;
  */
 typedef int Result;
 
+/*! @brief Maximum difference between two Scalars for them to be considered
+ * equal.
+ */
 #define BGE_SCALAR_EPSILON 0.000001f
 
+/*! @brief Ratio of degrees to radians.
+ */
 #define BGE_RAD_PER_DEG 0.0174532925f
 
+/*! @brief Ratio of radians to degrees.
+ */
 #define BGE_DEG_PER_RAD 57.2957795f
 
+/*! @brief Scalar is a single-precision floatint number.
+ */
 typedef float Scalar;
 
+/*! @brief Degrees type definition, for code clarity.
+ */
 typedef Scalar Degrees;
 
+/*! @brief Radians type definition, for code clarity.
+ */
 typedef Scalar Radians;
 
 /*! @brief An 8-bit type definition. Is not necessarily a printable character.
