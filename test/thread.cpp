@@ -26,15 +26,29 @@
 #include <stdlib.h>
 #include <bakge/Bakge.h>
 
+#define ARR_SIZE 7
+#define NUM_THREADS 3
+
+int TestArray[ARR_SIZE] = { 5, 3, 52, 25, 3, 2, 5};
+bakge::Mutex* Mut;
+
 int ThreadFunc(void* Data)
 {
     bakge::Window* Win;
 
     Win = (bakge::Window*)Data;
-    /* While window is open, print dots from this thread */
+
     while(Win->IsOpen()) {
         bakge::Delay(100000);
-        printf(".");
+        printf("First value of the array is: ");
+        printf("%d\n\n", TestArray[0]);
+
+        Mut->Lock();
+        for(int i = 0; i < ARR_SIZE; ++i) {
+            TestArray[i]+= 1;
+        }
+        Mut->Unlock();
+
         fflush(0);
     }
     printf("\n");
@@ -49,10 +63,15 @@ int main(int argc, char* argv[])
     bakge::Init(argc, argv);
 
     bakge::Window* Win;
-    bakge::Thread* Thr;
 
+    Mut = bakge::Mutex::Create();
     Win = bakge::Window::Create(600, 400);
-    Thr = bakge::Thread::Create(ThreadFunc, (void*)Win);
+
+    bakge::Thread* TestThreads[NUM_THREADS];
+
+    for(int i = 0; i < NUM_THREADS; ++i) {
+        TestThreads[i] = bakge::Thread::Create(ThreadFunc, (void*)Win);
+    }
 
     if(Win == NULL || Thr == NULL) {
         printf("Error initializing window and thread\n");
@@ -80,11 +99,14 @@ int main(int argc, char* argv[])
 
 CLEANUP:
 
-    if(Thr != NULL)
-        delete Thr;
+    if(TestThreads != NULL)
+        delete[] TestThreads;
 
     if(Win != NULL)
         delete Win;
+
+    if(Mut != NULL)
+        delete Mut;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
