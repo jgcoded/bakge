@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Mesh.h
+ * @brief Mesh class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_MESH_H
 #define BAKGE_GRAPHICS_MESH_H
 
