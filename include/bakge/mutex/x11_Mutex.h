@@ -30,6 +30,7 @@ namespace bakge
 
 typedef class BGE_API x11_Mutex : api::Mutex
 {
+
     x11_Mutex();
     pthread_mutex_t MutexHandle;
 
