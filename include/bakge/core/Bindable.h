@@ -75,7 +75,7 @@ public:
      * Binding an object is necessary before it can be safely used for its
      * designated purpose.
      *
-     * @retval BGE_SUCCESS if binding was successful and the object is ready
+     * @return BGE_SUCCESS if binding was successful and the object is ready
      * for use, or BGE_FAILURE if any errors occurred and the object is not
      * safe to use.
      */
@@ -87,7 +87,7 @@ public:
      * changes to the object's internal data, which is tied to the OpenGL
      * state or to set previously modified state to an arbitrary default.
      *
-     * @retval BGE_SUCCESS if unbinding was successful, or BGE_FAILURE if any
+     * @return BGE_SUCCESS if unbinding was successful, or BGE_FAILURE if any
      * errors occurred.
      */
     virtual Result Unbind() const = 0;

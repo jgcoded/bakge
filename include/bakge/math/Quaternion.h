@@ -122,7 +122,7 @@ public:
      * This function constructs a Matrix from the quaternion's rotation
      * in space.
      *
-     * @retval Rotation matrix representing the Quaternion's rotation in
+     * @return Rotation matrix representing the Quaternion's rotation in
      * 3D Cartesian space.
      */
     Matrix ToMatrix() const;
@@ -132,7 +132,7 @@ public:
      * Quaternions describe rotations about an arbitrary axis in space.
      * This method extracts that rotation, described in radians.
      *
-     * @retval Scalar representing rotation in radians.
+     * @return Scalar representing rotation in radians.
      */
     Radians GetAngle() const;
 
@@ -141,7 +141,7 @@ public:
      * Quaternions describe rotations about an arbitrary axis in space.
      * This method extracts that axis, described as a vector.
      *
-     * @retval Vector describing the axis about which the quaternion's rotation
+     * @return Vector describing the axis about which the quaternion's rotation
      * is oriented. Not guaranteed to be a unit vector.
      */
     Vector4 GetAxis() const;
@@ -156,7 +156,7 @@ public:
      * @param[in] Y Radian angle about the Y axis.
      * @param[in] Z Radian angle about the Z axis.
      *
-     * @retval Quaternion describing rotation about the three major axes.
+     * @return Quaternion describing rotation about the three major axes.
      */
     static Quaternion FromEulerAngles(Radians X, Radians Y, Radians Z);
 
@@ -167,7 +167,7 @@ public:
      * @param[in] Axis Axis about which the rotation is described.
      * @param[in] Angle Radian angle about Axis.
      *
-     * @retval Quaternion describing rotation about an arbitrary axis.
+     * @return Quaternion describing rotation about an arbitrary axis.
      */
     static Quaternion FromAxisAndAngle(Vector4 BGE_NCP Axis, Radians Angle);
 
@@ -177,7 +177,7 @@ public:
      *
      * @param[in] Other Quaternion to add with component-wise.
      *
-     * @retval Left operand after component-wise addition with right operand.
+     * @return Left operand after component-wise addition with right operand.
      */
     Quaternion BGE_NCP operator+=(Quaternion BGE_NCP Other);
 
@@ -187,7 +187,7 @@ public:
      *
      * @param[in] Other Quaternion to subtract by component-wise.
      *
-     * @retval Left operand after component-wise subtraction with right operand.
+     * @return Left operand after component-wise subtraction with right operand.
      */
     Quaternion BGE_NCP operator-=(Quaternion BGE_NCP Other);
 
@@ -198,7 +198,7 @@ public:
      * @param[in] Other Quaternion describing rotation to be compounded into
      * left operand.
      *
-     * @retval Left operand after compounded rotation by right operand.
+     * @return Left operand after compounded rotation by right operand.
      */
     Quaternion BGE_NCP operator*=(Quaternion BGE_NCP Other);
 
@@ -210,7 +210,7 @@ public:
      * @param[in] Other Quaternion describing inverse rotation to be compounded
      * into left operand.
      *
-     * @retval Left operand after compounded inverse rotation by right operand.
+     * @return Left operand after compounded inverse rotation by right operand.
      */
     Quaternion BGE_NCP operator/=(Quaternion BGE_NCP Other);
 
@@ -220,7 +220,7 @@ public:
      *
      * @param[in] Value Scalar to multiply quaternion's components by.
      *
-     * @retval Left operand after component-wise compounded scalar
+     * @return Left operand after component-wise compounded scalar
      * multiplication.
      */
     Quaternion BGE_NCP operator*=(Scalar BGE_NCP Value);
@@ -231,7 +231,7 @@ public:
      *
      * @param[in] Value Scalar to divide quaternion's components by.
      *
-     * @retval Left operand after component-wise compounded scalar
+     * @return Left operand after component-wise compounded scalar
      * division.
      */
     Quaternion BGE_NCP operator/=(Scalar BGE_NCP Value);
@@ -242,7 +242,7 @@ public:
      *
      * @param[in] Other Quaternion to add with component-wise.
      *
-     * @retval Quaternion representing component-wise sum of left and right
+     * @return Quaternion representing component-wise sum of left and right
      * operands.
      */
     Quaternion operator+(Quaternion BGE_NCP Other) const;
@@ -253,7 +253,7 @@ public:
      *
      * @param[in] Other Quaternion to subtract by component-wise.
      *
-     * @retval Quaternion representing component-wise difference of left and
+     * @return Quaternion representing component-wise difference of left and
      * right operands.
      */
     Quaternion operator-(Quaternion BGE_NCP Other) const;
@@ -265,7 +265,7 @@ public:
      * @param[in] Other Quaternion describing rotation to be compounded
      * onto left operand.
      *
-     * @retval Quaternion representing compounded rotations of the left and
+     * @return Quaternion representing compounded rotations of the left and
      * right operands.
      */
     Quaternion operator*(Quaternion BGE_NCP Other) const;
@@ -277,7 +277,7 @@ public:
      * @param[in] Other Quaternion describing inverse rotation to be compounded
      * onto left operand.
      *
-     * @retval Quaternion representing the compound of the left operand's
+     * @return Quaternion representing the compound of the left operand's
      * rotation and the right operand's inverse rotation.
      */
     Quaternion operator/(Quaternion BGE_NCP Other) const;
@@ -288,7 +288,7 @@ public:
      *
      * @param[in] Value Scalar by which to multiply left operand's components.
      *
-     * @retval Quaternion representing components of the left operand
+     * @return Quaternion representing components of the left operand
      * multiplied by the right operand.
      */
     Quaternion operator*(Scalar BGE_NCP Value) const;
@@ -299,7 +299,7 @@ public:
      *
      * @param[in] Value Scalar by which to divide left operand's components.
      *
-     * @retval Quaternion representing components of the left operand
+     * @return Quaternion representing components of the left operand
      * divided by the right operand.
      */
     Quaternion operator/(Scalar BGE_NCP Value) const;
@@ -309,7 +309,7 @@ public:
      * Negates the vector and scalar parts of the quaternion. The inverse of
      * a quaternion is the normalized negation of its components.
      *
-     * @retval Quaternion with negative components of the operand.
+     * @return Quaternion with negative components of the operand.
      */
     Quaternion operator-() const;
 
@@ -317,7 +317,7 @@ public:
      *
      * Invert the quaternion. Negates the components and normalizes.
      *
-     * @retval The quaternion after being inverted.
+     * @return The quaternion after being inverted.
      */
     Quaternion BGE_NCP Invert();
 
@@ -325,7 +325,7 @@ public:
      *
      * Get an inverted copy of the quaternion.
      *
-     * @retval Copy of the quaternion, inverted.
+     * @return Copy of the quaternion, inverted.
      */
     Quaternion Inverted() const;
 
@@ -333,7 +333,7 @@ public:
      *
      * Normalize the quaternion by dividing it by its length.
      *
-     * @retval The quaternion after being normalized.
+     * @return The quaternion after being normalized.
      *
      * @see Quaternion::Length
      */
@@ -343,7 +343,7 @@ public:
      *
      * Get a normalized copy of the quaternion.
      *
-     * @retval Copy of the quaternion, normalized.
+     * @return Copy of the quaternion, normalized.
      */
     Quaternion Normalized() const;
 
@@ -352,7 +352,7 @@ public:
      * The length of a quaternion is the square root of the sum of the length
      * of the vector part and the square of the real part.
      *
-     * @retval Scalar representing length of the quaternion.
+     * @return Scalar representing length of the quaternion.
      *
      * @see Quaternion::LengthSq
      */
@@ -364,7 +364,7 @@ public:
      * the square root operation becomes a needless and relatively
      * time-consuming operation.
      *
-     * @retval The square of the length of the quaternion.
+     * @return The square of the length of the quaternion.
      *
      * @see Quaternion::Length
      */

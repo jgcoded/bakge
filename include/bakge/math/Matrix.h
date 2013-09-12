@@ -108,7 +108,7 @@ public:
      *
      * @param[in] At 0-base field index.
      *
-     * @retval const reference to field at specified index.
+     * @return const reference to field at specified index.
      */
     BGE_INL Scalar BGE_NCP operator[](int BGE_NCP At) const
     {
@@ -121,7 +121,7 @@ public:
      *
      * @param[in] At 0-base field index.
      *
-     * @retval Reference to field at specified index.
+     * @return Reference to field at specified index.
      */
     BGE_INL Scalar& operator[](int BGE_NCP At)
     {
@@ -132,7 +132,7 @@ public:
      *
      * Matrix assignment operator.
      *
-     * @retval const reference to the Matrix after assignment.
+     * @return const reference to the Matrix after assignment.
      */
     Matrix BGE_NCP operator=(Matrix BGE_NCP Other);
 
@@ -142,7 +142,7 @@ public:
      *
      * @param[in] Other Right operand.
      *
-     * @retval Result matrix from multiplication of left and right operands.
+     * @return Result matrix from multiplication of left and right operands.
      */
     Matrix operator*(Matrix BGE_NCP Other) const;
 
@@ -152,7 +152,7 @@ public:
      *
      * @param[in] Other Right operand.
      *
-     * @retval const reference to the Matrix after compounded multiplication
+     * @return const reference to the Matrix after compounded multiplication
      * with right operand.
      */
     Matrix BGE_NCP operator*=(Matrix BGE_NCP Other);
@@ -161,7 +161,7 @@ public:
      *
      * Invert the Matrix.
      *
-     * @retval const reference to the Matrix after it has been inverted.
+     * @return const reference to the Matrix after it has been inverted.
      */
     Matrix BGE_NCP Invert();
 
@@ -169,7 +169,7 @@ public:
      *
      * Get the inverse of the Matrix.
      *
-     * @retval Inverse of the Matrix.
+     * @return Inverse of the Matrix.
      */
     Matrix Inverted() const;
 
@@ -177,7 +177,7 @@ public:
      *
      * Get the transpose of the Matrix.
      *
-     * @retval Transposition of the Matrix.
+     * @return Transposition of the Matrix.
      */
     Matrix Transposed() const;
 
@@ -185,7 +185,7 @@ public:
      *
      * Transpose the Matrix.
      *
-     * @retval const reference to the Matrix after it has been transposed.
+     * @return const reference to the Matrix after it has been transposed.
      */
     Matrix BGE_NCP Transpose();
 
@@ -193,7 +193,7 @@ public:
      *
      * Get the determinant of the Matrix.
      *
-     * @retval Determinant of the Matrix.
+     * @return Determinant of the Matrix.
      */
     Scalar Determinant() const;
 
@@ -201,7 +201,7 @@ public:
      *
      * Set the Matrix to the identity matrix.
      *
-     * @retval const reference to the Matrix after being set to identity.
+     * @return const reference to the Matrix after being set to identity.
      */
     Matrix BGE_NCP SetIdentity();
 
@@ -214,7 +214,7 @@ public:
      * @param[in] NearClip Near clipping plane.
      * @param[in] FarClip Far clipping plane.
      *
-     * @retval const reference to the Matrix after being set to a perspective
+     * @return const reference to the Matrix after being set to a perspective
      * projection.
      */
     Matrix BGE_NCP SetPerspective(Degrees FOV, Scalar Aspect, Scalar NearClip,
@@ -231,7 +231,7 @@ public:
      * @param[in] Near Near clipping plane.
      * @param[in] Far Far clipping plane.
      *
-     * @retval const reference to the Matrix after being set to an orthographic
+     * @return const reference to the Matrix after being set to an orthographic
      * projection.
      */
     Matrix BGE_NCP SetOrthographic(Scalar Left, Scalar Right, Scalar Bottom,
@@ -245,7 +245,7 @@ public:
      * @param[in] Target Eye target.
      * @param[in] UpVector View up vector. Affects roll of the camera.
      *
-     * @retval const reference to the Matrix after being set to a view matrix.
+     * @return const reference to the Matrix after being set to a view matrix.
      */
     Matrix BGE_NCP SetLookAt(Vector4 BGE_NCP Position, Vector4 BGE_NCP Target,
                                                     Vector4 BGE_NCP UpVector);
@@ -258,7 +258,7 @@ public:
      * @param[in] Y Scale along the Y axis.
      * @param[in] Z Scale along the Z axis.
      *
-     * @retval Scale matrix.
+     * @return Scale matrix.
      */
     static Matrix Scaling(Scalar X, Scalar Y, Scalar Z);
 
@@ -270,7 +270,7 @@ public:
      * @param[in] Y Translation along the Y axis.
      * @param[in] Z Translation along the Z axis.
      *
-     * @retval Translation matrix.
+     * @return Translation matrix.
      */
     static Matrix Translation(Scalar X, Scalar Y, Scalar Z);
 
@@ -282,7 +282,7 @@ public:
      * @param[in] Y Rotation in radians about the Y axis.
      * @param[in] Z Rotation in radians about the Z axis.
      *
-     * @retval Rotation matrix.
+     * @return Rotation matrix.
      */
     static Matrix Rotation(Radians X, Radians Y, Radians Z);
 
@@ -295,7 +295,7 @@ public:
      * @param[in] Y Y component of the axis.
      * @param[in] Z Z component of the axis.
      *
-     * @retval Rotation matrix.
+     * @return Rotation matrix.
      */
     static Matrix Rotation(Radians Angle, Scalar X, Scalar Y, Scalar Z);
 
@@ -307,7 +307,7 @@ public:
      * @param[in] Y Translation along the Y axis.
      * @param[in] Z Translation along the Z axis.
      *
-     * @retval const reference to the Matrix after translation.
+     * @return const reference to the Matrix after translation.
      */
     Matrix BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
 
@@ -319,7 +319,7 @@ public:
      * @param[in] Y Scale along the Y axis.
      * @param[in] Z Scale along the Z axis.
      *
-     * @retval const reference to the Matrix after scaling.
+     * @return const reference to the Matrix after scaling.
      */
     Matrix BGE_NCP Scale(Scalar X, Scalar Y, Scalar Z);
 
@@ -331,7 +331,7 @@ public:
      * @param[in] Y Rotation in radians about the Y axis.
      * @param[in] Z Rotation in radians about the Z axis.
      *
-     * @retval const reference to the Matrix after rotation.
+     * @return const reference to the Matrix after rotation.
      */
     Matrix BGE_NCP Rotate(Radians X, Radians Y, Radians Z);
 
@@ -344,7 +344,7 @@ public:
      * @param[in] Y Y component of the axis.
      * @param[in] Z Z component of the axis.
      *
-     * @retval const reference to the Matrix after rotation.
+     * @return const reference to the Matrix after rotation.
      */
     Matrix BGE_NCP Rotate(Radians Angle, Scalar X, Scalar Y, Scalar Z);
 

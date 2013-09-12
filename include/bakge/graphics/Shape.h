@@ -78,7 +78,7 @@ public:
      *
      * Bind the Shape for use in drawing.
      *
-     * @retval BGE_SUCCESS if the shape is ready to be drawn, or BGE_FAILURE
+     * @return BGE_SUCCESS if the shape is ready to be drawn, or BGE_FAILURE
      * if any errors occurred.
      */
     Result Bind() const;
@@ -87,7 +87,7 @@ public:
      *
      * Unbind the shape.
      *
-     * @retval BGE_SUCCESS if the shape was successfully unbound, or
+     * @return BGE_SUCCESS if the shape was successfully unbound, or
      * BGE_FAILURE if any errors occurred.
      */
     Result Unbind() const;
@@ -97,14 +97,14 @@ public:
      * Shapes may be drawn in different styles: a point cloud, wireframe mesh
      * or solid mesh.
      *
-     * @retval BGE_SUCCESS if the shape's draw style was successfully changed,
+     * @return BGE_SUCCESS if the shape's draw style was successfully changed,
      * or BGE_FAILURE if any errors occurred.
      */
     Result SetDrawStyle(BGE_SHAPE_STYLE Style);
 
     /*! @brief Draw the shape.
      *
-     * @retval BGE_SUCCESS if the shape was successfully drawn, or BGE_FAILURE
+     * @return BGE_SUCCESS if the shape was successfully drawn, or BGE_FAILURE
      * if any errors occurred.
      */
     virtual Result Draw() const;

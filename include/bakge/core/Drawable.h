@@ -64,7 +64,7 @@ public:
      * Draws the object to the screen. If other framebuffers are set they are
      * instead drawn there.
      *
-     * @retval BGE_SUCCESS if the object was successfully drawn, or
+     * @return BGE_SUCCESS if the object was successfully drawn, or
      * BGE_FAILURE if any errors occurred.
      */
     virtual Result Draw() const = 0;

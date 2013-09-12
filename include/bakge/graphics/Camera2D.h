@@ -77,7 +77,7 @@ public:
      * from the camera's position and span. The camera's position and span
      * are measured in pixels.
      *
-     * @retval BGE_SUCCESS if the Camera2D's view and projection transforms
+     * @return BGE_SUCCESS if the Camera2D's view and projection transforms
      * were set in OpenGL; BGE_FAILURE if any errors occurred.
      */
     virtual Result Bind() const;
@@ -86,7 +86,7 @@ public:
      *
      * Set viewing and projection transforms to defaults.
      *
-     * @retval BGE_SUCCESS if default view and projection transforms were
+     * @return BGE_SUCCESS if default view and projection transforms were
      * set in OpenGL; BGE_FAILURE if any errors occurred.
      */
     virtual Result Unbind() const;
@@ -100,7 +100,7 @@ public:
      * @param[in] Height Span of the scene along the Y axis.
      * @param[in] Far Span of the scene along the Z axis.
      *
-     * @retval const reference to the Camera2D's span after assignment.
+     * @return const reference to the Camera2D's span after assignment.
      */
     BGE_INL Vector4 BGE_NCP SetSpan(Scalar Width, Scalar Height, Scalar Far)
     {
@@ -116,7 +116,7 @@ public:
      * Get the span of the 2D scene. The span of the scene is measured in
      * pixels.
      *
-     * @retval const reference to the Camera2D's span.
+     * @return const reference to the Camera2D's span.
      */
     BGE_INL Vector4 BGE_NCP GetSpan() const
     {

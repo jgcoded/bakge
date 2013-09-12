@@ -83,7 +83,7 @@ public:
      * @param[in] Y New position along the Y axis.
      * @param[in] Z New position along the Z axis.
      *
-     * @retval const reference to the Node's position after assignment.
+     * @return const reference to the Node's position after assignment.
      */
     Vector4 BGE_NCP SetPosition(Scalar X, Scalar Y, Scalar Z);
 
@@ -91,7 +91,7 @@ public:
      *
      * Get this object's position in Cartesian space.
      *
-     * @retval const reference to this Node's position.
+     * @return const reference to this Node's position.
      */
     Vector4 BGE_NCP GetPosition() const;
 

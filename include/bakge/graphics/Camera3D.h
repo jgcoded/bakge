@@ -80,7 +80,7 @@ public:
      * @param[in] Y Y position of the eye target.
      * @param[in] Z Z position of the eye target.
      *
-     * @retval const reference to the Camera3D's eye target, after assignment.
+     * @return const reference to the Camera3D's eye target, after assignment.
      */
     Vector4 BGE_NCP SetTarget(Scalar X, Scalar Y, Scalar Z);
 
@@ -88,7 +88,7 @@ public:
      *
      * Get the Camera3D's eye target.
      *
-     * @retval const reference to the Camera3D's eye target.
+     * @return const reference to the Camera3D's eye target.
      */
     Vector4 BGE_NCP GetTarget() const;
 
@@ -96,7 +96,7 @@ public:
      *
      * Bind the Camera3D's viewing and projection transforms in OpenGL.
      *
-     * @retval BGE_SUCCESS if the camera's transforms were successfully bound
+     * @return BGE_SUCCESS if the camera's transforms were successfully bound
      * to OpenGL state; BGE_FAILURE if any errors occurred.
      */
     virtual Result Bind() const;
@@ -105,7 +105,7 @@ public:
      *
      * Bind default viewing and projection transforms in OpenGL.
      *
-     * @retval BGE_SUCCESS if default view and projection transforms were
+     * @return BGE_SUCCESS if default view and projection transforms were
      * bound to OpenGL; BGE_FAILURE if any errors occurred.
      */
     virtual Result Unbind() const;
@@ -116,7 +116,7 @@ public:
      *
      * @param[in] F New field of view in degrees.
      *
-     * @retval Degree value of the new field of view.
+     * @return Degree value of the new field of view.
      */
     BGE_INL Degrees SetFOV(Degrees F)
     {
@@ -129,7 +129,7 @@ public:
      *
      * Get the degree value of the Camera3D's field of view.
      *
-     * @retval Degree value of the Camera3D's field of view.
+     * @return Degree value of the Camera3D's field of view.
      */
     BGE_INL Degrees GetFOV() const
     {
@@ -143,7 +143,7 @@ public:
      *
      * @param[in] R New aspect ratio.
      *
-     * @retval Value of the new aspect ratio.
+     * @return Value of the new aspect ratio.
      */
     BGE_INL Scalar SetAspect(Scalar R)
     {
@@ -158,7 +158,7 @@ public:
      *
      * @param[in] F Z value of the new near clipping plane.
      *
-     * @retval Z value of the new near clipping plane.
+     * @return Z value of the new near clipping plane.
      */
     BGE_INL Scalar SetNearClip(Scalar N)
     {
@@ -171,7 +171,7 @@ public:
      *
      * Get the near clipping plane Z value.
      *
-     * @retval Z value of the near clipping plane.
+     * @return Z value of the near clipping plane.
      */
     BGE_INL Scalar GetNearClip() const
     {
@@ -184,7 +184,7 @@ public:
      *
      * @param[in] F Z value of the new far clipping plane.
      *
-     * @retval Z value of the new far clipping plane.
+     * @return Z value of the new far clipping plane.
      */
     BGE_INL Scalar SetFarClip(Scalar F)
     {
@@ -197,7 +197,7 @@ public:
      *
      * Get the far clipping plane Z value.
      *
-     * @retval Z value of the far clipping plane.
+     * @return Z value of the far clipping plane.
      */
     BGE_INL Scalar GetFarClip() const
     {

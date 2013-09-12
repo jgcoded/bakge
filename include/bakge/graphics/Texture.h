@@ -70,7 +70,7 @@ public:
      * @param[in] Type Type of data being uploaded.
      * @param[in] Data The texture data to upload.
      *
-     * @retval Pointer to newly created texture; NULL if any errors occurred.
+     * @return Pointer to newly created texture; NULL if any errors occurred.
      *
      * @see http://www.opengl.org/wiki/Texture
      */
@@ -84,7 +84,7 @@ public:
      * the texture (or texture2D) call in your GLSL shader using the
      * appropriate uniform location and texture coordinates.
      *
-     * @retval BGE_SUCCESS if the texture was successfully bound; BGE_FAILURE
+     * @return BGE_SUCCESS if the texture was successfully bound; BGE_FAILURE
      * if any errors occurred.
      */
     Result Bind() const;
@@ -94,7 +94,7 @@ public:
      * Unbinding a texture is important so future texture-related OpenGL
      * calls don't affect it.
      *
-     * @retval BGE_SUCCESS if the texture was successfully unbound; BGE_FAILURE
+     * @return BGE_SUCCESS if the texture was successfully unbound; BGE_FAILURE
      * if any errors occurred.
      */
     Result Unbind() const;
@@ -103,7 +103,7 @@ public:
      *
      * Get the width of the texture in pixels.
      *
-     * @retval Width of the texture in pixels.
+     * @return Width of the texture in pixels.
      */
     BGE_INL int GetWidth() const
     {
@@ -114,7 +114,7 @@ public:
      *
      * Get the height of the texture in pixels.
      *
-     * @retval Height of the texture in pixels.
+     * @return Height of the texture in pixels.
      */
     BGE_INL int GetHeight() const
     {

@@ -63,7 +63,7 @@ typedef int ButtonState;
  *
  * @param[in] M The bitfield containing modifier states
  *
- * @retval true if M shows that a shift key is pressed, false if not.
+ * @return true if M shows that a shift key is pressed, false if not.
  */
 inline bool ShiftPressed(ModField M)
 {
@@ -74,7 +74,7 @@ inline bool ShiftPressed(ModField M)
  *
  * @param[in] M The bitfield containing modifier states
  *
- * @retval true if M shows that a alt key is pressed, false if not.
+ * @return true if M shows that a alt key is pressed, false if not.
  */
 inline bool AltPressed(ModField M)
 {
@@ -85,7 +85,7 @@ inline bool AltPressed(ModField M)
  *
  * @param[in] M The bitfield containing modifier states
  *
- * @retval true if M shows that a control key is pressed, false if not.
+ * @return true if M shows that a control key is pressed, false if not.
  */
 inline bool ControlPressed(ModField M)
 {
@@ -100,7 +100,7 @@ inline bool ControlPressed(ModField M)
  *
  * @param[in] M The bitfield containing modifier states
  *
- * @retval true if M shows that a super key is pressed, false if not.
+ * @return true if M shows that a super key is pressed, false if not.
  */
 inline bool SuperPressed(ModField M)
 {

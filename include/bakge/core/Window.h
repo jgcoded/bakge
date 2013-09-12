@@ -103,7 +103,7 @@ public:
      * @param[in] Width The width of the created window.
      * @param[in] Height The height of the created window.
      *
-     * @retval Pointer to allocated Window, or NULL if any errors occur.
+     * @return Pointer to allocated Window, or NULL if any errors occur.
      */
     BGE_FACTORY Window* Create(int Width, int Height);
 
@@ -122,7 +122,7 @@ public:
      * If a window is flagged for closing or doesn't exist, it is considered
      * closed.
      *
-     * @retval true if the window exists and is not marked for deletion.
+     * @return true if the window exists and is not marked for deletion.
      * false otherwise.
      */
     bool IsOpen();
@@ -131,7 +131,7 @@ public:
      *
      * Check if a window is currently visible.
      *
-     * @retval true if window is visible; false if hidden.
+     * @return true if window is visible; false if hidden.
      */
     bool IsVisible() const;
 
@@ -141,7 +141,7 @@ public:
      * meaning key, mouse and other device input is processed only for that
      * window.
      *
-     * @retval true if window is open, visible and in focus. false otherwise.
+     * @return true if window is open, visible and in focus. false otherwise.
      */
     bool IsActive();
 
@@ -149,7 +149,7 @@ public:
      *
      * Check if a window is currently focused.
      *
-     * @retval true if window has input focus; false otherwise.
+     * @return true if window has input focus; false otherwise.
      */
     bool IsFocused() const;
 
@@ -157,13 +157,13 @@ public:
      *
      * Check if window is iconified.
      *
-     * @retval true if window is currently iconified; false otherwise.
+     * @return true if window is currently iconified; false otherwise.
      */
     bool IsIconified() const;
 
     /*! @brief Mark a window for closing.
      *
-     * @retval BGE_SUCCESS if the window was successfully closed, or
+     * @return BGE_SUCCESS if the window was successfully closed, or
      * BGE_FAILURE if the window was unable to be closed.
      */
     Result Close();
@@ -173,7 +173,7 @@ public:
      * After rendering a scene, call SwapBuffers to flip the buffer onto the
      * screen. If a window is closed or iconified this function will fail.
      *
-     * @retval BGE_SUCCESS if the window buffers were successfully swapped.
+     * @return BGE_SUCCESS if the window buffers were successfully swapped.
      * BGE_FAILURE if the window is closed, iconified or another error
      * occurred.
      */
@@ -186,7 +186,7 @@ public:
      * it is called. Any previous bound window's context will no longer
      * be current on the thread.
      *
-     * @retval BGE_SUCCESS if the context was successfully made current, and
+     * @return BGE_SUCCESS if the context was successfully made current, and
      * BGE_FAILURE if any error occurred.
      */
     Result Bind() const;
@@ -198,7 +198,7 @@ public:
      * and no code that requires an active OpenGL context can be safely run
      * until a new Window is bound.
      *
-     * @retval BGE_SUCCESS if the window context was removed as the current
+     * @return BGE_SUCCESS if the window context was removed as the current
      * context, or BGE_FAILURE if any error occurred.
      */
     Result Unbind() const;
@@ -211,7 +211,7 @@ public:
      *
      * @param[in] Who Pointer to the new event handler object.
      *
-     * @retval Pointer to the previous event handler object, or NULL if none
+     * @return Pointer to the previous event handler object, or NULL if none
      * existed previously.
      */
     EventHandler* SetEventHandler(EventHandler* Who);
@@ -221,7 +221,7 @@ public:
      * @param[out] X Sets pointee to mouse's X position relative to the window.
      * @param[out] Y Sets pointee to mouse's Y position relative to the window.
      *
-     * @retval BGE_SUCCESS if the device coordinates were successfully set. If
+     * @return BGE_SUCCESS if the device coordinates were successfully set. If
      * the window is not currently active, returns BGE_FAILURE.
      *
      * @see Window::IsActive()
@@ -233,7 +233,7 @@ public:
      * @param[in] X New X position of the mouse, relative to the window.
      * @param[in] Y New Y position of the mouse, relative to the window.
      *
-     * @retval BGE_SUCCESS if the mouse position was successfully set. If the
+     * @return BGE_SUCCESS if the mouse position was successfully set. If the
      * window is not currently active, returns BGE_FAILURE.
      *
      * @see Window::IsActive()
@@ -244,7 +244,7 @@ public:
      *
      * Hide a window, making it invisible.
      *
-     * @retval BGE_SUCCESS if window was successfully hidden, or BGE_FAILURE
+     * @return BGE_SUCCESS if window was successfully hidden, or BGE_FAILURE
      * if the window is already hidden or any errors occurred.
      *
      * @warning May only be called from the main thread.
@@ -255,7 +255,7 @@ public:
      *
      * Show a window, making it visible.
      *
-     * @retval BGE_SUCCESS if window was successfully shown, or BGE_FAILURE
+     * @return BGE_SUCCESS if window was successfully shown, or BGE_FAILURE
      * if the window is already shown or any errors occurred.
      *
      * @warning May only be called from the main thread.
@@ -266,7 +266,7 @@ public:
      *
      * Iconify (minimize) the window.
      *
-     * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if already
+     * @return BGE_SUCCESS if window was iconified; BGE_FAILURE if already
      * iconified or any errors occurred.
      *
      * @warning May only be called from the main thread.
@@ -277,7 +277,7 @@ public:
      *
      * Deiconify (restore) the window.
      *
-     * @retval BGE_SUCCESS if window was iconified; BGE_FAILURE if window
+     * @return BGE_SUCCESS if window was iconified; BGE_FAILURE if window
      * is not currently iconified or any errors occurred.
      *
      * @warning May only be called from the main thread.

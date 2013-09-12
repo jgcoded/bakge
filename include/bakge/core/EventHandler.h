@@ -72,7 +72,7 @@ public:
      * @param[in] C OS-specific key scan-code.
      * @param[in] M Active modifiers bitfield.
      *
-     * @retval BGE_FAILURE if any errors occurred while processing the key
+     * @return BGE_FAILURE if any errors occurred while processing the key
      * event, otherwise BGE_SUCCESS.
      *
      * @see http://www.glfw.org/docs/latest/glfw3_8h.html
@@ -88,7 +88,7 @@ public:
      * @param[in] S GLFW button state identifier.
      * @param[in] M Active modifiers bitfield.
      *
-     * @retval BGE_FAILURE if any errors occurred while processing the mouse
+     * @return BGE_FAILURE if any errors occurred while processing the mouse
      * button event, otherwise BGE_SUCCESS.
      */
     virtual Result MouseEvent(ButtonID B, ButtonState S, ModField M) = 0;
@@ -100,7 +100,7 @@ public:
      * @param[in] X Horizontal mouse motion.
      * @param[in] Y Vertical mouse motion.
      *
-     * @retval BGE_FAILURE if any errors occurred while processing the mouse
+     * @return BGE_FAILURE if any errors occurred while processing the mouse
      * motion event, otherwise BGE_SUCCESS.
      */
     virtual Result MotionEvent(Motion X, Motion Y) = 0;
@@ -112,7 +112,7 @@ public:
      * @param[in] X Horizontal scroll wheel motion.
      * @param[in] Y Vertical scroll wheel motion.
      *
-     * @retval BGE_FAILURE if any errors occurred while processing the mouse
+     * @return BGE_FAILURE if any errors occurred while processing the mouse
      * scroll wheel event, otherwise BGE_SUCCESS.
      *
      * @note It doesn't appear horizontal scroll wheel motion is relevant.
@@ -128,7 +128,7 @@ public:
      * to exit. This function is a great place to do memory clean up and
      * deinitialization of other components.
      *
-     * @retval BGE_FAILURE if any errors occurred while processing the window
+     * @return BGE_FAILURE if any errors occurred while processing the window
      * close event, otherwise BGE_SUCCESS.
      */
     virtual Result CloseEvent() = 0;
