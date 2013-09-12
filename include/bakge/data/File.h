@@ -30,10 +30,21 @@
 namespace bakge
 {
 
+enum FILE_MODE
+{
+    FILE_MODE_NONE = 0,
+    FILE_MODE_READ,
+    FILE_MODE_WRITE,
+    FILE_MODE_APPEND,
+    NUM_FILE_MODES
+};
+
 class BGE_API File
 {
     PHYSFS_File* Handle;
     char* Path;
+
+    int Mode;
 
     File();
 
