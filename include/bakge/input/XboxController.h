@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file XboxController.h
+ * @brief Xbox controller button and axis enumerations.
+ */
+
 #ifndef BAKGE_INPUT_XBOXCONTROLLER_H
 #define BAKGE_INPUT_XBOXCONTROLLER_H
 
@@ -30,11 +35,11 @@
 namespace bakge
 {
 
-/*! @brief X-Box axes enumerations
+/*! @brief Xbox axes enumerations.
  *
- * The X-Box controller scheme has 5 axes. Each axis ranges from -1.0 to 1.0.
- * The two analog sticks correspond to 4 axes -- an X and Y axis for each
- * stick. The fifth axis is controlled by the left and right trigger keys.
+ * The Xbox controller scheme has 5 axes. The two analog sticks correspond
+ * to 4 axes -- an X and Y axis for each stick. The fifth axis is controlled
+ * by the left and right trigger keys.
  */
 enum XBOX_AXES
 {
@@ -46,9 +51,9 @@ enum XBOX_AXES
     NUM_XBOX_AXES
 };
 
-/*! @brief X-Box button enumerations
+/*! @brief Xbox button enumerations.
  *
- * The X-Box controller has 14 buttons. The standard button pad on the right
+ * The Xbox controller has 14 buttons. The standard button pad on the right
  * side, the left and right bumper keys, start and back buttons and the
  * directional pad. Both analog sticks may also be pressed, bringing the total
  * to 14.
