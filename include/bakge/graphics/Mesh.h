@@ -75,7 +75,7 @@ enum MESH_BUFFERS
     NUM_MESH_BUFFERS
 };
 
-/*! @brief A Mesh is a collection of vertex data describing an arbitrary object
+/*! @brief A collection of vertex data describing an arbitrary object
  *
  * Meshes data and their associated metadata are used to describe objects
  * to be drawn in 3D Cartesian space. These data include vertex positions,
