@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Crowd.h
+ * @brief Crowd class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_CROWD_H
 #define BAKGE_GRAPHICS_CROWD_H
 
@@ -30,6 +35,23 @@
 namespace bakge
 {
 
+/*! @brief A grouping of Pawns typically used for instanced rendering.
+ *
+ * Crowds are large groups of pawns that are drawn using instanced rendering
+ * techniques, to avoid the large overhead associated with numerous draw calls.
+ * The Crowd class provides a way to manage its members as a whole or as
+ * individuals through various methods. Internally the Crowd uses a dynamically
+ * allocated array to store data about its members.
+ *
+ * Typically the Crowd is used for instanced rendering, but it could also see
+ * use as a storage class for arbitrary groups of Pawns or Nodes that don't
+ * necessarily get rendered, such as pathing waypoints.
+ *
+ * When rendered using Mesh::DrawInstanced, Crowds use a different set of
+ * shader attributes than Nodes or Pawns.
+ *
+ * @see VertexLib
+ */
 class BGE_API Crowd : public Pawn
 {
 
@@ -49,13 +71,29 @@ protected:
     /* Buffer for the Crowd's members' model matrices */
     GLuint CrowdBuffer;
 
+    /*! @brief Default Crowd constructor.
+     *
+     * Default Crowd constructor.
+     */
     Crowd();
 
 
 public:
 
+    /*! @brief Virtual Crowd destructor.
+     *
+     * Virtual Crowd destructor.
+     */
     virtual ~Crowd();
 
+    /*! @brief Create a Crowd with a given capacity.
+     *
+     * Allocates a Crowd and creates storage for a given number of members.
+     *
+     * @param[in] ReserveMembers Capacity for the new Crowd.
+     *
+     * @return Pointer to allocated Crowd; NULL if any errors occurred.
+     */
     BGE_FACTORY Crowd* Create(int ReserveMembers);
 
     virtual Result Bind() const;
