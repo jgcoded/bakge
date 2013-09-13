@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file File.h
+ * File class declaration.
+ */
+
 #ifndef BAKGE_DATA_FILE_H
 #define BAKGE_DATA_FILE_H
 
@@ -39,6 +44,10 @@ enum FILE_MODE
     NUM_FILE_MODES
 };
 
+/*! @brief PHYSFS_file wrapper class.
+ *
+ * Bakge uses PhysicsFS internally for all filesystem-related functionality.
+ */
 class BGE_API File
 {
     PHYSFS_File* Handle;
@@ -46,11 +55,19 @@ class BGE_API File
 
     int Mode;
 
+    /*! @brief Default File constructor.
+     *
+     * Default File constructor.
+     */
     File();
 
 
 public:
 
+    /*! @brief Default File destructor.
+     *
+     * Default File destructor.
+     */
     ~File();
 
     BGE_FACTORY File* Open(const char* Path);
