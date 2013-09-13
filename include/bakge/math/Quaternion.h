@@ -35,7 +35,7 @@
 namespace bakge
 {
 
-/*! @brief Quaternions are used to describe rotations in 3D Cartesian space
+/*! @brief Used to describe rotations in 3D Cartesian space.
  *
  * Quaternions describe rotations in space using an axis <i, j, k> and
  * a rotation theta around that axis. Quaternions are composed of 4 parts,
