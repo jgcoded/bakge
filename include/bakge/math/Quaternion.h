@@ -78,7 +78,7 @@ public:
      * @param[in] Vec Vector part of the quaternion.
      * @param[in] Real Scalar part of the quaternion.
      */
-    Quaternion(Vector4 BGE_NCP Vec, Scalar BGE_NCP Real);
+    Quaternion(Vector4 BGE_NCP Vec, Scalar Real);
 
     /*! @bief Quaternion copy constructor.
      *

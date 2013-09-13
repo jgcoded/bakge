@@ -32,7 +32,7 @@ Quaternion::Quaternion()
 }
 
 
-Quaternion::Quaternion(Vector4 BGE_NCP V, Scalar BGE_NCP R)
+Quaternion::Quaternion(Vector4 BGE_NCP V, Scalar R)
 {
     Val = V;
     Val[3] = R;
