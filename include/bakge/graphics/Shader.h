@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Shader.h
+ * @brief Shader class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_SHADER_H
 #define BAKGE_GRAPHICS_SHADER_H
 
@@ -40,6 +45,17 @@
 namespace bakge
 {
 
+/*! @brief GLSL shader wrapper class.
+ *
+ * Bakge uses shaders for all rendering. When binding and drawing with any
+ * resource such as a Mesh or Texture, shaders attributes or uniforms are set,
+ * providing you with the necessary variables to build GLSL shaders such
+ * as model and view transforms, or vertex data like positions or normals.
+ *
+ * This class serves as a wrapper with some auxiliary API for loading shaders
+ * that get compiled with the variables required by Bakge classes to properly
+ * render the scene.
+ */
 class BGE_API Shader : public Bindable
 {
     static Shader* GenericShader;
@@ -70,14 +86,55 @@ class BGE_API Shader : public Bindable
 
 public:
 
+    /*! @brief Default Shader constructor.
+     *
+     * Default Shader constructor.
+     */
     Shader();
+
+    /*! @brief Default Shader destructor.
+     *
+     * Default Shader destructor.
+     */
     ~Shader();
 
+    /*! @brief Create a shader using a variable number of null-terminated
+     * source strings.
+     *
+     * This factory method compiles a variable number of fragment and vertex
+     * shader sources along with the Bakge "header files" that contain required
+     * variables for rendering objects. The source strings are expected to be
+     * null-terminated.
+     *
+     * @param[in] NumVertex Number of vertex shader source strings.
+     * @param[in] NumFragment Number of fragment shader source strings.
+     * @param[in] VertexShaders Array of null-terminated vertex shader source
+     *            strings.
+     * @param[in] FragmentShaders Array of null-terminated fragment shader
+     *            source strings.
+     *
+     * @return Pointer to allocated Shader; NULL if any errors occurred.
+     */
     BGE_FACTORY Shader* LoadFromStrings(int NumVertex, int NumFragment,
                                             const char** VertexShaders,
                                             const char** FragmentShaders);
 
+    /*! @brief Bind the GLSL shader as the current shader program.
+     *
+     * Bind the GLSL shader as the current shader program.
+     *
+     * @return BGE_SUCCESS if the shader was successfully bound; BGE_FAILURE
+     * if any errors occurred.
+     */
     Result Bind() const;
+
+    /*! @brief Bind a generic, built-in shader for rendering objects.
+     *
+     * Bind a generic, built-in shader for rendering objects.
+     *
+     * @return BGE_SUCCESS if the default shader was successfully bound;
+     * BGE_FAILURE if any errors occurred.
+     */
     Result Unbind() const;
 
 }; /* Shader */
