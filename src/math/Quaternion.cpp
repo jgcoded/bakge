@@ -29,19 +29,28 @@ namespace bakge
 
 Quaternion::Quaternion()
 {
+    Val[0] = 0.0f;
+    Val[1] = 0.0f;
+    Val[2] = 0.0f;
+    Val[3] = 1.0f;
 }
 
 
 Quaternion::Quaternion(Vector4 BGE_NCP V, Scalar R)
 {
-    Val = V;
+    Val[0] = V[0];
+    Val[1] = V[1];
+    Val[2] = V[2];
     Val[3] = R;
 }
 
 
 Quaternion::Quaternion(Vector4 BGE_NCP Components)
 {
-    Val = Components;
+    Val[0] = Components[0];
+    Val[1] = Components[1];
+    Val[2] = Components[2];
+    Val[3] = Components[3];
 }
 
 
@@ -56,7 +65,10 @@ Quaternion::Quaternion(Scalar X, Scalar Y, Scalar Z, Scalar W)
 
 Quaternion::Quaternion(Quaternion BGE_NCP Other)
 {
-    Val = Other.Val;
+    Val[0] = Other.Val[0];
+    Val[1] = Other.Val[1];
+    Val[2] = Other.Val[2];
+    Val[3] = Other.Val[3];
 }
 
 
@@ -127,7 +139,10 @@ Quaternion Quaternion::FromAxisAndAngle(Vector4 BGE_NCP Axis, Radians Angle)
 
 Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 {
-    Val += Other.Val;
+    Val[0] += Other.Val[0];
+    Val[1] += Other.Val[1];
+    Val[2] += Other.Val[2];
+    Val[3] += Other.Val[3];
 
     return *this;
 }
@@ -135,7 +150,10 @@ Quaternion BGE_NCP Quaternion::operator+=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 {
-    Val -= Other.Val;
+    Val[0] -= Other.Val[0];
+    Val[1] -= Other.Val[1];
+    Val[2] -= Other.Val[2];
+    Val[3] -= Other.Val[3];
 
     return *this;
 }
@@ -143,7 +161,7 @@ Quaternion BGE_NCP Quaternion::operator-=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator*=(Quaternion BGE_NCP Other)
 {
-    Vector4 Temp = Val;
+    Vector4 Temp(Val[0], Val[1], Val[2], Val[3]);
     Val[3] *= Other.Val[3];
     Val[3] -= Val[0] * Other.Val[0];
     Val[3] -= Val[1] * Other.Val[1];
@@ -172,7 +190,10 @@ Quaternion BGE_NCP Quaternion::operator/=(Quaternion BGE_NCP Other)
 
 Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 {
-    Val *= Value;
+    Val[0] *= Value;
+    Val[1] *= Value;
+    Val[2] *= Value;
+    Val[3] *= Value;
 
     return *this;
 }
@@ -180,7 +201,10 @@ Quaternion BGE_NCP Quaternion::operator*=(Scalar BGE_NCP Value)
 
 Quaternion BGE_NCP Quaternion::operator/=(Scalar BGE_NCP Value)
 {
-    Val /= Value;
+    Val[0] /= Value;
+    Val[1] /= Value;
+    Val[2] /= Value;
+    Val[3] /= Value;
 
     return *this;
 }
@@ -269,7 +293,10 @@ Quaternion BGE_NCP Quaternion::Normalize()
     if(ScalarCompare(Len, 0))
         return *this;
 
-    Val /= Len;
+    Val[0] /= Len;
+    Val[1] /= Len;
+    Val[2] /= Len;
+    Val[3] /= Len;
 
     return *this;
 }

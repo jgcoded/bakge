@@ -58,7 +58,18 @@ namespace bakge
  */
 class BGE_API Quaternion
 {
-    Vector4 Val;
+    union
+    {
+        struct
+        {
+            Scalar Val[4];
+        };
+
+        struct
+        {
+            Scalar Q0, Q1, Q2, Q3;
+        };
+    };
 
 
 public:
