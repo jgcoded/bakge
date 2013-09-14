@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Clock.h
+ * @brief System clock API header.
+ */
+
 #ifndef BAKGE_SYSTEM_CLOCK_H
 #define BAKGE_SYSTEM_CLOCK_H
 
@@ -30,8 +35,21 @@
 namespace bakge
 {
 
+/*! @brief Pause the calling thread for a given length of time.
+ *
+ * Pause the calling thread for a given length of time.
+ *
+ * @return BGE_SUCCESS if the delay was successful; BGE_FAILURE if any
+ * errors occurred.
+ */
 BGE_FUNC Result Delay(Microseconds BGE_NCP Time);
 
+/*! @brief Get the time since bakge::Init was called.
+ *
+ * @brief Get the time since bakge::Init was called.
+ *
+ * @return Number of microseconds since bakge::Init was called.
+ */
 BGE_FUNC Microseconds GetRunningTime();
 
 } /* bakge */
