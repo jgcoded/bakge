@@ -42,7 +42,7 @@ namespace bakge
  * Currently GamePads do not trigger EventHandler events; you will have to
  * implement your own way to detect changes in GamePad state.
  */
-class GamePad
+class BGE_API GamePad
 {
     int Handle;
 
