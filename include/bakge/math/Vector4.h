@@ -44,7 +44,18 @@ namespace bakge
  * */
 class BGE_API Vector4
 {
-    Scalar Val[4];
+    union
+    {
+        struct
+        {
+            Scalar Val[4];
+        };
+
+        struct
+        {
+            Scalar V0, V1, V2, V3;
+        };
+    };
 
 
 public:
