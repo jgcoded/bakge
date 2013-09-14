@@ -96,24 +96,103 @@ public:
      */
     BGE_FACTORY Crowd* Create(int ReserveMembers);
 
+    /*! @brief Bind the Crowd for drawing using instanced rendering techniques.
+     *
+     * Bind the Crowd for drawing using instanced rendering techniques.
+     *
+     * @return BGE_SUCCESS if the Crowd was successfully bound; BGE_FAILURE
+     * if any errors occurred.
+     */
     virtual Result Bind() const;
+
+    /*! @brief Unbind the Crowd, setting OpenGL state to arbitrary defaults.
+     *
+     * Unbind the Crowd, setting OpenGL state to arbitrary defaults.
+     *
+     * @return BGE_SUCCESS if the Crowd was successfully unbound; BGE_FAILURE
+     * if any errors occurred.
+     */
     virtual Result Unbind() const;
 
+    /*! @brief Get storange capacity for the Crowd's members.
+     *
+     * Get storange capacity for the Crowd's members.
+     *
+     * @return Maximum number of members the Crowd can contain.
+     */
     BGE_INL int GetCapacity() const
     {
         return Capacity;
     }
 
+    /*! @brief Get the current number of members in the Crowd.
+     *
+     * Get the current number of members in the Crowd.
+     *
+     * @return Number of members active in the Crowd.
+     */
     BGE_INL int GetPopulation() const
     {
         return Population;
     }
 
+    /*! @brief Remove all members from the Crowd.
+     *
+     * Remove all members from the Crowd.
+     *
+     * @return BGE_SUCCESS if the Crowd was successfully emptied; BGE_FAILURE
+     * if any errors occurred.
+     */
     Result Clear();
+
+    /*! @brief Reallocate member storage with a given capacity.
+     *
+     * Reallocate member storage with a given capacity.
+     *
+     * @return BGE_SUCCESS if storage was successfully reallocated;
+     * BGE_FAILURE if any errors occurred.
+     */
     Result Reserve(int NumMembers);
 
+    /*! @brief Translate a Crowd member by a given amount along the X, Y and
+     * Z axes.
+     *
+     * Translate a Crowd member by a given amount along the X, Y and Z axes.
+     *
+     * @param[in] MemberIndex Index of the member to translate.
+     * @param[in] X Distance to translate along the X axis.
+     * @param[in] Y Distance to translate along the Y axis.
+     * @param[in] Z Distance to translate along the Z axis.
+     *
+     * @return BGE_SUCCESS if member was successfully translated; BGE_FAILURE
+     * if any errors occurred.
+     */
     Result TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
+
+    /*! @brief Rotate a member locally around an arbitrary axis.
+     *
+     * Rotate a member locally around an arbitrary axis.
+     *
+     * @param[in] MemberIndex Index of the member to rotate.
+     * @param[in] Rotation Quaternion to rotate the member by.
+     *
+     * @return BGE_SUCCESS if the member was successfully rotated;
+     * BGE_FAILURE if any errors occurred.
+     */
     Result RotateMember(int MemberIndex, Quaternion Rotation);
+
+    /*! @brief Non-uniformly scale a member.
+     *
+     * Non-uniformly scale a member.
+     *
+     * @param[in] MemberIndex Index of the member to scale.
+     * @param[in] X Amount to scale along the X axis.
+     * @param[in] Y Amount to scale along the Y axis.
+     * @param[in] Z Amount to scale along the Z axis.
+     *
+     * @return BGE_SUCCESS if the member was successfully scaled; BGE_FAILURE
+     * if any errors occurred.
+     */
     Result ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
 
 }; /* Crowd */
