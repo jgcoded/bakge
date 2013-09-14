@@ -54,6 +54,14 @@ class BGE_API Matrix
         {
             Scalar Val[16];
         };
+
+        struct
+        {
+            Scalar M00, M01, M02, M03;
+            Scalar M10, M11, M12, M13;
+            Scalar M20, M21, M22, M23;
+            Scalar M30, M31, M32, M33;
+        };
     };
 
 
