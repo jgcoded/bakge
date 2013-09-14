@@ -42,7 +42,7 @@ namespace bakge
  * @return BGE_SUCCESS if the delay was successful; BGE_FAILURE if any
  * errors occurred.
  */
-BGE_FUNC Result Delay(Microseconds BGE_NCP Time);
+BGE_FUNC Result Delay(Microseconds Time);
 
 /*! @brief Get the time since bakge::Init was called.
  *

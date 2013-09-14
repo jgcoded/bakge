@@ -27,7 +27,7 @@
 namespace bakge
 {
 
-Result Delay(Microseconds BGE_NCP Time)
+Result Delay(Microseconds Time)
 {
     NSTimeInterval DelayTime;
 
