@@ -58,36 +58,24 @@ Result Mesh::Bind() const
     GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
     GLint TexCoordsAttrib = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
 
-#ifdef _DEBUG
     /* Check each of our attributes' locations to ensure they exist */
-    if(PositionsAttrib < 0) {
-        printf("Unable to locate attribute %s in current shader\n",
-                                                BGE_VERTEX_ATTRIBUTE);
-        return BGE_FAILURE;
+    if(PositionsAttrib >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
+        glEnableVertexAttribArray(PositionsAttrib);
+        glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
     }
-    if(NormalsAttrib < 0) {
-        printf("Unable to locate attribute %s in current shader\n",
-                                                BGE_NORMAL_ATTRIBUTE);
-        return BGE_FAILURE;
+
+    if(NormalsAttrib >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
+        glEnableVertexAttribArray(NormalsAttrib);
+        glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
     }
-    if(TexCoordsAttrib < 0) {
-        printf("Unable to locate attribute %s in current shader\n",
-                                                BGE_TEXCOORD_ATTRIBUTE);
-        return BGE_FAILURE;
+
+    if(TexCoordsAttrib >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
+        glEnableVertexAttribArray(TexCoordsAttrib);
+        glVertexAttribPointer(TexCoordsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
     }
-#endif /* _DEBUG */
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glEnableVertexAttribArray(PositionsAttrib);
-    glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glEnableVertexAttribArray(TexCoordsAttrib);
-    glVertexAttribPointer(TexCoordsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-    glEnableVertexAttribArray(NormalsAttrib);
-    glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
 
