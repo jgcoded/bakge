@@ -36,6 +36,7 @@ set(MODULES
   graphics/shapes/Cube
   graphics/shapes/Cylinder
   graphics/shapes/Rectangle
+  input/GamePad
   ui/Clickable
   ui/Container
   ui/Draggable
@@ -61,6 +62,7 @@ set(HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Type
   ${BAKGE_SOURCE_DIR}/include/bakge/data/LinkedList
   ${BAKGE_SOURCE_DIR}/include/bakge/data/SingleNode
+  ${BAKGE_SOURCE_DIR}/include/bakge/input/XboxController
 )
 
 foreach(module ${MODULES})

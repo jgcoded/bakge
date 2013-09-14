@@ -202,6 +202,7 @@ namespace api
 #include <bakge/api/Socket.h>
 
 /* Utility headers */
+#include <bakge/input/GamePad.h>
 #include <bakge/input/XBoxController.h>
 
 /* Platform implementation classes */
