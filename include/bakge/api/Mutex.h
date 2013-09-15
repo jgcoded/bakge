@@ -42,6 +42,9 @@ public:
 
     virtual ~Mutex();
 
+    virtual Result Lock() = 0;
+    virtual Result Unlock() = 0;
+
 }; /* Mutex */
 
 } /* api */
