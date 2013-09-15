@@ -57,7 +57,7 @@ uniform mat4x4 bge_View;
  *
  * Set when a Camera class is bound.
  */
-uniform mat4x4 bge_Perspective;
+uniform mat4x4 bge_Projection;
 
 /*! @brief Position of vertices being drawn in 3D Cartesian space.
  *
