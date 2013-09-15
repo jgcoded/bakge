@@ -30,16 +30,13 @@
 namespace bakge
 {
 
-class BGE_API Frame : public Rectangle, public Node
+class BGE_API Frame : public Rectangle
 {
 
 public:
 
     Frame();
     ~Frame();
-
-    virtual Result Bind() const;
-    virtual Result Unbind() const;
 
     BGE_FACTORY Frame* Create(Scalar Width, Scalar Height);
 

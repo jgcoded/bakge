@@ -57,33 +57,7 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
 
     U->Unbind();
 
-    U->SetPosition(0, 0, 0);
-
     return U;
-}
-
-
-Result Frame::Bind() const
-{
-    if(Node::Bind() == BGE_FAILURE)
-        return BGE_FAILURE;
-
-    if(Rectangle::Bind() == BGE_FAILURE)
-        return BGE_FAILURE;
-
-    return BGE_SUCCESS;
-}
-
-
-Result Frame::Unbind() const
-{
-    if(Node::Unbind() == BGE_FAILURE)
-        return BGE_FAILURE;
-
-    if(Rectangle::Unbind() == BGE_FAILURE)
-        return BGE_FAILURE;
-
-    return BGE_SUCCESS;
 }
 
 } /* bakge */
