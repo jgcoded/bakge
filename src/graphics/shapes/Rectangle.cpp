@@ -102,19 +102,22 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
     glDeleteBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
     glGenBuffers(1, &MeshBuffers[MESH_BUFFER_POSITIONS]);
 
+    Width /= 2;
+    Height /= 2;
+
     Scalar Vertices[12];
 
-    Vertices[0] = -Width / 2.0f;
-    Vertices[1] = -Height / 2.0f;
+    Vertices[0] = -Width;
+    Vertices[1] = -Height;
     Vertices[2] = 0;
-    Vertices[3] = -Width / 2.0f;
-    Vertices[4] = +Height / 2.0f;
+    Vertices[3] = -Width;
+    Vertices[4] = +Height;
     Vertices[5] = 0;
-    Vertices[6] = +Width / 2.0f;
-    Vertices[7] = +Height / 2.0f;
+    Vertices[6] = +Width;
+    Vertices[7] = +Height;
     Vertices[8] = 0;
-    Vertices[9] = +Width / 2.0f;
-    Vertices[10] = -Height / 2.0f;
+    Vertices[9] = +Width;
+    Vertices[10] = -Height;
     Vertices[11] = 0;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
