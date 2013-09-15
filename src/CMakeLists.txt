@@ -37,6 +37,7 @@ set(MODULES
   graphics/shapes/Cylinder
   graphics/shapes/Rectangle
   input/GamePad
+  ui/Anchor
   ui/Clickable
   ui/Container
   ui/Draggable

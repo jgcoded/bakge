@@ -238,6 +238,7 @@ namespace api
 #include <bakge/graphics/Camera.h>
 #include <bakge/graphics/Camera2D.h>
 #include <bakge/graphics/Camera3D.h>
+#include <bakge/ui/Anchor.h>
 #include <bakge/ui/Frame.h>
 #include <bakge/ui/Container.h>
 #include <bakge/ui/Hoverable.h>
