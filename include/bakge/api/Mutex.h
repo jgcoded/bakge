@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Mutex.h
+ * @brief Mutex API class declaration.
+ */
+
 #ifndef BAKGE_API_MUTEX_H
 #define BAKGE_API_MUTEX_H
 
