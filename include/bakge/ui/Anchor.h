@@ -42,13 +42,28 @@ class BGE_API Anchor : public Pawn
 
 protected:
 
+    /*! @brief Default Anchor constructor.
+     *
+     * Default Anchor constructor.
+     */
     Anchor();
 
 
 public:
 
+    /*! @brief Default Anchor destructor.
+     *
+     * Default Anchor destructor.
+     */
     ~Anchor();
 
+    /*! @brief Allocate and initialize an Anchor instance.
+     *
+     * Allocate and initialize an Anchor instance.
+     *
+     * @return Pointer to allocated Anchor instance; NULL if any errors
+     * occurred.
+     */
     BGE_FACTORY Anchor* Create();
 
 }; /* Anchor */
