@@ -31,14 +31,13 @@
 
 int TestArray[ARR_SIZE] = { 5, 3, 52, 25, 3, 2, 5};
 bakge::Mutex* Mut;
+bakge::Window* Win;
 
 int ThreadFunc(void* Data)
 {
-    bakge::Window* Win;
+    bakge::Window* ThrWin = (bakge::Window*)Data;
 
-    Win = (bakge::Window*)Data;
-
-    while(Win->IsOpen()) {
+    while(ThrWin->IsOpen()) {
         bakge::Delay(100000);
         printf("First value of the array is: ");
         printf("%d\n\n", TestArray[0]);
@@ -62,8 +61,6 @@ int main(int argc, char* argv[])
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
-    bakge::Window* Win;
-
     Mut = bakge::Mutex::Create();
     Win = bakge::Window::Create(600, 400);
 
@@ -79,7 +76,6 @@ int main(int argc, char* argv[])
     }
 
     glClearColor(1, 0, 0, 1);
-    glViewport(0, 0, 600, 400);
 
     while(1) {
         /* Poll events for all windows */
@@ -91,7 +87,6 @@ int main(int argc, char* argv[])
 
         Win->Bind();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         Win->SwapBuffers();
         Win->Unbind();
     }
@@ -99,8 +94,8 @@ int main(int argc, char* argv[])
 
 CLEANUP:
 
-    if(TestThreads != NULL)
-        delete[] TestThreads;
+    for(int i=0;i<NUM_THREADS;++i)
+        delete TestThreads[i];
 
     if(Win != NULL)
         delete Win;
