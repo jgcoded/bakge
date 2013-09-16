@@ -71,7 +71,7 @@ void Rectangle::AllocateGLBuffers()
         0, 0, +1.0f
     };
 
-    static const unsigned int Indices[] = {
+    static const int Indices[] = {
         0, 1, 2,
         0, 2, 3
     };
@@ -83,17 +83,9 @@ void Rectangle::AllocateGLBuffers()
         1, 0
     };
 
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 3 * 4, Normals,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 8, TexCoords,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 6, Indices,
-                                                        GL_STATIC_DRAW);
+    NormalData(4, Normals);
+    TexCoordData(4, TexCoords);
+    IndexData(6, Indices);
 }
 
 
