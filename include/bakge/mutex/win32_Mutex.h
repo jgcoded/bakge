@@ -39,6 +39,9 @@ public:
 
     BGE_FACTORY win32_Mutex* Create();
 
+    Result Lock();
+    Result Unlock();
+
 } Mutex; /* win32_Mutex */
 
 } /* bakge */

@@ -42,4 +42,16 @@ win32_Mutex* win32_Mutex::Create()
     return NULL;
 }
 
+
+Result win32_Mutex::Lock()
+{
+    return BGE_FAILURE;
+}
+
+
+Result win32_Mutex::Unlock()
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */
