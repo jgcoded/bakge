@@ -53,8 +53,6 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
         return NULL;
     }
 
-    U->AllocateGLBuffers();
-
     U->Unbind();
 
     return U;
