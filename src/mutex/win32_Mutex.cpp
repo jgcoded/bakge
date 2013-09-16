@@ -36,4 +36,10 @@ win32_Mutex::~win32_Mutex()
 {
 }
 
+
+win32_Mutex* win32_Mutex::Create()
+{
+    return NULL;
+}
+
 } /* bakge */

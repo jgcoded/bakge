@@ -37,6 +37,8 @@ public:
 
     virtual ~win32_Mutex();
 
+    BGE_FACTORY win32_Mutex* Create();
+
 } Mutex; /* win32_Mutex */
 
 } /* bakge */
