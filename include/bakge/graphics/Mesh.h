@@ -152,10 +152,10 @@ protected:
     Result CreateBuffers();
     Result ClearBuffers();
 
-    Result PositionData(int NumPositions, Scalar* Data);
-    Result NormalData(int NumNormals, Scalar* Data);
-    Result IndexData(int NumIndices, int* Data);
-    Result TexCoordData(int NumTexCoords, Scalar* Data);
+    Result PositionData(int NumPositions, const Scalar* Data);
+    Result NormalData(int NumNormals, const Scalar* Data);
+    Result IndexData(int NumIndices, const int* Data);
+    Result TexCoordData(int NumTexCoords, const Scalar* Data);
 
 }; /* Mesh */
 
