@@ -1,7 +1,7 @@
 Bakge
 =====
 
-BAKersfield Game Engine. Bakge is a partial abstraction over OpenGL and its libraries, intended to simplify programmatic approaches to game and engine development, but comes with its own development kit and engine for creating games using Lua.
+Bakersfield Game Engine's goal is to simplify programmatic approaches to the development of games, game engines or other graphical applications. Bakge uses OpenGL as its graphics API and other third-party libraries to implement various functionality. The library's abstractions over Bakge's third-party libraries and OpenGL provide at most a basic implementation of common game-related functionality. Specific or niche features are left to users to develop, such as scene management or advanced rendering techniques like deferred shading.
 
 Bakge is licensed under the MIT License (MIT). You can see the terms and details of it in the LICENSE file. Note that copyright holders include any and all contributors or authors. If you'd like your name left out, don't write your name into the AUTHORS file.
 
