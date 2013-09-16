@@ -30,19 +30,51 @@ namespace bakge
 namespace api
 {
 
+/*! @brief Used to protect sections of code from being run by more than one
+ * thread at a time.
+ *
+ * The Mutex class is a wrapper for platform-specific implementations of
+ * a mutex. Mutexes are used to protect sections of code from being run
+ * by more than one thread at a time. They are also called binary semaphores.
+ */
 class BGE_API Mutex
 {
 
 protected:
 
+    /*! @brief Default Mutex constructor.
+     *
+     * Default Mutex constructor.
+     */
     Mutex();
 
 
 public:
 
+    /*! @brief Virtual Mutex constructor.
+     *
+     * Virtual Mutex constructor.
+     */
     virtual ~Mutex();
 
+    /*! @brief Immediately lock a mutex, preventing from other threads from
+     * locking it until it is released.
+     *
+     * Immediately lock a mutex, preventing from other threads from locking
+     * it until it is released.
+     *
+     * @return BGE_SUCCESS if the Mutex was successfully locked; BGE_FAILURE
+     * if it is already locked.
+     */
     virtual Result Lock() = 0;
+
+    /*! @brief Unlock a mutex, allowing other threads to lock it.
+     *
+     * Unlock a mutex, allowing other threads to lock it.
+     *
+     * @return BGE_SUCCESS if the Mutex was successfully unlocked;
+     * BGE_FAILURE if any errors occurred.
+     */
     virtual Result Unlock() = 0;
 
 }; /* Mutex */
