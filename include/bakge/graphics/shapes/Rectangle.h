@@ -38,8 +38,6 @@ protected:
 	Vector4 Dimensions;
 	Rectangle();
 
-	void AllocateGLBuffers();
-
 
 public:
 

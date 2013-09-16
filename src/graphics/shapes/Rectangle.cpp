@@ -39,31 +39,6 @@ Rectangle::~Rectangle()
 
 Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 {
-
-    Rectangle* R = new Rectangle;
-
-    R->NumIndices = 6;
-
-    if(R->CreateBuffers() != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
-
-    if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
-
-    R->AllocateGLBuffers();
-
-    R->Unbind();
-
-    return R;
-}
-
-
-void Rectangle::AllocateGLBuffers()
-{
     static const Scalar Normals[] = {
         0, 0, +1.0f,
         0, 0, +1.0f,
@@ -83,9 +58,41 @@ void Rectangle::AllocateGLBuffers()
         1, 0
     };
 
-    NormalData(4, Normals);
-    TexCoordData(4, TexCoords);
-    IndexData(6, Indices);
+    Rectangle* R = new Rectangle;
+
+    R->NumIndices = 6;
+
+    if(R->CreateBuffers() != BGE_SUCCESS) {
+        delete R;
+        return NULL;
+    }
+
+    if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
+        delete R;
+        return NULL;
+    }
+
+    if(R->NormalData(4, Normals) == BGE_FAILURE) {
+        printf("Error setting Rectangle normal data\n");
+        delete R;
+        return NULL;
+    }
+
+    if(R->TexCoordData(4, TexCoords) == BGE_FAILURE) {
+        printf("Error setting Rectangle texture coordinate data\n");
+        delete R;
+        return NULL;
+    }
+
+    if(R->IndexData(6, Indices) == BGE_FAILURE) {
+        printf("Error setting Rectangle triangle indices data\n");
+        delete R;
+        return NULL;
+    }
+
+    R->Unbind();
+
+    return R;
 }
 
 
