@@ -42,6 +42,9 @@ class BGE_API Anchor : public Pawn
 
 protected:
 
+    // Translate to anchor before applying rotation
+    Vector4 AnchorOffset;
+
     /*! @brief Default Anchor constructor.
      *
      * Default Anchor constructor.
@@ -65,6 +68,8 @@ public:
      * occurred.
      */
     BGE_FACTORY Anchor* Create();
+
+    Vector4 BGE_NCP SetAnchor(Scalar X, Scalar Y, Scalar Z);
 
 }; /* Anchor */
 

@@ -51,4 +51,14 @@ Anchor* Anchor::Create()
     return A;
 }
 
+
+Vector4 BGE_NCP Anchor::SetAnchor(Scalar X, Scalar Y, Scalar Z)
+{
+    AnchorOffset[0] = -X;
+    AnchorOffset[1] = -Y;
+    AnchorOffset[2] = -Z;
+
+    return AnchorOffset;
+}
+
 } /* bakge */
