@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Math.h
+ * @brief Math utility API declarations.
+ */
+
 #ifndef BAKGE_MATH_MATH_H
 #define BAKGE_MATH_MATH_H
 
@@ -30,24 +35,62 @@
 namespace bakge
 {
 
+/*! @brief Convert a degree value to radians.
+ *
+ * Convert a degree value to radians.
+ *
+ * @param[in] Deg Angle value in degrees.
+ *
+ * @return Angle value in radians.
+ */
 BGE_INL Radians ToRadians(Degrees BGE_NCP Deg)
 {
     return (Deg * BGE_RAD_PER_DEG);
 }
 
 
+/*! @brief Convert a radians value to degrees.
+ *
+ * Convert a radians value to degrees.
+ *
+ * @param[in] Rad Angle value in radians.
+ *
+ * @return Angle value in degrees.
+ */
 BGE_INL Degrees ToDegrees(Radians BGE_NCP Rad)
 {
     return (Rad * BGE_DEG_PER_RAD);
 }
 
 
+/*! @brief Compare the value of two floating-point values.
+ *
+ * Compare the value of two floating-point values. If the absolute value
+ * of the difference of the two values is less than an arbitrary constant,
+ * they are considered equal.
+ *
+ * @param[in] Left A value to compare.
+ * @param[in] Right Other value to compare.
+ *
+ * @return true if the difference between the two values is less than an
+ * arbitrary epsilon.
+ */
 BGE_INL bool ScalarCompare(Scalar BGE_NCP Left, Scalar BGE_NCP Right)
 {
     return abs(Right - Left) < BGE_SCALAR_EPSILON;
 }
 
 
+/*! @brief Get the max of two arbitrary variables of arbitrary type.
+ *
+ * Get the max of two arbitrary variables of arbitrary type. The type T for
+ * the template must implement the greater than operator (>).
+ *
+ * @param[in] A First value to compare.
+ * @param[in] B Second value to compare.
+ *
+ * @return A copy of the greater of the two variables.
+ */
 template<class T>
 BGE_INL T BGE_NCP Max(T BGE_NCP A, T BGE_NCP B)
 {
