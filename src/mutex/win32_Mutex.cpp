@@ -29,11 +29,14 @@ namespace bakge
 
 win32_Mutex::win32_Mutex()
 {
+    MutexHandle = NULL;
 }
 
 
 win32_Mutex::~win32_Mutex()
 {
+    if(MutexHandle != NULL)
+        CloseHandle(MutexHandle);
 }
 
 

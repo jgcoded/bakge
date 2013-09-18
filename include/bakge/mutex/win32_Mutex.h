@@ -30,6 +30,8 @@ namespace bakge
 
 typedef class BGE_API win32_Mutex : api::Mutex
 {
+    HANDLE MutexHandle;
+
     win32_Mutex();
 
 
