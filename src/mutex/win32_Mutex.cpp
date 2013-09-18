@@ -42,19 +42,40 @@ win32_Mutex::~win32_Mutex()
 
 win32_Mutex* win32_Mutex::Create()
 {
-    return NULL;
+    win32_Mutex* M = new win32_Mutex;
+
+    // Create an unnamed mutex object
+    M->MutexHandle = CreateMutex(NULL, FALSE, NULL);
+    if(M->MutexHandle == NULL) {
+        printf("Error creating mutex object\n");
+        delete M;
+        return NULL;
+    }
+
+    return M;
 }
 
 
 Result win32_Mutex::Lock()
 {
-    return BGE_FAILURE;
+    DWORD WaitResult = WaitForSingleObject(MutexHandle, INFINITE);
+    if(WaitResult != WAIT_OBJECT_0) {
+        printf("Error locking mutex object\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
 }
 
 
 Result win32_Mutex::Unlock()
 {
-    return BGE_FAILURE;
+    if(ReleaseMutex(MutexHandle) == 0) {
+        printf("Error releasing mutex object\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
