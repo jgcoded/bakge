@@ -88,7 +88,7 @@ list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
 set(BAKGE_PHYSFS_TARGET physfs)
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 set(BAKGE_BULLET_TARGETS LinearMath BulletDynamics BulletSoftBody BulletCollision
-                                                    BulletMultiThreaded)
+                                                   LinearMath BulletMultiThreaded)
 list(APPEND BAKGE_TARGETS_LIST ${BAKGE_BULLET_TARGETS})
 
 ########################################
