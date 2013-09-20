@@ -39,7 +39,7 @@ endif()
 option(BUILD_SHARED_LIBS "Build Bakge and all dependencies as shared libraries." ON)
 
 # Bakge include/link directories
-set(BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/include)
+set(BAKGE_INCLUDE_DIRECTORIES "")
 set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
 
 # Append library include directories
@@ -243,6 +243,11 @@ foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}
                                                     ${BAKGE_SDK_INC_PATH})
 endforeach(include_dir)
+
+# Copy Bakge headers
+make_directory(${BAKGE_SDK_INC_PATH}/bakge)
+execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory
+    "${BAKGE_SOURCE_DIR}/include/bakge" ${BAKGE_SDK_INC_PATH}/bakge)
 
 # Copy PhysFS headers manually here
 set(BAKGE_PHYSFS_HEADERS
