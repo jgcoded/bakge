@@ -54,7 +54,7 @@ public:
         this->Next = Next;
     }
 
-    T GetData()
+    T BGE_NCP GetData()
     {
         return Data;
     }

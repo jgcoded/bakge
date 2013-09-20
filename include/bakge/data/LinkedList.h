@@ -88,6 +88,16 @@ public:
         return DataValue;
     }
 
+    T BGE_NCP operator[](int At) const
+    {
+        SingleNode<T>* At = Head;
+
+        while(At--)
+            At = At->GetNext();
+
+        return At->GetData();
+    }
+
     bool IsEmpty() const
     {
         /* List is empty if Head pointer is NULL */
