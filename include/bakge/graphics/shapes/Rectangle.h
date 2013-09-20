@@ -36,6 +36,7 @@ class BGE_API Rectangle : public Shape
 protected:
 
 	Vector4 Dimensions;
+
 	Rectangle();
 
 
