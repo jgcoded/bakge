@@ -24,10 +24,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
- #include <bullet/btBulletDynamicsCommon.h>
+#include <bakge/Bakge.h>
 
 int main(int argc, char* argv[])
 {
-    printf("Bakge Bullet test\n");
     return 0;
 }
