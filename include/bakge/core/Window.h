@@ -35,6 +35,30 @@
 namespace bakge
 {
 
+/*! @brief Set the Window to fullscreen.
+ *
+ * Set the Window to fullscreen.
+ */
+#define BGE_WINDOW_FULLSCREEN 0x1
+
+/*! @brief Create a borderless (undecorated) Window.
+ *
+ * Create a borderless (undecorated) Window.
+ */
+#define BGE_WINDOW_NOBORDER 0x2
+
+/*! @brief Create a fixed-position Window.
+ *
+ * Create a fixed-position Window.
+ */
+#define BGE_WINDOW_NODRAG 0x4
+
+/*! @brief Create a fixed-size Window.
+ *
+ * Create a fixed-size Window.
+ */
+#define BGE_WINDOW_NORESIZE 0x8
+
 /*! @brief GLFW window wrapper class.
  *
  * Windows in Bakge have their own contexts, but have a shared context
