@@ -62,14 +62,14 @@ Font* Font::Load(const char* FileName)
     }
 
     // Allocate buffer for the data
-    unsigned char* Data = new unsigned char[Size];
+    unsigned char* Data = new unsigned char[(size_t)Size];
     if(Data == NULL) {
         printf("Error allocating file data buffer\n");
         return NULL;
     }
 
     // Read font file data into buffer
-    int BytesRead = PHYSFS_read(FontFile, (void*)Data, 1, Size);
+    PHYSFS_sint64 BytesRead = PHYSFS_read(FontFile, (void*)Data, 1, (PHYSFS_uint32)Size);
     if(BytesRead < 0) {
         printf("Error reading file data\n");
         return NULL;
@@ -115,7 +115,7 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
     stbtt_bakedchar* GlyphData = new stbtt_bakedchar[NumChars];
 
     // Bake into bitmap
-    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, PixelHeight,
+    int BakeResult = stbtt_BakeFontBitmap(FontInfo.data, 0, (float)PixelHeight,
                                                     GlyphBitmap, 512, 512,
                                                     GlyphStart, NumChars,
                                                                 GlyphData);
