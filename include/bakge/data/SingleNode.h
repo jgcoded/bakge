@@ -38,6 +38,7 @@ public:
 
     SingleNode()
     {
+        Next = NULL;
     }
 
     ~SingleNode()
