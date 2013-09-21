@@ -45,29 +45,6 @@ public:
     {
     }
 
-    SingleNode<T>* GetNext()
-    {
-        return Next;
-    }
-
-    void SetNext(SingleNode<T>* Next)
-    {
-        this->Next = Next;
-    }
-
-    T BGE_NCP GetData()
-    {
-        return Data;
-    }
-
-    void SetData(const T& Data)
-    {
-        this->Data = Data;
-    }
-
-
-protected:
-
     SingleNode<T>* Next;
     T Data;
 
