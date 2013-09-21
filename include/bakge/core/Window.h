@@ -305,6 +305,31 @@ public:
      */
     Result Deiconify();
 
+    /*! @brief Set the Window's screen position.
+     *
+     * Set the Window's screen position. The origin (0, 0) is the top-left of
+     * the screen.
+     *
+     * @param[in] X X position of the screen.
+     * @param[in] Y Y position of the screen.
+     *
+     * @return BGE_SUCCESS if the Window's position was successfully changed;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result SetPosition(Coord X, Coord Y);
+
+    /*! @brief Get the Window's screen position.
+     *
+     * Get the Window's screen position. The origin (0, 0) is the top-left of
+     * the screen. The parameters are not changed if any errors occur.
+     *
+     * @param[in] X Pointer to Coord; set to Window's X position.
+     * @param[in] Y Pointer to Coord; set to Window's Y position.
+     *
+     * @return BGE_FAILURE if any errors occurred; BGE_SUCCESS otherwise.
+     */
+    Result GetPosition(Coord* X, Coord* Y);
+
 }; /* Window */
 
 } /* bakge */

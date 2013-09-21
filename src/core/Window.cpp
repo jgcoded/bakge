@@ -385,4 +385,25 @@ Result Window::Deiconify()
     return BGE_SUCCESS;
 }
 
+
+Result Window::SetPosition(Coord X, Coord Y)
+{
+    glfwSetWindowPos(WindowHandle, (int)X, (int)Y);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Window::GetPosition(Coord* X, Coord* Y)
+{
+    int PX, PY;
+
+    glfwGetWindowPos(WindowHandle, &PX, &PY);
+
+    *X = (float)PX;
+    *Y = (float)PY;
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
