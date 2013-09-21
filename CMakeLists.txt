@@ -67,8 +67,16 @@ set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
 set(BAKGE_LUA_TARGET lua)
 set(BAKGE_GLEW_TARGET glew)
 set(BAKGE_PHYSFS_TARGET physfs)
-set(BAKGE_BULLET_TARGETS LinearMath BulletDynamics BulletSoftBody BulletCollision
-                                                   LinearMath BulletMultiThreaded)
+set(BAKGE_BULLET_TARGETS
+  LinearMath
+  BulletDynamics
+  BulletSoftBody
+  BulletCollision
+)
+
+if(NOT UNIX)
+  list(APPEND BAKGE_BULLET_TARGETS BulletMultiThreaded)
+endif()
 
 # Append library targets to a list we can use
 list(APPEND BAKGE_TARGETS_LIST
