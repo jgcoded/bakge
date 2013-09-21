@@ -36,25 +36,8 @@ if(NOT MSVC)
 endif()
 
 # Build dynamic/static libraries
-option(BUILD_SHARED_LIBS "Build Bakge and all dependencies as shared libraries." ON)
-
-# Bakge include/link directories
-set(BAKGE_INCLUDE_DIRECTORIES "")
-set(BAKGE_LIBRARY_DIRECTORIES ${BAKGE_SOURCE_DIR}/lib)
-
-# Append library include directories
-# SDK build needs to copy them into the SDK directory
-# Note: Lua has a special build and headers copy
-set(BAKGE_GLFW_PATH ${BAKGE_SOURCE_DIR}/lib/glfw-3.0)
-set(BAKGE_GLEW_PATH ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0)
-set(BAKGE_PHYSFS_PATH ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3)
-list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLFW_PATH}/include)
-list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_GLEW_PATH}/include)
-list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SDK_INC_PATH}/bullet)
-
-# Don't append BAKGE_PHYSFS_PATH to BAKGE_INCLUDE_DIRECTORIES
-# We need to copy the headers over manually below, there is no
-# physfs/include/ directory
+option(BUILD_SHARED_LIBS
+    "Build Bakge and all dependencies as shared libraries." ON)
 
 # Output all generated libraries and binaries to the SDK dir
 set(BAKGE_SDK_DIR ${BAKGE_SOURCE_DIR}/${BAKGE_SDK_PATH})
@@ -80,16 +63,20 @@ list(APPEND BAKGE_INCLUDE_DIRECTORIES ${BAKGE_SOURCE_DIR}/extern)
 set(BAKGE_TARGET bakge)
 set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
 
-# Append library targets
+# Library build targets
 set(BAKGE_LUA_TARGET lua)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_LUA_TARGET})
 set(BAKGE_GLEW_TARGET glew)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLEW_TARGET})
 set(BAKGE_PHYSFS_TARGET physfs)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_PHYSFS_TARGET})
 set(BAKGE_BULLET_TARGETS LinearMath BulletDynamics BulletSoftBody BulletCollision
                                                    LinearMath BulletMultiThreaded)
-list(APPEND BAKGE_TARGETS_LIST ${BAKGE_BULLET_TARGETS})
+
+# Append library targets to a list we can use
+list(APPEND BAKGE_TARGETS_LIST
+  ${BAKGE_BULLET_TARGETS}
+  ${BAKGE_PHYSFS_TARGET}
+  ${BAKGE_GLEW_TARGET}
+  ${BAKGE_LUA_TARGET}
+)
 
 ########################################
 # PLATFORM SPECIFIC LIBRARIES SETUP
@@ -179,9 +166,15 @@ list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
 ########################################
 
 # Add include directories
-foreach(directory ${BAKGE_INCLUDE_DIRECTORIES})
-  include_directories(${directory})
-endforeach(directory)
+include_directories(
+  ${BAKGE_SOURCE_DIR}/include
+  ${BAKGE_SOURCE_DIR}/lib/bullet-2.81-rev2613/src
+  ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0/include
+  ${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include
+  ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src
+  ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3
+  ${BAKGE_SOURCE_DIR}/extern
+)
 
 foreach(directory ${BAKGE_LIBRARY_DIRECTORIES})
   link_directories(${directory})
@@ -235,37 +228,42 @@ endif()
 # BAKGE SDK BUILD
 ########################################
 
-# Copy Bakge headers and library headers to SDK dir
-# Doesn't copy OpenGL or platform-specific headres like windows.h or x11.h
+# Create SDK build target
+# This copies all headers for Bakge and its libraries into the sdk/
+# directory. By default all libraries and run-time binaries are
+# output into this directory, so all that's left is to copy headers
+add_custom_target(bakge_sdk COMMENT "Building Bakge SDK")
 make_directory(${BAKGE_SDK_DIR})
 make_directory(${BAKGE_SDK_INC_PATH})
-foreach(include_dir ${BAKGE_INCLUDE_DIRECTORIES})
-  execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory ${include_dir}
-                                                    ${BAKGE_SDK_INC_PATH})
-endforeach(include_dir)
 
-# Copy Bakge headers
-make_directory(${BAKGE_SDK_INC_PATH}/bakge)
-execute_process(COMMAND ${CMAKE_COMMAND} -E copy_directory
-    "${BAKGE_SOURCE_DIR}/include/bakge" ${BAKGE_SDK_INC_PATH}/bakge)
-
-# Copy PhysFS headers manually here
-set(BAKGE_PHYSFS_HEADERS
-  ${BAKGE_PHYSFS_PATH}/physfs.h
-  ${BAKGE_PHYSFS_PATH}/physfs_casefolding.h
-  ${BAKGE_PHYSFS_PATH}/physfs_internal.h
-  ${BAKGE_PHYSFS_PATH}/physfs_platforms.h
-)
-make_directory(${BAKGE_SDK_INC_PATH}/physfs)
-foreach(PHYSFS_HEADER ${BAKGE_PHYSFS_HEADERS})
-  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${PHYSFS_HEADER}
-                                                ${BAKGE_SDK_INC_PATH}/physfs)
+#################################
+# Bakge public headers
+file(GLOB_RECURSE BAKGE_ALL_HEADERS "${BAKGE_SOURCE_DIR}/include/bakge/*.h")
+foreach(BAKGE_HEADER ${BAKGE_ALL_HEADERS})
+  set(PATH_REGEX "${BAKGE_SOURCE_DIR}/include")
+  STRING(REGEX REPLACE ${PATH_REGEX}
+                "${BAKGE_SDK_INC_PATH}" MOD_HEADER
+                ${BAKGE_HEADER})
+  add_custom_command(TARGET bakge_sdk PRE_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BAKGE_HEADER}
+      ${MOD_HEADER}
+  )
 endforeach()
 
-# Copy Bullet headers manually
-# Bullet's authors neglected to separate headers from source, and use
-# relative include paths. wat
-make_directory(${BAKGE_SDK_INC_PATH}/bullet)
+#################################
+# PhysicsFS header
+set(BAKGE_PHYSFS_HEADERS
+  ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3/physfs.h
+)
+add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+  copy
+    ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3/physfs.h
+    ${BAKGE_SDK_INC_PATH}/physfs/physfs.h
+)
+
+#################################
+# Bullet headers
 file(GLOB_RECURSE BAKGE_BULLET_HEADERS "${BAKGE_LIB_DIR}/bullet-2.81-rev2613/src/*.h")
 # Maybe creating this var out here will speed things up?
 set(MOD_HEADER "")
@@ -274,28 +272,86 @@ foreach(BULLET_HEADER ${BAKGE_BULLET_HEADERS})
   STRING(REGEX REPLACE ${PATH_REGEX}
                 "${BAKGE_SDK_INC_PATH}/bullet" MOD_HEADER
                 ${BULLET_HEADER})
-  configure_file(${BULLET_HEADER} ${MOD_HEADER} COPYONLY)
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BULLET_HEADER}
+      ${MOD_HEADER}
+  )
 endforeach()
 
-# Build documentation target
+#################################
+# Lua headers
+set(BAKGE_LUA_HEADERS
+  ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src/lua.h
+  ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src/lauxlib.h
+  ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src/luaconf.h
+  ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src/lualib.h
+)
+foreach(LUA_HEADER ${BAKGE_LUA_HEADERS})
+  set(PATH_REGEX "${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src")
+  STRING(REGEX REPLACE ${PATH_REGEX}
+                "${BAKGE_SDK_INC_PATH}/lua" MOD_HEADER
+                ${LUA_HEADER})
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${LUA_HEADER}
+      ${MOD_HEADER}
+  )
+endforeach()
+
+#################################
+# stb* headers
+set(BAKGE_STB_HEADERS
+  stb_truetype.c
+  stb_image.c
+)
+foreach(STB_HEADER ${BAKGE_STB_HEADERS})
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BAKGE_SOURCE_DIR}/extern/stb/${STB_HEADER}
+      ${BAKGE_SDK_INC_PATH}/stb/${STB_HEADER}
+  )
+endforeach()
+
+#################################
+# GLEW headers
+set(BAKGE_GLEW_HEADERS
+  glew.h
+  wglew.h
+  glxew.h
+)
+foreach(GLEW_HEADER ${BAKGE_GLEW_HEADERS})
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0/include/GL/${GLEW_HEADER}
+      ${BAKGE_SDK_INC_PATH}/GL/${GLEW_HEADER}
+  )
+endforeach()
+
+# GLFW headers
+set(BAKGE_GLFW_HEADERS
+  glfw3.h
+  glfw3native.h
+)
+foreach(GLFW_HEADER ${BAKGE_GLFW_HEADERS})
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include/GLFW/${GLFW_HEADER}
+      ${BAKGE_SDK_INC_PATH}/GLFW/${GLFW_HEADER}
+  )
+endforeach()
+
+
+######################################################
+# BAKGE DOCUMENTATION BUILD (REQUIRES DOXYGEN)
+######################################################
+
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
   # Generate a configured Doxyfile
   set(BAKGE_DOC_DIR ${BAKGE_SDK_DIR}/doc)
   configure_file(${BAKGE_SOURCE_DIR}/Doxyfile.in ${BAKGE_DOC_DIR}/Doxyfile @ONLY)
-  file(MAKE_DIRECTORY ${BAKGE_DOC_DIR})
+  make_directory(${BAKGE_DOC_DIR})
   add_custom_target(bakge_doc ALL ${DOXYGEN_EXECUTABLE} WORKING_DIRECTORY
     ${BAKGE_DOC_DIR} COMMENT "Generating documentation for Bakge" VERBATIM)
 endif(DOXYGEN_FOUND)
-
-###
-# ! NOTE: Lua headers are copied separately before the build, since
-# their build generates an include/ directory with necessary headers.
-# As such Lua include directories aren't appended to the
-# BAKGE_INCLUDE_DIRECTORIES list.
-# Instead, Bakge copies these headers to the SDK before
-# building its library, and compiles with the SDK's include path
-# to resolve any potential include path inconsistencies.
-# e.g. #include <lua/lua.h>   vs   #include <lua.h>
-###
-

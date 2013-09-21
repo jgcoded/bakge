@@ -61,12 +61,6 @@ if(LUA_TARGET)
   if(BUILD_SHARED_LIBS AND UNIX)
     target_link_libraries(${BAKGE_LUA_TARGET} m)
   endif()
-  
-  # Copy headers into SDK
-  make_directory(${BAKGE_SDK_INC_PATH}/lua)
-  foreach(header ${LUA_HEADERS})
-    configure_file(${header} ${BAKGE_SDK_INC_PATH}/lua COPYONLY)
-  endforeach(header)
 
 else()
   message("Couldn't find Lua path")
