@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-template<class  T>
+template<class T>
 class LinkedList
 {
 
