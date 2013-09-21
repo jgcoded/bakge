@@ -47,17 +47,11 @@ namespace bakge
  */
 #define BGE_WINDOW_NOBORDER 0x2
 
-/*! @brief Create a fixed-position Window.
- *
- * Create a fixed-position Window.
- */
-#define BGE_WINDOW_NODRAG 0x4
-
 /*! @brief Create a fixed-size Window.
  *
  * Create a fixed-size Window.
  */
-#define BGE_WINDOW_NORESIZE 0x8
+#define BGE_WINDOW_NORESIZE 0x4
 
 /*! @brief GLFW window wrapper class.
  *
