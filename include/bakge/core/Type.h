@@ -79,7 +79,7 @@ typedef int Result;
  */
 #define BGE_DEG_PER_RAD 57.2957795f
 
-/*! @brief Scalar is a single-precision floatint number.
+/*! @brief Scalar is a single-precision floating point number.
  */
 typedef float Scalar;
 
