@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
     bakge::Init(argc, argv);
 
     Mut = bakge::Mutex::Create();
-    Win = bakge::Window::Create(600, 400);
+    Win = bakge::Window::Create(600, 400, 0);
 
     bakge::Thread* TestThreads[NUM_THREADS];
 

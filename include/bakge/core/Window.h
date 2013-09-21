@@ -120,10 +120,13 @@ public:
      *
      * @param[in] Width The width of the created window.
      * @param[in] Height The height of the created window.
+     * @param[in] Properties Bitfield containing window properties.
      *
      * @return Pointer to allocated Window, or NULL if any errors occur.
+     *
+     * @warn May only be called from the main thread.
      */
-    BGE_FACTORY Window* Create(int Width, int Height);
+    BGE_FACTORY Window* Create(int Width, int Height, int Properties);
 
     /*! @brief Poll all events for all existing windows.
      *

@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
     memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 512 * 512 * 3);
 
-    Win = bakge::Window::Create(1024, 768);
+    Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
         printf("Error creating window\n");
         return bakge::Deinit();

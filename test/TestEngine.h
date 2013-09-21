@@ -64,7 +64,7 @@ class TestEngine : public Engine, public EventHandler
     /* Initialize/Clean up components */
     Result Initialize()
     {
-        EngineWindow = Window::Create(600, 400);
+        EngineWindow = Window::Create(600, 400, 0);
         if(EngineWindow == NULL)
             return BGE_FAILURE;
 

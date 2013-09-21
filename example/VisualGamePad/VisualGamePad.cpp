@@ -90,7 +90,7 @@ bakge::Result VisualGamePad::ShutDown()
 
 bakge::Result VisualGamePad::Initialize()
 {
-    AppWindow = bakge::Window::Create(800, 400);
+    AppWindow = bakge::Window::Create(800, 400, 0);
     if(AppWindow == NULL)
         return BGE_FAILURE;
 

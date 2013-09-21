@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
-    Win = bakge::Window::Create(600, 400);
+    Win = bakge::Window::Create(600, 400, 0);
 
     glClearColor(0, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);

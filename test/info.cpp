@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    Win = bakge::Window::Create(600, 400);
+    Win = bakge::Window::Create(600, 400, 0);
     if(Win == NULL) {
         printf("Error creating Bakge window\n");
         return bakge::Deinit();

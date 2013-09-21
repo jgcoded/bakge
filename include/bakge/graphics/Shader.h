@@ -61,7 +61,7 @@ class BGE_API Shader : public Bindable
     static Shader* GenericShader;
     static GLuint VertexLib;
     static GLuint FragmentLib;
-    friend Window* Window::Create(int, int);
+    friend Window* Window::Create(int, int, int);
 
     static Result InitShaderLibrary();
     static Result DeinitShaderLibrary();

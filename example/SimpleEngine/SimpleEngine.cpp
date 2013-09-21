@@ -77,7 +77,7 @@ bakge::Result SimpleEngine::Initialize()
     if(SceneRenderer == NULL)
         return BGE_FAILURE;
 
-    AppWindow = bakge::Window::Create(600, 400);
+    AppWindow = bakge::Window::Create(600, 400, 0);
     if(AppWindow == NULL)
         return BGE_FAILURE;
 

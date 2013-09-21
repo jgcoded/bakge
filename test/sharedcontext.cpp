@@ -46,7 +46,7 @@ int main(int argc, char* argv[])
         }
     }
 
-    Win = bakge::Window::Create(64, 64);
+    Win = bakge::Window::Create(64, 64, 0);
     Win->Bind();
 
     /* Load texture on Win, then we'll use it on Win2 */
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
     delete Win;
 
-    Win2 = bakge::Window::Create(600, 400);
+    Win2 = bakge::Window::Create(600, 400, 0);
     Win2->Bind();
 
     glClearColor(1, 0, 0, 1);

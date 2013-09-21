@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
         }
     }
 
-    Win = bakge::Window::Create(600, 400);
+    Win = bakge::Window::Create(600, 400, 0);
     Win->Bind();
 
     /* When testing the completed class, pass raw image data as last param */

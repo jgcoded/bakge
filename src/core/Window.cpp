@@ -154,14 +154,28 @@ Window::~Window()
 }
 
 
-Window* Window::Create(int Width, int Height)
+Window* Window::Create(int Width, int Height, int Properties)
 {
     GLFWwindow* Handle;
     Window* Win;
 
+    // Check each window property and set corresponding GLFW window hints
+    if(Properties & BGE_WINDOW_NOBORDER)
+        glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+
+    if(Properties & BGE_WINDOW_NORESIZE)
+        glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+
     Handle = glfwCreateWindow(Width, Height, "Bakge", NULL, SharedContext);
     if(Handle == NULL)
         return NULL;
+
+    // Now reset GLFW window hints if necessary
+    if(Properties & BGE_WINDOW_NOBORDER)
+        glfwWindowHint(GLFW_DECORATED, GL_TRUE);
+
+    if(Properties & BGE_WINDOW_NORESIZE)
+        glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
     /* Set all of our window's GLFW callbacks */
     glfwSetWindowCloseCallback(Handle, Window::Closed);
