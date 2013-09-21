@@ -90,12 +90,12 @@ public:
 
     T BGE_NCP operator[](int At) const
     {
-        SingleNode<T>* At = Head;
+        SingleNode<T>* Pos = Head;
 
-        while(At--)
-            At = At->Next;
+        while(Pos--)
+            Pos = Pos->Next;
 
-        return At->Data;
+        return Pos->Data;
     }
 
     bool IsEmpty() const
