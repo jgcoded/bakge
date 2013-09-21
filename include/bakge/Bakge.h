@@ -126,12 +126,12 @@
 #include <GLFW/glfw3.h>
 extern "C"
 {
-#include <lua/lua.h>
-#include <lua/luaconf.h>
-#include <lua/lualib.h>
-#include <lua/lauxlib.h>
+#include <lua.h>
+#include <luaconf.h>
+#include <lualib.h>
+#include <lauxlib.h>
 }
-#include <physfs/physfs.h>
+#include <physfs.h>
 
 /*! @brief All Bakge types, classes and API are declared and defined in this
  * namespace.
@@ -203,7 +203,7 @@ namespace api
 
 /* Utility headers */
 #include <bakge/input/GamePad.h>
-#include <bakge/input/XBoxController.h>
+#include <bakge/input/XboxController.h>
 
 /* Platform implementation classes */
 #ifdef __linux__
