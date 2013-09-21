@@ -53,14 +53,14 @@ public:
 
         /* Create new node */
         NewNode = new SingleNode<T>();
-        NewNode->SetData(Value);
+        NewNode->Data = Value;
 
         /* Move pointers */
         if (Head == NULL) {
             Tail = Head = NewNode;
-            NewNode->SetNext(NULL);
+            NewNode->Next = NULL;
         } else {
-            NewNode->SetNext(Head);
+            NewNode->Next = Head;
             Head = NewNode;
         }
 
@@ -76,13 +76,13 @@ public:
         TopNode = Head;
 
         /* Move pointers */
-        Head = Head->GetNext();
+        Head = Head->Next;
         if (Head == NULL) {
             Tail = Head;
         }
 
         /* Memorize return value and free memory */
-        DataValue = TopNode->GetData();
+        DataValue = TopNode->Data;
         delete TopNode;
 
         return DataValue;
@@ -93,9 +93,9 @@ public:
         SingleNode<T>* At = Head;
 
         while(At--)
-            At = At->GetNext();
+            At = At->Next;
 
-        return At->GetData();
+        return At->Data;
     }
 
     bool IsEmpty() const
@@ -111,7 +111,7 @@ public:
         SingleNode<T>* Node;
         while (Head != NULL) {
             Node = Head;
-            Head = Head->GetNext();
+            Head = Head->Next;
             delete Node;
         }
     }
