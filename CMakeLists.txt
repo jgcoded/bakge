@@ -188,9 +188,6 @@ foreach(directory ${BAKGE_LIBRARY_DIRECTORIES})
   link_directories(${directory})
 endforeach(directory)
 
-# Also add SDK paths
-include_directories(${BAKGE_SDK_INC_PATH})
-
 if(NOT BUILD_SHARED_LIBS)
   link_directories(${BAKGE_SDK_LIB_PATH})
 else()
@@ -267,7 +264,7 @@ set(BAKGE_PHYSFS_HEADERS
 add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
   copy
     ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3/physfs.h
-    ${BAKGE_SDK_INC_PATH}/physfs/physfs.h
+    ${BAKGE_SDK_INC_PATH}/physfs.h
 )
 
 #################################
@@ -298,7 +295,7 @@ set(BAKGE_LUA_HEADERS
 foreach(LUA_HEADER ${BAKGE_LUA_HEADERS})
   set(PATH_REGEX "${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src")
   STRING(REGEX REPLACE ${PATH_REGEX}
-                "${BAKGE_SDK_INC_PATH}/lua" MOD_HEADER
+                "${BAKGE_SDK_INC_PATH}" MOD_HEADER
                 ${LUA_HEADER})
   add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
     copy
