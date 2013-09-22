@@ -72,8 +72,8 @@ bakge::Result InitTest()
 
     memset((void*)Bitmap, 0, sizeof(Bitmap[0]) * 3);
 
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
-                                                    (void*)Bitmap);
+    Tex = bakge::Texture::Create(512, 512, NULL, GL_RGB, GL_UNSIGNED_BYTE,
+                                                            (void*)Bitmap);
 
     It = bakge::Pawn::Create();
     Obj = bakge::Cube::Create(0.4f, 0.4f, 0.4f);

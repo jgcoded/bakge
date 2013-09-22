@@ -50,8 +50,8 @@ int main(int argc, char* argv[])
     Win->Bind();
 
     /* Load texture on Win, then we'll use it on Win2 */
-    Tex = bakge::Texture::Create(64, 64, GL_RGB, GL_UNSIGNED_BYTE,
-                                                (void*)PictureInfo);
+    Tex = bakge::Texture::Create(64, 64, NULL, GL_RGB, GL_UNSIGNED_BYTE,
+                                                    (void*)PictureInfo);
 
     delete Win;
 

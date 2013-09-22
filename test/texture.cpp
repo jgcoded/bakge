@@ -49,8 +49,8 @@ int main(int argc, char* argv[])
     Win->Bind();
 
     /* When testing the completed class, pass raw image data as last param */
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
-                                                (void*)PictureInfo);
+    Tex = bakge::Texture::Create(512, 512, NULL, GL_RGB, GL_UNSIGNED_BYTE,
+                                                        (void*)PictureInfo);
 
     glClearColor(1, 0, 0, 1);
     glEnable(GL_TEXTURE_2D);

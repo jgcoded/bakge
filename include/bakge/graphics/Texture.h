@@ -30,7 +30,7 @@
 namespace bakge
 {
 
-/*! @brief OpenGL texture wrapper class
+/*! @brief OpenGL 2D texture wrapper class
  *
  * Textures are used to color meshes and other polygons drawn with OpenGL,
  * such as meshes or a GUI. They can also be used to hold framebuffers to
@@ -66,6 +66,9 @@ public:
      *
      * @param[in] Width Width of the texture in pixels.
      * @param[in] Height Height of the texture in pixels.
+     * @param[in] Params Array of texture parameters and corresponding values.
+     *                   After the last parameter-value pair, add a 0 to
+     *                   designate the end of the array.
      * @param[in] Format OpenGL format of the data to upload.
      * @param[in] Type Type of data being uploaded.
      * @param[in] Data The texture data to upload.
@@ -74,8 +77,9 @@ public:
      *
      * @see http://www.opengl.org/wiki/Texture
      */
-    BGE_FACTORY Texture* Create(int Width, int Height, GLint Format,
-                                            GLenum Type, void* Data);
+    BGE_FACTORY Texture* Create(int Width, int Height, const GLint* Params,
+                                                GLint Format, GLenum Type,
+                                                                void* Data);
 
     /*! @brief Bind the texture as active in its assigned location.
      *

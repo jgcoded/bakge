@@ -117,8 +117,8 @@ bakge::Result InitTest()
     It = bakge::Pawn::Create();
     It->SetPosition(0, 0, 0);
 
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
-                                                (void*)Bitmap);
+    Tex = bakge::Texture::Create(512, 512, NULL, GL_RGB, GL_UNSIGNED_BYTE,
+                                                        (void*)Bitmap);
 
     Frame* E = bakge::Frame::Create(0.8f, 0.5f);
 

@@ -61,9 +61,18 @@ Result Texture::Unbind() const
 }
 
 
-Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
-                                                              void* Data)
+Texture* Texture::Create(int Width, int Height, const GLint* Params,
+                                            GLint Format, GLenum Type,
+                                                            void* Data)
 {
+    static const GLint DefaultParams[] = {
+        GL_TEXTURE_MIN_FILTER, GL_LINEAR,
+        GL_TEXTURE_MAG_FILTER, GL_LINEAR,
+        GL_TEXTURE_WRAP_S, GL_REPEAT,
+        GL_TEXTURE_WRAP_T, GL_REPEAT,
+        0
+    };
+
     Texture* NewTexture = new Texture;
 
     NewTexture->Width = Width;
@@ -84,13 +93,21 @@ Texture* Texture::Create(int Width, int Height, GLint Format, GLenum Type,
     /* Bind the texture so we can set its parameters below */
     NewTexture->Bind();
 
-    /* *
-     * Set some parameters for our texture.
-     * */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    if(Params == NULL)
+        Params = DefaultParams;
+
+    // Pick out and set texture parameters/values
+    GLint i = 0;
+    GLint Pair[2]; // Index 0 is parameter name; 1 is value
+    GLint At = 0;
+    while(Params[i] != 0) {
+        Pair[At] = Params[i];
+        // If we just picked a value, set the texture parameter
+        if(At == 1)
+            glTexParameteri(GL_TEXTURE_2D, Pair[0], Pair[1]);
+        At ^= 1; // Flip between 0 and 1
+        ++i;
+    }
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, Format, Type,
                                                                     Data);

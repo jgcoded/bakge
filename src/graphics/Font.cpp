@@ -127,9 +127,9 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
     }
 
     // Create temp texture. If error occurs we don't want to change *Target
-    Texture* GlyphMap = bakge::Texture::Create(512, 512, GL_ALPHA,
-                                                GL_UNSIGNED_BYTE,
-                                                (void*)GlyphBitmap);
+    Texture* GlyphMap = bakge::Texture::Create(512, 512, NULL, GL_ALPHA,
+                                                        GL_UNSIGNED_BYTE,
+                                                        (void*)GlyphBitmap);
 
     printf("%d\n", glGetError());
 

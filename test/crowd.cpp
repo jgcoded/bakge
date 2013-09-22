@@ -65,8 +65,8 @@ int main(int argc, char* argv[])
         }
     }
 
-    Tex = bakge::Texture::Create(512, 512, GL_RGB, GL_UNSIGNED_BYTE,
-                                                    (void*)Bitmap);
+    Tex = bakge::Texture::Create(512, 512, NULL, GL_RGB, GL_UNSIGNED_BYTE,
+                                                            (void*)Bitmap);
 
     Obj = bakge::Cube::Create(0.35f, 0.35f, 0.35f);
 
