@@ -169,9 +169,12 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
     NumIndices = 36; /* 2 triangles per face, 3 vertices per triangle */
     Scalar Vertices[72];
 
-    Scalar Width = X / 2;
-    Scalar Height = Y / 2;
-    Scalar Length = Z / 2;
+    Scalar PosWidth = X / 2;
+    Scalar PosHeight = Y / 2;
+    Scalar PosLength = Z / 2;
+    Scalar NegWidth = -PosWidth;
+    Scalar NegHeight = -PosHeight;
+    Scalar NegLength = -PosLength;
 
     /* *
      *       H__________G
@@ -217,108 +220,108 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
      * */
 
     /* A+Z */
-    Vertices[0] = -Width;
-    Vertices[1] = -Height;
-    Vertices[2] = +Length;
+    Vertices[0] = NegWidth;
+    Vertices[1] = NegHeight;
+    Vertices[2] = PosLength;
     /* A-Y */
-    Vertices[3] = -Width;
-    Vertices[4] = -Height;
-    Vertices[5] = +Length;
+    Vertices[3] = NegWidth;
+    Vertices[4] = NegHeight;
+    Vertices[5] = PosLength;
     /* A-X */
-    Vertices[6] = -Width;
-    Vertices[7] = -Height;
-    Vertices[8] = +Length;
+    Vertices[6] = NegWidth;
+    Vertices[7] = NegHeight;
+    Vertices[8] = PosLength;
 
     /* B+Z */
-    Vertices[9] = +Width;
-    Vertices[10] = -Height;
-    Vertices[11] = +Length;
+    Vertices[9] = PosWidth;
+    Vertices[10] = NegHeight;
+    Vertices[11] = PosLength;
     /* B-Y */
-    Vertices[12] = +Width;
-    Vertices[13] = -Height;
-    Vertices[14] = +Length;
+    Vertices[12] = PosWidth;
+    Vertices[13] = NegHeight;
+    Vertices[14] = PosLength;
     /* B+X */
-    Vertices[15] = +Width;
-    Vertices[16] = -Height;
-    Vertices[17] = +Length;
+    Vertices[15] = PosWidth;
+    Vertices[16] = NegHeight;
+    Vertices[17] = PosLength;
 
     /* C+Z */
-    Vertices[18] = +Width;
-    Vertices[19] = +Height;
-    Vertices[20] = +Length;
+    Vertices[18] = PosWidth;
+    Vertices[19] = PosHeight;
+    Vertices[20] = PosLength;
     /* C+Y */
-    Vertices[21] = +Width;
-    Vertices[22] = +Height;
-    Vertices[23] = +Length;
+    Vertices[21] = PosWidth;
+    Vertices[22] = PosHeight;
+    Vertices[23] = PosLength;
     /* C+X */
-    Vertices[24] = +Width;
-    Vertices[25] = +Height;
-    Vertices[26] = +Length;
+    Vertices[24] = PosWidth;
+    Vertices[25] = PosHeight;
+    Vertices[26] = PosLength;
 
     /* D+Z */
-    Vertices[27] = -Width;
-    Vertices[28] = +Height;
-    Vertices[29] = +Length;
+    Vertices[27] = NegWidth;
+    Vertices[28] = PosHeight;
+    Vertices[29] = PosLength;
     /* D+Y */
-    Vertices[30] = -Width;
-    Vertices[31] = +Height;
-    Vertices[32] = +Length;
+    Vertices[30] = NegWidth;
+    Vertices[31] = PosHeight;
+    Vertices[32] = PosLength;
     /* D-X */
-    Vertices[33] = -Width;
-    Vertices[34] = +Height;
-    Vertices[35] = +Length;
+    Vertices[33] = NegWidth;
+    Vertices[34] = PosHeight;
+    Vertices[35] = PosLength;
 
     /* E-Z */
-    Vertices[36] = -Width;
-    Vertices[37] = -Height;
-    Vertices[38] = -Length;
+    Vertices[36] = NegWidth;
+    Vertices[37] = NegHeight;
+    Vertices[38] = NegLength;
     /* E-Y */
-    Vertices[39] = -Width;
-    Vertices[40] = -Height;
-    Vertices[41] = -Length;
+    Vertices[39] = NegWidth;
+    Vertices[40] = NegHeight;
+    Vertices[41] = NegLength;
     /* E-X */
-    Vertices[42] = -Width;
-    Vertices[43] = -Height;
-    Vertices[44] = -Length;
+    Vertices[42] = NegWidth;
+    Vertices[43] = NegHeight;
+    Vertices[44] = NegLength;
 
     /* F-Z */
-    Vertices[45] = +Width;
-    Vertices[46] = -Height;
-    Vertices[47] = -Length;
+    Vertices[45] = PosWidth;
+    Vertices[46] = NegHeight;
+    Vertices[47] = NegLength;
     /* F-Y */
-    Vertices[48] = +Width;
-    Vertices[49] = -Height;
-    Vertices[50] = -Length;
+    Vertices[48] = PosWidth;
+    Vertices[49] = NegHeight;
+    Vertices[50] = NegLength;
     /* F+X */
-    Vertices[51] = +Width;
-    Vertices[52] = -Height;
-    Vertices[53] = -Length;
+    Vertices[51] = PosWidth;
+    Vertices[52] = NegHeight;
+    Vertices[53] = NegLength;
 
     /* G-Z */
-    Vertices[54] = +Width;
-    Vertices[55] = +Height;
-    Vertices[56] = -Length;
+    Vertices[54] = PosWidth;
+    Vertices[55] = PosHeight;
+    Vertices[56] = NegLength;
     /* G+Y */
-    Vertices[57] = +Width;
-    Vertices[58] = +Height;
-    Vertices[59] = -Length;
+    Vertices[57] = PosWidth;
+    Vertices[58] = PosHeight;
+    Vertices[59] = NegLength;
     /* G+X */
-    Vertices[60] = +Width;
-    Vertices[61] = +Height;
-    Vertices[62] = -Length;
+    Vertices[60] = PosWidth;
+    Vertices[61] = PosHeight;
+    Vertices[62] = NegLength;
 
     /* H-Z */
-    Vertices[63] = -Width;
-    Vertices[64] = +Height;
-    Vertices[65] = -Length;
+    Vertices[63] = NegWidth;
+    Vertices[64] = PosHeight;
+    Vertices[65] = NegLength;
     /* H+Y */
-    Vertices[66] = -Width;
-    Vertices[67] = +Height;
-    Vertices[68] = -Length;
+    Vertices[66] = NegWidth;
+    Vertices[67] = PosHeight;
+    Vertices[68] = NegLength;
     /* H-X */
-    Vertices[69] = -Width;
-    Vertices[70] = +Height;
-    Vertices[71] = -Length;
+    Vertices[69] = NegWidth;
+    Vertices[70] = PosHeight;
+    Vertices[71] = NegLength;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices[0]) * 72, Vertices,
