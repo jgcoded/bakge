@@ -48,7 +48,7 @@ void GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
 int GetNumberMonitors()
 {
 
-    int* MonitorCount = NULL:
+    int* MonitorCount = NULL;
     glfwGetMonitors(MonitorCount);
 
     return *MonitorCount;
