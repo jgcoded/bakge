@@ -27,4 +27,13 @@
 namespace bakge
 {
 
+void GetMonitorResolution(GLFWmonitor* Monitor, int* StoreX, int* StoreY)
+{
+
+	const GLFWvidmode* MonitorVideoMode = glfwGetVideoMode(Monitor);
+	*(StoreX) = MonitorVideoMode->width;
+	*(StoreY) = MonitorVideoMode->height;
+}
+
+
 } /* bakge */
