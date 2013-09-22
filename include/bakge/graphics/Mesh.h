@@ -167,6 +167,13 @@ public:
      */
     Result SetDrawStyle(MESH_DRAW_STYLE Style);
 
+    /*! @brief Draw the Mesh.
+     *
+     * @return BGE_SUCCESS if the Mesh was successfully drawn; BGE_FAILURE if
+     * any errors occurred.
+     */
+    virtual Result Draw() const;
+
 
 protected:
 

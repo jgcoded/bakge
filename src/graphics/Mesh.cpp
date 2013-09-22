@@ -229,4 +229,12 @@ Result Mesh::SetDrawStyle(MESH_DRAW_STYLE Style)
     return BGE_SUCCESS;
 }
 
+
+Result Mesh::Draw() const
+{
+    glDrawElements(DrawStyle, NumIndices, GL_UNSIGNED_INT, (GLvoid*)0);
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

@@ -54,12 +54,4 @@ Result Shape::Unbind() const
     return Mesh::Unbind();
 }
 
-
-Result Shape::Draw() const
-{
-    glDrawElements(DrawStyle, NumIndices, GL_UNSIGNED_INT, (GLvoid*)0);
-
-    return BGE_SUCCESS;
-}
-
 } /* bakge */

@@ -82,13 +82,6 @@ public:
      */
     Result Unbind() const;
 
-    /*! @brief Draw the shape.
-     *
-     * @return BGE_SUCCESS if the shape was successfully drawn, or BGE_FAILURE
-     * if any errors occurred.
-     */
-    virtual Result Draw() const;
-
 }; /* Shape */
 
 } /* bakge */
