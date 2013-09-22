@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
         Group->TranslateMember(i, TRAND, TRAND, TRAND);
     }
 
-    Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
+    Obj->SetDrawStyle(bakge::MESH_DRAW_STYLE_SOLID);
 
     bakge::Matrix Perspective;
     bakge::Matrix View;

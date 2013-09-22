@@ -30,14 +30,6 @@
 namespace bakge
 {
 
-enum BGE_SHAPE_STYLE
-{
-    BGE_SHAPE_STYLE_POINTS = 1,
-    BGE_SHAPE_STYLE_WIREFRAME,
-    BGE_SHAPE_STYLE_SOLID,
-    BGE_SHAPE_STYLE_EDGE
-};
-
 /*! @brief Shapes are special mesh objects with configurable dimensions.
  *
  * Shapes' dimensions modifiable at run-time, unlike a typical Mesh whose
@@ -53,8 +45,6 @@ class BGE_API Shape : public Mesh
 {
 
 protected:
-
-    GLenum DrawStyle;
 
     /*! @brief Default Shape constructor.
      *
@@ -91,16 +81,6 @@ public:
      * BGE_FAILURE if any errors occurred.
      */
     Result Unbind() const;
-
-    /*! @brief Change the draw mode of the shape
-     *
-     * Shapes may be drawn in different styles: a point cloud, wireframe mesh
-     * or solid mesh.
-     *
-     * @return BGE_SUCCESS if the shape's draw style was successfully changed,
-     * or BGE_FAILURE if any errors occurred.
-     */
-    Result SetDrawStyle(BGE_SHAPE_STYLE Style);
 
     /*! @brief Draw the shape.
      *

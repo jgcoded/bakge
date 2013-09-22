@@ -38,34 +38,6 @@ Shape::~Shape()
 }
 
 
-Result Shape::SetDrawStyle(BGE_SHAPE_STYLE Style)
-{
-    switch(Style) {
-
-    case BGE_SHAPE_STYLE_EDGE:
-        DrawStyle = GL_LINE_LOOP;
-        break;
-
-    case BGE_SHAPE_STYLE_SOLID:
-        DrawStyle = GL_TRIANGLES;
-        break;
-
-    case BGE_SHAPE_STYLE_WIREFRAME:
-        DrawStyle = GL_LINE_LOOP;
-        break;
-
-    case BGE_SHAPE_STYLE_POINTS:
-        DrawStyle = GL_POINTS;
-        break;
-
-    default:
-        return BGE_FAILURE;
-    }
-
-    return BGE_SUCCESS;
-}
-
-
 Result Shape::Bind() const
 {
     Result Errors = BGE_SUCCESS;

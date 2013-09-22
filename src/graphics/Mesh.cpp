@@ -205,4 +205,28 @@ Result Mesh::TexCoordData(int NumTexCoords, const Scalar* Data)
     return BGE_SUCCESS;
 }
 
+
+Result Mesh::SetDrawStyle(MESH_DRAW_STYLE Style)
+{
+    switch(Style) {
+
+    case MESH_DRAW_STYLE_SOLID:
+        DrawStyle = GL_TRIANGLES;
+        break;
+
+    case MESH_DRAW_STYLE_WIREFRAME:
+        DrawStyle = GL_LINE_LOOP;
+        break;
+
+    case MESH_DRAW_STYLE_POINTS:
+        DrawStyle = GL_POINTS;
+        break;
+
+    default:
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */

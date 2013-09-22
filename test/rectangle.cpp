@@ -64,7 +64,7 @@ bakge::Result InitTest()
     It = bakge::Pawn::Create();
     Obj = bakge::Rectangle::Create(200, 200);
 
-    Obj->SetDrawStyle(bakge::BGE_SHAPE_STYLE_SOLID);
+    Obj->SetDrawStyle(bakge::MESH_DRAW_STYLE_SOLID);
 
     It->SetPosition(0, 0, 0);
 

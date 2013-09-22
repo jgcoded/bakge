@@ -35,6 +35,15 @@
 namespace bakge
 {
 
+enum MESH_DRAW_STYLE
+{
+    MESH_DRAW_STYLE_POINTS = 0,
+    MESH_DRAW_STYLE_WIREFRAME,
+    MESH_DRAW_STYLE_SOLID,
+    NUM_MESH_DRAW_STYLES
+    
+};
+
 /*! @brief Mesh buffer enumeration.
  *
  * Meshes contain several OpenGL buffers used for storing various data such
@@ -89,6 +98,8 @@ class BGE_API Mesh : public Drawable
 {
 
 protected:
+
+    GLenum DrawStyle;
 
     int NumVertices;
     int NumTriangles;
@@ -145,6 +156,16 @@ public:
      * @see bakge::Crowd
      */
     virtual Result DrawInstanced(int Count) const;
+
+    /*! @brief Change the draw mode of the Mesh.
+     *
+     * Shapes may be drawn in different styles: a point cloud, wireframe mesh
+     * or solid mesh.
+     *
+     * @return BGE_SUCCESS if the Mesh's draw style was successfully changed;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result SetDrawStyle(MESH_DRAW_STYLE Style);
 
 
 protected:
