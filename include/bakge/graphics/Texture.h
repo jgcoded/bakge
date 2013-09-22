@@ -68,7 +68,8 @@ public:
      * @param[in] Height Height of the texture in pixels.
      * @param[in] Params Array of texture parameters and corresponding values.
      *                   After the last parameter-value pair, add a 0 to
-     *                   designate the end of the array.
+     *                   designate the end of the array. If NULL is passed, a
+     *                   set of sensible defaults is used instead.
      * @param[in] Format OpenGL format of the data to upload.
      * @param[in] Type Type of data being uploaded.
      * @param[in] Data The texture data to upload.
