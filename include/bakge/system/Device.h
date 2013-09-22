@@ -35,6 +35,17 @@
 namespace bakge
 {
 
+BGE_FUNC void GetMonitorResolution(GLFWmonitor* Monitor, int* StoreX, int* StoreY);
+
+
+BGE_FUNC void GetMonitorPhysicalDimensions(GLFWmonitor* Monitor, int* StoreX, int* StoreY);
+
+
+BGE_FUNC void GetPrimaryMonitorResolution(int* StoreX, int* StoreY);
+
+
+BGE_FUNC void GetPrimaryMonitorPhysicalDimensions(int* StoreX, int* StoreY);
+
 } /* bakge */
 
 #endif /* BAKGE_SYSTEM_DEVICE_H */
