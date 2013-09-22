@@ -40,6 +40,9 @@ BGE_FUNC void GetPrimaryMonitorResolution(int* StoreX, int* StoreY);
 
 BGE_FUNC void GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY);
 
+
+BGE_FUNC int GetNumberMonitors();
+
 } /* bakge */
 
 #endif /* BAKGE_SYSTEM_DEVICE_H */
