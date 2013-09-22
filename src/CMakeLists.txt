@@ -53,6 +53,7 @@ set(MODULES
   renderer/DeferredGeometryRenderer
   renderer/DeferredLightingRenderer
   renderer/FrontRenderer
+  system/Device
 )
 
 # Create headers list, add those without a source file

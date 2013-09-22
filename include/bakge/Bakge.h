@@ -186,6 +186,7 @@ namespace api
 
 /* System modules */
 #include <bakge/system/Clock.h>
+#include <bakge/system/Device.h>
 
 /* Data structure modules */
 #include <bakge/data/File.h>
