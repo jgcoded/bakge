@@ -44,4 +44,9 @@ void GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
 }
 
 
+void GetMonitorPhysicalSize(GLFWmonitor* Monitor, int* StoreX, int* StoreY)
+{
+	glfwGetMonitorPhysicalSize(Monitor, StoreX, StoreY);
+}
+
 } /* bakge */
