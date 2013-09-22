@@ -30,23 +30,32 @@ namespace bakge
 void GetMonitorResolution(GLFWmonitor* Monitor, int* StoreX, int* StoreY)
 {
 
-	const GLFWvidmode* MonitorVideoMode = glfwGetVideoMode(Monitor);
-	*(StoreX) = MonitorVideoMode->width;
-	*(StoreY) = MonitorVideoMode->height;
+    const GLFWvidmode* MonitorVideoMode = glfwGetVideoMode(Monitor);
+    *(StoreX) = MonitorVideoMode->width;
+    *(StoreY) = MonitorVideoMode->height;
 }
 
 
 void GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
 {
 
-	GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
-	GetMonitorResolution(PrimaryMonitor, StoreX, StoreY);
+    GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+    GetMonitorResolution(PrimaryMonitor, StoreX, StoreY);
 }
 
 
 void GetMonitorPhysicalSize(GLFWmonitor* Monitor, int* StoreX, int* StoreY)
 {
-	glfwGetMonitorPhysicalSize(Monitor, StoreX, StoreY);
+
+    glfwGetMonitorPhysicalSize(Monitor, StoreX, StoreY);
+}
+
+
+void GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
+{
+
+    GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+    GetMonitorPhysicalSize(PrimaryMonitor, StoreX, StoreY);
 }
 
 } /* bakge */
