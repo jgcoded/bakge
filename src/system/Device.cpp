@@ -36,4 +36,12 @@ void GetMonitorResolution(GLFWmonitor* Monitor, int* StoreX, int* StoreY)
 }
 
 
+void GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
+{
+
+	GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+	GetMonitorResolution(PrimaryMonitor, StoreX, StoreY);
+}
+
+
 } /* bakge */
