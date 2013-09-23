@@ -13,6 +13,7 @@ set(TESTS
   cone
   crowd
   cylinder
+  device
   info
   linkedlist
   matrix
