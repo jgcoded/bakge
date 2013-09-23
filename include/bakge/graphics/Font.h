@@ -24,7 +24,7 @@
 
 /*!
  * @file Font.h
- * @brief Font class delcaration.
+ * @brief Font class declaration.
  */
 
 #ifndef BAKGE_GRAPHICS_FONT_H
