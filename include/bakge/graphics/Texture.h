@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Texture.h
+ * @brief Texture class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_TEXTURE_H
 #define BAKGE_GRAPHICS_TEXTURE_H
 
