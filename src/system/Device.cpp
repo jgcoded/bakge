@@ -65,7 +65,8 @@ Result GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
 int GetNumberMonitors()
 {
     int MonitorCount;
-    glfwGetMonitors(&MonitorCount);
+    if(glfwGetMonitors(&MonitorCount) == NULL)
+        return -1;
 
     return MonitorCount;
 }
