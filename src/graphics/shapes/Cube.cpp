@@ -332,4 +332,19 @@ Result Cube::SetDimensions(Scalar X, Scalar Y, Scalar Z)
     return BGE_SUCCESS;
 }
 
+
+Scalar Cube::GetDimensions(Scalar* Width, Scalar* Height, Scalar* Length) const
+{
+    if(Width != NULL)
+        *Width = Dimensions[0];
+
+    if(Height != NULL)
+        *Height = Dimensions[1];
+
+    if(Length != NULL)
+        *Length = Dimensions[2];
+
+    return Dimensions[0] * Dimensions[1] * Dimensions[2];
+}
+
 } /* bakge */

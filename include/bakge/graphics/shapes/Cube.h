@@ -55,10 +55,15 @@ public:
      * */
     Result SetDimensions(Scalar X, Scalar Y, Scalar Z);
 
-    BGE_INL Vector4 BGE_NCP GetDimensions() const
-    {
-        return Dimensions;
-    }
+    /*! @brief Get the Cube's dimensions.
+     *
+     * @param[out] Width Size along the X axis.
+     * @param[out] Height Size along the Y axis.
+     * @param[out] Length Size along the Z axis.
+     *
+     * @return Volume of the Cube.
+     */
+    Scalar GetDimensions(Scalar* Width, Scalar* Height, Scalar* Length) const;
 
 }; /* Cube */
 
