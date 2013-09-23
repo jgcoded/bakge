@@ -65,6 +65,18 @@ public:
 
     BGE_FACTORY Font* Load(const char* FontData);
 
+    /*! @brief Create a glyph map Texture for a range of glyphs.
+     *
+     * This method allocates a new Texture from a baked glyph map containing
+     * the glyphs between GlyphStart and GlyphEnd (inclusive).
+     *
+     * @param[out] Target Pointee set to address of allocated Texture.
+     * @param[in] GlyphStart First glyph index to bake.
+     * @param[in] GlyphEnd Last glyph to bake.
+     * @param[in] PixelHeight Height of font glyphs in pixels.
+     *
+     * @return The number of baked glyphs.
+     */
     int Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight);
 
 }; /* Font */
