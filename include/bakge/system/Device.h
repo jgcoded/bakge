@@ -35,12 +35,36 @@
 namespace bakge
 {
 
+/*! @brief Get the resolution of the primary monitor.
+ *
+ * Get the resolution of the primary monitor.
+ *
+ * @param[out] StoreX Pointee set to screen resolution width.
+ * @param[out] StoreY Pointee set to screen resolution height.
+ *
+ * @return BGE_FAILURE if any errors occurred. In such a case, *StoreX and
+ * *StoreY are not modified. BGE_SUCCESS otherwise.
+ */
 BGE_FUNC Result GetPrimaryMonitorResolution(int* StoreX, int* StoreY);
 
-
+/*! @brief Get the physical size in millimeters of the primary monitor.
+ *
+ * Get the physical size in millimeters of the primary monitor.
+ *
+ * @param[out] StoreX Pointee set to monitor's physical width.
+ * @param[out] StoreY Pointee set to monitor's physical height.
+ *
+ * @return BGE_FAILURE if any errors occurred. In such a case, *StoreX and
+ * *StoreY are not modified. BGE_SUCCESS otherwise.
+ */
 BGE_FUNC Result GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY);
 
-
+/*! @brief Get the number of attached monitors.
+ *
+ * Get the number of attached monitors.
+ *
+ * @return Number of attached monitors; -1 if any errors occurred.
+ */
 BGE_FUNC int GetNumberMonitors();
 
 } /* bakge */
