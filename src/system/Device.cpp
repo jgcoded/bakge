@@ -41,8 +41,11 @@ Result GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
         return BGE_FAILURE;
     }
 
-    *StoreX = MonitorVideoMode->width;
-    *StoreY = MonitorVideoMode->height;
+    if(StoreX != NULL)
+        *StoreX = MonitorVideoMode->width;
+
+    if(StoreY != NULL)
+        *StoreY = MonitorVideoMode->height;
 
     return BGE_SUCCESS;
 }
