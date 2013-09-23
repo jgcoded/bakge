@@ -35,10 +35,10 @@
 namespace bakge
 {
 
-BGE_FUNC void GetPrimaryMonitorResolution(int* StoreX, int* StoreY);
+BGE_FUNC Result GetPrimaryMonitorResolution(int* StoreX, int* StoreY);
 
 
-BGE_FUNC void GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY);
+BGE_FUNC Result GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY);
 
 
 BGE_FUNC int GetNumberMonitors();

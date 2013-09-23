@@ -27,27 +27,43 @@
 namespace bakge
 {
 
-void GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
+Result GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
 {
-
     GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+    if(PrimaryMonitor == NULL) {
+        printf("Error getting primary monitor\n");
+        return BGE_FAILURE;
+    }
+
     const GLFWvidmode* MonitorVideoMode = glfwGetVideoMode(PrimaryMonitor);
-    *(StoreX) = MonitorVideoMode->width;
-    *(StoreY) = MonitorVideoMode->height;
+    if(MonitorVideoMode == NULL) {
+        printf("Error getting primary monitor video mode\n");
+        return BGE_FAILURE;
+    }
+
+    *StoreX = MonitorVideoMode->width;
+    *StoreY = MonitorVideoMode->height;
+
+    return BGE_SUCCESS;
 }
 
 
-void GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
+Result GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
 {
-
     GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+    if(PrimaryMonitor == NULL) {
+        printf("Error getting primary monitor\n");
+        return BGE_FAILURE;
+    }
+
     glfwGetMonitorPhysicalSize(PrimaryMonitor, StoreX, StoreY);
+
+    return BGE_SUCCESS;
 }
 
 
 int GetNumberMonitors()
 {
-
     int MonitorCount;
     glfwGetMonitors(&MonitorCount);
 
