@@ -27,4 +27,31 @@
 namespace bakge
 {
 
+void GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
+{
+
+    GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode* MonitorVideoMode = glfwGetVideoMode(PrimaryMonitor);
+    *(StoreX) = MonitorVideoMode->width;
+    *(StoreY) = MonitorVideoMode->height;
+}
+
+
+void GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
+{
+
+    GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
+    glfwGetMonitorPhysicalSize(PrimaryMonitor, StoreX, StoreY);
+}
+
+
+int GetNumberMonitors()
+{
+
+    int MonitorCount;
+    glfwGetMonitors(&MonitorCount);
+
+    return MonitorCount;
+}
+
 } /* bakge */
