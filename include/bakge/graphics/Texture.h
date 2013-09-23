@@ -79,7 +79,7 @@ public:
      * @param[in] Type Type of data being uploaded.
      * @param[in] Data The texture data to upload.
      *
-     * @return Pointer to newly created texture; NULL if any errors occurred.
+     * @return Pointer to allocated Texture; NULL if any errors occurred.
      *
      * @see http://www.opengl.org/wiki/Texture
      */
