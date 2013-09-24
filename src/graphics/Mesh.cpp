@@ -176,13 +176,13 @@ Result Mesh::NormalData(int NumNormals, const Scalar* Data)
 }
 
 
-Result Mesh::IndexData(int NumIndices, const int* Data)
+Result Mesh::IndexData(int NumTriangles, const int* Data)
 {
     if(MeshBuffers[MESH_BUFFER_INDICES] == 0)
         return BGE_FAILURE;
 
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumIndices * 3,
+    glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumTriangles * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

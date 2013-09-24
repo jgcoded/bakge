@@ -182,7 +182,7 @@ protected:
 
     Result PositionData(int NumPositions, const Scalar* Data);
     Result NormalData(int NumNormals, const Scalar* Data);
-    Result IndexData(int NumIndices, const int* Data);
+    Result IndexData(int NumTriangles, const int* Data);
     Result TexCoordData(int NumTexCoords, const Scalar* Data);
 
 }; /* Mesh */
