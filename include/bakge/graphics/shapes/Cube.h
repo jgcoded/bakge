@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Cube.h
+ * @brief Cube class declaration.
+ */
+
 #ifndef BAKGE_GRAPHICS_SHAPES_CUBE_H
 #define BAKGE_GRAPHICS_SHAPES_CUBE_H
 
@@ -30,18 +35,38 @@
 namespace bakge
 {
 
+/*! @brief The Cube is a 3D block shape centered at the origin.
+ *
+ * The Cube is a 3D block shape centered at the origin. Width, height and
+ * length of the Cube are always 1. To draw non-uniformly scaled cube shapes,
+ * scale the Pawn bound before drawing the Cube.
+ */
 class BGE_API Cube : public Shape
 {
 
 protected:
 
+    /*! @brief Protected Cube constructor.
+     *
+     * Protected Cube constructor.
+     */
     Cube();
 
 
 public:
 
+    /*! @brief Default Cube destructor.
+     *
+     * Default Cube destructor.
+     */
     ~Cube();
 
+    /*! @brief Create a new Cube instance.
+     *
+     * Create a new Cube instance.
+     *
+     * @return Pointer to allocated Cube; NULL if any errors occurred.
+     */
     BGE_FACTORY Cube* Create(Scalar Length, Scalar Width, Scalar Height);
 
     /*! @brief Get the Cube's dimensions.
