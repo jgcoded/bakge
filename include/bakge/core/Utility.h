@@ -72,6 +72,12 @@ namespace bakge
  * Init must be called before any Bakge class or method can safely be used.
  * Calling Init twice or failing to match it with a corresponding Deinit call
  * before your program exits can cause crashes or memory leaks.
+ *
+ * @param[in] argc Number of command-line arguments.
+ * @param[in] argv Array of command-line arguments.
+ *
+ * @return BGE_SUCCESS if initialization was successful; BGE_FAILURE if any
+ * errors occurred.
  */
 BGE_FUNC Result Init(int argc, char* argv[]);
 
@@ -81,10 +87,15 @@ BGE_FUNC Result Init(int argc, char* argv[]);
  * internal resources that were allocated when Init was called. Calling
  * Deinit when not preceded by an Init call may result in crashes or memory
  * leaks.
+ *
+ * @return BGE_SUCCESS if deinitialization was successful; BGE_FAILURE if any
+ * errors occurred.
  */
 BGE_FUNC Result Deinit();
 
 /*! @brief Print computer system and OpenGL version info to stdout.
+ *
+ * Print computer system and OpenGL version info to stdout.
  */
 BGE_FUNC void SystemInfo();
 
