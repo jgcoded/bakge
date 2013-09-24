@@ -69,7 +69,7 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
         -1.0f, 0, 0  // H-X
     };
 
-    static const unsigned int Indices[] = {
+    static const int Indices[] = {
         0, 9, 6, // +Z
         0, 3, 6,
         15, 18, 21, // -Z
@@ -145,21 +145,10 @@ Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
         return NULL;
     }
 
-    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Positions[0]) * 72, Positions,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_NORMALS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Normals[0]) * 72, Normals,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(TexCoords[0]) * 48, TexCoords,
-                                                        GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, C->MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(Indices[0]) * 36,
-                                            Indices, GL_STATIC_DRAW);
+    C->PositionData(24, Positions);
+    C->NormalData(24, Normals);
+    C->TexCoordData(24, TexCoords);
+    C->IndexData(36, Indices);
 
     C->Unbind();
 
