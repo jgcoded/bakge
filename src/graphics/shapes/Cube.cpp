@@ -40,7 +40,7 @@ Cube::~Cube()
 }
 
 
-Cube* Cube::Create(Scalar Length, Scalar Width, Scalar Height)
+Cube* Cube::Create()
 {
     static const Scalar Normals[] = {
         0, 0, +1.0f, // A+Z

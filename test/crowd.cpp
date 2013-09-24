@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
     Tex = bakge::Texture::Create(512, 512, NULL, GL_RGB, GL_UNSIGNED_BYTE,
                                                             (void*)Bitmap);
 
-    Obj = bakge::Cube::Create(0.35f, 0.35f, 0.35f);
+    Obj = bakge::Cube::Create();
 
 #define CROWD_SIZE 50
     Group = bakge::Crowd::Create(CROWD_SIZE);

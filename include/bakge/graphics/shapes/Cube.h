@@ -67,7 +67,7 @@ public:
      *
      * @return Pointer to allocated Cube; NULL if any errors occurred.
      */
-    BGE_FACTORY Cube* Create(Scalar Length, Scalar Width, Scalar Height);
+    BGE_FACTORY Cube* Create();
 
     /*! @brief Get the Cube's dimensions.
      *
