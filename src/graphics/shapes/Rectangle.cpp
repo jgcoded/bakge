@@ -29,6 +29,8 @@ namespace bakge
 
 Rectangle::Rectangle()
 {
+    Width = 0;
+    Height = 0;
 }
 
 
@@ -61,6 +63,8 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     Rectangle* R = new Rectangle;
 
     R->NumIndices = 6;
+    R->Width = Width;
+    R->Height = Height;
 
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
@@ -126,6 +130,18 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
     Unbind();
 
     return BGE_SUCCESS;
+}
+
+
+Scalar GetDimensions(Scalar* W, Scalar* H) const
+{
+    if(W != NULL)
+        *W = Width;
+
+    if(H != NULL)
+        *H = Height;
+
+    return Width * Height;
 }
 
 } /* bakge */

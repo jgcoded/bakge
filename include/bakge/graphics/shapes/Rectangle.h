@@ -30,12 +30,20 @@
 namespace bakge
 {
 
+/*! @brief A Shape primarily used for 2D rendering.
+ *
+ * The Rectangle class represents a rectangular shape drawn in the XY plane
+ * in 3D Cartesian space. While it is primarily intended to be used for
+ * drawing 2D scenes, it could technically be used in a 3D setting. The
+ * Rectangle's normals point along the +Z axis.
+ */
 class BGE_API Rectangle : public Shape
 {
 
 protected:
 
-	Vector4 Dimensions;
+    Scalar Width;
+    Scalar Height;
 
     /*! @brief Default Rectangle constructor.
      *
@@ -56,10 +64,7 @@ public:
 
     Result SetDimensions(Scalar Width, Scalar Height);
 
-    BGE_INL Vector4 BGE_NCP GetDimensions() const
-    {
-        return Dimensions;
-    }
+    Scalar GetDimensions(Scalar* W, Scalar* H) const;
 
 }; /* Rectangle */
 
