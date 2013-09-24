@@ -9,33 +9,15 @@ endif()
 set(TESTS
   bullet
   client
-  clock
-  cone
   crowd
-  cylinder
   device
-  info
   linkedlist
-  matrix
   minlua
-  node
-  pawn
-  frontrenderer
   font
-  quaternion
   rectangle
   server
-  shapestest
-  sharedcontext
-  sphere
-  texture
   thread
-  types
-  vao
-  vector3
-  vector4
   ui
-  window
 )
 
 if(NOT APPLE)
