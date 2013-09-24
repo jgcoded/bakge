@@ -174,6 +174,39 @@ public:
      */
     virtual Result Draw() const;
 
+    /*! @brief Get the number of triangles in the Mesh.
+     *
+     * Get the number of triangles in the Mesh.
+     *
+     * @return Number of triangles in the Mesh.
+     */
+    BGE_INL int GetNumTriangles() const
+    {
+        return NumTriangles;
+    }
+
+    /*! @brief Get the number of indices used to draw the Mesh's triangles.
+     *
+     * Get the number of indices used to draw the Mesh's triangles.
+     *
+     * @return Number of indices in the Mesh.
+     */
+    BGE_INL int GetNumIndices() const
+    {
+        return NumIndices;
+    }
+
+    /*! @brief Get the number of vertices in the Mesh.
+     *
+     * Get the number of vertices in the Mesh.
+     *
+     * @return Number of vertices in the Mesh.
+     */
+    BGE_INL int GetNumVertices() const
+    {
+        return NumVertices;
+    }
+
 
 protected:
 
