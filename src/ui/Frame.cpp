@@ -41,7 +41,7 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
 {
     Frame* U = new Frame;
 
-    U->NumIndices = 6;
+    U->NumTriangles = 2;
 
     if(U->CreateBuffers() != BGE_SUCCESS) {
         delete U;

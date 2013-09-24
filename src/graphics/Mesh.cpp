@@ -31,7 +31,6 @@ Mesh::Mesh()
 {
     NumVertices = 0;
     NumTriangles = 0;
-    NumIndices = 0;
     memset((void*)MeshBuffers, 0, sizeof(GLuint) * NUM_MESH_BUFFERS);
 }
 
@@ -139,7 +138,7 @@ Result Mesh::ClearBuffers()
 
 Result Mesh::DrawInstanced(int Count) const
 {
-    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumIndices,
+    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumTriangles * 3,
                             GL_UNSIGNED_INT, (void*)0, Count, 0);
 
     return BGE_SUCCESS;
@@ -232,7 +231,7 @@ Result Mesh::SetDrawStyle(MESH_DRAW_STYLE Style)
 
 Result Mesh::Draw() const
 {
-    glDrawElements(DrawStyle, NumIndices, GL_UNSIGNED_INT, (GLvoid*)0);
+    glDrawElements(DrawStyle, NumTriangles * 3, GL_UNSIGNED_INT, (GLvoid*)0);
 
     return BGE_SUCCESS;
 }

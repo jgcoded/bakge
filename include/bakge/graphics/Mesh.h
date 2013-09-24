@@ -103,7 +103,6 @@ protected:
 
     int NumVertices;
     int NumTriangles;
-    int NumIndices;
 
     GLuint MeshBuffers[NUM_MESH_BUFFERS];
 
@@ -183,17 +182,6 @@ public:
     BGE_INL int GetNumTriangles() const
     {
         return NumTriangles;
-    }
-
-    /*! @brief Get the number of indices used to draw the Mesh's triangles.
-     *
-     * Get the number of indices used to draw the Mesh's triangles.
-     *
-     * @return Number of indices in the Mesh.
-     */
-    BGE_INL int GetNumIndices() const
-    {
-        return NumIndices;
     }
 
     /*! @brief Get the number of vertices in the Mesh.

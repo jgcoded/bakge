@@ -31,7 +31,6 @@ Cube::Cube()
 {
     NumTriangles = 12; // 6 faces, 2 triangles per face
     NumVertices = 24; // 4 vertices per face
-    NumIndices = 36; // 3 indices per triangle
 }
 
 

@@ -62,9 +62,9 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     Rectangle* R = new Rectangle;
 
-    R->NumIndices = 6;
     R->Width = Width;
     R->Height = Height;
+    R->NumTriangles = 2;
 
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
