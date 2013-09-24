@@ -90,6 +90,26 @@ BGE_FUNC void SystemInfo();
 
 BGE_WUNUSED BGE_FUNC Byte* LoadFileContents(const char* Path);
 
+/*! @brief Write a time-stamped log message to bakge.log.
+ *
+ * The log file is cleared and opened when bakge::Init is called, and is
+ * saved to disk and closed whne bakge::Deinit is called. Is a wrapper around
+ * the standard library printf function.
+ *
+ * @todo Time-stamp, print to file instead of stdout.
+ */
+BGE_INL int Log(const char* Format, ...)
+{
+    int i;
+    va_list ArgList;
+
+    va_start(ArgList, Format);
+    i = vprintf(Format, ArgList);
+    va_end(ArgList);
+
+    return i;
+}
+
 } /* bakge */
 
 #endif /* BAKGE_CORE_UTILITY_H */
