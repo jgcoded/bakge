@@ -32,8 +32,6 @@ namespace bakge
 
 class BGE_API Cube : public Shape
 {
-    Vector4 Dimensions;
-
 
 protected:
 
@@ -45,15 +43,6 @@ public:
     ~Cube();
 
     BGE_FACTORY Cube* Create(Scalar Length, Scalar Width, Scalar Height);
-
-    /* *
-     * Change dimensions of the cube. If one of the sizes is below 0
-     * the dimension remains unchaged.
-     *   X: Width
-     *   Y: Height
-     *   Z: Length
-     * */
-    Result SetDimensions(Scalar X, Scalar Y, Scalar Z);
 
     /*! @brief Get the Cube's dimensions.
      *
