@@ -177,12 +177,75 @@ public:
 
 protected:
 
+    /*! @brief Create the OpenGL vertex buffers that store Mesh data.
+     *
+     * Create the OpenGL vertex buffers that store Mesh data. Calls
+     * ClearBuffers and reallocates the buffers.
+     *
+     * @return BGE_SUCCESS if vertex buffers were successfully allocated;
+     * BGE_FAILURE if any errors occurred.
+     */
     Result CreateBuffers();
+
+    /*! @brief Deallocate the OpenGL vertex buffers that store Mesh data.
+    *
+    * Deallocate the OpenGL vertex buffers that store Mesh data.
+    *
+    * @return BGE_SUCCESS if vertex buffers were successfully deallocated;
+    * BGE_FAILURE if any errors occurred.
+    */
     Result ClearBuffers();
 
+    /*! @brief Set the contents of the Mesh's vertex position data store.
+     *
+     * Set the mesh's vertex position data. Data must be fed as an array of
+     * structs.
+     *
+     * @param[in] NumPositions Number of vertices in the Mesh.
+     * @param[in] Data Pointer to buffer holding vertex x, y and z positions.
+     *
+     * @return BGE_SUCCESS if the vertex positions data store was successfully
+     * filled; BGE_FAILURE if any errors occurred.
+     */
     Result PositionData(int NumPositions, const Scalar* Data);
+
+    /*! @brief Set the contents of the Mesh's vertex normal data store.
+     *
+     * Set the contents of the Mesh's vertex normal data store. Data must be
+     * fed as an array of structs.
+     *
+     * @param[in] NumNormals Number of vertex normals in the Mesh.
+     * @param[in] Data Pointer to buffer holding normal x, y and z components.
+     *
+     * @return BGE_SUCCESS if the vertex normal data store was successfully
+     * filled; BGE_FAILURE if any errors occurred.
+     */
     Result NormalData(int NumNormals, const Scalar* Data);
+
+    /*! @brief Set the contents of the Mesh's triangle indices data store.
+     *
+     * Set the contents of the Mesh's triangle indices data store. Every three
+     * indices form a triangle combination (order does not matter).
+     *
+     * @param[in] NumTriangles Number of triangles (3 indices per triangle).
+     * @param[in] Data Buffer containing triangle indices.
+     *
+     * @return BGE_SUCCESS if the triangle indices data store was successfully
+     * filled; BGE_FAILURE if any errors occurred.
+     */
     Result IndexData(int NumTriangles, const int* Data);
+
+    /*! @brief Set the contents of the Mesh's texture coordinates data store.
+     *
+     * Set the contents of the Mesh's texture coordinates data store. Data
+     * must be fed as an array of structs.
+     *
+     * @param[in] NumTexCoords Number of texture coordinates.
+     * @param[in] Data Buffer containing texture coordinate x and y components.
+     *
+     * @return BGE_SUCCESS if the vertex texture coordinates data store was
+     * successfully filled; BGE_FAILURE if any errors occurred.
+     */
     Result TexCoordData(int NumTexCoords, const Scalar* Data);
 
 }; /* Mesh */
