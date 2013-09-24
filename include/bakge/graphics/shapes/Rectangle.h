@@ -37,14 +37,22 @@ protected:
 
 	Vector4 Dimensions;
 
+    /*! @brief Default Rectangle constructor.
+     *
+     * Default Rectangle constructor.
+     */
 	Rectangle();
 
 
 public:
 
+    /*! @brief Default Rectangle destructor.
+     *
+     * Default Rectangle destructor.
+     */
     ~Rectangle();
 
-    BGE_FACTORY Rectangle* Create(Scalar Length, Scalar Width);
+    BGE_FACTORY Rectangle* Create(Scalar Width, Scalar Height);
 
     Result SetDimensions(Scalar X, Scalar Y);
 
