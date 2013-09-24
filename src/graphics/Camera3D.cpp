@@ -60,7 +60,10 @@ Vector4 BGE_NCP Camera3D::GetTarget() const
 Result Camera3D::Bind() const
 {
     GLint Location, Program = 0;
-    Matrix Mat;
+    Matrix Proj, View;
+
+    Proj.SetPerspective(FOV, Aspect, Near, Far);
+    View.SetLookAt(Position, Target, Vector4(0, 1, 0, 0));
 
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
@@ -71,18 +74,14 @@ Result Camera3D::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
-    Mat.SetPerspective(FOV, Aspect, Near, Far);
-
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Mat[0]);
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &Proj[0]);
 
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0)
         return BGE_FAILURE;
 
-    Mat.SetLookAt(Position, Target, Vector4(0, 1, 0, 0));
-
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Mat[0]);
+    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
     return BGE_SUCCESS;
 }
