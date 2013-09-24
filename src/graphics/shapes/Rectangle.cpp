@@ -133,7 +133,7 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
 }
 
 
-Scalar GetDimensions(Scalar* W, Scalar* H) const
+Scalar Rectangle::GetDimensions(Scalar* W, Scalar* H) const
 {
     if(W != NULL)
         *W = Width;
