@@ -32,6 +32,7 @@ int main(int argc, char* argv[])
     bakge::Cube* Obj;
     bakge::Texture* Tex;
     bakge::Crowd* Group;
+    bakge::Camera3D* Cam;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
@@ -87,16 +88,9 @@ int main(int argc, char* argv[])
 
     Obj->SetDrawStyle(bakge::MESH_DRAW_STYLE_SOLID);
 
-    bakge::Matrix Perspective;
-    bakge::Matrix View;
-
-    GLint ShaderProgram, Location;
-    Perspective.SetPerspective(80.0f, 1024.0f / 768.0f, 0.1f, 500.0f);
-    glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-    Location = glGetUniformLocation(ShaderProgram, BGE_PROJECTION_UNIFORM);
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &Perspective[0]);
-    Location = glGetUniformLocation(ShaderProgram, BGE_VIEW_UNIFORM);
-    glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+    Cam = new bakge::Camera3D;
+    Cam->SetPosition(0, 0.5f, 1.25f);
+    Cam->SetTarget(0, 0, 0);
 
     float Rot = 0;
     bakge::Microseconds NowTime;
@@ -116,19 +110,11 @@ int main(int argc, char* argv[])
         float DeltaTime = (float)(NowTime - LastTime) / 1000000;
         LastTime = NowTime;
 
-        Rot += 1.0f * DeltaTime;
-        View.SetLookAt(
-            bakge::Point(0, 0.5f, 1.25f),
-            bakge::Point(0.0f, 0, 0.0f),
-            bakge::UnitVector(0, 1, 0)
-        );
-        glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
-        glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
-
         for(int i=0;i<CROWD_SIZE;++i)
             Group->RotateMember(i, bakge::Quaternion::FromEulerAngles(0,
                                                         DeltaTime, 0));
 
+        Cam->Bind();
         Tex->Bind();
         Obj->Bind();
         Group->Bind();
@@ -136,6 +122,7 @@ int main(int argc, char* argv[])
         Group->Unbind();
         Obj->Unbind();
         Tex->Unbind();
+        Cam->Unbind();
 
         Win->SwapBuffers();
     }
@@ -151,6 +138,9 @@ int main(int argc, char* argv[])
 
     if(Group != NULL)
         delete Group;
+
+    if(Cam != NULL)
+        delete Cam;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();
