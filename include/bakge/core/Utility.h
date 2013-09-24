@@ -84,7 +84,7 @@ BGE_FUNC Result Init(int argc, char* argv[]);
  */
 BGE_FUNC Result Deinit();
 
-/*! @brief Print computer system and OpenGL version info to stdou
+/*! @brief Print computer system and OpenGL version info to stdout.
  */
 BGE_FUNC void SystemInfo();
 
