@@ -655,6 +655,7 @@ WARN_LOGFILE           = @BAKGE_DOC_DIR@/warnings.txt
 INPUT                  = @BAKGE_SOURCE_DIR@/include/bakge/Bakge.h \
                          @BAKGE_SOURCE_DIR@/include/bakge/core \
                          @BAKGE_SOURCE_DIR@/include/bakge/graphics \
+                         @BAKGE_SOURCE_DIR@/include/bakge/graphics/shapes \
                          @BAKGE_SOURCE_DIR@/include/bakge/input \
                          @BAKGE_SOURCE_DIR@/include/bakge/system \
                          @BAKGE_SOURCE_DIR@/include/bakge/math \
