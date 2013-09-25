@@ -30,6 +30,11 @@
 namespace bakge
 {
 
+/*! @brief A shape representing all points equidistant from an origin point.
+ *
+ * A shape representing all points equidistant from an origin point.
+ *
+ */
 class BGE_API Sphere : public Shape
 {
     Scalar Radius;
@@ -39,13 +44,25 @@ class BGE_API Sphere : public Shape
 
 protected:
 
+    /*! @brief Default Sphere constructor.
+     *
+     * Default Sphere constructor.
+     */
     Sphere();
 
 
 public:
 
+    /*! @brief Default Sphere desstructor.
+     *
+     * Default Sphere desstructor.
+     */
     ~Sphere();
 
+    /*! @brief Create a new Sphere.
+     *
+     * Create a new Sphere.
+     */
     BGE_FACTORY Sphere* Create(Scalar Radius);
 
     BGE_INL Scalar BGE_NCP SetRadius(Scalar BGE_NCP R)
