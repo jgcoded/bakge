@@ -92,8 +92,17 @@ Result Pawn::Bind() const
     glBufferData(GL_ARRAY_BUFFER, sizeof(Transformation[0]) * 16,
                             &Transformation[0], GL_DYNAMIC_DRAW);
 
-    if(Node::Bind() == BGE_FAILURE)
-        Errors = BGE_FAILURE;
+    /* *
+     * Each attribute pointer has a stride of 4. Since mat4x4 are composed
+     * of 4 vec4 components, set each of these individually
+     * */
+    for(int i=0;i<4;++i) {
+        glEnableVertexAttribArray(Location + i);
+        glVertexAttribPointer(Location + i, 4, GL_FLOAT, GL_FALSE, 0,
+                            (const GLvoid*)(sizeof(Scalar) * 4 * i));
+        /* So the attribute is updated per instance, not per vertex */
+        glVertexAttribDivisor(Location + i, 1);
+    }
 
     return Errors;
 }

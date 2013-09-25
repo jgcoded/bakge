@@ -54,7 +54,13 @@ Result Node::Bind() const
     if(Location < 0)
         return BGE_FAILURE;
 
+    Matrix Translation = Matrix::Translation(Position[0], Position[1],
+                                                        Position[2]);
+
+    /* Update the buffer with the new position */
     glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
+                                                            GL_DYNAMIC_DRAW);
 
     /* *
      * Each attribute pointer has a stride of 4. Since mat4x4 are composed
@@ -85,13 +91,6 @@ Vector4 BGE_NCP Node::SetPosition(Scalar X, Scalar Y, Scalar Z)
     Position[0] = X;
     Position[1] = Y;
     Position[2] = Z;
-
-    Matrix Translation = Matrix::Translation(X, Y, Z);
-
-    /* Update the buffer with the new position */
-    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Translation[0]) * 16, &Translation[0],
-                                                            GL_DYNAMIC_DRAW);
 
     return Position;
 }
