@@ -60,7 +60,15 @@ public:
      *
      * Pure-virtual destructor.
      */
-    virtual ~Node() = 0;
+    virtual ~Node();
+
+    /*! @brief Create a new Node at a given position.
+     *
+     * Create a new Node at a given position.
+     *
+     * @return Pointer to allocated Node; NULL if any errors occurred.
+     */
+    BGE_FACTORY Node* Create(Scalar X, Scalar Y, Scalar Z);
 
     /*! @brief Set OpenGL state so objects are rendered from this node's
      * position.

@@ -102,4 +102,26 @@ Vector4 BGE_NCP Node::GetPosition() const
     return Position;
 }
 
+
+Node* Node::Create(Scalar X, Scalar Y, Scalar Z)
+{
+    GLuint Store;
+    glGenBuffers(1, &Store);
+    if(Store == 0) {
+        printf("Error allocating Node matrix data store\n");
+        return NULL;
+    }
+
+    Node* N = new Node;
+    if(N == NULL) {
+        printf("Error allocating memory for Node\n");
+        return NULL;
+    }
+
+    N->ModelMatrixBuffer = Store;
+    N->SetPosition(X, Y, Z);
+
+    return N;
+}
+
 } /* bakge */
