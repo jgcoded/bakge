@@ -195,6 +195,18 @@ public:
      */
     Result RotateMember(int MemberIndex, Quaternion Rotation);
 
+    /*! @brief Rotate a member globally around an arbitrary axis.
+     *
+     * Rotate a member globally around an arbitrary axis.
+     *
+     * @param[in] MemberIndex Index of the member to rotate.
+     * @param[in] Rotation Quaternion to rotate the member by.
+     *
+     * @return BGE_SUCCESS if the member was successfully rotated;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result RotateMemberGlobal(int MemberIndex, Quaternion BGE_NCP Rot);
+
     /*! @brief Non-uniformly scale a member.
      *
      * Non-uniformly scale a member.

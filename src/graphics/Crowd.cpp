@@ -206,6 +206,21 @@ Result Crowd::RotateMember(int MemberIndex, Quaternion Rotation)
 }
 
 
+Result Crowd::RotateMemberGlobal(int MemberIndex, Quaternion BGE_NCP Rot)
+{
+    /* Prevent out-of-bounds transformations */
+    if(MemberIndex < 0 || MemberIndex >= Capacity)
+        return BGE_FAILURE;
+
+    /* Rotate the member */
+    Rotations[MemberIndex] = Rot * Rotations[MemberIndex];
+
+    SetDataStore(MemberIndex);
+
+    return BGE_SUCCESS;
+}
+
+
 Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 {
     /* Prevent out-of-bounds transformations */
