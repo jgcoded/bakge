@@ -270,6 +270,12 @@ Quaternion BGE_NCP Crowd::SetMemberRotation(int Index, Quaternion BGE_NCP Rot)
 {
     Rotations[Index] = Rot;
 
+Quaternion BGE_NCP Crowd::GetMemberRotation(int Index) const
+{
+    return Rotations[Index];
+}
+
+
     /* Create a new model matrix to copy into the buffer */
     Matrix Transformation;
     Transformation.Scale(Scales[Index * 3 + 0],
