@@ -183,22 +183,7 @@ Result Crowd::TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
     Positions[MemberIndex * 3 + 1] += Y;
     Positions[MemberIndex * 3 + 2] += Z;
 
-    /* Create a new model matrix to copy into the buffer */
-    Matrix Transformation;
-    Transformation.Scale(Scales[MemberIndex * 3 + 0],
-                        Scales[MemberIndex * 3 + 1],
-                        Scales[MemberIndex * 3 + 2]);
-    Transformation *= Rotations[MemberIndex].ToMatrix();
-    Transformation.Translate(Positions[MemberIndex * 3 + 0],
-                            Positions[MemberIndex * 3 + 1],
-                            Positions[MemberIndex * 3 + 2]);
-
-    GLint Stride = sizeof(Scalar) * 16;
-
-    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                                (const GLvoid*)&Transformation[0]);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    SetDataStore(MemberIndex);
 
     return BGE_SUCCESS;
 }
@@ -213,22 +198,7 @@ Result Crowd::RotateMember(int MemberIndex, Quaternion Rotation)
     /* Rotate the member */
     Rotations[MemberIndex] *= Rotation;
 
-    /* Create a new model matrix to copy into the buffer */
-    Matrix Transformation;
-    Transformation.Scale(Scales[MemberIndex * 3 + 0],
-                        Scales[MemberIndex * 3 + 1],
-                        Scales[MemberIndex * 3 + 2]);
-    Transformation *= Rotations[MemberIndex].ToMatrix();
-    Transformation.Translate(Positions[MemberIndex * 3 + 0],
-                            Positions[MemberIndex * 3 + 1],
-                            Positions[MemberIndex * 3 + 2]);
-
-    GLint Stride = sizeof(Scalar) * 16;
-
-    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                                (const GLvoid*)&Transformation[0]);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    SetDataStore(MemberIndex);
 
     return BGE_SUCCESS;
 }
@@ -245,22 +215,7 @@ Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
     Scales[MemberIndex * 3 + 1] *= Y;
     Scales[MemberIndex * 3 + 2] *= Z;
 
-    /* Create a new model matrix to copy into the buffer */
-    Matrix Transformation;
-    Transformation.Scale(Scales[MemberIndex * 3 + 0],
-                        Scales[MemberIndex * 3 + 1],
-                        Scales[MemberIndex * 3 + 2]);
-    Transformation *= Rotations[MemberIndex].ToMatrix();
-    Transformation.Translate(Positions[MemberIndex * 3 + 0],
-                            Positions[MemberIndex * 3 + 1],
-                            Positions[MemberIndex * 3 + 2]);
-
-    GLint Stride = sizeof(Scalar) * 16;
-
-    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER, Stride * MemberIndex, Stride,
-                                (const GLvoid*)&Transformation[0]);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    SetDataStore(MemberIndex);
 
     return BGE_SUCCESS;
 }
@@ -270,12 +225,20 @@ Quaternion BGE_NCP Crowd::SetMemberRotation(int Index, Quaternion BGE_NCP Rot)
 {
     Rotations[Index] = Rot;
 
+    SetDataStore(Index);
+
+    return Rotations[Index];
+}
+
+
 Quaternion BGE_NCP Crowd::GetMemberRotation(int Index) const
 {
     return Rotations[Index];
 }
 
 
+Result Crowd::SetDataStore(int Index)
+{
     /* Create a new model matrix to copy into the buffer */
     Matrix Transformation;
     Transformation.Scale(Scales[Index * 3 + 0],
@@ -286,20 +249,11 @@ Quaternion BGE_NCP Crowd::GetMemberRotation(int Index) const
                             Positions[Index * 3 + 1],
                             Positions[Index * 3 + 2]);
 
-    GLint Stride = sizeof(Scalar) * 16;
-
     glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
-    glBufferSubData(GL_ARRAY_BUFFER, Stride * Index, Stride,
-                                (const GLvoid*)&Transformation[0]);
+    glBufferSubData(GL_ARRAY_BUFFER, 64 * Index, 64, &Transformation[0]);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    return Rotations[Index];
-}
-
-
-Quaternion BGE_NCP Crowd::GetMemberRotation(int Index) const
-{
-    return Rotations[Index];
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

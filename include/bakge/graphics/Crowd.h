@@ -77,6 +77,20 @@ protected:
      */
     Crowd();
 
+    /*! @brief Set the contents of a member's buffer from array data.
+     *
+     * Set the contents of a member's buffer from array data. After a member
+     * is transformed, its buffer data must be set to the new and correct
+     * values. This internal method does so for the buffer at the
+     * appropriate offset for the member's index.
+     *
+     * @param[in] Index Member array index.
+     *
+     * @return BGE_SUCCESS if the member's buffer data was successfully set;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result SetDataStore(int Index);
+
 
 public:
 
