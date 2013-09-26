@@ -209,8 +209,25 @@ public:
      */
     Result ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
 
+    /*! @brief Get the rotation of a Crowd member.
+     *
+     * Get the rotation of a Crowd member.
+     *
+     * @param[in] Index Member array index.
+     *
+     * @return constref to member's rotation.
+     */
     Quaternion BGE_NCP GetMemberRotation(int Index) const;
 
+    /*! @brief Set the rotation of a Crowd member.
+     *
+     * Set the rotation of a Crowd member.
+     *
+     * @param[in] Index Member array index.
+     * @param[in] Rot Rotation to set to.
+     *
+     * @return constref to member's rotation after assignment.
+     */
     Quaternion BGE_NCP SetMemberRotation(int Index, Quaternion BGE_NCP Rot);
 
 }; /* Crowd */
