@@ -77,6 +77,17 @@ Quaternion::~Quaternion()
 }
 
 
+Quaternion BGE_NCP Quaternion::operator=(Quaternion BGE_NCP Other)
+{
+    Q0 = Other.Q0;
+    Q1 = Other.Q1;
+    Q2 = Other.Q2;
+    Q3 = Other.Q3;
+
+    return *this;
+}
+
+
 Matrix Quaternion::ToMatrix() const
 {
     return Matrix(

@@ -128,6 +128,14 @@ public:
      */
     ~Quaternion();
 
+    /*! @brief Quaternion assignment operator.
+     *
+     * Set the value of the Quaternion to another's.
+     *
+     * @return constref to the Quaternion after assignment.
+     */
+    Quaternion BGE_NCP operator=(Quaternion BGE_NCP Other);
+
     /*! @brief Return a rotation Matrix described by the Quaternion.
      *
      * This function constructs a Matrix from the quaternion's rotation
