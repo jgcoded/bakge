@@ -265,4 +265,35 @@ Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
     return BGE_SUCCESS;
 }
 
+
+Quaternion BGE_NCP Crowd::SetMemberRotation(int Index, Quaternion BGE_NCP Rot)
+{
+    Rotations[Index] = Rot;
+
+    /* Create a new model matrix to copy into the buffer */
+    Matrix Transformation;
+    Transformation.Scale(Scales[Index * 3 + 0],
+                        Scales[Index * 3 + 1],
+                        Scales[Index * 3 + 2]);
+    Transformation *= Rotations[Index].ToMatrix();
+    Transformation.Translate(Positions[Index * 3 + 0],
+                            Positions[Index * 3 + 1],
+                            Positions[Index * 3 + 2]);
+
+    GLint Stride = sizeof(Scalar) * 16;
+
+    glBindBuffer(GL_ARRAY_BUFFER, CrowdBuffer);
+    glBufferSubData(GL_ARRAY_BUFFER, Stride * Index, Stride,
+                                (const GLvoid*)&Transformation[0]);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return Rotations[Index];
+}
+
+
+Quaternion BGE_NCP Crowd::GetMemberRotation(int Index) const
+{
+    return Rotations[Index];
+}
+
 } /* bakge */

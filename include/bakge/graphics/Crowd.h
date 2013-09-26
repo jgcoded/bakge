@@ -195,6 +195,10 @@ public:
      */
     Result ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z);
 
+    Quaternion BGE_NCP GetMemberRotation(int Index) const;
+
+    Quaternion BGE_NCP SetMemberRotation(int Index, Quaternion BGE_NCP Rot);
+
 }; /* Crowd */
 
 } /* bakge */
