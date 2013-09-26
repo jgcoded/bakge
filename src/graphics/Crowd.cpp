@@ -131,6 +131,8 @@ Result Crowd::Clear()
     Rotations = NULL;
     Scales = NULL;
 
+    Population = 0;
+
     return BGE_SUCCESS;
 }
 
