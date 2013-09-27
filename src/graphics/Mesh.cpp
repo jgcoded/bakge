@@ -150,6 +150,8 @@ Result Mesh::PositionData(int NumPositions, const Scalar* Data)
     if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0)
         return BGE_FAILURE;
 
+    NumVertices = NumPositions;
+
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
                                             (const GLvoid*)Data,
