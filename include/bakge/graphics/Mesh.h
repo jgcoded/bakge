@@ -195,9 +195,6 @@ public:
         return NumVertices;
     }
 
-
-protected:
-
     /*! @brief Create the OpenGL vertex buffers that store Mesh data.
      *
      * Create the OpenGL vertex buffers that store Mesh data. Calls
