@@ -138,7 +138,25 @@ public:
      */
     Quaternion BGE_NCP GetRotation() const;
 
+    /*! @brief Rotate a Pawn locally.
+     *
+     * Rotate a Pawn locally.
+     *
+     * @param[in] Rot Quaternion to rotate by.
+     *
+     * @return constref to Pawn's rotation after transformed.
+     */
+    Quaternion BGE_NCP Rotate(Quaternion BGE_NCP Rot);
 
+    /*! @brief Rotate a Pawn globally.
+     *
+     * Rotate a Pawn globally.
+     *
+     * @param[in] Rot Quaternion to rotate by.
+     *
+     * @return constref to Pawn's rotation after transformed.
+     */
+    Quaternion BGE_NCP RotateGlobal(Quaternion BGE_NCP Rot);
 
 }; /* Pawn */
 

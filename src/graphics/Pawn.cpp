@@ -139,4 +139,20 @@ Quaternion BGE_NCP Pawn::GetRotation() const
     return Facing;
 }
 
+
+Quaternion BGE_NCP Pawn::Rotate(Quaternion BGE_NCP Rot)
+{
+    Facing *= Rot;
+
+    return Facing;
+}
+
+
+Quaternion BGE_NCP Pawn::RotateGlobal(Quaternion BGE_NCP Rot)
+{
+    Facing = Rot * Facing;
+
+    return Facing;
+}
+
 } /* bakge */
