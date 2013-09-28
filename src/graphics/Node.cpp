@@ -123,4 +123,14 @@ Node* Node::Create(Scalar X, Scalar Y, Scalar Z)
     return N;
 }
 
+
+Vector4 BGE_NCP Node::Translate(Scalar X, Scalar Y, Scalar Z)
+{
+    Position[0] += X;
+    Position[1] += Y;
+    Position[2] += Z;
+
+    return Position;
+}
+
 } /* bakge */

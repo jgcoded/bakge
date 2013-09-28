@@ -107,6 +107,18 @@ public:
      */
     Vector4 BGE_NCP GetPosition() const;
 
+    /*! @brief Translate the Node by a given amount along the X, Y and Z axes.
+     *
+     * Translate the Node by a given amount along the X, Y and Z axes.
+     *
+     * @param[in] X Amount to translate along the X axis.
+     * @param[in] Y Amount to translate along the Y axis.
+     * @param[in] Z Amount to translate along the Z axis.
+     *
+     * @returns constref to Node's position after translation.
+     */
+    Vector4 BGE_NCP Translate(Scalar X, Scalar Y, Scalar Z);
+
 }; /* Node */
 
 } /* bakge */
