@@ -85,6 +85,7 @@ Result Pawn::Bind() const
         Errors = BGE_FAILURE;
 
     Matrix Transformation;
+    Transformation.Scale(Scale[0], Scale[1], Scale[2]);
     Transformation *= Facing.ToMatrix();
     Transformation.Translate(Position[0], Position[1], Position[2]);
 
