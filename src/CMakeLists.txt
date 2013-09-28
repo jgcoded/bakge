@@ -113,6 +113,7 @@ set(PLATFORM_HEADERS
 set(EXTERN_SOURCES
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_image.c
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.c
+  ${BAKGE_SOURCE_DIR}/extern/stb/stb_vorbis.c
 )
 
 if(BUILD_SHARED_LIBS)

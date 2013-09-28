@@ -163,6 +163,11 @@ namespace api
 #endif /* STB_TRUETYPE_IMPLEMENTATION */
 #include <stb/stb_truetype.c>
 #define STB_TRUETYPE_IMPLEMENTATION
+#ifndef STB_VORBIS_HEADER_ONLY
+#define STB_VORBIS_HEADER_ONLY
+#endif // STB_VORBIS_HEADER_ONLY
+#include <stb/stb_vorbis.c>
+#undef STB_VORBIS_HEADER_ONLY
 
 /* Platform headers */
 #ifdef __linux__
