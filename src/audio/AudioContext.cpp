@@ -55,7 +55,7 @@ AudioContext* AudioContext::Create()
         return NULL;
     }
 
-    Context = alcCreateContext(AC->Device, NULL);
+    AC->Context = alcCreateContext(AC->Device, NULL);
     if(AC->Context == NULL) {
         printf("Error creating OpenAL context\n");
         delete AC;
@@ -63,6 +63,18 @@ AudioContext* AudioContext::Create()
     }
 
     return AC;
+}
+
+
+Result AudioContext::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result AudioContext::Unbind() const
+{
+    return BGE_FAILURE;
 }
 
 } /* bakge */

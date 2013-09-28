@@ -48,6 +48,10 @@ public:
 
     BGE_FACTORY AudioContext* Create();
 
+    Result Bind() const;
+
+    Result Unbind() const;
+
 }; /* AudioContext */
 
 } /* bakge */
