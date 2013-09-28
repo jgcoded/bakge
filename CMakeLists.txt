@@ -151,6 +151,7 @@ if(WIN32)
   FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 
   set(BAKGE_GLFW_TARGET glfw)
+  set(BAKGE_OPENAL_TARGET OpenAL32)
 
   set(BAKGE_LIBRARIES
     ${BAKGE_GLEW_TARGET}
@@ -159,6 +160,7 @@ if(WIN32)
     winmm.lib
     ${BAKGE_GLFW_TARGET}
     ${BAKGE_PHYSFS_TARGET}
+    ${BAKGE_OPENAL_TARGET}
     lua
     glu32.lib
     ${OPENGL_LIBRARY}
@@ -181,6 +183,7 @@ include_directories(
   ${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include
   ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src
   ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3
+  ${BAKGE_SOURCE_DIR}/lib/openal-1.15.1/include
   ${BAKGE_SOURCE_DIR}/extern
 )
 
@@ -344,6 +347,21 @@ foreach(GLFW_HEADER ${BAKGE_GLFW_HEADERS})
     copy
       ${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include/GLFW/${GLFW_HEADER}
       ${BAKGE_SDK_INC_PATH}/GLFW/${GLFW_HEADER}
+  )
+endforeach()
+
+
+###########################
+# AL headers
+set(BAKGE_OPENAL_HEADERS
+  al.h
+  alc.h
+)
+foreach(AL_HEADER ${BAKGE_OPENAL_HEADERS})
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BAKGE_SOURCE_DIR}/lib/openal-1.15.1/include/AL/${AL_HEADER}
+      ${BAKGE_SDK_INC_PATH}/GLFW/${AL_HEADER}
   )
 endforeach()
 

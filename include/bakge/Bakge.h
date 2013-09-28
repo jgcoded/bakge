@@ -132,6 +132,9 @@ extern "C"
 #include <lauxlib.h>
 }
 #include <physfs.h>
+#include <AL/al.h>
+#include <AL/alc.h>
+#include <AL/alext.h>
 
 /*! @brief All Bakge types, classes and API are declared and defined in this
  * namespace.
@@ -229,6 +232,9 @@ namespace api
 #include <bakge/math/Vector4.h>
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
+
+/* Audio classes */
+#include <bakge/audio/AudioContext.h>
 
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>
