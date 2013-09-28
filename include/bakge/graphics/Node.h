@@ -47,6 +47,10 @@ class BGE_API Node : public Bindable
 
 protected:
 
+    Vector4 Position;
+
+    GLuint ModelMatrixBuffer;
+
     /*! @brief Default constructor.
      *
      * Default constructor.
@@ -102,12 +106,6 @@ public:
      * @return const reference to this Node's position.
      */
     Vector4 BGE_NCP GetPosition() const;
-
-
-protected:
-
-    Vector4 Position;
-    GLuint ModelMatrixBuffer;
 
 }; /* Node */
 
