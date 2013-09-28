@@ -148,8 +148,10 @@ Result Crowd::Reserve(int NumMembers)
     Rotations = new Quaternion[NumMembers];
     Scales = new Scalar[NumMembers * 3];
 
-    memset((void*)Positions, 0, sizeof(Scalar) * NumMembers * 3);
     for(int i=0;i<NumMembers;++i) {
+        Positions[i * 3 + 0] = 0;
+        Positions[i * 3 + 1] = 0;
+        Positions[i * 3 + 2] = 0;
         Scales[i * 3 + 0] = 1;
         Scales[i * 3 + 1] = 1;
         Scales[i * 3 + 2] = 1;
