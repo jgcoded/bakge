@@ -47,6 +47,9 @@ class BGE_API Pawn : public Node
 
 protected:
 
+    Quaternion Facing;
+    Vector4 Scale;
+
     /*! @brief Default Pawn constructor.
      *
      * Default Pawn constructor.
@@ -136,10 +139,6 @@ public:
     Quaternion BGE_NCP GetRotation() const;
 
 
-protected:
-
-    Quaternion Facing;
-    Vector4 Scale;
 
 }; /* Pawn */
 
