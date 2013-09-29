@@ -67,12 +67,16 @@ AudioContext* AudioContext::Create()
 
 Result AudioContext::Bind() const
 {
-    return BGE_FAILURE;
+    alcMakeContextCurrent(Context);
+
+    return BGE_SUCCESS;
 }
 
 
 Result AudioContext::Unbind() const
 {
+    alcMakeContextCurrent(NULL);
+
     return BGE_FAILURE;
 }
 
