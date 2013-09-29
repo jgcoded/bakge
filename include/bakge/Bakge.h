@@ -265,5 +265,6 @@ namespace api
 /* Audio classes */
 #include <bakge/audio/AudioContext.h>
 #include <bakge/audio/Source.h>
+#include <bakge/audio/Stream.h>
 
 #endif /* BAKGE_BAKGE_H */

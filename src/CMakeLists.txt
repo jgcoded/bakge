@@ -13,6 +13,7 @@ set(MODULES
   api/Thread
   audio/AudioContext
   audio/Source
+  audio/Stream
   data/File
   core/Bindable
   core/Drawable
