@@ -79,7 +79,13 @@ Result Source::Play() const
 
 Result Source::Attach(Stream* Str)
 {
-    return BGE_FAILURE;
+    alSourcei(SourceHandle, AL_BUFFER, Str->StreamBuffer);
+    if(alGetError() != AL_NO_ERROR) {
+        printf("Error attaching buffer to source\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
