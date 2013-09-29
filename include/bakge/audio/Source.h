@@ -58,6 +58,8 @@ public:
 
     Result Play() const;
 
+    Result Attach(Stream* Str);
+
 }; /* Source */
 
 } /* bakge */

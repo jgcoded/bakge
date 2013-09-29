@@ -62,4 +62,10 @@ Result Source::Play() const
     return BGE_FAILURE;
 }
 
+
+Result Source::Attach(Stream* Str)
+{
+    return BGE_FAILURE;
+}
+
 } /* bakge */
