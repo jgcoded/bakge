@@ -41,7 +41,6 @@ protected:
     AudioContext();
 
 
-
 public:
 
     virtual ~AudioContext();
