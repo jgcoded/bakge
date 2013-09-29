@@ -7,6 +7,7 @@ if(BAKGE_BUILD_SDK)
 endif()
 
 set(TESTS
+  audio
   bullet
   client
   crowd
