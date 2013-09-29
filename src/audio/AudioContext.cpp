@@ -51,7 +51,6 @@ AudioContext* AudioContext::Create()
     AC->Device = alcOpenDevice(NULL);
     if(AC->Device == NULL) {
         printf("Error creating OpenAL device\n");
-        delete AC;
         return NULL;
     }
 
