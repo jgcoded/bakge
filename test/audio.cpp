@@ -34,6 +34,8 @@ int main(int argc, char* argv[])
     bakge::Crowd* Group;
     bakge::Camera3D* Cam;
     bakge::AudioContext* AC;
+    bakge::Source* Src;
+    bakge::Stream* Str;
 
     printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
@@ -80,6 +82,16 @@ int main(int argc, char* argv[])
     AC = bakge::AudioContext::Create();
     AC->Bind();
 
+    PHYSFS_addToSearchPath("C:/", 0);
+    PHYSFS_file* F = PHYSFS_openRead("door_gate_bar_locked.ogg");
+    int Len = (int)PHYSFS_fileLength(F);
+    bakge::Byte* Data = (bakge::Byte*)malloc(Len);
+    PHYSFS_read(F, (void*)Data, 1, Len);
+
+    Src = bakge::Source::Create();
+    Str = bakge::Stream::Create(Len, Data);
+    Src->Attach(Str);
+
 #define TRAND ((((float)(rand() % 1000) / 1000) * 5) - 2.5f)
 #define RRAND (((float)(rand() % 1000)) / 1000) * 6.28f
 #define SRAND (((float)(rand() % 1000) / 1000.0f) + 0.5f)
@@ -99,6 +111,8 @@ int main(int argc, char* argv[])
     float Rot = 0;
     bakge::Microseconds NowTime;
     bakge::Microseconds LastTime = bakge::GetRunningTime();
+
+    Src->Play();
 
     while(1) {
         /* Poll events for all windows */
