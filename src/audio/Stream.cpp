@@ -60,19 +60,29 @@ Stream* Stream::Create(int Len, Byte* Data)
         return NULL;
     }
 
-    int Error;
-    S->Vorbis = stb_vorbis_open_memory(Data, Len, &Error, &S->Allocation);
-    if(S->Vorbis == NULL) {
+    int Channels;
+    short* StreamData;
+    int NumPackets = stb_vorbis_decode_memory(Data, Len, &Channels,
+                                                        &StreamData);
+    if(NumPackets < 0) {
         printf("Error decoding stream data\n");
         delete S;
         return NULL;
     }
 
+    // Use Channels to check error
+    S->Vorbis = stb_vorbis_open_memory(Data, Len, &Channels, NULL);
+    if(S->Vorbis == NULL) {
+        printf("Error opening vorbis stream\n");
+        delete S;
+        return NULL;
+    }
+
     S->Info = stb_vorbis_get_info(S->Vorbis);
-    alBufferData(S->StreamBuffer, S->Info.channels == 1 ? AL_FORMAT_MONO16 :
-                            AL_FORMAT_STEREO16, S->Allocation.alloc_buffer,
-                                S->Allocation.alloc_buffer_length_in_bytes,
-                                                        S->Info.sample_rate);
+
+    alBufferData(S->StreamBuffer, Channels == 1 ? AL_FORMAT_MONO16 :
+                                    AL_FORMAT_STEREO16, StreamData,
+                                    NumPackets / 2, S->GetFrequency());
     if(alGetError() != AL_NO_ERROR) {
         printf("Error setting stream buffer data\n");
         delete S;

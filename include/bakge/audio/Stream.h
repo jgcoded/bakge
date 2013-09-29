@@ -39,7 +39,6 @@ class BGE_API Stream
     friend Result Source::Attach(Stream* Str);
 
     ALuint StreamBuffer;
-    stb_vorbis_alloc Allocation;
     stb_vorbis_info Info;
     stb_vorbis* Vorbis;
 
