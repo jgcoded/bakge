@@ -39,7 +39,21 @@ Source::~Source()
 
 Source* Source::Create()
 {
-    return NULL;
+    Source* S = new Source;
+    if(S == NULL) {
+        printf("Error allocating source\n");
+        return NULL;
+    }
+
+    alGetError();
+    alGenSources(1, &S->SourceHandle);
+    if(alGetError() != AL_NO_ERROR) {
+        printf("Error creating source\n");
+        delete S;
+        return NULL;
+    }
+
+    return S;
 }
 
 
