@@ -52,11 +52,6 @@ public:
 
     BGE_FACTORY Stream* Create(int Len, Byte* Data);
 
-    BGE_INL int GetSize() const
-    {
-        return Allocation.alloc_buffer_length_in_bytes;
-    }
-
     BGE_INL int GetFrequency() const
     {
         return Info.sample_rate;
