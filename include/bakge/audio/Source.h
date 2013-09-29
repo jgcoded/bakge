@@ -41,6 +41,8 @@ class BGE_API Source : public Node
 
 protected:
 
+    ALuint SourceHandle;
+
     Source();
 
 
