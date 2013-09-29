@@ -32,13 +32,13 @@ namespace bakge
 
 class Stream;
 
-/*! @brief Source is a special Node used for playing audio.
+/*! @brief A Node-like object used to play Stream objects.
  *
- * Source is a special Node used for playing audio. Source directly inherits
- * Node so you can technically Bind/Unbind it to use for drawing. Doing this
- * has no effect on the audio itself.
+ * Source is a Node-like object that is used to attach and play Stream
+ * objects. It does not inherit Node, but implements similar functionality
+ * in that you can move it around in 3D Cartesian space.
  */
-class BGE_API Source : public Node
+class BGE_API Source
 {
 
 protected:
@@ -53,10 +53,6 @@ public:
     virtual ~Source();
 
     BGE_FACTORY Source* Create();
-
-    virtual Result Bind() const;
-
-    virtual Result Unbind() const;
 
     Result Play() const;
 

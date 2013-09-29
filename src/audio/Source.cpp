@@ -57,18 +57,6 @@ Source* Source::Create()
 }
 
 
-Result Source::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result Source::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
 Result Source::Play() const
 {
     alSourcePlay(SourceHandle);
