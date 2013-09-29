@@ -61,10 +61,13 @@ public:
      */
     ~Stream();
 
-    /*! @brief Create a new audio stream from an encoded Ogg Vorbis stream.
+    /*! @brief Create a new Stream from a complete, encoded Ogg Vorbis stream.
      *
-     * This factory function decodes an Ogg Vorbis stream and returns
+     * This factory function decodes a complete Ogg Vorbis stream and returns
      * a Stream object that you can attach to a Source to play audio with.
+     * A Stream is not an audio stream in the traditional sense; the entire
+     * encoded audio file must be passed so it can be correctly decoded and
+     * turned into audio.
      *
      * @return Pointer to allcoated Stream; NULL if any errors occurred or
      * decoding failed.
