@@ -30,9 +30,13 @@
 namespace bakge
 {
 
-/*! @brief Audio stream wrapper.
+/*! @brief Wrapper class for decoded Ogg Vorbis audio stream data.
  *
- * Audio stream wrapper for sound data.
+ * Wrapper class for decoded Ogg Vorbis audio stream data. To play an
+ * audio Stream, you must first attach it to a Source and
+ * \link Source::Play Play\endlink it.
+ *
+ * @see Source, Source::Play
  */
 class BGE_API Stream
 {
@@ -42,20 +46,48 @@ class BGE_API Stream
     stb_vorbis_info Info;
     stb_vorbis* Vorbis;
 
+    /*! @brief Default Stream constructor.
+     *
+     * Default Stream constructor.
+     */
     Stream();
 
 
 public:
 
+    /*! @brief Default Stream destructor.
+     *
+     * Default Stream destructor.
+     */
     ~Stream();
 
+    /*! @brief Create a new audio stream from an encoded Ogg Vorbis stream.
+     *
+     * This factory function decodes an Ogg Vorbis stream and returns
+     * a Stream object that you can attach to a Source to play audio with.
+     *
+     * @return Pointer to allcoated Stream; NULL if any errors occurred or
+     * decoding failed.
+     */
     BGE_FACTORY Stream* Create(int Len, Byte* Data);
 
+    /*! @brief Get the frequency (sample rate) of the stream in hertz (Hz).
+     *
+     * Get the frequency (sample rate) of the stream in hertz (Hz).
+     *
+     * @return Frequency of audio stream in Hz.
+     */
     BGE_INL int GetFrequency() const
     {
         return Info.sample_rate;
     }
 
+    /*! @brief Get the number of channels in the audio stream.
+     *
+     * Get the number of channels in the audio stream.
+     *
+     * @return Number of channels in the audio stream.
+     */
     BGE_INL int GetNumChannels() const
     {
         return Info.channels;
