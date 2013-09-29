@@ -233,9 +233,6 @@ namespace api
 #include <bakge/math/Matrix.h>
 #include <bakge/math/Quaternion.h>
 
-/* Audio classes */
-#include <bakge/audio/AudioContext.h>
-
 /* Additional Bakge classes */
 #include <bakge/graphics/Shader.h>
 #include <bakge/graphics/Mesh.h>
@@ -264,5 +261,9 @@ namespace api
 #include <bakge/renderer/DeferredLightingRenderer.h>
 #include <bakge/renderer/FrontRenderer.h>
 #include <bakge/engine/ScriptedEngine.h>
+
+/* Audio classes */
+#include <bakge/audio/AudioContext.h>
+#include <bakge/audio/Source.h>
 
 #endif /* BAKGE_BAKGE_H */

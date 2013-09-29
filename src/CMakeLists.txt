@@ -12,6 +12,7 @@ set(MODULES
   api/Socket
   api/Thread
   audio/AudioContext
+  audio/Source
   data/File
   core/Bindable
   core/Drawable
