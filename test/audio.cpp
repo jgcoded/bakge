@@ -89,8 +89,24 @@ int main(int argc, char* argv[])
     PHYSFS_read(F, (void*)Data, 1, Len);
 
     Src = bakge::Source::Create();
+    if(Src == NULL) {
+        printf("Couldn't create Source\n");
+        bakge::Delay(2000000);
+        return -1;
+    }
+
     Str = bakge::Stream::Create(Len, Data);
-    Src->Attach(Str);
+    if(Str == NULL) {
+        printf("Couldn't create Stream\n");
+        bakge::Delay(2000000);
+        return -1;
+    }
+
+    if(Src->Attach(Str) == BGE_FAILURE) {
+        printf("Couldn't attach stream to source\n");
+        bakge::Delay(2000000);
+        return -1;
+    }
 
 #define TRAND ((((float)(rand() % 1000) / 1000) * 5) - 2.5f)
 #define RRAND (((float)(rand() % 1000)) / 1000) * 6.28f
