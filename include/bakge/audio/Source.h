@@ -56,6 +56,8 @@ public:
 
     virtual Result Unbind() const;
 
+    Result Play() const;
+
 }; /* Source */
 
 } /* bakge */

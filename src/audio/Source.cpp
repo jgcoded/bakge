@@ -54,4 +54,12 @@ Result Source::Unbind() const
     return BGE_FAILURE;
 }
 
+
+Result Source::Play() const
+{
+    alSourcePlay(SourceHandle);
+
+    return BGE_FAILURE;
+}
+
 } /* bakge */
