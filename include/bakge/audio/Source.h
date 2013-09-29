@@ -30,6 +30,8 @@
 namespace bakge
 {
 
+class Stream;
+
 /*! @brief Source is a special Node used for playing audio.
  *
  * Source is a special Node used for playing audio. Source directly inherits
