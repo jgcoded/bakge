@@ -45,17 +45,45 @@ protected:
 
     ALuint SourceHandle;
 
+    /*! @brief Default Source constructor.
+     *
+     * Default Source constructor.
+     */
     Source();
 
 
 public:
 
+    /*! @brief Virtual Source destructor.
+     *
+     * Virtual Source destructor.
+     */
     virtual ~Source();
 
+    /*! @brief Create a new Source object to play an audio Stream from.
+     *
+     * Create a new Source object to play an audio Stream from.
+     *
+     * @return Pointer to allocated Source; NULL if any errors occurred.
+     */
     BGE_FACTORY Source* Create();
 
+    /*! @brief Play the Source's attached Stream.
+     *
+     * Play the Source's attached Stream.
+     *
+     * @return BGE_SUCCESS if the Source is successfully playing; BGE_FAILURE
+     * if any errors occurred or no Stream is attached.
+     */
     Result Play() const;
 
+    /*! @brief Attach a Stream object to this Source, so it can be played.
+     *
+     * Attach a Stream object to this Source, so it can be played.
+     *
+     * @return BGE_SUCCESS if the Stream was successfully attached;
+     * BGE_FAILURE if any errors occurred.
+     */
     Result Attach(Stream* Str);
 
 }; /* Source */
