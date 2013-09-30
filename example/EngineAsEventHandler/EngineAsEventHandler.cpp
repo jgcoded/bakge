@@ -101,10 +101,7 @@ int EngineAsEventHandler::Run()
 
 bakge::Result EngineAsEventHandler::ShutDown()
 {
-    gluDeleteQuadric(Quadric);
-
     delete AppWindow;
-    delete SceneRenderer;
 
     return BGE_SUCCESS;
 }
@@ -112,10 +109,6 @@ bakge::Result EngineAsEventHandler::ShutDown()
 
 bakge::Result EngineAsEventHandler::Initialize()
 {
-    SceneRenderer = bakge::FrontRenderer::Create();
-    if(SceneRenderer == NULL)
-        return BGE_FAILURE;
-
     AppWindow = bakge::Window::Create(600, 400, 0);
     if(AppWindow == NULL)
         return BGE_FAILURE;
@@ -123,16 +116,12 @@ bakge::Result EngineAsEventHandler::Initialize()
     /* Engine is the event handler! */
     AppWindow->SetEventHandler(this);
 
-    Quadric = gluNewQuadric();
-
     glClearColor(0, 0.3f, 0.5f, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(50.0, 1.5, 0.1, 500.0);
-
-    SceneRenderer->Bind();
 
     return BGE_SUCCESS;
 }
@@ -158,12 +147,7 @@ bakge::Result EngineAsEventHandler::PostRenderStage()
 
 bakge::Result EngineAsEventHandler::RenderStage()
 {
-    /* *
-     * Usually it would be SceneRenderer->Draw(&Something)
-     * But there are on shape classes YET, so just do this
-     * */
     glColor3f(0.7f, 0.7f, 0.7f);
-    gluSphere(Quadric, 1.0f, 32, 32);
     return BGE_SUCCESS;
 }
 

@@ -33,10 +33,7 @@ set(MODULES
   graphics/Shader
   graphics/Shape
   graphics/Texture
-  graphics/shapes/Sphere
-  graphics/shapes/Cone
   graphics/shapes/Cube
-  graphics/shapes/Cylinder
   graphics/shapes/Rectangle
   input/GamePad
   ui/Anchor

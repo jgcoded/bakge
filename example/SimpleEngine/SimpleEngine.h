@@ -58,9 +58,6 @@ public:
 protected:
 
     bakge::Window* AppWindow;
-    bakge::FrontRenderer* SceneRenderer;
-
-    GLUquadric* Quadric;
 
 };
 
