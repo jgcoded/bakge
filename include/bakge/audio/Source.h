@@ -24,7 +24,7 @@
 
 /*!
  * @file Source.h
- * Source class declaration.
+ * @brief Source class declaration.
  */
 
 #ifndef BAKGE_AUDIO_SOURCE_H

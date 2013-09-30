@@ -24,7 +24,7 @@
 
 /*!
  * @file Stream.h
- * Stream class declaration.
+ * @brief Stream class declaration.
  */
 
 #ifndef BAKGE_AUDIO_STREAM_H

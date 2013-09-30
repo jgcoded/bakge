@@ -24,7 +24,7 @@
 
 /*!
  * @file Environment.h
- * Environment class declaration.
+ * @brief Environment class declaration.
  */
 
 #ifndef BAKGE_AUDIO_ENVIRONMENT_H
