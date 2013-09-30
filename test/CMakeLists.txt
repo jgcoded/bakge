@@ -8,7 +8,6 @@ endif()
 
 set(TESTS
   audio
-  bullet
   client
   crowd
   device

@@ -67,20 +67,9 @@ set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
 set(BAKGE_LUA_TARGET lua)
 set(BAKGE_GLEW_TARGET glew)
 set(BAKGE_PHYSFS_TARGET physfs)
-set(BAKGE_BULLET_TARGETS
-  LinearMath
-  BulletDynamics
-  BulletSoftBody
-  BulletCollision
-)
-
-if(NOT UNIX)
-  list(APPEND BAKGE_BULLET_TARGETS BulletMultiThreaded)
-endif()
 
 # Append library targets to a list we can use
 list(APPEND BAKGE_TARGETS_LIST
-  ${BAKGE_BULLET_TARGETS}
   ${BAKGE_PHYSFS_TARGET}
   ${BAKGE_GLEW_TARGET}
   ${BAKGE_LUA_TARGET}
@@ -178,7 +167,6 @@ list(APPEND BAKGE_TARGETS_LIST ${BAKGE_GLFW_TARGET})
 # Add include directories
 include_directories(
   ${BAKGE_SOURCE_DIR}/include
-  ${BAKGE_SOURCE_DIR}/lib/bullet-2.81-rev2613/src
   ${BAKGE_SOURCE_DIR}/lib/glew-1.9.0/include
   ${BAKGE_SOURCE_DIR}/lib/glfw-3.0/include
   ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src
@@ -269,23 +257,6 @@ add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
     ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3/physfs.h
     ${BAKGE_SDK_INC_PATH}/physfs.h
 )
-
-#################################
-# Bullet headers
-file(GLOB_RECURSE BAKGE_BULLET_HEADERS "${BAKGE_LIB_DIR}/bullet-2.81-rev2613/src/*.h")
-# Maybe creating this var out here will speed things up?
-set(MOD_HEADER "")
-foreach(BULLET_HEADER ${BAKGE_BULLET_HEADERS})
-  set(PATH_REGEX "${BAKGE_SOURCE_DIR}/lib/bullet-2.81-rev2613/src")
-  STRING(REGEX REPLACE ${PATH_REGEX}
-                "${BAKGE_SDK_INC_PATH}/bullet" MOD_HEADER
-                ${BULLET_HEADER})
-  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
-    copy
-      ${BULLET_HEADER}
-      ${MOD_HEADER}
-  )
-endforeach()
 
 #################################
 # Lua headers
