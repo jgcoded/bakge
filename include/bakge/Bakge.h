@@ -190,7 +190,6 @@ namespace api
 #include <bakge/core/Utility.h>
 #include <bakge/core/Bindable.h>
 #include <bakge/core/Drawable.h>
-#include <bakge/core/Renderer.h>
 #include <bakge/core/Engine.h>
 #include <bakge/core/EventHandler.h>
 #include <bakge/core/Window.h>
@@ -257,9 +256,6 @@ namespace api
 #include <bakge/ui/Clickable.h>
 #include <bakge/ui/Draggable.h>
 #include <bakge/ui/Resizable.h>
-#include <bakge/renderer/DeferredGeometryRenderer.h>
-#include <bakge/renderer/DeferredLightingRenderer.h>
-#include <bakge/renderer/FrontRenderer.h>
 #include <bakge/engine/ScriptedEngine.h>
 
 /* Audio classes */

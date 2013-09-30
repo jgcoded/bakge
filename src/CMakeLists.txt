@@ -19,7 +19,6 @@ set(MODULES
   core/Drawable
   core/Engine
   core/EventHandler
-  core/Renderer
   core/Utility
   core/Window
   engine/ScriptedEngine
@@ -53,9 +52,6 @@ set(MODULES
   math/Matrix
   network/Packet
   network/Remote
-  renderer/DeferredGeometryRenderer
-  renderer/DeferredLightingRenderer
-  renderer/FrontRenderer
   system/Device
 )
 
