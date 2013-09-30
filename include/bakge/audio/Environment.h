@@ -35,6 +35,12 @@
 namespace bakge
 {
 
+/*! @brief An audio Environment through which sounds are played.
+ *
+ * An audio Environment consists of an OpenAL context and its associated
+ * listener. The listener, as well as any Source objects, are placed in
+ * 3D Cartesian space, and OpenAL handles the positional audio.
+ */
 class BGE_API Environment : public Bindable
 {
     ALCdevice* Device;
@@ -43,17 +49,53 @@ class BGE_API Environment : public Bindable
 
 protected:
 
+    /*! @brief Default Environment constructor.
+     *
+     * Default Environment constructor.
+     */
     Environment();
 
 
 public:
 
+    /*! @brief Default Virtual destructor.
+     *
+     * Virtual Environment destructor.
+     */
     virtual ~Environment();
 
+    /*! @brief Create a new audio Environment.
+     *
+     * Create a new audio Environment. Typically your application will only
+     * need one. OpenAL contexts are different from OpenGL contexts in that
+     * one context may only be current on a per-process basis, not a
+     * per-thread basis. As a result you should only use one context to
+     * create and manage your sounds.
+     *
+     * Each Environment consists of a listener, which is where the audio is
+     * heard from by the user. This listener can be moved around in space
+     * to manipulate how the audio is heard.
+     *
+     * @return Pointer to allocated Environment; NULL if any errors occurred.
+     */
     BGE_FACTORY Environment* Create();
 
+    /*! @brief Bind the Environment as the active context in the process.
+     *
+     * Bind the Environment as the active context in the process.
+     *
+     * @return BGE_SUCCESS if the Environment context was successfully made
+     * current; BGE_FAILURE if any errors occurred.
+     */
     Result Bind() const;
 
+    /*! @brief Unbind the Environment as the active context in the process.
+     *
+     * Unbind the Environment as the active context in the process.
+     *
+     * @return BGE_SUCCESS if the Environment was successfully unbound;
+     * BGE_FAILURE if any errors occurred.
+     */
     Result Unbind() const;
 
 }; /* Environment */
