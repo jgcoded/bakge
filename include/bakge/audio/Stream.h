@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Stream.h
+ * Stream class declaration.
+ */
+
 #ifndef BAKGE_AUDIO_STREAM_H
 #define BAKGE_AUDIO_STREAM_H
 

@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Environment.h
+ * Environment class declaration.
+ */
+
 #ifndef BAKGE_AUDIO_ENVIRONMENT_H
 #define BAKGE_AUDIO_ENVIRONMENT_H
 

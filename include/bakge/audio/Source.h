@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Source.h
+ * Source class declaration.
+ */
+
 #ifndef BAKGE_AUDIO_SOURCE_H
 #define BAKGE_AUDIO_SOURCE_H
 
