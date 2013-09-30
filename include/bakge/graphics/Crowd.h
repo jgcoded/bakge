@@ -193,7 +193,7 @@ public:
      * @return BGE_SUCCESS if the member was successfully rotated;
      * BGE_FAILURE if any errors occurred.
      */
-    Result RotateMember(int MemberIndex, Quaternion Rotation);
+    Result RotateMember(int MemberIndex, Quaternion BGE_NCP Rotation);
 
     /*! @brief Rotate a member globally around an arbitrary axis.
      *

@@ -193,7 +193,7 @@ Result Crowd::TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 }
 
 
-Result Crowd::RotateMember(int MemberIndex, Quaternion Rotation)
+Result Crowd::RotateMember(int MemberIndex, Quaternion BGE_NCP Rotation)
 {
     /* Prevent out-of-bounds transformations */
     if(MemberIndex < 0 || MemberIndex >= Capacity)
