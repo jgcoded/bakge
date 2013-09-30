@@ -22,37 +22,62 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_AUDIO_AUDIOCONTEXT_H
-#define BAKGE_AUDIO_AUDIOCONTEXT_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
 {
 
-class BGE_API AudioContext : public Bindable
+Environment::Environment()
 {
-    ALCdevice* Device;
-    ALCcontext* Context;
+    Device = NULL;
+    Context = NULL;
+}
 
 
-protected:
+Environment::~Environment()
+{
+    if(Context != NULL)
+        alcDestroyContext(Context);
 
-    AudioContext();
+    if(Device != NULL)
+        alcCloseDevice(Device);
+}
 
 
-public:
+Environment* Environment::Create()
+{
+    Environment* AC = new Environment;
 
-    virtual ~AudioContext();
+    AC->Device = alcOpenDevice(NULL);
+    if(AC->Device == NULL) {
+        printf("Error creating OpenAL device\n");
+        return NULL;
+    }
 
-    BGE_FACTORY AudioContext* Create();
+    AC->Context = alcCreateContext(AC->Device, NULL);
+    if(AC->Context == NULL) {
+        printf("Error creating OpenAL context\n");
+        delete AC;
+        return NULL;
+    }
 
-    Result Bind() const;
+    return AC;
+}
 
-    Result Unbind() const;
 
-}; /* AudioContext */
+Result Environment::Bind() const
+{
+    alcMakeContextCurrent(Context);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Environment::Unbind() const
+{
+    alcMakeContextCurrent(NULL);
+
+    return BGE_FAILURE;
+}
 
 } /* bakge */
-
-#endif /* BAKGE_AUDIO_AUDIOCONTEXT_H */

@@ -263,7 +263,7 @@ namespace api
 #include <bakge/engine/ScriptedEngine.h>
 
 /* Audio classes */
-#include <bakge/audio/AudioContext.h>
+#include <bakge/audio/Environment.h>
 #include <bakge/audio/Source.h>
 #include <bakge/audio/Stream.h>
 

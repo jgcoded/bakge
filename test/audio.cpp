@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
     bakge::Texture* Tex;
     bakge::Crowd* Group;
     bakge::Camera3D* Cam;
-    bakge::AudioContext* AC;
+    bakge::Environment* Env;
     bakge::Source* Src;
     bakge::Stream* Str;
 
@@ -79,8 +79,8 @@ int main(int argc, char* argv[])
 
     srand(time(0));
 
-    AC = bakge::AudioContext::Create();
-    AC->Bind();
+    Env = bakge::Environment::Create();
+    Env->Bind();
 
     PHYSFS_addToSearchPath("C:/", 0);
     PHYSFS_file* F = PHYSFS_openRead("door_gate_bar_locked.ogg");
@@ -173,8 +173,8 @@ int main(int argc, char* argv[])
     if(Cam != NULL)
         delete Cam;
 
-    AC->Unbind();
-    delete AC;
+    Env->Unbind();
+    delete Env;
 
     printf("Deinitializing Bakge\n");
     bakge::Deinit();

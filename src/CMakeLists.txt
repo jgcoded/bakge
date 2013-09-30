@@ -11,7 +11,7 @@ set(MODULES
   api/Mutex
   api/Socket
   api/Thread
-  audio/AudioContext
+  audio/Environment
   audio/Source
   audio/Stream
   data/File
