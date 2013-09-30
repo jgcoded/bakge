@@ -9,4 +9,20 @@
  * game engine development using C++. The second is to provide a development
  * kit with which developers can create a 2D or 3D game using Lua, similar to
  * [Love2D](http://www.love2d.org).
+ *
+ * @section sdk SDK
+ *
+ * The Bakge library contains abstractions over common functionality
+ * implemented in OpenGL and the other third-party libraries used by Bakge.
+ * Though Bakge is a game engine, the library portion does not contain any
+ * physics engine code or libraries. As the library provides methods to extract
+ * data about meshes or other objects in the world, it is left to the end-user
+ * to use this data to create physics colliders in their physics engine of
+ * choice.
+ *
+ * @section gdk GDK
+ *
+ * The Bakge GDK contains tools and a ready-made game engine for which games
+ * can be programmed with Lua 5.1. As the SDK does not provide physics, the
+ * GDK engine will use Bullet for its 3D physics and Box2D for its 2D physics.
  */
