@@ -22,14 +22,6 @@
  * THE SOFTWARE.
  * */
 
-/*!
- * @file Debug.h
- * @brief Internal header with debugging macros and global functions.
- */
-
-#ifndef BAKGE_INTERNAL_DEBUG_H
-#define BAKGE_INTERNAL_DEBUG_H
-
 #include <bakge/Bakge.h>
 
 namespace bakge
@@ -37,16 +29,9 @@ namespace bakge
 namespace error
 {
 
-/*! @brief GLFW error handler function.
- *
- * GLFW error handler function.
- *
- * @param[in] Code GLFW error code
- * @param[in] Description String description of error.
- */
-void GLFW(int Code, const char* Description);
+void GLFW(int Code, const char* Description)
+{
+}
 
 } // error
 } // bakge
-
-#endif // BAKGE_INTERNAL_DEBUG_H
