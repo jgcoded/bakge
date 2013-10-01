@@ -182,7 +182,9 @@ namespace api
 #ifdef _DEBUG
 #include <bakge_internal/Debug.h>
 #endif // _DEBUG
+
 #include <bakge/core/Type.h>
+#include <bakge_internal/Utility.h>
 #include <bakge/core/Input.h>
 #include <bakge/core/Utility.h>
 #include <bakge/core/Bindable.h>

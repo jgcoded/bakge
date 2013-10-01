@@ -34,8 +34,6 @@
 
 namespace bakge
 {
-namespace utility
-{
 
 /*! @brief Check for required OpenGL extensions.
  *
@@ -65,9 +63,8 @@ Result PlatformInit(int, char*[]);
  * @return BGE_SUCCESS if deinitialization was successful; BGE_FAILURE if
  * any errors occurred.
  */
-Result PlatformDenit();
+Result PlatformDeinit();
 
-} // utility
 } // bakge
 
 #endif // BAKGE_INTERNAL_UTILITY_H

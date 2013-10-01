@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace utility
-{
 
 bool CheckRequiredExtensions()
 {
@@ -40,5 +38,4 @@ bool CheckRequiredExtensions()
     return true;
 }
 
-} // utility
 } // bakge
