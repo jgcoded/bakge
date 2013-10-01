@@ -34,7 +34,10 @@
 
 namespace bakge
 {
+namespace error
+{
 
-} /* bakge */
+} // error
+} // bakge
 
 #endif // BAKGE_INTERNAL_DEBUG_H
