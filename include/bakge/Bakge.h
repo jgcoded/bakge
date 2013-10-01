@@ -203,14 +203,9 @@ namespace api
 #include <bakge/data/SingleNode.h>
 #include <bakge/data/LinkedList.h>
 
-/* Network modules */
-#include <bakge/network/Remote.h>
-#include <bakge/network/Packet.h>
-
 /* Include API classes */
 #include <bakge/api/Mutex.h>
 #include <bakge/api/Thread.h>
-#include <bakge/api/Socket.h>
 
 /* Utility headers */
 #include <bakge/input/GamePad.h>

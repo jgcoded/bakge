@@ -27,6 +27,5 @@
 
 #include <bakge/mutex/osx_Mutex.h>
 #include <bakge/thread/osx_Thread.h>
-#include <bakge/socket/osx_Socket.h>
 
 #endif /* BAKGE_PLATFORM_OSX_BAKGE_H */

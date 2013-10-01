@@ -9,7 +9,6 @@ cmake_minimum_required (VERSION 2.6)
 
 set(MODULES
   api/Mutex
-  api/Socket
   api/Thread
   audio/Environment
   audio/Source
@@ -47,8 +46,6 @@ set(MODULES
   math/Vector4
   math/Quaternion
   math/Matrix
-  network/Packet
-  network/Remote
   system/Device
 )
 
@@ -88,7 +85,6 @@ endif()
 
 set(PLATFORM_MODULES
   clock/${PLATFORM_PREFIX}_Clock
-  socket/${PLATFORM_PREFIX}_Socket
   thread/${PLATFORM_PREFIX}_Thread
   mutex/${PLATFORM_PREFIX}_Mutex
   utility/${PLATFORM_PREFIX}_Utility
@@ -102,7 +98,6 @@ set(PLATFORM_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
   ${BAKGE_SOURCE_DIR}/include/bakge/mutex/${PLATFORM_PREFIX}_Mutex
   ${BAKGE_SOURCE_DIR}/include/bakge/thread/${PLATFORM_PREFIX}_Thread
-  ${BAKGE_SOURCE_DIR}/include/bakge/socket/${PLATFORM_PREFIX}_Socket
 )
 
 # Extern libraries in the source tree

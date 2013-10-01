@@ -8,14 +8,12 @@ endif()
 
 set(TESTS
   audio
-  client
   crowd
   device
   linkedlist
   minlua
   font
   rectangle
-  server
   thread
   ui
 )

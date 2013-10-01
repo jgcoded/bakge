@@ -27,6 +27,5 @@
 
 #include <bakge/mutex/win32_Mutex.h>
 #include <bakge/thread/win32_Thread.h>
-#include <bakge/socket/win32_Socket.h>
 
 #endif /* BAKGE_PLATFORM_WIN32_BAKGE_H */
