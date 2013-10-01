@@ -34,8 +34,6 @@
 
 namespace bakge
 {
-namespace error
-{
 
 /*! @brief GLFW error handler function.
  *
@@ -44,7 +42,7 @@ namespace error
  * @param[in] Code GLFW error code
  * @param[in] Description String description of error.
  */
-void GLFW(int Code, const char* Description);
+void GLFWErrorHandler(int Code, const char* Description);
 
 /*! @brief Get a string representation of an OpenGL error flag.
  *
@@ -52,9 +50,8 @@ void GLFW(int Code, const char* Description);
  *
  * @return String constant of the OpenGL error flag.
  */
-const char* GetNameGL(GLenum Error);
+const char* GetGLErrorName(GLenum Error);
 
-} // error
 } // bakge
 
 #endif // BAKGE_INTERNAL_DEBUG_H

@@ -26,16 +26,14 @@
 
 namespace bakge
 {
-namespace error
-{
 
-void GLFW(int Code, const char* Description)
+void GLFWErrorHandler(int Code, const char* Description)
 {
     printf("GLFW error %d: %s\n", Code, Description);
 }
 
 
-const char* GetNameGL(GLenum Error)
+const char* GetGLErrorName(GLenum Error)
 {
 #define BGE_GL_ERROR_CASE(ERR) case ERR: return #ERR
     switch(Error) {
@@ -54,5 +52,4 @@ const char* GetNameGL(GLenum Error)
     }
 }
 
-} // error
 } // bakge
