@@ -107,6 +107,10 @@ set(EXTERN_SOURCES
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_vorbis.c
 )
 
+set(OTHER_SOURCES
+  internal/Debug
+)
+
 if(BUILD_SHARED_LIBS)
   # It's a matter of taste
   remove_definitions(-Dbakge_EXPORTS)
@@ -115,7 +119,7 @@ endif()
 
 add_definitions(-DSTB_TRUETYPE_IMPLEMENTATION)
 add_library(bakge ${EXTERN_SOURCES} ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
-                                        ${PLATFORM_HEADERS})
+                                        ${PLATFORM_HEADERS} ${OTHER_SOURCES})
 if(BUILD_SHARED_LIBS)
   target_link_libraries(bakge ${BAKGE_LIBRARIES})
   target_link_libraries(bakge ${BAKGE_BULLET_TARGETS})
