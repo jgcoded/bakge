@@ -112,8 +112,8 @@ set(INTERNAL_SOURCES
 )
 
 set(INTERNAL_HEADERS
-  ${BAKGE_SOURCE_DIR}/include/bakge_internal/Debug
-  ${BAKGE_SOURCE_DIR}/include/bakge_internal/Utility
+  ${BAKGE_SOURCE_DIR}/include/bakge/internal/Debug
+  ${BAKGE_SOURCE_DIR}/include/bakge/internal/Utility
 )
 
 if(BUILD_SHARED_LIBS)
