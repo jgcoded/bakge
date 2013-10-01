@@ -52,23 +52,9 @@ Result Texture::Bind() const
 
     glActiveTexture(Location);
 
-#ifdef _DEBUG
-    if(glGetError() == GL_INVALID_ENUM) {
-        int TexUnits;
-        glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &TexUnits);
-        printf("Invalid texture location %d. Valid range is "
-                                    "[GL_TEXTURE0, GL_TEXTURE%d]\n",
-                                            Location, TexUnits - 1);
-        return BGE_FAILURE;
-    }
-#endif // _DEBUG
-
     glBindTexture(GL_TEXTURE_2D, TextureID);
 
 #ifdef _DEBUG
-    while(glGetError() != GL_NO_ERROR)
-        ;
-
     if(glGetError() == GL_INVALID_VALUE) {
         printf("Invalid texture name %d\n", TextureID);
         return BGE_FAILURE;
@@ -142,6 +128,27 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     NewTexture->Unbind();
 
     return NewTexture;
+}
+
+
+Result Texture::SetLocation(GLenum Loc)
+{
+#ifdef _DEBUG
+    // Determine max texture units available
+    int TexUnits;
+    glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &TexUnits);
+
+    if(Loc < GL_TEXTURE0 || Loc >= GL_TEXTURE0 + TexUnits) {
+        printf("Invalid texture location %d. Valid range is "
+                                    "[GL_TEXTURE0, GL_TEXTURE%d]\n",
+                                            Location, TexUnits - 1);
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    Location = Loc;
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

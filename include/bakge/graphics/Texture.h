@@ -131,6 +131,18 @@ public:
         return Height;
     }
 
+    /*! @brief Set the texture unit location.
+     *
+     * Set the texture unit location. The number of available texture units
+     * varies across OpenGL implementations and hardware. If the Texture is
+     * currently bound it will remain bound to its old texture unit until
+     * it has been bound again.
+     *
+     * @return BGE_SUCCESS if the texture unit location was successfully
+     * set; BGE_FAILURE if the location is invalid.
+     */
+    Result SetLocation(GLenum Loc);
+
 }; /* Texture */
 
 } /* bakge */
