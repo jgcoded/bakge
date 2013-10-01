@@ -23,6 +23,10 @@
  * */
 
 #include <bakge/Bakge.h>
+#include <bakge/internal/Utility.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
