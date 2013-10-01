@@ -31,6 +31,7 @@ namespace error
 
 void GLFW(int Code, const char* Description)
 {
+    printf("GLFW error %d: %s\n", Code, Description);
 }
 
 } // error
