@@ -37,4 +37,4 @@ namespace bakge
 
 } /* bakge */
 
-#endif /* BAKGE_DATA_SINGLENODE_H */
+#endif // BAKGE_INTERNAL_DEBUG_H
