@@ -35,11 +35,13 @@
 namespace bakge
 {
 
-/*! @brief OpenGL 2D texture wrapper class
+/*! @brief RGBA 2D texture wrapper class.
  *
  * Textures are used to color meshes and other polygons drawn with OpenGL,
  * such as meshes or a GUI. They can also be used to hold framebuffers to
- * which OpenGL renders to.
+ * which OpenGL renders to. Textures are stored in GL_RGBA format. To use
+ * a different color format for your texture, you will have to program
+ * directly against the OpenGL API.
  */
 class BGE_API Texture : public Bindable
 {
