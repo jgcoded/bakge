@@ -176,9 +176,12 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
                                                                     Data);
 
 #ifdef _DEBUG
-    GLenum Error;
-    do {
-        Error = glGetError();
+    GLenum Error = glGetError();
+
+    while(1) {
+        if(Error == GL_NO_ERROR)
+            break;
+
         switch(Error) {
 
         case GL_INVALID_ENUM:
@@ -190,13 +193,12 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
             printf("Incompatible pixel data type %x\n", Type);
             break;
 
-        case GL_NO_ERROR:
-            break;
-
         default:
             printf("Unexpected OpenGL error %x\n", Error);
         }
-    } while(Error != GL_NO_ERROR);
+
+        Error = glGetError();
+    }
 #endif // _DEBUG
 
     NewTexture->Unbind();
