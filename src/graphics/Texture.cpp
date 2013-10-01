@@ -193,6 +193,10 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
             printf("Incompatible pixel data type %x\n", Type);
             break;
 
+        case GL_OUT_OF_MEMORY:
+            printf("Not enough memory to create texture\n");
+            exit(-1);
+
         default:
             printf("Unexpected OpenGL error %x\n", Error);
         }
