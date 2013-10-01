@@ -111,6 +111,11 @@ set(INTERNAL_SOURCES
   internal/Utility
 )
 
+set(INTERNAL_HEADERS
+  ${BAKGE_SOURCE_DIR}/include/bakge_internal/Debug
+  ${BAKGE_SOURCE_DIR}/include/bakge_internal/Utility
+)
+
 if(BUILD_SHARED_LIBS)
   # It's a matter of taste
   remove_definitions(-Dbakge_EXPORTS)
