@@ -140,6 +140,8 @@ public:
      *
      * @return BGE_SUCCESS if the texture unit location was successfully
      * set; BGE_FAILURE if the location is invalid.
+     *
+     * @see http://www.opengl.org/sdk/docs/man/xhtml/glActiveTexture.xml
      */
     Result SetLocation(GLenum Loc);
 
