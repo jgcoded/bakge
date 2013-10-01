@@ -46,6 +46,14 @@ namespace error
  */
 void GLFW(int Code, const char* Description);
 
+/*! @brief Get a string representation of an OpenGL error flag.
+ *
+ * Get a string representation of an OpenGL error flag.
+ *
+ * @return String constant of the OpenGL error flag.
+ */
+const char* GetNameGL(GLenum Error);
+
 } // error
 } // bakge
 

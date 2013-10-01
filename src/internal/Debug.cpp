@@ -34,5 +34,25 @@ void GLFW(int Code, const char* Description)
     printf("GLFW error %d: %s\n", Code, Description);
 }
 
+
+const char* GetNameGL(GLenum Error)
+{
+#define BGE_GL_ERROR_CASE(ERR) case ERR: return #ERR
+    switch(Error) {
+        BGE_GL_ERROR_CASE(GL_NO_ERROR);
+        BGE_GL_ERROR_CASE(GL_INVALID_ENUM);
+        BGE_GL_ERROR_CASE(GL_INVALID_VALUE);
+        BGE_GL_ERROR_CASE(GL_INVALID_OPERATION);
+#ifdef GL_INVALID_FRAMEBUFFER_OPERATION
+        BGE_GL_ERROR_CASE(GL_INVALID_FRAMEBUFFER_OPERATION);
+#endif // GL_INVALID_FRAMEBUFFER_OPERATION
+        BGE_GL_ERROR_CASE(GL_OUT_OF_MEMORY);
+        BGE_GL_ERROR_CASE(GL_STACK_UNDERFLOW);
+        BGE_GL_ERROR_CASE(GL_STACK_OVERFLOW);
+        default:
+            return "Unknown error";
+    }
+}
+
 } // error
 } // bakge
