@@ -119,4 +119,17 @@ void SystemInfo()
     printf("GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 
+
+int Log(const char* Format, ...)
+{
+    int i;
+    va_list ArgList;
+
+    va_start(ArgList, Format);
+    i = vprintf(Format, ArgList);
+    va_end(ArgList);
+
+    return i;
+}
+
 } /* bakge */

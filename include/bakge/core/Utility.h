@@ -109,17 +109,7 @@ BGE_WUNUSED BGE_FUNC Byte* LoadFileContents(const char* Path);
  *
  * @todo Time-stamp, print to file instead of stdout.
  */
-BGE_INL int Log(const char* Format, ...)
-{
-    int i;
-    va_list ArgList;
-
-    va_start(ArgList, Format);
-    i = vprintf(Format, ArgList);
-    va_end(ArgList);
-
-    return i;
-}
+int Log(const char* Format, ...);
 
 } /* bakge */
 
