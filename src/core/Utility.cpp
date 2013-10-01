@@ -68,9 +68,8 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
 
-    /* Check if required extensions are supported */
-    if(!glewIsSupported(VERTEX_BUFFER_OBJECT_EXT)) {
-        printf("Extension %s required.\n", VERTEX_BUFFER_OBJECT_EXT);
+    // Check for required OpenGL extensions to run Bakge
+    if(!CheckRequiredExtensions()) {
         return BGE_FAILURE;
     }
 

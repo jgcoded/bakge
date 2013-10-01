@@ -118,9 +118,6 @@
  */
 #define BGE_VER_REV 0
 
-/* Required extensions to run Bakge */
-#define VERTEX_BUFFER_OBJECT_EXT "GL_ARB_vertex_buffer_object"
-
 /* Include external library headers */
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
