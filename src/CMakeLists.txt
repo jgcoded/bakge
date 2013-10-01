@@ -108,6 +108,7 @@ set(EXTERN_SOURCES
 
 set(INTERNAL_SOURCES
   internal/Debug
+  internal/Utility
 )
 
 if(BUILD_SHARED_LIBS)
