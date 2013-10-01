@@ -234,18 +234,29 @@ make_directory(${BAKGE_SDK_INC_PATH})
 
 #################################
 # Bakge public headers
-file(GLOB_RECURSE BAKGE_ALL_HEADERS "${BAKGE_SOURCE_DIR}/include/bakge/*.h")
-foreach(BAKGE_HEADER ${BAKGE_ALL_HEADERS})
-  set(PATH_REGEX "${BAKGE_SOURCE_DIR}/include")
-  STRING(REGEX REPLACE ${PATH_REGEX}
-                "${BAKGE_SDK_INC_PATH}" MOD_HEADER
-                ${BAKGE_HEADER})
+set(BAKGE_HEADER_MODULES
+  api
+  audio
+  core
+  data
+  graphics
+  input
+  math
+  mutex
+  platform
+  system
+  thread
+  ui
+)
+foreach(HEADER_MODULE ${BAKGE_HEADER_MODULES})
   add_custom_command(TARGET bakge_sdk PRE_BUILD COMMAND ${CMAKE_COMMAND} -E
-    copy
-      ${BAKGE_HEADER}
-      ${MOD_HEADER}
+    copy_directory
+      ${BAKGE_SOURCE_DIR}/include/bakge/${HEADER_MODULE}
+      ${BAKGE_SDK_INC_PATH}/bakge/${HEADER_MODULE}
   )
 endforeach()
+add_custom_command(TARGET bakge_sdk PRE_BUILD COMMAND ${CMAKE_COMMAND} -E
+  copy ${BAKGE_SOURCE_DIR}/include/bakge/Bakge.h ${BAKGE_SDK_INC_PATH}/bakge)
 
 #################################
 # PhysicsFS header
