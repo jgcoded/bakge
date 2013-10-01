@@ -20,7 +20,6 @@ set(MODULES
   core/EventHandler
   core/Utility
   core/Window
-  engine/ScriptedEngine
   graphics/Camera
   graphics/Camera2D
   graphics/Camera3D

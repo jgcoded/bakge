@@ -248,7 +248,6 @@ namespace api
 #include <bakge/ui/Clickable.h>
 #include <bakge/ui/Draggable.h>
 #include <bakge/ui/Resizable.h>
-#include <bakge/engine/ScriptedEngine.h>
 
 /* Audio classes */
 #include <bakge/audio/Environment.h>
