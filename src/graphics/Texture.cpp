@@ -138,7 +138,7 @@ Result Texture::SetLocation(GLenum Loc)
     int TexUnits;
     glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &TexUnits);
 
-    if(Loc < GL_TEXTURE0 || Loc >= GL_TEXTURE0 + TexUnits) {
+    if(Loc < GL_TEXTURE0 || Loc >= (GLenum)(GL_TEXTURE0 + TexUnits)) {
         printf("Invalid texture location %d. Valid range is "
                                     "[GL_TEXTURE0, GL_TEXTURE%d]\n",
                                             Location, TexUnits - 1);
