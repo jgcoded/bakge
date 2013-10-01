@@ -32,13 +32,6 @@ Result Init(int argc, char* argv[])
     PHYSFS_init(argv[0]);
     PHYSFS_addToSearchPath(".", 0);
 
-    /* *
-     * Will be defined in platform-specific utility sources.
-     * This weird declaration is so that this function isn't
-     * exposed as end-user API
-     * */
-    extern Result PlatformInit(int, char*[]);
-
     if(!glfwInit()) {
         printf("GLFW initialization failed\n");
         return BGE_FAILURE;
@@ -93,8 +86,6 @@ Result Init(int argc, char* argv[])
 Result Deinit()
 {
     PHYSFS_deinit();
-
-    extern Result PlatformDeinit();
 
     /* Run platform-specific deinitialization protocol */
     PlatformDeinit();

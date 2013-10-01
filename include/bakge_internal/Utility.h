@@ -49,6 +49,24 @@ namespace utility
  */
 bool CheckRequiredExtensions();
 
+/*! @brief Platform-specific initialization.
+ *
+ * Platform-specific initialization.
+ *
+ * @return BGE_SUCCESS if initialization was successful; BGE_FAILURE if
+ * any errors occurred.
+ */
+Result PlatformInit(int, char*[]);
+
+/*! @brief Platform-specific deinitialization.
+ *
+ * Platform-specific deinitialization.
+ *
+ * @return BGE_SUCCESS if deinitialization was successful; BGE_FAILURE if
+ * any errors occurred.
+ */
+Result PlatformDenit();
+
 } // utility
 } // bakge
 
