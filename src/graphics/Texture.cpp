@@ -86,6 +86,33 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
         0
     };
 
+#ifdef _DEBUG
+    int Max;
+    glGetIntegerv(GL_MAX_TEXTURE_SIZE, &Max);
+
+    if(Width < 0 || Width >= Max) {
+        printf("Invalid texture width %d\n", Width);
+        return NULL;
+    }
+
+    if(Height < 0 || Height >= Max) {
+        printf("Invalid texture height %d\n", Height);
+        return NULL;
+    }
+
+    /* *
+     * When a buffer is bound to GL_PIXEL_UNPACK_BUFFER, there are a few
+     * misleading GL_INVALID_OPERATION errors that can occur.
+     * */
+    GLint BufferBinding;
+    glGetIntegerv(GL_PIXEL_UNPACK_BUFFER_BINDING, &BufferBinding);
+    if(BufferBinding != 0) {
+        printf("Cannot create a texture while a non-zero name is bound to "
+                                                "GL_PIXEL_UNPACK_BUFFER\n");
+        return NULL;
+    }
+#endif // _DEBUG
+
     Texture* NewTexture = new Texture;
 
     NewTexture->Width = Width;
@@ -109,6 +136,11 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     if(Params == NULL)
         Params = DefaultParams;
 
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif //_DEBUG
+
     // Pick out and set texture parameters/values
     GLint i = 0;
     GLint Pair[2]; // Index 0 is parameter name; 1 is value
@@ -118,12 +150,51 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
         // If we just picked a value, set the texture parameter
         if(At == 1)
             glTexParameteri(GL_TEXTURE_2D, Pair[0], Pair[1]);
+
+#ifdef _DEBUG
+        if(glGetError() == GL_INVALID_ENUM) {
+            printf("Invalid parameter name %x or value %x\n", Pair[0],
+                                                            Pair[1]);
+            delete NewTexture;
+            return NULL;
+        }
+#endif // _DEBUG
+
         At ^= 1; // Flip between 0 and 1
         ++i;
     }
 
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Width, Height, 0, Format, Type,
                                                                     Data);
+
+#ifdef _DEBUG
+    GLenum Error;
+    do {
+        Error = glGetError();
+        switch(Error) {
+
+        case GL_INVALID_ENUM:
+            printf("Invalid pixel data type %x\n", Type);
+            break;
+
+        // Some pixel types require specific formats (we only use GL_RGBA)
+        case GL_INVALID_OPERATION:
+            printf("Incompatible pixel data type %x\n", Type);
+            break;
+
+        case GL_NO_ERROR:
+            break;
+
+        default:
+            printf("Unexpected OpenGL error %x\n", Error);
+        }
+    } while(Error != GL_NO_ERROR);
+#endif // _DEBUG
 
     NewTexture->Unbind();
 
