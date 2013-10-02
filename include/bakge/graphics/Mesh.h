@@ -271,6 +271,54 @@ public:
      */
     Result SetTexCoordData(int NumTexCoords, const Scalar* Data);
 
+    /*! @brief Get the Mesh's vertex position data.
+     *
+     * Get the Mesh's vertex position data. These positions are relative to
+     * the origin.
+     *
+     * @return Pointer to position data. Do not free this pointer.
+     */
+    BGE_INL const Scalar* GetPositionData() const
+    {
+        return Positions;
+    }
+
+    /*! @brief Get the Mesh's vertex normal data.
+     *
+     * Get the Mesh's vertex normal data. Vertex normals are unit vectors
+     * which designate the facing of its triangles.
+     *
+     * @return Pointer to normal data. Do not free this pointer.
+     */
+    BGE_INL const Scalar* GetNormalData() const
+    {
+        return Normals;
+    }
+
+    /*! @brief Get the Mesh's texcoord data.
+     *
+     * Get the Mesh's texcoord data. Each vertex has a texture coordinate
+     * ranging from 0.0 to 1.0.
+     *
+     * @return Pointer to texcoord data. Do not free this pointer.
+     */
+    BGE_INL const Scalar* GetTexCoordData() const
+    {
+        return TexCoords;
+    }
+
+    /*! @brief Get the Mesh's index data.
+     *
+     * Get the Mesh's index data. Each three indices forms a triangle which
+     * is drawn. These triangles together form the complete mesh.
+     *
+     * @return Pointer to index data. Do not free this pointer.
+     */
+    BGE_INL const int* GetIndexData() const
+    {
+        return Indices;
+    }
+
 }; /* Mesh */
 
 } /* bakge */
