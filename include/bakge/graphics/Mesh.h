@@ -104,6 +104,11 @@ protected:
     int NumVertices;
     int NumTriangles;
 
+    Scalar* Positions;
+    Scalar* Normals;
+    Scalar* TexCoords;
+    int* Indices;
+
     GLuint MeshBuffers[NUM_MESH_BUFFERS];
 
     /*! @brief Default Mesh constructor.
