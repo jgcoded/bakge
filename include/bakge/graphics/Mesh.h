@@ -225,7 +225,7 @@ public:
      * @return BGE_SUCCESS if the vertex positions data store was successfully
      * filled; BGE_FAILURE if any errors occurred.
      */
-    Result PositionData(int NumPositions, const Scalar* Data);
+    Result SetPositionData(int NumPositions, const Scalar* Data);
 
     /*! @brief Set the contents of the Mesh's vertex normal data store.
      *
@@ -238,7 +238,7 @@ public:
      * @return BGE_SUCCESS if the vertex normal data store was successfully
      * filled; BGE_FAILURE if any errors occurred.
      */
-    Result NormalData(int NumNormals, const Scalar* Data);
+    Result SetNormalData(int NumNormals, const Scalar* Data);
 
     /*! @brief Set the contents of the Mesh's triangle indices data store.
      *
@@ -251,7 +251,7 @@ public:
      * @return BGE_SUCCESS if the triangle indices data store was successfully
      * filled; BGE_FAILURE if any errors occurred.
      */
-    Result IndexData(int NumTriangles, const int* Data);
+    Result SetIndexData(int NumTriangles, const int* Data);
 
     /*! @brief Set the contents of the Mesh's texture coordinates data store.
      *
@@ -264,7 +264,7 @@ public:
      * @return BGE_SUCCESS if the vertex texture coordinates data store was
      * successfully filled; BGE_FAILURE if any errors occurred.
      */
-    Result TexCoordData(int NumTexCoords, const Scalar* Data);
+    Result SetTexCoordData(int NumTexCoords, const Scalar* Data);
 
 }; /* Mesh */
 

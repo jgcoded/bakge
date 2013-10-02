@@ -145,7 +145,7 @@ Result Mesh::DrawInstanced(int Count) const
 }
 
 
-Result Mesh::PositionData(int NumPositions, const Scalar* Data)
+Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 {
     if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0)
         return BGE_FAILURE;
@@ -162,7 +162,7 @@ Result Mesh::PositionData(int NumPositions, const Scalar* Data)
 }
 
 
-Result Mesh::NormalData(int NumNormals, const Scalar* Data)
+Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 {
     if(MeshBuffers[MESH_BUFFER_NORMALS] == 0)
         return BGE_FAILURE;
@@ -177,7 +177,7 @@ Result Mesh::NormalData(int NumNormals, const Scalar* Data)
 }
 
 
-Result Mesh::IndexData(int NumTriangles, const int* Data)
+Result Mesh::SetIndexData(int NumTriangles, const int* Data)
 {
     if(MeshBuffers[MESH_BUFFER_INDICES] == 0)
         return BGE_FAILURE;
@@ -192,7 +192,7 @@ Result Mesh::IndexData(int NumTriangles, const int* Data)
 }
 
 
-Result Mesh::TexCoordData(int NumTexCoords, const Scalar* Data)
+Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
 {
     if(MeshBuffers[MESH_BUFFER_TEXCOORDS] == 0)
         return BGE_FAILURE;
