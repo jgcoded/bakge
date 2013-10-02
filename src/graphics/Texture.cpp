@@ -116,25 +116,22 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     }
 #endif // _DEBUG
 
-    Texture* NewTexture = new Texture;
-
-    NewTexture->Width = Width;
-    NewTexture->Height = Height;
-
     /* Generate an OpenGL texture */
-    glGenTextures(1, &(NewTexture->TextureID));
+    GLuint Tex;
+    glGenTextures(1, &Tex);
 
 #ifdef _DEBUG
     /* Check if error occured while generating the texture */
-    if(NewTexture->TextureID == 0) {
+    if(Tex == 0) {
         printf("Error generating texture\n");
-        delete NewTexture;
         return NULL;
     }
 #endif /* _DEBUG */
 
-    /* Bind the texture so we can set its parameters below */
-    NewTexture->Bind();
+    // Save currently bound texture
+    GLint Old;
+    glGetIntegerv(GL_TEXTURE_BINDING_2D, &Old);
+    glBindTexture(GL_TEXTURE_2D, Tex);
 
     if(Params == NULL)
         Params = DefaultParams;
@@ -158,7 +155,6 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
         if(glGetError() == GL_INVALID_ENUM) {
             printf("Invalid parameter name %x or value %x\n", Pair[0],
                                                             Pair[1]);
-            delete NewTexture;
             return NULL;
         }
 #endif // _DEBUG
@@ -205,9 +201,15 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     }
 #endif // _DEBUG
 
-    NewTexture->Unbind();
+    // Bind the texture that was previously bound
+    glBindTexture(GL_TEXTURE_2D, Old);
 
-    return NewTexture;
+    Texture* T = new Texture;
+    T->TextureID = Tex;
+    T->Width = Width;
+    T->Height = Height;
+
+    return T;
 }
 
 
