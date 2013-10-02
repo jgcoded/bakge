@@ -485,18 +485,17 @@ Result Shader::Bind() const
     }
 #endif // _DEBUG
 
+    // Below we bind some sensible defaults to various uniforms
     GLint Location;
 
     Location = glGetUniformLocation(Program, BGE_DIFFUSE_UNIFORM);
     if(Location >= 0) {
         glUniform1i(Location, 0);
     }
-
     Location = glGetUniformLocation(Program, BGE_CROWD_UNIFORM);
     if(Location >= 0) {
         glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 	}
-
 
     return BGE_SUCCESS;
 }
