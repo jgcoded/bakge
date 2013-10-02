@@ -232,7 +232,6 @@ namespace api
 #include <bakge/graphics/shapes/Rectangle.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Font.h>
-#include <bakge/graphics/Camera.h>
 #include <bakge/graphics/Camera2D.h>
 #include <bakge/graphics/Camera3D.h>
 #include <bakge/ui/Anchor.h>

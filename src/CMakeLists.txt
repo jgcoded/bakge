@@ -20,7 +20,6 @@ set(MODULES
   core/EventHandler
   core/Utility
   core/Window
-  graphics/Camera
   graphics/Camera2D
   graphics/Camera3D
   graphics/Crowd
