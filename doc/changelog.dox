@@ -1,0 +1,10 @@
+
+/*! @page Changelog
+ *
+ * @brief Contains detailed, verbose logs of changes for each version of
+ * Bakge.
+ *
+ * Detailed changelogs are compilations of commit messages describing changes
+ * to the code. These logs can be quite lengthy, so each changelog has an
+ * overview that summarizes any major changes.
+ */
