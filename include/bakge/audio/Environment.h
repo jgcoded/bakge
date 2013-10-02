@@ -39,7 +39,12 @@ namespace bakge
  *
  * An audio Environment consists of an OpenAL context and its associated
  * listener. The listener, as well as any Source objects, are placed in
- * 3D Cartesian space, and OpenAL handles the positional audio.
+ * 3D Cartesian space, and OpenAL handles the positional audio. OpenAL
+ * contexts are per-process, not per-thread like OpenGL contexts. As such,
+ * you should only ever have one Environment for your entire application.
+ * There is nothing wrong with having multiples, just know that Sources
+ * and Streams created while one Environment is bound will not work if you
+ * then bind a different Environment.
  */
 class BGE_API Environment : public Bindable
 {
