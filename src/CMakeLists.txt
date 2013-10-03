@@ -8,8 +8,6 @@ cmake_minimum_required (VERSION 2.6)
 ########################################
 
 set(MODULES
-  api/Mutex
-  api/Thread
   audio/Environment
   audio/Source
   audio/Stream
@@ -90,7 +88,6 @@ set(PLATFORM_MODULES
 # Platform modules might share a common header.
 # Manually set them here
 set(PLATFORM_HEADERS
-  ${BAKGE_SOURCE_DIR}/include/bakge/platform/${PLATFORM_PREFIX}_Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/system/Clock
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Utility
   ${BAKGE_SOURCE_DIR}/include/bakge/mutex/${PLATFORM_PREFIX}_Mutex
