@@ -64,7 +64,6 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     R->Width = Width;
     R->Height = Height;
-    R->NumTriangles = 2;
 
     if(R->CreateBuffers() != BGE_SUCCESS) {
         delete R;
@@ -88,7 +87,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         return NULL;
     }
 
-    if(R->SetIndexData(6, Indices) == BGE_FAILURE) {
+    if(R->SetIndexData(2, Indices) == BGE_FAILURE) {
         printf("Error setting Rectangle triangle indices data\n");
         delete R;
         return NULL;
