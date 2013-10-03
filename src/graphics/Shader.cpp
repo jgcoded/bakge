@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -117,11 +120,38 @@ const char* VertexShaderLibHeader =
 
 Result Shader::InitShaderLibrary()
 {
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
     VertexLib = glCreateShader(GL_VERTEX_SHADER);
     if(VertexLib == 0) {
         printf("Error creating library vertex shader\n");
         return BGE_FAILURE;
     }
+
+#ifdef _DEBUG
+    GLenum Error = glGetError();
+    while(1) {
+        if(Error == GL_NO_ERROR)
+            break;
+
+        switch(Error) {
+
+        case GL_OUT_OF_MEMORY:
+            printf("Not enough memory to create library vertex shader\n");
+            return BGE_FAILURE;
+
+        default:
+            printf("Unexpected error while creating library vertex shader "
+                                            "%s\n", GetGLErrorName(Error));
+            return BGE_FAILURE;
+        }
+
+        Error = glGetError();
+    }
+#endif // _DEBUG
 
     FragmentLib = glCreateShader(GL_FRAGMENT_SHADER);
     if(FragmentLib == 0) {
@@ -129,8 +159,49 @@ Result Shader::InitShaderLibrary()
         return BGE_FAILURE;
     }
 
+#ifdef _DEBUG
+    Error = glGetError();
+    while(1) {
+        if(Error == GL_NO_ERROR)
+            break;
+
+        switch(Error) {
+
+        case GL_OUT_OF_MEMORY:
+            printf("Not enough memory to create library fragment shader\n");
+            return BGE_FAILURE;
+
+        default:
+            printf("Unexpected error while creating library fragment shader "
+                                            "%s\n", GetGLErrorName(Error));
+            return BGE_FAILURE;
+        }
+
+        Error = glGetError();
+    }
+#endif // _DEBUG
+
     glShaderSource(VertexLib, 1, &VertexShaderLibSource, NULL);
+
+#ifdef _DEBUG
+    Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        printf("Unexpected error while attaching library vertex shader "
+                                    "source %s\n", GetGLErrorName(Error));
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
     glShaderSource(FragmentLib, 1, &FragmentShaderLibSource, NULL);
+
+#ifdef _DEBUG
+    Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        printf("Unexpected error while attaching library fragment shader "
+                                    "source %s\n", GetGLErrorName(Error));
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
 
     if(Compile(VertexLib) == BGE_FAILURE) {
         printf("Error compiling library vertex shader\n");
@@ -338,12 +409,31 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
 
 Result Shader::Compile(GLuint Handle)
 {
-    if(Handle == 0)
-        return BGE_FAILURE;
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
 
     Result Errors = BGE_SUCCESS;
 
     glCompileShader(Handle);
+
+#ifdef _DEBUG
+    GLenum Error = glGetError();
+    while(1) {
+        if(Error == GL_NO_ERROR)
+            break;
+
+        switch(Error) {
+
+        case GL_INVALID_OPERATION:
+        case GL_INVALID_VALUE:
+            printf("Compiled invalid shader object\n");
+            return BGE_FAILURE;
+        }
+
+        Error = glGetError();
+    }
 
     GLint Status, Length;
 
@@ -358,6 +448,7 @@ Result Shader::Compile(GLuint Handle)
         printf("%s\n", Info);
         delete[] Info;
     }
+#endif // _DEBUG
 
     return Errors;
 }
@@ -365,23 +456,46 @@ Result Shader::Compile(GLuint Handle)
 
 Result Shader::Bind() const
 {
-    if(Program == 0)
-        return BGE_FAILURE;
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
 
     glUseProgram(Program);
 
+#ifdef _DEBUG
+    GLenum Error = glGetError();
+    while(1) {
+        if(Error == GL_NO_ERROR)
+            break;
+
+        switch(Error) {
+
+        case GL_INVALID_VALUE:
+            printf("Invalid program object\n");
+            return BGE_FAILURE;
+
+        case GL_INVALID_OPERATION:
+            printf("Unable to make program part of current state (is "
+                                "transform feedback mode active?)\n");
+            return BGE_FAILURE;
+        }
+
+        Error = glGetError();
+    }
+#endif // _DEBUG
+
+    // Below we bind some sensible defaults to various uniforms
     GLint Location;
 
     Location = glGetUniformLocation(Program, BGE_DIFFUSE_UNIFORM);
     if(Location >= 0) {
         glUniform1i(Location, 0);
     }
-
     Location = glGetUniformLocation(Program, BGE_CROWD_UNIFORM);
     if(Location >= 0) {
         glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 	}
-
 
     return BGE_SUCCESS;
 }

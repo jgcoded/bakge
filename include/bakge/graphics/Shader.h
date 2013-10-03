@@ -121,16 +121,19 @@ public:
 
     /*! @brief Bind the GLSL shader as the current shader program.
      *
-     * Bind the GLSL shader as the current shader program.
+     * Bind the GLSL shader as the current shader program. Sets various
+     * uniforms used for rendering to sensible defaults. As a result one
+     * should always bind a Shader before a Texture, Pawn or any other
+     * object used for rendering.
      *
      * @return BGE_SUCCESS if the shader was successfully bound; BGE_FAILURE
      * if any errors occurred.
      */
     Result Bind() const;
 
-    /*! @brief Bind a generic, built-in shader for rendering objects.
+    /*! @brief Unbind a Shader and binds in its place a generic Shader.
      *
-     * Bind a generic, built-in shader for rendering objects.
+     * Unbind a Shader and binds in its place a generic Shader.
      *
      * @return BGE_SUCCESS if the default shader was successfully bound;
      * BGE_FAILURE if any errors occurred.

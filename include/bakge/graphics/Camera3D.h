@@ -45,7 +45,7 @@ namespace bakge
  * @todo Have Camera3D perhaps inherit pawn so a Quaternion can be derived from
  * its look-at configuration.
  */
-class BGE_API Camera3D : public Camera
+class BGE_API Camera3D : public Node
 {
 
 protected:

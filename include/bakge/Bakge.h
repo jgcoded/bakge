@@ -38,6 +38,28 @@
 #include <time.h>
 #include <math.h>
 
+#ifdef __linux__
+#include <sys/time.h>
+#include <time.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#elif defined(_WIN32)
+// Disable some pesky MSVC warnings
+#pragma warning(disable : 4193)
+#pragma warning(disable : 4005)
+#define _CRT_SECURE_NO_WARNINGS
+#ifndef WIN32_LEAN_AND_MEAN // Really?
+#define WIN32_LEAN_AND_MEAN
+#endif // WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <winsock2.h>
+#elif defined(__APPLE__)
+#import <cocoa/Cocoa.h>
+#include <unistd.h>
+#endif // __linux__
+
 /* GCC & Clang attributes */
 #if defined __GNUC__ || defined __clang__ || defined __MINGW__
 /*! @brief Send compiler warning if function return result is not used.
@@ -169,15 +191,6 @@ namespace api
 #include <stb/stb_vorbis.c>
 #undef STB_VORBIS_HEADER_ONLY
 
-/* Platform headers */
-#ifdef __linux__
-#include <bakge/platform/x11.h>
-#elif defined(_WIN32)
-#include <bakge/platform/win32.h>
-#elif defined(__APPLE__)
-#include <bakge/platform/osx.h>
-#endif /* __linux__ */
-
 /* Include core Bakge classes and headers */
 #include <bakge/core/Type.h>
 #include <bakge/core/Input.h>
@@ -197,22 +210,20 @@ namespace api
 #include <bakge/data/SingleNode.h>
 #include <bakge/data/LinkedList.h>
 
-/* Include API classes */
-#include <bakge/api/Mutex.h>
-#include <bakge/api/Thread.h>
-
 /* Utility headers */
 #include <bakge/input/GamePad.h>
 #include <bakge/input/XboxController.h>
 
-/* Platform implementation classes */
 #ifdef __linux__
-#include <bakge/platform/x11_Bakge.h>
+#include <bakge/mutex/x11_Mutex.h>
+#include <bakge/thread/x11_Thread.h>
 #elif defined(_WIN32)
-#include <bakge/platform/win32_Bakge.h>
+#include <bakge/mutex/win32_Mutex.h>
+#include <bakge/thread/win32_Thread.h>
 #elif defined(__APPLE__)
-#include <bakge/platform/osx_Bakge.h>
-#endif /* __linux__ */
+#include <bakge/mutex/osx_Mutex.h>
+#include <bakge/thread/osx_Thread.h>
+#endif // __linux__
 
 /* Math modules */
 #include <bakge/math/Math.h>
@@ -227,12 +238,10 @@ namespace api
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Crowd.h>
-#include <bakge/graphics/Shape.h>
 #include <bakge/graphics/shapes/Cube.h>
 #include <bakge/graphics/shapes/Rectangle.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Font.h>
-#include <bakge/graphics/Camera.h>
 #include <bakge/graphics/Camera2D.h>
 #include <bakge/graphics/Camera3D.h>
 #include <bakge/ui/Anchor.h>

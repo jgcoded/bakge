@@ -49,7 +49,7 @@ namespace bakge
  * clipping plane from the near clipping plane. The suggested clipping plane
  * position and span are -1.0f and 2.0f respectively.
  */
-class BGE_API Camera2D : public Camera
+class BGE_API Camera2D : public Node
 {
 
 protected:

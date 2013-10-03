@@ -144,10 +144,10 @@ Cube* Cube::Create()
         return NULL;
     }
 
-    C->PositionData(24, Positions);
-    C->NormalData(24, Normals);
-    C->TexCoordData(24, TexCoords);
-    C->IndexData(36, Indices);
+    C->SetPositionData(24, Positions);
+    C->SetNormalData(24, Normals);
+    C->SetTexCoordData(24, TexCoords);
+    C->SetIndexData(36, Indices);
 
     C->Unbind();
 
