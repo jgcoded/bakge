@@ -38,7 +38,7 @@ public:
     Resizable();
     virtual ~Resizable() = 0;
 
-    virtual bool OnResize(Coord X, Coord Y) = 0;
+    virtual void OnResize(Coord X, Coord Y) = 0;
 
 }; /* Resizable */
 

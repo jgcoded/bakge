@@ -38,7 +38,7 @@ public:
     Hoverable();
     virtual ~Hoverable() = 0;
 
-    virtual bool OnHover(Coord X, Coord Y) = 0;
+    virtual bool IsHovered() const = 0;
 
 }; /* Hoverable */
 

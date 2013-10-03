@@ -38,7 +38,7 @@ public:
     Clickable();
     virtual ~Clickable() = 0;
 
-    virtual bool OnClick(Coord X, Coord Y) = 0;
+    virtual bool IsClicked() const = 0;
 
 }; /* Clickable */
 
