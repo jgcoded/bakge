@@ -218,6 +218,8 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
     if(Indices != NULL)
         free(Indices);
 
+    this->NumTriangles = NumTriangles;
+
     size_t Size = sizeof(int) * 3 * NumVertices;
 
     Indices = (int*)malloc(Size);
