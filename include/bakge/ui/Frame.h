@@ -40,6 +40,8 @@ public:
 
     BGE_FACTORY Frame* Create(Scalar Width, Scalar Height);
 
+    Result SetDimensions(Scalar Width, Scalar Height);
+
 }; /* Frame */
 
 } /* bakge */

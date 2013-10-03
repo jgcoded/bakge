@@ -69,7 +69,7 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
         delete U;
         return NULL;
     }
-
+    
     if(U->SetTexCoordData(4, TexCoords) == BGE_FAILURE) {
         printf("Error setting frame texcoords\n");
         delete U;
@@ -89,6 +89,22 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
     }
 
     return U;
+}
+
+
+Result Frame::SetDimensions(Scalar Width, Scalar Height)
+{
+    Scalar Positions[] = {
+        0, 0, 0,
+        0, Height, 0,
+        Width, Height, 0,
+        Width, 0, 0
+    };
+
+    this->Width = Width;
+    this->Height = Height;
+
+    return SetPositionData(4, Positions);
 }
 
 } /* bakge */
