@@ -39,21 +39,54 @@ Frame::~Frame()
 
 Frame* Frame::Create(Scalar Width, Scalar Height)
 {
-    Frame* U = new Frame;
+    static const Scalar Normals[] = {
+        0, 0, +1.0f,
+        0, 0, +1.0f,
+        0, 0, +1.0f,
+        0, 0, +1.0f
+    };
 
-    U->NumTriangles = 2;
+    static const int Indices[] = {
+        0, 1, 2,
+        0, 2, 3
+    };
+
+    static const Scalar TexCoords[] = {
+        0, 0,
+        0, 1,
+        1, 1,
+        1, 0
+    };
+
+    Frame* U = new Frame;
 
     if(U->CreateBuffers() != BGE_SUCCESS) {
         delete U;
         return NULL;
     }
 
-    if(U->SetDimensions(Width, Height) != BGE_SUCCESS) {
+    if(U->SetDimensions(Width, Height) == BGE_FAILURE) {
         delete U;
         return NULL;
     }
 
-    U->Unbind();
+    if(U->SetTexCoordData(4, TexCoords) == BGE_FAILURE) {
+        printf("Error setting frame texcoords\n");
+        delete U;
+        return NULL;
+    }
+
+    if(U->SetNormalData(4, Normals) == BGE_FAILURE) {
+        printf("Error setting frame normals\n");
+        delete U;
+        return NULL;
+    }
+
+    if(U->SetIndexData(2, Indices) == BGE_FAILURE) {
+        printf("Error setting frame indices\n");
+        delete U;
+        return NULL;
+    }
 
     return U;
 }
