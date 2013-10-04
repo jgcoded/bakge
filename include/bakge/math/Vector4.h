@@ -22,6 +22,11 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Vector4.h
+ * @brief Vector4 class declaration.
+ */
+
 #ifndef BAKGE_MATH_VECTOR4_H
 #define BAKGE_MATH_VECTOR4_H
 
