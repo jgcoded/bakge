@@ -351,6 +351,15 @@ public:
      */
     Matrix BGE_NCP Rotate(Radians Angle, Scalar X, Scalar Y, Scalar Z);
 
+    /*! @brief Multiply a Matrix and Vector4.
+     *
+     * Multiply a Matrix and Vector4. Get the result of the transformation of
+     * the Matrix on the Vector4.
+     *
+     * @param[in] Other Vector4 to transform.
+     *
+     * @return The transformation of the Vector4 by the Matrix.
+     */
     Vector4 operator*(Vector4 BGE_NCP Other) const;
 
 }; /* Matrix */
