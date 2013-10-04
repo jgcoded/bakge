@@ -536,4 +536,34 @@ Matrix BGE_NCP Matrix::Transpose()
     return *this;
 }
 
+
+Vector4 Matrix::operator*(Vector4 BGE_NCP Other) const
+{
+    Scalar A = 0;
+    Scalar B = 0;
+    Scalar C = 0;
+    Scalar D = 0;
+
+    A += M00 * Other[0];
+    B += M01 * Other[0];
+    C += M02 * Other[0];
+    D += M03 * Other[0];
+    A += M10 * Other[1];
+    B += M11 * Other[1];
+    C += M12 * Other[1];
+    D += M13 * Other[1];
+    A += M20 * Other[2];
+    B += M21 * Other[2];
+    C += M22 * Other[2];
+    D += M23 * Other[2];
+    A += M30 * Other[3];
+    B += M31 * Other[3];
+    C += M32 * Other[3];
+    D += M33 * Other[3];
+
+    return Vector4(
+        A, B, C, D
+    );
+}
+
 } /* bakge */

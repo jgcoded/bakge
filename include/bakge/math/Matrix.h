@@ -356,6 +356,8 @@ public:
      */
     Matrix BGE_NCP Rotate(Radians Angle, Scalar X, Scalar Y, Scalar Z);
 
+    Vector4 operator*(Vector4 BGE_NCP Other) const;
+
 }; /* Matrix */
 
 } /* bakge */
