@@ -90,6 +90,8 @@ if(UNIX AND NOT APPLE)
     set(BAKGE_GLFW_TARGET glfw)
   endif()
 
+  set(BAKGE_OPENAL_TARGET openal)
+
   set(BAKGE_LIBRARIES
     m
     ${BAKGE_GLEW_TARGET}
@@ -101,6 +103,7 @@ if(UNIX AND NOT APPLE)
     ${X11_X_PRE_LIBS}
     ${X11_LIBRARIES}
     ${X11_X_EXTRA_LIBRARIES}
+    ${BAKGE_OPENAL_TARGET}
     Xxf86vm
     Xrandr
     Xi
