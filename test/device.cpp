@@ -128,9 +128,9 @@ int main(int argc, char* argv[])
 
         Rot += 1.0f * DeltaTime;
         View.SetLookAt(
-            bakge::Point(0, 0.5f, 1.25f),
-            bakge::Point(0.0f, 0, 0.0f),
-            bakge::UnitVector(0, 1, 0)
+            bakge::Vector4::Point(0, 0.5f, 1.25f),
+            bakge::Vector4::Point(0.0f, 0, 0.0f),
+            bakge::Vector4::UnitVector(0, 1, 0)
         );
         glGetIntegerv(GL_CURRENT_PROGRAM, &ShaderProgram);
         glUniformMatrix4fv(glGetUniformLocation(ShaderProgram, "bge_View"), 1, GL_FALSE, &View[0]);
