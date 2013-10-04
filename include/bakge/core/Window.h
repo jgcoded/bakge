@@ -124,7 +124,7 @@ public:
      *
      * @return Pointer to allocated Window, or NULL if any errors occur.
      *
-     * @warn May only be called from the main thread.
+     * @warning May only be called from the main thread.
      */
     BGE_FACTORY Window* Create(int Width, int Height, int Properties);
 

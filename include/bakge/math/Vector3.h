@@ -147,7 +147,7 @@ public:
      *
      * Compound multiply-assign operator.
      *
-     * @param[in] Other Scalar to multiply by.
+     * @param[in] Value Scalar to multiply by.
      *
      * @return constref to the Vector3 after multiplication.
      */
@@ -157,7 +157,7 @@ public:
      *
      * Compound divide-assign operator.
      *
-     * @param[in] Other Scalar to divide by.
+     * @param[in] Value Scalar to divide by.
      *
      * @return constref to the Vector3 after division.
      */
@@ -197,7 +197,7 @@ public:
      *
      * @warning Do not multiply a point by a scalar.
      */
-    Vector3 operator*(Scalar Other) const;
+    Vector3 operator*(Scalar Value) const;
 
     /*! @brief Vector3 divided by a scalar.
      *

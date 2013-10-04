@@ -91,7 +91,7 @@ public:
      */
     Quaternion(Vector4 BGE_NCP Vec, Scalar Real);
 
-    /*! @bief Quaternion copy constructor.
+    /*! @brief Quaternion copy constructor.
      *
      * Copy data from the other quaternion.
      *

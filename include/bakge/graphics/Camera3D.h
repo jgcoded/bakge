@@ -156,7 +156,7 @@ public:
      *
      * Set the near clipping plane Z value.
      *
-     * @param[in] F Z value of the new near clipping plane.
+     * @param[in] N Z value of the new near clipping plane.
      *
      * @return Z value of the new near clipping plane.
      */

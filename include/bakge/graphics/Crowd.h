@@ -200,7 +200,7 @@ public:
      * Rotate a member globally around an arbitrary axis.
      *
      * @param[in] MemberIndex Index of the member to rotate.
-     * @param[in] Rotation Quaternion to rotate the member by.
+     * @param[in] Rot Quaternion to rotate the member by.
      *
      * @return BGE_SUCCESS if the member was successfully rotated;
      * BGE_FAILURE if any errors occurred.
