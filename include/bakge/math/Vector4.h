@@ -183,9 +183,9 @@ public:
      */
     Vector4 operator+(Vector4 BGE_NCP Other) const;
 
-    /*! @brief Subtract two vectors together.
+    /*! @brief Subtract two vectors.
      *
-     * Subtract two vectors together.
+     * Subtract two vectors.
      *
      * @param[in] Other Vector4 to subtract with.
      *
