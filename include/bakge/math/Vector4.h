@@ -91,7 +91,7 @@ public:
      *
      * @return Opposite of the Vector4 direction.
      *
-     * @warn Do not negate a point.
+     * @warning Do not negate a point.
      */
     Vector4 operator-() const;
 
@@ -140,7 +140,7 @@ public:
      *
      * @return constref to the Vector4 after addition.
      *
-     * @warn Do not sum two points.
+     * @warning Do not sum two points.
      */
     Vector4 BGE_NCP operator+=(Vector4 BGE_NCP Other);
 
@@ -152,7 +152,7 @@ public:
      *
      * @return constref to the Vector4 after subtraction.
      *
-     * @warn Do not subtract a point from a vector.
+     * @warning Do not subtract a point from a vector.
      */
     Vector4 BGE_NCP operator-=(Vector4 BGE_NCP Other);
 
@@ -184,7 +184,7 @@ public:
      *
      * @return Sum of two Vector4 objects, component-wise.
      *
-     * @warn Do not sum 2 points.
+     * @warning Do not sum 2 points.
      */
     Vector4 operator+(Vector4 BGE_NCP Other) const;
 
@@ -196,7 +196,7 @@ public:
      *
      * @return Difference of two Vector4 objects, component-wise.
      *
-     * @warn Do not subtract a point from a vector.
+     * @warning Do not subtract a point from a vector.
      */
     Vector4 operator-(Vector4 BGE_NCP Other) const;
 
@@ -208,7 +208,7 @@ public:
      *
      * @return Value of the Vector4 multiplied by a given value.
      *
-     * @warn Do not multiply a point by a scalar.
+     * @warning Do not multiply a point by a scalar.
      */
     Vector4 operator*(Scalar Value) const;
 
@@ -220,7 +220,7 @@ public:
      *
      * @return Value of the Vector4 divided by a given value.
      *
-     * @warn Do not divide a point by a scalar.
+     * @warning Do not divide a point by a scalar.
      */
     Vector4 operator/(Scalar Value) const;
 
@@ -228,7 +228,7 @@ public:
      *
      * Normalize a vector.
      *
-     * @warn Do not normalize a point.
+     * @warning Do not normalize a point.
      */
     Vector4 BGE_NCP Normalize();
 
@@ -236,7 +236,7 @@ public:
      *
      * Get a normalized copy of the Vector4.
      *
-     * @warn Do not normalize a point.
+     * @warning Do not normalize a point.
      */
     Vector4 Normalized() const;
 
@@ -246,7 +246,7 @@ public:
      *
      * @return Length squared of the vector.
      *
-     * @warn Do not get the length of a point.
+     * @warning Do not get the length of a point.
      */
     Scalar LengthSquared() const;
 
@@ -256,7 +256,7 @@ public:
      *
      * @return Length of the vector.
      *
-     * @warn Do not get the length of a point.
+     * @warning Do not get the length of a point.
      */
     Scalar Length() const;
 
@@ -266,7 +266,7 @@ public:
      *
      * @return Dot product of two vectors.
      *
-     * @warn Do not use points to compute a dot product.
+     * @warning Do not use points to compute a dot product.
      */
     static Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
@@ -276,7 +276,7 @@ public:
      *
      * @return Vector perpendicular to two given vectors.
      *
-     * @note Safe to use on points, as the homogeneous coordinate is ignored.
+     * @warning Safe to use on points, as the homogeneous coordinate is ignored.
      */
     static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
 
