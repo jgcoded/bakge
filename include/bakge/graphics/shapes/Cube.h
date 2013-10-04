@@ -55,9 +55,9 @@ protected:
 
 public:
 
-    /*! @brief Default Cube destructor.
+    /*! @brief Cube destructor.
      *
-     * Default Cube destructor.
+     * Cube destructor.
      */
     ~Cube();
 

@@ -60,9 +60,9 @@ public:
      */
     Texture();
 
-    /*! @brief Default Texture destructor.
+    /*! @brief Texture destructor.
      *
-     * Default Texture destructor.
+     * Texture destructor.
      */
     ~Texture();
 

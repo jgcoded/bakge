@@ -92,9 +92,9 @@ public:
      */
     Shader();
 
-    /*! @brief Default Shader destructor.
+    /*! @brief Shader destructor.
      *
-     * Default Shader destructor.
+     * Shader destructor.
      */
     ~Shader();
 

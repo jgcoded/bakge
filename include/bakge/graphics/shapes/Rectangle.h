@@ -59,9 +59,9 @@ protected:
 
 public:
 
-    /*! @brief Default Rectangle destructor.
+    /*! @brief Rectangle destructor.
      *
-     * Default Rectangle destructor.
+     * Rectangle destructor.
      */
     ~Rectangle();
 

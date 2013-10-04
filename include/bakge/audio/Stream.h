@@ -60,9 +60,9 @@ class BGE_API Stream
 
 public:
 
-    /*! @brief Default Stream destructor.
+    /*! @brief Stream destructor.
      *
-     * Default Stream destructor.
+     * Stream destructor.
      */
     ~Stream();
 

@@ -64,9 +64,9 @@ class BGE_API File
 
 public:
 
-    /*! @brief Default File destructor.
+    /*! @brief File destructor.
      *
-     * Default File destructor.
+     * File destructor.
      */
     ~File();
 

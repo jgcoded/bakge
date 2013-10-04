@@ -63,9 +63,9 @@ public:
 
     static GamePad* AvailableGamePads;
 
-    /*! @brief Default GamePad destructor.
+    /*! @brief GamePad destructor.
      *
-     * Default GamePad destructor.
+     * GamePad destructor.
      */
     ~GamePad();
 
