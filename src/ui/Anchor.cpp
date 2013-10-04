@@ -61,4 +61,48 @@ Vector4 BGE_NCP Anchor::SetAnchor(Scalar X, Scalar Y, Scalar Z)
     return AnchorOffset;
 }
 
+
+Result Anchor::Bind() const
+{
+    Result Errors = BGE_SUCCESS;
+    GLint Program, Location;
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        Errors = BGE_FAILURE;
+
+    /* Get location of bge_Rotation uniform */
+    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
+    if(Location < 0)
+        Errors = BGE_FAILURE;
+
+    Matrix Transformation;
+    Transformation.Scale(Scale[0], Scale[1], Scale[2]);
+    Transformation.Translate(-AnchorOffset[0], -AnchorOffset[1],
+                                                -AnchorOffset[2]);
+    Transformation *= Facing.ToMatrix();
+    Transformation.Translate(Position[0], Position[1], Position[2]);
+    Transformation.Translate(AnchorOffset[0], AnchorOffset[1],
+                                                AnchorOffset[2]);
+
+    glBindBuffer(GL_ARRAY_BUFFER, ModelMatrixBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Transformation[0]) * 16,
+                            &Transformation[0], GL_DYNAMIC_DRAW);
+
+    /* *
+     * Each attribute pointer has a stride of 4. Since mat4x4 are composed
+     * of 4 vec4 components, set each of these individually
+     * */
+    for(int i=0;i<4;++i) {
+        glEnableVertexAttribArray(Location + i);
+        glVertexAttribPointer(Location + i, 4, GL_FLOAT, GL_FALSE, 0,
+                            (const GLvoid*)(sizeof(Scalar) * 4 * i));
+        /* So the attribute is updated per instance, not per vertex */
+        glVertexAttribDivisor(Location + i, 1);
+    }
+
+    return Errors;
+}
+
 } /* bakge */

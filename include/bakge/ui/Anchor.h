@@ -81,6 +81,8 @@ public:
      */
     Vector4 BGE_NCP SetAnchor(Scalar X, Scalar Y, Scalar Z);
 
+    virtual Result Bind() const;
+
 }; /* Anchor */
 
 } /* bakge */
