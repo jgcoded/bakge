@@ -67,8 +67,7 @@ public:
     Scalar LengthSquared() const;
 
     static Scalar Dot(Vector3 BGE_NCP Left, Vector3 BGE_NCP Right);
-    static Vector3 UnitVector(Scalar X, Scalar Y,
-                                                Scalar Z);
+    static Vector3 UnitVector(Scalar X, Scalar Y, Scalar Z);
 
 }; /* Vector3 */
 
