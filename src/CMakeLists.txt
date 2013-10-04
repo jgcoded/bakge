@@ -32,7 +32,6 @@ set(MODULES
   input/GamePad
   ui/Anchor
   ui/Clickable
-  ui/Container
   ui/Draggable
   ui/Frame
   ui/Hoverable
