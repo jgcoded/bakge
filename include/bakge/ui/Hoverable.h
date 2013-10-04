@@ -38,6 +38,7 @@ namespace bakge
 /*! @brief An object that responds in some fashion when the mouse is over it.
  *
  * An object that responds in some fashion when the mouse is over it.
+ * Typically interactive elements will implement Hoverable.
  */
 class BGE_API Hoverable
 {
