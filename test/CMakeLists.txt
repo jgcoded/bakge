@@ -11,7 +11,6 @@ set(TESTS
   crowd
   device
   linkedlist
-  minlua
   font
   rectangle
   thread
