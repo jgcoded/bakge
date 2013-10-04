@@ -146,10 +146,6 @@ Vector4 BGE_NCP Vector4::operator*=(Scalar Value)
 
 Vector4 BGE_NCP Vector4::operator/=(Scalar Value)
 {
-    if(ScalarCompare(Value, 0)) {
-        return *this;
-    }
-
     Val[0] /= Value;
     Val[1] /= Value;
     Val[2] /= Value;
@@ -171,10 +167,6 @@ Vector4 BGE_NCP Vector4::Normalize()
 {
     Scalar Len = Length();
 
-    if(ScalarCompare(Len, 0)) {
-        return *this;
-    }
-
     Val[0] /= Len;
     Val[1] /= Len;
     Val[2] /= Len;
@@ -187,10 +179,6 @@ Vector4 BGE_NCP Vector4::Normalize()
 Vector4 Vector4::Normalized() const
 {
     Scalar Len = Length();
-
-    if(ScalarCompare(Len, 0)) {
-        return *this;
-    }
 
     return Vector4(Val[0] / Len, Val[1] / Len, Val[2] / Len, Val[3] / Len);
 }
@@ -250,10 +238,6 @@ Vector4 Vector4::operator*(Scalar Value) const
 
 Vector4 Vector4::operator/(Scalar Value) const
 {
-    if(ScalarCompare(Value, 0)) {
-        return *this;
-    }
-
     return Vector4(Val[0] / Value, Val[1] / Value, Val[2] / Value,
                                                     Val[3] / Value);
 }
