@@ -160,20 +160,6 @@ extern "C"
  */
 namespace bakge
 {
-/*! @brief Contains abstract interface classes which platform implementations
- * inherit from.
- *
- * Classes like mutexes and threads will have different implementations
- * across Bakge's supported platforms. Dubbed "API classes", all interfaces
- * declared in this namespace are pure-virtual and exist only to ensure
- * different implementations have the same public API. When allocating an
- * instance, it is recommended you do not use a pointer from an interface
- * in the \ref api namespace. Use the appropriate interface from the
- * \ref bakge namespace.
- */
-namespace api
-{
-}
 }
 
 /* Include other external libraries */
