@@ -46,7 +46,16 @@ class BGE_API Resizable : public Draggable
 
 public:
 
+    /*! @brief Default Resizable constructor.
+     *
+     * Default Resizable constructor.
+     */
     Resizable();
+
+    /*! @brief Pure-virtual Resizable destructor.
+     *
+     * Pure-virtual Resizable destructor.
+     */
     virtual ~Resizable() = 0;
 
     /*! @brief Resize callback.

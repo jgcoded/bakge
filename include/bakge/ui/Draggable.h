@@ -40,7 +40,16 @@ class BGE_API Draggable : public Clickable
 
 public:
 
+    /*! @brief Default Draggable constructor.
+     *
+     * Default Draggable constructor.
+     */
     Draggable();
+
+    /*! @brief Pure-virtual Draggable destructor.
+     *
+     * Pure-virtual Draggable destructor.
+     */
     virtual ~Draggable() = 0;
 
     /*! @brief Drag callback.

@@ -44,7 +44,16 @@ class BGE_API Hoverable
 
 public:
 
+    /*! @brief Default Hoverable constructor.
+     *
+     * Default Hoverable constructor.
+     */
     Hoverable();
+
+    /*! @brief Pure-virtual Hoverable destructor.
+     *
+     * Pure-virtual Hoverable destructor.
+     */
     virtual ~Hoverable() = 0;
 
     /*! @brief Check if the mouse is over a Hoverable element.

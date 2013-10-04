@@ -45,8 +45,17 @@ class BGE_API Frame : public Rectangle
 
 public:
 
+    /*! @brief Default Frame constructor.
+     *
+     * Default Frame constructor.
+     */
     Frame();
-    ~Frame();
+
+    /*! @brief Frame destructor.
+     *
+     * Frame destructor.
+     */
+    ~Frame() = 0;
 
     /*! @brief Create a new frame with a given width and height.
      *

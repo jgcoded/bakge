@@ -40,7 +40,16 @@ class BGE_API Clickable : public Hoverable
 
 public:
 
+    /*! @brief Default Clickable constructor.
+     *
+     * Default Clickable constructor.
+     */
     Clickable();
+
+    /*! @brief Pure-virtual Clickable destructor.
+     *
+     * Pure-virtual Clickable destructor.
+     */
     virtual ~Clickable() = 0;
 
     /*! @brief Check if a Clickable object is currently clicked on.
