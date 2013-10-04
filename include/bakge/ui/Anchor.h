@@ -69,6 +69,16 @@ public:
      */
     BGE_FACTORY Anchor* Create();
 
+    /*! @brief Set the offset from the origin of the anchor point.
+     *
+     * Set the offset from the origin of the anchor point.
+     *
+     * @param[in] X X offset of the anchor.
+     * @param[in] Y Y offset of the anchor.
+     * @param[in] Z Z offset of the anchor.
+     *
+     * @return constref to the anchor offset after assignment.
+     */
     Vector4 BGE_NCP SetAnchor(Scalar X, Scalar Y, Scalar Z);
 
 }; /* Anchor */
