@@ -22,6 +22,11 @@
 * THE SOFTWARE.
 * */
 
+/*!
+ * @file Frame.h
+ * @brief Frame class declaration.
+ */
+
 #ifndef BAKGE_UI_FRAME_H
 #define BAKGE_UI_FRAME_H
 
