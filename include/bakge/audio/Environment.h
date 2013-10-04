@@ -63,7 +63,7 @@ protected:
 
 public:
 
-    /*! @brief Default Virtual destructor.
+    /*! @brief Virtual Environment destructor.
      *
      * Virtual Environment destructor.
      */
