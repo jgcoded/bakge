@@ -35,17 +35,12 @@
 namespace bakge
 {
 
-/* *
- * 4x4 matrix. Used to store matrices for use in OpenGL
- * The matrices are stored in column-major form, much like OpenGL's, for
- * faster multiplication.
+/*! @brief 4x4 transformation matrix.
  *
- * They will most often be used to store matrix transforms that need to be
- * quickly loaded into OpenGL on a regular bases -- such as projection
- * matrices for 2D and 3D renderers.
- *
- * Position and/or rotation data can be described with a Node or Pawn object.
- * */
+ * Matrices are widely used in graphics to represent position, rotation and
+ * scale of objects in space, as well as for perspective, viewing
+ * transforms or model transforms.
+ */
 class BGE_API Matrix
 {
     union
