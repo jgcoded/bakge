@@ -160,7 +160,7 @@ public:
      *
      * Compound multiply-assign operator.
      *
-     * @param[in] Other Scalar to multiply by.
+     * @param[in] Value Scalar to multiply by.
      *
      * @return constref to the Vector4 after multiplication.
      */
@@ -170,7 +170,7 @@ public:
      *
      * Compound divide-assign operator.
      *
-     * @param[in] Other Scalar to divide by.
+     * @param[in] Value Scalar to divide by.
      *
      * @return constref to the Vector4 after division.
      */
