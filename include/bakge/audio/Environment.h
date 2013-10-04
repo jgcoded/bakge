@@ -35,9 +35,9 @@
 namespace bakge
 {
 
-/*! @brief An audio Environment through which sounds are played.
+/*! @brief An audio environment through which sounds are played.
  *
- * An audio Environment consists of an OpenAL context and its associated
+ * An audio environment consists of an OpenAL context and its associated
  * listener. The listener, as well as any Source objects, are placed in
  * 3D Cartesian space, and OpenAL handles the positional audio. OpenAL
  * contexts are per-process, not per-thread like OpenGL contexts. As such,

@@ -35,7 +35,7 @@
 namespace bakge
 {
 
-/*! @brief The Cube is a 3D block shape centered at the origin.
+/*! @brief A 3D block shape centered at the origin.
  *
  * The Cube is a 3D block shape centered at the origin. Width, height and
  * length of the Cube are always 1. To draw non-uniformly scaled cube shapes,
