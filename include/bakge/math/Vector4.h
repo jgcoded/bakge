@@ -85,13 +85,13 @@ public:
     Scalar LengthSquared() const;
     Scalar Length() const;
 
-}; /* Vector4 */
+    static Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+    static Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
+    static Vector4 Point(Scalar X, Scalar Y, Scalar Z);
+    static Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
+    static Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
 
-BGE_FUNC Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-BGE_FUNC Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right);
-BGE_FUNC Vector4 Point(Scalar X, Scalar Y, Scalar Z);
-BGE_FUNC Vector4 Vector(Scalar X, Scalar Y, Scalar Z);
-BGE_FUNC Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z);
+}; // Vector4
 
 } /* bakge */
 

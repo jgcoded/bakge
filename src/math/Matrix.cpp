@@ -301,10 +301,10 @@ Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
     Vector4 Forward = Target - Position;
     Forward.Normalize();
 
-    Vector4 Side = Cross(Forward, UpVector);
+    Vector4 Side = Vector4::Cross(Forward, UpVector);
     Side.Normalize();
 
-    Vector4 Up = Cross(Side, Forward);
+    Vector4 Up = Vector4::Cross(Side, Forward);
     Up.Normalize();
 
     Val[0] = Side[0];
@@ -321,9 +321,9 @@ Matrix BGE_NCP Matrix::SetLookAt(Vector4 BGE_NCP Position,
 
     Val[3] = Val[7] = Val[11] = 0;
 
-    Val[12] = -Dot(Side, Position);
-    Val[13] = -Dot(Up, Position);
-    Val[14] = Dot(Forward, Position);
+    Val[12] = -Vector4::Dot(Side, Position);
+    Val[13] = -Vector4::Dot(Up, Position);
+    Val[14] = Vector4::Dot(Forward, Position);
 
     return *this;
 }

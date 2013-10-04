@@ -68,19 +68,19 @@ Vector4 Vector4::operator-() const
 }
 
 
-Vector4 Point(Scalar X, Scalar Y, Scalar Z)
+Vector4 Vector4::Point(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 1.0);
 }
 
 
-Vector4 Vector(Scalar X, Scalar Y, Scalar Z)
+Vector4 Vector4::Vector(Scalar X, Scalar Y, Scalar Z)
 {
     return Vector4(X, Y, Z, 0);
 }
 
 
-Vector4 UnitVector(Scalar X, Scalar Y, Scalar Z)
+Vector4 Vector4::UnitVector(Scalar X, Scalar Y, Scalar Z)
 {
     Scalar Len = sqrt(X * X + Y * Y + Z * Z);
 
@@ -209,14 +209,14 @@ Scalar Vector4::Length() const
 }
 
 
-Scalar Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+Scalar Vector4::Dot(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
     return Left[0] * Right[0] + Left[1] * Right[1] + Left[2] * Right[2]
                                                     + Left[3] * Right[3];
 }
 
 
-Vector4 Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
+Vector4 Vector4::Cross(Vector4 BGE_NCP Left, Vector4 BGE_NCP Right)
 {
     return Vector4(
         Left[1] * Right[2] - Left[2] * Right[1],

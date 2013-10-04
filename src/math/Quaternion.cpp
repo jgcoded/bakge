@@ -250,7 +250,7 @@ Quaternion Quaternion::operator*(Quaternion BGE_NCP Other) const
              + Val[0] * Other.Val[1] - Val[1] * Other.Val[0],
             0
         ),
-        Val[3] * Other.Val[3] - Dot(Us, Them)
+        Val[3] * Other.Val[3] - Vector4::Dot(Us, Them)
     );
 }
 
