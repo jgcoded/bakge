@@ -14,7 +14,6 @@ set(TESTS
   font
   rectangle
   thread
-  ui
 )
 
 if(NOT APPLE)
