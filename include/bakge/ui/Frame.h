@@ -30,6 +30,11 @@
 namespace bakge
 {
 
+/*! @brief A Rectangle specifically suited for UI elements.
+ *
+ * A Rectangle specifically suited for UI elements. The origin of the shape
+ * is at the bottom-left corner of the Frame.
+ */
 class BGE_API Frame : public Rectangle
 {
 
@@ -38,8 +43,24 @@ public:
     Frame();
     ~Frame();
 
+    /*! @brief Create a new frame with a given width and height.
+     *
+     * Create a new frame with a given width and height.
+     *
+     * @param[in] Width Width of the Frame.
+     * @param[in] Height Height of the Frame.
+     *
+     * @return Pointer to allocated Frame; NULL if any errors occurred.
+     */
     BGE_FACTORY Frame* Create(Scalar Width, Scalar Height);
 
+    /*! @brief Set the dimensions of a Frame.
+     *
+     * Set the dimensions of a Frame.
+     *
+     * @param[in] Width New width of the Frame.
+     * @param[in] Height New height of the Frame.
+     */
     Result SetDimensions(Scalar Width, Scalar Height);
 
 }; /* Frame */

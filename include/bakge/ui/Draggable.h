@@ -30,6 +30,11 @@
 namespace bakge
 {
 
+/*! @brief A UI element that responds when the mouse is clicked and dragged.
+ *
+ * A Draggable can usually be moved on the screen, but can also be something
+ * like a slider bar. A Draggable element is inherently Clickable.
+ */
 class BGE_API Draggable : public Clickable
 {
 
@@ -38,6 +43,13 @@ public:
     Draggable();
     virtual ~Draggable() = 0;
 
+    /*! @brief Drag callback.
+     *
+     * Drag callback.
+     *
+     * @param[in] X Distance dragged along the X axis.
+     * @param[in] Y Distance dragged along the Y axis.
+     */
     virtual void OnDrag(Motion X, Motion Y) = 0;
 
 }; /* Draggable */

@@ -22,6 +22,11 @@
 * THE SOFTWARE.
 * */
 
+/*!
+ * @file Resizable.h
+ * @brief Resizable interface declaration.
+ */
+
 #ifndef BAKGE_UI_RESIZEABLE_H
 #define BAKGE_UI_RESIZEABLE_H
 
@@ -30,6 +35,12 @@
 namespace bakge
 {
 
+/*! @brief A UI element that is resizable, like a window.
+ *
+ * UI classes inheriting this will be considered resizable, and must
+ * implement a callback for when they have been resized to a given 2D size.
+ * A Resizable object is inherently Draggable.
+ */
 class BGE_API Resizable : public Draggable
 {
 
@@ -38,6 +49,13 @@ public:
     Resizable();
     virtual ~Resizable() = 0;
 
+    /*! @brief Resize callback.
+     *
+     * Resize callback.
+     *
+     * @param[in] X New X size of the element.
+     * @param[in] Y New Y size of the element.
+     */
     virtual void OnResize(Coord X, Coord Y) = 0;
 
 }; /* Resizable */

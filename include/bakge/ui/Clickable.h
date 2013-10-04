@@ -30,6 +30,11 @@
 namespace bakge
 {
 
+/*! @brief An element that responds to mouse clicks.
+ *
+ * A UI element that is clickable must implement a callback for when the
+ * mouse is clicked over it. A Clickable object is inherently Hoverable.
+ */
 class BGE_API Clickable : public Hoverable
 {
 
@@ -38,6 +43,12 @@ public:
     Clickable();
     virtual ~Clickable() = 0;
 
+    /*! @brief Check if a Clickable object is currently clicked on.
+     *
+     * Check if a Clickable object is currently clicked on.
+     *
+     * @return true if the mouse is clicked on the element; false otherwise.
+     */
     virtual bool IsClicked() const = 0;
 
 }; /* Clickable */

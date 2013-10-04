@@ -22,6 +22,11 @@
 * THE SOFTWARE.
 * */
 
+/*!
+ * @file Hoverable.h
+ * @brief Hoverable interface declaration.
+ */
+
 #ifndef BAKGE_UI_HOVERABLE_H
 #define BAKGE_UI_HOVERABLE_H
 
@@ -30,6 +35,10 @@
 namespace bakge
 {
 
+/*! @brief An object that responds in some fashion when the mouse is over it.
+ *
+ * An object that responds in some fashion when the mouse is over it.
+ */
 class BGE_API Hoverable
 {
 
@@ -38,6 +47,12 @@ public:
     Hoverable();
     virtual ~Hoverable() = 0;
 
+    /*! @brief Check if the mouse is over a Hoverable element.
+     *
+     * Check if the mouse is over a Hoverable element.
+     *
+     * @return true if the element is hovered over; false otherwise.
+     */
     virtual bool IsHovered() const = 0;
 
 }; /* Hoverable */
