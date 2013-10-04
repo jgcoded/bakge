@@ -99,6 +99,8 @@ public:
      *
      * Mutable indexing operator. Get the value of a Vector4's component.
      *
+     * @param[in] At Index of component to reference.
+     *
      * @return Reference to the component at the given index.
      */
     Scalar& operator[](int At);
@@ -106,6 +108,8 @@ public:
     /*! @brief Read-only indexing operator.
      *
      * Read-only indexing operator. Get the value of a Vector4's component.
+     *
+     * @param[in] At Index of component to reference.
      *
      * @return constref to the component at the given index.
      */
