@@ -35,7 +35,7 @@
 namespace bakge
 {
 
-/*! @brief A Shape primarily used for 2D rendering.
+/*! @brief A shape primarily used for 2D rendering.
  *
  * The Rectangle class represents a rectangular shape drawn in the XY plane
  * in 3D Cartesian space. While it is primarily intended to be used for
