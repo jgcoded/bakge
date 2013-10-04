@@ -41,7 +41,9 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
     }
 
+#ifdef _DEBUG
     glfwSetErrorCallback(GLFWErrorHandler);
+#endif // _DEBUG
 
     /* We don't want the shared context window visible */
     glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
