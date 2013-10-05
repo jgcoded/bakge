@@ -27,6 +27,11 @@
 #ifdef _DEBUG
 #include <bakge/internal/Debug.h>
 #endif // _DEBUG
+#define PREFER_PORTABLE_SNPRINTF
+extern "C"
+{
+#include <snprintf/snprintf.h>
+}
 
 namespace bakge
 {
