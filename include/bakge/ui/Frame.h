@@ -55,7 +55,7 @@ public:
      *
      * Frame destructor.
      */
-    ~Frame() = 0;
+    virtual ~Frame();
 
     /*! @brief Create a new frame with a given width and height.
      *
