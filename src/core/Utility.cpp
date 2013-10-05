@@ -31,10 +31,19 @@
 namespace bakge
 {
 
+PHYSFS_File* LogFile = NULL;
+
 Result Init(int argc, char* argv[])
 {
     PHYSFS_init(argv[0]);
     PHYSFS_addToSearchPath(".", 0);
+    PHYSFS_setWriteDir(".");
+
+    LogFile = PHYSFS_openWrite("bakge.log");
+    if(LogFile == NULL) {
+        printf("Error opening log file: %s\n", PHYSFS_getLastError());
+        return BGE_FAILURE;
+    }
 
     if(!glfwInit()) {
         printf("GLFW initialization failed\n");
@@ -92,6 +101,10 @@ Result Init(int argc, char* argv[])
 Result Deinit()
 {
     PHYSFS_deinit();
+
+    if(PHYSFS_close(LogFile) == 0) {
+        printf("Error closing log file\n");
+    }
 
     /* Run platform-specific deinitialization protocol */
     PlatformDeinit();
