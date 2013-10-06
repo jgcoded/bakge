@@ -66,6 +66,10 @@ Result Init(int argc, char* argv[])
     }
 
     LogLock = bakge::Mutex::Create();
+    if(LogLock == NULL) {
+        fprintf(stderr, "Error creating log mutex\n");
+        return Deinit();
+    }
 
     if(!glfwInit()) {
         Log("GLFW initialization failed\n");
@@ -131,7 +135,8 @@ Result Deinit()
     if(PHYSFS_isInit() != 0)
         PHYSFS_deinit();
 
-    delete LogLock;
+    if(LogLock != NULL)
+        delete LogLock;
 
     /* Run platform-specific deinitialization protocol */
     PlatformDeinit();
