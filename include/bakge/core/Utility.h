@@ -103,9 +103,10 @@ BGE_WUNUSED BGE_FUNC Byte* LoadFileContents(const char* Path);
 
 /*! @brief Write a time-stamped log message to bakge.log.
  *
- * The log file is cleared and opened when bakge::Init is called, and is
- * saved to disk and closed whne bakge::Deinit is called. Is a wrapper around
- * the standard library printf function.
+ * Write a time-stamped, formatted log message to bakge.log. Supports limited
+ * use of the standard printf formatting symbols.
+ *
+ * @return Number of characters written to log; -1 on total failure.
  *
  * @todo Time-stamp, print to file instead of stdout.
  */
