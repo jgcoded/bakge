@@ -118,7 +118,9 @@ if(BUILD_SHARED_LIBS)
 endif()
 
 add_definitions(-DSTB_TRUETYPE_IMPLEMENTATION)
-add_library(bakge ${EXTERN_SOURCES} ${MODULES} ${PLATFORM_MODULES} ${HEADERS}
+add_definitions(-DHAVE_SNPRINTF)
+add_definitions(-DPREFER_PORTABLE_SNPRINTF)
+add_library(bakge ${MODULES} ${PLATFORM_MODULES} ${HEADERS} ${EXTERN_SOURCES}
                                     ${PLATFORM_HEADERS} ${INTERNAL_SOURCES})
 if(BUILD_SHARED_LIBS)
   target_link_libraries(bakge ${BAKGE_LIBRARIES})

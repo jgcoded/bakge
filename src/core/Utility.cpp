@@ -27,6 +27,7 @@
 #ifdef _DEBUG
 #include <bakge/internal/Debug.h>
 #endif // _DEBUG
+#define HAVE_SNPRINTF // Always use portable_*printf functions
 #define PREFER_PORTABLE_SNPRINTF
 extern "C"
 {
