@@ -43,7 +43,7 @@ Result Init(int argc, char* argv[])
 {
     if(PHYSFS_init(argv[0]) == 0) {
         Log("Error initializing PhysicsFS\n");
-        return BGE_FAILURE;
+        return Deinit();
     }
 
     PHYSFS_addToSearchPath(".", 0);
@@ -52,12 +52,12 @@ Result Init(int argc, char* argv[])
     LogFile = PHYSFS_openWrite("bakge.log");
     if(LogFile == NULL) {
         Log("Error opening log file: %s\n", PHYSFS_getLastError());
-        return BGE_FAILURE;
+        return Deinit();
     }
 
     if(!glfwInit()) {
         Log("GLFW initialization failed\n");
-        return BGE_FAILURE;
+        return Deinit();
     }
 
 #ifdef _DEBUG
@@ -71,7 +71,7 @@ Result Init(int argc, char* argv[])
     Window::SharedContext = glfwCreateWindow(16, 16, "", NULL, NULL);
     if(Window::SharedContext == NULL) {
         Log("Error creating shared context\n");
-        return BGE_FAILURE;
+        return Deinit();
     }
 
     /* Need to make context current so we can init the shader library */
@@ -83,22 +83,22 @@ Result Init(int argc, char* argv[])
     glewExperimental = GL_TRUE;
     if(glewInit() != GLEW_OK) {
         Log("Error initializing GLEW\n");
-        return BGE_FAILURE;
+        return Deinit();
     }
 
     // Check for required OpenGL extensions to run Bakge
     if(!CheckRequiredExtensions()) {
-        return BGE_FAILURE;
+        return Deinit();
     }
 
     /* Run platform-specific initialization protocol */
     if(PlatformInit(argc, argv) != BGE_SUCCESS)
-        return BGE_FAILURE;
+        return Deinit();
 
     /* Initialize our Bakge shader library */
     if(Shader::InitShaderLibrary() != BGE_SUCCESS) {
         Log("Failed to initialize shader library\n");
-        return BGE_FAILURE;
+        return Deinit();
     }
 
     Log("Bakersfield Game Engine v%d.%d.%d\n", BGE_VER_MAJ, BGE_VER_MIN,
