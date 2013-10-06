@@ -59,7 +59,7 @@ Result Texture::Bind() const
 
 #ifdef _DEBUG
     if(glGetError() == GL_INVALID_VALUE) {
-        printf("Invalid texture name %d\n", TextureID);
+        Log("Texture: Invalid texture name %d\n", TextureID);
         return BGE_FAILURE;
     }
 #endif // _DEBUG
@@ -94,12 +94,12 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     glGetIntegerv(GL_MAX_TEXTURE_SIZE, &Max);
 
     if(Width < 0 || Width >= Max) {
-        printf("Invalid texture width %d\n", Width);
+        Log("Texture: Invalid texture width %d\n", Width);
         return NULL;
     }
 
     if(Height < 0 || Height >= Max) {
-        printf("Invalid texture height %d\n", Height);
+        Log("Texture: Invalid texture height %d\n", Height);
         return NULL;
     }
 
@@ -110,8 +110,8 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     GLint BufferBinding;
     glGetIntegerv(GL_PIXEL_UNPACK_BUFFER_BINDING, &BufferBinding);
     if(BufferBinding != 0) {
-        printf("Cannot create a texture while a non-zero name is bound to "
-                                                "GL_PIXEL_UNPACK_BUFFER\n");
+        Log("Texture: Cannot create a texture while a non-zero name is "
+                                    "bound to GL_PIXEL_UNPACK_BUFFER\n");
         return NULL;
     }
 #endif // _DEBUG
@@ -123,7 +123,7 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
 #ifdef _DEBUG
     /* Check if error occured while generating the texture */
     if(Tex == 0) {
-        printf("Error generating texture\n");
+        Log("Texture: Error generating GL texture\n");
         return NULL;
     }
 #endif /* _DEBUG */
@@ -153,8 +153,8 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
 
 #ifdef _DEBUG
         if(glGetError() == GL_INVALID_ENUM) {
-            printf("Invalid parameter name %x or value %x\n", Pair[0],
-                                                            Pair[1]);
+            Log("Texture: Invalid parameter name %x or value %x\n", Pair[0],
+                                                                    Pair[1]);
             return NULL;
         }
 #endif // _DEBUG
@@ -181,20 +181,20 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
         switch(Error) {
 
         case GL_INVALID_ENUM:
-            printf("Invalid pixel data type %x\n", Type);
+            Log("Texture: Invalid pixel data type %x\n", Type);
             break;
 
         // Some pixel types require specific formats (we only use GL_RGBA)
         case GL_INVALID_OPERATION:
-            printf("Incompatible pixel data type %x\n", Type);
+            Log("Texture: Incompatible pixel data type %x\n", Type);
             break;
 
         case GL_OUT_OF_MEMORY:
-            printf("Not enough memory to create texture\n");
+            Log("Texture: Not enough memory to create texture\n");
             exit(-1);
 
         default:
-            printf("Unexpected OpenGL error %x\n", Error);
+            Log("Texture: Unexpected OpenGL error %x\n", Error);
         }
 
         Error = glGetError();
@@ -221,7 +221,7 @@ Result Texture::SetLocation(GLenum Loc)
     glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &TexUnits);
 
     if(Loc < GL_TEXTURE0 || Loc >= (GLenum)(GL_TEXTURE0 + TexUnits)) {
-        printf("Invalid texture location %d. Valid range is "
+        Log("Texture: Invalid texture location %d. Valid range is "
                                     "[GL_TEXTURE0, GL_TEXTURE%d]\n",
                                             Location, TexUnits - 1);
         return BGE_FAILURE;

@@ -47,7 +47,7 @@ File* File::Open(const char* Path)
 {
     // Check if the file exists within the search path.
     if(PHYSFS_exists(Path) == 0) {
-        printf("Could not find file \"%s\"\n", Path);
+        Log("File: Could not find file \"%s\"\n", Path);
         return NULL;
     }
 

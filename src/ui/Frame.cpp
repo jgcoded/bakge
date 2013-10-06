@@ -71,19 +71,19 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
     }
     
     if(U->SetTexCoordData(4, TexCoords) == BGE_FAILURE) {
-        printf("Error setting frame texcoords\n");
+        Log("Frame: Error setting frame texcoords\n");
         delete U;
         return NULL;
     }
 
     if(U->SetNormalData(4, Normals) == BGE_FAILURE) {
-        printf("Error setting frame normals\n");
+        Log("Frame: Error setting frame normals\n");
         delete U;
         return NULL;
     }
 
     if(U->SetIndexData(2, Indices) == BGE_FAILURE) {
-        printf("Error setting frame indices\n");
+        Log("Frame: Error setting frame indices\n");
         delete U;
         return NULL;
     }

@@ -65,7 +65,7 @@ Result Mesh::Bind() const
 
 #ifdef DEBUG
     if(Program < 0) {
-        printf("Unable to find current shader\n");
+        Log("Mesh: Unable to find current shader\n");
         return BGE_FAILURE;
     }
 #endif /* _DEBUG */
@@ -118,22 +118,22 @@ Result Mesh::CreateBuffers()
 #ifdef _DEBUG
     /* Check to make sure each of our mesh's buffers was created properly */
     if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0) {
-        printf("Error creating positions buffer\n");
+        Log("Mesh: Error creating positions buffer\n");
         return BGE_FAILURE;
     }
 
     if(MeshBuffers[MESH_BUFFER_NORMALS] == 0) {
-        printf("Error creating normals buffer\n");
+        Log("Mesh: Error creating normals buffer\n");
         return BGE_FAILURE;
     }
 
     if(MeshBuffers[MESH_BUFFER_TEXCOORDS] == 0) {
-        printf("Error creating texture coordinates buffer\n");
+        Log("Mesh: Error creating texture coordinates buffer\n");
         return BGE_FAILURE;
     }
 
     if(MeshBuffers[MESH_BUFFER_INDICES] == 0) {
-        printf("Error creating triangle indices buffer\n");
+        Log("Mesh: Error creating triangle indices buffer\n");
         return BGE_FAILURE;
     }
 #endif /* _DEBUG */

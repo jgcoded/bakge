@@ -44,7 +44,7 @@ Pawn* Pawn::Create()
 
     glGenBuffers(1, &P->ModelMatrixBuffer);
     if(P->ModelMatrixBuffer == 0) {
-        printf("Error creating model matrix buffer\n");
+        Log("Pawn: Error creating model matrix buffer\n");
         delete P;
         return NULL;
     }

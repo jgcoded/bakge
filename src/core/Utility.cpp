@@ -113,7 +113,7 @@ Result Init(int argc, char* argv[])
 Result Deinit()
 {
     if(LogFile != NULL && PHYSFS_close(LogFile) == 0) {
-        printf("Error closing log file\n");
+        fprintf(stderr, "Error closing log file\n");
     }
 
     PHYSFS_deinit();
@@ -139,8 +139,8 @@ void SystemInfo()
 
     PlatformSystemInfo();
 
-    printf("OpenGL v%s\n", glGetString(GL_VERSION));
-    printf("GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+    Log("OpenGL v%s\n", glGetString(GL_VERSION));
+    Log("GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 
 
@@ -167,10 +167,10 @@ int Log(const char* Format, ...)
 
     int Error = PHYSFS_write(LogFile, Buf, 1, Len);
     if(Error < 0) {
-        printf("Error writing to log: %s\n", PHYSFS_getLastError());
+        fprintf(stderr, "Error writing to log: %s\n", PHYSFS_getLastError());
         return -1;
     } else if(Error < Len) {
-        printf("Incomplete write to log: %s\n", PHYSFS_getLastError());
+        fprintf(stderr, "Incomplete write to log: %s\n", PHYSFS_getLastError());
         return Error;
     }
 
@@ -185,12 +185,16 @@ int Log(const char* Format, ...)
     // Write message
     Error = PHYSFS_write(LogFile, Buf, 1, Len);
     if(Error < 0) {
-        printf("Error writing to log: %s\n", PHYSFS_getLastError());
+        fprintf(stderr, "Error writing to log: %s\n", PHYSFS_getLastError());
         return -1;
     } else if(Error < Len) {
-        printf("Incomplete write to log: %s\n", PHYSFS_getLastError());
+        fprintf(stderr, "Incomplete write to log: %s\n", PHYSFS_getLastError());
         return Error;
     }
+
+    // Always flush in case a crash happens
+    if(PHYSFS_flush(LogFile) == 0)
+        fprintf(stderr, "Error flushing log: %s\n", PHYSFS_getLastError());
 
     va_end(ArgList);
 

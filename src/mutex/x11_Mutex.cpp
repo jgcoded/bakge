@@ -45,7 +45,7 @@ x11_Mutex* x11_Mutex::Create()
 
     if(pthread_mutex_init(&(M->MutexHandle), NULL) != 0) {
         /* Mutex creation failed */
-        printf("Mutex creation failed");
+        Log("Mutex: Creation failed");
         exit(1);
     }
 

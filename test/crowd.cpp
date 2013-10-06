@@ -34,7 +34,6 @@ int main(int argc, char* argv[])
     bakge::Crowd* Group;
     bakge::Camera3D* Cam;
 
-    printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
@@ -42,7 +41,7 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
-        printf("Error creating window\n");
+        Log("test/crowd: Error creating window\n");
         return bakge::Deinit();
     }
 
@@ -96,6 +95,8 @@ int main(int argc, char* argv[])
     bakge::Microseconds NowTime;
     bakge::Microseconds LastTime = bakge::GetRunningTime();
 
+    bakge::Log("%s%d\n", "hi", 8888887);
+
     while(1) {
         /* Poll events for all windows */
         bakge::Window::PollEvents();
@@ -142,7 +143,6 @@ int main(int argc, char* argv[])
     if(Cam != NULL)
         delete Cam;
 
-    printf("Deinitializing Bakge\n");
     bakge::Deinit();
 
     delete[] Bitmap;

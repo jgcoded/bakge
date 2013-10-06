@@ -43,7 +43,7 @@ Anchor* Anchor::Create()
 
     glGenBuffers(1, &A->ModelMatrixBuffer);
     if(A->ModelMatrixBuffer == 0) {
-        printf("Error creating model matrix buffer\n");
+        Log("Anchor: Error creating model matrix buffer\n");
         delete A;
         return NULL;
     }

@@ -41,14 +41,14 @@ Source* Source::Create()
 {
     Source* S = new Source;
     if(S == NULL) {
-        printf("Error allocating source\n");
+        Log("Source: Couldn't allocate memory\n");
         return NULL;
     }
 
     alGetError();
     alGenSources(1, &S->SourceHandle);
     if(alGetError() != AL_NO_ERROR) {
-        printf("Error creating source\n");
+        Log("Source: Error creating AL source\n");
         delete S;
         return NULL;
     }
@@ -69,7 +69,7 @@ Result Source::Attach(Stream* Str)
 {
     alSourcei(SourceHandle, AL_BUFFER, Str->StreamBuffer);
     if(alGetError() != AL_NO_ERROR) {
-        printf("Error attaching buffer to source\n");
+        Log("Source: Error attaching buffer to source\n");
         return BGE_FAILURE;
     }
 

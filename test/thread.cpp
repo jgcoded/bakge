@@ -39,8 +39,7 @@ int ThreadFunc(void* Data)
 
     while(ThrWin->IsOpen()) {
         bakge::Delay(100000);
-        printf("First value of the array is: ");
-        printf("%d\n\n", TestArray[0]);
+        Log("test/thread: First value of the array is: %d", TestArray[0]);
 
         Mut->Lock();
         for(int i = 0; i < ARR_SIZE; ++i) {
@@ -50,7 +49,6 @@ int ThreadFunc(void* Data)
 
         fflush(0);
     }
-    printf("\n");
 
     return 0;
 }
@@ -58,7 +56,6 @@ int ThreadFunc(void* Data)
 
 int main(int argc, char* argv[])
 {
-    printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     Mut = bakge::Mutex::Create();
@@ -71,7 +68,7 @@ int main(int argc, char* argv[])
     }
 
     if(Win == NULL) {
-        printf("Error initializing window\n");
+        Log("test/thread: Error initializing window\n");
         goto CLEANUP;
     }
 
@@ -103,7 +100,6 @@ CLEANUP:
     if(Mut != NULL)
         delete Mut;
 
-    printf("Deinitializing Bakge\n");
     bakge::Deinit();
 
     return 0;

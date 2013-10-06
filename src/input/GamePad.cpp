@@ -44,7 +44,8 @@ GamePad* GamePad::Detect()
     for(int i=GLFW_JOYSTICK_1;i<GLFW_JOYSTICK_LAST;++i) {
         if(glfwJoystickPresent(i) == GL_TRUE) {
             Pad->Handle = i;
-            printf("Detected GamePad %d: %s\n", i, glfwGetJoystickName(i));
+            Log("GamePad: Detected joystick %d (%s)\n", i,
+                                    glfwGetJoystickName(i));
         }
     }
 

@@ -28,7 +28,7 @@
 
 int main(int argc, char* argv[])
 {
-    printf("Checking linked list as a stack\n");
+    Log("test/linkedlist: Checking linked list as a stack\n");
 
     const char* Strings[] = { "Wake", "up", "Neo", "Matrix", "has", "you" };
     bakge::LinkedList<const char*> List;
@@ -41,9 +41,8 @@ int main(int argc, char* argv[])
     /* Pop values in reversed order */
     while (!List.IsEmpty()) {
         const char* Popped = List.Pop();
-        printf("%s ", Popped);
+        Log("test/linkedlist: Popped %s\n", Popped);
     }
-    printf("\n");
 
     return 0;
 }

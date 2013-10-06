@@ -189,7 +189,7 @@ Window* Window::Create(int Width, int Height, int Properties)
     /* Allocate our bakge Window */
     Win = new Window;
     if(Win == NULL) {
-        printf("Error allocating window memory\n");
+        Log("Window: Couldn't allocate memory\n");
         return NULL;
     }
 

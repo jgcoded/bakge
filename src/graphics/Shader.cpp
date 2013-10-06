@@ -127,7 +127,7 @@ Result Shader::InitShaderLibrary()
 
     VertexLib = glCreateShader(GL_VERTEX_SHADER);
     if(VertexLib == 0) {
-        printf("Error creating library vertex shader\n");
+        Log("Shader Library: Error creating vertex shader\n");
         return BGE_FAILURE;
     }
 
@@ -140,12 +140,13 @@ Result Shader::InitShaderLibrary()
         switch(Error) {
 
         case GL_OUT_OF_MEMORY:
-            printf("Not enough memory to create library vertex shader\n");
+            Log("Shader Library: Not enough memory to create vertex "
+                                                            "shader\n");
             return BGE_FAILURE;
 
         default:
-            printf("Unexpected error while creating library vertex shader "
-                                            "%s\n", GetGLErrorName(Error));
+            Log("Shader Library: Unexpected error while creating vertex "
+                                    "shader %s\n", GetGLErrorName(Error));
             return BGE_FAILURE;
         }
 
@@ -155,7 +156,7 @@ Result Shader::InitShaderLibrary()
 
     FragmentLib = glCreateShader(GL_FRAGMENT_SHADER);
     if(FragmentLib == 0) {
-        printf("Error creating library fragment shader\n");
+        Log("Shader Library: Error creating fragment shader\n");
         return BGE_FAILURE;
     }
 
@@ -168,12 +169,13 @@ Result Shader::InitShaderLibrary()
         switch(Error) {
 
         case GL_OUT_OF_MEMORY:
-            printf("Not enough memory to create library fragment shader\n");
+            Log("Shader Library: Not enough memory to create fragment "
+                                                            "shader\n");
             return BGE_FAILURE;
 
         default:
-            printf("Unexpected error while creating library fragment shader "
-                                            "%s\n", GetGLErrorName(Error));
+            Log("Shader Library: Unexpected error while creating fragment "
+                                        "shader %s\n", GetGLErrorName(Error));
             return BGE_FAILURE;
         }
 
@@ -186,8 +188,8 @@ Result Shader::InitShaderLibrary()
 #ifdef _DEBUG
     Error = glGetError();
     if(Error != GL_NO_ERROR) {
-        printf("Unexpected error while attaching library vertex shader "
-                                    "source %s\n", GetGLErrorName(Error));
+        Log("Unexpected error while attaching library vertex shader "
+                                "source %s\n", GetGLErrorName(Error));
         return BGE_FAILURE;
     }
 #endif // _DEBUG
@@ -197,26 +199,26 @@ Result Shader::InitShaderLibrary()
 #ifdef _DEBUG
     Error = glGetError();
     if(Error != GL_NO_ERROR) {
-        printf("Unexpected error while attaching library fragment shader "
+        Log("Unexpected error while attaching library fragment shader "
                                     "source %s\n", GetGLErrorName(Error));
         return BGE_FAILURE;
     }
 #endif // _DEBUG
 
     if(Compile(VertexLib) == BGE_FAILURE) {
-        printf("Error compiling library vertex shader\n");
+        Log("Shader Library: Error compiling vertex shader\n");
         return BGE_FAILURE;
     }
 
     if(Compile(FragmentLib) == BGE_FAILURE) {
-        printf("Error compiling library fragment shader\n");
+        Log("Shader Library: Error compiling fragment shader\n");
         return BGE_FAILURE;
     }
 
     GenericShader = Shader::LoadFromStrings(1, 1, &GenericVertexShaderSource,
                                                 &GenericFragmentShaderSource);
     if(GenericShader == NULL) {
-        printf("Error creating generic shader\n");
+        Log("Shader Library: Error creating default shader\n");
         return BGE_FAILURE;
     }
 
@@ -338,13 +340,13 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     /* Allocate memory for the new Shader */
     S = new Shader;
     if(S == NULL) {
-        printf("Unable to allocate new shader\n");
+        Log("Shader: Couldn't allocate memory\n");
         return NULL;
     }
 
     S->Program = glCreateProgram();
     if(S->Program == 0) {
-        printf("Error creating shader program\n");
+        Log("Shader: Error creating shader program\n");
         delete S;
         return NULL;
     }
@@ -352,7 +354,7 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     // Allocate a vertex shader
     S->Vertex = glCreateShader(GL_VERTEX_SHADER);
     if(S->Vertex == 0) {
-        printf("Error creating vertex shader\n");
+        Log("Shader: Error creating vertex shader\n");
         delete S;
         return NULL;
     }
@@ -360,7 +362,7 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     // Allocate a fragment shader
     S->Fragment = glCreateShader(GL_FRAGMENT_SHADER);
     if(S->Fragment == 0) {
-        printf("Error creating fragment shader\n");
+        Log("Shader: Error creating fragment shader\n");
         delete S;
         return NULL;
     }
@@ -384,20 +386,20 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
 
     // Compile vertex shader and check for errors
     if(Compile(S->Vertex) == BGE_FAILURE) {
-        printf("Vertex shader compilation failed\n");
+        Log("Shader: Vertex shader compilation failed\n");
         delete S;
         return NULL;
     }
 
     // Compile fragment shader and check for errors
     if(Compile(S->Fragment) == BGE_FAILURE) {
-        printf("Fragment shader compilation failed\n");
+        Log("Shader: Fragment shader compilation failed\n");
         delete S;
         return NULL;
     }
 
     if(S->Link() == BGE_FAILURE) {
-        printf("Shader link failed\n");
+        Log("Shader: Program linking failed\n");
         delete S;
         return NULL;
     }
@@ -428,7 +430,7 @@ Result Shader::Compile(GLuint Handle)
 
         case GL_INVALID_OPERATION:
         case GL_INVALID_VALUE:
-            printf("Compiled invalid shader object\n");
+            Log("Shader: Compiled invalid shader object\n");
             return BGE_FAILURE;
         }
 
@@ -445,7 +447,7 @@ Result Shader::Compile(GLuint Handle)
     if(Length > 1) {
         char* Info = new char[Length];
         glGetShaderInfoLog(Handle, Length, NULL, Info);
-        printf("%s\n", Info);
+        Log("Shader: %s\n", Info);
         delete[] Info;
     }
 #endif // _DEBUG
@@ -472,11 +474,11 @@ Result Shader::Bind() const
         switch(Error) {
 
         case GL_INVALID_VALUE:
-            printf("Invalid program object\n");
+            Log("Shader: Invalid program object\n");
             return BGE_FAILURE;
 
         case GL_INVALID_OPERATION:
-            printf("Unable to make program part of current state (is "
+            Log("Shader: Unable to make program part of current state (is "
                                 "transform feedback mode active?)\n");
             return BGE_FAILURE;
         }

@@ -37,7 +37,6 @@ int main(int argc, char* argv[])
     bakge::Source* Src;
     bakge::Stream* Str;
 
-    printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
@@ -45,7 +44,7 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
-        printf("Error creating window\n");
+        Log("test/audio: Error creating window\n");
         return bakge::Deinit();
     }
 
@@ -90,18 +89,18 @@ int main(int argc, char* argv[])
 
     Src = bakge::Source::Create();
     if(Src == NULL) {
-        printf("Couldn't create Source\n");
+        Log("test/audio: Couldn't create Source\n");
         return -1;
     }
 
     Str = bakge::Stream::Create(Len, Data);
     if(Str == NULL) {
-        printf("Couldn't create Stream\n");
+        Log("test/audio: Couldn't create Stream\n");
         return -2;
     }
 
     if(Src->Attach(Str) == BGE_FAILURE) {
-        printf("Couldn't attach stream to source\n");
+        Log("test/audio: Couldn't attach stream to source\n");
         return -3;
     }
 
@@ -176,7 +175,6 @@ int main(int argc, char* argv[])
     Env->Unbind();
     delete Env;
 
-    printf("Deinitializing Bakge\n");
     bakge::Deinit();
 
     delete[] Bitmap;

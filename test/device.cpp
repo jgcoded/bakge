@@ -33,7 +33,6 @@ int main(int argc, char* argv[])
     bakge::Texture* Tex;
     bakge::Crowd* Group;
 
-    printf("Initializing Bakge\n");
     bakge::Init(argc, argv);
 
     GLubyte* Bitmap = new GLubyte[512 * 512 * 3];
@@ -41,7 +40,7 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
-        printf("Error creating window\n");
+        Log("test/device: Error creating window\n");
         return bakge::Deinit();
     }
 
@@ -53,10 +52,10 @@ int main(int argc, char* argv[])
     } Screen;
 
     bakge::GetPrimaryMonitorResolution(&Screen.X, &Screen.Y);
-    printf("Screen resolution: %d x %d\n", Screen.X, Screen.Y);
+    Log("test/device: Screen resolution: %d x %d\n", Screen.X, Screen.Y);
 
     bakge::GetPrimaryMonitorPhysicalSize(&Screen.X, &Screen.Y);
-    printf("Screen physical size: %d x %d\n", Screen.X, Screen.Y);
+    Log("test/device: Screen physical size: %d x %d\n", Screen.X, Screen.Y);
 
     /* Create simple checkerboard texture */
     for(int i=0;i<256;++i) {
@@ -162,7 +161,6 @@ int main(int argc, char* argv[])
     if(Group != NULL)
         delete Group;
 
-    printf("Deinitializing Bakge\n");
     bakge::Deinit();
 
     delete[] Bitmap;

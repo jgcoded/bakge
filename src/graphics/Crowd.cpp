@@ -49,7 +49,7 @@ Crowd* Crowd::Create(int ReserveMembers)
 
     glGenBuffers(1, &C->ModelMatrixBuffer);
     if(C->ModelMatrixBuffer == 0) {
-        printf("Error creating model matrix buffer\n");
+        Log("Crowd: Error creating model matrix buffer\n");
         delete C;
         return NULL;
     }

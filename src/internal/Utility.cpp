@@ -30,8 +30,8 @@ namespace bakge
 bool CheckRequiredExtensions()
 {
     if(!glewIsSupported("GL_ARB_vertex_buffer_object")) {
-        printf("Required extension %s is unavailable\n",
-                        "GL_ARB_vertex_buffer_object");
+        Log("GLEW: Required extension %s is unavailable\n",
+                            "GL_ARB_vertex_buffer_object");
         return false;
     }
 

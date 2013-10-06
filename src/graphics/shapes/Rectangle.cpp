@@ -76,19 +76,19 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
     }
 
     if(R->SetNormalData(4, Normals) == BGE_FAILURE) {
-        printf("Error setting Rectangle normal data\n");
+        Log("Rectangle: Error setting Rectangle normal data\n");
         delete R;
         return NULL;
     }
 
     if(R->SetTexCoordData(4, TexCoords) == BGE_FAILURE) {
-        printf("Error setting Rectangle texture coordinate data\n");
+        Log("Rectangle: Error setting Rectangle texture coordinate data\n");
         delete R;
         return NULL;
     }
 
     if(R->SetIndexData(2, Indices) == BGE_FAILURE) {
-        printf("Error setting Rectangle triangle indices data\n");
+        Log("Rectangle: Error setting Rectangle triangle indices data\n");
         delete R;
         return NULL;
     }

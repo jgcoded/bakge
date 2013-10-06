@@ -29,7 +29,7 @@ namespace bakge
 
 void GLFWErrorHandler(int Code, const char* Description)
 {
-    printf("GLFW error %d: %s\n", Code, Description);
+    Log("GLFW: Error - %s (%x)\n", Description, Code);
 }
 
 
