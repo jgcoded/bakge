@@ -42,7 +42,7 @@ PHYSFS_File* LogFile = NULL;
 Result Init(int argc, char* argv[])
 {
     if(PHYSFS_init(argv[0]) == 0) {
-        Log("Error initializing PhysicsFS\n");
+        fprintf(stderr, "Error initializing PhysicsFS\n");
         return Deinit();
     }
 
@@ -51,7 +51,7 @@ Result Init(int argc, char* argv[])
 
     LogFile = PHYSFS_openWrite("bakge.log");
     if(LogFile == NULL) {
-        Log("Error opening log file: %s\n", PHYSFS_getLastError());
+        fprintf(stderr, "Error opening log file: %s\n", PHYSFS_getLastError());
         return Deinit();
     }
 
