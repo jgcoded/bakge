@@ -167,6 +167,11 @@ int Log(const char* Format, ...)
         return Error;
     }
 
+#ifdef _DEBUG
+    fprintf(stdout, "[%02d:%02d:%02d.%03d] ", Hour, Min, Sec, Millisec);
+    vfprintf(stdout, Format, ArgList);
+#endif // _DEBUG
+
     // Now write the message
     Len = portable_vsnprintf(Buf, 1024, Format, ArgList);
 
