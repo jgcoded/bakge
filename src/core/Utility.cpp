@@ -173,21 +173,26 @@ int Log(const char* Format, ...)
 
     bakge::Microseconds Time = bakge::GetRunningTime();
 
-    // Get time in hours/minutes/seconds/milliseconds
-    uint64 Millisec = Time / 1000;
-    uint64 Sec = Millisec / 1000;
-    Millisec %= 1000;
-    uint64 Min = Sec / 60;
-    Sec %= 60;
-    uint64 Hour = Min / 60;
-    Min %= 60;
+    // 3.6 billion microseconds per hour
+    uint64 Hour = Time / 3600000000;
+
+    // Remaining microseconds (this amounts to less than one hour)
+    uint32 Rem = Time % 3600000000;
+    uint32 Min = Rem / 60000000;
+
+    // Remaining microseconds now amounts to less than one minute
+    Rem %= 60000000;
+    uint32 Sec = Rem / 1000000;
+
+    // Our remaining microseconds converted to milliseconds
+    Rem %= 1000000;
+    Rem /= 1000;
 
     LogLock->Lock();
 
     // Write the timestamp
-    int Len = portable_snprintf(Buf, 1024, "[%02llu:%02llu:%02llu.%03llu] ",
-                                                            Hour, Min, Sec,
-                                                                Millisec);
+    int Len = portable_snprintf(Buf, 1024, "[%02llu:%02u:%02u.%03u] ",
+                                                Hour, Min, Sec, Rem);
 
     PHYSFS_sint64 Error = PHYSFS_write(LogFile, Buf, 1, Len);
     if(Error < 0) {
@@ -199,8 +204,7 @@ int Log(const char* Format, ...)
     }
 
 #ifdef _DEBUG
-    fprintf(stdout, "[%02llu:%02llu:%02llu.%03llu] ", Hour, Min, Sec,
-                                                            Millisec);
+    fprintf(stdout, "[%02llu:%02u:%02u.%03u] ", Hour, Min, Sec, Rem);
     vfprintf(stdout, Format, ArgList);
 #endif // _DEBUG
 
