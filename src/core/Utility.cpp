@@ -112,7 +112,7 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    if(PHYSFS_close(LogFile) == 0) {
+    if(LogFile != NULL && PHYSFS_close(LogFile) == 0) {
         printf("Error closing log file\n");
     }
 
@@ -124,7 +124,8 @@ Result Deinit()
     Shader::DeinitShaderLibrary();
 
     /* Destroy our shared context window */
-    glfwDestroyWindow(Window::SharedContext);
+    if(Window::SharedContext != NULL)
+        glfwDestroyWindow(Window::SharedContext);
 
     glfwTerminate();
 
