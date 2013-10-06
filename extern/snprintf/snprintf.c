@@ -287,6 +287,12 @@
 #define PORTABLE_SNPRINTF_VERSION_MAJOR 2
 #define PORTABLE_SNPRINTF_VERSION_MINOR 2
 
+#ifdef _MSC_VER /* Prevent pesky MSVC warnings */
+#pragma warning(disable : 4273)
+#pragma warning(disable : 4996)
+#pragma warning(disable : 4018)
+#endif /* _MSC_VER */
+
 #if defined(NEED_ASPRINTF) || defined(NEED_ASNPRINTF) || defined(NEED_VASPRINTF) || defined(NEED_VASNPRINTF)
 # if defined(NEED_SNPRINTF_ONLY)
 # undef NEED_SNPRINTF_ONLY
