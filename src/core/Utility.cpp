@@ -106,11 +106,11 @@ Result Init(int argc, char* argv[])
 
 Result Deinit()
 {
-    PHYSFS_deinit();
-
     if(PHYSFS_close(LogFile) == 0) {
         printf("Error closing log file\n");
     }
+
+    PHYSFS_deinit();
 
     /* Run platform-specific deinitialization protocol */
     PlatformDeinit();
