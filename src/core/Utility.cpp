@@ -143,10 +143,21 @@ int Log(const char* Format, ...)
 
     char Buf[1024];
     va_start(ArgList, Format);
-    int Len = portable_vsnprintf(Buf, 1024, Format, ArgList);
-    va_end(ArgList);
 
-    // Write message
+    bakge::Microseconds Time = bakge::GetRunningTime();
+
+    // Get time in hours/minutes/seconds/milliseconds
+    int Sec = Time / 1000000;
+    int Min = Sec / 60;
+    Sec = Sec % 60;
+    int Hour = Min / 60;
+    Min = Min % 60;
+    int Millisec = (Time % 1000000) / 1000;
+
+    // Write the timestamp
+    int Len = portable_snprintf(Buf, 1024, "[%02d:%02d:%02d.%03d] ", Hour,
+                                                        Min, Sec, Millisec);
+
     int Error = PHYSFS_write(LogFile, Buf, 1, Len);
     if(Error < 0) {
         printf("Error writing to log: %s\n", PHYSFS_getLastError());
@@ -155,6 +166,21 @@ int Log(const char* Format, ...)
         printf("Incomplete write to log: %s\n", PHYSFS_getLastError());
         return Error;
     }
+
+    // Now write the message
+    Len = portable_vsnprintf(Buf, 1024, Format, ArgList);
+
+    // Write message
+    Error = PHYSFS_write(LogFile, Buf, 1, Len);
+    if(Error < 0) {
+        printf("Error writing to log: %s\n", PHYSFS_getLastError());
+        return -1;
+    } else if(Error < Len) {
+        printf("Incomplete write to log: %s\n", PHYSFS_getLastError());
+        return Error;
+    }
+
+    va_end(ArgList);
 
     return Len;
 }
