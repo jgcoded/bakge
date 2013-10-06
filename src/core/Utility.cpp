@@ -129,7 +129,7 @@ Result Deinit()
 
     glfwTerminate();
 
-    return BGE_SUCCESS;
+    return BGE_FAILURE;
 }
 
 

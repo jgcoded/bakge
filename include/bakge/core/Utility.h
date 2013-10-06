@@ -88,8 +88,7 @@ BGE_FUNC Result Init(int argc, char* argv[]);
  * Deinit when not preceded by an Init call may result in crashes or memory
  * leaks.
  *
- * @return BGE_SUCCESS if deinitialization was successful; BGE_FAILURE if any
- * errors occurred.
+ * @return Always returns BGE_FAILURE
  */
 BGE_FUNC Result Deinit();
 
