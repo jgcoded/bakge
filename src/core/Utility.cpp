@@ -38,6 +38,7 @@ namespace bakge
 {
 
 PHYSFS_File* LogFile = NULL;
+static Mutex* LogLock = NULL;
 
 Result Init(int argc, char* argv[])
 {
@@ -54,6 +55,8 @@ Result Init(int argc, char* argv[])
         fprintf(stderr, "Error opening log file: %s\n", PHYSFS_getLastError());
         return Deinit();
     }
+
+    LogLock = bakge::Mutex::Create();
 
     if(!glfwInit()) {
         Log("GLFW initialization failed\n");
@@ -118,6 +121,8 @@ Result Deinit()
 
     PHYSFS_deinit();
 
+    delete LogLock;
+
     /* Run platform-specific deinitialization protocol */
     PlatformDeinit();
 
@@ -162,6 +167,8 @@ int Log(const char* Format, ...)
     uint64 Hour = Min / 60;
     Min %= 60;
 
+    LogLock->Lock();
+
     // Write the timestamp
     int Len = portable_snprintf(Buf, 1024, "[%02llu:%02d:%02d.%03d] ", Hour,
                                                         (int)Min, (int)Sec,
@@ -197,6 +204,8 @@ int Log(const char* Format, ...)
     // Always flush in case a crash happens
     if(PHYSFS_flush(LogFile) == 0)
         fprintf(stderr, "Error flushing log: %s\n", PHYSFS_getLastError());
+
+    LogLock->Unlock();
 
     va_end(ArgList);
 
