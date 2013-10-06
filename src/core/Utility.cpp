@@ -37,7 +37,7 @@ extern "C"
 namespace bakge
 {
 
-PHYSFS_File* LogFile = NULL;
+static PHYSFS_File* LogFile = NULL;
 static Mutex* LogLock = NULL;
 
 Result Init(int argc, char* argv[])
