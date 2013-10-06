@@ -54,7 +54,7 @@ bakge::Result InitTest()
     F = bakge::Font::Load("arial.ttf");
 
     int R = F->Bake(&Tex, 36, 132, 64.0f);
-    Log("test/font: Bake result %d\n", R);
+    bakge::Log("test/font: Bake result %d\n", R);
 
     It = bakge::Pawn::Create();
     Obj = bakge::Rectangle::Create(512, 512);

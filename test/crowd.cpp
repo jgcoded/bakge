@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
-        Log("test/crowd: Error creating window\n");
+        bakge::Log("test/crowd: Error creating window\n");
         return bakge::Deinit();
     }
 
@@ -94,8 +94,6 @@ int main(int argc, char* argv[])
     float Rot = 0;
     bakge::Microseconds NowTime;
     bakge::Microseconds LastTime = bakge::GetRunningTime();
-
-    bakge::Log("%s%d\n", "hi", 8888887);
 
     while(1) {
         /* Poll events for all windows */

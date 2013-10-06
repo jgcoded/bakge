@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
-        Log("test/device: Error creating window\n");
+        bakge::Log("test/device: Error creating window\n");
         return bakge::Deinit();
     }
 
@@ -52,10 +52,10 @@ int main(int argc, char* argv[])
     } Screen;
 
     bakge::GetPrimaryMonitorResolution(&Screen.X, &Screen.Y);
-    Log("test/device: Screen resolution: %d x %d\n", Screen.X, Screen.Y);
+    bakge::Log("test/device: Screen resolution: %d x %d\n", Screen.X, Screen.Y);
 
     bakge::GetPrimaryMonitorPhysicalSize(&Screen.X, &Screen.Y);
-    Log("test/device: Screen physical size: %d x %d\n", Screen.X, Screen.Y);
+    bakge::Log("test/device: Screen physical size: %d x %d\n", Screen.X, Screen.Y);
 
     /* Create simple checkerboard texture */
     for(int i=0;i<256;++i) {

@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
     Win = bakge::Window::Create(1024, 768, 0);
     if(Win == NULL) {
-        Log("test/audio: Error creating window\n");
+        bakge::Log("test/audio: Error creating window\n");
         return bakge::Deinit();
     }
 
@@ -89,18 +89,18 @@ int main(int argc, char* argv[])
 
     Src = bakge::Source::Create();
     if(Src == NULL) {
-        Log("test/audio: Couldn't create Source\n");
+        bakge::Log("test/audio: Couldn't create Source\n");
         return -1;
     }
 
     Str = bakge::Stream::Create(Len, Data);
     if(Str == NULL) {
-        Log("test/audio: Couldn't create Stream\n");
+        bakge::Log("test/audio: Couldn't create Stream\n");
         return -2;
     }
 
     if(Src->Attach(Str) == BGE_FAILURE) {
-        Log("test/audio: Couldn't attach stream to source\n");
+        bakge::Log("test/audio: Couldn't attach stream to source\n");
         return -3;
     }
 

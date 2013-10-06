@@ -39,7 +39,7 @@ int ThreadFunc(void* Data)
 
     while(ThrWin->IsOpen()) {
         bakge::Delay(100000);
-        Log("test/thread: First value of the array is: %d", TestArray[0]);
+        bakge::Log("test/thread: First value of the array is: %d", TestArray[0]);
 
         Mut->Lock();
         for(int i = 0; i < ARR_SIZE; ++i) {
@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
     }
 
     if(Win == NULL) {
-        Log("test/thread: Error initializing window\n");
+        bakge::Log("test/thread: Error initializing window\n");
         goto CLEANUP;
     }
 
