@@ -34,7 +34,7 @@ Shader* Shader::GenericShader = NULL;
 GLuint Shader::VertexLib = 0;
 GLuint Shader::FragmentLib = 0;
 
-const char* VertexShaderLibSource =
+static const char* VertexShaderLibSource =
     "#version 120\n"
     "\n"
     "attribute mat4x4 bge_Model;\n"
@@ -48,7 +48,7 @@ const char* VertexShaderLibSource =
     "attribute vec2 bge_TexCoord;\n"
     "\n";
 
-const char* GenericVertexShaderSource =
+static const char* GenericVertexShaderSource =
     "varying float LightIntensity;\n"
     "varying vec2 TexCoord0;\n"
     "\n"
@@ -71,7 +71,7 @@ const char* GenericVertexShaderSource =
     "}\n"
     "\n";
 
-const char* FragmentShaderLibSource =
+static const char* FragmentShaderLibSource =
     "#version 120\n"
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
@@ -79,7 +79,7 @@ const char* FragmentShaderLibSource =
     "uniform sampler2D bge_Diffuse;\n"
     "\n";
 
-const char* GenericFragmentShaderSource =
+static const char* GenericFragmentShaderSource =
     "varying float LightIntensity;\n"
     "varying vec2 TexCoord0;\n"
     "\n"
@@ -93,7 +93,7 @@ const char* GenericFragmentShaderSource =
     "}\n"
     "\n";
 
-const char* FragmentShaderLibHeader =
+static const char* FragmentShaderLibHeader =
     "#version 120\n"
     "\n"
     "varying vec4 bge_TransformedNormal;\n"
@@ -101,7 +101,7 @@ const char* FragmentShaderLibHeader =
     "uniform sampler2D bge_Diffuse;\n"
     "\n";
 
-const char* VertexShaderLibHeader =
+static const char* VertexShaderLibHeader =
     "#version 120\n"
     "\n"
     "attribute mat4x4 bge_Model;\n"
