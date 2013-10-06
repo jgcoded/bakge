@@ -41,18 +41,22 @@ PHYSFS_File* LogFile = NULL;
 
 Result Init(int argc, char* argv[])
 {
-    PHYSFS_init(argv[0]);
+    if(PHYSFS_init(argv[0]) == 0) {
+        Log("Error initializing PhysicsFS\n");
+        return BGE_FAILURE;
+    }
+
     PHYSFS_addToSearchPath(".", 0);
     PHYSFS_setWriteDir(".");
 
     LogFile = PHYSFS_openWrite("bakge.log");
     if(LogFile == NULL) {
-        printf("Error opening log file: %s\n", PHYSFS_getLastError());
+        Log("Error opening log file: %s\n", PHYSFS_getLastError());
         return BGE_FAILURE;
     }
 
     if(!glfwInit()) {
-        printf("GLFW initialization failed\n");
+        Log("GLFW initialization failed\n");
         return BGE_FAILURE;
     }
 
@@ -66,7 +70,7 @@ Result Init(int argc, char* argv[])
     /* Create our shared context window */
     Window::SharedContext = glfwCreateWindow(16, 16, "", NULL, NULL);
     if(Window::SharedContext == NULL) {
-        printf("Error creating shared context\n");
+        Log("Error creating shared context\n");
         return BGE_FAILURE;
     }
 
@@ -78,7 +82,7 @@ Result Init(int argc, char* argv[])
 
     glewExperimental = GL_TRUE;
     if(glewInit() != GLEW_OK) {
-        printf("Error initializing GLEW\n");
+        Log("Error initializing GLEW\n");
         return BGE_FAILURE;
     }
 
@@ -92,11 +96,13 @@ Result Init(int argc, char* argv[])
         return BGE_FAILURE;
 
     /* Initialize our Bakge shader library */
-    if(Shader::InitShaderLibrary() != BGE_SUCCESS)
+    if(Shader::InitShaderLibrary() != BGE_SUCCESS) {
+        Log("Failed to initialize shader library\n");
         return BGE_FAILURE;
+    }
 
-    printf("Bakersfield Game Engine v%d.%d.%d\n", BGE_VER_MAJ, BGE_VER_MIN,
-                                                                BGE_VER_REV);
+    Log("Bakersfield Game Engine v%d.%d.%d\n", BGE_VER_MAJ, BGE_VER_MIN,
+                                                            BGE_VER_REV);
 
     SystemInfo();
 
