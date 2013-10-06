@@ -128,7 +128,8 @@ Result Deinit()
         fprintf(stderr, "Error closing log file\n");
     }
 
-    PHYSFS_deinit();
+    if(PHYSFS_isInit() != 0)
+        PHYSFS_deinit();
 
     delete LogLock;
 
