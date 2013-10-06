@@ -39,7 +39,8 @@ int ThreadFunc(void* Data)
 
     while(ThrWin->IsOpen()) {
         bakge::Delay(100000);
-        bakge::Log("test/thread: First value of the array is: %d", TestArray[0]);
+        bakge::Log("test/thread: First value of the array is: %d\n",
+                                                        TestArray[0]);
 
         Mut->Lock();
         for(int i = 0; i < ARR_SIZE; ++i) {
