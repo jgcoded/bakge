@@ -154,28 +154,30 @@ int Log(const char* Format, ...)
     bakge::Microseconds Time = bakge::GetRunningTime();
 
     // Get time in hours/minutes/seconds/milliseconds
-    int Sec = Time / 1000000;
-    int Min = Sec / 60;
-    Sec = Sec % 60;
-    int Hour = Min / 60;
-    Min = Min % 60;
-    int Millisec = (Time % 1000000) / 1000;
+    uint64 Millisec = Time / 1000;
+    uint64 Sec = Millisec / 1000;
+    Millisec %= 1000;
+    uint64 Min = Sec / 60;
+    Sec %= 60;
+    uint64 Hour = Min / 60;
+    Min %= 60;
 
     // Write the timestamp
-    int Len = portable_snprintf(Buf, 1024, "[%02d:%02d:%02d.%03d] ", Hour,
-                                                        Min, Sec, Millisec);
+    int Len = portable_snprintf(Buf, 1024, "[%02llu:%02d:%02d.%03d] ", Hour,
+                                                        (int)Min, (int)Sec,
+                                                            (int)Millisec);
 
-    int Error = PHYSFS_write(LogFile, Buf, 1, Len);
+    PHYSFS_sint64 Error = PHYSFS_write(LogFile, Buf, 1, Len);
     if(Error < 0) {
         fprintf(stderr, "Error writing to log: %s\n", PHYSFS_getLastError());
         return -1;
     } else if(Error < Len) {
-        fprintf(stderr, "Incomplete write to log: %s\n", PHYSFS_getLastError());
-        return Error;
+        fprintf(stderr, "Incomplete write to log: %s\n",
+                                PHYSFS_getLastError());
     }
 
 #ifdef _DEBUG
-    fprintf(stdout, "[%02d:%02d:%02d.%03d] ", Hour, Min, Sec, Millisec);
+    fprintf(stdout, "[%02llu:%02d:%02d.%03d] ", Hour, Min, Sec, Millisec);
     vfprintf(stdout, Format, ArgList);
 #endif // _DEBUG
 
@@ -188,8 +190,8 @@ int Log(const char* Format, ...)
         fprintf(stderr, "Error writing to log: %s\n", PHYSFS_getLastError());
         return -1;
     } else if(Error < Len) {
-        fprintf(stderr, "Incomplete write to log: %s\n", PHYSFS_getLastError());
-        return Error;
+        fprintf(stderr, "Incomplete write to log: %s\n",
+                                    PHYSFS_getLastError());
     }
 
     // Always flush in case a crash happens
