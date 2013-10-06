@@ -71,7 +71,8 @@ namespace bakge
  *
  * Init must be called before any Bakge class or method can safely be used.
  * Calling Init twice or failing to match it with a corresponding Deinit call
- * before your program exits can cause crashes or memory leaks.
+ * before your program exits can cause crashes or memory leaks. If any errors
+ * or failed initialization is called, Init internally calls Deinit.
  *
  * @param[in] argc Number of command-line arguments.
  * @param[in] argv Array of command-line arguments.
