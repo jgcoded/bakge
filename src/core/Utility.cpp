@@ -170,9 +170,9 @@ int Log(const char* Format, ...)
     LogLock->Lock();
 
     // Write the timestamp
-    int Len = portable_snprintf(Buf, 1024, "[%02llu:%02d:%02d.%03d] ", Hour,
-                                                        (int)Min, (int)Sec,
-                                                            (int)Millisec);
+    int Len = portable_snprintf(Buf, 1024, "[%02llu:%02llu:%02llu.%03llu] ",
+                                                            Hour, Min, Sec,
+                                                                Millisec);
 
     PHYSFS_sint64 Error = PHYSFS_write(LogFile, Buf, 1, Len);
     if(Error < 0) {
@@ -184,7 +184,8 @@ int Log(const char* Format, ...)
     }
 
 #ifdef _DEBUG
-    fprintf(stdout, "[%02llu:%02d:%02d.%03d] ", Hour, Min, Sec, Millisec);
+    fprintf(stdout, "[%02llu:%02llu:%02llu.%03llu] ", Hour, Min, Sec,
+                                                            Millisec);
     vfprintf(stdout, Format, ArgList);
 #endif // _DEBUG
 
