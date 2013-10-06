@@ -27,11 +27,8 @@
 namespace bakge
 {
 
-#define BAKGE_WINDOW_CLASS_NAME "BakgeWinClass"
-
 LARGE_INTEGER ClockFreq;
 LARGE_INTEGER StartCount;
-WSADATA WSA;
 
 Result PlatformInit(int argc, char* argv[])
 {
@@ -48,20 +45,12 @@ Result PlatformInit(int argc, char* argv[])
     /* Reset thread affinity mask for this thread */
     SetThreadAffinityMask(CurrentThread, OldThreadMask);
 
-    /* Initialize WinSock 2 */
-    if(WSAStartup(MAKEWORD(2,2), &WSA) != 0) {
-        printf("Error initializing WinSock\n");
-        return BGE_FAILURE;
-    }
-
     return BGE_SUCCESS;
 }
 
 
 Result PlatformDeinit()
 {
-    WSACleanup();
-
     return BGE_SUCCESS;
 }
 
