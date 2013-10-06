@@ -47,8 +47,17 @@ Result Init(int argc, char* argv[])
         return Deinit();
     }
 
-    PHYSFS_addToSearchPath(".", 0);
-    PHYSFS_setWriteDir(".");
+    if(PHYSFS_addToSearchPath(".", 0) == 0) {
+        fprintf(stderr, "Error mounting running directory: %s\n",
+                                            PHYSFS_getLastError());
+        return Deinit();
+    }
+
+    if(PHYSFS_setWriteDir(".") == 0) {
+        fprintf(stderr, "Error setting write directory: %s\n",
+                                            PHYSFS_getLastError());
+        return Deinit();
+    }
 
     LogFile = PHYSFS_openWrite("bakge.log");
     if(LogFile == NULL) {
