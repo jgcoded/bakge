@@ -139,14 +139,24 @@ void SystemInfo()
 
 int Log(const char* Format, ...)
 {
-    int i;
     va_list ArgList;
 
+    char Buf[1024];
     va_start(ArgList, Format);
-    i = vprintf(Format, ArgList);
+    int Len = portable_vsnprintf(Buf, 1024, Format, ArgList);
     va_end(ArgList);
 
-    return i;
+    // Write message
+    int Error = PHYSFS_write(LogFile, Buf, 1, Len);
+    if(Error < 0) {
+        printf("Error writing to log: %s\n", PHYSFS_getLastError());
+        return -1;
+    } else if(Error < Len) {
+        printf("Incomplete write to log: %s\n", PHYSFS_getLastError());
+        return Error;
+    }
+
+    return Len;
 }
 
 } /* bakge */
