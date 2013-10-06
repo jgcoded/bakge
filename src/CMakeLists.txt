@@ -49,8 +49,6 @@ set(HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/Bakge
   ${BAKGE_SOURCE_DIR}/include/bakge/math/Math
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Type
-  ${BAKGE_SOURCE_DIR}/include/bakge/data/LinkedList
-  ${BAKGE_SOURCE_DIR}/include/bakge/data/SingleNode
   ${BAKGE_SOURCE_DIR}/include/bakge/input/XboxController
 )
 

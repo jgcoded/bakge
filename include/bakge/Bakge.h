@@ -43,18 +43,12 @@
 #include <time.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
 #elif defined(_WIN32)
 // Disable some pesky MSVC warnings
 #pragma warning(disable : 4193)
 #pragma warning(disable : 4005)
 #define _CRT_SECURE_NO_WARNINGS
-#ifndef WIN32_LEAN_AND_MEAN // Really?
-#define WIN32_LEAN_AND_MEAN
-#endif // WIN32_LEAN_AND_MEAN
 #include <windows.h>
-#include <winsock2.h>
 #elif defined(__APPLE__)
 #import <cocoa/Cocoa.h>
 #include <unistd.h>
@@ -191,10 +185,8 @@ namespace bakge
 #include <bakge/system/Clock.h>
 #include <bakge/system/Device.h>
 
-/* Data structure modules */
+/* Data/filesystem module */
 #include <bakge/data/File.h>
-#include <bakge/data/SingleNode.h>
-#include <bakge/data/LinkedList.h>
 
 /* Utility headers */
 #include <bakge/input/GamePad.h>
