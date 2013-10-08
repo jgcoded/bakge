@@ -31,7 +31,6 @@ namespace gdk
 
 Application::Application()
 {
-    Gui = new bakge::engine::GUI;
 }
 
 
@@ -46,7 +45,7 @@ Application* Application::Create()
 {
     Application* App = new Application;
 
-    App->Gui = new GUI;
+    App->Gui = GUI::Create();
     if(App->Gui == NULL) {
         Log("Application: Error creating GUI\n");
 	return NULL;

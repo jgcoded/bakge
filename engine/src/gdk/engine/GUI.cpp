@@ -39,6 +39,12 @@ GUI::~GUI()
 }
 
 
+GUI* GUI::Create()
+{
+    return new GUI;
+}
+
+
 Result GUI::Bind() const
 {
     return BGE_FAILURE;

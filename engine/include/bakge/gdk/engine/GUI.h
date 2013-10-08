@@ -34,11 +34,14 @@ namespace gdk
 
 class GUI : public Frame, public Hoverable
 {
+    GUI();
+
 
 public:
 
-    GUI();
     ~GUI();
+
+    BGE_FACTORY GUI* Create();
 
     virtual Result Bind() const;
     virtual Result Unbind() const;
