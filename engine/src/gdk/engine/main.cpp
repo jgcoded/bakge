@@ -26,5 +26,18 @@
 
 int main(int argc, char* argv[])
 {
-    return 0;
+    if(bakge::Init(argc, argv) != BGE_SUCCESS)
+        return -1;
+
+    bakge::gdk::Application* App = new bakge::gdk::Application;
+
+    App->Initialize();
+
+    int Code = App->Run();
+
+    App->ShutDown();
+
+    bakge::Deinit();
+
+    return Code;
 }
