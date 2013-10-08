@@ -31,11 +31,14 @@ namespace gdk
 
 Application::Application()
 {
+    Gui = new bakge::engine::GUI;
 }
 
 
 Application::~Application()
 {
+    if(Gui != NULL)
+        delete Gui;
 }
 
 
