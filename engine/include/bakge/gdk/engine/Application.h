@@ -32,13 +32,28 @@ namespace bakge
 namespace gdk
 {
 
-class Application : public Engine
+class Application : public Engine, public EventHandler
 {
 
 public:
 
     Application();
+
     ~Application();
+
+    Result Initialize();
+
+    Result ShutDown();
+
+    int Run();
+
+    Result Update(Seconds DeltaTime);
+
+    Result PreRenderStage();
+
+    Result PostRenderStage();
+
+    Result RenderStage();
 
 }; /* Application */
 

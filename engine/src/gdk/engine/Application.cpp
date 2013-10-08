@@ -38,5 +38,47 @@ Application::~Application()
 {
 }
 
+
+Result Application::Initialize()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::ShutDown()
+{
+    return BGE_SUCCESS;
+}
+
+
+int Application::Run()
+{
+    return 0;
+}
+
+
+Result Application::Update(Seconds DeltaTime)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::PreRenderStage()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::PostRenderStage()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::RenderStage()
+{
+    return BGE_SUCCESS;
+}
+
 } /* gdk */
 } /* bakge */
