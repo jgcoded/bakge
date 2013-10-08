@@ -42,6 +42,20 @@ Application::~Application()
 }
 
 
+Application* Application::Create()
+{
+    Application* App = new Application;
+
+    App->Gui = new GUI;
+    if(App->Gui == NULL) {
+        Log("Application: Error creating GUI\n");
+	return NULL;
+    }
+
+    return App;
+}
+
+
 Result Application::Initialize()
 {
     return BGE_SUCCESS;

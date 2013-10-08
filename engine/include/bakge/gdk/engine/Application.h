@@ -36,12 +36,14 @@ class Application : public Engine, public EventHandler
 {
     GUI* Gui;
 
+    Application();
+
 
 public:
 
-    Application();
-
     ~Application();
+
+    BGE_FACTORY Application* Create();
 
     Result Initialize();
 

@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
     if(bakge::Init(argc, argv) != BGE_SUCCESS)
         return -1;
 
-    bakge::gdk::Application* App = new bakge::gdk::Application;
+    bakge::gdk::Application* App = bakge::gdk::Application::Create();
 
     App->Initialize();
 
