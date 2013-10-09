@@ -116,9 +116,12 @@ Radians Quaternion::GetAngle() const
 
 Vector4 Quaternion::GetAxis() const
 {
-    Scalar Inv = 1.0f / sinf(acosf(Val[3]));
+    if(ScalarCompare(Val[3], 0))
+        return Vector4(0, 1, 0, 0); // return up-vector as a default
 
-    return Vector4(Val[0] * Inv, Val[1] * Inv, Val[2] * Inv, 0);
+    Scalar Inv = sqrt(1 - (Val[3] * Val[3]));
+
+    return Vector4(Val[0] / Inv, Val[1] / Inv, Val[2] / Inv, 0);
 }
 
 
