@@ -31,6 +31,7 @@ namespace gdk
 
 Application::Application()
 {
+    Gui = NULL;
 }
 
 
