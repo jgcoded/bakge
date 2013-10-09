@@ -27,12 +27,6 @@
 #ifdef _DEBUG
 #include <bakge/internal/Debug.h>
 #endif // _DEBUG
-#define HAVE_SNPRINTF // Always use portable_*printf functions
-#define PREFER_PORTABLE_SNPRINTF
-extern "C"
-{
-#include <snprintf/snprintf.h>
-}
 
 namespace bakge
 {
@@ -168,7 +162,9 @@ int Log(const char* Format, ...)
 {
     va_list ArgList;
 
-    char Buf[1024];
+#define BGE_LOG_BUFSZ 4096
+    static char Buf[BGE_LOG_BUFSZ];
+
     va_start(ArgList, Format);
 
     bakge::Microseconds Time = bakge::GetRunningTime();
@@ -190,35 +186,26 @@ int Log(const char* Format, ...)
 
     LogLock->Lock();
 
-    // Write the timestamp
-    int Len = portable_snprintf(Buf, 1024, "[%02llu:%02u:%02u.%03u] ",
-                                                Hour, Min, Sec, Rem);
+    // First print to stdout to grab required length of buffer
+    int Len = fprintf(stdout, "[%02llu:%02u:%02u.%03u] ", Hour, Min, Sec,
+                                                                    Rem);
+    Len += vfprintf(stdout, Format, ArgList);
 
-    PHYSFS_sint64 Error = PHYSFS_write(LogFile, Buf, 1, Len);
-    if(Error < 0) {
-        fprintf(stderr, "Error writing to log: %s\n", PHYSFS_getLastError());
-        return -1;
-    } else if(Error < Len) {
-        fprintf(stderr, "Incomplete write to log: %s\n",
-                                PHYSFS_getLastError());
-    }
+    // If we have enough space, write to buffer and write to log
+    if(Len < BGE_LOG_BUFSZ) {
+        int TimestampLen = sprintf(Buf, "[%02llu:%02u:%02u.%03u] ", Hour,
+                                                            Min, Sec, Rem);
+        vsprintf(Buf + TimestampLen, Format, ArgList);
 
-#ifdef _DEBUG
-    fprintf(stdout, "[%02llu:%02u:%02u.%03u] ", Hour, Min, Sec, Rem);
-    vfprintf(stdout, Format, ArgList);
-#endif // _DEBUG
-
-    // Now write the message
-    Len = portable_vsnprintf(Buf, 1024, Format, ArgList);
-
-    // Write message
-    Error = PHYSFS_write(LogFile, Buf, 1, Len);
-    if(Error < 0) {
-        fprintf(stderr, "Error writing to log: %s\n", PHYSFS_getLastError());
-        return -1;
-    } else if(Error < Len) {
-        fprintf(stderr, "Incomplete write to log: %s\n",
+        PHYSFS_sint64 Error = PHYSFS_write(LogFile, Buf, 1, Len);
+        if(Error < 0) {
+            fprintf(stderr, "Error writing to log: %s\n",
                                     PHYSFS_getLastError());
+            return -1;
+        } else if(Error < Len) {
+            fprintf(stderr, "Incomplete write to log: %s\n",
+                                    PHYSFS_getLastError());
+        }
     }
 
     // Always flush in case a crash happens
