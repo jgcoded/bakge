@@ -48,6 +48,7 @@ Application* Application::Create()
     App->Gui = GUI::Create();
     if(App->Gui == NULL) {
         Log("Application: Error creating GUI\n");
+        delete App;
         return NULL;
     }
 
