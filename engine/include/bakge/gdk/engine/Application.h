@@ -35,6 +35,7 @@ namespace gdk
 class Application : public Engine, public EventHandler
 {
     GUI* Gui;
+    Window* Win;
 
     Application();
 

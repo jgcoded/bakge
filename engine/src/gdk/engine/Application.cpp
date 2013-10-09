@@ -32,6 +32,7 @@ namespace gdk
 Application::Application()
 {
     Gui = NULL;
+    Win = NULL;
 }
 
 
@@ -39,6 +40,9 @@ Application::~Application()
 {
     if(Gui != NULL)
         delete Gui;
+
+    if(Win != NULL)
+        delete Win;
 }
 
 
@@ -52,6 +56,15 @@ Application* Application::Create()
         delete App;
         return NULL;
     }
+
+    App->Win = Window::Create(800, 480, 0);
+    if(App->Win == NULL) {
+        Log("Application: Error creating Window\n");
+        delete App;
+        return NULL;
+    }
+
+    App->Win->SetEventHandler(App);
 
     return App;
 }
@@ -71,6 +84,10 @@ Result Application::ShutDown()
 
 int Application::Run()
 {
+    while(Win->IsOpen()) {
+        Window::PollEvents();
+    }
+
     return 0;
 }
 
