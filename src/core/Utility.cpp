@@ -186,16 +186,20 @@ int Log(const char* Format, ...)
 
     LogLock->Lock();
 
+#ifdef _WIN32
+#define BGE_LOG_TIMESTAMP_FMT "[%02llu:%02u:%02u.%03u] "
+#else
+#define BGE_LOG_TIMESTAMP_FMT "[%02lu:%02u:%02u.%03u] "
+#endif // _WIN32
     // First print to stdout to grab required length of buffer
-    int Len = fprintf(stdout, "[%02llu:%02u:%02u.%03u] ", Hour, Min, Sec,
-                                                                    Rem);
+    int Len = fprintf(stdout, BGE_LOG_TIMESTAMP_FMT, Hour, Min, Sec, Rem);
     Len += vfprintf(stdout, Format, ArgList);
 
     // If we have enough space, write to buffer and write to log
     if(Len < BGE_LOG_BUFSZ) {
-        int TimestampLen = sprintf(Buf, "[%02llu:%02u:%02u.%03u] ", Hour,
-                                                            Min, Sec, Rem);
         vsprintf(Buf + TimestampLen, Format, ArgList);
+        int TimestampLen = sprintf(Buf, BGE_LOG_TIMESTAMP_FMT, Hour,
+                                                     Min, Sec, Rem);
 
         PHYSFS_sint64 Error = PHYSFS_write(LogFile, Buf, 1, Len);
         if(Error < 0) {
