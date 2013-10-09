@@ -96,5 +96,35 @@ Result Application::RenderStage()
     return BGE_SUCCESS;
 }
 
+
+Result Application::KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::MouseEvent(ButtonID B, ButtonState S, ModField M)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::MotionEvent(Motion X, Motion Y)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::ScrollEvent(Motion X, Motion Y)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::CloseEvent()
+{
+    return BGE_SUCCESS;
+}
+
 } /* gdk */
 } /* bakge */
