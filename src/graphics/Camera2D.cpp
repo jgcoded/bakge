@@ -120,8 +120,10 @@ Result Camera2D::Unbind() const
 
     /* First we'll set the perspective */
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Log("WARNING: Unable to find uniform %s in current shader\n",
+                                            BGE_PROJECTION_UNIFORM);
+    }
 
 #ifdef _DEBUG
     while(glGetError() != GL_NO_ERROR)
@@ -146,8 +148,10 @@ Result Camera2D::Unbind() const
 
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Log("WARNING: Unable to find uniform %s in current shader\n",
+                                                    BGE_VIEW_UNIFORM);
+    }
 
 #ifdef _DEBUG
     while(glGetError() != GL_NO_ERROR)
