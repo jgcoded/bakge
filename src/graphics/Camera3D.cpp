@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -76,7 +79,26 @@ Result Camera3D::Bind() const
                                             BGE_PROJECTION_UNIFORM);
     }
 
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Proj[0]);
+
+#ifdef _DEBUG
+    GLenum Error;
+    while(1) {
+        Error = glGetError();
+        if(Error == GL_NO_ERROR)
+            break;
+
+        Log("WARNING: Unexpected GL error %s while setting uniform "
+                                            "%s in Camera3D::Bind\n",
+                                                GetGLErrorName(Error),
+                                                BGE_PROJECTION_UNIFORM);
+    }
+#endif // _DEBUG
 
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
@@ -85,7 +107,26 @@ Result Camera3D::Bind() const
                                                     BGE_VIEW_UNIFORM);
     }
 
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
+
+#ifdef _DEBUG
+    Error;
+    while(1) {
+        Error = glGetError();
+        if(Error == GL_NO_ERROR)
+            break;
+
+        Log("WARNING: Unexpected GL error %s while setting uniform "
+                                            "%s in Camera3D::Bind\n",
+                                                GetGLErrorName(Error),
+                                                    BGE_VIEW_UNIFORM);
+    }
+#endif // _DEBUG
 
     return BGE_SUCCESS;
 }
@@ -101,17 +142,59 @@ Result Camera3D::Unbind() const
 
     /* First we'll set the perspective */
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Log("WARNING: Unable to find uniform %s in current shader\n",
+                                            BGE_PROJECTION_UNIFORM);
+    }
+
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
 
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
+
+#ifdef _DEBUG
+    GLenum Error;
+    while(1) {
+        Error = glGetError();
+        if(Error == GL_NO_ERROR)
+            break;
+
+        Log("WARNING: Unexpected GL error %s while setting uniform "
+                                            "%s in Camera3D::Bind\n",
+                                                GetGLErrorName(Error),
+                                                BGE_PROJECTION_UNIFORM);
+    }
+#endif // _DEBUG
 
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Log("WARNING: Unable to find uniform %s in current shader\n",
+                                                    BGE_VIEW_UNIFORM);
+    }
+
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
 
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
+
+#ifdef _DEBUG
+    Error;
+    while(1) {
+        Error = glGetError();
+        if(Error == GL_NO_ERROR)
+            break;
+
+        Log("WARNING: Unexpected GL error %s while setting uniform "
+                                            "%s in Camera3D::Bind\n",
+                                                GetGLErrorName(Error),
+                                                    BGE_VIEW_UNIFORM);
+    }
+#endif // _DEBUG
 
     return BGE_SUCCESS;
 }
