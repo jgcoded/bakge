@@ -416,7 +416,7 @@ EventHandler* Window::SetEventHandler(EventHandler* Who)
 {
     if(!IsOpen()) {
         Log("WARNING: Called SetEventHandler on closed Window\n");
-        return BGE_FAILURE;
+        return NULL;
     }
 
     EventHandler* Previous;
