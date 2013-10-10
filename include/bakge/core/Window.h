@@ -77,6 +77,8 @@ class BGE_API Window : public Bindable
 
     GLFWwindow* WindowHandle;
 
+    char* WinTitle;
+
     /* Who receives events from the window? */
     EventHandler* Handler;
 
@@ -329,6 +331,15 @@ public:
      * @return BGE_FAILURE if any errors occurred; BGE_SUCCESS otherwise.
      */
     Result GetPosition(Coord* X, Coord* Y);
+
+    /*! @brief Set the title of the window.
+     *
+     * Set the title of the window.
+     *
+     * @return BGE_SUCCESS if window title was successfully changed;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result SetTitle(const char* Title);
 
 }; /* Window */
 

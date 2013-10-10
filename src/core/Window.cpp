@@ -141,6 +141,7 @@ Window::Window()
 {
     WindowHandle = NULL;
     Handler = NULL;
+    WinTitle = NULL;
     MouseCache.X = 0;
     MouseCache.Y = 0;
     ScrollCache.X = 0;
@@ -151,6 +152,9 @@ Window::Window()
 Window::~Window()
 {
     Close();
+
+    if(WinTitle != NULL)
+        delete[] WinTitle;
 }
 
 
@@ -406,6 +410,25 @@ Result Window::GetPosition(Coord* X, Coord* Y)
 
     *X = (float)PX;
     *Y = (float)PY;
+
+    return BGE_SUCCESS;
+}
+
+
+Result Window::SetTitle(const char* Title)
+{
+    if(!IsOpen()) {
+        Log("WARNING: Called SetTitle on closed Window\n");
+        return BGE_FAILURE;
+    }
+
+    glfwSetWindowTitle(WindowHandle, Title);
+
+    if(WinTitle != NULL) {
+        delete[] WinTitle;
+        WinTitle = new char[strlen(Title)];
+        strcpy(WinTitle, Title);
+    }
 
     return BGE_SUCCESS;
 }
