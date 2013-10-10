@@ -32,13 +32,43 @@ namespace bakge
 namespace gdk
 {
 
-class Application : public Engine
+class Application : public Engine, public EventHandler
 {
+    GUI* Gui;
+    Window* Win;
+
+    Application();
+
 
 public:
 
-    Application();
     ~Application();
+
+    BGE_FACTORY Application* Create();
+
+    Result Initialize();
+
+    Result ShutDown();
+
+    int Run();
+
+    Result Update(Seconds DeltaTime);
+
+    Result PreRenderStage();
+
+    Result PostRenderStage();
+
+    Result RenderStage();
+
+    Result KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M);
+
+    Result MouseEvent(ButtonID B, ButtonState S, ModField M);
+
+    Result MotionEvent(Motion X, Motion Y);
+
+    Result ScrollEvent(Motion X, Motion Y);
+
+    Result CloseEvent();
 
 }; /* Application */
 

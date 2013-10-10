@@ -31,11 +31,118 @@ namespace gdk
 
 Application::Application()
 {
+    Gui = NULL;
+    Win = NULL;
 }
 
 
 Application::~Application()
 {
+    if(Gui != NULL)
+        delete Gui;
+
+    if(Win != NULL)
+        delete Win;
+}
+
+
+Application* Application::Create()
+{
+    Application* App = new Application;
+
+    App->Gui = GUI::Create();
+    if(App->Gui == NULL) {
+        Log("Application: Error creating GUI\n");
+        delete App;
+        return NULL;
+    }
+
+    App->Win = Window::Create(800, 480, 0);
+    if(App->Win == NULL) {
+        Log("Application: Error creating Window\n");
+        delete App;
+        return NULL;
+    }
+
+    App->Win->SetEventHandler(App);
+
+    return App;
+}
+
+
+Result Application::Initialize()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::ShutDown()
+{
+    return BGE_SUCCESS;
+}
+
+
+int Application::Run()
+{
+    while(Win->IsOpen()) {
+        Window::PollEvents();
+    }
+
+    return 0;
+}
+
+
+Result Application::Update(Seconds DeltaTime)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::PreRenderStage()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::PostRenderStage()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::RenderStage()
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::KeyEvent(KeyID K, KeyState S, ScanCode C, ModField M)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::MouseEvent(ButtonID B, ButtonState S, ModField M)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::MotionEvent(Motion X, Motion Y)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::ScrollEvent(Motion X, Motion Y)
+{
+    return BGE_SUCCESS;
+}
+
+
+Result Application::CloseEvent()
+{
+    return BGE_SUCCESS;
 }
 
 } /* gdk */
