@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -67,7 +70,7 @@ Result Camera2D::Bind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Mat[0]);
 
 #ifdef _DEBUG
-    Error;
+    GLenum Error;
     while(1) {
         Error = glGetError();
         if(Error == GL_NO_ERROR)
@@ -97,7 +100,6 @@ Result Camera2D::Bind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
 #ifdef _DEBUG
-    Error;
     while(1) {
         Error = glGetError();
         if(Error == GL_NO_ERROR)
@@ -140,7 +142,7 @@ Result Camera2D::Unbind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
 #ifdef _DEBUG
-    Error;
+    GLenum Error;
     while(1) {
         Error = glGetError();
         if(Error == GL_NO_ERROR)
@@ -169,7 +171,6 @@ Result Camera2D::Unbind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
 #ifdef _DEBUG
-    Error;
     while(1) {
         Error = glGetError();
         if(Error == GL_NO_ERROR)

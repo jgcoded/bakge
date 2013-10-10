@@ -115,7 +115,6 @@ Result Camera3D::Bind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
 #ifdef _DEBUG
-    Error;
     while(1) {
         Error = glGetError();
         if(Error == GL_NO_ERROR)
@@ -183,7 +182,6 @@ Result Camera3D::Unbind() const
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Matrix::Identity[0]);
 
 #ifdef _DEBUG
-    Error;
     while(1) {
         Error = glGetError();
         if(Error == GL_NO_ERROR)
