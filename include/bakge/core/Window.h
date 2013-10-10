@@ -148,7 +148,7 @@ public:
      * @return true if the window exists and is not marked for deletion.
      * false otherwise.
      */
-    bool IsOpen();
+    bool IsOpen() const;
 
     /*! @brief Check if a window is currently visible.
      *

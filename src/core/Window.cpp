@@ -274,7 +274,7 @@ Result Window::Close()
 }
 
 
-bool Window::IsOpen()
+bool Window::IsOpen() const
 {
     if(WindowHandle == NULL)
         return false;
