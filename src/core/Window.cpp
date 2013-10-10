@@ -221,6 +221,11 @@ Window* Window::Create(int Width, int Height, int Properties)
 
 Result Window::SwapBuffers()
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called SwapBuffers on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     glfwSwapBuffers(WindowHandle);
 
     return BGE_SUCCESS;
@@ -229,6 +234,11 @@ Result Window::SwapBuffers()
 
 Result Window::Bind() const
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called Bind on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     glfwMakeContextCurrent(WindowHandle);
 
     return BGE_SUCCESS;
@@ -237,6 +247,11 @@ Result Window::Bind() const
 
 Result Window::Unbind() const
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called Unbind on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     glfwMakeContextCurrent(NULL);
 
     return BGE_SUCCESS;
@@ -245,9 +260,10 @@ Result Window::Unbind() const
 
 Result Window::Close()
 {
-    /* If window is already closed */
-    if(WindowHandle == NULL)
+    if(!IsOpen()) {
+        Log("WARNING: Called Close on closed Window\n");
         return BGE_FAILURE;
+    }
 
     /* Destroy the GLFW window */
     GLFWwindow* Handle = WindowHandle;
@@ -289,18 +305,33 @@ bool Window::IsActive()
 
 bool Window::IsVisible() const
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called IsVisible on closed Window\n");
+        return false;
+    }
+
     return glfwGetWindowAttrib(WindowHandle, GLFW_VISIBLE) != 0;
 }
 
 
 bool Window::IsIconified() const
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called IsIconified on closed Window\n");
+        return false;
+    }
+
     return glfwGetWindowAttrib(WindowHandle, GLFW_ICONIFIED) != 0;
 }
 
 
 bool Window::IsFocused() const
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called IsFocused on closed Window\n");
+        return false;
+    }
+
     return glfwGetWindowAttrib(WindowHandle, GLFW_FOCUSED) != 0;
 }
 
@@ -313,6 +344,11 @@ void Window::PollEvents()
 
 Result Window::GetMousePosition(Coord* X, Coord* Y)
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called GetMousePosition on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     /* Can't access mouse if window isn't active */
     if(!IsActive())
         return BGE_FAILURE;
@@ -329,6 +365,11 @@ Result Window::GetMousePosition(Coord* X, Coord* Y)
 
 Result Window::SetMousePosition(Coord X, Coord Y)
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called SetMousePosition on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     /* Can't change mouse position if window isn't active */
     if(!IsActive())
         return BGE_FAILURE;
@@ -341,6 +382,11 @@ Result Window::SetMousePosition(Coord X, Coord Y)
 
 Result Window::Show()
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called Show on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     if(IsVisible())
         return BGE_FAILURE;
 
@@ -352,6 +398,11 @@ Result Window::Show()
 
 Result Window::Hide()
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called Hide on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     if(!IsVisible())
         return BGE_FAILURE;
 
@@ -363,6 +414,11 @@ Result Window::Hide()
 
 EventHandler* Window::SetEventHandler(EventHandler* Who)
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called SetEventHandler on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     EventHandler* Previous;
 
     Previous = Handler;
@@ -374,6 +430,11 @@ EventHandler* Window::SetEventHandler(EventHandler* Who)
 
 Result Window::Iconify()
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called Iconify on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     if(IsIconified())
         return BGE_FAILURE;
 
@@ -385,6 +446,11 @@ Result Window::Iconify()
 
 Result Window::Deiconify()
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called Deiconify on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     if(!IsIconified())
         return BGE_FAILURE;
 
@@ -396,6 +462,11 @@ Result Window::Deiconify()
 
 Result Window::SetPosition(Coord X, Coord Y)
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called SetPosition on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     glfwSetWindowPos(WindowHandle, (int)X, (int)Y);
 
     return BGE_SUCCESS;
@@ -404,6 +475,11 @@ Result Window::SetPosition(Coord X, Coord Y)
 
 Result Window::GetPosition(Coord* X, Coord* Y)
 {
+    if(!IsOpen()) {
+        Log("WARNING: Called GetPosition on closed Window\n");
+        return BGE_FAILURE;
+    }
+
     int PX, PY;
 
     glfwGetWindowPos(WindowHandle, &PX, &PY);
