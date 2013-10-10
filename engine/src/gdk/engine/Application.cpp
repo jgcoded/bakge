@@ -55,6 +55,8 @@ Application* Application::Create()
         Log("Application: Error creating GUI\n");
         delete App;
         return NULL;
+    } else {
+        Log("Application: Successfully created GUI\n");
     }
 
     App->Win = Window::Create(800, 480, 0);
@@ -62,6 +64,8 @@ Application* Application::Create()
         Log("Application: Error creating Window\n");
         delete App;
         return NULL;
+    } else {
+        Log("Application: Successfully created Window\n");
     }
 
     App->Win->SetEventHandler(App);
