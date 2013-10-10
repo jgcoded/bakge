@@ -166,7 +166,7 @@ public:
      *
      * @return true if window is open, visible and in focus. false otherwise.
      */
-    bool IsActive();
+    bool IsActive() const;
 
     /*! @brief Check if a window is currently focused.
      *
@@ -249,7 +249,7 @@ public:
      *
      * @see Window::IsActive()
      */
-    Result GetMousePosition(Coord* X, Coord* Y);
+    Result GetMousePosition(Coord* X, Coord* Y) const;
 
     /*! @brief Set the mouse's position.
      *
@@ -330,7 +330,7 @@ public:
      *
      * @return BGE_FAILURE if any errors occurred; BGE_SUCCESS otherwise.
      */
-    Result GetPosition(Coord* X, Coord* Y);
+    Result GetPosition(Coord* X, Coord* Y) const;
 
     /*! @brief Set the title of the window.
      *

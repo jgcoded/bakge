@@ -286,7 +286,7 @@ bool Window::IsOpen() const
 }
 
 
-bool Window::IsActive()
+bool Window::IsActive() const
 {
     /* Active windows must be open */
     if(!IsOpen())
@@ -342,7 +342,7 @@ void Window::PollEvents()
 }
 
 
-Result Window::GetMousePosition(Coord* X, Coord* Y)
+Result Window::GetMousePosition(Coord* X, Coord* Y) const
 {
     if(!IsOpen()) {
         Log("WARNING: Called GetMousePosition on closed Window\n");
@@ -473,7 +473,7 @@ Result Window::SetPosition(Coord X, Coord Y)
 }
 
 
-Result Window::GetPosition(Coord* X, Coord* Y)
+Result Window::GetPosition(Coord* X, Coord* Y) const
 {
     if(!IsOpen()) {
         Log("WARNING: Called GetPosition on closed Window\n");
