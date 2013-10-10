@@ -48,6 +48,8 @@ int main(int argc, char* argv[])
 
     App->ShutDown();
 
+    bakge::Log("Engine exited with code %x\n", Code);
+
     bakge::Deinit();
 
     return Code;
