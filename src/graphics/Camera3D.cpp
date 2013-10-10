@@ -71,15 +71,19 @@ Result Camera3D::Bind() const
 
     /* First we'll set the perspective */
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Log("WARNING: Unable to find uniform %s in current shader\n",
+                                            BGE_PROJECTION_UNIFORM);
+    }
 
     glUniformMatrix4fv(Location, 1, GL_FALSE, &Proj[0]);
 
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Log("WARNING: Unable to find uniform %s in current shader\n",
+                                                    BGE_VIEW_UNIFORM);
+    }
 
     glUniformMatrix4fv(Location, 1, GL_FALSE, &View[0]);
 
