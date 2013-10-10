@@ -41,7 +41,13 @@ GUI::~GUI()
 
 GUI* GUI::Create()
 {
-    return new GUI;
+    GUI* G = new GUI;
+    if(G == NULL) {
+        Log("GUI: Couldn't allocate memory\n");
+        return NULL;
+    }
+
+    return G;
 }
 
 
