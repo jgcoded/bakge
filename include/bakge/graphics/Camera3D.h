@@ -94,19 +94,27 @@ public:
 
     /*! @brief Bind the Camera3D's viewing and projection transforms in OpenGL.
      *
-     * Bind the Camera3D's viewing and projection transforms in OpenGL.
+     * Bind the Camera3D's viewing and projection transforms in OpenGL. If
+     * certain shader uniforms are not present in the currently bound Shader,
+     * Bind will return BGE_FAILURE, even when the uniforms that are present
+     * have successfully been bound.
      *
      * @return BGE_SUCCESS if the camera's transforms were successfully bound
-     * to OpenGL state; BGE_FAILURE if any errors occurred.
+     * to OpenGL state; BGE_FAILURE if any errors occurred or an incomplete
+     * binding occurred due to missing uniforms.
      */
     virtual Result Bind() const;
 
     /*! @brief Bind default viewing and projection transforms in OpenGL.
      *
-     * Bind default viewing and projection transforms in OpenGL.
+     * Bind default viewing and projection transforms in OpenGL. If certain
+     * shader uniforms are not present in the currently bound Shader, Unbind
+     * will return BGE_FAILURE, even when the uniforms that are present have
+     * successfully been bound.
      *
      * @return BGE_SUCCESS if default view and projection transforms were
-     * bound to OpenGL; BGE_FAILURE if any errors occurred.
+     * bound to OpenGL; BGE_FAILURE if any errors occurred or an incomplete
+     * binding occurred due to missing uniforms.
      */
     virtual Result Unbind() const;
 

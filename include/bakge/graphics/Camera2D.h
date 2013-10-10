@@ -75,19 +75,26 @@ public:
      *
      * Binding a Camera2D sets up OpenGL state so that the scene is rendered
      * from the camera's position and span. The camera's position and span
-     * are measured in pixels.
+     * are measured in pixels. If certain shader uniforms are not present in
+     * the currently bound Shader, Bind will return BGE_FAILURE, even when
+     * the uniforms that are present have successfully been bound.
      *
      * @return BGE_SUCCESS if the Camera2D's view and projection transforms
-     * were set in OpenGL; BGE_FAILURE if any errors occurred.
+     * were set in OpenGL; BGE_FAILURE if any errors occurred or an incomplete
+     * binding occurred due to missing uniforms.
      */
     virtual Result Bind() const;
 
     /*! @brief Set viewing and projection transforms to defaults.
      *
-     * Set viewing and projection transforms to defaults.
+     * Set viewing and projection transforms to defaults. If certain
+     * shader uniforms are not present in the currently bound Shader, Unbind
+     * will return BGE_FAILURE, even when the uniforms that are present have
+     * successfully been bound.
      *
      * @return BGE_SUCCESS if default view and projection transforms were
-     * set in OpenGL; BGE_FAILURE if any errors occurred.
+     * set in OpenGL; BGE_FAILURE if any errors occurred or an incomplete
+     * binding occurred due to missing uniforms.
      */
     virtual Result Unbind() const;
 
