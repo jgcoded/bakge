@@ -205,6 +205,11 @@ Texture* Texture::Create(int Width, int Height, const GLint* Params,
     glBindTexture(GL_TEXTURE_2D, Old);
 
     Texture* T = new Texture;
+    if(T == NULL) {
+        Log("Texture: Couldn't allocate memory\n");
+        return NULL;
+    }
+
     T->TextureID = Tex;
     T->Width = Width;
     T->Height = Height;
