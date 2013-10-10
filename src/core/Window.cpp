@@ -198,7 +198,11 @@ Window* Window::Create(int Width, int Height, int Properties)
     Win->Bind();
 
     /* Bind default shader to new window's context */
-    Shader::GenericShader->Bind();
+    if(Shader::GenericShader->Bind() == BGE_FAILURE) {
+        Log("Window: Unable to bind default shader\n");
+        delete Win;
+        return NULL;
+    }
 
     /* *
      * Store pointer to Bakge window so global callbacks can access it.
