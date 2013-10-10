@@ -96,7 +96,6 @@ set(EXTERN_SOURCES
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_image.c
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_truetype.c
   ${BAKGE_SOURCE_DIR}/extern/stb/stb_vorbis.c
-  ${BAKGE_SOURCE_DIR}/extern/snprintf/snprintf.c
 )
 
 set(INTERNAL_SOURCES
