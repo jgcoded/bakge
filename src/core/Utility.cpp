@@ -193,6 +193,11 @@ int Log(const char* Format, ...)
 #endif // _WIN32
 
     va_list ArgList2;
+
+#ifdef _WIN32
+#define va_copy(A, B) ((A) = (B))
+#endif // _WIN32
+
     va_copy(ArgList2, ArgList);
 
     // First print to stdout to grab required length of buffer
