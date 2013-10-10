@@ -126,10 +126,6 @@ Result Shader::InitShaderLibrary()
 #endif // _DEBUG
 
     VertexLib = glCreateShader(GL_VERTEX_SHADER);
-    if(VertexLib == 0) {
-        Log("Shader Library: Error creating vertex shader\n");
-        return BGE_FAILURE;
-    }
 
 #ifdef _DEBUG
     GLenum Error = glGetError();
@@ -140,13 +136,15 @@ Result Shader::InitShaderLibrary()
         switch(Error) {
 
         case GL_OUT_OF_MEMORY:
-            Log("Shader Library: Not enough memory to create vertex "
-                                                            "shader\n");
+            Log("ERROR: Shader Library - Not enough memory to create "
+                                                    "vertex shader %s\n",
+                                                    GetGLErrorName(Error));
             return BGE_FAILURE;
 
         default:
-            Log("Shader Library: Unexpected error while creating vertex "
-                                    "shader %s\n", GetGLErrorName(Error));
+            Log("ERROR: Shader Library - Unexpected error while creating "
+                                                    "fragment shader %s\n",
+                                                    GetGLErrorName(Error));
             return BGE_FAILURE;
         }
 
@@ -155,10 +153,6 @@ Result Shader::InitShaderLibrary()
 #endif // _DEBUG
 
     FragmentLib = glCreateShader(GL_FRAGMENT_SHADER);
-    if(FragmentLib == 0) {
-        Log("Shader Library: Error creating fragment shader\n");
-        return BGE_FAILURE;
-    }
 
 #ifdef _DEBUG
     Error = glGetError();
@@ -169,13 +163,15 @@ Result Shader::InitShaderLibrary()
         switch(Error) {
 
         case GL_OUT_OF_MEMORY:
-            Log("Shader Library: Not enough memory to create fragment "
-                                                            "shader\n");
+            Log("ERROR: Shader Library - Not enough memory to create "
+                                                    "fragment shader %s\n",
+                                                    GetGLErrorName(Error));
             return BGE_FAILURE;
 
         default:
-            Log("Shader Library: Unexpected error while creating fragment "
-                                        "shader %s\n", GetGLErrorName(Error));
+            Log("ERROR: Shader Library - Unexpected error while creating "
+                                                    "fragment shader %s\n",
+                                                    GetGLErrorName(Error));
             return BGE_FAILURE;
         }
 
@@ -188,8 +184,9 @@ Result Shader::InitShaderLibrary()
 #ifdef _DEBUG
     Error = glGetError();
     if(Error != GL_NO_ERROR) {
-        Log("Unexpected error while attaching library vertex shader "
-                                "source %s\n", GetGLErrorName(Error));
+        Log("ERROR: Shader Library - Unexpected error while attaching "
+                                    "library vertex shader source %s\n",
+                                                    GetGLErrorName(Error));
         return BGE_FAILURE;
     }
 #endif // _DEBUG
@@ -199,26 +196,27 @@ Result Shader::InitShaderLibrary()
 #ifdef _DEBUG
     Error = glGetError();
     if(Error != GL_NO_ERROR) {
-        Log("Unexpected error while attaching library fragment shader "
-                                    "source %s\n", GetGLErrorName(Error));
+        Log("ERROR: Shader Library - Unexpected error while attaching "
+                                    "library fragment shader source %s\n",
+                                                    GetGLErrorName(Error));
         return BGE_FAILURE;
     }
 #endif // _DEBUG
 
     if(Compile(VertexLib) == BGE_FAILURE) {
-        Log("Shader Library: Error compiling vertex shader\n");
+        Log("ERROR: Shader Library - Error compiling vertex shader\n");
         return BGE_FAILURE;
     }
 
     if(Compile(FragmentLib) == BGE_FAILURE) {
-        Log("Shader Library: Error compiling fragment shader\n");
+        Log("ERROR: Shader Library - Error compiling fragment shader\n");
         return BGE_FAILURE;
     }
 
     GenericShader = Shader::LoadFromStrings(1, 1, &GenericVertexShaderSource,
                                                 &GenericFragmentShaderSource);
     if(GenericShader == NULL) {
-        Log("Shader Library: Error creating default shader\n");
+        Log("ERROR: Shader Library - Error creating default shader\n");
         return BGE_FAILURE;
     }
 
@@ -340,13 +338,13 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     /* Allocate memory for the new Shader */
     S = new Shader;
     if(S == NULL) {
-        Log("Shader: Couldn't allocate memory\n");
+        Log("ERROR: Shader - Couldn't allocate memory\n");
         return NULL;
     }
 
     S->Program = glCreateProgram();
     if(S->Program == 0) {
-        Log("Shader: Error creating shader program\n");
+        Log("ERROR: Shader - Error creating shader program\n");
         delete S;
         return NULL;
     }
@@ -354,7 +352,7 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     // Allocate a vertex shader
     S->Vertex = glCreateShader(GL_VERTEX_SHADER);
     if(S->Vertex == 0) {
-        Log("Shader: Error creating vertex shader\n");
+        Log("ERROR: Shader - Error creating vertex shader\n");
         delete S;
         return NULL;
     }
@@ -362,7 +360,7 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
     // Allocate a fragment shader
     S->Fragment = glCreateShader(GL_FRAGMENT_SHADER);
     if(S->Fragment == 0) {
-        Log("Shader: Error creating fragment shader\n");
+        Log("ERROR: Shader - Error creating fragment shader\n");
         delete S;
         return NULL;
     }
@@ -386,20 +384,20 @@ Shader* Shader::LoadFromStrings(int NumVertex, int NumFragment,
 
     // Compile vertex shader and check for errors
     if(Compile(S->Vertex) == BGE_FAILURE) {
-        Log("Shader: Vertex shader compilation failed\n");
+        Log("ERROR: Shader - Vertex shader compilation failed\n");
         delete S;
         return NULL;
     }
 
     // Compile fragment shader and check for errors
     if(Compile(S->Fragment) == BGE_FAILURE) {
-        Log("Shader: Fragment shader compilation failed\n");
+        Log("ERROR: Shader - Fragment shader compilation failed\n");
         delete S;
         return NULL;
     }
 
     if(S->Link() == BGE_FAILURE) {
-        Log("Shader: Program linking failed\n");
+        Log("ERROR: Shader - Program linking failed\n");
         delete S;
         return NULL;
     }
@@ -430,7 +428,7 @@ Result Shader::Compile(GLuint Handle)
 
         case GL_INVALID_OPERATION:
         case GL_INVALID_VALUE:
-            Log("Shader: Compiled invalid shader object\n");
+            Log("ERROR: Shader - Compiled invalid shader object\n");
             return BGE_FAILURE;
         }
 
@@ -447,7 +445,8 @@ Result Shader::Compile(GLuint Handle)
     if(Length > 1) {
         char* Info = new char[Length];
         glGetShaderInfoLog(Handle, Length, NULL, Info);
-        Log("Shader: %s\n", Info);
+        Log("Shader compile result\n", Info);
+        Log("======================\n");
         delete[] Info;
     }
 #endif // _DEBUG
@@ -474,12 +473,13 @@ Result Shader::Bind() const
         switch(Error) {
 
         case GL_INVALID_VALUE:
-            Log("Shader: Invalid program object\n");
+            Log("ERROR: Shader - Invalid program object\n");
             return BGE_FAILURE;
 
         case GL_INVALID_OPERATION:
-            Log("Shader: Unable to make program part of current state (is "
-                                "transform feedback mode active?)\n");
+            Log("ERROR: Shader - Unable to make program part of current "
+                                                    "state (is transform "
+                                                "feedback mode active?)\n");
             return BGE_FAILURE;
         }
 
