@@ -170,10 +170,10 @@ int Log(const char* Format, ...)
     bakge::Microseconds Time = bakge::GetRunningTime();
 
     // 3.6 billion microseconds per hour
-    uint64 Hour = Time / 3600000000;
+    uint64 Hour = Time / 3600000000U;
 
     // Remaining microseconds (this amounts to less than one hour)
-    uint32 Rem = Time % 3600000000;
+    uint32 Rem = Time % 3600000000U;
     uint32 Min = Rem / 60000000;
 
     // Remaining microseconds now amounts to less than one minute
