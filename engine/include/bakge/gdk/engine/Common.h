@@ -29,4 +29,8 @@
 #include <bakge/gdk/engine/GUI.h>
 #include <bakge/gdk/engine/Application.h>
 
+#define BGE_GDK_ENGINE_VER_MAJ 0
+#define BGE_GDK_ENGINE_VER_MIN 0
+#define BGE_GDK_ENGINE_VER_REV 0
+
 #endif /* BAKGE_GDK_ENGINE_COMMON_H */
