@@ -41,12 +41,18 @@ int main(int argc, char* argv[])
     free(LineBuf);
 
     bakge::gdk::Application* App = bakge::gdk::Application::Create();
+    int Code;
 
-    App->Initialize();
+    if(App->Initialize() == BGE_FAILURE) {
+        Code = -1;
+        goto ExitEngine;
+    }
 
-    int Code = App->Run();
+    Code = App->Run();
 
     App->ShutDown();
+
+ExitEngine:
 
     bakge::Log("Engine exited with code %x\n", Code);
 
