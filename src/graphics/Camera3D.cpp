@@ -162,7 +162,7 @@ Result Camera3D::Unbind() const
             break;
 
         Log("WARNING: Unexpected GL error %s while setting uniform "
-                                            "%s in Camera3D::Bind\n",
+                                            "%s in Camera3D::Unbind\n",
                                                 GetGLErrorName(Error),
                                                 BGE_PROJECTION_UNIFORM);
     }
@@ -190,7 +190,7 @@ Result Camera3D::Unbind() const
             break;
 
         Log("WARNING: Unexpected GL error %s while setting uniform "
-                                            "%s in Camera3D::Bind\n",
+                                            "%s in Camera3D::Unbind\n",
                                                 GetGLErrorName(Error),
                                                     BGE_VIEW_UNIFORM);
     }
