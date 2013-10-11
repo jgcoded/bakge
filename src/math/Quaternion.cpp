@@ -118,8 +118,11 @@ Radians Quaternion::GetAngle() const
 
 Vector4 Quaternion::GetAxis() const
 {
-    if(ScalarCompare(Val[3], 0))
-        return Vector4(0, 1, 0, 0); // return up-vector as a default
+    if(ScalarCompare(Val[3], 1.0f)) {
+        Log("WARNING: Quaternion - GetAxis on 0 rotation quaternion. "
+                                            "Returning up-vector.\n");
+        return Vector4(0, 1, 0, 0);
+    }
 
     Scalar Inv = sqrt(1 - (Val[3] * Val[3]));
 
