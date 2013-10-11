@@ -54,8 +54,7 @@ Result Camera2D::Bind() const
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
-        Log("WARNING: Unable to find uniform %s in current shader\n",
-                                            BGE_PROJECTION_UNIFORM);
+        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
     }
 
     Mat.SetOrthographic(Position[0], Position[0] + Span[0], Position[1],
@@ -88,8 +87,7 @@ Result Camera2D::Bind() const
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
-        Log("WARNING: Unable to find uniform %s in current shader\n",
-                                                    BGE_VIEW_UNIFORM);
+        WarnMissingUniform(BGE_VIEW_UNIFORM);
     }
 
 #ifdef _DEBUG
@@ -130,8 +128,7 @@ Result Camera2D::Unbind() const
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
-        Log("WARNING: Unable to find uniform %s in current shader\n",
-                                            BGE_PROJECTION_UNIFORM);
+        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
     }
 
 #ifdef _DEBUG
@@ -160,8 +157,7 @@ Result Camera2D::Unbind() const
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
-        Log("WARNING: Unable to find uniform %s in current shader\n",
-                                                    BGE_VIEW_UNIFORM);
+        WarnMissingUniform(BGE_VIEW_UNIFORM);
     }
 
 #ifdef _DEBUG
