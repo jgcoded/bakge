@@ -64,6 +64,7 @@ Result Camera3D::Bind() const
 {
     GLint Location, Program = 0;
     Matrix Proj, View;
+    Result Res = BGE_SUCCESS;
 
     Proj.SetPerspective(FOV, Aspect, Near, Far);
     View.SetLookAt(Position, Target, Vector4(0, 1, 0, 0));
@@ -75,6 +76,7 @@ Result Camera3D::Bind() const
     /* First we'll set the perspective */
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0) {
+        Res = BGE_FAILURE;
         Log("WARNING: Unable to find uniform %s in current shader\n",
                                             BGE_PROJECTION_UNIFORM);
     }
@@ -93,6 +95,7 @@ Result Camera3D::Bind() const
         if(Error == GL_NO_ERROR)
             break;
 
+        Res = BGE_FAILURE;
         Log("WARNING: Unexpected GL error %s while setting uniform "
                                             "%s in Camera3D::Bind\n",
                                                 GetGLErrorName(Error),
@@ -103,6 +106,7 @@ Result Camera3D::Bind() const
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0) {
+        Res = BGE_FAILURE;
         Log("WARNING: Unable to find uniform %s in current shader\n",
                                                     BGE_VIEW_UNIFORM);
     }
@@ -120,6 +124,7 @@ Result Camera3D::Bind() const
         if(Error == GL_NO_ERROR)
             break;
 
+        Res = BGE_FAILURE;
         Log("WARNING: Unexpected GL error %s while setting uniform "
                                             "%s in Camera3D::Bind\n",
                                                 GetGLErrorName(Error),
@@ -127,13 +132,14 @@ Result Camera3D::Bind() const
     }
 #endif // _DEBUG
 
-    return BGE_SUCCESS;
+    return Res;
 }
 
 
 Result Camera3D::Unbind() const
 {
     GLint Location, Program = 0;
+    Result Res = BGE_SUCCESS;
 
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
@@ -142,6 +148,7 @@ Result Camera3D::Unbind() const
     /* First we'll set the perspective */
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0) {
+        Res = BGE_FAILURE;
         Log("WARNING: Unable to find uniform %s in current shader\n",
                                             BGE_PROJECTION_UNIFORM);
     }
@@ -160,6 +167,7 @@ Result Camera3D::Unbind() const
         if(Error == GL_NO_ERROR)
             break;
 
+        Res = BGE_FAILURE;
         Log("WARNING: Unexpected GL error %s while setting uniform "
                                             "%s in Camera3D::Unbind\n",
                                                 GetGLErrorName(Error),
@@ -170,6 +178,7 @@ Result Camera3D::Unbind() const
     /* Now the view transform */
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0) {
+        Res = BGE_FAILURE;
         Log("WARNING: Unable to find uniform %s in current shader\n",
                                                     BGE_VIEW_UNIFORM);
     }
@@ -187,6 +196,7 @@ Result Camera3D::Unbind() const
         if(Error == GL_NO_ERROR)
             break;
 
+        Res = BGE_FAILURE;
         Log("WARNING: Unexpected GL error %s while setting uniform "
                                             "%s in Camera3D::Unbind\n",
                                                 GetGLErrorName(Error),
@@ -194,7 +204,7 @@ Result Camera3D::Unbind() const
     }
 #endif // _DEBUG
 
-    return BGE_SUCCESS;
+    return Res;
 }
 
 } /* bakge */
