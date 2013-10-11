@@ -115,20 +115,7 @@ Result Pawn::Bind() const
 
 Result Pawn::Unbind() const
 {
-    GLint Program, Location;
-
-    /* Retrieve current shader program */
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0)
-        return BGE_FAILURE;
-
-    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
-    if(Location < 0) {
-        WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
-        return BGE_FAILURE;
-    }
-
-    return BGE_SUCCESS;
+    return Node::Unbind();
 }
 
 

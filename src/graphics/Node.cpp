@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -51,8 +54,10 @@ Result Node::Bind() const
 
     /* Retrieve location of the bge_Translation vec4 */
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
-    if(Location < 0)
+    if(Location < 0) {
+        WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
         return BGE_FAILURE;
+    }
 
     Matrix Translation = Matrix::Translation(Position[0], Position[1],
                                                         Position[2]);
@@ -80,7 +85,23 @@ Result Node::Bind() const
 
 Result Node::Unbind() const
 {
+    GLint Program, Location;
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    /* Retrieve current shader program */
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
+    if(Location < 0) {
+        WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+        return BGE_FAILURE;
+    }
+
+    for(int i=0;i<4;++i)
+        glDisableVertexAttribArray(Location + i);
 
     return BGE_SUCCESS;
 }
