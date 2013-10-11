@@ -169,8 +169,6 @@ Window* Window::Create(int Width, int Height, int Properties)
 
     GLFWwindow* Handle = glfwCreateWindow(Width, Height, "Bakge", NULL,
                                                         SharedContext);
-    if(Handle == NULL)
-        return NULL;
 
     // Now reset GLFW window hints if necessary
     if(Properties & BGE_WINDOW_NOBORDER)
@@ -178,6 +176,11 @@ Window* Window::Create(int Width, int Height, int Properties)
 
     if(Properties & BGE_WINDOW_NORESIZE)
         glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
+
+    if(Handle == NULL) {
+        Log("ERROR: Unable to create GLFW window.\n");
+        return NULL;
+    }
 
     /* Set all of our window's GLFW callbacks */
     glfwSetWindowCloseCallback(Handle, Window::Closed);
