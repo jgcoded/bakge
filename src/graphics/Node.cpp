@@ -128,13 +128,13 @@ Node* Node::Create(Scalar X, Scalar Y, Scalar Z)
     GLuint Store;
     glGenBuffers(1, &Store);
     if(Store == 0) {
-        Log("Node: Couldn't create model matrix buffer\n");
+        Log("ERROR: Node - Couldn't create model matrix buffer\n");
         return NULL;
     }
 
     Node* N = new Node;
     if(N == NULL) {
-        Log("Node: Couldn't allocate memory\n");
+        Log("ERROR: Node - Couldn't allocate memory\n");
         return NULL;
     }
 
