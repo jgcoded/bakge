@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -60,41 +63,36 @@ Mesh::~Mesh()
 
 Result Mesh::Bind() const
 {
-    GLint Program = -1;
+    GLint Program;
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-
-#ifdef DEBUG
-    if(Program < 0) {
-        Log("ERROR: Mesh - Unable to find current shader\n");
+    if(Program == 0) {
         return BGE_FAILURE;
     }
-#endif /* _DEBUG */
-
-    GLint PositionsAttrib = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    GLint NormalsAttrib = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
-    GLint TexCoordsAttrib = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
 
     /* Check each of our attributes' locations to ensure they exist */
-    if(PositionsAttrib >= 0) {
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location >= 0) {
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-        glEnableVertexAttribArray(PositionsAttrib);
-        glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
     } else {
         WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
     }
 
-    if(NormalsAttrib >= 0) {
+    Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
+    if(Location >= 0) {
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-        glEnableVertexAttribArray(NormalsAttrib);
-        glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
     } else {
         WarnMissingAttribute(BGE_NORMAL_ATTRIBUTE);
     }
 
-    if(TexCoordsAttrib >= 0) {
+    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(Location >= 0) {
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-        glEnableVertexAttribArray(TexCoordsAttrib);
-        glVertexAttribPointer(TexCoordsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 2, GL_FLOAT, GL_FALSE, 0, 0);
     } else {
         WarnMissingAttribute(BGE_TEXCOORD_ATTRIBUTE);
     }
@@ -107,6 +105,33 @@ Result Mesh::Bind() const
 
 Result Mesh::Unbind() const
 {
+    GLint Program;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0) {
+        return BGE_FAILURE;
+    }
+
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location < 0) {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+    } else {
+        glDisableVertexAttribArray(Location);
+    }
+
+    Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
+    if(Location < 0) {
+        WarnMissingAttribute(BGE_NORMAL_ATTRIBUTE);
+    } else {
+        glDisableVertexAttribArray(Location);
+    }
+
+    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(Location < 0) {
+        WarnMissingAttribute(BGE_TEXCOORD_ATTRIBUTE);
+    } else {
+        glDisableVertexAttribArray(Location);
+    }
+
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
