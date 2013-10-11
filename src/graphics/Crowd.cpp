@@ -179,9 +179,10 @@ Result Crowd::Reserve(int NumMembers)
 
 Result Crowd::TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 {
-    /* Prevent out-of-bounds transformations */
-    if(MemberIndex < 0 || MemberIndex >= Capacity)
+    if(MemberIndex < 0 || MemberIndex >= Capacity) {
+        Log("ERROR: Crowd - Member index out of range\n");
         return BGE_FAILURE;
+    }
 
     Positions[MemberIndex * 3 + 0] += X;
     Positions[MemberIndex * 3 + 1] += Y;
@@ -195,9 +196,10 @@ Result Crowd::TranslateMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 
 Result Crowd::RotateMember(int MemberIndex, Quaternion BGE_NCP Rotation)
 {
-    /* Prevent out-of-bounds transformations */
-    if(MemberIndex < 0 || MemberIndex >= Capacity)
+    if(MemberIndex < 0 || MemberIndex >= Capacity) {
+        Log("ERROR: Crowd - Member index out of range\n");
         return BGE_FAILURE;
+    }
 
     /* Rotate the member */
     Rotations[MemberIndex] *= Rotation;
@@ -210,9 +212,10 @@ Result Crowd::RotateMember(int MemberIndex, Quaternion BGE_NCP Rotation)
 
 Result Crowd::RotateMemberGlobal(int MemberIndex, Quaternion BGE_NCP Rot)
 {
-    /* Prevent out-of-bounds transformations */
-    if(MemberIndex < 0 || MemberIndex >= Capacity)
+    if(MemberIndex < 0 || MemberIndex >= Capacity) {
+        Log("ERROR: Crowd - Member index out of range\n");
         return BGE_FAILURE;
+    }
 
     /* Rotate the member */
     Rotations[MemberIndex] = Rot * Rotations[MemberIndex];
@@ -225,9 +228,10 @@ Result Crowd::RotateMemberGlobal(int MemberIndex, Quaternion BGE_NCP Rot)
 
 Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 {
-    /* Prevent out-of-bounds transformations */
-    if(MemberIndex < 0 || MemberIndex >= Capacity)
+    if(MemberIndex < 0 || MemberIndex >= Capacity) {
+        Log("ERROR: Crowd - Member index out of range\n");
         return BGE_FAILURE;
+    }
 
     /* Scale the member */
     Scales[MemberIndex * 3 + 0] *= X;
@@ -242,6 +246,11 @@ Result Crowd::ScaleMember(int MemberIndex, Scalar X, Scalar Y, Scalar Z)
 
 Quaternion BGE_NCP Crowd::SetMemberRotation(int Index, Quaternion BGE_NCP Rot)
 {
+    if(Index < 0 || Index >= Capacity) {
+        Log("ERROR: Crowd - Member index out of range\n");
+        return Quaternion::Identity;
+    }
+
     Rotations[Index] = Rot;
 
     SetDataStore(Index);
@@ -252,6 +261,11 @@ Quaternion BGE_NCP Crowd::SetMemberRotation(int Index, Quaternion BGE_NCP Rot)
 
 Quaternion BGE_NCP Crowd::GetMemberRotation(int Index) const
 {
+    if(Index < 0 || Index >= Capacity) {
+        Log("ERROR: Crowd - Member index out of range\n");
+        return Quaternion::Identity;
+    }
+
     return Rotations[Index];
 }
 
