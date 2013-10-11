@@ -52,6 +52,36 @@ void GLFWErrorHandler(int Code, const char* Description);
  */
 const char* GetGLErrorName(GLenum Error);
 
+/*! @brief Log a warning that an attribute variable is missing.
+ *
+ * Log a warning that an attribute variable is missing from the currently
+ * bound Shader. This should only be called if the variable is not found
+ * while attempting to set its attribute pointer to be used for rendering,
+ * e.g. when a Mesh is bound and the bge_Vertex attribute is not found in
+ * the current Shader.
+ *
+ * @param[in] Name Name of the missing variable.
+ */
+BGE_INL void WarnMissingAttribute(const char* Name)
+{
+    Log("WARNING: Unable to find attribute '%s' in current shader\n", Name);
+}
+
+/*! @brief Log a warning that a uniform variable is missing.
+ *
+ * Log a warning that an uniform variable is missing from the currently
+ * bound Shader. This should only be called if the variable is not found
+ * while attempting to set its value to be used for rendering,
+ * e.g. when a Camera2D is bound and the bge_View uniform is not found in
+ * the current Shader.
+ *
+ * @param[in] Name Name of the missing variable.
+ */
+BGE_INL void WarnMissingUniform(const char* Name)
+{
+    Log("WARNING: Unable to find uniform '%s' in current shader\n", Name);
+}
+
 } // bakge
 
 #endif // BAKGE_INTERNAL_DEBUG_H
