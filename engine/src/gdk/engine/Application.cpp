@@ -49,6 +49,10 @@ Application::~Application()
 Application* Application::Create()
 {
     Application* App = new Application;
+    if(App == NULL) {
+        Log("ERROR: Application - Couldn't allocate memory.\n");
+        return NULL;
+    }
 
     App->Gui = GUI::Create();
     if(App->Gui == NULL) {
