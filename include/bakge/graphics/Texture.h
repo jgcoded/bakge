@@ -48,7 +48,7 @@ class BGE_API Texture : public Bindable
     int Width;
     int Height;
 
-    GLenum Location;
+    GLenum TextureUnit;
     GLuint TextureID;
 
 

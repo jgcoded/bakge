@@ -32,7 +32,7 @@ namespace bakge
 
 Texture::Texture()
 {
-    Location = GL_TEXTURE0;
+    TextureUnit = GL_TEXTURE0;
     TextureID = 0;
     Width = 0;
     Height = 0;
@@ -53,7 +53,7 @@ Result Texture::Bind() const
         ;
 #endif // _DEBUG
 
-    glActiveTexture(Location);
+    glActiveTexture(TextureUnit);
 
     glBindTexture(GL_TEXTURE_2D, TextureID);
 
@@ -70,7 +70,7 @@ Result Texture::Bind() const
 
 Result Texture::Unbind() const
 {
-    glActiveTexture(Location);
+    glActiveTexture(TextureUnit);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     return BGE_SUCCESS;
@@ -228,12 +228,12 @@ Result Texture::SetLocation(GLenum Loc)
     if(Loc < GL_TEXTURE0 || Loc >= (GLenum)(GL_TEXTURE0 + TexUnits)) {
         Log("Texture: Invalid texture location %d. Valid range is "
                                     "[GL_TEXTURE0, GL_TEXTURE%d]\n",
-                                            Location, TexUnits - 1);
+                                        TextureUnit, TexUnits - 1);
         return BGE_FAILURE;
     }
 #endif // _DEBUG
 
-    Location = Loc;
+    TextureUnit = Loc;
 
     return BGE_SUCCESS;
 }
