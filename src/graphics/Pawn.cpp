@@ -74,19 +74,18 @@ Vector4 BGE_NCP Pawn::GetScale() const
 
 Result Pawn::Bind() const
 {
-    Result Errors = BGE_SUCCESS;
     GLint Program, Location;
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
     if(Program == 0)
-        Errors = BGE_FAILURE;
+        return BGE_FAILURE;
 
-    /* Get location of bge_Rotation uniform */
+    // Check if required attribute is present. If not, don't continue
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0) {
-        Errors = BGE_FAILURE;
         WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+        return BGE_FAILURE;
     }
 
     Matrix Transformation;
@@ -110,13 +109,12 @@ Result Pawn::Bind() const
         glVertexAttribDivisor(Location + i, 1);
     }
 
-    return Errors;
+    return BGE_SUCCESS;
 }
 
 
 Result Pawn::Unbind() const
 {
-    Result Errors = BGE_SUCCESS;
     GLint Program, Location;
 
     /* Retrieve current shader program */
@@ -126,11 +124,11 @@ Result Pawn::Unbind() const
 
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0) {
-        Errors = BGE_FAILURE;
         WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+        return BGE_FAILURE;
     }
 
-    return Errors;
+    return BGE_SUCCESS;
 }
 
 
