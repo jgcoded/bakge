@@ -27,6 +27,8 @@
 namespace bakge
 {
 
+const Quaternion Quaternion::Identity;
+
 Quaternion::Quaternion()
 {
     Val[0] = 0.0f;

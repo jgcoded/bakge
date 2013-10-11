@@ -74,6 +74,8 @@ class BGE_API Quaternion
 
 public:
 
+    const static Quaternion Identity;
+
     /*! @brief Default Quaternion constructor.
      *
      * Sets scalar component to 1.0, describing a rotation of 0 radians about
