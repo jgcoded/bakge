@@ -291,7 +291,10 @@ Quaternion Quaternion::operator-() const
 
 Quaternion BGE_NCP Quaternion::Invert()
 {
-    operator-();
+    Val[0] *= -1;
+    Val[1] *= -1;
+    Val[2] *= -1;
+    Val[3] *= -1;
     Normalize();
 
     return *this;
