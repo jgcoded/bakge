@@ -31,13 +31,13 @@ Result GetPrimaryMonitorResolution(int* StoreX, int* StoreY)
 {
     GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
     if(PrimaryMonitor == NULL) {
-        Log("Device: Error getting primary monitor\n");
+        Log("ERROR: Couldn't get primary monitor\n");
         return BGE_FAILURE;
     }
 
     const GLFWvidmode* MonitorVideoMode = glfwGetVideoMode(PrimaryMonitor);
     if(MonitorVideoMode == NULL) {
-        Log("Device: Error getting primary monitor video mode\n");
+        Log("ERROR: Couldn't get primary monitor video mode\n");
         return BGE_FAILURE;
     }
 
@@ -55,7 +55,7 @@ Result GetPrimaryMonitorPhysicalSize(int* StoreX, int* StoreY)
 {
     GLFWmonitor* PrimaryMonitor = glfwGetPrimaryMonitor();
     if(PrimaryMonitor == NULL) {
-        Log("Device: Error getting primary monitor\n");
+        Log("ERROR: Couldn't get primary monitor\n");
         return BGE_FAILURE;
     }
 
