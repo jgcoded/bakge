@@ -414,7 +414,7 @@ Result Shader::Compile(GLuint Handle)
         ;
 #endif // _DEBUG
 
-    Result Errors = BGE_SUCCESS;
+    Result Res = BGE_SUCCESS;
 
     glCompileShader(Handle);
 
@@ -439,7 +439,7 @@ Result Shader::Compile(GLuint Handle)
 
     glGetShaderiv(Handle, GL_COMPILE_STATUS, &Status);
     if(Status == GL_FALSE)
-        Errors = BGE_FAILURE;
+        Res = BGE_FAILURE;
 
     glGetShaderiv(Handle, GL_INFO_LOG_LENGTH, &Length);
     if(Length > 1) {
@@ -451,7 +451,7 @@ Result Shader::Compile(GLuint Handle)
     }
 #endif // _DEBUG
 
-    return Errors;
+    return Res;
 }
 
 
