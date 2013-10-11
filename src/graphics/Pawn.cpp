@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -81,8 +84,10 @@ Result Pawn::Bind() const
 
     /* Get location of bge_Rotation uniform */
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
-    if(Location < 0)
+    if(Location < 0) {
         Errors = BGE_FAILURE;
+        WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+    }
 
     Matrix Transformation;
     Transformation.Scale(Scale[0], Scale[1], Scale[2]);
@@ -111,6 +116,7 @@ Result Pawn::Bind() const
 
 Result Pawn::Unbind() const
 {
+    Result Errors = BGE_SUCCESS;
     GLint Program, Location;
 
     /* Retrieve current shader program */
@@ -118,12 +124,13 @@ Result Pawn::Unbind() const
     if(Program == 0)
         return BGE_FAILURE;
 
-    /* Get location of bge_Rotation uniform */
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
-    if(Location < 0)
-        return BGE_FAILURE;
+    if(Location < 0) {
+        Errors = BGE_FAILURE;
+        WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+    }
 
-    return Node::Unbind();
+    return Errors;
 }
 
 
