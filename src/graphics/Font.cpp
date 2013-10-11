@@ -43,42 +43,42 @@ Font* Font::Load(const char* FileName)
 {
     // Verify the font file exists
     if(PHYSFS_exists(FileName) == 0) {
-        Log("Font: Unable to locate file %s\n", FileName);
+        Log("ERROR: Font - Unable to locate file %s\n", FileName);
         return NULL;
     }
 
     // Open the font file for reading
     PHYSFS_file* FontFile = PHYSFS_openRead(FileName);
     if(FontFile == NULL) {
-        Log("Font: Unable to load file\n");
+        Log("ERROR: Font - Unable to load file\n");
         return NULL;
     }
 
     // Determine size of data in the file
     PHYSFS_sint64 Size = PHYSFS_fileLength(FontFile);
     if(Size < 0) {
-        Log("Font: Unable to get file length\n");
+        Log("ERROR: Font - Unable to get file length\n");
         return NULL;
     }
 
     // Allocate buffer for the data
     unsigned char* Data = new unsigned char[(size_t)Size];
     if(Data == NULL) {
-        Log("Font: Error allocating file data buffer\n");
+        Log("ERROR: Font - Error allocating file data buffer\n");
         return NULL;
     }
 
     // Read font file data into buffer
     PHYSFS_sint64 BytesRead = PHYSFS_read(FontFile, (void*)Data, 1, (PHYSFS_uint32)Size);
     if(BytesRead < 0) {
-        Log("Font: Error reading file data\n");
+        Log("ERROR: Font - Error reading file data\n");
         return NULL;
     }
 
     // Allocate a new Font instance
     Font* F = new Font;
     if(F == NULL) {
-        Log("Font: Couldn't allocate memory\n");
+        Log("ERROR: Font - Couldn't allocate memory\n");
         return NULL;
     }
 
@@ -101,13 +101,13 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
 {
     int NumChars = GlyphEnd - GlyphStart;
     if(NumChars < 1) {
-        Log("Font: Error baking glyph texture - GlyphStart >= GlyphEnd\n");
+        Log("ERROR: Font - Can't bake glyph map (GlyphStart >= GlyphEnd)\n");
         return -1;
     }
 
     unsigned char* GlyphBitmap = new unsigned char[512 * 512];
     if(GlyphBitmap == NULL) {
-        Log("Font: Error allocating glyph bitmap buffer\n");
+        Log("ERROR: Font - Error allocating glyph bitmap buffer\n");
         return -1;
     }
 
@@ -136,7 +136,7 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
     delete[] GlyphData;
 
     if(GlyphMap == NULL) {
-        Log("Font: Error creating glyph texture\n");
+        Log("ERROR: Font - Couldn't creating glyph texture\n");
         return -1;
     }
 
