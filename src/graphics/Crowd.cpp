@@ -66,7 +66,7 @@ Result Crowd::Bind() const
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program < 0)
+    if(Program == 0)
         return BGE_FAILURE;
 
     /* Retrieve location of the bge_Translation vec4 */
@@ -109,7 +109,7 @@ Result Crowd::Unbind() const
 
     /* Retrieve current shader program */
     glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program < 0)
+    if(Program == 0)
         return BGE_FAILURE;
 
     Location = glGetUniformLocation(Program, BGE_CROWD_UNIFORM);
