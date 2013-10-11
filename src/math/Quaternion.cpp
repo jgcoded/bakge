@@ -312,8 +312,10 @@ Quaternion BGE_NCP Quaternion::Normalize()
     Scalar Len = Length();
 
     /* Don't divide by 0 */
-    if(ScalarCompare(Len, 0))
+    if(ScalarCompare(Len, 0)) {
+        Log("WARNING: Normalized zero-length Quaternion.\n");
         return *this;
+    }
 
     Val[0] /= Len;
     Val[1] /= Len;
