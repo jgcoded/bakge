@@ -79,18 +79,24 @@ Result Mesh::Bind() const
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
         glEnableVertexAttribArray(PositionsAttrib);
         glVertexAttribPointer(PositionsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    } else {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
     }
 
     if(NormalsAttrib >= 0) {
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
         glEnableVertexAttribArray(NormalsAttrib);
         glVertexAttribPointer(NormalsAttrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    } else {
+        WarnMissingAttribute(BGE_NORMAL_ATTRIBUTE);
     }
 
     if(TexCoordsAttrib >= 0) {
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
         glEnableVertexAttribArray(TexCoordsAttrib);
         glVertexAttribPointer(TexCoordsAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    } else {
+        WarnMissingAttribute(BGE_TEXCOORD_ATTRIBUTE);
     }
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
