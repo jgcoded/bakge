@@ -191,7 +191,7 @@ Window* Window::Create(int Width, int Height, int Properties)
     /* Allocate our bakge Window */
     Window* Win = new Window;
     if(Win == NULL) {
-        Log("Window: Couldn't allocate memory\n");
+        Log("ERROR: Window - Couldn't allocate memory\n");
         return NULL;
     }
 
@@ -201,7 +201,7 @@ Window* Window::Create(int Width, int Height, int Properties)
 
     /* Bind default shader to new window's context */
     if(Shader::GenericShader->Bind() == BGE_FAILURE) {
-        Log("Window: Unable to bind default shader\n");
+        Log("ERROR: Window - Unable to bind default shader\n");
         delete Win;
         return NULL;
     }
