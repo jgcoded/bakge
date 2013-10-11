@@ -160,9 +160,6 @@ Window::~Window()
 
 Window* Window::Create(int Width, int Height, int Properties)
 {
-    GLFWwindow* Handle;
-    Window* Win;
-
     // Check each window property and set corresponding GLFW window hints
     if(Properties & BGE_WINDOW_NOBORDER)
         glfwWindowHint(GLFW_DECORATED, GL_FALSE);
@@ -170,7 +167,8 @@ Window* Window::Create(int Width, int Height, int Properties)
     if(Properties & BGE_WINDOW_NORESIZE)
         glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    Handle = glfwCreateWindow(Width, Height, "Bakge", NULL, SharedContext);
+    GLFWwindow* Handle = glfwCreateWindow(Width, Height, "Bakge", NULL,
+                                                        SharedContext);
     if(Handle == NULL)
         return NULL;
 
@@ -191,7 +189,7 @@ Window* Window::Create(int Width, int Height, int Properties)
     glfwSetScrollCallback(Handle, Window::Scroll);
 
     /* Allocate our bakge Window */
-    Win = new Window;
+    Window* Win = new Window;
     if(Win == NULL) {
         Log("Window: Couldn't allocate memory\n");
         return NULL;
