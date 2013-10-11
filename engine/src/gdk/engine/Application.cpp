@@ -56,7 +56,7 @@ Application* Application::Create()
 
     App->Gui = GUI::Create();
     if(App->Gui == NULL) {
-        Log("Application: Error creating GUI\n");
+        Log("ERROR: Application - Couldn't create GUI\n");
         delete App;
         return NULL;
     } else {
@@ -65,7 +65,7 @@ Application* Application::Create()
 
     App->Win = Window::Create(800, 480, 0);
     if(App->Win == NULL) {
-        Log("Application: Error creating Window\n");
+        Log("ERROR: Application - Couldn't create Window\n");
         delete App;
         return NULL;
     } else {
