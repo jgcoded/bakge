@@ -43,9 +43,6 @@ public:
 
     BGE_FACTORY GUI* Create();
 
-    virtual Result Bind() const;
-    virtual Result Unbind() const;
-
 }; /* GUI */
 
 } /* gdk */
