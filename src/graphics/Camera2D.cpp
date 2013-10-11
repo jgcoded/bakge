@@ -148,6 +148,7 @@ Result Camera2D::Unbind() const
         if(Error == GL_NO_ERROR)
             break;
 
+        Res = BGE_FAILURE;
         Log("WARNING: Unexpected GL error %s while setting uniform "
                                             "%s in Camera2D::Unbind\n",
                                                 GetGLErrorName(Error),
@@ -176,6 +177,7 @@ Result Camera2D::Unbind() const
         if(Error == GL_NO_ERROR)
             break;
 
+        Res = BGE_FAILURE;
         Log("WARNING: Unexpected GL error %s while setting uniform "
                                             "%s in Camera2D::Unbind\n",
                                                 GetGLErrorName(Error),
