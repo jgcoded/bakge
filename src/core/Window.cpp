@@ -69,8 +69,6 @@ void Window::Closed(GLFWwindow* Handle)
     if(Handler != NULL) {
         Handler->CloseEvent();
     }
-
-    Win->Close();
 }
 
 
@@ -151,7 +149,8 @@ Window::Window()
 
 Window::~Window()
 {
-    Close();
+    if(IsOpen())
+        Close();
 
     if(WinTitle != NULL)
         delete[] WinTitle;
