@@ -270,6 +270,9 @@ Result Window::Close()
     WindowHandle = NULL;
     glfwDestroyWindow(Handle);
 
+    if(Handler != NULL)
+        Handler->CloseEvent();
+
     return BGE_SUCCESS;
 }
 
