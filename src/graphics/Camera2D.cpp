@@ -54,7 +54,9 @@ Result Camera2D::Bind() const
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
+#ifdef _DEBUG
         WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+#endif // _DEBUG
     }
 
     Mat.SetOrthographic(Position[0], Position[0] + Span[0], Position[1],
@@ -87,7 +89,9 @@ Result Camera2D::Bind() const
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
-        WarnMissingUniform(BGE_VIEW_UNIFORM);
+#ifdef _DEBUG
+        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+#endif // _DEBUG
     }
 
 #ifdef _DEBUG
@@ -128,7 +132,9 @@ Result Camera2D::Unbind() const
     Location = glGetUniformLocation(Program, BGE_PROJECTION_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
+#ifdef _DEBUG
         WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+#endif // _DEBUG
     }
 
 #ifdef _DEBUG
@@ -157,7 +163,9 @@ Result Camera2D::Unbind() const
     Location = glGetUniformLocation(Program, BGE_VIEW_UNIFORM);
     if(Location < 0) {
         Res = BGE_FAILURE;
-        WarnMissingUniform(BGE_VIEW_UNIFORM);
+#ifdef _DEBUG
+        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+#endif // _DEBUG
     }
 
 #ifdef _DEBUG

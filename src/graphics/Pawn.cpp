@@ -84,7 +84,9 @@ Result Pawn::Bind() const
     // Check if required attribute is present. If not, don't continue
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0) {
+#ifdef _DEBUG
         WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+#endif // _DEBUG
         return BGE_FAILURE;
     }
 

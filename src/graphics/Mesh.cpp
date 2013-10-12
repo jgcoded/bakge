@@ -75,8 +75,10 @@ Result Mesh::Bind() const
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
         glEnableVertexAttribArray(Location);
         glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
     } else {
         WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
     }
 
     Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
@@ -84,8 +86,10 @@ Result Mesh::Bind() const
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
         glEnableVertexAttribArray(Location);
         glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
     } else {
         WarnMissingAttribute(BGE_NORMAL_ATTRIBUTE);
+#endif // _DEBUG
     }
 
     Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
@@ -93,8 +97,10 @@ Result Mesh::Bind() const
         glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
         glEnableVertexAttribArray(Location);
         glVertexAttribPointer(Location, 2, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
     } else {
         WarnMissingAttribute(BGE_TEXCOORD_ATTRIBUTE);
+#endif // _DEBUG
     }
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
@@ -112,24 +118,30 @@ Result Mesh::Unbind() const
     }
 
     GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    if(Location < 0) {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
-    } else {
+    if(Location >= 0) {
         glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
     }
 
     Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
-    if(Location < 0) {
-        WarnMissingAttribute(BGE_NORMAL_ATTRIBUTE);
-    } else {
+    if(Location >= 0) {
         glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
     }
 
     Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
-    if(Location < 0) {
-        WarnMissingAttribute(BGE_TEXCOORD_ATTRIBUTE);
-    } else {
+    if(Location >= 0) {
         glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

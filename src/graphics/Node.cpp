@@ -55,7 +55,9 @@ Result Node::Bind() const
     /* Retrieve location of the bge_Translation vec4 */
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0) {
+#ifdef _DEBUG
         WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+#endif // _DEBUG
         return BGE_FAILURE;
     }
 
@@ -96,7 +98,9 @@ Result Node::Unbind() const
 
     Location = glGetAttribLocation(Program, BGE_MODEL_ATTRIBUTE);
     if(Location < 0) {
+#ifdef _DEBUG
         WarnMissingAttribute(BGE_MODEL_ATTRIBUTE);
+#endif // _DEBUG
         return BGE_FAILURE;
     }
 
