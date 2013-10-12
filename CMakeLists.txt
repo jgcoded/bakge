@@ -297,7 +297,7 @@ endforeach()
 set(BAKGE_STB_HEADERS
   stb_truetype.c
   stb_image.c
-  stb_truetype.c
+  stb_vorbis.c
 )
 foreach(STB_HEADER ${BAKGE_STB_HEADERS})
   add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
@@ -341,6 +341,10 @@ endforeach()
 set(BAKGE_OPENAL_HEADERS
   al.h
   alc.h
+  alext.h
+  efx.h
+  efx-creative.h
+  efx-presets.h
 )
 foreach(AL_HEADER ${BAKGE_OPENAL_HEADERS})
   add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
