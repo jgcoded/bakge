@@ -111,8 +111,14 @@ Result Init(int argc, char* argv[])
         return Deinit();
     }
 
-    Log("Bakersfield Game Engine v%d.%d.%d\n", BGE_VER_MAJ, BGE_VER_MIN,
-                                                            BGE_VER_REV);
+#ifdef _DEBUG
+#define BGE_BUILD_CONFIGURATION "[Debug Configuration]"
+#else
+#define BGE_BUILD_CONFIGURATION "[Release Configuration]"
+#endif // _DEBUG
+
+    Log("Bakersfield Game Engine v%d.%d.%d %s\n", BGE_VER_MAJ, BGE_VER_MIN,
+                                    BGE_VER_REV, BGE_BUILD_CONFIGURATION);
 
     SystemInfo();
 
