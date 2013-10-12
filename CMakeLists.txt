@@ -346,7 +346,7 @@ foreach(AL_HEADER ${BAKGE_OPENAL_HEADERS})
   add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
     copy
       ${BAKGE_SOURCE_DIR}/lib/openal-1.15.1/include/AL/${AL_HEADER}
-      ${BAKGE_SDK_INC_PATH}/GLFW/${AL_HEADER}
+      ${BAKGE_SDK_INC_PATH}/AL/${AL_HEADER}
   )
 endforeach()
 
