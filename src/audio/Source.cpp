@@ -67,7 +67,10 @@ Result Source::Play() const
 
 Result Source::Attach(Stream* Str)
 {
+    alGetError();
+
     alSourcei(SourceHandle, AL_BUFFER, Str->StreamBuffer);
+
     if(alGetError() != AL_NO_ERROR) {
         Log("ERROR: Source - Error attaching buffer to source\n");
         return BGE_FAILURE;
