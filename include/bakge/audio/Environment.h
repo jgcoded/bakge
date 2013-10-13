@@ -103,6 +103,34 @@ public:
      */
     Result Unbind() const;
 
+    /*! @brief Set the position of the listener in the Environment.
+     *
+     * Set the position of the listener in the Environment in 3D Cartesian
+     * space. This position is where sounds are heard from.
+     *
+     * @param[in] X X position of the listener.
+     * @param[in] Y Y position of the listener.
+     * @param[in] Z Z position of the listener.
+     *
+     * @return BGE_SUCCESS if the listener position was successfully set;
+     * BGE_FAILURE otherwise.
+     */
+    Result SetListenerPosition(Scalar X, Scalar Y, Scalar Z);
+
+    /*! @brief Get the position of the listener in the Environment.
+     *
+     * Get the position of the listener in the Environment in 3D Cartesian
+     * space. This position is where sounds are heard from.
+     *
+     * @param[in] X Set to X position of the listener.
+     * @param[in] Y Set to Y position of the listener.
+     * @param[in] Z Set to Z position of the listener.
+     *
+     * @return BGE_SUCCESS if the listener position was successfully
+     * retrieved; BGE_FAILURE otherwise.
+     */
+    Result GetListenerPosition(Scalar* X, Scalar* Y, Scalar* Z);
+
 }; /* Environment */
 
 } /* bakge */

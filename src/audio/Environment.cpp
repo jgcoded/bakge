@@ -80,4 +80,60 @@ Result Environment::Unbind() const
     return BGE_FAILURE;
 }
 
+
+Result Environment::SetListenerPosition(Scalar X, Scalar Y, Scalar Z)
+{
+#ifdef _DEBUG
+    ALenum Error = alGetError();
+#endif // _DEBUG
+
+    alListener3f(AL_POSITION, X, Y, Z);
+
+#ifdef _DEBUG
+    Error = alGetError();
+
+    if(Error != AL_NO_ERROR) {
+        bakge::Log("ERROR: Environment - Unexpected AL error while setting "
+                                                    "listener position.\n");
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    return BGE_SUCCESS;
+}
+
+
+Result Environment::GetListenerPosition(Scalar* X, Scalar* Y, Scalar* Z)
+{
+    // Not sure if AL cares when passing NULL to alGetListener3f
+    static Scalar Dummy;
+
+    if(X == NULL)
+        X = &Dummy;
+
+    if(Y == NULL)
+        Y = &Dummy;
+
+    if(Z == NULL)
+        Z = &Dummy;
+
+#ifdef _DEBUG
+    ALenum Error = alGetError();
+#endif // _DEBUG
+
+    alGetListener3f(AL_POSITION, X, Y, Z);
+
+#ifdef _DEBUG
+    Error = alGetError();
+
+    if(Error != AL_NO_ERROR) {
+        bakge::Log("ERROR: Environment - Unexpected AL error while getting "
+                                                    "listener position.\n");
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    return BGE_SUCCESS;
+}
+
 } /* bakge */
