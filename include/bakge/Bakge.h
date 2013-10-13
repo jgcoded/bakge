@@ -216,9 +216,10 @@ namespace bakge
 #include <bakge/graphics/Node.h>
 #include <bakge/graphics/Pawn.h>
 #include <bakge/graphics/Crowd.h>
+#include <bakge/graphics/Geometry.h>
 #include <bakge/graphics/shapes/Cube.h>
 #include <bakge/graphics/shapes/Rectangle.h>
-#include <bakge/graphics/geometry/BezierCurve.h>
+#include <bakge/graphics/geometries/BezierCurve.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Font.h>
 #include <bakge/graphics/Camera2D.h>

@@ -22,12 +22,13 @@ set(MODULES
   graphics/Camera3D
   graphics/Crowd
   graphics/Font
+  graphics/Geometry
   graphics/Mesh
   graphics/Node
   graphics/Pawn
   graphics/Shader
   graphics/Texture
-  graphics/geometry/BezierCurve
+  graphics/geometries/BezierCurve
   graphics/shapes/Cube
   graphics/shapes/Rectangle
   input/GamePad
