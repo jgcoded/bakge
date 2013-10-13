@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
 
     Obj = bakge::Cube::Create();
 
-#define CROWD_SIZE 50
+#define CROWD_SIZE 5000
     Group = bakge::Crowd::Create(CROWD_SIZE);
 
     srand(time(0));
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 #define RRAND (((float)(rand() % 1000)) / 1000) * 6.28f
 #define SRAND (((float)(rand() % 1000) / 1000.0f) + 0.5f)
     for(int i=0;i<CROWD_SIZE;++i) {
-        Group->ScaleMember(i, SRAND, SRAND, SRAND);
+        Group->ScaleMember(i, SRAND / 10, SRAND / 10, SRAND / 10);
         Group->RotateMember(i, bakge::Quaternion::FromEulerAngles(RRAND,
                                                         RRAND, RRAND));
         Group->TranslateMember(i, TRAND, TRAND, TRAND);
