@@ -447,6 +447,7 @@ Result Shader::Compile(GLuint Handle)
         glGetShaderInfoLog(Handle, Length, NULL, Info);
         Log("Shader compile result\n", Info);
         Log("======================\n");
+        Log("%s\n", Info);
         delete[] Info;
     }
 #endif // _DEBUG
