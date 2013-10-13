@@ -48,14 +48,14 @@ Stream* Stream::Create(int Len, Byte* Data)
 {
     Stream* S = new Stream;
     if(S == NULL) {
-        Log("Stream: Couldn't allocate memory\n");
+        Log("ERROR: Stream - Couldn't allocate memory\n");
         return NULL;
     }
 
     alGetError(); // Clear error state
     alGenBuffers(1, &S->StreamBuffer);
     if(alGetError() != AL_NO_ERROR) {
-        Log("Stream: Error creating buffer\n");
+        Log("ERROR: Stream - Error creating buffer\n");
         delete S;
         return NULL;
     }
@@ -65,7 +65,7 @@ Stream* Stream::Create(int Len, Byte* Data)
     int NumPackets = stb_vorbis_decode_memory(Data, Len, &Channels,
                                                         &StreamData);
     if(NumPackets < 0) {
-        Log("Stream: Error decoding data\n");
+        Log("ERROR: Stream - Error decoding data\n");
         delete S;
         return NULL;
     }
@@ -73,7 +73,7 @@ Stream* Stream::Create(int Len, Byte* Data)
     // Use Channels to check error
     S->Vorbis = stb_vorbis_open_memory(Data, Len, &Channels, NULL);
     if(S->Vorbis == NULL) {
-        Log("Stream: Error opening vorbis stream\n");
+        Log("ERROR: Stream - Error opening vorbis stream\n");
         delete S;
         return NULL;
     }
@@ -84,7 +84,7 @@ Stream* Stream::Create(int Len, Byte* Data)
                                     AL_FORMAT_STEREO16, StreamData,
                                     NumPackets / 2, S->GetFrequency());
     if(alGetError() != AL_NO_ERROR) {
-        Log("Stream: Error setting buffer data\n");
+        Log("ERROR: Stream - Error setting buffer data\n");
         delete S;
         return NULL;
     }

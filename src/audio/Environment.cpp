@@ -50,13 +50,13 @@ Environment* Environment::Create()
 
     AC->Device = alcOpenDevice(NULL);
     if(AC->Device == NULL) {
-        Log("Environment: Error creating OpenAL device\n");
+        Log("ERROR: Environment - Error creating OpenAL device\n");
         return NULL;
     }
 
     AC->Context = alcCreateContext(AC->Device, NULL);
     if(AC->Context == NULL) {
-        Log("Environment: Error creating OpenAL context\n");
+        Log("ERROR: Environment - Error creating OpenAL context\n");
         delete AC;
         return NULL;
     }
