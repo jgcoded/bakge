@@ -90,7 +90,7 @@ Result Camera2D::Bind() const
     if(Location < 0) {
         Res = BGE_FAILURE;
 #ifdef _DEBUG
-        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+        WarnMissingUniform(BGE_VIEW_UNIFORM);
 #endif // _DEBUG
     }
 
@@ -164,7 +164,7 @@ Result Camera2D::Unbind() const
     if(Location < 0) {
         Res = BGE_FAILURE;
 #ifdef _DEBUG
-        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+        WarnMissingUniform(BGE_VIEW_UNIFORM);
 #endif // _DEBUG
     }
 
