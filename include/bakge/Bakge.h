@@ -128,7 +128,7 @@
 
 /*! @brief Current release minor version number.
  */
-#define BGE_VER_MIN 0
+#define BGE_VER_MIN 1
 
 /*! @brief Current release revision version number.
  */
