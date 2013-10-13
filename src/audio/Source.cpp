@@ -61,9 +61,16 @@ Source* Source::Create()
 
 Result Source::Play() const
 {
+    alGetError();
+
     alSourcePlay(SourceHandle);
 
-    return BGE_FAILURE;
+    if(alGetError() != AL_NO_ERROR) {
+        Log("ERROR: Source - Error playing AL source.\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
 }
 
 
