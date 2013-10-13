@@ -10,7 +10,6 @@ set(TESTS
   audio
   crowd
   device
-  linkedlist
   font
   rectangle
   thread
