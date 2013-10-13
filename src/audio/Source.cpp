@@ -46,7 +46,9 @@ Source* Source::Create()
     }
 
     alGetError();
+
     alGenSources(1, &S->SourceHandle);
+
     if(alGetError() != AL_NO_ERROR) {
         Log("ERROR: Source - Error creating AL source\n");
         delete S;
