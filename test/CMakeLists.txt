@@ -8,6 +8,7 @@ endif()
 
 set(TESTS
   audio
+  bezier
   crowd
   device
   font

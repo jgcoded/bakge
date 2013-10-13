@@ -27,6 +27,7 @@ set(MODULES
   graphics/Pawn
   graphics/Shader
   graphics/Texture
+  graphics/geometry/BezierCurve
   graphics/shapes/Cube
   graphics/shapes/Rectangle
   input/GamePad
