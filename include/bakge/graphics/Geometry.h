@@ -50,6 +50,8 @@ protected:
     GLuint PointsBuffer;
     GLuint IndicesBuffer;
 
+    int NumPoints;
+
     /*! @brief Default constructor.
      *
      * Default constructor.

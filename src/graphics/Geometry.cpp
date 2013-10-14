@@ -34,6 +34,7 @@ Geometry::Geometry()
 {
     PointsBuffer = 0;
     IndicesBuffer = 0;
+    NumPoints = 0;
 }
 
 
