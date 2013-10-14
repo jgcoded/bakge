@@ -42,7 +42,74 @@ LineStrip::~LineStrip()
 
 LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
 {
-    return NULL;
+    LineStrip* L = new LineStrip;
+    if(L == NULL) {
+        Log("ERROR: LineStrip - Couldn't allocate memory.\n");
+	return NULL;
+    }
+
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
+    glGenBuffers(1, &L->PointsBuffer);
+
+#ifdef _DEBUG
+    GLenum Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        Log("ERROR: LineStrip - Unexpected error %s while creating points "
+                                       "buffer.\n", GetGLErrorName(Error);
+        delete L;
+        return NULL;
+    }
+
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
+    glGenBuffers(1, &L->IndicesBuffer);
+
+#ifdef _DEBUG
+    GLenum Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        Log("ERROR: LineStrip - Unexpected error %s while creating indices "
+                                       "buffer.\n", GetGLErrorName(Error);
+        delete L;
+        return NULL;
+    }
+#endif // _DEBUG
+
+    //! TODO: GL error checking between data store allocations/fills
+    glBindBuffer(GL_ARRAY_BUFFER, L->PointsBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * NumPoints,
+                               (GLvoid*)Points, GL_DYNAMIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * NumPoints, NULL,
+                                                   GL_DYNAMIC_DRAW);
+
+    // Map the indices store instead of making a temp buffer
+    GLuint* IndicesMap = (GLuint*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+    if(IndicesMap == NULL) {
+        Log("ERROR: LineStrip - Error mapping indices data store.\n");
+        delete L;
+        return NULL;
+    }
+
+    // Fill indices data store
+    for(int i=0;i<NumPoints;++i)
+        IndicesMap[i] = i;
+
+    if(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE) {
+        Log("ERROR: LineStrip - Error unmapping indices data store.\n");
+        delete L;
+        return NULL;
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return L;
 }
 
 } /* bakge */
