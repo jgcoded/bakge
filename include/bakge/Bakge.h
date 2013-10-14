@@ -220,6 +220,7 @@ namespace bakge
 #include <bakge/graphics/shapes/Cube.h>
 #include <bakge/graphics/shapes/Rectangle.h>
 #include <bakge/graphics/geometries/BezierCurve.h>
+#include <bakge/graphics/geometries/Line.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Font.h>
 #include <bakge/graphics/Camera2D.h>
