@@ -30,6 +30,7 @@ set(MODULES
   graphics/Texture
   graphics/geometries/BezierCurve
   graphics/geometries/Line
+  graphics/geometries/LineStrip
   graphics/shapes/Cube
   graphics/shapes/Rectangle
   input/GamePad
