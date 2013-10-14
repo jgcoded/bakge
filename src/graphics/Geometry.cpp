@@ -50,6 +50,8 @@ Geometry::~Geometry()
 
 Result Geometry::Draw() const
 {
+    glDrawElements(GL_LINE_STRIP, NumPoints, GL_UNSIGNED_INT, (void*)0);
+
     return BGE_FAILURE;
 }
 
