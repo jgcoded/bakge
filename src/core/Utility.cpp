@@ -65,6 +65,10 @@ Result Init(int argc, char* argv[])
         return Deinit();
     }
 
+    /* Run platform-specific initialization protocol */
+    if(PlatformInit(argc, argv) != BGE_SUCCESS)
+        return Deinit();
+
     if(!glfwInit()) {
         Log("GLFW initialization failed\n");
         return Deinit();
@@ -100,10 +104,6 @@ Result Init(int argc, char* argv[])
     if(!CheckRequiredExtensions()) {
         return Deinit();
     }
-
-    /* Run platform-specific initialization protocol */
-    if(PlatformInit(argc, argv) != BGE_SUCCESS)
-        return Deinit();
 
     /* Initialize our Bakge shader library */
     if(Shader::InitShaderLibrary() != BGE_SUCCESS) {
