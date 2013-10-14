@@ -62,6 +62,16 @@ public:
      */
     virtual ~Geometry();
 
+    /*! @brief Render the Geometry.
+     *
+     * Render the Geometry. Geometries are typically rendered using lines
+     * or line segments.
+     *
+     * @return BGE_SUCCESS if the Geometry was successfully drawn; BGE_FAILURE
+     * otherwise.
+     */
+    virtual Result Draw() const;
+
 }; // Geometry
 
 } // bakge

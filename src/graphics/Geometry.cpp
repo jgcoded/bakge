@@ -39,4 +39,10 @@ Geometry::~Geometry()
 {
 }
 
+
+Result Geometry::Draw() const
+{
+    return BGE_FAILURE;
+}
+
 } // bakge
