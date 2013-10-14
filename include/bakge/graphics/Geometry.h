@@ -47,6 +47,9 @@ class BGE_API Geometry : public Drawable
 
 protected:
 
+    GLuint PointsBuffer;
+    GLuint IndicesBuffer;
+
     /*! @brief Default constructor.
      *
      * Default constructor.

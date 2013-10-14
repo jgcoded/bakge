@@ -32,11 +32,18 @@ namespace bakge
 
 Geometry::Geometry()
 {
+    PointsBuffer = 0;
+    IndicesBuffer = 0;
 }
 
 
 Geometry::~Geometry()
 {
+    if(PointsBuffer != NULL)
+        glDeleteBuffers(1, &PointsBuffer);
+
+    if(IndicesBuffer != NULL)
+        glDeleteBuffers(1, &IndicesBuffer);
 }
 
 
