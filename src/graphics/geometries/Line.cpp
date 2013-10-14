@@ -42,11 +42,64 @@ Line::~Line()
 
 Line* Line::Create(Vector3 A, Vector3 B)
 {
+    static const GLuint Indices[] = {
+        0, 1
+    };
+
     Line* L = new Line;
     if(L == NULL) {
         Log("ERROR: Line - Couldn't allocate memory.\n");
         return NULL;
     }
+
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
+    glGenBuffers(1, &L->PointsBuffer);
+
+#ifdef _DEBUG
+    GLenum Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        Log("ERROR: Line - Unexpected error %s while creating points "
+                                   "buffer.\n", GetGLErrorName(Error));
+        delete L;
+        return NULL;
+    }
+#endif // _DEBUG
+
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
+    glGenBuffers(1, &L->IndicesBuffer);
+
+#ifdef _DEBUG
+    Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        Log("ERROR: Line - Unexpected error %s while creating points "
+                                   "buffer.\n", GetGLErrorName(Error));
+        delete L;
+        return NULL;
+    }
+#endif // _DEBUG
+
+    // Create a temporary buffer 
+    Scalar Positions[6];
+    size_t CopySize = sizeof(Scalar) * 6;
+    memcpy((void*)Positions, (void*)&A[0], CopySize);
+    memcpy((void*)(Positions + sizeof(Scalar) * 3), (void*)&B[0], CopySize);
+
+    glBindBuffer(GL_ARRAY_BUFFER, L->PointsBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 6, (GLvoid*)Positions,
+                                                       GL_DYNAMIC_DRAW);
+
+    glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * 2, (GLvoid*)Indices,
+                                                       GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return L;
 }
