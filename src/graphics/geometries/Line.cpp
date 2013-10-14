@@ -42,7 +42,13 @@ Line::~Line()
 
 Line* Line::Create(Vector3 A, Vector3 B)
 {
-    return NULL;
+    Line* L = new Line;
+    if(L == NULL) {
+        Log("ERROR: Line - Couldn't allocate memory.\n");
+        return NULL;
+    }
+
+    return L;
 }
 
 } /* bakge */
