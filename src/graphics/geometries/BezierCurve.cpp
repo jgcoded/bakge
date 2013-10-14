@@ -32,18 +32,11 @@ namespace bakge
 
 BezierCurve::BezierCurve()
 {
-    ControlPoints = 0;
-    Indices = 0;
 }
 
 
 BezierCurve::~BezierCurve()
 {
-    if(ControlPoints != 0)
-        glDeleteBuffers(1, &ControlPoints);
-
-    if(Indices != 0)
-        glDeleteBuffers(1, &Indices);
 }
 
 
@@ -60,8 +53,8 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
         ;
 #endif // _DEBUG
 
-    glGenBuffers(1, &B->ControlPoints);
-    glGenBuffers(1, &B->Indices);
+    glGenBuffers(1, &B->PointsBuffer);
+    glGenBuffers(1, &B->IndicesBuffer);
 
 #ifdef _DEBUG
     if(glGetError() != GL_NO_ERROR) {
@@ -71,84 +64,25 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     }
 #endif // _DEBUG
 
-    B->NumControlPoints = NumPoints;
+    B->NumPoints = NumPoints;
 
-    glBindBuffer(GL_ARRAY_BUFFER, B->ControlPoints);
+    glBindBuffer(GL_ARRAY_BUFFER, B->PointsBuffer);
     glBufferData(GL_ARRAY_BUFFER, NumPoints * sizeof(Scalar) * 3, Points,
                                                         GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    int* IndicesBuffer = new int[NumPoints];
+    int* Indices = new int[NumPoints];
     for(int i=0;i<NumPoints;++i)
-        IndicesBuffer[i] = i;
+        Indices[i] = i;
 
-    glBindBuffer(GL_ARRAY_BUFFER, B->Indices);
-    glBufferData(GL_ARRAY_BUFFER, NumPoints * sizeof(int), IndicesBuffer,
+    glBindBuffer(GL_ARRAY_BUFFER, B->IndicesBuffer);
+    glBufferData(GL_ARRAY_BUFFER, NumPoints * sizeof(int), Indices,
                                                         GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    delete IndicesBuffer;
+    delete Indices;
 
     return B;
-}
-
-
-Result BezierCurve::Bind() const
-{
-    GLint Program;
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0) {
-        return BGE_FAILURE;
-    }
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, Indices);
-
-    /* Check each of our attributes' locations to ensure they exist */
-    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    if(Location >= 0) {
-        glBindBuffer(GL_ARRAY_BUFFER, ControlPoints);
-        glEnableVertexAttribArray(Location);
-        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
-#ifdef _DEBUG
-    } else {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    return BGE_SUCCESS;
-}
-
-
-Result BezierCurve::Unbind() const
-{
-    GLint Program;
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0) {
-        return BGE_FAILURE;
-    }
-
-    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    if(Location >= 0) {
-        glDisableVertexAttribArray(Location);
-#ifdef _DEBUG
-    } else {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    return BGE_SUCCESS;
-}
-
-
-Result BezierCurve::Draw() const
-{
-    glDrawElements(GL_LINE_STRIP, NumControlPoints, GL_UNSIGNED_INT,
-                                                            (void*)0);
-
-    return BGE_SUCCESS;
 }
 
 } /* bakge */

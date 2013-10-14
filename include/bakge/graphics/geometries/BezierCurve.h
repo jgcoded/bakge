@@ -40,13 +40,8 @@ namespace bakge
  * Bezier curves use control points to influence where the curve goes. Each
  * segment follows an arbitrary parabola.
  */
-class BGE_API BezierCurve : public Drawable
+class BGE_API BezierCurve : public Geometry
 {
-    GLuint ControlPoints;
-    GLuint Indices;
-
-    int NumControlPoints;
-
     /*! @brief Default BezierCurve constructor.
      *
      * Default BezierCurve constructor.
@@ -63,12 +58,6 @@ public:
     ~BezierCurve();
 
     BGE_FACTORY BezierCurve* Create(int NumPoints, Scalar* Points);
-
-    virtual Result Bind() const;
-
-    virtual Result Unbind() const;
-
-    virtual Result Draw() const;
 
 }; /* BezierCurve */
 
