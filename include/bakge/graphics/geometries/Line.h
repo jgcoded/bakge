@@ -35,10 +35,10 @@
 namespace bakge
 {
 
-/*! @brief A Bezier curve is rendered using control points.
+/*! @brief A single line segment connecting two points in 3D Cartesian space.
  *
- * Bezier curves use control points to influence where the curve goes. Each
- * segment follows an arbitrary parabola.
+ * A single line segment connecting two points in 3D Cartesian space. Line
+ * width can be modified using glLineWidth.
  */
 class BGE_API Line : public Geometry
 {
