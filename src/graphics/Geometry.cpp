@@ -58,13 +58,52 @@ Result Geometry::Draw() const
 
 Result Geometry::Bind() const
 {
-    return BGE_FAILURE;
+    GLint Program;
+
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndicesBuffer);
+
+    // Set vertex attribute properties
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, PointsBuffer);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
+    } else {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    return BGE_SUCCESS;
 }
 
 
 Result Geometry::Unbind() const
 {
-    return BGE_FAILURE;
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    GLint Program;
+
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0)
+        return BGE_FAILURE;
+
+    // Disable the bge_Vertex pointer
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location >= 0) {
+        glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    return BGE_SUCCESS;
 }
 
 } // bakge
