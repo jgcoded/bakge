@@ -72,6 +72,27 @@ public:
      */
     virtual Result Draw() const;
 
+    /*! @brief Bind the Geometry for rendering.
+     *
+     * Bind the Geometry for rendering. Geometries have specific OpenGL state
+     * that must be set before Draw calls successfully render into the active
+     * framebuffer.
+     *
+     * @return BGE_SUCCESS if the Geometry was successfully bound; BGE_FAILURE
+     * if any errors occurred.
+     */
+    virtual Result Bind() const;
+
+    /*! @brief Unbind the Geometry, setting default OpenGL state.
+     *
+     * Unbind the Geometry, setting default OpenGL state. This protects the
+     * data from unwanted modification.
+     *
+     * @return BGE_SUCCESS if the Geometry was successfully unbound;
+     * BGE_FAILURE otherwise.
+     */
+    virtual Result Unbind() const;
+
 }; // Geometry
 
 } // bakge

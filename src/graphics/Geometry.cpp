@@ -45,4 +45,16 @@ Result Geometry::Draw() const
     return BGE_FAILURE;
 }
 
+
+Result Geometry::Bind() const
+{
+    return BGE_FAILURE;
+}
+
+
+Result Geometry::Unbind() const
+{
+    return BGE_FAILURE;
+}
+
 } // bakge
