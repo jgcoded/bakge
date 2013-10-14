@@ -1,0 +1,6 @@
+#!/bin/sh
+# git-changelog
+# Runs git log with options specifically for outputting oneline
+# log information about a single branch (single parent, no merges)
+
+git log --oneline --reverse --first-parent --no-merges $1
