@@ -81,9 +81,17 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
                                                         GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    // Allocate points cache
+    B->AllPoints = new Vector3[NumPoints];
+    // Indices buffer, for setting GL data store
     int* Indices = new int[NumPoints];
-    for(int i=0;i<NumPoints;++i)
+
+    for(int i=0;i<NumPoints;++i) {
         Indices[i] = i;
+        B->AllPoints[i][0] = Points[i * 3 + 0];
+        B->AllPoints[i][1] = Points[i * 3 + 1];
+        B->AllPoints[i][2] = Points[i * 3 + 2];
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, B->IndicesBuffer);
     glBufferData(GL_ARRAY_BUFFER, NumPoints * sizeof(int), Indices,
@@ -130,9 +138,21 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     Log("\n");
 #endif // defined(_DEBUG)
 
-    // TODO: Fill the array with points
+    Vector3* CurvePoints = new Vector3[NumPoints];
+    CurvePoints[0] = AllPoints[0];
+    CurvePoints[NumPoints-1] = AllPoints[NumPoints-1];
 
-    return NULL;
+    Scalar Advance = 1.0f / (NumSubdivisions + 1);
+
+    for(int i=0;i<=NumSubdivisions;++i) {
+        GetPointAt(2, &AllPoints[0], &CurvePoints[i+1], Advance * (i+1));
+    }
+
+    LineStrip* L = LineStrip::Create(NumPoints, &CurvePoints[0][0]);
+
+    delete[] CurvePoints;
+
+    return L;
 }
 
 
