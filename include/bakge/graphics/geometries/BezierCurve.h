@@ -38,7 +38,23 @@ namespace bakge
 /*! @brief A Bezier curve is rendered using control points.
  *
  * Bezier curves use control points to influence where the curve goes. Each
- * segment follows an arbitrary parabola.
+ * segment has an order equal to the number of control points it has. First
+ * order segments follow parabolic curves while higher order segments can
+ * be much more intricate. The BezierCurve starts out as one large curve
+ * segment. Both endpoints are anchors and cannot be converted to control
+ * points unless an extra point is appended or prepended as appropriate to
+ * take its place. An endpoint can never be a control point, and as such
+ * inserting a single point at either end of the line is always an
+ * anchor, and the old endpoint becomes a new control point for the segment
+ * it was previously anchoring.
+ *
+ * Bezier curves currently will be used to build LineStrips from with
+ * varying levels of accuracy. The more subdivisions used to generate
+ * points along the curve, the more smooth and accurate the curve will
+ * appear when rendered. This also requires more time to process and
+ * create the array, which can take a noticeable length of time when dealing
+ * with long curves with any of A) many segments, B) high-order segments,
+ * C) high subdivision counts.
  */
 class BGE_API BezierCurve : public Geometry
 {
