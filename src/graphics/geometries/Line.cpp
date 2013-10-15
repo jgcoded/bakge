@@ -86,11 +86,20 @@ Line* Line::Create(Vector3 A, Vector3 B)
     }
 #endif // _DEBUG
 
-    // Create a temporary buffer 
-    Scalar Positions[6];
-    size_t CopySize = sizeof(Scalar) * 6;
-    memcpy((void*)Positions, (void*)&A[0], CopySize);
-    memcpy((void*)(Positions + sizeof(Scalar) * 3), (void*)&B[0], CopySize);
+    // Create a temporary buffer
+    Scalar* Positions = new Scalar[6];
+    if(Positions == NULL) {
+        Log("ERROR: Line - Unable to allocate temporary buffer.\n");
+        delete L;
+        return NULL;
+	}
+
+    Positions[0] = A[0];
+    Positions[1] = A[1];
+    Positions[2] = A[2];
+    Positions[3] = B[0];
+    Positions[4] = B[1];
+    Positions[5] = B[2];
 
     glBindBuffer(GL_ARRAY_BUFFER, L->PointsBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 6, (GLvoid*)Positions,
@@ -100,6 +109,10 @@ Line* Line::Create(Vector3 A, Vector3 B)
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * 2, (GLvoid*)Indices,
                                                        GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    L->NumPoints = 2;
+
+    delete[] Positions;
 
     return L;
 }
