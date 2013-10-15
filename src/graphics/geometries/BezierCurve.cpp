@@ -87,6 +87,10 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 #endif // _DEBUG
 
     B->NumPoints = NumPoints;
+    // All BezierCurve objects start out amalgamated
+    B->NumSegments = 1;
+    // Amalgamated curves have 2 anchors; the rest are control points
+    B->HighOrder = NumPoints - 2;
 
     glBindBuffer(GL_ARRAY_BUFFER, B->PointsBuffer);
     glBufferData(GL_ARRAY_BUFFER, NumPoints * sizeof(Scalar) * 3, Points,
