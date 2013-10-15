@@ -138,6 +138,35 @@ public:
      */
     int Separate(int MinOrder);
 
+    /*! @brief Check if a point at a given index is an anchor point.
+     *
+     * Check if a point at a given index is an anchor point. Anchors split
+     * the entire curve into segments. Every segment is of order 1 or
+     * greater. The order is equal to the number of control points in that
+     * segment.
+     *
+     * @param[in] Index Index of the point along the curve.
+     *
+     * @return true if the point at the given index is an anchor point; false
+     * if it is a control point.
+     */
+    bool IsAnchor(int Index) const;
+
+    /*! @brief Check if a point at a given index is a control point.
+     *
+     * Check if a point at a given index is a control point. Control points
+     * influence the behavior of the curve along each of its segments. All
+     * curves have at least 1 segment, with each segment having 2 anchor
+     * points denoting its boundaries, and at least 1 control point directing
+     * the curve.
+     *
+     * @param[in] Index Index of the point along the curve.
+     *
+     * @return true if the point at the given index is a control point; false
+     * if it is an anchor point.
+     */
+    bool IsControl(int Index) const;
+
 }; /* BezierCurve */
 
 } /* bakge */

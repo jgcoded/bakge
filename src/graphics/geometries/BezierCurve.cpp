@@ -226,4 +226,16 @@ void BezierCurve::GetPointAt(int NumControlPoints,
 #endif // defined(_DEBUG)
 }
 
+
+bool BezierCurve::IsAnchor(int Index) const
+{
+    return false;
+}
+
+
+bool BezierCurve::IsControl(int Index) const
+{
+    return !IsAnchor(Index);
+}
+
 } /* bakge */
