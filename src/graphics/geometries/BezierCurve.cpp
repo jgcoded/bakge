@@ -111,7 +111,7 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 
     glBindBuffer(GL_ARRAY_BUFFER, B->IndicesBuffer);
     glBufferData(GL_ARRAY_BUFFER, NumPoints * sizeof(int), Indices,
-                                                        GL_DYNAMIC_DRAW);
+                                                   GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     delete Indices;
@@ -182,7 +182,6 @@ int BezierCurve::Separate(int MinOrder)
 {
     return -1;
 }
-
 
 
 void BezierCurve::GetPointAt(int NumControlPoints,
