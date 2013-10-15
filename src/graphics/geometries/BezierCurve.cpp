@@ -200,10 +200,12 @@ void BezierCurve::GetPointAt(int NumControlPoints,
         return;
 #endif // _DEBUG
 
+    // Temporaries to store control points (we offset them)
     Vector3 L = SegmentPoints[0];
     Vector3 R = SegmentPoints[1];
     *PointsBuffer = L;
 
+    // Travel T of the way between control points to get the point P(T)
     for(int i=0;i<NumControlPoints;++i) {
         (*PointsBuffer) += (R - L) * T;
         L = (*PointsBuffer);
