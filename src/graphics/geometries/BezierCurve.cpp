@@ -135,4 +135,16 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     return NULL;
 }
 
+
+Result BezierCurve::Amalgamate()
+{
+    return BGE_FAILURE;
+}
+
+
+int BezierCurve::Separate(int MinOrder)
+{
+    return -1;
+}
+
 } /* bakge */

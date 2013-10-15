@@ -102,6 +102,35 @@ public:
      */
     BGE_WUNUSED LineStrip* Build(int NumSubdivisions);
 
+    /*! @brief Combine all segments into one segment spanning the entire
+     * curve.
+     *
+     * Combine all segments into one segment spanning the entire curve. All
+     * points between the endpoints of the curve are converted into control
+     * points. Calling Build on an amalgamated BezierCurve is unwise, as
+     * this can lead to extremely long processing times, particularly when
+     * called on curves with a high number of points and with a high number
+     * of subdivisions. The suggested use of this is to "reset" the curve
+     * and subsequently set certain points to anchors.
+     *
+     * @return BGE_SUCCESS if the curve was successfully amalgamated;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result Amalgamate();
+
+    /*! @brief Split up the curve into segments with a given minimum order.
+     *
+     * Split up the curve into segments with a given minimum order. After
+     * separation, all of the curve's segments will be guaranteed to have
+     * at minimum number of control points equal to a given value.
+     *
+     * @return -1 if there are not enough points to create any segments with
+     * a minimum order of MinOrder; Otherwise returns the segment index which
+     * contains the remaining points which could not made into their own
+     * segment and thus were added on to the last created one.
+     */
+    int Separate(int MinOrder);
+
 }; /* BezierCurve */
 
 } /* bakge */
