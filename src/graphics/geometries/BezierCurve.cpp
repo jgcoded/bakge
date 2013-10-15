@@ -138,9 +138,6 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
         return NULL;
     }
 
-    // TEMPORARY: For now we'll assume it's one segment.
-    int NumSegments = 1;
-
     // Anchor points = NumSegments + 1
     int NumPoints = NumSegments + 1 + NumSubdivisions;
 
