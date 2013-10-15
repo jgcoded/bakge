@@ -78,7 +78,6 @@ class BGE_API BezierCurve : public Geometry
 
     // Get P(t) in an n-order curve segment.
     // SegmentPoints[0] and SegmentPoints[NumControlPoints+1] are anchors
-    // TODO: Public API?
     void GetPointAt(int NumControlPoints, const Vector3* SegmentPoints,
                                                 Vector3* PointsBuffer,
                                                             Scalar T);
