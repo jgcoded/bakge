@@ -58,6 +58,18 @@ namespace bakge
  */
 class BGE_API BezierCurve : public Geometry
 {
+    // Highest order segment in the curve, also order of the whole
+    int HighOrder;
+
+    // Number of curve segments (section between two anchors)
+    int NumSegments;
+
+    // Dynamic array of all points (anchors and control points)
+    Vector3* AllPoints;
+
+    // Dynamic array of which points in array are anchors
+    int* AnchorIndices;
+
     /*! @brief Default BezierCurve constructor.
      *
      * Default BezierCurve constructor.

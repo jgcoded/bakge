@@ -35,11 +35,18 @@ namespace bakge
 
 BezierCurve::BezierCurve()
 {
+    AllPoints = NULL;
+    AnchorIndices = NULL;
 }
 
 
 BezierCurve::~BezierCurve()
 {
+    if(AllPoints != NULL)
+        delete[] AllPoints;
+
+    if(AnchorIndices != NULL)
+        delete[] AnchorIndices;
 }
 
 
