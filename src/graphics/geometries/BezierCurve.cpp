@@ -147,4 +147,45 @@ int BezierCurve::Separate(int MinOrder)
     return -1;
 }
 
+
+
+void BezierCurve::GetPointAt(int NumControlPoints,
+                        const Vector3* SegmentPoints,
+                        Vector3* PointsBuffer, Scalar T)
+{
+#ifdef _DEBUG
+    // Courtesy error-checking
+    if(NumControlPoints < 1)
+        return;
+
+    if(SegmentPoints == NULL)
+        return;
+
+    if(PointsBuffer == NULL)
+        return;
+
+    if(T < 0 || T > 1.0f)
+        return;
+#endif // _DEBUG
+
+    Vector3 L = SegmentPoints[0];
+    Vector3 R = SegmentPoints[1];
+    *PointsBuffer = L;
+
+    for(int i=0;i<NumControlPoints;++i) {
+        (*PointsBuffer) += (R - L) * T;
+        L = (*PointsBuffer);
+        R += (SegmentPoints[i+2] - R) * T;
+        (*PointsBuffer) += (R - L) * T;
+        L = (*PointsBuffer);
+    }
+
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+    Log("BezierCurve: Built point P(%2.2f) = (%2.3f, %2.3f, %2.3f)\n", T,
+                                                        (*PointsBuffer)[0],
+                                                        (*PointsBuffer)[1],
+                                                        (*PointsBuffer)[2]);
+#endif // defined(_DEBUG)
+}
+
 } /* bakge */
