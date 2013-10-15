@@ -191,17 +191,29 @@ void BezierCurve::GetPointAt(int NumControlPoints,
 {
 #ifdef _DEBUG
     // Courtesy error-checking
-    if(NumControlPoints < 1)
+    if(NumControlPoints < 1) {
+        Log("ERROR: BezierCurve - Cannot generate P(T) with < 1 control "
+                                                           "points.\n");
         return;
+    }
 
-    if(SegmentPoints == NULL)
+    if(SegmentPoints == NULL) {
+        Log("ERROR: BezierCurve - GetPointAt requires SegmentPoints "
+                                                       "!= NULL.\n");
         return;
+    }
 
-    if(PointsBuffer == NULL)
+    if(PointsBuffer == NULL) {
+        Log("ERROR: BezierCurve - GetPointAt requires PointsBuffer "
+                                                       "!= NULL.\n");
         return;
+    }
 
-    if(T < 0 || T > 1.0f)
+    if(T < 0 || T > 1.0f) {
+        Log("ERROR: BezierCurve - Cannot get point P(t) where t is < 0 "
+                                                           "or > 1.\n");
         return;
+    }
 #endif // _DEBUG
 
     // Temporaries to store control points (we offset them)
