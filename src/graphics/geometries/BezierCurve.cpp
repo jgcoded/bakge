@@ -27,6 +27,9 @@
 #include <bakge/internal/Debug.h>
 #endif // _DEBUG
 
+// Log point/subdivision information when building LineStrip from BezierCurve
+#define BGE_BEZIER_VERBOSE_BUILD 1
+
 namespace bakge
 {
 
@@ -83,6 +86,46 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     delete Indices;
 
     return B;
+}
+
+
+LineStrip* BezierCurve::Build(int NumSubdivisions)
+{
+    /* *
+     * Each segment has 2 endpoints, but most segments share both points
+     * with a neighboring segment. The number of segment "anchor" points
+     * is NumSegments + 1.
+     *
+     * Each segment has one or more control points. NumSubdivisions is
+     * equal to the number of points between each segment's anchor points.
+     * */
+
+    // So we need NumSubdivisions to be at least 1.
+    if(NumSubdivisions < 1) {
+        Log("ERROR: BezierCurve - Creating a LineStrip requires > 0 "
+                                                    "subdivisions.\n");
+        return NULL;
+    }
+
+    // TEMPORARY: For now we'll assume it's one segment.
+    int NumSegments = 1;
+
+    // Anchor points = NumSegments + 1
+    int NumPoints = NumSegments + 1 + NumSubdivisions;
+
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+    Log("\n");
+    Log("BezierCurve: Building LineStrip\n");
+    Log("===============================\n");
+    Log("%d Subdivisions (Also points per segment).\n", NumSubdivisions);
+    Log("%d Segments.\n", NumSegments);
+    Log("%d Total points.\n", NumPoints);
+    Log("\n");
+#endif // defined(_DEBUG)
+
+    // TODO: Fill the array with points
+
+    return NULL;
 }
 
 } /* bakge */

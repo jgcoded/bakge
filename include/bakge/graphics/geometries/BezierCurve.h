@@ -59,6 +59,21 @@ public:
 
     BGE_FACTORY BezierCurve* Create(int NumPoints, Scalar* Points);
 
+    /*! @brief Create a LineStrip by subdividing along control points,
+     * creating a smooth curve.
+     *
+     * Creates a LineStrip of the BezierCurve with a given number of
+     * subdivisions per curve section. The more subdivisions are
+     * performed, the smoother the curve and the higher number of
+     * points.
+     *
+     * @param[in] NumSubdivisions Number of subdivisions between control
+     *            points.
+     *
+     * @return Pointer to created LineStrip; NULL if any errors occurred.
+     */
+    BGE_WUNUSED LineStrip* Build(int NumSubdivisions);
+
 }; /* BezierCurve */
 
 } /* bakge */
