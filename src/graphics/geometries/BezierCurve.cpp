@@ -64,11 +64,23 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 #endif // _DEBUG
 
     glGenBuffers(1, &B->PointsBuffer);
-    glGenBuffers(1, &B->IndicesBuffer);
 
 #ifdef _DEBUG
     if(glGetError() != GL_NO_ERROR) {
         Log("ERROR: BezierCurve - Error allocating control point buffer.\n");
+        delete B;
+        return NULL;
+    }
+
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
+    glGenBuffers(1, &B->IndicesBuffer);
+
+#ifdef _DEBUG
+    if(glGetError() != GL_NO_ERROR) {
+        Log("ERROR: BezierCurve - Error allocating indices buffer.\n");
         delete B;
         return NULL;
     }
