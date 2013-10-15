@@ -109,6 +109,8 @@ LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    L->NumPoints = NumPoints;
+
     return L;
 }
 
