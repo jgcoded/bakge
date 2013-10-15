@@ -34,6 +34,7 @@ GLint ShaderProgram;
 bakge::Camera2D* UICam;
 GLubyte* Bitmap;
 bakge::BezierCurve* Bez;
+bakge::LineStrip* Lined;
 bakge::Shader* BezShader;
 
 float Rot;
@@ -92,11 +93,12 @@ bakge::Result InitTest()
 
     bakge::Scalar BezPoints[] = {
         100, 100, 0,
-        200, 200, 0,
+        120, 250, 0,
+        180, 110, 0,
         300, 100, 0
     };
 
-    Bez = bakge::BezierCurve::Create(3, BezPoints);
+    Bez = bakge::BezierCurve::Create(4, BezPoints);
     if(Bez == NULL)
         return BGE_FAILURE;
 
@@ -106,6 +108,8 @@ bakge::Result InitTest()
 
     BezShader->Bind();
 
+    Lined = Bez->Build(20);
+
     return BGE_SUCCESS;
 }
 
@@ -113,7 +117,6 @@ bakge::Result InitTest()
 bakge::Result PreRenderTest()
 {
     UICam->Bind();
-    Bez->Bind();
 
     return BGE_SUCCESS;
 }
@@ -121,7 +124,13 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
+    Bez->Bind();
     Bez->Draw();
+    Bez->Unbind();
+
+    Lined->Bind();
+    Lined->Draw();
+    Lined->Unbind();
 
     return BGE_SUCCESS;
 }
@@ -129,7 +138,6 @@ bakge::Result RenderTest()
 
 bakge::Result PostRenderTest()
 {
-    Bez->Unbind();
     UICam->Unbind();
 
     return BGE_SUCCESS;
@@ -152,6 +160,7 @@ bakge::Result ShutDownTest()
 
     delete Bez;
     delete BezShader;
+    delete Lined;
 
     delete[] Bitmap;
 
