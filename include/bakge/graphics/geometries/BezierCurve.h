@@ -167,6 +167,17 @@ public:
      */
     bool IsControl(int Index) const;
 
+    /*! @brief Get point P(T) along the entire length of the curve.
+     *
+     * Get point P(T) along the entire length of the curve. This is useful
+     * for making objects follow a bezier path, like particles or dynamic
+     * GUI elements.
+     *
+     * @param[in] T Value along the curve. Must be 0 <= T <= 1.
+     * @param[out] V Where position in 3D space is stored.
+     */
+    void GetPointAt(Scalar T, Vector3* V);
+
 }; /* BezierCurve */
 
 } /* bakge */

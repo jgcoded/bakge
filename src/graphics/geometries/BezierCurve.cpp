@@ -246,4 +246,9 @@ bool BezierCurve::IsControl(int Index) const
     return !IsAnchor(Index);
 }
 
+
+void BezierCurve::GetPointAt(Scalar T, Vector3* V)
+{
+}
+
 } /* bakge */
