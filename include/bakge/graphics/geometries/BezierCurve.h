@@ -96,8 +96,29 @@ public:
      */
     ~BezierCurve();
 
+    /*! @brief Create a Bezier curve from an array of points.
+     *
+     * Create a Bezier curve from an array of points. All curves start
+     * out as a single segment curve of order NumPoints - 2. To split
+     * the curve into smaller segments use Separate or MakeAnchor.
+     *
+     * @param[in] NumPoints Number of points the curve will initially have.
+     * @param[in] Points Array of structs (point X, Y, Z components).
+     *
+     * @return Pointer to allocated BezierCurve; NULL if any errors occurred.
+     */
     BGE_FACTORY BezierCurve* Create(int NumPoints, Scalar* Points);
 
+    /*! @brief Draw the Bezier curve as a line strip, accenting the control
+     * points.
+     *
+     * Draw the Bezier curve as a line strip, accenting the control points.
+     * The curve's control points are additionally drawn as GL_POINTS with
+     * a point size of 4, making them stand out against the anchor points.
+     *
+     * @return BGE_SUCCESS if the rendering was successful; BGE_FAILURE if
+     * any errors occurred.
+     */
     Result Draw() const;
 
     /*! @brief Create a LineStrip by subdividing along control points,
