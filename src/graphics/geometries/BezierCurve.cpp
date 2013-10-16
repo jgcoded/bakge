@@ -38,6 +38,8 @@ BezierCurve::BezierCurve()
     AllPoints = NULL;
     AnchorIndices = NULL;
     ControlIndices = NULL;
+    NumControlPoints = 0;
+    NumAnchors = 0;
 }
 
 

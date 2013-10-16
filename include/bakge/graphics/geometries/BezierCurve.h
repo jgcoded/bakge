@@ -62,6 +62,10 @@ class BGE_API BezierCurve : public Geometry
 
     // Number of curve segments (section between two anchors)
     int NumSegments;
+    // Number of control points in the curve
+    int NumControlPoints;
+    // Number of anchor points in the curve
+    int NumAnchors;
 
     // Dynamic array of all points (anchors and control points)
     Vector3* AllPoints;
