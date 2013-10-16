@@ -45,8 +45,7 @@ namespace bakge
  * points unless an extra point is appended or prepended as appropriate to
  * take its place. An endpoint can never be a control point, and as such
  * inserting a single point at either end of the line is always an
- * anchor, and the old endpoint becomes a new control point for the segment
- * it was previously anchoring.
+ * anchor
  *
  * Bezier curves currently will be used to build LineStrips from with
  * varying levels of accuracy. The more subdivisions used to generate
@@ -140,9 +139,7 @@ public:
     /*! @brief Check if a point at a given index is an anchor point.
      *
      * Check if a point at a given index is an anchor point. Anchors split
-     * the entire curve into segments. Every segment is of order 1 or
-     * greater. The order is equal to the number of control points in that
-     * segment.
+     * the entire curve into segments.
      *
      * @param[in] Index Index of the point along the curve.
      *
@@ -154,10 +151,7 @@ public:
     /*! @brief Check if a point at a given index is a control point.
      *
      * Check if a point at a given index is a control point. Control points
-     * influence the behavior of the curve along each of its segments. All
-     * curves have at least 1 segment, with each segment having 2 anchor
-     * points denoting its boundaries, and at least 1 control point directing
-     * the curve.
+     * influence the behavior of the curve along each of its segments.
      *
      * @param[in] Index Index of the point along the curve.
      *

@@ -126,12 +126,10 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
      * Each segment has 2 endpoints, but most segments share both points
      * with a neighboring segment. The number of segment "anchor" points
      * is NumSegments + 1.
-     *
-     * Each segment has one or more control points. NumSubdivisions is
-     * equal to the number of points between each segment's anchor points.
      * */
 
-    // So we need NumSubdivisions to be at least 1.
+    // 0 subdivisions is just a LineStrip of the control points.
+    // If you need to draw this, just use the BezierCurve directly
     if(NumSubdivisions < 1) {
         Log("ERROR: BezierCurve - Creating a LineStrip requires > 0 "
                                                     "subdivisions.\n");
@@ -185,14 +183,17 @@ void BezierCurve::GetPointAt(int NumControlPoints,
                         const Vector3* SegmentPoints,
                         Vector3* PointsBuffer, Scalar T)
 {
-#ifdef _DEBUG
-    // Courtesy error-checking
+    // If there no control points, segment is a line. Simple case
     if(NumControlPoints < 1) {
-        Log("ERROR: BezierCurve - Cannot generate P(T) with < 1 control "
-                                                           "points.\n");
+        // Start at first anchor
+        (*PointsBuffer) = SegmentPoints[0];
+        // Translate T * (anchor2 - anchor1)
+        (*PointsBuffer) += (SegmentPoints[1] - SegmentPoints[0]) * T;
         return;
     }
 
+#ifdef _DEBUG
+    // Courtesy error-checking
     if(SegmentPoints == NULL) {
         Log("ERROR: BezierCurve - GetPointAt requires SegmentPoints "
                                                        "!= NULL.\n");
