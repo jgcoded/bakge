@@ -98,6 +98,8 @@ public:
 
     BGE_FACTORY BezierCurve* Create(int NumPoints, Scalar* Points);
 
+    Result Draw() const;
+
     /*! @brief Create a LineStrip by subdividing along control points,
      * creating a smooth curve.
      *

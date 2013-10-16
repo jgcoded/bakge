@@ -126,6 +126,15 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 }
 
 
+Result BezierCurve::Draw() const
+{
+    glDrawElements(GL_POINTS, NumControlPoints, GL_UNSIGNED_INT,
+                                       (GLvoid*)ControlIndices);
+
+    return Geometry::Draw();
+}
+
+
 LineStrip* BezierCurve::Build(int NumSubdivisions)
 {
     /* *
