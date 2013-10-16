@@ -37,6 +37,7 @@ BezierCurve::BezierCurve()
 {
     AllPoints = NULL;
     AnchorIndices = NULL;
+    ControlIndices = NULL;
 }
 
 
@@ -47,6 +48,9 @@ BezierCurve::~BezierCurve()
 
     if(AnchorIndices != NULL)
         delete[] AnchorIndices;
+
+    if(ControlIndices != NULL)
+        delete[] ControlIndices;
 }
 
 
