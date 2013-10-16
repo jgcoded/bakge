@@ -86,24 +86,35 @@ Line* Line::Create(Vector3 A, Vector3 B)
     }
 #endif // _DEBUG
 
-    // Create a temporary buffer
-    Scalar* Positions = new Scalar[6];
-    if(Positions == NULL) {
-        Log("ERROR: Line - Unable to allocate temporary buffer.\n");
+    glBindBuffer(GL_ARRAY_BUFFER, L->PointsBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 6, NULL, GL_DYNAMIC_DRAW);
+
+    Scalar* BufferMap = (Scalar*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+
+#ifdef _DEBUG
+    if(BufferMap == NULL) {
+        Log("ERROR: Line - Unable to map positions data store.\n");
         delete L;
         return NULL;
-	}
+    }
+#endif // _DEBUG
 
-    Positions[0] = A[0];
-    Positions[1] = A[1];
-    Positions[2] = A[2];
-    Positions[3] = B[0];
-    Positions[4] = B[1];
-    Positions[5] = B[2];
+    BufferMap[0] = A[0];
+    BufferMap[1] = A[1];
+    BufferMap[2] = A[2];
+    BufferMap[3] = B[0];
+    BufferMap[4] = B[1];
+    BufferMap[5] = B[2];
 
-    glBindBuffer(GL_ARRAY_BUFFER, L->PointsBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 6, (GLvoid*)Positions,
-                                                       GL_DYNAMIC_DRAW);
+#ifdef _DEBUG
+    if(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE) {
+        Log("ERROR: Line - Error while unmapping positions data store.\n");
+        delete L;
+        return NULL;
+    }
+#else
+    glUnmapBuffer(GL_ARRAY_BUFFER);
+#endif // _DEBUG
 
     glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * 2, (GLvoid*)Indices,
@@ -111,8 +122,6 @@ Line* Line::Create(Vector3 A, Vector3 B)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     L->NumPoints = 2;
-
-    delete[] Positions;
 
     return L;
 }
