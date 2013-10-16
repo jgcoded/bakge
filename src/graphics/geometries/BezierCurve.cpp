@@ -213,18 +213,20 @@ void BezierCurve::GetPointAt(int NumControlPoints,
 #endif // _DEBUG
 
     // Temporaries to store control points (we offset them)
-    Vector3 L = SegmentPoints[0];
-    Vector3 R = SegmentPoints[1];
-    *PointsBuffer = L;
+    Vector3* Temp = new Vector3[NumControlPoints+2];
 
-    // Travel T of the way between control points to get the point P(T)
-    for(int i=0;i<NumControlPoints;++i) {
-        (*PointsBuffer) += (R - L) * T;
-        L = (*PointsBuffer);
-        R += (SegmentPoints[i+2] - R) * T;
-        (*PointsBuffer) += (R - L) * T;
-        L = (*PointsBuffer);
+    // Intermediates start out at same position as anchors/control points
+    for(int i=0;i<NumControlPoints+2;++i)
+        Temp[i] = SegmentPoints[i];
+
+    int Shifts = NumControlPoints + 1;
+    while(Shifts > 0) {
+        for(int i=0;i<Shifts;++i)
+            Temp[i] += (Temp[i+1] - Temp[i]) * T;
+        --Shifts;
     }
+
+    (*PointsBuffer) = Temp[0];
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
     Log("BezierCurve: Built point P(%2.2f) = (%2.3f, %2.3f, %2.3f)\n", T,
