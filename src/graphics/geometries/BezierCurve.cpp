@@ -220,12 +220,15 @@ void BezierCurve::GetPointAt(int NumControlPoints,
         Temp[i] = SegmentPoints[i];
 
     int Shifts = NumControlPoints + 1;
+
+    // This loop shifts them to their intermediate positions.
     while(Shifts > 0) {
         for(int i=0;i<Shifts;++i)
             Temp[i] += (Temp[i+1] - Temp[i]) * T;
         --Shifts;
     }
 
+    // Temp[0] will end up in the position P(T) after the final shift.
     (*PointsBuffer) = Temp[0];
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
