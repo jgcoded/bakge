@@ -35,6 +35,13 @@
 namespace bakge
 {
 
+enum GEOMETRY_DRAW_STYLE
+{
+    GEOMETRY_DRAW_STYLE_LINES = 0,
+    GEOMETRY_DRAW_STYLE_POINTS,
+    NUM_GEOMETRY_DRAW_STYLES
+};
+
 /*! @brief Geometries are unenclosed objects that are drawn as a set of line
  * segments.
  *
