@@ -80,14 +80,40 @@ LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
     }
 #endif // _DEBUG
 
-    //! TODO: GL error checking between data store allocations/fills
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
     glBindBuffer(GL_ARRAY_BUFFER, L->PointsBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * NumPoints,
                                (GLvoid*)Points, GL_DYNAMIC_DRAW);
 
+#ifdef _DEBUG
+    Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        Log("ERROR: LineStrip - Unexpected error %s while setting postions "
+                                        "store.\n", GetGLErrorName(Error));
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        delete L;
+        return NULL;
+    }
+#endif // _DEBUG
+
     glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * NumPoints, NULL,
                                                    GL_DYNAMIC_DRAW);
+
+#ifdef _DEBUG
+    Error = glGetError();
+    if(Error != GL_NO_ERROR) {
+        Log("ERROR: LineStrip - Unexpected error %s while initializing "
+                                "indices store.\n", GetGLErrorName(Error));
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        delete L;
+        return NULL;
+    }
+#endif // _DEBUG
 
     // Map the indices store instead of making a temp buffer
     GLuint* IndicesMap = (GLuint*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
