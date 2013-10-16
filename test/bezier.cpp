@@ -36,6 +36,7 @@ GLubyte* Bitmap;
 bakge::BezierCurve* Bez;
 bakge::LineStrip* Lined;
 bakge::Shader* BezShader;
+bakge::Line* Lin;
 
 float Rot;
 bakge::Microseconds NowTime;
@@ -109,6 +110,13 @@ bakge::Result InitTest()
     BezShader->Bind();
 
     Lined = Bez->Build(20);
+    if(Lined == NULL)
+        return BGE_FAILURE;
+
+    Lin = bakge::Line::Create(bakge::Vector3(350, 200, 0),
+                            bakge::Vector3(450, 250, 0));
+    if(Lin == NULL)
+        return BGE_FAILURE;
 
     return BGE_SUCCESS;
 }
@@ -131,6 +139,10 @@ bakge::Result RenderTest()
     Lined->Bind();
     Lined->Draw();
     Lined->Unbind();
+
+    Lin->Bind();
+    Lin->Draw();
+    Lin->Unbind();
 
     return BGE_SUCCESS;
 }
@@ -161,6 +173,7 @@ bakge::Result ShutDownTest()
     delete Bez;
     delete BezShader;
     delete Lined;
+    delete Lin;
 
     delete[] Bitmap;
 
