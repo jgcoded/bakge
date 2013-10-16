@@ -32,6 +32,7 @@ namespace bakge
 
 Geometry::Geometry()
 {
+    DrawStyle = GL_LINE_STRIP;
     PointsBuffer = 0;
     IndicesBuffer = 0;
     NumPoints = 0;
@@ -50,7 +51,7 @@ Geometry::~Geometry()
 
 Result Geometry::Draw() const
 {
-    glDrawElements(GL_LINE_STRIP, NumPoints, GL_UNSIGNED_INT, (void*)0);
+    glDrawElements(DrawStyle, NumPoints, GL_UNSIGNED_INT, (void*)0);
 
     return BGE_FAILURE;
 }
@@ -101,6 +102,28 @@ Result Geometry::Unbind() const
     } else {
         WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
 #endif // _DEBUG
+    }
+
+    return BGE_SUCCESS;
+}
+
+
+
+Result Geometry::SetDrawStyle(GEOMETRY_DRAW_STYLE Style)
+{
+    switch(Style) {
+
+    case GEOMETRY_DRAW_STYLE_LINES:
+        DrawStyle = GL_LINE_STRIP;
+        break;
+
+    case GEOMETRY_DRAW_STYLE_POINTS:
+        DrawStyle = GL_POINTS;
+        break;
+
+    default:
+        Log("ERROR: Geometry - Invalid draw style enumeration.\n");
+        return BGE_FAILURE;
     }
 
     return BGE_SUCCESS;

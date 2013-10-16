@@ -54,6 +54,8 @@ class BGE_API Geometry : public Drawable
 
 protected:
 
+    GLenum DrawStyle;
+
     GLuint PointsBuffer;
     GLuint IndicesBuffer;
 
@@ -104,6 +106,16 @@ public:
      * BGE_FAILURE otherwise.
      */
     virtual Result Unbind() const;
+
+    /*! @brief Change the draw mode of the Geometry.
+     *
+     * Geometries may be drawn in one of two modes: as a series of line
+     * segments or points.
+     *
+     * @return BGE_SUCCESS if the draw style was successfully changed;
+     * BGE_FAILURE if any errors occurred.
+     */
+    Result SetDrawStyle(GEOMETRY_DRAW_STYLE Style);
 
 }; // Geometry
 
