@@ -258,4 +258,16 @@ void BezierCurve::GetPointAt(Scalar T, Vector3* V)
 {
 }
 
+
+int BezierCurve::MakeAnchor(int PointIndex)
+{
+    return -1;
+}
+
+
+int BezierCurve::MakeControl(int PointIndex)
+{
+    return -1;
+}
+
 } /* bakge */

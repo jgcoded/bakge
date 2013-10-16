@@ -177,6 +177,31 @@ public:
      */
     void GetPointAt(Scalar T, Vector3* V);
 
+    /*! @brief Make the point at a given index into an anchor.
+     *
+     * Make the point at a given index into an anchor. The given index must
+     * be within the current bounds of the curve's points array.
+     *
+     * @param[in] PointIndex Index in the array of points.
+     *
+     * @return -1 if failure (out of bounds or otherwise); 0 if point is
+     * already an anchor; 1 if point was successfully made into an anchor.
+     */
+    int MakeAnchor(int PointIndex);
+
+    /*! @brief Make the point at a given index into a control point.
+     *
+     * Make the point at a given index into a control point. The given index
+     * must be within the current bounds of the curve's points array.
+     *
+     * @param[in] PointIndex Index in the array of points.
+     *
+     * @return -1 if failure (out of bounds or otherwise); 0 if point is
+     * already a control point; 1 if point was successfully made into a
+     * control point.
+     */
+    int MakeControl(int PointIndex);
+
 }; /* BezierCurve */
 
 } /* bakge */
