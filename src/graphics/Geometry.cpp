@@ -51,7 +51,36 @@ Geometry::~Geometry()
 
 Result Geometry::Draw() const
 {
+#ifdef _DEBUG
+    while(glGetError() != GL_NO_ERROR)
+        ;
+#endif // _DEBUG
+
     glDrawElements(DrawStyle, NumPoints, GL_UNSIGNED_INT, (void*)0);
+
+#ifdef _DEBUG
+    GLenum Error;
+    while(1) {
+        Error = glGetError();
+
+        if(Error == GL_NO_ERROR)
+            break;
+
+        switch(Error) {
+
+        case GL_INVALID_OPERATION:
+            Log("ERROR: Geometry - Error while rendering (geometry shader "
+                                    "and draw mode incompatible OR a bound "
+                                            "buffer is currently mapped).\n");
+            break;
+
+        default:
+            Log("ERROR: Geometry - Unexpected error %s while rendering.\n",
+                                                    GetGLErrorName(Error));
+            return BGE_FAILURE;
+        }
+    }
+#endif // _DEBUG
 
     return BGE_FAILURE;
 }
