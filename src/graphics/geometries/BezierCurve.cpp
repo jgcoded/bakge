@@ -237,6 +237,8 @@ void BezierCurve::GetPointAt(int NumControlPoints,
                                                         (*PointsBuffer)[1],
                                                         (*PointsBuffer)[2]);
 #endif // defined(_DEBUG)
+
+    delete[] Temp;
 }
 
 
