@@ -57,6 +57,10 @@ File* File::Open(const char* Path)
     }
 
     File* F = new File;
+    if(F == NULL) {
+        Log("ERROR: File - Couldn't allocate memory.\n");
+        return NULL;
+    }
 
     int Len = strlen(Path);
     F->Path = (char*)malloc(Len + 1);
