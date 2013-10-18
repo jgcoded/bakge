@@ -83,6 +83,18 @@ File* File::Find(const char* Path)
 }
 
 
+File* File::Create(const char* Path)
+{
+    return NULL;
+}
+
+
+File* File::FindOrCreate(const char* Path)
+{
+    return NULL;
+}
+
+
 Result File::Close()
 {
     /* File isn't opened */

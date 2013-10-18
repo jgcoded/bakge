@@ -73,7 +73,44 @@ public:
      */
     ~File();
 
+    /*! @brief Find a file on disk with a given path.
+     *
+     * Find a file on disk with a given path. If the file does not exist,
+     * it is not created, and NULL is returned.
+     *
+     * @param[in] Path String path of the file.
+     *
+     * @return Pointer to wrapper for the file; NULL if the file does not
+     * exist or any errors occurred.
+     */
     BGE_FACTORY File* Find(const char* Path);
+
+    /*! @brief Create a file on disk with a given path.
+     *
+     * Create a file on disk with a given path. If the file already exists,
+     * NULL is returned.
+     *
+     * @param[in] Path String path of the file.
+     *
+     * @return Pointer to wrapper for the newly created file; NULL if the file
+     * already exists or any errors occurred.
+     */
+    BGE_FACTORY File* Create(const char* Path);
+
+    /*! @brief Create a file on disk with a given path if it doesn't exist,
+     * otherwise find it.
+     *
+     * Create a file on disk with a given path if it doesn't exist, otherwise
+     * find it. If the file already exists, a File instance is created for
+     * it. If it doesn't exist, a new file is created and a pointer to
+     * a File instance for it is returned.
+     *
+     * @param[in] Path String path of the file.
+     *
+     * @return Pointer to wrapper for the newly created file or the already
+     * existing one; NULL if any errors occurred.
+     */
+    BGE_FACTORY File* FindOrCreate(const char* Path);
 
     /*! @brief Write a string to file at the current offset.
      *
