@@ -64,7 +64,14 @@ File* File::Open(const char* Path)
     }
 
     int Len = strlen(Path);
+
     F->Path = (char*)malloc(Len + 1);
+    if(F->Path == NULL) {
+        Log("ERROR: File - Error allocating name string buffer.\n");
+        delete F;
+        return NULL;
+    }
+
     memcpy((void*)F->Path, (const void*)Path, Len);
     F->Path[Len] = '\0';
 
