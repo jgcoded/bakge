@@ -53,7 +53,8 @@ class BGE_API File
     PHYSFS_File* Handle;
     char* Path;
 
-    int Mode;
+    // Current file mode.
+    FILE_MODE Mode;
     // Current offset into the active file
     int Offset;
 
