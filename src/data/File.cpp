@@ -44,7 +44,7 @@ File::~File()
 }
 
 
-File* File::Open(const char* Path)
+File* File::Find(const char* Path)
 {
     // Check if the file exists within the search path.
     if(PHYSFS_exists(Path) == 0) {

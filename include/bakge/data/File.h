@@ -73,7 +73,7 @@ public:
      */
     ~File();
 
-    BGE_FACTORY File* Open(const char* Path);
+    BGE_FACTORY File* Find(const char* Path);
 
     /*! @brief Write a string to file at the current offset.
      *
