@@ -77,7 +77,7 @@ Result Mesh::Bind() const
         glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
 #ifdef _DEBUG
     } else {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
 #endif // _DEBUG
     }
 
@@ -88,7 +88,7 @@ Result Mesh::Bind() const
         glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
 #ifdef _DEBUG
     } else {
-        WarnMissingAttribute(BGE_NORMAL_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_NORMAL_ATTRIBUTE);
 #endif // _DEBUG
     }
 
@@ -99,7 +99,7 @@ Result Mesh::Bind() const
         glVertexAttribPointer(Location, 2, GL_FLOAT, GL_FALSE, 0, 0);
 #ifdef _DEBUG
     } else {
-        WarnMissingAttribute(BGE_TEXCOORD_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_TEXCOORD_ATTRIBUTE);
 #endif // _DEBUG
     }
 
@@ -122,7 +122,7 @@ Result Mesh::Unbind() const
         glDisableVertexAttribArray(Location);
 #ifdef _DEBUG
     } else {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
 #endif // _DEBUG
     }
 
@@ -131,7 +131,7 @@ Result Mesh::Unbind() const
         glDisableVertexAttribArray(Location);
 #ifdef _DEBUG
     } else {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
 #endif // _DEBUG
     }
 
@@ -140,7 +140,7 @@ Result Mesh::Unbind() const
         glDisableVertexAttribArray(Location);
 #ifdef _DEBUG
     } else {
-        WarnMissingAttribute(BGE_VERTEX_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
 #endif // _DEBUG
     }
 
