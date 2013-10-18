@@ -64,6 +64,11 @@ File* File::Open(const char* Path)
     }
 
     int Len = strlen(Path);
+    if(Len < 1) {
+        Log("ERROR: File - Invalid path string.\n");
+        delete F;
+        return NULL;
+    }
 
     F->Path = (char*)malloc(Len + 1);
     if(F->Path == NULL) {
