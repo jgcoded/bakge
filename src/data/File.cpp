@@ -57,16 +57,15 @@ File* File::Open(const char* Path)
         return NULL;
     }
 
-    File* F = new File;
-    if(F == NULL) {
-        Log("ERROR: File - Couldn't allocate memory.\n");
-        return NULL;
-    }
-
     int Len = strlen(Path);
     if(Len < 1) {
         Log("ERROR: File - Invalid path string.\n");
-        delete F;
+        return NULL;
+    }
+
+    File* F = new File;
+    if(F == NULL) {
+        Log("ERROR: File - Couldn't allocate memory.\n");
         return NULL;
     }
 
