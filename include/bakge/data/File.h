@@ -72,6 +72,32 @@ public:
 
     BGE_FACTORY File* Open(const char* Path);
 
+    /*! @brief Write a string to file at the current offset.
+     *
+     * Write a string to file at the current offset. The number of bytes
+     * is added to the current file offset.
+     *
+     * @param[in] Str Pointer to string to write.
+     *
+     * @return Number of bytes written; -1 if any errors occurred.
+     */
+    int Write(const char* Str);
+
+    /*! @brief Read a given number of bytes from the file at the current
+     * offset.
+     *
+     * Read a given number of bytes from the file at the current offset. The
+     * current offset is incremented by the number of bytes read. If any error
+     * occurs, the provided buffer is not modified.
+     *
+     * @param[in] NumBytes Number of bytes to read.
+     * @param[in] Buffer Pointer to buffer to write to. Must be sufficiently
+     *            large to write the given number of bytes.
+     *
+     * @return Number of bytes read; -1 if any errors occurred.
+     */
+    int Read(int NumBytes, char* Buffer);
+
     Result Close();
 
 }; /* File */

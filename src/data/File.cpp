@@ -88,4 +88,16 @@ Result File::Close()
     return BGE_SUCCESS;
 }
 
+
+int File::Write(const char* Str)
+{
+    return -1;
+}
+
+
+int File::Read(int NumBytes, char* Buffer)
+{
+    return -1;
+}
+
 } /* bakge */
