@@ -62,7 +62,7 @@ const char* GetGLErrorName(GLenum Error);
  *
  * @param[in] Name Name of the missing variable.
  */
-#define WarnMissingAttribute(Name) \
+#define BGE_WARN_MISSING_ATTRIBUTE(Name) \
     Log("WARNING: Unable to find attribute '%s' in current shader\n", Name);
 
 /*! @brief Log a warning that a uniform variable is missing.
@@ -75,7 +75,7 @@ const char* GetGLErrorName(GLenum Error);
  *
  * @param[in] Name Name of the missing variable.
  */
-#define WarnMissingUniform(Name) \
+#define BGE_WARN_MISSING_UNIFORM(Name) \
     Log("WARNING: Unable to find uniform '%s' in current shader\n", Name);
 
 } // bakge

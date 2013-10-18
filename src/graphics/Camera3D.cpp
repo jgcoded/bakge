@@ -79,7 +79,7 @@ Result Camera3D::Bind() const
     if(Location < 0) {
         Res = BGE_FAILURE;
 #ifdef _DEBUG
-        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+        BGE_WARN_MISSING_UNIFORM(BGE_PROJECTION_UNIFORM);
 #endif // _DEBUG
     }
 
@@ -110,7 +110,7 @@ Result Camera3D::Bind() const
     if(Location < 0) {
         Res = BGE_FAILURE;
 #ifdef _DEBUG
-        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+        BGE_WARN_MISSING_UNIFORM(BGE_PROJECTION_UNIFORM);
 #endif // _DEBUG
     }
 
@@ -153,7 +153,7 @@ Result Camera3D::Unbind() const
     if(Location < 0) {
         Res = BGE_FAILURE;
 #ifdef _DEBUG
-        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+        BGE_WARN_MISSING_UNIFORM(BGE_PROJECTION_UNIFORM);
 #endif // _DEBUG
     }
 
@@ -184,7 +184,7 @@ Result Camera3D::Unbind() const
     if(Location < 0) {
         Res = BGE_FAILURE;
 #ifdef _DEBUG
-        WarnMissingUniform(BGE_PROJECTION_UNIFORM);
+        BGE_WARN_MISSING_UNIFORM(BGE_PROJECTION_UNIFORM);
 #endif // _DEBUG
     }
 
