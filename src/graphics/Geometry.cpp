@@ -137,7 +137,6 @@ Result Geometry::Unbind() const
 }
 
 
-
 Result Geometry::SetDrawStyle(GEOMETRY_DRAW_STYLE Style)
 {
     switch(Style) {
