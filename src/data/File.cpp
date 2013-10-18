@@ -51,6 +51,11 @@ File* File::Open(const char* Path)
         return NULL;
     }
 
+    if(PHYSFS_isDirectory(Path)) {
+        Log("ERROR: File - \"%s\" is a directory.\n", Path);
+        return NULL;
+    }
+
     File* F = new File;
 
     int Len = strlen(Path);
