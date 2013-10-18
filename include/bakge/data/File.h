@@ -54,6 +54,8 @@ class BGE_API File
     char* Path;
 
     int Mode;
+    // Current offset into the active file
+    int Offset;
 
     /*! @brief Default File constructor.
      *

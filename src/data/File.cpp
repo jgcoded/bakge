@@ -32,6 +32,7 @@ File::File()
     Handle = NULL;
     Path = NULL;
     Mode = FILE_MODE_NONE;
+    Offset = 0;
 }
 
 
