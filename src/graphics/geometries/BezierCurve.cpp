@@ -108,14 +108,24 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     // Indices buffer, for setting GL data store
     int* Indices = new int[NumPoints];
 
+    // Start amalgamated; all but 2 endpoints are control points
     B->NumAnchors = 2;
+    B->NumControlPoints = NumPoints - 2;
+
     B->AnchorIndicesSize = 64;
     B->AnchorIndices = new int[B->AnchorIndicesSize];
+    if(B->AnchorIndices == NULL) {
+        Log("ERROR: BezierCurve::Create - Couldn't allocate anchor indices "
+                                                                "buffer.\n");
+        delete B;
+        return NULL;
+    }
+
+    Log("BezierCurve::Create - Anchor indices buffer size: %d\n",
+                                            B->AnchorIndicesSize);
+
     B->AnchorIndices[0] = 0;
     B->AnchorIndices[1] = NumPoints - 1;
-
-    // Start amalgamated; all but 2 endpoints are control points
-    B->NumControlPoints = NumPoints - 2;
 
     B->ControlIndicesSize = 1;
     // Allocate a buffer large enough for some extra points; maintain pow2
