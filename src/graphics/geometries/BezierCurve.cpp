@@ -297,7 +297,32 @@ bool BezierCurve::IsAnchor(int Index) const
 
 bool BezierCurve::IsControl(int Index) const
 {
-    return !IsAnchor(Index);
+    if(NumControlPoints == 0)
+        return false;
+
+    // Divide and conquer search, start in middle of array
+    int Check = NumControlPoints / 2;
+
+    int Left = 0;
+    int Right = NumControlPoints - 1;
+
+    while(1) {
+        if(Index > ControlIndices[Check]) {
+            Left = Check + 1;
+            if(Left > Right)
+                break;
+            Check = (Right - Left) / 2;
+        } else if(Index < ControlIndices[Check]) {
+            Right = Check - 1;
+            if(Left > Right)
+                break;
+            Check = (Right - Left) / 2;
+        } else {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
