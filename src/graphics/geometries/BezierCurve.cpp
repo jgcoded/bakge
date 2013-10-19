@@ -340,12 +340,66 @@ void BezierCurve::GetPointAt(Scalar T, Vector3* V)
 
 int BezierCurve::MakeAnchor(int PointIndex)
 {
-    if(AnchorIndices == NULL)
+    if(PointIndex >= NumPoints) {
+        Log("ERROR: BezierCurve::MakeAnchor - Index %d is out of bounds.\n",
+                                                                PointIndex);
         return -1;
+    }
 
-    // Already an anchor
-    if(IsAnchor(PointIndex))
-        return 0;
+    if(AnchorIndices == NULL) {
+        Log("ERROR: BezierCurve::MakeAnchor - Anchor indices buffer is "
+                                                                "NULL.\n");
+        return -1;
+    }
+
+    // Do a binary search to find where the new index belongs
+    int Check = NumAnchors / 2;
+    int Left = 0;
+    int Right = NumAnchors - 1;
+    int Index;
+
+    while(1) {
+        if(PointIndex > AnchorIndices[Check]) {
+            Left = Check + 1;
+            if(Left > Right) {
+                Index = Left;
+                break;
+            }
+            Check = (Right + Left) / 2;
+        } else if(PointIndex < AnchorIndices[Check]) {
+            Right = Check - 1;
+            if(Left > Right) {
+                Index = Right;
+                break;
+            }
+            Check = (Right + Left) / 2;
+        } else {
+            // Already an anchor point
+            Log("ERROR: BezierCurve - Point at index %d is already an "
+                                                "anchor.\n", PointIndex);
+            return 0;
+        }
+    }
+
+    // Reallocate the buffer if it is not large enough to hold all indices
+    ++NumAnchors;
+    if(NumAnchors > AnchorIndicesSize) {
+        int OldSize = AnchorIndicesSize;
+        int* OldArray = AnchorIndices;
+        AnchorIndicesSize *= 2;
+        AnchorIndices = new int[AnchorIndicesSize];
+        memcpy((void*)AnchorIndices, (const void*)OldArray, OldSize * 4);
+        Log("BezierCurve::MakeAnchor - Reallocating anchor indices "
+                                                        "buffer.\n");
+        Log("  - Old size: %d\n", OldSize);
+        Log("  - New size: %d\n", AnchorIndicesSize);
+    }
+
+    // Shift data to make room for the new index.
+    for(int i=NumAnchors;i>=Index;--i)
+        AnchorIndices[i] = AnchorIndices[i-1];
+
+    AnchorIndices[Index] = PointIndex;
 
     return 1;
 }
