@@ -284,12 +284,12 @@ bool BezierCurve::IsAnchor(int Index) const
             Left = Check + 1;
             if(Left > Right)
                 break;
-            Check = (Right - Left) / 2;
+            Check = (Right + Left) / 2;
         } else if(Index < AnchorIndices[Check]) {
             Right = Check - 1;
             if(Left > Right)
                 break;
-            Check = (Right - Left) / 2;
+            Check = (Right + Left) / 2;
         } else {
             return true;
         }
@@ -318,12 +318,12 @@ bool BezierCurve::IsControl(int Index) const
             Left = Check + 1;
             if(Left > Right)
                 break;
-            Check = (Right - Left) / 2;
+            Check = (Right + Left) / 2;
         } else if(Index < ControlIndices[Check]) {
             Right = Check - 1;
             if(Left > Right)
                 break;
-            Check = (Right - Left) / 2;
+            Check = (Right + Left) / 2;
         } else {
             return true;
         }
