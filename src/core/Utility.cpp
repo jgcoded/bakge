@@ -33,6 +33,8 @@ namespace bakge
 
 static PHYSFS_File* LogFile = NULL;
 static Mutex* LogLock = NULL;
+// Used to track whether we're in block mode or not
+static volatile int LogBlockMode = 0;
 
 Result Init(int argc, char* argv[])
 {
@@ -169,6 +171,11 @@ void SystemInfo()
 Result BeginLogBlock()
 {
     Result Res = LogLock->Lock();
+    if(LogBlockMode == 0) {
+        LogBlockMode = 1;
+    } else {
+        Log("WARNING: BeginLogBlock called while already in block mode.\n");
+    }
 
     return Res;
 }
@@ -176,6 +183,12 @@ Result BeginLogBlock()
 
 Result EndLogBlock()
 {
+    if(LogBlockMode == 1) {
+        LogBlockMode = 0;
+    } else {
+        Log("WARNING: EndLogBlock called while not in block mode.\n");
+    }
+
     return LogLock->Unlock();
 }
 
