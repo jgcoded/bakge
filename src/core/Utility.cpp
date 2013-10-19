@@ -164,6 +164,20 @@ void SystemInfo()
 }
 
 
+Result BeginLogBlock()
+{
+    Result Res = LogLock->Lock();
+
+    return Res;
+}
+
+
+Result EndLogBlock()
+{
+    return LogLock->Unlock();
+}
+
+
 int Log(const char* Format, ...)
 {
     va_list ArgList;
