@@ -108,6 +108,12 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     // Indices buffer, for setting GL data store
     int* Indices = new int[NumPoints];
 
+    B->NumAnchors = 2;
+    B->AnchorIndices = new int[64];
+    B->AnchorIndices[0] = 0;
+    B->AnchorIndices[1] = NumPoints - 1;
+    B->NumControlPoints = NumPoints - 2;
+
     for(int i=0;i<NumPoints;++i) {
         Indices[i] = i;
         B->AllPoints[i][0] = Points[i * 3 + 0];
