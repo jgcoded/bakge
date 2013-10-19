@@ -109,7 +109,8 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     int* Indices = new int[NumPoints];
 
     B->NumAnchors = 2;
-    B->AnchorIndices = new int[64];
+    B->AnchorIndicesSize = 2;
+    B->AnchorIndices = new int[B->AnchorIndicesSize];
     B->AnchorIndices[0] = 0;
     B->AnchorIndices[1] = NumPoints - 1;
     B->NumControlPoints = NumPoints - 2;

@@ -72,8 +72,10 @@ class BGE_API BezierCurve : public Geometry
 
     // Dynamic array of which points in array are anchors
     int* AnchorIndices;
+    int AnchorIndicesSize;
     // Dynamic array of which points in array are control points
     int* ControlIndices;
+    int ControlIndicesSize;
 
     /*! @brief Default BezierCurve constructor.
      *
