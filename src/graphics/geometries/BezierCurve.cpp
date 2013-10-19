@@ -113,7 +113,29 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     B->AnchorIndices = new int[B->AnchorIndicesSize];
     B->AnchorIndices[0] = 0;
     B->AnchorIndices[1] = NumPoints - 1;
+
+    // Start amalgamated; all but 2 endpoints are control points
     B->NumControlPoints = NumPoints - 2;
+
+    B->ControlIndicesSize = 1;
+    // Allocate a buffer large enough for some extra points; maintain pow2
+    while((B->ControlIndicesSize <<= 1) < (NumPoints * 2))
+        ;
+
+    B->ControlIndices = new int[B->ControlIndicesSize];
+    if(B->ControlIndices == NULL) {
+        Log("ERROR: BezierCurve::Create - Couldn't allocate control indices "
+                                                                "buffer.\n");
+        delete B;
+        return NULL;
+    }
+
+    Log("BezierCurve::Create - Control indices buffer size: %d\n",
+                                            B->ControlIndicesSize);
+
+    for(int i=0;i<B->NumControlPoints;++i) {
+        B->ControlIndices[i] = i+1;
+    }
 
     for(int i=0;i<NumPoints;++i) {
         Indices[i] = i;
