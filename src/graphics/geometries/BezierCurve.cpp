@@ -266,6 +266,9 @@ void BezierCurve::GetPointAt(int NumControlPoints,
 
 bool BezierCurve::IsAnchor(int Index) const
 {
+    if(AnchorIndices == NULL)
+        return false;
+
     if(NumAnchors == 0)
         return false;
 
@@ -297,6 +300,9 @@ bool BezierCurve::IsAnchor(int Index) const
 
 bool BezierCurve::IsControl(int Index) const
 {
+    if(ControlIndices == NULL)
+        return false;
+
     if(NumControlPoints == 0)
         return false;
 
