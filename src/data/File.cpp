@@ -32,6 +32,7 @@ File::File()
     Handle = NULL;
     Path = NULL;
     Mode = FILE_MODE_NONE;
+    Offset = 0;
 }
 
 
@@ -43,22 +44,54 @@ File::~File()
 }
 
 
-File* File::Open(const char* Path)
+File* File::Find(const char* Path)
 {
     // Check if the file exists within the search path.
     if(PHYSFS_exists(Path) == 0) {
-        Log("File: Could not find file \"%s\"\n", Path);
+        Log("ERROR: File - Could not find file \"%s\"\n.", Path);
+        return NULL;
+    }
+
+    if(PHYSFS_isDirectory(Path)) {
+        Log("ERROR: File - \"%s\" is a directory.\n", Path);
+        return NULL;
+    }
+
+    int Len = strlen(Path);
+    if(Len < 1) {
+        Log("ERROR: File - Invalid path string.\n");
         return NULL;
     }
 
     File* F = new File;
+    if(F == NULL) {
+        Log("ERROR: File - Couldn't allocate memory.\n");
+        return NULL;
+    }
 
-    int Len = strlen(Path);
     F->Path = (char*)malloc(Len + 1);
+    if(F->Path == NULL) {
+        Log("ERROR: File - Error allocating name string buffer.\n");
+        delete F;
+        return NULL;
+    }
+
     memcpy((void*)F->Path, (const void*)Path, Len);
     F->Path[Len] = '\0';
 
     return F;
+}
+
+
+File* File::Create(const char* Path)
+{
+    return NULL;
+}
+
+
+File* File::FindOrCreate(const char* Path)
+{
+    return NULL;
 }
 
 
@@ -77,6 +110,18 @@ Result File::Close()
     }
 
     return BGE_SUCCESS;
+}
+
+
+int File::Write(const char* Str)
+{
+    return -1;
+}
+
+
+int File::Read(int NumBytes, char* Buffer)
+{
+    return -1;
 }
 
 } /* bakge */

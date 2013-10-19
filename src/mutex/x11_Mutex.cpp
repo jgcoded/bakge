@@ -40,10 +40,14 @@ x11_Mutex::~x11_Mutex()
 
 x11_Mutex* x11_Mutex::Create()
 {
-
     x11_Mutex* M = new x11_Mutex;
 
-    if(pthread_mutex_init(&(M->MutexHandle), NULL) != 0) {
+    pthread_mutexattr_t Attrib;
+
+    pthread_mutexattr_init(&Attrib);
+    pthread_mutexattr_settype(&Attrib, PTHREAD_MUTEX_RECURSIVE);
+
+    if(pthread_mutex_init(&(M->MutexHandle), &Attrib) != 0) {
         /* Mutex creation failed */
         Log("Mutex: Creation failed");
         exit(1);

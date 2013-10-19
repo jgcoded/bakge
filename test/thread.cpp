@@ -41,6 +41,21 @@ int ThreadFunc(void* Data)
         bakge::Delay(100000);
         bakge::Log("test/thread: First value of the array is: %d\n",
                                                         TestArray[0]);
+    bakge::BeginLogBlock();
+        bakge::Log("==============================\n");
+        bakge::Log("Beginning the block\n");
+        bakge::Log("==============================\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("I'm in the block!\n");
+        bakge::Log("==============================\n");
+        bakge::Log("I'm exiting the block\n");
+        bakge::Log("==============================\n");
+    bakge::EndLogBlock();
 
         Mut->Lock();
         for(int i = 0; i < ARR_SIZE; ++i) {
@@ -82,6 +97,9 @@ int main(int argc, char* argv[])
         /* Don't draw if the window has closed */
         if(Win->IsOpen() == false)
             break;
+
+        bakge::Delay(rand() % 100000);
+        bakge::Log("a;sdlfka;slkdjf;lakGARBGE!\n");
 
         Win->Bind();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

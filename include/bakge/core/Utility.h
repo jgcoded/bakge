@@ -101,6 +101,29 @@ BGE_FUNC void SystemInfo();
 
 BGE_WUNUSED BGE_FUNC Byte* LoadFileContents(const char* Path);
 
+/*! @brief Protect the log from being written to by another thread. Use when
+ * writing blocks of text to the log.
+ *
+ * Protect the log from being written to by another thread. Use when writing
+ * blocks of text to the log. Not doing so may result in blocks of log entries
+ * being mixed together.
+ *
+ * @return BGE_SUCCESS if it is safe to write to the log; BGE_FAILURE if any
+ * errors occurred.
+ */
+BGE_FUNC Result BeginLogBlock();
+
+/*! @brief End a log block, allowing other threads access to write to the log.
+ *
+ * End a log block, allowing other threads access to write to the log. Be sure
+ * to match every BeginLogBlock call with a call to EndLogBlock! Not doing so
+ * can result in deadlock or crashes.
+ *
+ * @return BGE_SUCCESS if the log block was successfully ended; BGE_FAILURE if
+ * any errors occurred.
+ */
+BGE_FUNC Result EndLogBlock();
+
 /*! @brief Write a time-stamped log message to bakge.log.
  *
  * Write a time-stamped, formatted log message to bakge.log. Supports limited
