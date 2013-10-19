@@ -40,7 +40,6 @@ x11_Mutex::~x11_Mutex()
 
 x11_Mutex* x11_Mutex::Create()
 {
-
     x11_Mutex* M = new x11_Mutex;
 
     pthread_mutexattr_t Attrib;
