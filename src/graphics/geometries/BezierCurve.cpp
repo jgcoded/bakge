@@ -162,6 +162,7 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     int NumPoints = NumSegments + 1 + NumSubdivisions;
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+    BeginLogBlock();
     Log("\n");
     Log("BezierCurve: Building LineStrip\n");
     Log("===============================\n");
@@ -169,6 +170,7 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     Log("%d Segments.\n", NumSegments);
     Log("%d Total points.\n", NumPoints);
     Log("\n");
+    EndLogBlock();
 #endif // defined(_DEBUG)
 
     Vector3* CurvePoints = new Vector3[NumPoints];
@@ -177,9 +179,18 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
 
     Scalar Advance = 1.0f / (NumSubdivisions + 1);
 
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+    // GetPointAt internal makes Log calls, put them in a block
+    BeginLogBlock();
+#endif // defined(_DEBUG)
+
     for(int i=0;i<=NumSubdivisions;++i) {
         GetPointAt(2, &AllPoints[0], &CurvePoints[i+1], Advance * (i+1));
     }
+
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+    EndLogBlock();
+#endif // defined(_DEBUG)
 
     LineStrip* L = LineStrip::Create(NumPoints, &CurvePoints[0][0]);
 
@@ -389,10 +400,12 @@ int BezierCurve::MakeAnchor(int PointIndex)
         AnchorIndicesSize *= 2;
         AnchorIndices = new int[AnchorIndicesSize];
         memcpy((void*)AnchorIndices, (const void*)OldArray, OldSize * 4);
+        BeginLogBlock();
         Log("BezierCurve::MakeAnchor - Reallocating anchor indices "
                                                         "buffer.\n");
         Log("  - Old size: %d\n", OldSize);
         Log("  - New size: %d\n", AnchorIndicesSize);
+        EndLogBlock();
     }
 
     // Shift data to make room for the new index.
