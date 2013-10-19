@@ -38,7 +38,7 @@ int ThreadFunc(void* Data)
     bakge::Window* ThrWin = (bakge::Window*)Data;
 
     while(ThrWin->IsOpen()) {
-        bakge::Delay(100000);
+        bakge::Delay((rand() % 5000) * 300);
         bakge::Log("test/thread: First value of the array is: %d\n",
                                                         TestArray[0]);
     bakge::BeginLogBlock();
@@ -62,8 +62,6 @@ int ThreadFunc(void* Data)
             TestArray[i]+= 1;
         }
         Mut->Unlock();
-
-        fflush(0);
     }
 
     return 0;
@@ -72,6 +70,8 @@ int ThreadFunc(void* Data)
 
 int main(int argc, char* argv[])
 {
+    srand(time(0));
+
     bakge::Init(argc, argv);
 
     Mut = bakge::Mutex::Create();
@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
         if(Win->IsOpen() == false)
             break;
 
-        bakge::Delay(rand() % 100000);
+        bakge::Delay(rand() % 5000);
         bakge::Log("a;sdlfka;slkdjf;lakGARBGE!\n");
 
         Win->Bind();
