@@ -29,6 +29,8 @@
 
 // Log point/subdivision information when building LineStrip from BezierCurve
 #define BGE_BEZIER_VERBOSE_BUILD 0
+// Log curve points information when creating a BezierCurve
+#define BGE_BEZIER_VERBOSE_CREATE 0
 
 namespace bakge
 {
@@ -150,6 +152,19 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     for(int i=0;i<B->NumControlPoints;++i) {
         B->ControlIndices[i] = i+1;
     }
+
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
+    BeginLogBlock();
+    Log("====================================\n");
+    Log("BezierCurve control points:\n");
+    for(int i=0;i<B->NumControlPoints;++i)
+        Log("  %d: %d\n", i, B->ControlIndices[i]);
+    Log("BezierCurve anchor points:\n");
+    for(int i=0;i<B->NumAnchors;++i)
+        Log("  %d: %d\n", i, B->AnchorIndices[i]);
+    Log("====================================\n");
+    EndLogBlock();
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
 
     for(int i=0;i<NumPoints;++i) {
         Indices[i] = i;
