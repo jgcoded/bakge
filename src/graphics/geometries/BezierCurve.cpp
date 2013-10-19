@@ -132,6 +132,10 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     while((B->ControlIndicesSize <<= 1) < (NumPoints * 2))
         ;
 
+    // Let's also have a default size of 64 for the buffer though
+    while(B->ControlIndicesSize < 64)
+        B->ControlIndicesSize <<= 1;
+
     B->ControlIndices = new int[B->ControlIndicesSize];
     if(B->ControlIndices == NULL) {
         Log("ERROR: BezierCurve::Create - Couldn't allocate control indices "
