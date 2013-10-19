@@ -32,6 +32,7 @@ namespace bakge
 {
 
 static PHYSFS_File* LogFile = NULL;
+// Ensure threads have mutual-exclusive log file writes
 static Mutex* LogLock = NULL;
 // Used to track whether we're in block mode or not
 static volatile int LogBlockMode = 0;
