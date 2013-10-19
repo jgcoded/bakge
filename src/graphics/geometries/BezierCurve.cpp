@@ -339,13 +339,26 @@ void BezierCurve::GetPointAt(Scalar T, Vector3* V)
 
 int BezierCurve::MakeAnchor(int PointIndex)
 {
-    return -1;
+    if(AnchorIndices == NULL)
+        return -1;
+
+    // Already an anchor
+    if(IsAnchor(PointIndex))
+        return 0;
+
+    return 1;
 }
 
 
 int BezierCurve::MakeControl(int PointIndex)
 {
-    return -1;
+    if(ControlIndices == NULL)
+        return -1;
+
+    if(IsControl(PointIndex))
+        return 0;
+
+    return 1;
 }
 
 } /* bakge */
