@@ -266,6 +266,31 @@ void BezierCurve::GetPointAt(int NumControlPoints,
 
 bool BezierCurve::IsAnchor(int Index) const
 {
+    if(NumAnchors == 0)
+        return false;
+
+    // Divide and conquer search, start in middle of array
+    int Check = NumAnchors / 2;
+
+    int Left = 0;
+    int Right = NumAnchors - 1;
+
+    while(1) {
+        if(Index > AnchorIndices[Check]) {
+            Left = Check + 1;
+            if(Left > Right)
+                break;
+            Check = (Right - Left) / 2;
+        } else if(Index < AnchorIndices[Check]) {
+            Right = Check - 1;
+            if(Left > Right)
+                break;
+            Check = (Right - Left) / 2;
+        } else {
+            return true;
+        }
+    }
+
     return false;
 }
 
