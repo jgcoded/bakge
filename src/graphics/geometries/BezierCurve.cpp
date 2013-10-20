@@ -210,23 +210,23 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     }
 
     // Anchor points = NumSegments + 1
-    int NumPoints = NumSegments + 1 + NumSubdivisions;
+    int NumLinePoints = NumSegments + 1;
+    NumLinePoints += (NumSegments * NumSubdivisions);
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
     BeginLogBlock();
     Log("\n");
     Log("BezierCurve: Building LineStrip\n");
     Log("===============================\n");
-    Log("%d Subdivisions (Also points per segment).\n", NumSubdivisions);
+    Log("%d Subdivisions.\n", NumSubdivisions);
+    Log("%d Points per segment.\n", NumSubdivisions + 1);
     Log("%d Segments.\n", NumSegments);
-    Log("%d Total points.\n", NumPoints);
+    Log("%d Total points.\n", NumLinePoints);
     Log("\n");
     EndLogBlock();
 #endif // defined(_DEBUG)
 
-    Vector3* CurvePoints = new Vector3[NumPoints];
-    CurvePoints[0] = AllPoints[0];
-    CurvePoints[NumPoints-1] = AllPoints[NumPoints-1];
+    Vector3* CurvePoints = new Vector3[NumLinePoints];
 
     Scalar Advance = 1.0f / (NumSubdivisions + 1);
 
@@ -235,15 +235,42 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     BeginLogBlock();
 #endif // defined(_DEBUG)
 
-    for(int i=0;i<=NumSubdivisions;++i) {
-        GetPointAt(2, &AllPoints[0], &CurvePoints[i+1], Advance * (i+1));
+    // Various metadata used for calculating points along the curve
+    // Indices of anchors of segment currently being built
+    int Start, End;
+    // Number of control points in this particular segment.
+    int NumControl;
+    // Span of the segment (number points per segment)
+    int Span;
+    // Current offset into the CurvePoints buffer
+    int Offset;
+    for(int i=0;i<NumSegments;++i) {
+        Start = AnchorIndices[i];
+        End = AnchorIndices[i+1];
+        // Anchor indices are sorted, letting us easily calculated # control
+        // points in any given segment.
+        NumControl = AnchorIndices[i+1] - AnchorIndices[i] - 1;
+        Span = (NumSubdivisions + 1);
+        Offset = i * Span;
+        // Calculates all points between the anchors in a segment
+        // X-----0-----0-----0-----X
+        // Calculates the 0's
+        for(int j=1;j<=NumSubdivisions;++j) {
+            GetPointAt(NumControl, &AllPoints[Start], &CurvePoints[Offset+j],
+                                                                Advance * j);
+        }
+        // Manually set anchor points in points buffer
+        // X-----0-----0-----0-----X
+        // Sets the X's to the anchor points values
+        CurvePoints[Offset] = AllPoints[Start];
+        CurvePoints[Offset + Span] = AllPoints[End];
     }
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
     EndLogBlock();
 #endif // defined(_DEBUG)
 
-    LineStrip* L = LineStrip::Create(NumPoints, &CurvePoints[0][0]);
+    LineStrip* L = LineStrip::Create(NumLinePoints, &CurvePoints[0][0]);
 
     delete[] CurvePoints;
 
