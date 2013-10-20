@@ -29,14 +29,13 @@ namespace bakge
 
 win32_Mutex::win32_Mutex()
 {
-	CriticalSectionHandle = NULL;
+
 }
 
 
 win32_Mutex::~win32_Mutex()
 {
-    if(CriticalSectionHandle != NULL)
-        DeleteCriticalSection(CriticalSectionHandle);
+    DeleteCriticalSection(&CriticalSectionHandle);
 }
 
 
@@ -44,14 +43,8 @@ win32_Mutex* win32_Mutex::Create()
 {
     win32_Mutex* M = new win32_Mutex;
 
-    // Create an unnamed mutex object
-	InitializeCriticalSection(M->CriticalSectionHandle);
-    if(M->CriticalSectionHandle == NULL) {
-        Log("Mutex: Error creating mutex\n");
-        delete M;
-        return NULL;
-    }
-
+	InitializeCriticalSection(&M->CriticalSectionHandle);
+    
     return M;
 }
 
@@ -64,7 +57,7 @@ Result win32_Mutex::Lock()
 	 * */
 
 	// Blocks until available. Mutually exclusive access.
-	EnterCriticalSection(CriticalSectionHandle);
+	EnterCriticalSection(&CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
@@ -72,7 +65,7 @@ Result win32_Mutex::Lock()
 
 Result win32_Mutex::TryLock()
 {
-	if(TryEnterCriticalSection(CriticalSectionHandle) > 0)
+	if(TryEnterCriticalSection(&CriticalSectionHandle) > 0)
 		return BGE_SUCCESS;
 
 	return BGE_FAILURE;
@@ -81,7 +74,7 @@ Result win32_Mutex::TryLock()
 
 Result win32_Mutex::Unlock()
 {
-	LeaveCriticalSection(CriticalSectionHandle);
+	LeaveCriticalSection(&CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
