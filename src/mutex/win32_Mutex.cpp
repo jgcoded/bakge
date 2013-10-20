@@ -29,14 +29,14 @@ namespace bakge
 
 win32_Mutex::win32_Mutex()
 {
-    MutexHandle = NULL;
+	CriticalSectionHandle = NULL;
 }
 
 
 win32_Mutex::~win32_Mutex()
 {
-    if(MutexHandle != NULL)
-        CloseHandle(MutexHandle);
+    if(CriticalSectionHandle != NULL)
+        DeleteCriticalSection(CriticalSectionHandle);
 }
 
 
