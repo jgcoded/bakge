@@ -476,6 +476,9 @@ int BezierCurve::MakeAnchor(int PointIndex)
         }
     }
 
+    // Adding an anchor splits some segment into two.
+    ++NumSegments;
+
     // Reallocate the buffer if it is not large enough to hold all indices
     ++NumAnchors;
     if(NumAnchors > AnchorIndicesSize) {
