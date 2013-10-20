@@ -122,7 +122,7 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     B->AnchorIndices[0] = 0;
     B->AnchorIndices[1] = NumPoints - 1;
 
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE == 1
     BeginLogBlock();
     Log("====================================\n");
     Log("BezierCurve anchor buffer size: %d\n", B->AnchorIndicesSize);
@@ -131,7 +131,7 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
         Log("    %d: %d\n", i, B->AnchorIndices[i]);
     Log("====================================\n");
     EndLogBlock();
-#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE == 1
 
     for(int i=0;i<NumPoints;++i) {
         Indices[i] = i;
@@ -181,7 +181,7 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     int NumLinePoints = NumSegments + 1;
     NumLinePoints += (NumSegments * NumSubdivisions);
 
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
     BeginLogBlock();
     Log("\n");
     Log("BezierCurve: Building LineStrip\n");
@@ -192,16 +192,16 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
     Log("%d Total points.\n", NumLinePoints);
     Log("\n");
     EndLogBlock();
-#endif // defined(_DEBUG)
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
 
     Vector3* CurvePoints = new Vector3[NumLinePoints];
 
     Scalar Advance = 1.0f / (NumSubdivisions + 1);
 
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
     // GetPointAt internal makes Log calls, put them in a block
     BeginLogBlock();
-#endif // defined(_DEBUG)
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
 
     // Various metadata used for calculating points along the curve
     // Indices of anchors of segment currently being built
@@ -234,9 +234,9 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
         CurvePoints[Offset + Span] = AllPoints[End];
     }
 
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
     EndLogBlock();
-#endif // defined(_DEBUG)
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
 
     LineStrip* L = LineStrip::Create(NumLinePoints, &CurvePoints[0][0]);
 
@@ -268,12 +268,12 @@ void BezierCurve::GetPointAt(int NumControlPoints,
         (*PointsBuffer) = SegmentPoints[0];
         // Translate T * (anchor2 - anchor1)
         (*PointsBuffer) += (SegmentPoints[1] - SegmentPoints[0]) * T;
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
         Log("BezierCurve: Built point P(%2.2f) = (%2.3f, %2.3f, %2.3f)\n", T,
                                                         (*PointsBuffer)[0],
                                                         (*PointsBuffer)[1],
                                                         (*PointsBuffer)[2]);
-#endif // defined(_DEBUG)
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
         return;
     }
 
@@ -317,12 +317,12 @@ void BezierCurve::GetPointAt(int NumControlPoints,
     // Temp[0] will end up in the position P(T) after the final shift.
     (*PointsBuffer) = Temp[0];
 
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
     Log("BezierCurve: Built point P(%2.2f) = (%2.3f, %2.3f, %2.3f)\n", T,
                                                         (*PointsBuffer)[0],
                                                         (*PointsBuffer)[1],
                                                         (*PointsBuffer)[2]);
-#endif // defined(_DEBUG)
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
 
     delete[] Temp;
 }
@@ -442,7 +442,7 @@ int BezierCurve::MakeAnchor(int PointIndex)
 
     AnchorIndices[Index] = PointIndex;
 
-#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS == 1
     BeginLogBlock();
     Log("BezierCurve::MakeAnchor anchors list:\n");
     Log("=====================================\n");
@@ -450,7 +450,7 @@ int BezierCurve::MakeAnchor(int PointIndex)
         Log("  %d: %d\n", i, AnchorIndices[i]);
     Log("=====================================\n");
     EndLogBlock();
-#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS == 1
 
     return 1;
 }
