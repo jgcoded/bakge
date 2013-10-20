@@ -119,18 +119,16 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
         return NULL;
     }
 
-    Log("BezierCurve::Create - Anchor indices buffer size: %d\n",
-                                            B->AnchorIndicesSize);
-
     B->AnchorIndices[0] = 0;
     B->AnchorIndices[1] = NumPoints - 1;
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
     BeginLogBlock();
     Log("====================================\n");
-    Log("BezierCurve anchor points:\n");
+    Log("BezierCurve anchor buffer size: %d\n", B->AnchorIndicesSize);
+    Log("  Anchor points:\n");
     for(int i=0;i<B->NumAnchors;++i)
-        Log("  %d: %d\n", i, B->AnchorIndices[i]);
+        Log("    %d: %d\n", i, B->AnchorIndices[i]);
     Log("====================================\n");
     EndLogBlock();
 #endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
