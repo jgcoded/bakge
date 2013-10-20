@@ -72,10 +72,7 @@ Result win32_Mutex::Lock()
 
 Result win32_Mutex::Unlock()
 {
-    if(ReleaseMutex(MutexHandle) == 0) {
-        Log("Mutex: Error releasing mutex\n");
-        return BGE_FAILURE;
-    }
+	LeaveCriticalSection(CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
