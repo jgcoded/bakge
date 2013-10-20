@@ -186,8 +186,9 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 
 Result BezierCurve::Draw() const
 {
-    glDrawElements(GL_POINTS, NumControlPoints, GL_UNSIGNED_INT,
-                                       (GLvoid*)ControlIndices);
+    glPointSize(5);
+    glDrawElements(GL_POINTS, NumPoints, GL_UNSIGNED_INT, (GLvoid*)0);
+    glPointSize(1);
 
     return Geometry::Draw();
 }
