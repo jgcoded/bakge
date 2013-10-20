@@ -28,11 +28,11 @@
 #endif // _DEBUG
 
 // Log point/subdivision information when building LineStrip from BezierCurve
-#define BGE_BEZIER_VERBOSE_BUILD 0
+#define BGE_BEZIER_VERBOSE_BUILD 1
 // Log curve points information when creating a BezierCurve
-#define BGE_BEZIER_VERBOSE_CREATE 0
+#define BGE_BEZIER_VERBOSE_CREATE 1
 // Verbose output when manipulating anchor/control indices buffers
-#define BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS 0
+#define BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS 1
 
 namespace bakge
 {
