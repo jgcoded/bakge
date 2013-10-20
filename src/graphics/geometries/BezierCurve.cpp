@@ -41,8 +41,6 @@ BezierCurve::BezierCurve()
 {
     AllPoints = NULL;
     AnchorIndices = NULL;
-    ControlIndices = NULL;
-    NumControlPoints = 0;
     NumAnchors = 0;
 }
 
@@ -54,9 +52,6 @@ BezierCurve::~BezierCurve()
 
     if(AnchorIndices != NULL)
         delete[] AnchorIndices;
-
-    if(ControlIndices != NULL)
-        delete[] ControlIndices;
 }
 
 
@@ -114,7 +109,6 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 
     // Start amalgamated; all but 2 endpoints are control points
     B->NumAnchors = 2;
-    B->NumControlPoints = NumPoints - 2;
 
     B->AnchorIndicesSize = 64;
     B->AnchorIndices = new int[B->AnchorIndicesSize];
@@ -131,36 +125,9 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
     B->AnchorIndices[0] = 0;
     B->AnchorIndices[1] = NumPoints - 1;
 
-    B->ControlIndicesSize = 1;
-    // Allocate a buffer large enough for some extra points; maintain pow2
-    while((B->ControlIndicesSize <<= 1) < (NumPoints * 2))
-        ;
-
-    // Let's also have a default size of 64 for the buffer though
-    while(B->ControlIndicesSize < 64)
-        B->ControlIndicesSize <<= 1;
-
-    B->ControlIndices = new int[B->ControlIndicesSize];
-    if(B->ControlIndices == NULL) {
-        Log("ERROR: BezierCurve::Create - Couldn't allocate control indices "
-                                                                "buffer.\n");
-        delete B;
-        return NULL;
-    }
-
-    Log("BezierCurve::Create - Control indices buffer size: %d\n",
-                                            B->ControlIndicesSize);
-
-    for(int i=0;i<B->NumControlPoints;++i) {
-        B->ControlIndices[i] = i+1;
-    }
-
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE
     BeginLogBlock();
     Log("====================================\n");
-    Log("BezierCurve control points:\n");
-    for(int i=0;i<B->NumControlPoints;++i)
-        Log("  %d: %d\n", i, B->ControlIndices[i]);
     Log("BezierCurve anchor points:\n");
     for(int i=0;i<B->NumAnchors;++i)
         Log("  %d: %d\n", i, B->AnchorIndices[i]);
@@ -399,35 +366,7 @@ bool BezierCurve::IsAnchor(int Index) const
 
 bool BezierCurve::IsControl(int Index) const
 {
-    if(ControlIndices == NULL)
-        return false;
-
-    if(NumControlPoints == 0)
-        return false;
-
-    // Divide and conquer search, start in middle of array
-    int Check = NumControlPoints / 2;
-
-    int Left = 0;
-    int Right = NumControlPoints - 1;
-
-    while(1) {
-        if(Index > ControlIndices[Check]) {
-            Left = Check + 1;
-            if(Left > Right)
-                break;
-            Check = (Right + Left) / 2;
-        } else if(Index < ControlIndices[Check]) {
-            Right = Check - 1;
-            if(Left > Right)
-                break;
-            Check = (Right + Left) / 2;
-        } else {
-            return true;
-        }
-    }
-
-    return false;
+    return !IsAnchor(Index);
 }
 
 
@@ -521,9 +460,6 @@ int BezierCurve::MakeAnchor(int PointIndex)
 
 int BezierCurve::MakeControl(int PointIndex)
 {
-    if(ControlIndices == NULL)
-        return -1;
-
     if(IsControl(PointIndex))
         return 0;
 
