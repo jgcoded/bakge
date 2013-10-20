@@ -457,17 +457,13 @@ int BezierCurve::MakeAnchor(int PointIndex)
     while(1) {
         if(PointIndex > AnchorIndices[Check]) {
             Left = Check + 1;
-            if(Left > Right) {
-                Index = Left;
+            if(Left > Right)
                 break;
-            }
             Check = (Right + Left) / 2;
         } else if(PointIndex < AnchorIndices[Check]) {
             Right = Check - 1;
-            if(Left > Right) {
-                Index = Right;
+            if(Left > Right)
                 break;
-            }
             Check = (Right + Left) / 2;
         } else {
             // Already an anchor point
@@ -476,6 +472,8 @@ int BezierCurve::MakeAnchor(int PointIndex)
             return 0;
         }
     }
+
+    Index = Left;
 
     // Adding an anchor splits some segment into two.
     ++NumSegments;
