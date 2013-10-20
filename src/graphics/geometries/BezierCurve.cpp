@@ -300,6 +300,12 @@ void BezierCurve::GetPointAt(int NumControlPoints,
         (*PointsBuffer) = SegmentPoints[0];
         // Translate T * (anchor2 - anchor1)
         (*PointsBuffer) += (SegmentPoints[1] - SegmentPoints[0]) * T;
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD
+        Log("BezierCurve: Built point P(%2.2f) = (%2.3f, %2.3f, %2.3f)\n", T,
+                                                        (*PointsBuffer)[0],
+                                                        (*PointsBuffer)[1],
+                                                        (*PointsBuffer)[2]);
+#endif // defined(_DEBUG)
         return;
     }
 
