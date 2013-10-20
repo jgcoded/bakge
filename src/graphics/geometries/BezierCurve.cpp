@@ -31,6 +31,8 @@
 #define BGE_BEZIER_VERBOSE_BUILD 0
 // Log curve points information when creating a BezierCurve
 #define BGE_BEZIER_VERBOSE_CREATE 0
+// Verbose output when manipulating anchor/control indices buffers
+#define BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS 0
 
 namespace bakge
 {
@@ -502,6 +504,16 @@ int BezierCurve::MakeAnchor(int PointIndex)
         AnchorIndices[i] = AnchorIndices[i-1];
 
     AnchorIndices[Index] = PointIndex;
+
+#if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS
+    BeginLogBlock();
+    Log("BezierCurve::MakeAnchor anchors list:\n");
+    Log("=====================================\n");
+    for(int i=0;i<NumAnchors;++i)
+        Log("  %d: %d\n", i, AnchorIndices[i]);
+    Log("=====================================\n");
+    EndLogBlock();
+#endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS
 
     return 1;
 }
