@@ -31,6 +31,12 @@
 #ifndef BAKGE_BAKGE_H
 #define BAKGE_BAKGE_H
 
+#ifndef _DEBUG
+#ifndef NDEBUG
+#define _DEBUG
+#endif // NDEBUG
+#endif // _DEBUG
+
 /* Include standard library dependencies */
 #include <stdio.h>
 #include <stdlib.h>
