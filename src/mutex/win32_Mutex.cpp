@@ -58,11 +58,13 @@ win32_Mutex* win32_Mutex::Create()
 
 Result win32_Mutex::Lock()
 {
-    DWORD WaitResult = WaitForSingleObject(MutexHandle, INFINITE);
-    if(WaitResult != WAIT_OBJECT_0) {
-        Log("Mutex: Error locking mutex\n");
-        return BGE_FAILURE;
-    }
+	/* *
+	 * From MSDN:
+	 * Do not handle a possible deadlock exception; instead, debug the application.
+	 * */
+
+	// Blocks until available. Mutually exclusive access.
+	EnterCriticalSection(CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
