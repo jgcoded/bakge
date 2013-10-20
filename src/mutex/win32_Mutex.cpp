@@ -45,8 +45,8 @@ win32_Mutex* win32_Mutex::Create()
     win32_Mutex* M = new win32_Mutex;
 
     // Create an unnamed mutex object
-    M->MutexHandle = CreateMutex(NULL, FALSE, NULL);
-    if(M->MutexHandle == NULL) {
+	InitializeCriticalSection(M->CriticalSectionHandle);
+    if(M->CriticalSectionHandle == NULL) {
         Log("Mutex: Error creating mutex\n");
         delete M;
         return NULL;
