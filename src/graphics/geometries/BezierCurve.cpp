@@ -419,9 +419,9 @@ int BezierCurve::MakeAnchor(int PointIndex)
 
     // Making an anchor removes a control point
     --NumControlPoints;
+    ++NumAnchors;
 
     // Reallocate the buffer if it is not large enough to hold all indices
-    ++NumAnchors;
     if(NumAnchors > AnchorIndicesSize) {
         int OldSize = AnchorIndicesSize;
         int* OldArray = AnchorIndices;
