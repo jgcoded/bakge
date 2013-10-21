@@ -25,6 +25,8 @@ uint32 NumVertices;
 typedef struct
 {
     Scalar Position[3];
+    Scalar Normal[3];
+    Scalar TexCoord[2];
 } Vertex;
 
 uint32 NumTriangles;
