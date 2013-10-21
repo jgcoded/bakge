@@ -23,6 +23,7 @@
  * */
 
 #include <bakge/Bakge.h>
+#include <bakge/internal/Graphics.h>
 #ifdef _DEBUG
 #include <bakge/internal/Debug.h>
 #endif // _DEBUG
@@ -100,10 +101,6 @@ LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
     }
 #endif // _DEBUG
 
-    glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * NumPoints, NULL,
-                                                   GL_DYNAMIC_DRAW);
-
 #ifdef _DEBUG
     Error = glGetError();
     if(Error != GL_NO_ERROR) {
@@ -115,23 +112,39 @@ LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
     }
 #endif // _DEBUG
 
-    // Map the indices store instead of making a temp buffer
-    GLuint* IndicesMap = (GLuint*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-    if(IndicesMap == NULL) {
-        Log("ERROR: LineStrip - Error mapping indices data store.\n");
-        delete L;
-        return NULL;
-    }
+    glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
 
-    // Fill indices data store
-    for(int i=0;i<NumPoints;++i)
-        IndicesMap[i] = i;
+    int Tries = 0;
 
-    if(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE) {
-        Log("ERROR: LineStrip - Error unmapping indices data store.\n");
-        delete L;
-        return NULL;
-    }
+    do {
+        // Allocate storage here, in case unmapping fails
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * NumPoints, NULL,
+                                                       GL_DYNAMIC_DRAW);
+
+        // Map the indices store instead of making a temp buffer
+        GLuint* IndicesMap = (GLuint*)glMapBuffer(GL_ARRAY_BUFFER,
+                                                   GL_WRITE_ONLY);
+        if(IndicesMap == NULL) {
+            Log("ERROR: LineStrip - Failed to map buffer (attempt %d).\n",
+                                                                   ++Tries);
+
+            // Sentinel
+            if(Tries > BGE_MAP_BUFFER_MAX_ATTEMPTS) {
+                Log("ERROR: LineStrip - Couldn't map buffer after %d "
+                           "attempts.\n", BGE_MAP_BUFFER_MAX_ATTEMPTS);
+                delete L;
+                return NULL;
+            }
+
+            // Keep allocating storage and attempting to map and fill buffer
+            continue;
+        }
+
+        // Fill indices data store
+        for(int i=0;i<NumPoints;++i)
+            IndicesMap[i] = i;
+
+    } while(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
