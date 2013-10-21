@@ -1,6 +1,8 @@
 Bakge Mesh File v1.0.0 Specification
 ====================================
 
+** Data Layout
+
 ```
 typedef struct
 {
