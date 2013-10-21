@@ -124,12 +124,10 @@ BezierCurve* BezierCurve::Create(int NumPoints, Scalar* Points)
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE == 1
     BeginLogBlock();
-    Log("====================================\n");
     Log("BezierCurve anchor buffer size: %d\n", B->AnchorIndicesSize);
     Log("  Anchor points:\n");
     for(int i=0;i<B->NumAnchors;++i)
         Log("    %d: %d\n", i, B->AnchorIndices[i]);
-    Log("====================================\n");
     EndLogBlock();
 #endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_CREATE == 1
 
@@ -183,14 +181,11 @@ LineStrip* BezierCurve::Build(int NumSubdivisions)
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
     BeginLogBlock();
-    Log("\n");
     Log("BezierCurve: Building LineStrip\n");
-    Log("===============================\n");
-    Log("%d Subdivisions.\n", NumSubdivisions);
-    Log("%d Points per segment.\n", NumSubdivisions + 1);
-    Log("%d Segments.\n", NumSegments);
-    Log("%d Total points.\n", NumLinePoints);
-    Log("\n");
+    Log("  %d Subdivisions.\n", NumSubdivisions);
+    Log("  %d Points per segment.\n", NumSubdivisions + 1);
+    Log("  %d Segments.\n", NumSegments);
+    Log("  %d Total points.\n", NumLinePoints);
     EndLogBlock();
 #endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUILD == 1
 
@@ -376,14 +371,12 @@ void BezierCurve::GetPointAt(Scalar T, Vector3* V)
 int BezierCurve::MakeAnchor(int PointIndex)
 {
     if(PointIndex >= NumPoints) {
-        Log("ERROR: BezierCurve::MakeAnchor - Index %d is out of bounds.\n",
-                                                                PointIndex);
+        Log("ERROR: BezierCurve - Index %d is out of bounds.\n", PointIndex);
         return -1;
     }
 
     if(AnchorIndices == NULL) {
-        Log("ERROR: BezierCurve::MakeAnchor - Anchor indices buffer is "
-                                                                "NULL.\n");
+        Log("ERROR: BezierCurve - Anchor indices buffer is NULL.\n");
         return -1;
     }
 
@@ -429,8 +422,7 @@ int BezierCurve::MakeAnchor(int PointIndex)
         AnchorIndices = new int[AnchorIndicesSize];
         memcpy((void*)AnchorIndices, (const void*)OldArray, OldSize * 4);
         BeginLogBlock();
-        Log("BezierCurve::MakeAnchor - Reallocating anchor indices "
-                                                        "buffer.\n");
+        Log("BezierCurve - Reallocating anchor indices buffer.\n");
         Log("  - Old size: %d\n", OldSize);
         Log("  - New size: %d\n", AnchorIndicesSize);
         EndLogBlock();
@@ -444,11 +436,9 @@ int BezierCurve::MakeAnchor(int PointIndex)
 
 #if defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS == 1
     BeginLogBlock();
-    Log("BezierCurve::MakeAnchor anchors list:\n");
-    Log("=====================================\n");
+    Log("BezierCurve - Anchors list\n");
     for(int i=0;i<NumAnchors;++i)
         Log("  %d: %d\n", i, AnchorIndices[i]);
-    Log("=====================================\n");
     EndLogBlock();
 #endif // defined(_DEBUG) && BGE_BEZIER_VERBOSE_BUFFER_OPERATIONS == 1
 
