@@ -23,6 +23,7 @@
  * */
 
 #include <bakge/Bakge.h>
+#include <bakge/internal/Graphics.h>
 #ifdef _DEBUG
 #include <bakge/internal/Debug.h>
 #endif // _DEBUG
@@ -96,14 +97,24 @@ Line* Line::Create(Vector3 A, Vector3 B)
         // Get a pointer for writing to the data store
         Scalar* BufferMap = (Scalar*)glMapBuffer(GL_ARRAY_BUFFER,
                                                     GL_WRITE_ONLY);
-#ifdef _DEBUG
+
+        int Tries = 0;
+
         if(BufferMap == NULL) {
-            Log("ERROR: Line - Unable to map positions data store.\n");
-            glBindBuffer(GL_ARRAY_BUFFER, 0);
-            delete L;
-            return NULL;
+            Log("ERROR: Line - Failed to map buffer (attempt %d).\n", ++Tries);
+
+            // Sentinel to avoid infinite or long loops
+            if(Tries > BGE_MAP_BUFFER_MAX_ATTEMPTS) {
+                Log("ERROR: Line - Couldn't map buffer after %d attempts.\n",
+                                               BGE_MAP_BUFFER_MAX_ATTEMPTS);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                delete L;
+                return NULL;
+            }
+
+            // Keep attempting to map and fill buffer
+            continue;
         }
-#endif // _DEBUG
 
         BufferMap[0] = A[0];
         BufferMap[1] = A[1];
