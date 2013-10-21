@@ -20,6 +20,8 @@ typedef struct
     };
 } Header;
 
+uint32 NumVertices;
+
 typedef struct
 {
     Scalar Position[3];
