@@ -26,4 +26,12 @@ typedef struct
 {
     Scalar Position[3];
 } Vertex;
+
+uint32 NumTriangles;
+
+typedef struct
+{
+    uint32 Indices[3];
+} Triangle;
+
 ```
