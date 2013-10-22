@@ -16,7 +16,7 @@ typedef struct
             Byte Major;
             Byte Minor;
             Byte Revision;
-        }
+        };
     };
 } Header;
 
