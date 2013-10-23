@@ -53,7 +53,13 @@ Result DecodeImageFile(const char* FilePath, Byte** Data)
 
 bmf::v100* OpenMeshFile100(const char* Path)
 {
-    return NULL;
+    bmf::v100* Handle = new bmf::v100;
+    if(Handle == NULL) {
+        Log("ERROR: OpenMeshFile100() - Couldn't allocate memory.\n");
+        return NULL;
+    }
+
+    return Handle;
 }
 
 
