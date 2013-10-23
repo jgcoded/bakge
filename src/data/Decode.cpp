@@ -63,6 +63,17 @@ bmf::v100* OpenMeshFile100(const char* Path)
 }
 
 
+Result CloseMeshFile100(bmf::v100* Handle)
+{
+    if(PHYSFS_close(Handle->F) == 0) {
+        Log("ERROR: CloseMeshFile100() - Error closing mesh file handle.\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
+}
+
+
 int GetNumVertices(bmf::v100* Handle, uint32* Num)
 {
     return 0;

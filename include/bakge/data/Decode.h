@@ -62,6 +62,19 @@ BGE_FUNC Result DecodeImageFile(const char* FilePath, Byte** Data);
  */
 BGE_FUNC bmf::v100* OpenMeshFile100(const char* Path);
 
+/*! @brief Close a v1.0.0 Bakge Mesh File handle.
+ *
+ * Close a v1.0.0 Bakge Mesh File handle. This transparent struct should
+ * never be deleted or freed directly, as there may be open file handles
+ * associated with this struct that must be closed.
+ *
+ * @param[in] Handle Bakge Mesh File struct, v1.0.0
+ *
+ * @return BGE_SUCCESS if the handle was successfully closed; BGE_FAILURE
+ * if any errors occurred.
+ */
+BGE_FUNC Result CloseMeshFile100(bmf::v100* Handle);
+
 /*! @brief Get the number of vertices in a mesh file.
  * 
  * Get the number of vertices in a mesh from its file handle. Use this value
