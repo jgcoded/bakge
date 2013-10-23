@@ -33,6 +33,14 @@ namespace bmf
 struct v100
 {
     PHYSFS_file* F;
+    // Cache number of vertices and triangles in the mesh
+    uint32 NumVertices;
+    uint32 NumTriangles;
+    // File offsets of various vertex data
+    uint64 PositionsOffset;
+    uint64 NormalsOffset;
+    uint64 TexCoordsOffset;
+    uint64 TrianglesOffset;
 };
 
 } // bmf
