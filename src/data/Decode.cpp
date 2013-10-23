@@ -43,6 +43,12 @@ Result DecodeImageFile(const char* FilePath, Byte** Data)
 }
 
 
+bmf::v100* OpenMeshFile100(const char* Path)
+{
+    return NULL;
+}
+
+
 int GetNumVertices(bmf::v100 Handle, uint32* Num)
 {
     return 0;

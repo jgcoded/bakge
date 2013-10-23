@@ -49,6 +49,19 @@ namespace bakge
  */
 BGE_FUNC Result DecodeImageFile(const char* FilePath, Byte** Data);
 
+/* @brief Open a v1.0.0 Bakge Mesh File and return its handle.
+ *
+ * Open a v1.0.0 Bakge Mesh File and return its handle. This struct should
+ * be considered transparent and never have its contents modified or directly
+ * accessed. To extract information about the mesh, use the appropriate
+ * decoding API.
+ *
+ * @param[in] Path String path of the file to open.
+ *
+ * @return Pointer to mesh file struct; NULL if any errors occurred.
+ */
+BGE_FUNC bmf::v100* OpenMeshFile100(const char* Path);
+
 /*! @brief Get the number of vertices in a mesh file.
  * 
  * Get the number of vertices in a mesh from its file handle. Use this value
