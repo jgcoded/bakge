@@ -35,5 +35,4 @@ typedef struct
 {
     uint32 Indices[3];
 } Triangle;
-
 ```
