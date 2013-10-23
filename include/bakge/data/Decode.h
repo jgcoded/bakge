@@ -49,6 +49,15 @@ namespace bakge
  */
 Result DecodeImageFile(const char* FilePath, Byte** Data);
 
+/*! @brief Get the number of vertices in a mesh file.
+ * 
+ * Get the number of vertices in a mesh from its file handle. Use this value
+ * when setting Mesh positions data.
+ *
+ * @param[in] Handle Bakge Mesh File struct, v1.0.0
+ *
+ * @return Number of vertices in the mesh.
+ */
 uint32 GetNumVertices(bmf::v100 Handle);
 
 } /* bakge */
