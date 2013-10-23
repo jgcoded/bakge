@@ -32,7 +32,7 @@ namespace bmf
 
 struct v100
 {
-    PHYSFS_file* Handle;
+    PHYSFS_file* F;
 };
 
 } // bmf
