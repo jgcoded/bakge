@@ -32,6 +32,8 @@
 
 #include <bakge/Bakge.h>
 
+#define BGE_BMF_V100 "BAKGEMESHFILE0000000000000000000"
+
 namespace bakge
 {
 namespace bmf
