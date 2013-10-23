@@ -49,7 +49,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
 }
 
 
-int GetNumVertices(bmf::v100 Handle, uint32* Num)
+int GetNumVertices(bmf::v100* Handle, uint32* Num)
 {
     return 0;
 }

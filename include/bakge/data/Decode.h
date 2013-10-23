@@ -75,7 +75,7 @@ BGE_FUNC bmf::v100* OpenMeshFile100(const char* Path);
  * @return 1 if no errors occurred; -1 if some error occurred; 0 if invalid
  * format or format version.
  */
-BGE_FUNC int GetNumVertices(bmf::v100 Handle, uint32* Num);
+BGE_FUNC int GetNumVertices(bmf::v100* Handle, uint32* Num);
 
 } /* bakge */
 
