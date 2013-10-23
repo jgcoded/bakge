@@ -22,6 +22,14 @@
  * THE SOFTWARE.
  * */
 
+/*!
+ * @file Format.h
+ * Bakge file format struct declarations.
+ */
+
+#ifndef BAKGE_DATA_FORMAT_H
+#define BAKGE_DATA_FORMAT_H
+
 #include <bakge/Bakge.h>
 
 namespace bakge
@@ -30,16 +38,10 @@ namespace bakge
 namespace bmf
 {
 
-struct v100
-{
-    PHYSFS_file* Handle;
-};
+typedef struct v100 v100;
 
 } // bmf
 
-Result DecodeImageFile(const char* FilePath, Byte** Data)
-{
-    return BGE_FAILURE;
-}
+} // bakge
 
-} /* bakge */
+#endif // BAKGE_DATA_FORMAT_H

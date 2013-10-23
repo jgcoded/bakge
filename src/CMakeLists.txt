@@ -55,6 +55,7 @@ set(HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/math/Math
   ${BAKGE_SOURCE_DIR}/include/bakge/core/Type
   ${BAKGE_SOURCE_DIR}/include/bakge/input/XboxController
+  ${BAKGE_SOURCE_DIR}/include/bakge/data/Format
 )
 
 foreach(module ${MODULES})
