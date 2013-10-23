@@ -54,4 +54,10 @@ int GetNumVertices(bmf::v100* Handle, uint32* Num)
     return 0;
 }
 
+
+int GetNumTriangles(bmf::v100* Handle, uint32* Num)
+{
+    return 0;
+}
+
 } /* bakge */
