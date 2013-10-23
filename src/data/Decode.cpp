@@ -75,15 +75,15 @@ Result CloseMeshFile100(bmf::v100* Handle)
 }
 
 
-int GetNumVertices(bmf::v100* Handle, uint32* Num)
+Result GetNumVertices(bmf::v100* Handle, uint32* Num)
 {
-    return 0;
+    return BGE_SUCCESS;
 }
 
 
-int GetNumTriangles(bmf::v100* Handle, uint32* Num)
+Result GetNumTriangles(bmf::v100* Handle, uint32* Num)
 {
-    return 0;
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
