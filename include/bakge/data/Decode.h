@@ -52,13 +52,17 @@ BGE_FUNC Result DecodeImageFile(const char* FilePath, Byte** Data);
 /*! @brief Get the number of vertices in a mesh file.
  * 
  * Get the number of vertices in a mesh from its file handle. Use this value
- * when setting Mesh positions data.
+ * when setting Mesh positions data. The value of *Num is not changed if any
+ * errors occur (indicated by a return value of 0 or -1).
  *
  * @param[in] Handle Bakge Mesh File struct, v1.0.0
+ * @param[out] Num Pointee set to number of vertices in the mesh file. Not
+ *                 changed in occurrence of any error.
  *
- * @return Number of vertices in the mesh.
+ * @return 1 if no errors occurred; -1 if some error occurred; 0 if invalid
+ * format or format version.
  */
-BGE_FUNC uint32 GetNumVertices(bmf::v100 Handle);
+BGE_FUNC int GetNumVertices(bmf::v100 Handle, uint32* Num);
 
 } /* bakge */
 

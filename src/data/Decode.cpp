@@ -43,7 +43,7 @@ Result DecodeImageFile(const char* FilePath, Byte** Data)
 }
 
 
-uint32 GetNumVertices(bmf::v100 Handle)
+int GetNumVertices(bmf::v100 Handle, uint32* Num)
 {
     return 0;
 }
