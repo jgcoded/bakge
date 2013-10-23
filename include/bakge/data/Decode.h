@@ -47,7 +47,7 @@ namespace bakge
  * @return BGE_SUCCESS if the image data was successfully decoded; BGE_FAILURE
  * if the file does not exist or is not a valid and supported image format.
  */
-Result DecodeImageFile(const char* FilePath, Byte** Data);
+BGE_FUNC Result DecodeImageFile(const char* FilePath, Byte** Data);
 
 /*! @brief Get the number of vertices in a mesh file.
  * 
@@ -58,7 +58,7 @@ Result DecodeImageFile(const char* FilePath, Byte** Data);
  *
  * @return Number of vertices in the mesh.
  */
-uint32 GetNumVertices(bmf::v100 Handle);
+BGE_FUNC uint32 GetNumVertices(bmf::v100 Handle);
 
 } /* bakge */
 
