@@ -42,4 +42,10 @@ Result DecodeImageFile(const char* FilePath, Byte** Data)
     return BGE_FAILURE;
 }
 
+
+uint32 GetNumVertices(bmf::v100 Handle)
+{
+    return 0;
+}
+
 } /* bakge */

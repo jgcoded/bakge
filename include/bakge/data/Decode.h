@@ -49,6 +49,8 @@ namespace bakge
  */
 Result DecodeImageFile(const char* FilePath, Byte** Data);
 
+uint32 GetNumVertices(bmf::v100 Handle);
+
 } /* bakge */
 
 #endif // BAKGE_DATA_DECODE_H
