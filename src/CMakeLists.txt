@@ -113,6 +113,7 @@ set(INTERNAL_HEADERS
   ${BAKGE_SOURCE_DIR}/include/bakge/internal/Debug
   ${BAKGE_SOURCE_DIR}/include/bakge/internal/Utility
   ${BAKGE_SOURCE_DIR}/include/bakge/internal/Format
+  ${BAKGE_SOURCE_DIR}/include/bakge/internal/Graphics
 )
 
 if(BUILD_SHARED_LIBS)
