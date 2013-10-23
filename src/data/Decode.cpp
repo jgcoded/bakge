@@ -77,12 +77,40 @@ Result CloseMeshFile100(bmf::v100* Handle)
 
 Result GetNumVertices(bmf::v100* Handle, uint32* Num)
 {
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetNumVertices() - Passed NULL bmf::v100*\n");
+        return BGE_FAILURE;
+    }
+
+    if(Num == NULL) {
+        Log("ERROR: GetNumVertices() - Passed NULL uint32*\n");
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    *Num = Handle->NumVertices;
+
     return BGE_SUCCESS;
 }
 
 
 Result GetNumTriangles(bmf::v100* Handle, uint32* Num)
 {
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetNumTriangles() - Passed NULL bmf::v100*\n");
+        return BGE_FAILURE;
+    }
+
+    if(Num == NULL) {
+        Log("ERROR: GetNumTriangles() - Passed NULL uint32*\n");
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    *Num = Handle->NumTriangles;
+
     return BGE_SUCCESS;
 }
 
