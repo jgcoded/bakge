@@ -22,12 +22,9 @@ typedef struct
 
 uint32 NumVertices;
 
-typedef struct
-{
-    Scalar Position[3];
-    Scalar Normal[3];
-    Scalar TexCoord[2];
-} Vertex;
+Scalar Position[3 * NumVertices];
+Scalar Normal[3 * NumVertices];
+Scalar TexCoord[2 * NumVertices];
 
 uint32 NumTriangles;
 

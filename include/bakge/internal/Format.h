@@ -56,13 +56,6 @@ struct Header
     };
 };
 
-struct Vertex
-{
-    Scalar Position[3];
-    Scalar Normal[3];
-    Scalar TexCoord[2];
-};
-
 struct Triangle
 {
     uint32 Indices[3];
