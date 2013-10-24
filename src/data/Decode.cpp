@@ -54,21 +54,30 @@ Result DecodeImageFile(const char* FilePath, Byte** Data)
 
 bmf::v100* OpenMeshFile100(const char* Path)
 {
+    BeginLogBlock();
+
+    Log("OpenMeshFile100() - Verifying file \"%s\"...\n", Path);
+
     if(PHYSFS_exists(Path) == 0) {
         Log("ERROR: OpenMeshFile100() - File \"%s\" does not exist.\n",
                                                                 Path);
+        EndLogBlock();
         return NULL;
     }
 
     if(PHYSFS_isDirectory(Path) != 0) {
         Log("ERROR: OpenMeshFile100() - \"%s\" is a directory.\n", Path);
+        EndLogBlock();
         return NULL;
     }
+
+    Log("OpenMeshFile100() - Verified \"%s\"; opening to read.\n", Path);
 
     PHYSFS_file* MeshFile = PHYSFS_openRead(Path);
     if(MeshFile == NULL) {
         Log("ERROR: OpenMeshFile100() - Error while opening file \"%s\".\n",
                                                                       Path);
+        EndLogBlock();
         return NULL;
     }
 
@@ -76,8 +85,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
     if(Handle == NULL) {
         Log("ERROR: OpenMeshFile100() - Couldn't allocate memory.\n");
         PHYSFS_close(MeshFile);
+        EndLogBlock();
         return NULL;
     }
+
+    Log("OpenMeshFile100() - Opened \"%s\"; scanning for metadata and data "
+                                                        "segment offsets.\n");
 
     PHYSFS_uint64 Offset = sizeof(bmf::layout100::Header);
 
@@ -85,8 +98,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
         Log("ERROR: OpenMeshFile100() - Error seeking vertex metadatum.\n");
         PHYSFS_close(MeshFile);
         delete Handle;
+        EndLogBlock();
         return NULL;
     }
+
+    Log("OpenMeshFile100() - Found vertex metadatum at offset 0x%x\n",
+                                                                Offset);
 
     PHYSFS_sint64 ReadObj = PHYSFS_read(MeshFile,
                     (void*)(&Handle->NumVertices),
@@ -95,21 +112,27 @@ bmf::v100* OpenMeshFile100(const char* Path)
         Log("ERROR: OpenMeshFile100() - Error reading vertex metadatum.\n");
         PHYSFS_close(MeshFile);
         delete Handle;
+        EndLogBlock();
         return NULL;
     }
+
+    Log("OpenMeshFile100() - Setting vertex data segment offsets...\n");
 
     // Reading advances file offset
     Offset += sizeof(uint32);
 
     Handle->PositionsOffset = Offset;
+    Log("  - Vertex positions at offset  0x%0x\n", Offset);
     // Advance past positions
     Offset += sizeof(Scalar) * 3 * Handle->NumVertices;
 
     Handle->NormalsOffset = Offset;
+    Log("  - Vertex normals at offset    0x%0x\n", Offset);
     // Advance past normals
     Offset += sizeof(Scalar) * 3 * Handle->NumVertices;
 
     Handle->TexCoordsOffset = Offset;
+    Log("  - Vertex texcoords at offset  0x%0x\n", Offset);
     // Advance past texcoords
     Offset += sizeof(Scalar) * 2 * Handle->NumVertices;
 
@@ -117,8 +140,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
         Log("ERROR: OpenMeshFile100() - Error seeking triangle metadatum.\n");
         PHYSFS_close(MeshFile);
         delete Handle;
+        EndLogBlock();
         return NULL;
     }
+
+    Log("OpenMeshFile100() - Found triangle metadatum at offset 0x%x\n",
+                                                                Offset);
 
     ReadObj = PHYSFS_read(MeshFile, (void*)(&Handle->NumTriangles),
                                                 sizeof(uint32), 1);
@@ -126,11 +153,21 @@ bmf::v100* OpenMeshFile100(const char* Path)
         Log("ERROR: OpenMeshFile100() - Error reading triangle metadatum.\n");
         PHYSFS_close(MeshFile);
         delete Handle;
+        EndLogBlock();
         return NULL;
     }
 
     Offset += sizeof(uint32);
+
+    Log("OpenMeshFile100() - Setting triangle data segment offset...\n");
+
     Handle->TrianglesOffset = Offset;
+    Log("  - Triangle indices at offset  0x%0x\n", Offset);
+
+    Log("OpenMeshFile100() - Successfully opened and scanned mesh file "
+                                                        "\"%s\".", Path);
+
+    EndLogBlock();
 
     return Handle;
 }
