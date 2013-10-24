@@ -46,6 +46,7 @@ struct Header
     char FormatName[32]; // Always BAKGEMESHFILE0000000000000000000
     union
     {
+        uint32 Version;
         struct
         {
             Byte Type;
