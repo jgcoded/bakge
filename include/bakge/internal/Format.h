@@ -56,11 +56,6 @@ struct Header
     };
 };
 
-struct Triangle
-{
-    uint32 Indices[3];
-};
-
 } // layout100
 } // bmf
 } // bakge

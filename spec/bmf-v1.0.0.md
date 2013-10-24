@@ -28,8 +28,5 @@ Scalar TexCoord[2 * NumVertices];
 
 uint32 NumTriangles;
 
-typedef struct
-{
-    uint32 Indices[3];
-} Triangle;
+uint32 Indices[3 * NumTriangles];
 ```
