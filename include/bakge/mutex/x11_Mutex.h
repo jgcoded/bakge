@@ -22,27 +22,30 @@
  * THE SOFTWARE.
  * */
 
-#ifndef BAKGE_THREAD_X11_MUTEX_H
-#define BAKGE_THREAD_X11_MUTEX_H
+#ifndef BAKGE_MUTEX_X11_MUTEX_H
+#define BAKGE_MUTEX_X11_MUTEX_H
 
 namespace bakge
 {
 
 typedef class BGE_API x11_Mutex
 {
+    pthread_mutex_t MutexHandle;
 
     x11_Mutex();
-    pthread_mutex_t MutexHandle;
+
 
 public:
 
-	static x11_Mutex* Create();
-	int Lock();
-	int Unlock();
     virtual ~x11_Mutex();
+
+    BGE_FACTORY x11_Mutex* Create();
+
+    int Lock();
+    int Unlock();
 
 } Mutex; /* x11_Mutex */
 
 } /* bakge */
 
-#endif /* BAKGE_THREAD_X11_MUTEX_H */
+#endif // BAKGE_MUTEX_X11_MUTEX_H
