@@ -90,8 +90,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Opened \"%s\"; verifying format and version...",
-                                                                     Path);
+    Log("OpenMeshFile100() - Verifying format and version...\n", Path);
 
     bmf::layout100::Header H;
 
@@ -117,7 +116,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
                                             H.Major, H.Minor, H.Revision);
    }
 
-    Log("OpenMeshFile100() - Verified Bakge Mesh File v%d.%d.%d \"%s\"",
+    Log("OpenMeshFile100() - Verified Bakge Mesh File v%d.%d.%d \"%s\"\n",
                                                       H.Major, H.Minor,
                                                       H.Revision, Path);
 
@@ -186,7 +185,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
     Log("  - Triangle indices at offset  0x%0x\n", Offset);
 
     Log("OpenMeshFile100() - Successfully opened and scanned mesh file "
-                                                        "\"%s\".", Path);
+                                                    "\"%s\".\n", Path);
 
     Handle->Path = strdup(Path);
 
@@ -200,6 +199,7 @@ Result CloseMeshFile100(bmf::v100* Handle)
 {
     if(PHYSFS_close(Handle->F) == 0) {
         Log("ERROR: CloseMeshFile100() - Error closing mesh file handle.\n");
+        Log("  - %s\n", PHYSFS_getLastError());
         return BGE_FAILURE;
     }
 
