@@ -72,8 +72,6 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Verified \"%s\"; opening to read.\n", Path);
-
     PHYSFS_file* MeshFile = PHYSFS_openRead(Path);
     if(MeshFile == NULL) {
         Log("ERROR: OpenMeshFile100() - Error while opening file \"%s\".\n",
@@ -90,12 +88,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Verifying format and version...\n", Path);
+    Log("  - Verifying format and version...\n", Path);
 
     bmf::layout100::Header H;
 
     if(PHYSFS_read(MeshFile, (void*)&H, sizeof(H), 1) < 1) {
-        Log("ERROR: OpenMeshFile100() - Error scanning file header.\n");
+        Log("ERROR: OpenMeshFile100() - Couldn't find file header.\n");
         PHYSFS_close(MeshFile);
         EndLogBlock();
         return NULL;
@@ -104,21 +102,21 @@ bmf::v100* OpenMeshFile100(const char* Path)
     // Make sure name string is correct
     if(strncmp(BGE_BMF_NAME, H.FormatName, 32) != 0) {
         Log("ERROR: OpenMeshFile100() - \"%s\" is not a valid Bakge Mesh "
-                                                          "File.\n", Path);
+                                                            "File.\n", Path);
         PHYSFS_close(MeshFile);
         EndLogBlock();
         return NULL;
     }
 
    if(H.Major != 1 || H.Minor != 0 || H.Revision != 0) {
-       Log("OpenMeshFile100() - \"%s\" is of an incorrect format version "
-                                                 "(v%d.%d.%d).\n", Path,
-                                            H.Major, H.Minor, H.Revision);
+       Log("ERROR: OpenMeshFile100() - \"%s\" is of an incorrect format "
+                                                "version (v%d.%d.%d).\n",
+                                                    Path, H.Major, H.Minor,
+                                                            H.Revision);
    }
 
-    Log("OpenMeshFile100() - Verified Bakge Mesh File v%d.%d.%d \"%s\"\n",
-                                                      H.Major, H.Minor,
-                                                      H.Revision, Path);
+    Log("  - Verified Bakge Mesh File v%d.%d.%d \"%s\"\n", H.Major, H.Minor,
+                                                            H.Revision, Path);
 
     PHYSFS_uint64 Offset = sizeof(bmf::layout100::Header);
 
@@ -133,26 +131,25 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Found vertex metadatum at offset 0x%x\n",
-                                                                Offset);
+    Log("  - Found vertex metadatum at offset 0x%x\n", Offset);
 
     // Reading advances file offset
     Offset += sizeof(uint32);
 
-    Log("OpenMeshFile100() - Setting vertex data segment offsets...\n");
+    Log("  - Setting vertex data segment offsets...\n");
 
     Handle->PositionsOffset = Offset;
-    Log("  - Vertex positions at offset  0x%0x\n", Offset);
+    Log("    - Vertex positions at offset  0x%0x\n", Offset);
     // Advance past positions
     Offset += sizeof(Scalar) * 3 * Handle->NumVertices;
 
     Handle->NormalsOffset = Offset;
-    Log("  - Vertex normals at offset    0x%0x\n", Offset);
+    Log("    - Vertex normals at offset    0x%0x\n", Offset);
     // Advance past normals
     Offset += sizeof(Scalar) * 3 * Handle->NumVertices;
 
     Handle->TexCoordsOffset = Offset;
-    Log("  - Vertex texcoords at offset  0x%0x\n", Offset);
+    Log("    - Vertex texcoords at offset  0x%0x\n", Offset);
     // Advance past texcoords
     Offset += sizeof(Scalar) * 2 * Handle->NumVertices;
 
@@ -174,18 +171,16 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Found triangle metadatum at offset 0x%x\n",
-                                                                Offset);
+    Log("  - Found triangle metadatum at offset 0x%x\n", Offset);
 
     Offset += sizeof(uint32);
 
-    Log("OpenMeshFile100() - Setting triangle data segment offset...\n");
+    Log("  - Setting triangle data segment offset...\n");
 
     Handle->TrianglesOffset = Offset;
-    Log("  - Triangle indices at offset  0x%0x\n", Offset);
+    Log("    - Triangle indices at offset  0x%0x\n", Offset);
 
-    Log("OpenMeshFile100() - Successfully opened and scanned mesh file "
-                                                    "\"%s\".\n", Path);
+    Log("  - Successfully opened and scanned mesh file \"%s\".\n", Path);
 
     Handle->F = MeshFile;
     Handle->Path = strdup(Path);
