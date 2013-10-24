@@ -30,6 +30,7 @@ set(MODULES
   graphics/Shader
   graphics/Texture
   graphics/geometries/BezierCurve
+  graphics/geometries/Grid
   graphics/geometries/Line
   graphics/geometries/LineStrip
   graphics/shapes/Cube
