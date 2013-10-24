@@ -42,6 +42,9 @@ namespace bakge
  */
 class BGE_API Line : public Geometry
 {
+    Vector3 A;
+    Vector3 B;
+
     /*! @brief Default Line constructor.
      *
      * Default Line constructor.

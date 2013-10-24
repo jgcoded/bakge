@@ -131,6 +131,8 @@ Line* Line::Create(Vector3 A, Vector3 B)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     L->NumPoints = 2;
+    L->A = A;
+    L->B = B;
 
     return L;
 }
