@@ -57,7 +57,8 @@ bmf::v100* OpenMeshFile100(const char* Path)
 {
     BeginLogBlock();
 
-    Log("OpenMeshFile100() - Verifying file \"%s\"...\n", Path);
+    Log("OpenMeshFile100() - \"%s\"\n", Path);
+    Log("==================================================\n");
 
     if(PHYSFS_exists(Path) == 0) {
         Log("ERROR: OpenMeshFile100() - File \"%s\" does not exist.\n",
@@ -101,8 +102,8 @@ bmf::v100* OpenMeshFile100(const char* Path)
 
     // Make sure name string is correct
     if(strncmp(BGE_BMF_NAME, H.FormatName, 32) != 0) {
-        Log("ERROR: OpenMeshFile100() - \"%s\" is not a valid Bakge Mesh "
-                                                            "File.\n", Path);
+        Log("ERROR: OpenMeshFile100() - \"%s\" is not a Bakge Mesh File.\n",
+                                                                      Path);
         PHYSFS_close(MeshFile);
         EndLogBlock();
         return NULL;
@@ -184,11 +185,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
     Log("    - Triangle indices at offset  0x%0x\n", Offset);
 
     Log("  - Successfully opened and scanned mesh file \"%s\".\n", Path);
+    Log("\n");
+
+    EndLogBlock();
 
     Handle->F = MeshFile;
     Handle->Path = strdup(Path);
-
-    EndLogBlock();
 
     return Handle;
 }
