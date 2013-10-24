@@ -192,6 +192,8 @@ namespace bakge
 #include <bakge/system/Device.h>
 
 /* Data/filesystem module */
+#include <bakge/data/Format.h>
+#include <bakge/data/Decode.h>
 #include <bakge/data/File.h>
 
 /* Utility headers */

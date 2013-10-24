@@ -23,13 +23,95 @@
  * */
 
 #include <bakge/Bakge.h>
+#include <bakge/internal/Format.h>
 
 namespace bakge
 {
 
+namespace bmf
+{
+
+struct v100
+{
+    PHYSFS_file* F;
+    // Cache number of vertices and triangles in the mesh
+    uint32 NumVertices;
+    uint32 NumTriangles;
+    // File offsets of various vertex data
+    uint64 PositionsOffset;
+    uint64 NormalsOffset;
+    uint64 TexCoordsOffset;
+    uint64 TrianglesOffset;
+};
+
+} // bmf
+
 Result DecodeImageFile(const char* FilePath, Byte** Data)
 {
     return BGE_FAILURE;
+}
+
+
+bmf::v100* OpenMeshFile100(const char* Path)
+{
+    bmf::v100* Handle = new bmf::v100;
+    if(Handle == NULL) {
+        Log("ERROR: OpenMeshFile100() - Couldn't allocate memory.\n");
+        return NULL;
+    }
+
+    return Handle;
+}
+
+
+Result CloseMeshFile100(bmf::v100* Handle)
+{
+    if(PHYSFS_close(Handle->F) == 0) {
+        Log("ERROR: CloseMeshFile100() - Error closing mesh file handle.\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
+}
+
+
+Result GetNumVertices(bmf::v100* Handle, uint32* Num)
+{
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetNumVertices() - Passed NULL bmf::v100*\n");
+        return BGE_FAILURE;
+    }
+
+    if(Num == NULL) {
+        Log("ERROR: GetNumVertices() - Passed NULL uint32*\n");
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    *Num = Handle->NumVertices;
+
+    return BGE_SUCCESS;
+}
+
+
+Result GetNumTriangles(bmf::v100* Handle, uint32* Num)
+{
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetNumTriangles() - Passed NULL bmf::v100*\n");
+        return BGE_FAILURE;
+    }
+
+    if(Num == NULL) {
+        Log("ERROR: GetNumTriangles() - Passed NULL uint32*\n");
+        return BGE_FAILURE;
+    }
+#endif // _DEBUG
+
+    *Num = Handle->NumTriangles;
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */
