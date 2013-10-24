@@ -54,11 +54,83 @@ Result DecodeImageFile(const char* FilePath, Byte** Data)
 
 bmf::v100* OpenMeshFile100(const char* Path)
 {
+    if(PHYSFS_exists(Path) == 0) {
+        Log("ERROR: OpenMeshFile100() - File \"%s\" does not exist.\n",
+                                                                Path);
+        return NULL;
+    }
+
+    if(PHYSFS_isDirectory(Path) != 0) {
+        Log("ERROR: OpenMeshFile100() - \"%s\" is a directory.\n", Path);
+        return NULL;
+    }
+
+    PHYSFS_file* MeshFile = PHYSFS_openRead(Path);
+    if(MeshFile == NULL) {
+        Log("ERROR: OpenMeshFile100() - Error while opening file \"%s\".\n",
+                                                                      Path);
+        return NULL;
+    }
+
     bmf::v100* Handle = new bmf::v100;
     if(Handle == NULL) {
         Log("ERROR: OpenMeshFile100() - Couldn't allocate memory.\n");
+        PHYSFS_close(MeshFile);
         return NULL;
     }
+
+    PHYSFS_uint64 Offset = sizeof(bmf::layout100::Header);
+
+    if(PHYSFS_seek(MeshFile, Offset) == 0) {
+        Log("ERROR: OpenMeshFile100() - Error seeking vertex metadatum.\n");
+        PHYSFS_close(MeshFile);
+        delete Handle;
+        return NULL;
+    }
+
+    PHYSFS_sint64 ReadObj = PHYSFS_read(MeshFile,
+                    (void*)(&Handle->NumVertices),
+                               sizeof(uint32), 1);
+    if(ReadObj < 1) {
+        Log("ERROR: OpenMeshFile100() - Error reading vertex metadatum.\n");
+        PHYSFS_close(MeshFile);
+        delete Handle;
+        return NULL;
+    }
+
+    // Reading advances file offset
+    Offset += sizeof(uint32);
+
+    Handle->PositionsOffset = Offset;
+    // Advance past positions
+    Offset += sizeof(Scalar) * 3 * Handle->NumVertices;
+
+    Handle->NormalsOffset = Offset;
+    // Advance past normals
+    Offset += sizeof(Scalar) * 3 * Handle->NumVertices;
+
+    Handle->TexCoordsOffset = Offset;
+    // Advance past texcoords
+    Offset += sizeof(Scalar) * 2 * Handle->NumVertices;
+
+    if(PHYSFS_seek(MeshFile, Offset) == 0) {
+        Log("ERROR: OpenMeshFile100() - Error seeking triangle metadatum.\n");
+        PHYSFS_close(MeshFile);
+        delete Handle;
+        return NULL;
+    }
+
+    ReadObj = PHYSFS_read(MeshFile, (void*)(&Handle->NumTriangles),
+                                                sizeof(uint32), 1);
+    if(ReadObj < 1) {
+        Log("ERROR: OpenMeshFile100() - Error reading triangle metadatum.\n");
+        PHYSFS_close(MeshFile);
+        delete Handle;
+        return NULL;
+    }
+
+    Offset += sizeof(uint32);
+    Handle->TrianglesOffset = Offset;
 
     return Handle;
 }
