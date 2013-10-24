@@ -32,7 +32,7 @@
 
 #include <bakge/Bakge.h>
 
-#define BGE_BMF_V100 "BAKGEMESHFILE0000000000000000000"
+#define BGE_BMF_NAME "BAKGEMESHFILE0000000000000000000"
 
 namespace bakge
 {

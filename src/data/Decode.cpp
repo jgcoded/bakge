@@ -102,7 +102,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
     }
 
     // Make sure name string is correct
-    if(strncmp(BGE_BMF_V100, H.FormatName, 32) != 0) {
+    if(strncmp(BGE_BMF_NAME, H.FormatName, 32) != 0) {
         Log("ERROR: OpenMeshFile100() - \"%s\" is not a valid Bakge Mesh "
                                                           "File.\n", Path);
         PHYSFS_close(MeshFile);
