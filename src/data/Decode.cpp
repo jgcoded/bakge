@@ -33,6 +33,7 @@ namespace bmf
 
 struct v100
 {
+    char* Path;
     PHYSFS_file* F;
     // Cache number of vertices and triangles in the mesh
     uint32 NumVertices;
@@ -187,6 +188,8 @@ bmf::v100* OpenMeshFile100(const char* Path)
     Log("OpenMeshFile100() - Successfully opened and scanned mesh file "
                                                         "\"%s\".", Path);
 
+    Handle->Path = strdup(Path);
+
     EndLogBlock();
 
     return Handle;
@@ -199,6 +202,8 @@ Result CloseMeshFile100(bmf::v100* Handle)
         Log("ERROR: CloseMeshFile100() - Error closing mesh file handle.\n");
         return BGE_FAILURE;
     }
+
+    Log("Successfully closed mesh file \"%s\".\n", Handle->Path);
 
     return BGE_SUCCESS;
 }
