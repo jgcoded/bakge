@@ -126,6 +126,19 @@ public:
      */
     virtual ~Mesh();
 
+    /*! @brief Write the Mesh data to a Bakge Mesh File v1.0.0.
+     *
+     * Write the Mesh data to a Bakge Mesh File v1.0.0. The file contents are
+     * cleared and the mesh data is written according to the v1.0.0
+     * Bakge Mesh File specifications.
+     *
+     * @param[in] Path String path of the file to write to.
+     *
+     * @return BGE_SUCCESS if Mesh encoding succeeded; BGE_FAILURE if any
+     * errors occurred.
+     */
+    Result Encode100(const char* Path);
+
     /*! @brief Bind the mesh for drawing use.
      *
      * To draw a mesh it must first be bound. This sets OpenGL state so its
