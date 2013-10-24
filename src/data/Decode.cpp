@@ -89,21 +89,32 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Opened \"%s\"; scanning for metadata and data "
-                                                        "segment offsets.\n");
+    Log("OpenMeshFile100() - Opened \"%s\"; verifying format and version...",
+                                                                     Path);
 
-    PHYSFS_uint64 Offset = sizeof(bmf::layout100::Header);
+    bmf::layout100::Header H;
 
-    if(PHYSFS_seek(MeshFile, Offset) == 0) {
-        Log("ERROR: OpenMeshFile100() - Error seeking vertex metadatum.\n");
+    if(PHYSFS_read(MeshFile, (void*)&H, sizeof(H), 1) < 1) {
+        Log("ERROR: OpenMeshFile100() - Error scanning file header.\n");
         PHYSFS_close(MeshFile);
-        delete Handle;
         EndLogBlock();
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Found vertex metadatum at offset 0x%x\n",
-                                                                Offset);
+    // Make sure name string is correct
+    if(strncmp(BGE_BMF_V100, H.FormatName, 32) != 0) {
+        Log("ERROR: OpenMeshFile100() - \"%s\" is not a valid Bakge Mesh "
+                                                          "File.\n", Path);
+        PHYSFS_close(MeshFile);
+        EndLogBlock();
+        return NULL;
+    }
+
+    Log("OpenMeshFile100() - Verified Bakge Mesh File v%d.%d.%d \"%s\"",
+                                                      H.Major, H.Minor,
+                                                      H.Revision, Path);
+
+    PHYSFS_uint64 Offset = sizeof(bmf::layout100::Header);
 
     PHYSFS_sint64 ReadObj = PHYSFS_read(MeshFile,
                     (void*)(&Handle->NumVertices),
@@ -116,10 +127,13 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Setting vertex data segment offsets...\n");
+    Log("OpenMeshFile100() - Found vertex metadatum at offset 0x%x\n",
+                                                                Offset);
 
     // Reading advances file offset
     Offset += sizeof(uint32);
+
+    Log("OpenMeshFile100() - Setting vertex data segment offsets...\n");
 
     Handle->PositionsOffset = Offset;
     Log("  - Vertex positions at offset  0x%0x\n", Offset);
@@ -144,9 +158,6 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    Log("OpenMeshFile100() - Found triangle metadatum at offset 0x%x\n",
-                                                                Offset);
-
     ReadObj = PHYSFS_read(MeshFile, (void*)(&Handle->NumTriangles),
                                                 sizeof(uint32), 1);
     if(ReadObj < 1) {
@@ -156,6 +167,9 @@ bmf::v100* OpenMeshFile100(const char* Path)
         EndLogBlock();
         return NULL;
     }
+
+    Log("OpenMeshFile100() - Found triangle metadatum at offset 0x%x\n",
+                                                                Offset);
 
     Offset += sizeof(uint32);
 
