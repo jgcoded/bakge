@@ -204,6 +204,8 @@ Result CloseMeshFile100(bmf::v100* Handle)
 
     Log("Successfully closed mesh file \"%s\".\n", Handle->Path);
 
+    free(Handle->Path);
+
     return BGE_SUCCESS;
 }
 
