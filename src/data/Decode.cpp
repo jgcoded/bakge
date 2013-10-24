@@ -187,6 +187,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
     Log("OpenMeshFile100() - Successfully opened and scanned mesh file "
                                                     "\"%s\".\n", Path);
 
+    Handle->F = MeshFile;
     Handle->Path = strdup(Path);
 
     EndLogBlock();
