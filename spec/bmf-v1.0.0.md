@@ -4,7 +4,7 @@ Bakge Mesh File v1.0.0 Specification
 ## Data Layout
 
 ```cpp
-typedef struct
+struct
 {
     char FormatName[32]; // Always BAKGEMESHFILE0000000000000000000
     union
