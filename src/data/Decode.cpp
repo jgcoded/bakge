@@ -110,6 +110,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
+   if(H.Major != 1 || H.Minor != 0 || H.Revision != 0) {
+       Log("OpenMeshFile100() - \"%s\" is of an incorrect format version "
+                                                 "(v%d.%d.%d).\n", Path,
+                                            H.Major, H.Minor, H.Revision);
+   }
+
     Log("OpenMeshFile100() - Verified Bakge Mesh File v%d.%d.%d \"%s\"",
                                                       H.Major, H.Minor,
                                                       H.Revision, Path);
