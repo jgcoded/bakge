@@ -113,6 +113,9 @@ bmf::v100* OpenMeshFile100(const char* Path)
                                                 "version (v%d.%d.%d).\n",
                                                     Path, H.Major, H.Minor,
                                                             H.Revision);
+        PHYSFS_close(MeshFile);
+        EndLogBlock();
+        return NULL;
    }
 
     Log("  - Verified Bakge Mesh File v%d.%d.%d \"%s\"\n", H.Major, H.Minor,
