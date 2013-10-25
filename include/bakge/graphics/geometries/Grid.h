@@ -67,6 +67,22 @@ public:
      */
     ~Grid();
 
+    /*! @brief Create a Grid with a given number of half-rows and half-columns
+    * and a given grid unit size.
+    *
+    * Create a grid with a given number of half-rows and half-columns
+    * and a given grid unit size.
+    *
+    * @param[in] HalfRows Number of half-rows
+    * @param[in] HalfCols Number of half-columns
+    * @param[in] Width Width of each grid unit.
+    * @param[in] Length Length of each grid unit.
+    *
+    * @return Pointer to allocated Grid; NULL if any errors occurred.
+    */
+    BGE_FACTORY Grid* Create(int HalfRows, int HalfCols, Scalar Width,
+                                                        Scalar Length);
+
 }; // Grid
 
 } // bakge

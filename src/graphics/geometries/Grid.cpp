@@ -44,4 +44,30 @@ Grid::~Grid()
 {
 }
 
+
+Grid* Grid::Create(int HalfRows, int HalfCols, Scalar Width, Scalar Length)
+{
+    Grid* G = new Grid;
+    if(G == NULL) {
+        Log("ERROR: Grid - Couldn't allocate memory.\n");
+        return NULL;
+    }
+
+    glGenBuffers(1, &G->PointsBuffer);
+    glGenBuffers(1, &G->IndicesBuffer);
+
+    G->HalfRows = HalfRows;
+    G->HalfCols = HalfCols;
+    G->UnitWidth = Width;
+    G->UnitLength = Length;
+
+    if(G->Bufferize() != BGE_SUCCESS) {
+        Log("ERROR: Grid::Create - Failed to bufferize the grid.\n");
+        delete G;
+        return NULL;
+    }
+
+    return G;
+}
+
 } // bakge
