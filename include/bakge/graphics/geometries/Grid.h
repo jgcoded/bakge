@@ -43,6 +43,15 @@ namespace bakge
  */
 class BGE_API Grid : public Geometry
 {
+    // These values * 2 are number of grid units. Rows = Z, Cols = X
+    int HalfRows;
+    int HalfCols;
+
+    // Grid unit length along X axis
+    Scalar UnitWidth;
+    // Grid unit length along Z axis
+    Scalar UnitLength;
+
     /*! @brief Default Grid constructor.
      *
      * Default Grid constructor.

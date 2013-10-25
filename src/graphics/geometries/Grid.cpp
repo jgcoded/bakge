@@ -33,6 +33,10 @@ namespace bakge
 
 Grid::Grid()
 {
+    UnitWidth = 1.0f;
+    UnitLength = 1.0f;
+    HalfRows = 3;
+    HalfCols = 3;
 }
 
 
