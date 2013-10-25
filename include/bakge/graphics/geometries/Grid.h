@@ -93,6 +93,44 @@ public:
     BGE_FACTORY Grid* Create(int HalfRows, int HalfCols, Scalar Width,
                                                         Scalar Length);
 
+    /*! @brief Set the half-rows of the grid.
+     *
+     * When the grid is drawn, HalfRows units are placed along the +Z and -Z
+     * axes, from the center.
+     *
+     * @param[in] R Number of half-rows.
+     *
+     * @return Number of half-rows for the grid.
+     */
+    int SetHalfRows(int R);
+
+    /*! @brief Set the half-columns of the grid.
+     *
+     * When the grid is drawn, HalfCols units are placed along the +X and -X
+     * axes, from the center.
+     *
+     * @param[in] C Number of half-columns.
+     *
+     * @return Number of half-columns for the grid.
+     */
+    int SetHalfCols(int C);
+
+    /*! @brief Get the grid's half-rows count.
+     *
+     * Get the grid's half-rows count.
+     *
+     * @return Number of half-rows.
+     */
+    int GetHalfRows() const;
+
+    /*! @brief Get the grid's half-columns count.
+     *
+     * Get the grid's half-columns count.
+     *
+     * @return Number of half-columns.
+     */
+    int GetHalfCols() const;
+
 }; // Grid
 
 } // bakge

@@ -103,4 +103,40 @@ Result Grid::Bufferize()
     return BGE_FAILURE;
 }
 
+
+int Grid::SetHalfRows(int R)
+{
+    HalfRows = R;
+
+    NumPoints = ((HalfRows + 1) * 2) + ((HalfCols + 1) * 2);
+
+    Bufferize();
+
+    return HalfRows;
+}
+
+
+int Grid::SetHalfCols(int C)
+{
+    HalfCols = C;
+
+    NumPoints = ((HalfRows + 1) * 2) + ((HalfCols + 1) * 2);
+
+    Bufferize();
+
+    return HalfCols;
+}
+
+
+int Grid::GetHalfRows() const
+{
+    return HalfRows;
+}
+
+
+int Grid::GetHalfCols() const
+{
+    return HalfCols;
+}
+
 } // bakge
