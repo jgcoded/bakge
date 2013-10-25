@@ -30,7 +30,7 @@ namespace bakge
 
 typedef class BGE_API win32_Mutex
 {
-	CRITICAL_SECTION CriticalSectionHandle;
+	LPCRITICAL_SECTION CriticalSectionHandle;
 
     win32_Mutex();
 
