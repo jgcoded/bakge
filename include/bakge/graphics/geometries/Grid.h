@@ -58,6 +58,16 @@ class BGE_API Grid : public Geometry
      */
     Grid();
 
+    /*! @brief Allocate data store and fill with grid data.
+     *
+     * Allocate data store and fill with grid data. This orphans the previous
+     * OpenGL buffer and fills a new one.
+     *
+     * @return BGE_SUCCESS if OpenGL buffer was successfully allocated and
+     * filled with grid data; BGE_FAILURE if any errors occurred.
+     */
+    Result Bufferize();
+
 
 public:
 

@@ -70,4 +70,37 @@ Grid* Grid::Create(int HalfRows, int HalfCols, Scalar Width, Scalar Length)
     return G;
 }
 
+
+Result Grid::Bufferize()
+{
+    int Tries = 0;
+
+    do {
+        glBindBuffer(GL_ARRAY_BUFFER, PointsBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * NumPoints, NULL,
+                                                            GL_DYNAMIC_DRAW);
+
+        Scalar* BufPtr = (Scalar*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        if(BufPtr == NULL) {
+            Log("ERROR: Grid - Failed to map buffer "
+                            "(attempt %d).\n", ++Tries);
+
+            // Sentinel to avoid infinite or long loops
+            if(Tries > BGE_MAP_BUFFER_MAX_ATTEMPTS) {
+                Log("ERROR: Grid - Couldn't map buffer after %d attempts.\n",
+                                               BGE_MAP_BUFFER_MAX_ATTEMPTS);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                return BGE_FAILURE;
+            }
+
+            continue;
+        }
+
+        // Assign vertex positions here
+
+    } while(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE);
+
+    return BGE_FAILURE;
+}
+
 } // bakge
