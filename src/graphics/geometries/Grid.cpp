@@ -80,10 +80,10 @@ Result Grid::Bufferize()
 
     Log("Grid - Bufferizing...\n");
     Log("  %d points.\n", NumPoints);
-
-    glBindBuffer(GL_ARRAY_BUFFER, PointsBuffer);
+    Log("  %d lines.\n", NumColLines + NumRowLines);
 
     do {
+        glBindBuffer(GL_ARRAY_BUFFER, PointsBuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * NumPoints, NULL,
                                                             GL_DYNAMIC_DRAW);
 
@@ -127,9 +127,8 @@ Result Grid::Bufferize()
 
     Tries = 0;
 
-    glBindBuffer(GL_ARRAY_BUFFER, IndicesBuffer);
-
     do {
+        glBindBuffer(GL_ARRAY_BUFFER, IndicesBuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * NumPoints * 2, NULL,
                                                             GL_DYNAMIC_DRAW);
 
@@ -149,15 +148,8 @@ Result Grid::Bufferize()
             continue;
         }
 
-        int LineCount = NumRowLines + NumColLines;
-        int i = 0;
-
-        Log("Grid - LineCount %d\n", LineCount);
-
-        while(i < NumPoints) {
-            Log("  %d: %d\n", i, i);
+        for(int i=0;i < NumPoints;++i) {
             BufPtr[i] = i;
-            ++i;
         }
 
     } while(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE);
