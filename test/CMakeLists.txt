@@ -12,6 +12,7 @@ set(TESTS
   crowd
   device
   font
+  grid
   rectangle
   thread
 )
