@@ -26,7 +26,7 @@ else()
     add_executable(${test} MACOSX_BUNDLE ${test})
     target_link_libraries(${test} bakge ${BAKGE_LIBRARIES})
     set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_BUNDLE_NAME ${test})
-    set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING ${BAKGE_GLFW_VERSION}
-                                             MACOSX_BUNDLE_LONG_VERSION_STRING ${BAKGE_GLFW_VERSION_FULL})
+    set_target_properties(${test} PROPERTIES MACOSX_BUNDLE_SHORT_VERSION_STRING ${BAKGE_VERSION_STRING}
+                                             MACOSX_BUNDLE_LONG_VERSION_STRING ${BAKGE_VERSION_STRING_FULL})
   endforeach(test)
 endif()
