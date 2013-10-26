@@ -4,8 +4,8 @@ cmake_minimum_required (VERSION 2.6)
 
 project(BAKGE)
 
-SET(BAKGE_VERSION_STRING "v0.1.0")
-SET(BAKGE_VERSION_STRING_FULL "Bakersfield Game Engine v0.1.0")
+SET(BAKGE_VERSION_STRING "v0.2.0")
+SET(BAKGE_VERSION_STRING_FULL "Bakersfield Game Engine v0.2.0")
 
 # Prevent build attempts on any unsupported platform
 if(NOT APPLE AND NOT WIN32 AND NOT UNIX)
