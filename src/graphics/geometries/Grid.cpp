@@ -166,6 +166,17 @@ Result Grid::Bufferize()
 }
 
 
+Result Grid::SetDrawStyle(GEOMETRY_DRAW_STYLE Style)
+{
+    if(Style == GEOMETRY_DRAW_STYLE_LINES) {
+        DrawStyle = GL_LINES;
+        return BGE_SUCCESS;
+    } else {
+        return Geometry::SetDrawStyle(Style);
+    }
+}
+
+
 int Grid::SetHalfRows(int R)
 {
     HalfRows = R;

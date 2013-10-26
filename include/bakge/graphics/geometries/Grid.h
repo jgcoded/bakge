@@ -93,6 +93,8 @@ public:
     BGE_FACTORY Grid* Create(int HalfRows, int HalfCols, Scalar Width,
                                                         Scalar Length);
 
+    Result SetDrawStyle(GEOMETRY_DRAW_STYLE Style);
+
     /*! @brief Set the half-rows of the grid.
      *
      * When the grid is drawn, HalfRows units are placed along the +Z and -Z
