@@ -190,7 +190,10 @@ int Grid::SetHalfRows(int R)
 
     NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
 
-    Bufferize();
+    if(Bufferize() == BGE_FAILURE) {
+        Log("ERROR: Grid - Failed to bufferize with new half-rows.\n");
+        return -1;
+    }
 
     return HalfRows;
 }
@@ -207,7 +210,10 @@ int Grid::SetHalfCols(int C)
 
     NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
 
-    Bufferize();
+    if(Bufferize() == BGE_FAILURE) {
+        Log("ERROR: Grid - Failed to bufferize with new half-columns.\n");
+        return -1;
+    }
 
     return HalfCols;
 }
