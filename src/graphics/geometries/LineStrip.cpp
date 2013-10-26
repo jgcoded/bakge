@@ -101,17 +101,6 @@ LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
     }
 #endif // _DEBUG
 
-#ifdef _DEBUG
-    Error = glGetError();
-    if(Error != GL_NO_ERROR) {
-        Log("ERROR: LineStrip - Unexpected error %s while initializing "
-                                "indices store.\n", GetGLErrorName(Error));
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        delete L;
-        return NULL;
-    }
-#endif // _DEBUG
-
     glBindBuffer(GL_ARRAY_BUFFER, L->IndicesBuffer);
 
     int Tries = 0;
