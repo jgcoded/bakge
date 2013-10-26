@@ -46,7 +46,7 @@ LineStrip* LineStrip::Create(int NumPoints, Scalar* Points)
     LineStrip* L = new LineStrip;
     if(L == NULL) {
         Log("ERROR: LineStrip - Couldn't allocate memory.\n");
-	return NULL;
+        return NULL;
     }
 
 #ifdef _DEBUG
