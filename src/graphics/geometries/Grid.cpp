@@ -75,9 +75,15 @@ Grid* Grid::Create(int HalfRows, int HalfCols, Scalar Width, Scalar Length)
 Result Grid::Bufferize()
 {
     int Tries = 0;
+    int NumColLines = (HalfCols * 2 + 1);
+    int NumRowLines = (HalfRows * 2 + 1);
+
+    Log("Grid - Bufferizing...\n");
+    Log("  %d points.\n", NumPoints);
+
+    glBindBuffer(GL_ARRAY_BUFFER, PointsBuffer);
 
     do {
-        glBindBuffer(GL_ARRAY_BUFFER, PointsBuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * NumPoints, NULL,
                                                             GL_DYNAMIC_DRAW);
 
@@ -97,11 +103,66 @@ Result Grid::Bufferize()
             continue;
         }
 
-        // Assign vertex positions here
+        int At = 0;
+
+        for(int i=-HalfCols;i<=HalfCols;++i) {
+            BufPtr[At++] = i * UnitWidth;
+            BufPtr[At++] = 0;
+            BufPtr[At++] = HalfRows * UnitLength;
+            BufPtr[At++] = i * UnitWidth;
+            BufPtr[At++] = 0;
+            BufPtr[At++] = -HalfRows * UnitLength;
+        }
+
+        for(int i=-HalfRows;i<=HalfRows;++i) {
+            BufPtr[At++] = -HalfCols * UnitWidth;
+            BufPtr[At++] = 0;
+            BufPtr[At++] = i * UnitLength;
+            BufPtr[At++] = HalfCols * UnitWidth;
+            BufPtr[At++] = 0;
+            BufPtr[At++] = i * UnitLength;
+        }
 
     } while(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE);
 
-    return BGE_FAILURE;
+    Tries = 0;
+
+    glBindBuffer(GL_ARRAY_BUFFER, IndicesBuffer);
+
+    do {
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * NumPoints * 2, NULL,
+                                                            GL_DYNAMIC_DRAW);
+
+        int* BufPtr = (int*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        if(BufPtr == NULL) {
+            Log("ERROR: Grid - Failed to map indices buffer "
+                                "(attempt %d).\n", ++Tries);
+
+            // Sentinel to avoid infinite or long loops
+            if(Tries >= BGE_MAP_BUFFER_MAX_ATTEMPTS) {
+                Log("ERROR: Grid - Couldn't map buffer after %d attempts.\n",
+                                               BGE_MAP_BUFFER_MAX_ATTEMPTS);
+                glBindBuffer(GL_ARRAY_BUFFER, 0);
+                return BGE_FAILURE;
+            }
+
+            continue;
+        }
+
+        int LineCount = NumRowLines + NumColLines;
+        int i = 0;
+
+        Log("Grid - LineCount %d\n", LineCount);
+
+        while(i < NumPoints) {
+            Log("  %d: %d\n", i, i);
+            BufPtr[i] = i;
+            ++i;
+        }
+
+    } while(glUnmapBuffer(GL_ARRAY_BUFFER) == GL_FALSE);
+
+    return BGE_SUCCESS;
 }
 
 
