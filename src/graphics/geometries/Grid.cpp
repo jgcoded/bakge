@@ -47,6 +47,16 @@ Grid::~Grid()
 
 Grid* Grid::Create(int HalfRows, int HalfCols, Scalar Width, Scalar Length)
 {
+    if(HalfRows < 1) {
+        Log("ERROR: Grid - Requires HalfRows > 0.\n");
+        return NULL;
+    }
+
+    if(HalfCols < 1) {
+        Log("ERROR: Grid - Requires HalfCols > 0.\n");
+        return NULL;
+    }
+
     Grid* G = new Grid;
     if(G == NULL) {
         Log("ERROR: Grid - Couldn't allocate memory.\n");
@@ -171,6 +181,11 @@ Result Grid::SetDrawStyle(GEOMETRY_DRAW_STYLE Style)
 
 int Grid::SetHalfRows(int R)
 {
+    if(HalfRows < 1) {
+        Log("ERROR: Grid - Requires HalfRows > 0.\n");
+        return -1;
+    }
+
     HalfRows = R;
 
     NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
@@ -183,6 +198,11 @@ int Grid::SetHalfRows(int R)
 
 int Grid::SetHalfCols(int C)
 {
+    if(HalfCols < 1) {
+        Log("ERROR: Grid - Requires HalfCols > 0.\n");
+        return -1;
+    }
+
     HalfCols = C;
 
     NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
