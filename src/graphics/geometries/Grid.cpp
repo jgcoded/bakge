@@ -60,6 +60,7 @@ Grid* Grid::Create(int HalfRows, int HalfCols, Scalar Width, Scalar Length)
     G->HalfCols = HalfCols;
     G->UnitWidth = Width;
     G->UnitLength = Length;
+    G->NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
 
     if(G->Bufferize() != BGE_SUCCESS) {
         Log("ERROR: Grid::Create - Failed to bufferize the grid.\n");
@@ -108,7 +109,7 @@ int Grid::SetHalfRows(int R)
 {
     HalfRows = R;
 
-    NumPoints = ((HalfRows + 1) * 2) + ((HalfCols + 1) * 2);
+    NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
 
     Bufferize();
 
@@ -120,7 +121,7 @@ int Grid::SetHalfCols(int C)
 {
     HalfCols = C;
 
-    NumPoints = ((HalfRows + 1) * 2) + ((HalfCols + 1) * 2);
+    NumPoints = 2 * ((HalfCols * 2 + 1) + (HalfRows * 2 + 1));
 
     Bufferize();
 
