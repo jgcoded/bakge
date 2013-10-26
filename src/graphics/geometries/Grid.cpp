@@ -93,7 +93,7 @@ Result Grid::Bufferize()
                             "(attempt %d).\n", ++Tries);
 
             // Sentinel to avoid infinite or long loops
-            if(Tries > BGE_MAP_BUFFER_MAX_ATTEMPTS) {
+            if(Tries >= BGE_MAP_BUFFER_MAX_ATTEMPTS) {
                 Log("ERROR: Grid - Couldn't map buffer after %d attempts.\n",
                                                BGE_MAP_BUFFER_MAX_ATTEMPTS);
                 glBindBuffer(GL_ARRAY_BUFFER, 0);
