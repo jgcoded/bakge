@@ -192,7 +192,6 @@ namespace bakge
 #include <bakge/system/Device.h>
 
 /* Data/filesystem module */
-#include <bakge/data/File.h>
 
 /* Utility headers */
 #include <bakge/input/GamePad.h>

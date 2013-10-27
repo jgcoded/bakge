@@ -11,7 +11,6 @@ set(MODULES
   audio/Environment
   audio/Source
   audio/Stream
-  data/File
   core/Bindable
   core/Drawable
   core/Engine
