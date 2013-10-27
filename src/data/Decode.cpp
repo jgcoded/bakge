@@ -271,8 +271,8 @@ void GetVertexPositions(bmf::v100* Handle, Scalar* Buffer)
     GetNumVertices(Handle, &Count);
     Count *= 3 * sizeof(Scalar);
 
-    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
-    if(Read < Count) {
+    PHYSFS_sint64 Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < (PHYSFS_sint64)Count) {
         Log("ERROR: GetVertexPositions (v100) - Incomplete read from "
                                                             "file.\n");
         Log("  %d of %d read\n", Read, Count);
@@ -295,8 +295,8 @@ void GetVertexNormals(bmf::v100* Handle, Scalar* Buffer)
     GetNumVertices(Handle, &Count);
     Count *= 3 * sizeof(Scalar);
 
-    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
-    if(Read < Count) {
+    PHYSFS_sint64 Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < (PHYSFS_sint64)Count) {
         Log("ERROR: GetVertexNormals (v100) - Incomplete read from "
                                                             "file.\n");
         Log("  %d of %d read\n", Read, Count);
@@ -319,8 +319,8 @@ void GetVertexTexCoords(bmf::v100* Handle, Scalar* Buffer)
     GetNumVertices(Handle, &Count);
     Count *= 2 * sizeof(Scalar);
 
-    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
-    if(Read < Count) {
+    PHYSFS_sint64 Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < (PHYSFS_sint64)Count) {
         Log("ERROR: GetVertexTexCoords (v100) - Incomplete read from "
                                                             "file.\n");
         Log("  %d of %d read\n", Read, Count);
@@ -343,8 +343,8 @@ void GetTriangleIndices(bmf::v100* Handle, uint32* Buffer)
     GetNumIndices(Handle, &Count);
     Count *= sizeof(uint32);
 
-    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
-    if(Read < Count) {
+    PHYSFS_sint64 Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < (PHYSFS_sint64)Count) {
         Log("ERROR: GetTriangleIndices (v100) - Incomplete read from "
                                                             "file.\n");
         Log("  %d of %d read\n", Read, Count);
