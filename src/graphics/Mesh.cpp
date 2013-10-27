@@ -300,15 +300,21 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
     if(Positions != NULL)
         free(Positions);
 
-    size_t Size = sizeof(Scalar) * 3 * NumVertices;
+    size_t Size = sizeof(Scalar) * 3 * NumPositions;
 
     Positions = (Scalar*)malloc(Size);
     memcpy((void*)Positions, (const void*)Data, Size);
 
+    BeginLogBlock();
+    Log("Setting positions...\n");
+    for(int i=0;i<NumPositions;++i) {
+        Log("  %d: %2.2f, %2.2f, %2.2f\n", i, Positions[i*3+0],
+                            Positions[i*3+1], Positions[i*3+2]);
+    }
+    EndLogBlock();
+
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
-                                            (const GLvoid*)Data,
-                                                GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -323,15 +329,21 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
     if(Normals != NULL)
         free(Normals);
 
-    size_t Size = sizeof(Scalar) * 3 * NumVertices;
+    size_t Size = sizeof(Scalar) * 3 * NumNormals;
 
     Normals = (Scalar*)malloc(Size);
     memcpy((void*)Normals, (const void*)Data, Size);
 
+    BeginLogBlock();
+    Log("Setting normals...\n");
+    for(int i=0;i<NumNormals;++i) {
+        Log("  %d: %2.2f, %2.2f, %2.2f\n", i, Normals[i*3+0], Normals[i*3+1],
+                                                            Normals[i*3+2]);
+    }
+    EndLogBlock();
+
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
-                                            (const GLvoid*)Data,
-                                                GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -348,15 +360,21 @@ Result Mesh::SetIndexData(int NumIndices, const int* Data)
 
     this->NumIndices = NumIndices;
 
-    size_t Size = sizeof(int) * 3 * NumVertices;
+    size_t Size = sizeof(int) * 3 * NumIndices;
 
     Indices = (int*)malloc(Size);
     memcpy((void*)Indices, (const void*)Data, Size);
 
+    BeginLogBlock();
+    Log("Setting indices...\n");
+    for(int i=0;i<NumIndices / 3;++i) {
+        Log("  %d: %d, %d, %d\n", i, Indices[i*3+0], Indices[i*3+1],
+                                                    Indices[i*3+2]);
+    }
+    EndLogBlock();
+
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumTriangles * 3,
-                                            (const GLvoid*)Data,
-                                                GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -371,15 +389,20 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
     if(TexCoords != NULL)
         free(TexCoords);
 
-    size_t Size = sizeof(Scalar) * 2 * NumVertices;
+    size_t Size = sizeof(Scalar) * 2 * NumTexCoords;
 
     TexCoords = (Scalar*)malloc(Size);
     memcpy((void*)TexCoords, (const void*)Data, Size);
 
+    BeginLogBlock();
+    Log("Setting texcoords...\n");
+    for(int i=0;i<NumTexCoords;++i) {
+        Log("  %d: %2.2f, %2.2f\n", i, TexCoords[i*2+0], TexCoords[i*2+1]);
+    }
+    EndLogBlock();
+
     glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
-                                                (const GLvoid*)Data,
-                                                    GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
