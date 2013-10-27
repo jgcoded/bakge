@@ -136,6 +136,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
     }
 
     Log("  - Found vertex metadatum at offset 0x%x\n", Offset);
+    Log("  - Number of vertices: %d\n", Handle->NumVertices);
 
     // Reading advances file offset
     Offset += sizeof(uint32);
@@ -176,6 +177,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
     }
 
     Log("  - Found triangle metadatum at offset 0x%x\n", Offset);
+    Log("  - Number of indices: %d\n", Handle->NumIndices);
 
     Offset += sizeof(uint32);
 
