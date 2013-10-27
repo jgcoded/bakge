@@ -41,7 +41,7 @@ enum MESH_DRAW_STYLE
     MESH_DRAW_STYLE_WIREFRAME,
     MESH_DRAW_STYLE_SOLID,
     NUM_MESH_DRAW_STYLES
-    
+
 };
 
 /*! @brief Mesh buffer enumeration.
@@ -125,6 +125,15 @@ public:
      * Virtual Mesh destructor.
      */
     virtual ~Mesh();
+
+    /*! @brief Create an empty mesh.
+     *
+     * Create an empty mesh. Use Set*Data methods to set the mesh data before
+     * binding or drawing it.
+     *
+     * @return Pointer to allocated Mesh; NULL if any errors occurred.
+     */
+    BGE_FACTORY Mesh* Create();
 
     /*! @brief Write the Mesh data to a Bakge Mesh File v1.0.0.
      *
