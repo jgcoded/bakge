@@ -140,19 +140,11 @@ void PlatformSystemInfo()
         }
     }
 
-    Log("====================\n");
-    Log("= Operating System =\n");
-    Log("====================\n");
-    Log("  %s\n", VerString);
-    Log("    - Build %d\n", Info.dwBuildNumber);
-    Log("    - PlatformID %d\n", Info.dwPlatformId);
-    Log("    - Service Pack %d.%d\n", Info.wServicePackMajor,
+    Log("%s\n", VerString);
+    Log("  - Build %d\n", Info.dwBuildNumber);
+    Log("  - PlatformID %d\n", Info.dwPlatformId);
+    Log("  - Service Pack %d.%d\n", Info.wServicePackMajor,
                                         Info.wServicePackMinor);
-    Log("\n");
-
-    Log("===============\n");
-    Log("= System Info =\n");
-    Log("===============\n");
 
     const char* ProcString = "i486";
 
@@ -162,30 +154,29 @@ void PlatformSystemInfo()
         ProcString = "i386";
     case PROCESSOR_INTEL_486:
         if((Sys.wProcessorRevision & 0xFFFF0000) == 0xFF0000) {
-            Log("  %s %d-%d\n", ProcString, (Sys.wProcessorRevision &
+            Log("%s %d-%d\n", ProcString, (Sys.wProcessorRevision &
                 0x0000FF00) - 0xA, Sys.wProcessorRevision & 0x000000FF);
         } else {
-            Log("  %s %d-%d\n", ProcString, (Sys.wProcessorRevision &
+            Log("%s %d-%d\n", ProcString, (Sys.wProcessorRevision &
                0xFFFF0000) + 'A', Sys.wProcessorRevision & 0x0000FFFF);
         }
 
         break;
 
     case PROCESSOR_INTEL_PENTIUM:
-        Log("  Intel Pentium\n");
+        Log("Intel Pentium\n");
         break;
 
     case PROCESSOR_AMD_X8664:
-        Log("  AMD x86-64\n");
+        Log("AMD x86-64\n");
         break;
 
     default:
-        Log("  %d\n", Sys.dwProcessorType);
+        Log("%d\n", Sys.dwProcessorType);
         break;
     }
 
-    Log("  %d processors\n", Sys.dwNumberOfProcessors);
-    Log("\n");
+    Log("  - %d processors\n", Sys.dwNumberOfProcessors);
 }
 
 } /* bakge */
