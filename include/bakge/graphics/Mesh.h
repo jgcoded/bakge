@@ -126,6 +126,15 @@ public:
      */
     virtual ~Mesh();
 
+    /*! @brief Create an empty mesh.
+     *
+     * Create an empty mesh. Use Set*Data methods to set the mesh data before
+     * binding or drawing it.
+     *
+     * @return Pointer to allocated Mesh; NULL if any errors occurred.
+     */
+    BGE_FACTORY Mesh* Create();
+
     /*! @brief Bind the mesh for drawing use.
      *
      * To draw a mesh it must first be bound. This sets OpenGL state so its
