@@ -192,7 +192,12 @@ bmf::v100* OpenMeshFile100(const char* Path)
     EndLogBlock();
 
     Handle->F = MeshFile;
+
+#ifdef _MSC_VER
+    Handle->Path = _strdup(Path);
+#else
     Handle->Path = strdup(Path);
+#endif // _MSC_VER
 
     return Handle;
 }
