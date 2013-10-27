@@ -37,7 +37,7 @@ struct v100
     PHYSFS_file* F;
     // Cache number of vertices and triangles in the mesh
     uint32 NumVertices;
-    uint32 NumTriangles;
+    uint32 NumIndices;
     // File offsets of various vertex data
     uint64 PositionsOffset;
     uint64 NormalsOffset;
@@ -165,7 +165,7 @@ bmf::v100* OpenMeshFile100(const char* Path)
         return NULL;
     }
 
-    ReadObj = PHYSFS_read(MeshFile, (void*)(&Handle->NumTriangles),
+    ReadObj = PHYSFS_read(MeshFile, (void*)(&Handle->NumIndices),
                                                 sizeof(uint32), 1);
     if(ReadObj < 1) {
         Log("ERROR: OpenMeshFile100() - Error reading triangle metadatum.\n");
@@ -232,21 +232,21 @@ Result GetNumVertices(bmf::v100* Handle, uint32* Num)
 }
 
 
-Result GetNumTriangles(bmf::v100* Handle, uint32* Num)
+Result GetNumIndices(bmf::v100* Handle, uint32* Num)
 {
 #ifdef _DEBUG
     if(Handle == NULL) {
-        Log("ERROR: GetNumTriangles() - Passed NULL bmf::v100*\n");
+        Log("ERROR: GetNumIndices() - Passed NULL bmf::v100*\n");
         return BGE_FAILURE;
     }
 
     if(Num == NULL) {
-        Log("ERROR: GetNumTriangles() - Passed NULL uint32*\n");
+        Log("ERROR: GetNumIndices() - Passed NULL uint32*\n");
         return BGE_FAILURE;
     }
 #endif // _DEBUG
 
-    *Num = Handle->NumTriangles;
+    *Num = Handle->NumIndices;
 
     return BGE_SUCCESS;
 }

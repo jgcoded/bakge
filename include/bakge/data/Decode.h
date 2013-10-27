@@ -90,20 +90,20 @@ BGE_FUNC Result CloseMeshFile100(bmf::v100* Handle);
  */
 BGE_FUNC Result GetNumVertices(bmf::v100* Handle, uint32* Num);
 
-/*! @brief Get the number of triangles in a mesh file.
+/*! @brief Get the number of indices in a mesh file.
  *
- * Get the number of triangles in a mesh file from its handle. Use this value
+ * Get the number of indices in a mesh file from its handle. Use this value
  * when setting Mesh indices data. The value of *Num is not changed if any
  * errors occurred (indicated by a return value of BGE_FAILURE).
  *
  * @param[in] Handle Bakge Mesh File struct, v1.0.0
- * @param[out] Num Pointee set to number of triangles in the mesh file. The
- *                 number of indices associated with the mesh is *Num * 3.
+ * @param[out] Num Pointee set to number of indices in the mesh file. The
+ *                 number of triangles associated with the mesh is *Num / 3.
  *
- * @return BGE_SUCCESS if number of triangles successfully extracted;
+ * @return BGE_SUCCESS if number of indices successfully extracted;
  * BGE_FAILURE if any errors occurred.
  */
-BGE_FUNC Result GetNumTriangles(bmf::v100* Handle, uint32* Num);
+BGE_FUNC Result GetNumIndices(bmf::v100* Handle, uint32* Num);
 
 } /* bakge */
 

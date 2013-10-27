@@ -29,7 +29,7 @@ namespace bakge
 
 Cube::Cube()
 {
-    NumTriangles = 12; // 6 faces, 2 triangles per face
+    NumIndices = 12; // 6 faces, 2 triangles per face
     NumVertices = 24; // 4 vertices per face
 }
 

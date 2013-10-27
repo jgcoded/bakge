@@ -34,7 +34,7 @@ namespace bakge
 Mesh::Mesh()
 {
     NumVertices = 0;
-    NumTriangles = 0;
+    NumIndices = 0;
     memset((void*)MeshBuffers, 0, sizeof(GLuint) * NUM_MESH_BUFFERS);
 
     Positions = NULL;
@@ -121,7 +121,7 @@ Result Mesh::Encode100(const char* Path)
         return BGE_FAILURE;
     }
 
-    Num = GetNumTriangles();
+    Num = GetNumIndices();
 
     if(PHYSFS_write(F, (void*)&Num, sizeof(Num), 1) < 1) {
         Log("ERROR: Mesh::Encode100() - Error writing triangles metadatum.\n");
@@ -283,7 +283,7 @@ Result Mesh::ClearBuffers()
 
 Result Mesh::DrawInstanced(int Count) const
 {
-    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumTriangles * 3,
+    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumIndices,
                             GL_UNSIGNED_INT, (void*)0, Count, 0);
 
     return BGE_SUCCESS;
@@ -338,7 +338,7 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 }
 
 
-Result Mesh::SetIndexData(int NumTriangles, const int* Data)
+Result Mesh::SetIndexData(int NumIndices, const int* Data)
 {
     if(MeshBuffers[MESH_BUFFER_INDICES] == 0)
         return BGE_FAILURE;
@@ -346,7 +346,7 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
     if(Indices != NULL)
         free(Indices);
 
-    this->NumTriangles = NumTriangles;
+    this->NumIndices = NumIndices;
 
     size_t Size = sizeof(int) * 3 * NumVertices;
 
@@ -412,7 +412,7 @@ Result Mesh::SetDrawStyle(MESH_DRAW_STYLE Style)
 
 Result Mesh::Draw() const
 {
-    glDrawElements(DrawStyle, NumTriangles * 3, GL_UNSIGNED_INT, (GLvoid*)0);
+    glDrawElements(DrawStyle, NumIndices, GL_UNSIGNED_INT, (GLvoid*)0);
 
     return BGE_SUCCESS;
 }

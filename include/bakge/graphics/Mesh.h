@@ -102,7 +102,7 @@ protected:
     GLenum DrawStyle;
 
     int NumVertices;
-    int NumTriangles;
+    int NumIndices;
 
     Scalar* Positions;
     Scalar* Normals;
@@ -197,9 +197,9 @@ public:
      *
      * @return Number of triangles in the Mesh.
      */
-    BGE_INL int GetNumTriangles() const
+    BGE_INL int GetNumIndices() const
     {
-        return NumTriangles;
+        return NumIndices;
     }
 
     /*! @brief Get the number of vertices in the Mesh.
@@ -263,13 +263,13 @@ public:
      * Set the contents of the Mesh's triangle indices data store. Every three
      * indices form a triangle combination (order does not matter).
      *
-     * @param[in] NumTriangles Number of triangles (3 indices per triangle).
+     * @param[in] NumIndices Number of triangles (3 indices per triangle).
      * @param[in] Data Buffer containing triangle indices.
      *
      * @return BGE_SUCCESS if the triangle indices data store was successfully
      * filled; BGE_FAILURE if any errors occurred.
      */
-    Result SetIndexData(int NumTriangles, const int* Data);
+    Result SetIndexData(int NumIndices, const int* Data);
 
     /*! @brief Set the contents of the Mesh's texture coordinates data store.
      *
