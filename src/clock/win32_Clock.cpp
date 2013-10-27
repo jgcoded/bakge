@@ -27,6 +27,9 @@
 namespace bakge
 {
 
+static LARGE_INTEGER ClockFreq;
+static LARGE_INTEGER StartCount;
+
 Result Delay(Microseconds Time)
 {
     Microseconds End = Time + GetRunningTime();
@@ -38,11 +41,25 @@ Result Delay(Microseconds Time)
 }
 
 
+void _BeginClock()
+{
+    /* Grab current thread handle */
+    HANDLE CurrentThread = GetCurrentThread();
+
+    /* Run clock stuff on processor 1 only */
+    DWORD_PTR OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
+
+    /* Get PerformanceCounter frequency and start tick count */
+    QueryPerformanceFrequency(&ClockFreq);
+    QueryPerformanceCounter(&StartCount);
+
+    /* Reset thread affinity mask for this thread */
+    SetThreadAffinityMask(CurrentThread, OldThreadMask);
+}
+
+
 Microseconds GetRunningTime()
 {
-    /* Defined in src/utility/win32_Utility.cpp */
-    extern LARGE_INTEGER ClockFreq;
-    extern LARGE_INTEGER StartCount;
     LARGE_INTEGER TickCount;
     HANDLE CurrentThread;
     DWORD_PTR OldThreadMask;
