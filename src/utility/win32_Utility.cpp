@@ -27,23 +27,13 @@
 namespace bakge
 {
 
-LARGE_INTEGER ClockFreq;
-LARGE_INTEGER StartCount;
+static LARGE_INTEGER ClockFreq;
+static LARGE_INTEGER StartCount;
 
 Result PlatformInit(int argc, char* argv[])
 {
-    /* Grab current thread handle */
-    HANDLE CurrentThread = GetCurrentThread();
-
-    /* Run clock stuff on processor 1 only */
-    DWORD_PTR OldThreadMask = SetThreadAffinityMask(CurrentThread, 1);
-
-    /* Get PerformanceCounter frequency and start tick count */
-    QueryPerformanceFrequency(&ClockFreq);
-    QueryPerformanceCounter(&StartCount);
-
-    /* Reset thread affinity mask for this thread */
-    SetThreadAffinityMask(CurrentThread, OldThreadMask);
+    extern void _BeginClock();
+    _BeginClock();
 
     return BGE_SUCCESS;
 }
