@@ -253,4 +253,100 @@ Result GetNumIndices(bmf::v100* Handle, uint32* Num)
     return BGE_SUCCESS;
 }
 
+
+void GetVertexPositions(bmf::v100* Handle, Scalar* Buffer)
+{
+    if(PHYSFS_seek(Handle->F, Handle->PositionsOffset) == 0) {
+        Log("ERROR: GetVertexPositions (v100) - Error seeking positions "
+                                                            "offset.\n");
+        return;
+    }
+
+    uint32 Count;
+    GetNumVertices(Handle, &Count);
+    Count *= 3 * sizeof(Scalar);
+
+    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < Count) {
+        Log("ERROR: GetVertexPositions (v100) - Incomplete read from "
+                                                            "file.\n");
+        Log("  %d of %d read\n", Read, Count);
+        return;
+    }
+
+    Log("GetVertexPositions (v100) complete\n");
+}
+
+
+void GetVertexNormals(bmf::v100* Handle, Scalar* Buffer)
+{
+    if(PHYSFS_seek(Handle->F, Handle->NormalsOffset) == 0) {
+        Log("ERROR: GetVertexNormals (v100) - Error seeking normals "
+                                                            "offset.\n");
+        return;
+    }
+
+    uint32 Count;
+    GetNumVertices(Handle, &Count);
+    Count *= 3 * sizeof(Scalar);
+
+    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < Count) {
+        Log("ERROR: GetVertexNormals (v100) - Incomplete read from "
+                                                            "file.\n");
+        Log("  %d of %d read\n", Read, Count);
+        return;
+    }
+
+    Log("GetVertexNormals (v100) complete\n");
+}
+
+
+void GetVertexTexCoords(bmf::v100* Handle, Scalar* Buffer)
+{
+    if(PHYSFS_seek(Handle->F, Handle->TexCoordsOffset) == 0) {
+        Log("ERROR: GetVertexTexCoords (v100) - Error seeking texcoords "
+                                                            "offset.\n");
+        return;
+    }
+
+    uint32 Count;
+    GetNumVertices(Handle, &Count);
+    Count *= 2 * sizeof(Scalar);
+
+    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < Count) {
+        Log("ERROR: GetVertexTexCoords (v100) - Incomplete read from "
+                                                            "file.\n");
+        Log("  %d of %d read\n", Read, Count);
+        return;
+    }
+
+    Log("GetVertexTexCoords (v100) complete\n");
+}
+
+
+void GetTriangleIndices(bmf::v100* Handle, uint32* Buffer)
+{
+    if(PHYSFS_seek(Handle->F, Handle->TrianglesOffset) == 0) {
+        Log("ERROR: GetTriangleIndices (v100) - Error seeking indices "
+                                                            "offset.\n");
+        return;
+    }
+
+    uint32 Count;
+    GetNumIndices(Handle, &Count);
+    Count *= sizeof(uint32);
+
+    int Read = PHYSFS_read(Handle->F, Buffer, 1, Count);
+    if(Read < Count) {
+        Log("ERROR: GetTriangleIndices (v100) - Incomplete read from "
+                                                            "file.\n");
+        Log("  %d of %d read\n", Read, Count);
+        return;
+    }
+
+    Log("GetTriangleIndices (v100) complete\n");
+}
+
 } /* bakge */

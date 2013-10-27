@@ -105,6 +105,50 @@ BGE_FUNC Result GetNumVertices(bmf::v100* Handle, uint32* Num);
  */
 BGE_FUNC Result GetNumIndices(bmf::v100* Handle, uint32* Num);
 
+/*! @brief Get the vertex positions from a mesh file.
+ *
+ * Get the vertex positions from a mesh file. The supplied buffer must be
+ * large enough to hold the data.
+ *
+ * @param[in] Handle Bakge Mesh File struct, v1.0.0
+ * @param[in] Buffer Pointer to buffer to fill. Must be large enough to hold
+ *                   3 * sizeof(Scalar) * GetNumVertices(Handle) bytes.
+ */
+BGE_FUNC void GetVertexPositions(bmf::v100* Handle, Scalar* Buffer);
+
+/*! @brief Get the vertex normals from a mesh file.
+ *
+ * Get the vertex normals from a mesh file. The supplied buffer must be large
+ * enough to hold the data.
+ *
+ * @param[in] Handle Bakge Mesh File, v1.0.0
+ * @param[in] Buffer Pointer to the buffer to fill. Must be large enough to
+ *                   hold 3 * sizeof(Scalar) * GetNumVertices(Handle) bytes.
+ */
+BGE_FUNC void GetVertexNormals(bmf::v100* Handle, Scalar* Buffer);
+
+/*! @brief Get the vertex texture coordinates from a mesh file.
+ *
+ * Get the vertex texture coordinates from a mesh file. The supplied buffer
+ * must be large enough to hold the data.
+ *
+ * @param[in] Handle Bakge Mesh File, v1.0.0
+ * @param[in] Buffer Pointer to the buffer to fill. Must be large enough to
+ *                   hold 2 * sizeof(Scalar) * GetNumVertices(Handle) bytes.
+ */
+BGE_FUNC void GetVertexTexCoords(bmf::v100* Handle, Scalar* Buffer);
+
+/*! @brief Get the triangle indices from a mesh file.
+ *
+ * Get the triangle indices from a mesh file. The supplier buffer must be
+ * large enough to hold the data.
+ *
+ * @param[in] Handle Bakge Mesh File, v1.0.0
+ * @param[in] Buffer Pointer to the buffer to fill. Must be large enough to
+ *                   hold 3 * sizeof(uint32) * GetNumTriangles(Handle) bytes.
+ */
+BGE_FUNC void GetTriangleIndices(bmf::v100* Handle, uint32* Buffer);
+
 } /* bakge */
 
 #endif // BAKGE_DATA_DECODE_H
