@@ -185,6 +185,7 @@ void PlatformSystemInfo()
     }
 
     Log("  %d processors\n", Sys.dwNumberOfProcessors);
+    Log("\n");
 }
 
 } /* bakge */
