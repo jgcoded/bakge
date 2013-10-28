@@ -34,17 +34,21 @@ import bpy
 from bpy_extras.io_utils import ExportHelper
 
 class ExportFormat(bpy.types.Operator, ExportHelper):
-    bl_idname       = "filename.bmf";
-    bl_label        = "Export BMF v1.0.0";
-    bl_options      = {'PRESET'};
-    
-    filename_ext    = ".bmf";
+    filename_ext = ".bmf";
+    bl_idname = "filename.bmf";
+    bl_label = "Export BMF v1.0.0";
+    bl_options = {
+        'PRESET'
+    };
     
     def execute(self, context):
-        return {'Finished'};
+        return {
+            'Finished'
+        };
 
 def menu_func(self, context):
-    self.layout.operator(ExportFormat.bl_idname, text="Bakge Mesh File v1.0.0 (.bmf)");
+    self.layout.operator(ExportFormat.bl_idname,
+            text="Bakge Mesh File v1.0.0 (.bmf)");
 
 def register():
     bpy.utils.register_module(__name__);
