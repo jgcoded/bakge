@@ -30,7 +30,7 @@ namespace bakge
 
 typedef class BGE_API win32_Mutex
 {
-    HANDLE MutexHandle;
+	CRITICAL_SECTION CriticalSectionHandle;
 
     win32_Mutex();
 
@@ -42,6 +42,7 @@ public:
     BGE_FACTORY win32_Mutex* Create();
 
     Result Lock();
+	Result TryLock();
     Result Unlock();
 
 } Mutex; /* win32_Mutex */
