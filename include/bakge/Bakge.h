@@ -218,6 +218,7 @@ namespace bakge
 #include <bakge/math/Quaternion.h>
 
 /* Additional Bakge classes */
+#include <bakge/graphics/Shape.h>
 #include <bakge/graphics/Shader.h>
 #include <bakge/graphics/Mesh.h>
 #include <bakge/graphics/Node.h>
@@ -226,6 +227,7 @@ namespace bakge
 #include <bakge/graphics/Geometry.h>
 #include <bakge/graphics/shapes/Cube.h>
 #include <bakge/graphics/shapes/Rectangle.h>
+#include <bakge/graphics/shapes/Sphere.h>
 #include <bakge/graphics/geometries/Line.h>
 #include <bakge/graphics/geometries/LineStrip.h>
 #include <bakge/graphics/geometries/Grid.h>

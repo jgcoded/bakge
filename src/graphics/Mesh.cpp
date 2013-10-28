@@ -33,32 +33,11 @@ namespace bakge
 
 Mesh::Mesh()
 {
-    NumVertices = 0;
-    NumIndices = 0;
-    memset((void*)MeshBuffers, 0, sizeof(GLuint) * NUM_MESH_BUFFERS);
-
-    Positions = NULL;
-    Normals = NULL;
-    TexCoords = NULL;
-    Indices = NULL;
 }
 
 
 Mesh::~Mesh()
 {
-    ClearBuffers();
-
-    if(Positions != NULL)
-        free(Positions);
-
-    if(Normals != NULL)
-        free(Normals);
-
-    if(TexCoords != NULL)
-        free(TexCoords);
-
-    if(Indices != NULL)
-        free(Indices);
 }
 
 
@@ -164,121 +143,31 @@ Result Mesh::Encode100(const char* Path)
 }
 
 
-Result Mesh::Bind() const
-{
-    GLint Program;
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0) {
-        return BGE_FAILURE;
-    }
-
-    /* Check each of our attributes' locations to ensure they exist */
-    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    if(Location >= 0) {
-        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-        glEnableVertexAttribArray(Location);
-        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
-#ifdef _DEBUG
-    } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
-    if(Location >= 0) {
-        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-        glEnableVertexAttribArray(Location);
-        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
-#ifdef _DEBUG
-    } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_NORMAL_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
-    if(Location >= 0) {
-        glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-        glEnableVertexAttribArray(Location);
-        glVertexAttribPointer(Location, 2, GL_FLOAT, GL_FALSE, 0, 0);
-#ifdef _DEBUG
-    } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_TEXCOORD_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::Unbind() const
-{
-    GLint Program;
-    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
-    if(Program == 0) {
-        return BGE_FAILURE;
-    }
-
-    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
-    if(Location >= 0) {
-        glDisableVertexAttribArray(Location);
-#ifdef _DEBUG
-    } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
-    if(Location >= 0) {
-        glDisableVertexAttribArray(Location);
-#ifdef _DEBUG
-    } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
-    if(Location >= 0) {
-        glDisableVertexAttribArray(Location);
-#ifdef _DEBUG
-    } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
-#endif // _DEBUG
-    }
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    return BGE_SUCCESS;
-}
-
-
 Result Mesh::CreateBuffers()
 {
     /* If data already exists clear it */
     ClearBuffers();
 
-    glGenBuffers(NUM_MESH_BUFFERS, MeshBuffers);
+    glGenBuffers(NUM_SHAPE_BUFFERS, ShapeBuffers);
 
 #ifdef _DEBUG
     /* Check to make sure each of our mesh's buffers was created properly */
-    if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0) {
+    if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0) {
         Log("ERROR: Mesh - Couldn't create positions buffer\n");
         return BGE_FAILURE;
     }
 
-    if(MeshBuffers[MESH_BUFFER_NORMALS] == 0) {
+    if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0) {
         Log("ERROR: Mesh - Couldn't create normals buffer\n");
         return BGE_FAILURE;
     }
 
-    if(MeshBuffers[MESH_BUFFER_TEXCOORDS] == 0) {
+    if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0) {
         Log("ERROR: Mesh - Couldn't create texture coordinates buffer\n");
         return BGE_FAILURE;
     }
 
-    if(MeshBuffers[MESH_BUFFER_INDICES] == 0) {
+    if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0) {
         Log("ERROR: Mesh - Couldn't create indices buffer\n");
         return BGE_FAILURE;
     }
@@ -290,19 +179,10 @@ Result Mesh::CreateBuffers()
 
 Result Mesh::ClearBuffers()
 {
-    if(MeshBuffers[0] != 0) {
-        glDeleteBuffers(NUM_MESH_BUFFERS, MeshBuffers);
-        memset((void*)MeshBuffers, 0, sizeof(GLuint) * NUM_MESH_BUFFERS);
+    if(ShapeBuffers[0] != 0) {
+        glDeleteBuffers(NUM_SHAPE_BUFFERS, ShapeBuffers);
+        memset((void*)ShapeBuffers, 0, sizeof(GLuint) * NUM_SHAPE_BUFFERS);
     }
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::DrawInstanced(int Count) const
-{
-    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumIndices,
-                            GL_UNSIGNED_INT, (void*)0, Count, 0);
 
     return BGE_SUCCESS;
 }
@@ -310,7 +190,7 @@ Result Mesh::DrawInstanced(int Count) const
 
 Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 {
-    if(MeshBuffers[MESH_BUFFER_POSITIONS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0)
         return BGE_FAILURE;
 
     NumVertices = NumPositions;
@@ -323,8 +203,10 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
     Positions = (Scalar*)malloc(Size);
     memcpy((void*)Positions, (const void*)Data, Size);
 
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_POSITIONS]);
-    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
+                                            (const GLvoid*)Data,
+                                                GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -333,7 +215,7 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 
 Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 {
-    if(MeshBuffers[MESH_BUFFER_NORMALS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0)
         return BGE_FAILURE;
 
     if(Normals != NULL)
@@ -344,8 +226,10 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
     Normals = (Scalar*)malloc(Size);
     memcpy((void*)Normals, (const void*)Data, Size);
 
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_NORMALS]);
-    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
+                                            (const GLvoid*)Data,
+                                                GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -354,7 +238,7 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 
 Result Mesh::SetIndexData(int NumIndices, const int* Data)
 {
-    if(MeshBuffers[MESH_BUFFER_INDICES] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0)
         return BGE_FAILURE;
 
     if(Indices != NULL)
@@ -367,8 +251,10 @@ Result Mesh::SetIndexData(int NumIndices, const int* Data)
     Indices = (int*)malloc(Size);
     memcpy((void*)Indices, (const void*)Data, Size);
 
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_INDICES]);
-    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumIndices,
+                                            (const GLvoid*)Data,
+                                                GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
@@ -377,7 +263,7 @@ Result Mesh::SetIndexData(int NumIndices, const int* Data)
 
 Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
 {
-    if(MeshBuffers[MESH_BUFFER_TEXCOORDS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0)
         return BGE_FAILURE;
 
     if(TexCoords != NULL)
@@ -388,41 +274,11 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
     TexCoords = (Scalar*)malloc(Size);
     memcpy((void*)TexCoords, (const void*)Data, Size);
 
-    glBindBuffer(GL_ARRAY_BUFFER, MeshBuffers[MESH_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, Size, (const GLvoid*)Data, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
+                                                (const GLvoid*)Data,
+                                                    GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::SetDrawStyle(MESH_DRAW_STYLE Style)
-{
-    switch(Style) {
-
-    case MESH_DRAW_STYLE_SOLID:
-        DrawStyle = GL_TRIANGLES;
-        break;
-
-    case MESH_DRAW_STYLE_WIREFRAME:
-        DrawStyle = GL_LINE_LOOP;
-        break;
-
-    case MESH_DRAW_STYLE_POINTS:
-        DrawStyle = GL_POINTS;
-        break;
-
-    default:
-        return BGE_FAILURE;
-    }
-
-    return BGE_SUCCESS;
-}
-
-
-Result Mesh::Draw() const
-{
-    glDrawElements(DrawStyle, NumIndices, GL_UNSIGNED_INT, (GLvoid*)0);
 
     return BGE_SUCCESS;
 }

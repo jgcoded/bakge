@@ -1,7 +1,11 @@
 Bakge
 =====
 
-Bakersfield Game Engine is a cross-platform framework for developing 2D and 3D graphical applications. Its goals are to 1) simplify programmatic approaches to game and engine development through its SDK, which provides a simple, natural-feeling class- and interface-centered API for writing games or game engines in C++ and 2) provide a game development kit (GDK) with a tool-chain and engine designed with a feature set robust enough to produce great content yet simple enough to be easily approached by developers new to Lua, Bakge or both.
+Bakersfield Game Engine is a cross-platform framework for developing 2D and 3D graphical applications. Its goals are to:
+
+1) Simplify programmatic approaches to game and engine development through its SDK, which provides a simple, natural-feeling class- and interface-centered API for writing games or game engines in C++.
+
+2) Provide a game development kit (GDK) with a tool-chain and engine designed with a feature set robust enough to produce great content yet simple enough to be easily approached by developers new to Lua, Bakge or both.
 
 
 A Simple Sample

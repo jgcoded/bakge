@@ -28,6 +28,7 @@ set(MODULES
   graphics/Node
   graphics/Pawn
   graphics/Shader
+  graphics/Shape
   graphics/Texture
   graphics/geometries/BezierCurve
   graphics/geometries/Grid
@@ -35,6 +36,7 @@ set(MODULES
   graphics/geometries/LineStrip
   graphics/shapes/Cube
   graphics/shapes/Rectangle
+  graphics/shapes/Sphere
   input/GamePad
   ui/Anchor
   ui/Clickable
