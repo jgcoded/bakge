@@ -42,21 +42,16 @@ win32_Mutex* win32_Mutex::Create()
 {
     win32_Mutex* M = new win32_Mutex;
 
-	InitializeCriticalSection(&M->CriticalSectionHandle);
-    
+    InitializeCriticalSection(&M->CriticalSectionHandle);
+
     return M;
 }
 
 
 Result win32_Mutex::Lock()
 {
-	/* *
-	 * From MSDN:
-	 * Do not handle a possible deadlock exception; instead, debug the application.
-	 * */
-
-	// Blocks until available. Mutually exclusive access.
-	EnterCriticalSection(&CriticalSectionHandle);
+    // Blocks until available. Mutually exclusive access.
+    EnterCriticalSection(&CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
@@ -64,16 +59,16 @@ Result win32_Mutex::Lock()
 
 Result win32_Mutex::TryLock()
 {
-	if(TryEnterCriticalSection(&CriticalSectionHandle) > 0)
-		return BGE_SUCCESS;
+    if(TryEnterCriticalSection(&CriticalSectionHandle) > 0)
+        return BGE_SUCCESS;
 
-	return BGE_FAILURE;
+    return BGE_FAILURE;
 }
 
 
 Result win32_Mutex::Unlock()
 {
-	LeaveCriticalSection(&CriticalSectionHandle);
+    LeaveCriticalSection(&CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
