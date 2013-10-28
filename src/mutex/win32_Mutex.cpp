@@ -63,7 +63,7 @@ Result win32_Mutex::Lock()
 
 Result win32_Mutex::TryLock()
 {
-    if(TryEnterCriticalSection(&CriticalSectionHandle) > 0)
+    if(TryEnterCriticalSection(&CriticalSectionHandle) != 0)
         return BGE_SUCCESS;
 
     return BGE_FAILURE;
