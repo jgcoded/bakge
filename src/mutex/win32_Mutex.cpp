@@ -41,6 +41,10 @@ win32_Mutex::~win32_Mutex()
 win32_Mutex* win32_Mutex::Create()
 {
     win32_Mutex* M = new win32_Mutex;
+    if(M == NULL) {
+        Log("ERROR: win32_Mutex - Couldn't allocate memory.\n");
+        return NULL;
+    }
 
     InitializeCriticalSection(&M->CriticalSectionHandle);
 
