@@ -223,6 +223,7 @@ namespace bakge
 #include <bakge/graphics/Crowd.h>
 #include <bakge/graphics/shapes/Cube.h>
 #include <bakge/graphics/shapes/Rectangle.h>
+#include <bakge/graphics/shapes/Sphere.h>
 #include <bakge/graphics/Texture.h>
 #include <bakge/graphics/Font.h>
 #include <bakge/graphics/Camera2D.h>

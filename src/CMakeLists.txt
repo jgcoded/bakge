@@ -28,6 +28,7 @@ set(MODULES
   graphics/Texture
   graphics/shapes/Cube
   graphics/shapes/Rectangle
+  graphics/shapes/Sphere
   input/GamePad
   ui/Anchor
   ui/Clickable
