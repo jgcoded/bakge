@@ -57,7 +57,7 @@ int ThreadFunc(void* Data)
         bakge::Log("==============================\n");
     bakge::EndLogBlock();
 
-        Mut->Lock();
+	Mut->Lock();
         for(int i = 0; i < ARR_SIZE; ++i) {
             TestArray[i]+= 1;
         }

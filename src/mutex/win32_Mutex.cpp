@@ -29,28 +29,24 @@ namespace bakge
 
 win32_Mutex::win32_Mutex()
 {
-    MutexHandle = NULL;
 }
 
 
 win32_Mutex::~win32_Mutex()
 {
-    if(MutexHandle != NULL)
-        CloseHandle(MutexHandle);
+    DeleteCriticalSection(&CriticalSectionHandle);
 }
 
 
 win32_Mutex* win32_Mutex::Create()
 {
     win32_Mutex* M = new win32_Mutex;
-
-    // Create an unnamed mutex object
-    M->MutexHandle = CreateMutex(NULL, FALSE, NULL);
-    if(M->MutexHandle == NULL) {
-        Log("Mutex: Error creating mutex\n");
-        delete M;
+    if(M == NULL) {
+        Log("ERROR: win32_Mutex - Couldn't allocate memory.\n");
         return NULL;
     }
+
+    InitializeCriticalSection(&M->CriticalSectionHandle);
 
     return M;
 }
@@ -58,22 +54,25 @@ win32_Mutex* win32_Mutex::Create()
 
 Result win32_Mutex::Lock()
 {
-    DWORD WaitResult = WaitForSingleObject(MutexHandle, INFINITE);
-    if(WaitResult != WAIT_OBJECT_0) {
-        Log("Mutex: Error locking mutex\n");
-        return BGE_FAILURE;
-    }
+    // Blocks until available. Mutually exclusive access.
+    EnterCriticalSection(&CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
 
 
+Result win32_Mutex::TryLock()
+{
+    if(TryEnterCriticalSection(&CriticalSectionHandle) != 0)
+        return BGE_SUCCESS;
+
+    return BGE_FAILURE;
+}
+
+
 Result win32_Mutex::Unlock()
 {
-    if(ReleaseMutex(MutexHandle) == 0) {
-        Log("Mutex: Error releasing mutex\n");
-        return BGE_FAILURE;
-    }
+    LeaveCriticalSection(&CriticalSectionHandle);
 
     return BGE_SUCCESS;
 }
