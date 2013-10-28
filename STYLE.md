@@ -1,4 +1,5 @@
-SOURCE CONTROL CONVENTION
+Code & Commit Convention
+========================
 
 When committing code to your git repository, it's important to remember that each commit should be a single distinguishable change, new feature, or deletion. Source control is not about backing up code in a remote repository, it's about leaving a bread crumb trail which tracks the development of the program's new features, changes and removals in distinguishable chunks.
 
@@ -28,77 +29,93 @@ NAMING
 
 To maintain code readability, use succinct yet descriptive identifiers for variables, types and functions. All identifiers should be camel-cased. Certain abbreviations are allowed when appropriate, and easily understood. (e.g. Num instead of NumberOf)
 
+```
 int nplayer; /* BAD */
 int NumPlayers; /* GOOD */
-
+```
 
 Iterators or sentinels in for or while loops can be single lowercase characters instead of full words.
 
+```cpp
 for(int Value=0;Value<5;++Value) /* Ehh, passable */
     ...
 for(int i=0;i<5;++i) /* Just fine */
     ...
+```
 
 
 Enumerations and macros should be in all caps.
 
+```cpp
 enum DRAW_TYPE /* GOOD */
 {
     ...
 };
+```
 
-#define bge_ASSERT ... /* BAD */
+`#define bge_ASSERT ... /* BAD */`
 
 
 Anything unable to be placed into the bakge namespace (Objective-C code, or macros) should be prefixed with bge and styled appropriately.
 
-#define BGE_MACRO_SYMBOL ...
+`#define BGE_MACRO_SYMBOL ...`
 
+```objc
 @implementation bgeObjectiveCClass
 ...
 @end
+```
 
 
 FUNCTIONS
 
 If a function is a public API call, the identifier should be clear in what it does. Internal functions do not need to have such a level of clarity, but they should still be easily understood by those familiar with the system in which they are used.
 
+```cpp
 /* BAD - Reset all what?! */
 void ResetAll()
 {
     ...
 }
+```
 
 
+```cpp
 /* GOOD */
 void ResetPlayers()
 {
     ...
 }
+```
 
 
 TYPES AND CLASSES
 
 Classes and type definitions should aim to provide as much detail about the use of the type as possible.
 
+```cpp
 /* BAD */
 void SetVelocity(float X, float Y, float Z, float S);
 {
     ...
 }
+```
 
 
+```cpp
 /* GOOD */
 void SetVelocity(Vector4 Direction, Meters PerSec)
 {
     ...
 }
+```
 
 
 COMMENT STYLE
 
 Comment your code! Use the following comment styles as appropriate.
 
+```cpp
 // Single-line comment.
 
 /* Single-line comment. */
@@ -111,6 +128,7 @@ Comment your code! Use the following comment styles as appropriate.
 /*!
  * Doxygen documentation comment (header files only).
  */
+```
 
 
 INDENTATION
@@ -122,9 +140,11 @@ GENERAL CONVENTION
 
 * Tag your endif preprocessor symbols with the corresponding if's predicate.
 
-    e.g.   #ifdef DEFINED_SYMBOL
-               ...
-           #endif /* DEFINED_SYMBOL */
+    ```cpp
+    #ifdef DEFINED_SYMBOL
+    ...
+    #endif // DEFINED_SYMBOL
+    ```
 
 * Always have a newline at the end of a file.
 
@@ -138,13 +158,15 @@ GENERAL CONVENTION
 
 * Declaring extern functions inside other functions, then defining them elsewhere is OK.
 
-    e.g.   void PublicAPIMethod(int X)
-           {
-               extern void InternalAPIMethod(int); /* OK */
+    ```cpp
+    void PublicAPIMethod(int X)
+    {
+        extern void InternalAPIMethod(int); /* OK */
 
-               InternalAPIMethod(X); /* Defined in SomeOtherSource.cpp */
-               ...
-           }
+        InternalAPIMethod(X); /* Defined in SomeOtherSource.cpp */
+        ...
+    }
+    ```
 
 * Put one newline between function definitions and namespace declarations
 
@@ -154,51 +176,61 @@ GENERAL CONVENTION
 
 * Empty loops are OK but put the semicolon on a new line, indented 4 spaces
 
-    e.g.   while(i < 20)
-               ;
+    ```cpp
+    while(i < 20)
+        ;
+    ```
 
 
 * Do not put spaces between control flow statements and their predicates
 
-    e.g.    if (i > 12) /* BAD */
-
-            if(i > 12) /* GOOOD */
+    ```cpp
+    if (i > 12) /* BAD */
+        ...
+    if(i > 12) /* GOOOD */
+        ...
+    ```
 
 
 * Put single lines after control flow statements on a new line
 
-    e.g.    if(Win->IsOpen()) return true; /* BAD */
+    ```cpp
+    if(Win->IsOpen()) return true; /* BAD */
 
-            if(Win->IsOpen()) /* GOOD */
-                return true;
+    if(Win->IsOpen()) /* GOOD */
+        return true;
+    ```
 
 
 * Else blocks and if blocks should always match each other.
 
-    e.g.    if(PlayerOne->IsAlive()) {
-                ...
-            } else return NULL; /* BAD */
+    ```cpp
+    if(PlayerOne->IsAlive()) {
+        ...
+    } else return NULL; /* BAD */
 
-            if(PlayerOne->IsAlive()) {
-                ...
-            } else {
-                return NULL; /* GOOD */
-            }
+    if(PlayerOne->IsAlive()) {
+        ...
+    } else {
+        return NULL; /* GOOD */
+    }
+    ```
 
 
 * Switch statement case labels should line up with their switch statement. The case block code and break (or return, not both) should be indented once. If a default case exists, put it at the end of the switch block. Do not use a break statement in a default case. Put a newline above each case label.
 
-    e.g.    switch(PlayerLevel) {
+    ```cpp
+    switch(PlayerLevel) {
 
-            case 1:
-                ...
-                return false;
+    case 1:
+        ...
+        return false;
 
-            case 2:
-                ...
-                break;
+    case 2:
+        ...
+        break;
 
-            default:
-                ...
-            }
-
+    default:
+        ...
+    }
+    ```
