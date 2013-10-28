@@ -85,7 +85,7 @@ int main(int argc, char* argv[])
         Group->TranslateMember(i, TRAND, TRAND, TRAND);
     }
 
-    Obj->SetDrawStyle(bakge::MESH_DRAW_STYLE_SOLID);
+    Obj->SetDrawStyle(bakge::SHAPE_DRAW_STYLE_SOLID);
 
     Cam = new bakge::Camera3D;
     Cam->SetPosition(0, 0.5f, 1.25f);

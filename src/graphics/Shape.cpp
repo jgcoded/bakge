@@ -23,17 +23,188 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
 
 Shape::Shape()
 {
+    DrawStyle = GL_TRIANGLES;
+
+    Positions = NULL;
+    Normals = NULL;
+    TexCoords = NULL;
+    Indices = NULL;
+
+    NumVertices = 0;
+    NumTriangles = 0;
+
+    memset((void*)ShapeBuffers, 0, sizeof(GLuint) * NUM_SHAPE_BUFFERS);
 }
 
 
 Shape::~Shape()
 {
+    for(int i=0;i<NUM_SHAPE_BUFFERS;++i) {
+        if(ShapeBuffers[i] != 0) {
+            glDeleteBuffers(1, &ShapeBuffers[i]);
+            ShapeBuffers[i] = 0;
+        }
+    }
+
+    if(Positions != NULL) {
+        free(Positions);
+        Positions = NULL;
+    }
+
+    if(Normals != NULL) {
+        free(Normals);
+        Normals = NULL;
+    }
+
+    if(TexCoords != NULL) {
+        free(TexCoords);
+        TexCoords = NULL;
+    }
+
+    if(Indices != NULL) {
+        free(Indices);
+        Indices = NULL;
+    }
+}
+
+
+Result Shape::Bind() const
+{
+    GLint Program;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0) {
+        return BGE_FAILURE;
+    }
+
+    /* Check each of our attributes' locations to ensure they exist */
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
+    if(Location >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_NORMAL_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(Location >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 2, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_TEXCOORD_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shape::Unbind() const
+{
+    GLint Program;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0) {
+        return BGE_FAILURE;
+    }
+
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location >= 0) {
+        glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    Location = glGetAttribLocation(Program, BGE_NORMAL_ATTRIBUTE);
+    if(Location >= 0) {
+        glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(Location >= 0) {
+        glDisableVertexAttribArray(Location);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shape::SetDrawStyle(SHAPE_DRAW_STYLE Style)
+{
+    switch(Style) {
+
+    case SHAPE_DRAW_STYLE_SOLID:
+        DrawStyle = GL_TRIANGLES;
+        break;
+
+    case SHAPE_DRAW_STYLE_WIREFRAME:
+        DrawStyle = GL_LINE_LOOP;
+        break;
+
+    case SHAPE_DRAW_STYLE_POINTS:
+        DrawStyle = GL_POINTS;
+        break;
+
+    default:
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shape::Draw() const
+{
+    glDrawElements(DrawStyle, NumTriangles * 3, GL_UNSIGNED_INT, (GLvoid*)0);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Shape::DrawInstanced(int Count) const
+{
+    glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumTriangles * 3,
+                                GL_UNSIGNED_INT, (void*)0, Count, 0);
+
+    return BGE_SUCCESS;
 }
 
 } // bakge
