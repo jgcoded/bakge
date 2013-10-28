@@ -246,4 +246,6 @@ namespace bakge
 #include <bakge/audio/Source.h>
 #include <bakge/audio/Stream.h>
 
+#include <bakge/bindings/lua/Common.h>
+
 #endif /* BAKGE_BAKGE_H */

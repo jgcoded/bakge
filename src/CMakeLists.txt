@@ -11,6 +11,7 @@ set(MODULES
   audio/Environment
   audio/Source
   audio/Stream
+  bindings/lua/Common
   data/Decode
   core/Bindable
   core/Drawable
