@@ -1,5 +1,5 @@
-Code & Commit Convention
-========================
+Source Control
+==============
 
 When committing code to your git repository, it's important to remember that each commit should be a single distinguishable change, new feature, or deletion. Source control is not about backing up code in a remote repository, it's about leaving a bread crumb trail which tracks the development of the program's new features, changes and removals in distinguishable chunks.
 
@@ -18,14 +18,16 @@ Some tips on committing:
 5) Ensure your working branch is up to date with the corresponding branch in palistov/bakge. This way if you submit a pull request I don't have to dig through a mountain of commits already pushed to my repo. You can do this by doing `$ git pull palistov <branch_name>` (assuming palistov is an alias for my remote repository https://github.com/palistov/bakge)
 
 
-CODING STYLE
+Style
+=====
 
 For consistency across the codebase, a certain coding style is recommended. If you commit code that doesn't meet the styling standards, no worries -- I'll adjust it before finalizing the pull request. Remember that you can always browse existing code for examples of proper style usage.
 
 Except for the following cases, code should match the Linux kernel coding style as described here: https://www.kernel.org/doc/Documentation/CodingStyle
 
 
-NAMING
+Identifiers
+===========
 
 To maintain code readability, use succinct yet descriptive identifiers for variables, types and functions. All identifiers should be camel-cased. Certain abbreviations are allowed when appropriate, and easily understood. (e.g. Num instead of NumberOf)
 
@@ -67,7 +69,8 @@ Anything unable to be placed into the bakge namespace (Objective-C code, or macr
 ```
 
 
-FUNCTIONS
+Functions
+=========
 
 If a function is a public API call, the identifier should be clear in what it does. Internal functions do not need to have such a level of clarity, but they should still be easily understood by those familiar with the system in which they are used.
 
@@ -89,7 +92,8 @@ void ResetPlayers()
 ```
 
 
-TYPES AND CLASSES
+Types and Classes
+=================
 
 Classes and type definitions should aim to provide as much detail about the use of the type as possible.
 
@@ -111,7 +115,8 @@ void SetVelocity(Vector4 Direction, Meters PerSec)
 ```
 
 
-COMMENT STYLE
+Commentation
+============
 
 Comment your code! Use the following comment styles as appropriate.
 
@@ -131,12 +136,14 @@ Comment your code! Use the following comment styles as appropriate.
 ```
 
 
-INDENTATION
+Whitespace
+==========
 
 Indentation is done using 4 spaces. Please don't use tabs! Namespaces and class declarations should begin at column 0. Do not nest namespaces.
 
 
-GENERAL CONVENTION
+General Convention
+==================
 
 * Tag your endif preprocessor symbols with the corresponding if's predicate.
 
