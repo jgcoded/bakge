@@ -25,6 +25,7 @@ set(MODULES
   graphics/Node
   graphics/Pawn
   graphics/Shader
+  graphics/Shape
   graphics/Texture
   graphics/shapes/Cube
   graphics/shapes/Rectangle
