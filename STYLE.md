@@ -55,12 +55,16 @@ enum DRAW_TYPE /* GOOD */
 };
 ```
 
-`#define bge_ASSERT ... /* BAD */`
+```cpp
+#define bge_ASSERT ... /* BAD */
+```
 
 
 Anything unable to be placed into the bakge namespace (Objective-C code, or macros) should be prefixed with bge and styled appropriately.
 
-`#define BGE_MACRO_SYMBOL ...`
+```cpp
+#define BGE_MACRO_SYMBOL ...
+```
 
 ```objc
 @implementation bgeObjectiveCClass
