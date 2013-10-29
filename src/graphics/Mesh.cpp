@@ -105,8 +105,11 @@ Result Mesh::ClearBuffers()
 
 Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0) {
+        Log("ERROR: Mesh::SetPositionData - Positions buffer doesn't "
+                                                            "exist.\n");
         return BGE_FAILURE;
+    }
 
     NumVertices = NumPositions;
 
@@ -130,8 +133,10 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 
 Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0) {
+        Log("ERROR: Mesh::SetNormalData - Normals buffer doesn't exist.\n");
         return BGE_FAILURE;
+    }
 
     if(Normals != NULL)
         free(Normals);
@@ -153,8 +158,10 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 
 Result Mesh::SetIndexData(int NumTriangles, const int* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0) {
+        Log("ERROR: Mesh::SetIndexData - Indices buffer doesn't exist.\n");
         return BGE_FAILURE;
+    }
 
     if(Indices != NULL)
         free(Indices);
@@ -178,8 +185,11 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
 
 Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0) {
+        Log("ERROR: Mesh::SetTexCoordData - Texcoords buffer doesn't "
+                                                            "exist.\n");
         return BGE_FAILURE;
+    }
 
     if(TexCoords != NULL)
         free(TexCoords);
