@@ -87,6 +87,17 @@ public:
      */
     Result Encode100(const char* Path);
 
+    /*! @brief Open a Bakge Mesh File v1.0.0 and create a Mesh from its data.
+     *
+     * Open a Bakge Mesh File v1.0.0 and create a Mesh from its data. The
+     * file must be of the 1.0.0 format specification for Bakge Mesh File.
+     *
+     * @param[in] Path String path of the mesh file to open.
+     *
+     * @return Pointer to allocated Mesh; NULL if any errors occurred.
+     */
+    BGE_FACTORY Mesh* Decode100(const char* Path);
+
     /*! @brief Create the OpenGL vertex buffers that store Mesh data.
      *
      * Create the OpenGL vertex buffers that store Mesh data. Calls

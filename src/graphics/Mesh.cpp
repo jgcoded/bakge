@@ -143,6 +143,12 @@ Result Mesh::Encode100(const char* Path)
 }
 
 
+Mesh* Mesh::Decode100(const char* Path)
+{
+    return NULL;
+}
+
+
 Result Mesh::CreateBuffers()
 {
     /* If data already exists clear it */
