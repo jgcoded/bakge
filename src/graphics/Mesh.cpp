@@ -190,18 +190,36 @@ Result Mesh::ClearBuffers()
 
 Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0) {
+        Log("ERROR: Mesh::SetPositionData - Positions buffer doesn't "
+                                                            "exist.\n");
         return BGE_FAILURE;
+    }
 
     NumVertices = NumPositions;
 
-    if(Positions != NULL)
+    BeginLogBlock();
+    Log("Mesh::SetPositionData\n");
+
+    if(Positions != NULL) {
+        Log("  - Freeing old positions cache...\n");
         free(Positions);
+    }
 
     size_t Size = sizeof(Scalar) * 3 * NumPositions;
 
     Positions = (Scalar*)malloc(Size);
+    if(Positions == NULL) {
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
+        return BGE_FAILURE;
+    }
+
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)Positions, (const void*)Data, Size);
+
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
@@ -209,22 +227,43 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    Log("  - Filled GL buffer data store with new data.\n");
+
+    EndLogBlock();
+
     return BGE_SUCCESS;
 }
 
 
 Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0) {
+        Log("ERROR: Mesh::SetNormalData - Normals buffer doesn't exist.\n");
         return BGE_FAILURE;
+    }
 
-    if(Normals != NULL)
+    BeginLogBlock();
+    Log("Mesh::SetNormalData\n");
+
+    if(Normals != NULL) {
+        Log("  - Freeing old normals cache...\n");
         free(Normals);
+    }
 
     size_t Size = sizeof(Scalar) * 3 * NumNormals;
 
     Normals = (Scalar*)malloc(Size);
+    if(Normals == NULL) {
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
+        return BGE_FAILURE;
+    }
+
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)Normals, (const void*)Data, Size);
+
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
@@ -232,24 +271,45 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    Log("  - Filled GL buffer data store with new data.\n");
+
+    EndLogBlock();
+
     return BGE_SUCCESS;
 }
 
 
 Result Mesh::SetIndexData(int NumIndices, const int* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0) {
+        Log("ERROR: Mesh::SetIndexData - Indices buffer doesn't exist.\n");
         return BGE_FAILURE;
+    }
 
-    if(Indices != NULL)
+    BeginLogBlock();
+    Log("Mesh::SetIndexData\n");
+
+    if(Indices != NULL) {
+        Log("  - Freeing old indices cache...\n");
         free(Indices);
+    }
 
     this->NumIndices = NumIndices;
 
     size_t Size = sizeof(int) * 3 * NumIndices;
 
     Indices = (int*)malloc(Size);
+    if(Indices == NULL) {
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
+        return BGE_FAILURE;
+    }
+
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)Indices, (const void*)Data, Size);
+
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumIndices,
@@ -257,28 +317,54 @@ Result Mesh::SetIndexData(int NumIndices, const int* Data)
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    Log("  - Filled GL buffer data store with new data.\n");
+
+    EndLogBlock();
+
     return BGE_SUCCESS;
 }
 
 
 Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
 {
-    if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0)
+    if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0) {
+        Log("ERROR: Mesh::SetTexCoordData - Texcoords buffer doesn't "
+                                                            "exist.\n");
         return BGE_FAILURE;
+    }
 
-    if(TexCoords != NULL)
+    BeginLogBlock();
+    Log("Mesh::SetTexCoordData\n");
+
+    if(TexCoords != NULL) {
+        Log("  - Freeing old texcoords cache...\n");
         free(TexCoords);
+    }
 
     size_t Size = sizeof(Scalar) * 2 * NumTexCoords;
 
     TexCoords = (Scalar*)malloc(Size);
+    if(TexCoords == NULL) {
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
+        return BGE_FAILURE;
+    }
+
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)TexCoords, (const void*)Data, Size);
+
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
                                                 (const GLvoid*)Data,
                                                     GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    Log("  - Filled GL buffer data store with new data.\n");
+
+    EndLogBlock();
 
     return BGE_SUCCESS;
 }

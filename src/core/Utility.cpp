@@ -165,7 +165,9 @@ void SystemInfo()
     PlatformSystemInfo();
 
     Log("OpenGL v%s\n", glGetString(GL_VERSION));
-    Log("GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+    Log("  - %s\n", glGetString(GL_VENDOR));
+    Log("  - %s\n", glGetString(GL_RENDERER));
+    Log("  - GLSL v%s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 }
 
 
