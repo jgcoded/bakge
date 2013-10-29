@@ -178,6 +178,8 @@ Mesh* Mesh::Decode100(const char* Path)
         return NULL;
     }
 
+    Log("  - Allocated positions cache buffer.\n");
+
     Scalar* N = (Scalar*)malloc(sizeof(Scalar) * 3 * VertCount);
     if(N == NULL) {
         Log("  ERROR: Couldn't allocate normals cache buffer.\n");
@@ -186,6 +188,8 @@ Mesh* Mesh::Decode100(const char* Path)
 	EndLogBlock();
         return NULL;
     }
+
+    Log("  - Allocated normals cache buffer.\n");
 
     Scalar* T = (Scalar*)malloc(sizeof(Scalar) * 2 * VertCount);
     if(T == NULL) {
@@ -196,6 +200,8 @@ Mesh* Mesh::Decode100(const char* Path)
 	EndLogBlock();
         return NULL;
     }
+
+    Log("  - Allocated texcoords cache buffer.\n");
 
     uint32 IndCount;
     if(bakge::GetNumIndices(Handle, &IndCount) == BGE_FAILURE) {
@@ -219,11 +225,15 @@ Mesh* Mesh::Decode100(const char* Path)
         return NULL;
     }
 
+    Log("  - Allocated indices cache buffer.\n");
+
     // Extract data from file
     GetVertexPositions(Handle, P);
     GetVertexNormals(Handle, N);
     GetVertexTexCoords(Handle, T);
     GetTriangleIndices(Handle, I);
+
+    Log("  - Setting mesh buffer pointers and metadata.\n");
 
     // Set mesh's cache buffer pointers and metadata
     M->Positions = P;
@@ -247,15 +257,22 @@ Mesh* Mesh::Decode100(const char* Path)
     glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * VertCount,
                                 (const GLvoid*)P, GL_STATIC_DRAW);
+    Log("  - Filled GL positions buffer data store.\n");
+
     glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * VertCount,
                                 (const GLvoid*)N, GL_STATIC_DRAW);
+    Log("  - Filled GL normals buffer data store.\n");
+
     glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 2 * VertCount,
                                 (const GLvoid*)T, GL_STATIC_DRAW);
+    Log("  - Filled GL texcoords buffer data store.\n");
+
     glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * IndCount, (const GLvoid*)N,
                                                             GL_STATIC_DRAW);
+    Log("  - Filled GL indices buffer data store.\n");
 
     EndLogBlock();
 
