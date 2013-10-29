@@ -176,6 +176,9 @@ Result Shape::SetDrawStyle(SHAPE_DRAW_STYLE Style)
         break;
 
     case SHAPE_DRAW_STYLE_WIREFRAME:
+        // We don't actually draw as GL_LINE_LOOP, that connects the first
+        // and last vertices. Instead we just check for GL_LINE_LOOP and set
+        // polygon draw modes
         DrawStyle = GL_LINE_LOOP;
         break;
 
@@ -193,7 +196,13 @@ Result Shape::SetDrawStyle(SHAPE_DRAW_STYLE Style)
 
 Result Shape::Draw() const
 {
+    if(DrawStyle == GL_LINE_LOOP)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     glDrawElements(DrawStyle, NumTriangles * 3, GL_UNSIGNED_INT, (GLvoid*)0);
+
+    if(DrawStyle == GL_LINE_LOOP)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     return BGE_SUCCESS;
 }
@@ -201,8 +210,14 @@ Result Shape::Draw() const
 
 Result Shape::DrawInstanced(int Count) const
 {
+    if(DrawStyle == GL_LINE_LOOP)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     glDrawElementsInstancedBaseVertex(GL_TRIANGLES, NumTriangles * 3,
                                 GL_UNSIGNED_INT, (void*)0, Count, 0);
+
+    if(DrawStyle == GL_LINE_LOOP)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     return BGE_SUCCESS;
 }
