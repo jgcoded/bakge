@@ -257,6 +257,8 @@ Mesh* Mesh::Decode100(const char* Path)
     glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * IndCount, (const GLvoid*)N,
                                                             GL_STATIC_DRAW);
 
+    EndLogBlock();
+
     return M;
 }
 
