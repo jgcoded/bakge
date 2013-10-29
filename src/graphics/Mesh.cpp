@@ -130,15 +130,19 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
         return BGE_FAILURE;
     }
 
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)Positions, (const void*)Data, Size);
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    Log("  Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
@@ -170,15 +174,19 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
         return BGE_FAILURE;
     }
 
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)Normals, (const void*)Data, Size);
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    Log("  Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
@@ -212,15 +220,19 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
         return BGE_FAILURE;
     }
 
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)Indices, (const void*)Data, Size);
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumTriangles * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    Log("  Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
@@ -253,15 +265,19 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
         return BGE_FAILURE;
     }
 
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+
     memcpy((void*)TexCoords, (const void*)Data, Size);
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
                                                 (const GLvoid*)Data,
                                                     GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    Log("  Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
