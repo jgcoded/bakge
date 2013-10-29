@@ -117,7 +117,7 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
     Log("Mesh::SetPositionData\n");
 
     if(Positions != NULL) {
-        Log("  Freeing old positions cache...\n");
+        Log("  - Freeing old positions cache...\n");
         free(Positions);
     }
 
@@ -130,11 +130,11 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
         return BGE_FAILURE;
     }
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
 
     memcpy((void*)Positions, (const void*)Data, Size);
 
-    Log("  Copied new buffer data to cache.\n");
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
@@ -142,7 +142,7 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    Log("  Filled GL buffer data store with new data.\n");
+    Log("  - Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
@@ -161,7 +161,7 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
     Log("Mesh::SetNormalData\n");
 
     if(Normals != NULL) {
-        Log("  Freeing old normals cache...\n");
+        Log("  - Freeing old normals cache...\n");
         free(Normals);
     }
 
@@ -174,11 +174,11 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
         return BGE_FAILURE;
     }
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
 
     memcpy((void*)Normals, (const void*)Data, Size);
 
-    Log("  Copied new buffer data to cache.\n");
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
@@ -186,7 +186,7 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    Log("  Filled GL buffer data store with new data.\n");
+    Log("  - Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
@@ -205,7 +205,7 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
     Log("Mesh::SetIndexData\n");
 
     if(Indices != NULL) {
-        Log("  Freeing old indices cache...\n");
+        Log("  - Freeing old indices cache...\n");
         free(Indices);
     }
 
@@ -220,11 +220,11 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
         return BGE_FAILURE;
     }
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
 
     memcpy((void*)Indices, (const void*)Data, Size);
 
-    Log("  Copied new buffer data to cache.\n");
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumTriangles * 3,
@@ -232,7 +232,7 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    Log("  Filled GL buffer data store with new data.\n");
+    Log("  - Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
@@ -252,7 +252,7 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
     Log("Mesh::SetTexCoordData\n");
 
     if(TexCoords != NULL) {
-        Log("  Freeing old texcoords cache...\n");
+        Log("  - Freeing old texcoords cache...\n");
         free(TexCoords);
     }
 
@@ -265,11 +265,11 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
         return BGE_FAILURE;
     }
 
-    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
+    Log("  - Allocated new cache buffer (size 0x%08x)\n", Size);
 
     memcpy((void*)TexCoords, (const void*)Data, Size);
 
-    Log("  Copied new buffer data to cache.\n");
+    Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
@@ -277,7 +277,7 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
                                                     GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-    Log("  Filled GL buffer data store with new data.\n");
+    Log("  - Filled GL buffer data store with new data.\n");
 
     EndLogBlock();
 
