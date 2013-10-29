@@ -113,13 +113,18 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 
     NumVertices = NumPositions;
 
-    if(Positions != NULL)
+    if(Positions != NULL) {
+        Log("Mesh::SetPositionData - Freeing old positions cache...\n");
         free(Positions);
+    }
 
     size_t Size = sizeof(Scalar) * 3 * NumVertices;
 
     Positions = (Scalar*)malloc(Size);
     memcpy((void*)Positions, (const void*)Data, Size);
+
+    Log("Mesh::SetPositionData - Allocated new positions cache.\n");
+    Log("  Size: 0x%08x\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
@@ -138,13 +143,18 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
         return BGE_FAILURE;
     }
 
-    if(Normals != NULL)
+    if(Normals != NULL) {
+        Log("Mesh::SetNormalData - Freeing old normals cache...\n");
         free(Normals);
+    }
 
     size_t Size = sizeof(Scalar) * 3 * NumVertices;
 
     Normals = (Scalar*)malloc(Size);
     memcpy((void*)Normals, (const void*)Data, Size);
+
+    Log("Mesh::SetNormalData - Allocated new normals cache.\n");
+    Log("  Size: 0x%08x\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
@@ -163,8 +173,10 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
         return BGE_FAILURE;
     }
 
-    if(Indices != NULL)
+    if(Indices != NULL) {
+        Log("Mesh::SetIndexData - Freeing old indices cache...\n");
         free(Indices);
+    }
 
     this->NumTriangles = NumTriangles;
 
@@ -172,6 +184,9 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
 
     Indices = (int*)malloc(Size);
     memcpy((void*)Indices, (const void*)Data, Size);
+
+    Log("Mesh::SetIndexData - Allocated new indices cache.\n");
+    Log("  Size: 0x%08x\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumTriangles * 3,
@@ -191,13 +206,18 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
         return BGE_FAILURE;
     }
 
-    if(TexCoords != NULL)
+    if(TexCoords != NULL) {
+        Log("Mesh::SetTexCoordData - Freeing old texcoords cache...\n");
         free(TexCoords);
+    }
 
     size_t Size = sizeof(Scalar) * 2 * NumVertices;
 
     TexCoords = (Scalar*)malloc(Size);
     memcpy((void*)TexCoords, (const void*)Data, Size);
+
+    Log("Mesh::SetTexCoordData - Allocated new texcoords cache.\n");
+    Log("  Size: 0x%08x\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
