@@ -60,7 +60,9 @@ end
 
 function bakge.onRender()
     p:bind()
+    c:bind()
     c:draw()
+    c:unbind()
     p:unbind()
 end
 ```
