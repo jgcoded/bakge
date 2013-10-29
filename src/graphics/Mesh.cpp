@@ -94,7 +94,9 @@ Result Mesh::Encode100(const char* Path)
         return BGE_FAILURE;
     }
 
-    if(PHYSFS_write(F, (void*)GetPositionData(), sizeof(Scalar) * 3, Num) < Num) {
+    if(PHYSFS_write(F, (void*)GetPositionData(), sizeof(Scalar) * 3,
+                                                         Num) < Num)
+    {
         Log("ERROR: Mesh::Encode100() - Error writing vertex position data "
                                                                 "segment.\n");
         PHYSFS_close(F);
@@ -102,7 +104,9 @@ Result Mesh::Encode100(const char* Path)
         return BGE_FAILURE;
     }
 
-    if(PHYSFS_write(F, (void*)GetNormalData(), sizeof(Scalar) * 3, Num) < Num) {
+    if(PHYSFS_write(F, (void*)GetNormalData(), sizeof(Scalar) * 3,
+                                                       Num) < Num)
+    {
         Log("ERROR: Mesh::Encode100() - Error writing vertex normals data "
                                                                 "segment.\n");
         PHYSFS_close(F);
@@ -110,7 +114,9 @@ Result Mesh::Encode100(const char* Path)
         return BGE_FAILURE;
     }
 
-    if(PHYSFS_write(F, (void*)GetTexCoordData(), sizeof(Scalar) * 2, Num) < Num) {
+    if(PHYSFS_write(F, (void*)GetTexCoordData(), sizeof(Scalar) * 2,
+		                                        Num) < Num)
+    {
         Log("ERROR: Mesh::Encode100() - Error writing vertex texcoords data "
                                                                 "segment.\n");
         PHYSFS_close(F);
