@@ -121,6 +121,12 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
     size_t Size = sizeof(Scalar) * 3 * NumVertices;
 
     Positions = (Scalar*)malloc(Size);
+    if(Positions == NULL) {
+        Log("ERROR: Mesh::SetPositionData - Couldn't allocate new cache "
+                                            "buffer (size 0x%08x)\n", Size);
+        return BGE_FAILURE;
+    }
+
     memcpy((void*)Positions, (const void*)Data, Size);
 
     Log("Mesh::SetPositionData - Allocated new positions cache.\n");
@@ -151,6 +157,12 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
     size_t Size = sizeof(Scalar) * 3 * NumVertices;
 
     Normals = (Scalar*)malloc(Size);
+    if(Normals == NULL) {
+        Log("ERROR: Mesh::SetNormalData - Couldn't allocate new cache "
+                                            "buffer (size 0x%08x)\n", Size);
+        return BGE_FAILURE;
+    }
+
     memcpy((void*)Normals, (const void*)Data, Size);
 
     Log("Mesh::SetNormalData - Allocated new normals cache.\n");
@@ -183,6 +195,12 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
     size_t Size = sizeof(int) * 3 * NumVertices;
 
     Indices = (int*)malloc(Size);
+    if(Indices == NULL) {
+        Log("ERROR: Mesh::SetIndexData - Couldn't allocate new cache "
+                                            "buffer (size 0x%08x)\n", Size);
+        return BGE_FAILURE;
+    }
+
     memcpy((void*)Indices, (const void*)Data, Size);
 
     Log("Mesh::SetIndexData - Allocated new indices cache.\n");
@@ -214,6 +232,12 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
     size_t Size = sizeof(Scalar) * 2 * NumVertices;
 
     TexCoords = (Scalar*)malloc(Size);
+    if(TexCoords == NULL) {
+        Log("ERROR: Mesh::SetTexCoordData - Couldn't allocate new cache "
+                                            "buffer (size 0x%08x)\n", Size);
+        return BGE_FAILURE;
+    }
+
     memcpy((void*)TexCoords, (const void*)Data, Size);
 
     Log("Mesh::SetTexCoordData - Allocated new texcoords cache.\n");
