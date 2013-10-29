@@ -106,7 +106,7 @@ protected:
     Scalar* Positions;
     Scalar* Normals;
     Scalar* TexCoords;
-    int* Indices;
+    uint32* Indices;
 
     /*! @brief Default Shape constructor.
      *

@@ -48,7 +48,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
         0, 0, +1.0f
     };
 
-    static const int Indices[] = {
+    static const uint32 Indices[] = {
         0, 1, 2,
         0, 2, 3
     };

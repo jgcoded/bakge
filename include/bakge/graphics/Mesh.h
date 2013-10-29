@@ -154,7 +154,7 @@ public:
      * @return BGE_SUCCESS if the triangle indices data store was successfully
      * filled; BGE_FAILURE if any errors occurred.
      */
-    Result SetIndexData(int NumIndices, const int* Data);
+    Result SetIndexData(int NumIndices, const uint32* Data);
 
     /*! @brief Set the contents of the Mesh's texture coordinates data store.
      *
@@ -212,7 +212,7 @@ public:
      *
      * @return Pointer to index data. Do not free this pointer.
      */
-    BGE_INL const int* GetIndexData() const
+    BGE_INL const uint32* GetIndexData() const
     {
         return Indices;
     }

@@ -291,7 +291,7 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 }
 
 
-Result Mesh::SetIndexData(int NumIndices, const int* Data)
+Result Mesh::SetIndexData(int NumIndices, const uint32* Data)
 {
     if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0) {
         Log("ERROR: Mesh::SetIndexData - Indices buffer doesn't exist.\n");
@@ -308,9 +308,9 @@ Result Mesh::SetIndexData(int NumIndices, const int* Data)
 
     this->NumIndices = NumIndices;
 
-    size_t Size = sizeof(int) * 3 * NumIndices;
+    size_t Size = sizeof(uint32) * 3 * NumIndices;
 
-    Indices = (int*)malloc(Size);
+    Indices = (uint32*)malloc(Size);
     if(Indices == NULL) {
         Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
         EndLogBlock();
@@ -324,7 +324,7 @@ Result Mesh::SetIndexData(int NumIndices, const int* Data)
     Log("  - Copied new buffer data to cache.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumIndices,
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * NumIndices,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

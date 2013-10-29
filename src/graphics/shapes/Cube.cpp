@@ -68,7 +68,7 @@ Cube* Cube::Create()
         -1.0f, 0, 0  // H-X
     };
 
-    static const int Indices[] = {
+    static const uint32 Indices[] = {
         0, 9, 6, // +Z
         0, 3, 6,
         15, 18, 21, // -Z
