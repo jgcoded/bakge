@@ -113,8 +113,11 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 
     NumVertices = NumPositions;
 
+    BeginLogBlock();
+    Log("Mesh::SetPositionData\n");
+
     if(Positions != NULL) {
-        Log("Mesh::SetPositionData - Freeing old positions cache...\n");
+        Log("  Freeing old positions cache...\n");
         free(Positions);
     }
 
@@ -122,21 +125,22 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
 
     Positions = (Scalar*)malloc(Size);
     if(Positions == NULL) {
-        Log("ERROR: Mesh::SetPositionData - Couldn't allocate new cache "
-                                            "buffer (size 0x%08x)\n", Size);
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
         return BGE_FAILURE;
     }
 
     memcpy((void*)Positions, (const void*)Data, Size);
 
-    Log("Mesh::SetPositionData - Allocated new positions cache.\n");
-    Log("  Size: 0x%08x\n", Size);
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumPositions * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    EndLogBlock();
 
     return BGE_SUCCESS;
 }
@@ -149,8 +153,11 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
         return BGE_FAILURE;
     }
 
+    BeginLogBlock();
+    Log("Mesh::SetNormalData\n");
+
     if(Normals != NULL) {
-        Log("Mesh::SetNormalData - Freeing old normals cache...\n");
+        Log("  Freeing old normals cache...\n");
         free(Normals);
     }
 
@@ -158,21 +165,22 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
 
     Normals = (Scalar*)malloc(Size);
     if(Normals == NULL) {
-        Log("ERROR: Mesh::SetNormalData - Couldn't allocate new cache "
-                                            "buffer (size 0x%08x)\n", Size);
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
         return BGE_FAILURE;
     }
 
     memcpy((void*)Normals, (const void*)Data, Size);
 
-    Log("Mesh::SetNormalData - Allocated new normals cache.\n");
-    Log("  Size: 0x%08x\n", Size);
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumNormals * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    EndLogBlock();
 
     return BGE_SUCCESS;
 }
@@ -185,8 +193,11 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
         return BGE_FAILURE;
     }
 
+    BeginLogBlock();
+    Log("Mesh::SetIndexData\n");
+
     if(Indices != NULL) {
-        Log("Mesh::SetIndexData - Freeing old indices cache...\n");
+        Log("  Freeing old indices cache...\n");
         free(Indices);
     }
 
@@ -196,21 +207,22 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
 
     Indices = (int*)malloc(Size);
     if(Indices == NULL) {
-        Log("ERROR: Mesh::SetIndexData - Couldn't allocate new cache "
-                                            "buffer (size 0x%08x)\n", Size);
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
         return BGE_FAILURE;
     }
 
     memcpy((void*)Indices, (const void*)Data, Size);
 
-    Log("Mesh::SetIndexData - Allocated new indices cache.\n");
-    Log("  Size: 0x%08x\n", Size);
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(int) * NumTriangles * 3,
                                             (const GLvoid*)Data,
                                                 GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    EndLogBlock();
 
     return BGE_SUCCESS;
 }
@@ -224,8 +236,11 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
         return BGE_FAILURE;
     }
 
+    BeginLogBlock();
+    Log("Mesh::SetTexCoordData\n");
+
     if(TexCoords != NULL) {
-        Log("Mesh::SetTexCoordData - Freeing old texcoords cache...\n");
+        Log("  Freeing old texcoords cache...\n");
         free(TexCoords);
     }
 
@@ -233,21 +248,22 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
 
     TexCoords = (Scalar*)malloc(Size);
     if(TexCoords == NULL) {
-        Log("ERROR: Mesh::SetTexCoordData - Couldn't allocate new cache "
-                                            "buffer (size 0x%08x)\n", Size);
+        Log("  ERROR: Couldn't allocate new cache (size 0x%08x)\n", Size);
+        EndLogBlock();
         return BGE_FAILURE;
     }
 
     memcpy((void*)TexCoords, (const void*)Data, Size);
 
-    Log("Mesh::SetTexCoordData - Allocated new texcoords cache.\n");
-    Log("  Size: 0x%08x\n", Size);
+    Log("  Allocated new cache buffer (size 0x%08x)\n", Size);
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * NumTexCoords * 2,
                                                 (const GLvoid*)Data,
                                                     GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    EndLogBlock();
 
     return BGE_SUCCESS;
 }
