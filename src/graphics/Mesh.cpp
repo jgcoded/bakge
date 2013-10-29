@@ -151,7 +151,113 @@ Result Mesh::Encode100(const char* Path)
 
 Mesh* Mesh::Decode100(const char* Path)
 {
-    return NULL;
+    bmf::v100* Handle = OpenMeshFile100(Path);
+    if(Handle == NULL)
+        return NULL;
+
+    Mesh* M = new Mesh;
+    if(M == NULL)
+        return NULL;
+
+    BeginLogBlock();
+    Log("Mesh::Decode100 - \"%s\"", Path);
+
+    uint32 VertCount;
+    if(bakge::GetNumVertices(Handle, &VertCount) == BGE_FAILURE) {
+        Log("  ERROR: Unable to get number of vertices.\n");
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    Scalar* P = (Scalar*)malloc(sizeof(Scalar) * 3 * VertCount);
+    if(P == NULL) {
+        Log("  ERROR: Couldn't allocate positions cache buffer.\n");
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    Scalar* N = (Scalar*)malloc(sizeof(Scalar) * 3 * VertCount);
+    if(N == NULL) {
+        Log("  ERROR: Couldn't allocate normals cache buffer.\n");
+	free(P);
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    Scalar* T = (Scalar*)malloc(sizeof(Scalar) * 2 * VertCount);
+    if(T == NULL) {
+        Log("  ERROR: Couldn't allocate texcoords cache buffer.\n");
+	free(P);
+	free(N);
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    uint32 IndCount;
+    if(bakge::GetNumIndices(Handle, &IndCount) == BGE_FAILURE) {
+        Log("  ERROR: Unable to get number of indices.\n");
+	free(P);
+	free(N);
+	free(T);
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    uint32* I = (uint32*)malloc(sizeof(uint32) * 3 * IndCount);
+    if(I == NULL) {
+        Log("  ERROR: Couldn't allocate indices cache buffer.\n");
+	free(P);
+	free(N);
+	free(T);
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    // Extract data from file
+    GetVertexPositions(Handle, P);
+    GetVertexNormals(Handle, N);
+    GetVertexTexCoords(Handle, T);
+    GetTriangleIndices(Handle, I);
+
+    // Set mesh's cache buffer pointers and metadata
+    M->Positions = P;
+    M->Normals = N;
+    M->TexCoords = T;
+    M->Indices = I;
+    M->NumIndices = IndCount;
+    M->NumVertices = VertCount;
+
+    if(M->CreateBuffers() == BGE_FAILURE) {
+        Log("  ERROR: Unable to create GL buffers.\n");
+	free(P);
+	free(N);
+	free(T);
+	delete M;
+	EndLogBlock();
+        return NULL;
+    }
+
+    // Fill data store data using cache buffers
+    glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * VertCount,
+                                (const GLvoid*)P, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 3 * VertCount,
+                                (const GLvoid*)N, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 2 * VertCount,
+                                (const GLvoid*)T, GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_INDICES]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * IndCount, (const GLvoid*)N,
+                                                            GL_STATIC_DRAW);
+
+    return M;
 }
 
 
