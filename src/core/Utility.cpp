@@ -121,10 +121,12 @@ Result Init(int argc, char* argv[])
 #endif // _DEBUG
 
     BeginLogBlock();
+
     Log("Bakersfield Game Engine v%d.%d.%d %s\n", BGE_VER_MAJ, BGE_VER_MIN,
                                     BGE_VER_REV, BGE_BUILD_CONFIGURATION);
-
     SystemInfo();
+
+    Log("\n");
     EndLogBlock();
 
     return BGE_SUCCESS;
