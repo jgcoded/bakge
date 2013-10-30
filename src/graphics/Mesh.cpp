@@ -143,6 +143,7 @@ Result Mesh::SetPositionData(int NumPositions, const Scalar* Data)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     Log("  - Filled GL buffer data store with new data.\n");
+    Log("\n");
 
     EndLogBlock();
 
@@ -187,6 +188,7 @@ Result Mesh::SetNormalData(int NumNormals, const Scalar* Data)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     Log("  - Filled GL buffer data store with new data.\n");
+    Log("\n");
 
     EndLogBlock();
 
@@ -233,6 +235,7 @@ Result Mesh::SetIndexData(int NumTriangles, const int* Data)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     Log("  - Filled GL buffer data store with new data.\n");
+    Log("\n");
 
     EndLogBlock();
 
@@ -278,6 +281,7 @@ Result Mesh::SetTexCoordData(int NumTexCoords, const Scalar* Data)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     Log("  - Filled GL buffer data store with new data.\n");
+    Log("\n");
 
     EndLogBlock();
 
