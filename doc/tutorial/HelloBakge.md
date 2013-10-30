@@ -1,7 +1,7 @@
 Hello, Bakge
 ============
 
-In this tutorial we'll go through how to fork, clone build Bakge on Windows and Linux (we'll be using Ubuntu, but feel free to build on whatever flavor or distro tickles your fancy). Then we'll write create a simple "hello, world"-esque program using Bakge.
+In this tutorial we'll go through how to fork, clone build Bakge on Windows and Linux (we'll be using Ubuntu, but feel free to build on whatever flavor or distro tickles your fancy). Then we'll write create a simple "hello, world"-esque program using Bakge. If you experience any errors, let me know so I can fix them and update the tutorials!
 
 
 ## Windows
