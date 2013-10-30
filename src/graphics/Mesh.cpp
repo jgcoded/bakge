@@ -273,6 +273,7 @@ Mesh* Mesh::Decode100(const char* Path)
     glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * IndCount, (const GLvoid*)I,
                                                             GL_STATIC_DRAW);
     Log("  - Filled GL indices buffer data store.\n");
+    Log("\n");
 
     EndLogBlock();
 
