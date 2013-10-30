@@ -63,13 +63,16 @@ Result Mesh::Encode100(const char* Path)
 {
     BeginLogBlock();
 
+    Log("Mesh::Encode100() - \"%s\"\n", Path);
+
     PHYSFS_file* F = PHYSFS_openWrite(Path);
     if(F == NULL) {
-        Log("ERROR: Mesh::Encode100() - Unable to open \"%s\" for writing.\n",
-                                                                        Path);
+        Log("  ERROR: Unable to open \"%s\" for writing.\n", Path);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Opened file \"%s\" for writing.\n", Path);
 
     bmf::layout100::Header H;
     strcpy((char*)(&H.FormatName), BGE_BMF_NAME);
@@ -79,69 +82,81 @@ Result Mesh::Encode100(const char* Path)
     H.Revision = 0;
 
     if(PHYSFS_write(F, (void*)&H, sizeof(H), 1) < 1) {
-        Log("ERROR: Mesh::Encode100() - Error writing file header.\n");
+        Log("  ERROR: Error writing file header.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Wrote file header.\n");
 
     int Num = GetNumVertices();
 
     if(PHYSFS_write(F, (void*)&Num, sizeof(Num), 1) < 1) {
-        Log("ERROR: Mesh::Encode100() - Error writing vertex metadatum.\n");
+        Log("  ERROR: Error writing vertex metadatum.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Wrote vertex metadatum (%d vertices)\n", Num);
 
     if(PHYSFS_write(F, (void*)GetPositionData(), sizeof(Scalar) * 3,
                                                          Num) < Num)
     {
-        Log("ERROR: Mesh::Encode100() - Error writing vertex position data "
-                                                                "segment.\n");
+        Log("  ERROR: Error writing vertex position data segment.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Wrote vertex positions segment.\n");
 
     if(PHYSFS_write(F, (void*)GetNormalData(), sizeof(Scalar) * 3,
                                                        Num) < Num)
     {
-        Log("ERROR: Mesh::Encode100() - Error writing vertex normals data "
-                                                                "segment.\n");
+        Log("  ERROR: Error writing vertex normals data segment.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Wrote vertex normals segment.\n");
 
     if(PHYSFS_write(F, (void*)GetTexCoordData(), sizeof(Scalar) * 2,
                                                 Num) < Num)
     {
-        Log("ERROR: Mesh::Encode100() - Error writing vertex texcoords data "
-                                                                "segment.\n");
+        Log("  ERROR: Error writing vertex texcoords data segment.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Wrote vertex texcoords segment.\n");
 
     Num = GetNumIndices();
 
     if(PHYSFS_write(F, (void*)&Num, sizeof(Num), 1) < 1) {
-        Log("ERROR: Mesh::Encode100() - Error writing triangles metadatum.\n");
+        Log("  ERROR: Error writing triangles metadatum.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Wrote triangles metadatum (%d indices)\n", Num);
 
     if(PHYSFS_write(F, (void*)GetIndexData(), sizeof(int), Num) < Num) {
-        Log("ERROR: Mesh::Encode100() - Error writing triangle indices data "
-                                                                "segment.\n");
+        Log("  ERROR: Error writing triangle indices data segment.\n");
         PHYSFS_close(F);
         EndLogBlock();
         return BGE_FAILURE;
     }
 
+    Log("  - Wrote triangle indices segment.\n");
+
     PHYSFS_close(F);
+
+    Log("  - Closed file \"%s\"\n", Path);
 
     EndLogBlock();
 
