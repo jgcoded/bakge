@@ -160,7 +160,7 @@ Mesh* Mesh::Decode100(const char* Path)
         return NULL;
 
     BeginLogBlock();
-    Log("Mesh::Decode100 - \"%s\"", Path);
+    Log("Mesh::Decode100 - \"%s\"\n", Path);
 
     uint32 VertCount;
     if(bakge::GetNumVertices(Handle, &VertCount) == BGE_FAILURE) {
