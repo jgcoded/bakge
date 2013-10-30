@@ -270,7 +270,7 @@ Mesh* Mesh::Decode100(const char* Path)
     Log("  - Filled GL texcoords buffer data store.\n");
 
     glBindBuffer(GL_ARRAY_BUFFER, M->ShapeBuffers[SHAPE_BUFFER_INDICES]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * IndCount, (const GLvoid*)N,
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * IndCount, (const GLvoid*)I,
                                                             GL_STATIC_DRAW);
     Log("  - Filled GL indices buffer data store.\n");
 
