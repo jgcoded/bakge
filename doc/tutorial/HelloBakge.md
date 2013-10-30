@@ -13,6 +13,6 @@ What you'll need:
  - Visual Studio (I use 2010 but previous versions should work just fine)
  - A [GitHub](http://github.com) account
 
-# 1) Fork Bakge
+### 1) Fork Bakge
 
-# 2) Clone your fork to your local machine
+### 2) Clone your fork to your local machine
