@@ -11,6 +11,7 @@ What you'll need:
  - [CMake 2.6+](http://www.cmake.org/cmake/resources/software.html)
  - [git](http://git-scm.com/)
  - Visual Studio (I use 2010 but previous versions should work just fine)
+ - Basic know-how for building a Visual Studio project with libraries.
  - A [GitHub](http://github.com) account
 
 ### 1) Fork Bakge
@@ -40,5 +41,38 @@ What you'll need:
  - Make sure no options are highlighted red. If any are, click 'Configure'.
  - Once configuration is complete, click 'Generate'.
  - Open BAKGE.sln in Visual Studio.
- - Right-click the project 'bakge' and click 'Build'.
+ - Right-click the project 'bakge' and click 'Build'. Note we'll use a Debug configuration for the entirety of this tutorial.
  - Feel free to build and run any of the test programs.
+
+### 4) Build the rest of the SDK
+
+ - Open BAKGE.sln in Visual Studio.
+ - Right click the project 'build_sdk' and click 'Build'.
+
+### 5) Create your own project
+
+ - Close BAKGE.sln and make a new project. We'll call ours 'HelloBakge' for now.
+ - Copy the contents of the 'bakge/sdk' into the 'HelloBakge' project directory.
+ - Configure your project to use 'bakge/sdk/include' as an additional include directory.
+ - Create a new source file in your project called 'main.cpp'. Copy this code into it:
+   ```cpp
+   #include <bakge/Bakge.h>
+   #pragma comment(lib, "lib/Debug/bakge.lib")
+
+   int main(int argc, char* argv[])
+   {
+       if(bakge::Init(argc, argv) != BGE_SUCCESS) {
+           return -1;
+       }
+
+       bakge::Log("Hello, Bakge!\n");
+
+       bakge::Deinit();
+
+       return 0;
+   }
+   ```
+ - Build and run your program. Observe and fix any errors.
+ - If you get a return code of -1, open 'bakge.log' (you might have to dig around in your directories for it).
+ - If you're sure 'bakge.log' doesn't exist, you're likely getting a PhysicsFS error. Let me know about this!
+ - If all is well, you should see a console pop up and immediately close, with a return code of 0. Open 'bakge.log' to see the log output.
