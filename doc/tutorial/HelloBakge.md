@@ -72,7 +72,8 @@ What you'll need:
        return 0;
    }
    ```
+
  - Build and run your program. Observe and fix any errors.
  - If you get a return code of -1, open 'bakge.log' (you might have to dig around in your directories for it).
  - If you're sure 'bakge.log' doesn't exist, you're likely getting a PhysicsFS error. Let me know about this!
- - If all is well, you should see a console pop up and immediately close, with a return code of 0. Open 'bakge.log' to see the log output.
+ - If all is well, you should see a return code of 0. Open 'bakge.log' to see the log output.
