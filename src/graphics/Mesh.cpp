@@ -115,7 +115,7 @@ Result Mesh::Encode100(const char* Path)
     }
 
     if(PHYSFS_write(F, (void*)GetTexCoordData(), sizeof(Scalar) * 2,
-		                                        Num) < Num)
+                                                Num) < Num)
     {
         Log("ERROR: Mesh::Encode100() - Error writing vertex texcoords data "
                                                                 "segment.\n");
@@ -165,16 +165,16 @@ Mesh* Mesh::Decode100(const char* Path)
     uint32 VertCount;
     if(bakge::GetNumVertices(Handle, &VertCount) == BGE_FAILURE) {
         Log("  ERROR: Unable to get number of vertices.\n");
-	delete M;
-	EndLogBlock();
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
     Scalar* P = (Scalar*)malloc(sizeof(Scalar) * 3 * VertCount);
     if(P == NULL) {
         Log("  ERROR: Couldn't allocate positions cache buffer.\n");
-	delete M;
-	EndLogBlock();
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
@@ -183,9 +183,9 @@ Mesh* Mesh::Decode100(const char* Path)
     Scalar* N = (Scalar*)malloc(sizeof(Scalar) * 3 * VertCount);
     if(N == NULL) {
         Log("  ERROR: Couldn't allocate normals cache buffer.\n");
-	free(P);
-	delete M;
-	EndLogBlock();
+        free(P);
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
@@ -194,10 +194,10 @@ Mesh* Mesh::Decode100(const char* Path)
     Scalar* T = (Scalar*)malloc(sizeof(Scalar) * 2 * VertCount);
     if(T == NULL) {
         Log("  ERROR: Couldn't allocate texcoords cache buffer.\n");
-	free(P);
-	free(N);
-	delete M;
-	EndLogBlock();
+        free(P);
+        free(N);
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
@@ -206,22 +206,22 @@ Mesh* Mesh::Decode100(const char* Path)
     uint32 IndCount;
     if(bakge::GetNumIndices(Handle, &IndCount) == BGE_FAILURE) {
         Log("  ERROR: Unable to get number of indices.\n");
-	free(P);
-	free(N);
-	free(T);
-	delete M;
-	EndLogBlock();
+        free(P);
+        free(N);
+        free(T);
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
     uint32* I = (uint32*)malloc(sizeof(uint32) * 3 * IndCount);
     if(I == NULL) {
         Log("  ERROR: Couldn't allocate indices cache buffer.\n");
-	free(P);
-	free(N);
-	free(T);
-	delete M;
-	EndLogBlock();
+        free(P);
+        free(N);
+        free(T);
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
@@ -245,11 +245,11 @@ Mesh* Mesh::Decode100(const char* Path)
 
     if(M->CreateBuffers() == BGE_FAILURE) {
         Log("  ERROR: Unable to create GL buffers.\n");
-	free(P);
-	free(N);
-	free(T);
-	delete M;
-	EndLogBlock();
+        free(P);
+        free(N);
+        free(T);
+        delete M;
+        EndLogBlock();
         return NULL;
     }
 
