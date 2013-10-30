@@ -34,7 +34,9 @@ What you'll need:
  - Set the 'Source' directory to the path of your repository.
  - Set the 'Build' directory. I suggest making it a subdirectory named 'build'.
  - Review the available options. Most of the time you won't need to configure anything
- - Click 'Configure' at the bottom. Complete the first-time setup.
+ - Click 'Configure' at the bottom.
+ - Complete the first-time setup.
+ - Wait for external libraries to download.
  - Make sure no options are highlighted red. If any are, click 'Configure'.
  - Once configuration is complete, click 'Generate'.
  - Open BAKGE.sln in Visual Studio.
