@@ -58,7 +58,6 @@ bmf::v100* OpenMeshFile100(const char* Path)
     BeginLogBlock();
 
     Log("OpenMeshFile100() - \"%s\"\n", Path);
-    Log("==================================================\n");
 
     if(PHYSFS_exists(Path) == 0) {
         Log("ERROR: OpenMeshFile100() - File \"%s\" does not exist.\n",
