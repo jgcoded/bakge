@@ -278,8 +278,6 @@ void GetVertexPositions(bmf::v100* Handle, Scalar* Buffer)
         Log("  %d of %d read\n", Read, Count);
         return;
     }
-
-    Log("GetVertexPositions (v100) complete\n");
 }
 
 
@@ -302,8 +300,6 @@ void GetVertexNormals(bmf::v100* Handle, Scalar* Buffer)
         Log("  %d of %d read\n", Read, Count);
         return;
     }
-
-    Log("GetVertexNormals (v100) complete\n");
 }
 
 
@@ -326,8 +322,6 @@ void GetVertexTexCoords(bmf::v100* Handle, Scalar* Buffer)
         Log("  %d of %d read\n", Read, Count);
         return;
     }
-
-    Log("GetVertexTexCoords (v100) complete\n");
 }
 
 
@@ -350,8 +344,6 @@ void GetTriangleIndices(bmf::v100* Handle, uint32* Buffer)
         Log("  %d of %d read\n", Read, Count);
         return;
     }
-
-    Log("GetTriangleIndices (v100) complete\n");
 }
 
 } /* bakge */
