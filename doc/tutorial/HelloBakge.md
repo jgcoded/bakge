@@ -55,6 +55,7 @@ What you'll need:
  - Copy the contents of the 'bakge/sdk' into the 'HelloBakge' project directory.
  - Configure your project to use 'bakge/sdk/include' as an additional include directory.
  - Create a new source file in your project called 'main.cpp'. Copy this code into it:
+
    ```cpp
    #include <bakge/Bakge.h>
    #pragma comment(lib, "lib/Debug/bakge.lib")
