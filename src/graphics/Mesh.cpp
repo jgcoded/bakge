@@ -97,6 +97,8 @@ Result Mesh::ClearBuffers()
     if(ShapeBuffers[0] != 0) {
         glDeleteBuffers(NUM_SHAPE_BUFFERS, ShapeBuffers);
         memset((void*)ShapeBuffers, 0, sizeof(GLuint) * NUM_SHAPE_BUFFERS);
+    } else {
+        return BGE_FAILURE;
     }
 
     return BGE_SUCCESS;
