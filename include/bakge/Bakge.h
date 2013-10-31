@@ -233,6 +233,7 @@ namespace bakge
 #include <bakge/graphics/geometries/Grid.h>
 #include <bakge/graphics/geometries/BezierCurve.h>
 #include <bakge/graphics/Texture.h>
+#include <bakge/graphics/textures/CompositeTexture.h>
 #include <bakge/graphics/Font.h>
 #include <bakge/graphics/Camera2D.h>
 #include <bakge/graphics/Camera3D.h>
