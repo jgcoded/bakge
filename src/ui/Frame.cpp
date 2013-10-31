@@ -60,33 +60,22 @@ Frame* Frame::Create(Scalar Width, Scalar Height)
 
     Frame* U = new Frame;
 
-    if(U->CreateBuffers() != BGE_SUCCESS) {
-        delete U;
-        return NULL;
-    }
+    glGenBuffers(NUM_SHAPE_BUFFERS, &U->ShapeBuffers[0]);
 
     if(U->SetDimensions(Width, Height) == BGE_FAILURE) {
         delete U;
         return NULL;
     }
-    
-    if(U->SetTexCoordData(4, TexCoords) == BGE_FAILURE) {
-        Log("Frame: Error setting frame texcoords\n");
-        delete U;
-        return NULL;
-    }
 
-    if(U->SetNormalData(4, Normals) == BGE_FAILURE) {
-        Log("Frame: Error setting frame normals\n");
-        delete U;
-        return NULL;
-    }
-
-    if(U->SetIndexData(2, Indices) == BGE_FAILURE) {
-        Log("Frame: Error setting frame indices\n");
-        delete U;
-        return NULL;
-    }
+    glBindBuffer(GL_ARRAY_BUFFER, U->ShapeBuffers[SHAPE_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Normals,
+                                                        GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, U->ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 8, (GLvoid*)TexCoords,
+                                                        GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, U->ShapeBuffers[SHAPE_BUFFER_INDICES]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * 6, (GLvoid*)Indices,
+                                                        GL_STATIC_DRAW);
 
     return U;
 }
@@ -104,7 +93,12 @@ Result Frame::SetDimensions(Scalar Width, Scalar Height)
     this->Width = Width;
     this->Height = Height;
 
-    return SetPositionData(4, Positions);
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Positions,
+                                                            GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
 }
 
 } /* bakge */

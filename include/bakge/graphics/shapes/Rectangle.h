@@ -42,7 +42,7 @@ namespace bakge
  * drawing 2D scenes, it could technically be used in a 3D setting. The
  * Rectangle's normals point along the +Z axis.
  */
-class BGE_API Rectangle : public Mesh
+class BGE_API Rectangle : public Shape
 {
 
 protected:
