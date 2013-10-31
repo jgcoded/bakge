@@ -64,7 +64,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     R->Width = Width;
     R->Height = Height;
-    R->NumIndices = 6;
+    R->NumTriangles = 6;
 
     glGenBuffers(NUM_SHAPE_BUFFERS, &R->ShapeBuffers[0]);
 
