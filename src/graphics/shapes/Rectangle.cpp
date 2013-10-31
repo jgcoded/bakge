@@ -64,34 +64,24 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     R->Width = Width;
     R->Height = Height;
+    R->NumIndices = 6;
 
-    if(R->CreateBuffers() != BGE_SUCCESS) {
-        delete R;
-        return NULL;
-    }
+    glGenBuffers(NUM_SHAPE_BUFFERS, &R->ShapeBuffers[0]);
 
     if(R->SetDimensions(Width, Height) != BGE_SUCCESS) {
         delete R;
         return NULL;
     }
 
-    if(R->SetNormalData(4, Normals) == BGE_FAILURE) {
-        Log("Rectangle: Error setting Rectangle normal data\n");
-        delete R;
-        return NULL;
-    }
-
-    if(R->SetTexCoordData(4, TexCoords) == BGE_FAILURE) {
-        Log("Rectangle: Error setting Rectangle texture coordinate data\n");
-        delete R;
-        return NULL;
-    }
-
-    if(R->SetIndexData(2, Indices) == BGE_FAILURE) {
-        Log("Rectangle: Error setting Rectangle triangle indices data\n");
-        delete R;
-        return NULL;
-    }
+    glBindBuffer(GL_ARRAY_BUFFER, R->ShapeBuffers[SHAPE_BUFFER_NORMALS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Normals,
+                                                        GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, R->ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 8, (GLvoid*)TexCoords,
+                                                        GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, R->ShapeBuffers[SHAPE_BUFFER_INDICES]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * 6, (GLvoid*)Indices,
+                                                        GL_STATIC_DRAW);
 
     R->Unbind();
 
@@ -116,7 +106,11 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
         R, B, 0
     };
 
-    SetPositionData(4, Positions);
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12,
+                                (const GLvoid*)Positions,
+                                        GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
 }

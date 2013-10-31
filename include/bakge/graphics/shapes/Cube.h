@@ -41,7 +41,7 @@ namespace bakge
  * length of the Cube are always 1. To draw non-uniformly scaled cube shapes,
  * scale the Pawn bound before drawing the Cube.
  */
-class BGE_API Cube : public Mesh
+class BGE_API Cube : public Shape
 {
 
 protected:
