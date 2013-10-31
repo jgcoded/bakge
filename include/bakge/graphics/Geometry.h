@@ -86,6 +86,8 @@ public:
      */
     virtual Result Draw() const;
 
+    virtual Result DrawInstanced(int Count) const;
+
     /*! @brief Bind the Geometry for rendering.
      *
      * Bind the Geometry for rendering. Geometries have specific OpenGL state

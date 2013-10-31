@@ -86,6 +86,12 @@ Result Geometry::Draw() const
 }
 
 
+Result Geometry::DrawInstanced() const
+{
+    return BGE_FAILURE;
+}
+
+
 Result Geometry::Bind() const
 {
     GLint Program;
