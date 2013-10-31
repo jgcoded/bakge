@@ -5,7 +5,7 @@ In this tutorial we'll go through how to fork, clone build Bakge on Windows and 
 
 Some important notes:
 
- - Bakge requires OpenGL version 2.1 or greater. To check your version on Linux, open a terminal and run ` $ glxinfo | grep version`. For Windows, open a Run window (ctrl + r) and type 'dxdiag'. Search for GL version in the various tabs.
+ - Bakge requires OpenGL version 2.1 or greater. To check your version on Linux, open a terminal and run ` $ glxinfo | grep version`. There isn't a quick and easy way to check your OpenGL version on Windows, so just run one of the unit tests. If you get an error, try updating your graphics drivers.
  - Bakge uses shaders for all rendering. Shaders, shaders, shaders. Immediate mode calls such as glVertex3f and glColor3f will likely not work when used in tandem with various Bakge graphics objects like the Pawn or Rectangle.
  - So far Bakge has only been built and tested on Ubuntu 12.x and Windows 7 (using Visual Studio 2010). If you can get your hands on older/different platforms (calling all virtual machine enthusiasts!), build and run the test suite and see if you can patch up any issues.
  - CSUB students: Bakge builds, but does not run on sleipnir. I'll see if I can get our system admin to install the latest Mesa GL implementation so we can test on it, but it's probably best if you run it on your personal machine anyways.
