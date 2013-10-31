@@ -86,9 +86,13 @@ Result Geometry::Draw() const
 }
 
 
-Result Geometry::DrawInstanced() const
+Result Geometry::DrawInstanced(int Count) const
 {
-    return BGE_FAILURE;
+
+    glDrawElementsInstancedBaseVertex(DrawStyle, NumPoints,
+                  GL_UNSIGNED_INT, (void*)0, Count, 0);
+
+    return BGE_SUCCESS;
 }
 
 
