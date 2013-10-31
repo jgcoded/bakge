@@ -298,33 +298,57 @@ Mesh* Mesh::Decode100(const char* Path)
 
 Result Mesh::CreateBuffers()
 {
+    BeginLogBlock();
+
+    Log("Mesh::CreateBuffers\n");
+
     /* If data already exists clear it */
-    ClearBuffers();
+    if(ClearBuffers() == BGE_SUCCESS) {
+        Log("  WARN: Deleted existing buffer names.\n");
+    }
 
     glGenBuffers(NUM_SHAPE_BUFFERS, ShapeBuffers);
 
-#ifdef _DEBUG
+    Log("  - Generated %d buffer names.\n", NUM_SHAPE_BUFFERS);
+
     /* Check to make sure each of our mesh's buffers was created properly */
     if(ShapeBuffers[SHAPE_BUFFER_POSITIONS] == 0) {
         Log("ERROR: Mesh - Couldn't create positions buffer\n");
+        EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Verified positions buffer name 0x%x.\n",
+                ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
 
     if(ShapeBuffers[SHAPE_BUFFER_NORMALS] == 0) {
         Log("ERROR: Mesh - Couldn't create normals buffer\n");
+        EndLogBlock();
         return BGE_FAILURE;
     }
+
+    Log("  - Verified normals buffer name 0x%x.\n",
+                ShapeBuffers[SHAPE_BUFFER_NORMALS]);
 
     if(ShapeBuffers[SHAPE_BUFFER_TEXCOORDS] == 0) {
         Log("ERROR: Mesh - Couldn't create texture coordinates buffer\n");
+        EndLogBlock();
         return BGE_FAILURE;
     }
 
+    Log("  - Verified texcoords buffer name 0x%x.\n",
+            ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+
     if(ShapeBuffers[SHAPE_BUFFER_INDICES] == 0) {
         Log("ERROR: Mesh - Couldn't create indices buffer\n");
+        EndLogBlock();
         return BGE_FAILURE;
     }
-#endif /* _DEBUG */
+
+    Log("  - Verified indices buffer name 0x%x.\n",
+            ShapeBuffers[SHAPE_BUFFER_INDICES]);
+
+    EndLogBlock();
 
     return BGE_SUCCESS;
 }
@@ -335,6 +359,8 @@ Result Mesh::ClearBuffers()
     if(ShapeBuffers[0] != 0) {
         glDeleteBuffers(NUM_SHAPE_BUFFERS, ShapeBuffers);
         memset((void*)ShapeBuffers, 0, sizeof(GLuint) * NUM_SHAPE_BUFFERS);
+    } else {
+        return BGE_FAILURE;
     }
 
     return BGE_SUCCESS;

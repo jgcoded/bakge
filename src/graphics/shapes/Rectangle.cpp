@@ -64,7 +64,7 @@ Rectangle* Rectangle::Create(Scalar Width, Scalar Height)
 
     R->Width = Width;
     R->Height = Height;
-    R->NumIndices = 6;
+    R->NumTriangles = 6;
 
     glGenBuffers(NUM_SHAPE_BUFFERS, &R->ShapeBuffers[0]);
 
@@ -107,9 +107,8 @@ Result Rectangle::SetDimensions(Scalar Width, Scalar Height)
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12,
-                                (const GLvoid*)Positions,
-                                        GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Positions,
+                                                            GL_STATIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;

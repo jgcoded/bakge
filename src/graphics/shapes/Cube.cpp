@@ -153,7 +153,7 @@ Cube* Cube::Create()
     glBindBuffer(GL_ARRAY_BUFFER, C->ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * 36, (GLvoid*)Indices,
                                                         GL_STATIC_DRAW);
-    C->NumIndices = 36;
+    C->NumTriangles = 36;
 
     C->Unbind();
 
