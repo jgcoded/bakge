@@ -24,7 +24,7 @@
 
 /*!
  * @file Font.h
- * @brief Font class declaration.
+ * @brief Font class and Glyph struct declarations.
  */
 
 #ifndef BAKGE_GRAPHICS_FONT_H
@@ -34,6 +34,21 @@
 
 namespace bakge
 {
+
+typedef struct
+{
+    uint16 Width;
+    uint16 Height;
+
+    struct {
+        float X;
+        float Y;
+    } Offset;
+
+    int Codepoint;
+
+    float Advance;
+} Glyph;
 
 /*! @brief Wrapper class for TrueType fonts.
  *
