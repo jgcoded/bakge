@@ -55,7 +55,6 @@ Stamp* Stamp::Create()
 
     glGenBuffers(NUM_SHAPE_BUFFERS, &St->ShapeBuffers[0]);
 
-    glBindBuffer(GL_ARRAY_BUFFER, St->ShapeBuffers[SHAPE_BUFFER_NORMALS]);
     glBindBuffer(GL_ARRAY_BUFFER, St->ShapeBuffers[SHAPE_BUFFER_INDICES]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * 6, (GLvoid*)Indices,
                                                         GL_STATIC_DRAW);
