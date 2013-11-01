@@ -94,10 +94,6 @@ bakge::Result InitTest()
     St = bakge::Stamp::Create();
     St->SetDimensions(50, 50);
 
-    bakge::Glyph G;
-    Tex->Extract((int)'A', &G);
-    St->Pick(&G);
-
     return BGE_SUCCESS;
 }
 
@@ -106,6 +102,8 @@ bakge::Result PreRenderTest()
 {
     UICam->Bind();
     Tex->Bind();
+
+    St->Begin(0, 0);
     St->Bind();
 
     return BGE_SUCCESS;
@@ -114,7 +112,13 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
-    St->Draw();
+    bakge::Glyph G;
+    for(int i='X';i<'f';++i) {
+        Tex->Extract(i, &G);
+        St->Pick(&G);
+        St->Draw();
+        St->Advance();
+    }
 
     return BGE_SUCCESS;
 }
@@ -122,7 +126,6 @@ bakge::Result RenderTest()
 
 bakge::Result PostRenderTest()
 {
-    St->Advance();
     St->Unbind();
     Tex->Unbind();
     UICam->Unbind();
