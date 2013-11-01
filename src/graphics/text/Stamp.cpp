@@ -86,10 +86,10 @@ Result Stamp::Pick(const Glyph* G)
     }
 
     const Scalar TexCoords[] = {
-        G->Coord.U, G->Coord.T,
         G->Coord.U, G->Coord.V,
-        G->Coord.S, G->Coord.V,
-        G->Coord.S, G->Coord.T
+        G->Coord.U, G->Coord.T,
+        G->Coord.S, G->Coord.T,
+        G->Coord.S, G->Coord.V
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
