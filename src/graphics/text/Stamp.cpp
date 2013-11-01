@@ -39,11 +39,26 @@ Stamp::~Stamp()
 
 Stamp* Stamp::Create()
 {
+    static const uint32 Indices[] = {
+        0, 1, 2,
+        0, 2, 3
+    };
     Stamp* St = new Stamp;
     if(St == NULL) {
         Log("ERROR: Stamp - Couldn't allocate memory.\n");
         return NULL;
     }
+
+    St->NumIndices = 6;
+
+    St->SetDimensions(0, 0);
+
+    glGenBuffers(NUM_SHAPE_BUFFERS, &St->ShapeBuffers[0]);
+
+    glBindBuffer(GL_ARRAY_BUFFER, St->ShapeBuffers[SHAPE_BUFFER_NORMALS]);
+    glBindBuffer(GL_ARRAY_BUFFER, St->ShapeBuffers[SHAPE_BUFFER_INDICES]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uint32) * 6, (GLvoid*)Indices,
+                                                        GL_STATIC_DRAW);
 
     return St;
 }
