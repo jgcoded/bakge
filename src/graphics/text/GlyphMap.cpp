@@ -55,6 +55,10 @@ Result GlyphMap::Extract(int Codepoint, Glyph* Target)
     Target->Advance = Data[i].xadvance;
     Target->Offset.X = Data[i].xoff;
     Target->Offset.Y = Data[i].yoff;
+    Target->Coord.U = (Scalar)Data[i].x0 / Tex->GetWidth();
+    Target->Coord.V = (Scalar)Data[i].y0 / Tex->GetHeight();
+    Target->Coord.S = (Scalar)Data[i].x1 / Tex->GetWidth();
+    Target->Coord.T = (Scalar)Data[i].y1 / Tex->GetHeight();
 
     return BGE_SUCCESS;
 }
