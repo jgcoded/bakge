@@ -139,8 +139,8 @@ Result Stamp::Bind() const
 
 Result Stamp::SetDimensions(Scalar W, Scalar H)
 {
-    Scalar X = Current.X;
-    Scalar Y = Current.Y;
+    Scalar X = Current.X + Offset.X;
+    Scalar Y = Current.Y + Offset.Y;
 
     Scalar Positions[] = {
         X, Y, 0,
