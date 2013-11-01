@@ -29,7 +29,7 @@
 
 bakge::Rectangle* Obj;
 bakge::Pawn* It;
-bakge::Texture* Tex;
+bakge::GlyphMap* Tex;
 GLint ShaderProgram;
 bakge::Camera2D* UICam;
 bakge::Font* F;

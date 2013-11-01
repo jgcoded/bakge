@@ -42,8 +42,10 @@ namespace bakge
  * easier to manage and keep track of which glyphs are available for rendering
  * and which ones you'll have to bake first.
  */
-class BGE_API GlyphMap
+class BGE_API GlyphMap : public Bindable
 {
+    friend int Font::Bake(GlyphMap**, int, int, int);
+
     Texture* Tex;
 
     stbtt_bakedchar* Data;
@@ -66,6 +68,16 @@ public:
      * GlyphMap destructor.
      */
     ~GlyphMap();
+
+    Result Bind() const
+    {
+        return Tex->Bind();
+    }
+
+    Result Unbind() const
+    {
+        return Tex->Unbind();
+    }
 
 }; // GlyphMap
 

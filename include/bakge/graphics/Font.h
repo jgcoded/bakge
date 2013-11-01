@@ -35,6 +35,8 @@
 namespace bakge
 {
 
+class GlyphMap;
+
 typedef struct
 {
     int Width;
@@ -92,7 +94,8 @@ public:
      *
      * @return The number of baked glyphs.
      */
-    int Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight);
+    int Bake(GlyphMap** Target, int GlyphStart, int GlyphEnd,
+                                            int PixelHeight);
 
 }; /* Font */
 

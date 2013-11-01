@@ -97,7 +97,8 @@ Font* Font::Load(const char* FileName)
 }
 
 
-int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
+int Font::Bake(GlyphMap** Target, int GlyphStart, int GlyphEnd,
+                                                int PixelHeight)
 {
     int NumChars = GlyphEnd - GlyphStart;
     if(NumChars < 1) {
@@ -127,26 +128,36 @@ int Font::Bake(Texture** Target, int GlyphStart, int GlyphEnd, int PixelHeight)
     }
 
     // Create temp texture. If error occurs we don't want to change *Target
-    Texture* GlyphMap = bakge::Texture::Create(512, 512, NULL, GL_ALPHA,
+    Texture* BakedMap = bakge::Texture::Create(512, 512, NULL, GL_ALPHA,
                                                         GL_UNSIGNED_BYTE,
                                                         (void*)GlyphBitmap);
-
-    // Delete these, no longer needed.
     delete[] GlyphBitmap;
-    delete[] GlyphData;
 
-    if(GlyphMap == NULL) {
+    if(BakedMap == NULL) {
         Log("ERROR: Font - Couldn't creating glyph texture\n");
         return -1;
     }
 
-    *Target = GlyphMap;
+    *Target = new GlyphMap;
+    if(*Target == NULL) {
+        delete[] GlyphData;
+        Log("ERROR: Font::Bake - Couldn't allocate GlyphMap memory.\n");
+        return 0;
+    }
+
+    (*Target)->Tex = BakedMap;
+    (*Target)->Data = GlyphData;
+    (*Target)->Start = GlyphStart;
 
     // Negative result is -1 * number of baked glyphs
-    if(BakeResult < 0)
+    if(BakeResult < 0) {
+        (*Target)->End = GlyphStart - BakeResult;
         return -BakeResult;
-    else
+    } else {
+        // Baked all glyph
+        (*Target)->End = GlyphEnd;
         return NumChars;
+    }
 }
 
 } /* bakge */
