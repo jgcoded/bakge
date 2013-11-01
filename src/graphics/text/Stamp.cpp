@@ -135,4 +135,12 @@ Result Stamp::SetDimensions(Scalar Width, Scalar Height)
     return BGE_SUCCESS;
 }
 
+
+Result Stamp::Advance()
+{
+    Current.X += Adv;
+
+    return BGE_SUCCESS;
+}
+
 } // bakge

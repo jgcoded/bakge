@@ -75,6 +75,8 @@ public:
 
     virtual Result Bind() const;
 
+    Result Advance();
+
 }; // Stamp
 
 } // bakge
