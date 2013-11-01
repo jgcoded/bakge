@@ -236,6 +236,7 @@ namespace bakge
 #include <bakge/graphics/textures/CompositeTexture.h>
 #include <bakge/graphics/Font.h>
 #include <bakge/graphics/text/Stamp.h>
+#include <bakge/graphics/text/GlyphLibrary.h>
 #include <bakge/graphics/Camera2D.h>
 #include <bakge/graphics/Camera3D.h>
 #include <bakge/ui/Anchor.h>

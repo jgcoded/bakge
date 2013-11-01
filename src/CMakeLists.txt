@@ -37,6 +37,7 @@ set(MODULES
   graphics/shapes/Cube
   graphics/shapes/Rectangle
   graphics/shapes/Sphere
+  graphics/text/GlyphLibrary
   graphics/text/Stamp
   graphics/textures/CompositeTexture
   input/GamePad
