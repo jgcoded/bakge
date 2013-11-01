@@ -109,11 +109,14 @@ Result Stamp::Bind() const
 
 Result Stamp::SetDimensions(Scalar Width, Scalar Height)
 {
+    Scalar X = Current.X + Offset.X;
+    Scalar Y = Current.Y + Offset.Y;
+
     Scalar Positions[] = {
-        0, 0, 0,
-        0, Height, 0,
-        Width, Height, 0,
-        Width, 0, 0,
+        X, Y, 0,
+        X, Y + Height, 0,
+        X + Width, Y +Height, 0,
+        X + Width, Y, 0,
     };
 
     this->Width = Width;
