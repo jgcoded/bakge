@@ -94,6 +94,10 @@ bakge::Result InitTest()
     St = bakge::Stamp::Create();
     St->SetDimensions(50, 50);
 
+    bakge::Glyph G;
+    Tex->Extract((int)'A', &G);
+    St->Pick(&G);
+
     return BGE_SUCCESS;
 }
 
