@@ -53,6 +53,7 @@ Stamp* Stamp::Create()
         0, 1, 2,
         0, 2, 3
     };
+
     Stamp* St = new Stamp;
     if(St == NULL) {
         Log("ERROR: Stamp - Couldn't allocate memory.\n");
