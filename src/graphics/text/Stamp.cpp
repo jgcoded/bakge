@@ -37,6 +37,12 @@ Stamp::~Stamp()
 }
 
 
+Result Stamp::Pick(const Glyph* G)
+{
+    return BGE_FAILURE;
+}
+
+
 Result Stamp::Bind() const
 {
     return BGE_FAILURE;
