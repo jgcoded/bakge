@@ -67,7 +67,7 @@ bakge::Result InitTest()
     UICam->SetPosition(-256.0f, -256.0f, -1.0f);
     UICam->SetSpan(512.0f, 512.0f, 2.0f);
 
-    St = new bakge::Stamp;
+    St = bakge::Stamp::Create();
 
     return BGE_SUCCESS;
 }

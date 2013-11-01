@@ -43,7 +43,7 @@ namespace bakge
 class BGE_API Stamp : public Rectangle
 {
 
-public:
+protected:
 
     /*! @brief Default Stamp constructor.
      *
@@ -51,11 +51,16 @@ public:
      */
     Stamp();
 
+
+public:
+
     /*! @brief Stamp destructor.
      *
      * Stamp destructor.
      */
     ~Stamp();
+
+    BGE_FACTORY Stamp* Create();
 
     Result Pick(const Glyph* G);
 

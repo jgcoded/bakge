@@ -37,6 +37,18 @@ Stamp::~Stamp()
 }
 
 
+Stamp* Stamp::Create()
+{
+    Stamp* St = new Stamp;
+    if(St == NULL) {
+        Log("ERROR: Stamp - Couldn't allocate memory.\n");
+        return NULL;
+    }
+
+    return St;
+}
+
+
 Result Stamp::Pick(const Glyph* G)
 {
     return BGE_FAILURE;
