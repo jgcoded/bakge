@@ -120,6 +120,19 @@ Result Stamp::Bind() const
 #endif // _DEBUG
     }
 
+    Location = glGetAttribLocation(Program, BGE_TEXCOORD_ATTRIBUTE);
+    if(Location >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 2, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_TEXCOORD_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_INDICES]);
+
     return BGE_SUCCESS;
 }
 
