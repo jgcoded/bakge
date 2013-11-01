@@ -34,10 +34,31 @@ GLint ShaderProgram;
 bakge::Camera2D* UICam;
 bakge::Font* F;
 bakge::Stamp* St;
+bakge::Shader* Shad;
 
 float Rot;
 bakge::Microseconds NowTime;
 bakge::Microseconds LastTime;
+
+static const char* Vertex =
+    "varying vec2 TexCoord0;\n"
+    "varying vec4 Position;\n"
+    "void main()\n"
+    "{\n"
+    "    TexCoord0 = bge_TexCoord;\n"
+    "    Position = bge_View * bge_Vertex;\n"
+    "    gl_Position = bge_Projection * Position;\n"
+    "}\n"
+    "\n";
+
+static const char* Fragment =
+    "varying vec2 TexCoord0;\n"
+    "varying vec4 Position;\n"
+    "void main()\n"
+    "{\n"
+    "    gl_FragColor = texture(bge_Diffuse, TexCoord0);\n"
+    "}\n"
+    "\n";
 
 bakge::Result InitTest()
 {
@@ -50,6 +71,9 @@ bakge::Result InitTest()
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
+
+    Shad = bakge::Shader::LoadFromStrings(1, 1, &Vertex, &Fragment);
+    Shad->Bind();
 
     PHYSFS_addToSearchPath("C:/", 0);
     F = bakge::Font::Load("arial.ttf");
