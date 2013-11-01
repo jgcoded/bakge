@@ -78,7 +78,7 @@ bakge::Result InitTest()
     PHYSFS_addToSearchPath("C:/", 0);
     F = bakge::Font::Load("arial.ttf");
 
-    int R = F->Bake(&Tex, 36, 132, 64.0f);
+    int R = F->Bake(&Tex, 36, 132, 24.0f);
     bakge::Log("test/font: Bake result %d\n", R);
 
     It = bakge::Pawn::Create();
@@ -103,7 +103,7 @@ bakge::Result PreRenderTest()
     UICam->Bind();
     Tex->Bind();
 
-    St->Begin(0, 0);
+    St->Begin(-200, 0);
     St->Bind();
 
     return BGE_SUCCESS;
