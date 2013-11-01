@@ -75,34 +75,6 @@ Stamp* Stamp::Create()
 }
 
 
-Result Stamp::Pick(const Glyph* G)
-{
-    //TODO Add kerning advance
-    Offset.X = G->Offset.X;
-    Offset.Y = G->Offset.Y;
-    Adv = G->Advance;
-    ScaleFactor = G->ScaleFactor;
-
-    if(SetDimensions(G->Width, G->Height) == BGE_FAILURE) {
-        Log("ERROR: Stamp::Pick - Couldn't resize to glyph dimensions.\n");
-        return BGE_FAILURE;
-    }
-
-    const Scalar TexCoords[] = {
-        G->Coord.U, G->Coord.V,
-        G->Coord.U, G->Coord.T,
-        G->Coord.S, G->Coord.T,
-        G->Coord.S, G->Coord.V
-    };
-
-    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 8, (GLvoid*)TexCoords,
-                                                        GL_DYNAMIC_DRAW);
-
-    return BGE_SUCCESS;
-}
-
-
 Result Stamp::Bind() const
 {
     GLint Program;
@@ -159,6 +131,23 @@ Result Stamp::SetDimensions(Scalar W, Scalar H)
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Positions,
                                                             GL_DYNAMIC_DRAW);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
+}
+
+
+Result Stamp::SetTexCoords(Scalar S0, Scalar T0, Scalar S1, Scalar T1)
+{
+    const Scalar TexCoords[] = {
+        S0, T0,
+        S0, T1,
+        S1, T1,
+        S1, T0
+    };
+
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 8, (GLvoid*)TexCoords,
+                                                        GL_DYNAMIC_DRAW);
 
     return BGE_SUCCESS;
 }

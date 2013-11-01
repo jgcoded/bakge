@@ -70,9 +70,9 @@ public:
 
     BGE_FACTORY Stamp* Create();
 
-    Result Pick(const Glyph* G);
-
     Result SetDimensions(Scalar Width, Scalar Height);
+
+    Result SetTexCoords(Scalar S0, Scalar T0, Scalar S1, Scalar T1);
 
     virtual Result Bind() const;
 
@@ -81,6 +81,42 @@ public:
     Result Begin(Scalar X, Scalar Y);
 
     Result Kern(Scalar Amount);
+
+    BGE_INL Scalar SetAdvance(Scalar A)
+    {
+        Adv = A;
+
+        return A;
+    }
+
+    BGE_INL Scalar GetAdvance() const
+    {
+        return Adv;
+    }
+
+    BGE_INL void SetOffsets(Scalar X, Scalar Y)
+    {
+        Offset.X = X;
+        Offset.Y = Y;
+    }
+
+    BGE_INL void GetOffsets(Scalar* X , Scalar* Y)
+    {
+        *X = Offset.X;
+        *Y = Offset.Y;
+    }
+
+    BGE_INL Scalar SetScaleFactor(Scalar F)
+    {
+        ScaleFactor = F;
+
+        return F;
+    }
+
+    BGE_INL Scalar GetScaleFactor() const
+    {
+        return ScaleFactor;
+    }
 
 }; // Stamp
 

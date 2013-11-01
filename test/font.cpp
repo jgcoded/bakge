@@ -114,12 +114,10 @@ bakge::Result RenderTest()
 {
     const char* Str = "The Quick Brown Fox Jumps Over the Lazy Dog.";
     const char* C = Str;
-    bakge::Glyph G;
     while(*C) {
-        Tex->Extract(*C, &G);
+        Tex->Extract(*C, St);
         bakge::Scalar K = Tex->GetScaleFactor() * F->GetKerning(*C, *(C+1));
         St->Kern(K);
-        St->Pick(&G);
         St->Draw();
         St->Advance();
         ++C;

@@ -42,25 +42,22 @@ GlyphMap::~GlyphMap()
 }
 
 
-Result GlyphMap::Extract(int Codepoint, Glyph* Target)
+Result GlyphMap::Extract(int Codepoint, Stamp* Target)
 {
     if(Codepoint < Start || Codepoint > End) {
-        Target->Codepoint = 0;
         return BGE_FAILURE;
     }
 
     int i = Codepoint - Start;
+    int W = Tex->GetWidth();
+    int H = Tex->GetHeight();
 
-    Target->Width = Data[i].x1 - Data[i].x0;
-    Target->Height = Data[i].y1 - Data[i].y0;
-    Target->Advance = Data[i].xadvance;
-    Target->Offset.X = Data[i].xoff;
-    Target->Offset.Y = Data[i].yoff;
-    Target->Coord.U = (Scalar)Data[i].x0 / Tex->GetWidth();
-    Target->Coord.V = (Scalar)Data[i].y0 / Tex->GetHeight();
-    Target->Coord.S = (Scalar)Data[i].x1 / Tex->GetWidth();
-    Target->Coord.T = (Scalar)Data[i].y1 / Tex->GetHeight();
-    Target->ScaleFactor = ScaleFactor;
+    Target->SetOffsets(Data[i].xoff, Data[i].yoff);
+    Target->SetAdvance(Data[i].xadvance);
+    Target->SetScaleFactor(ScaleFactor);
+    Target->SetDimensions(Data[i].x1 - Data[i].x0, Data[i].y1 - Data[i].y0);
+    Target->SetTexCoords((Scalar)Data[i].x0 / W, (Scalar)Data[i].y0 / H,
+                            (Scalar)Data[i].x1 / W, (Scalar)Data[i].y1 / H);
 
     return BGE_SUCCESS;
 }
