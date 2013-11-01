@@ -27,18 +27,11 @@
 #include <bakge/Bakge.h>
 #include "TestEngine.h"
 
-bakge::Rectangle* Obj;
-bakge::Pawn* It;
 bakge::GlyphMap* Tex;
-GLint ShaderProgram;
 bakge::Camera2D* UICam;
 bakge::Font* F;
 bakge::Stamp* St;
 bakge::Shader* Shad;
-
-float Rot;
-bakge::Microseconds NowTime;
-bakge::Microseconds LastTime;
 
 static const char* Vertex =
     "varying vec2 TexCoord0;\n"
@@ -64,9 +57,6 @@ bakge::Result InitTest()
 {
     UICam = new bakge::Camera2D;
 
-    Rot = 0;
-    LastTime = bakge::GetRunningTime();
-
     glEnable(GL_DEPTH_TEST);
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -80,13 +70,6 @@ bakge::Result InitTest()
 
     int R = F->Bake(&Tex, 4, 132, 20.0f);
     bakge::Log("test/font: Bake result %d\n", R);
-
-    It = bakge::Pawn::Create();
-    Obj = bakge::Rectangle::Create(512, 512);
-
-    Obj->SetDrawStyle(bakge::SHAPE_DRAW_STYLE_SOLID);
-
-    It->SetPosition(0, 0, 0);
 
     UICam->SetPosition(-256.0f, 256.0f, -1.0f);
     UICam->SetSpan(512.0f, -512.0f, 2.0f);
@@ -139,14 +122,8 @@ bakge::Result PostRenderTest()
 
 bakge::Result ShutDownTest()
 {
-    if(Obj != NULL)
-        delete Obj;
-
     if(Tex != NULL)
         delete Tex;
-
-    if(It != NULL)
-        delete It;
 
     if(UICam != NULL)
         delete UICam;
