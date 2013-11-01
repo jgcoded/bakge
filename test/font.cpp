@@ -117,6 +117,8 @@ bakge::Result RenderTest()
     bakge::Glyph G;
     while(*C) {
         Tex->Extract(*C, &G);
+        bakge::Scalar K = Tex->GetScaleFactor() * F->GetKerning(*C, *(C+1));
+        St->Kern(K);
         St->Pick(&G);
         St->Draw();
         St->Advance();
