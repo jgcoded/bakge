@@ -39,6 +39,7 @@ Stamp::Stamp()
     Offset.X = 0;
     Offset.Y = 0;
     Adv = 0;
+    ScaleFactor = 0;
 }
 
 
@@ -80,6 +81,7 @@ Result Stamp::Pick(const Glyph* G)
     Offset.X = G->Offset.X;
     Offset.Y = G->Offset.Y;
     Adv = G->Advance;
+    ScaleFactor = G->ScaleFactor;
 
     if(SetDimensions(G->Width, G->Height) == BGE_FAILURE) {
         Log("ERROR: Stamp::Pick - Couldn't resize to glyph dimensions.\n");

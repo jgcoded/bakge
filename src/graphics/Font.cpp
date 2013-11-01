@@ -148,6 +148,8 @@ int Font::Bake(GlyphMap** Target, int GlyphStart, int GlyphEnd,
     (*Target)->Tex = BakedMap;
     (*Target)->Data = GlyphData;
     (*Target)->Start = GlyphStart;
+    (*Target)->ScaleFactor = stbtt_ScaleForPixelHeight(&FontInfo,
+                                                (float)PixelHeight);
 
     // Negative result is -1 * number of baked glyphs
     if(BakeResult < 0) {

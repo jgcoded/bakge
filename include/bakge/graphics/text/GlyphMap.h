@@ -48,6 +48,8 @@ class BGE_API GlyphMap : public Bindable
 
     Texture* Tex;
 
+    Scalar ScaleFactor;
+
     stbtt_bakedchar* Data;
 
     // NumGlyphs is End - Start
@@ -95,6 +97,11 @@ public:
     BGE_INL uint32 GetEndGlyph() const
     {
         return End;
+    }
+
+    BGE_INL Scalar GetScaleFactor() const
+    {
+        return ScaleFactor;
     }
 
     /*! @brief Fill the target Glyph struct with data about the given

@@ -59,6 +59,7 @@ typedef struct
     int Codepoint;
 
     float Advance;
+    float ScaleFactor;
 } Glyph;
 
 /*! @brief Wrapper class for TrueType fonts.

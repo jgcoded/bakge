@@ -33,6 +33,7 @@ GlyphMap::GlyphMap()
     Data = NULL;
     Start = 0;
     End = 0;
+    ScaleFactor = 0;
 }
 
 
@@ -59,6 +60,7 @@ Result GlyphMap::Extract(int Codepoint, Glyph* Target)
     Target->Coord.V = (Scalar)Data[i].y0 / Tex->GetHeight();
     Target->Coord.S = (Scalar)Data[i].x1 / Tex->GetWidth();
     Target->Coord.T = (Scalar)Data[i].y1 / Tex->GetHeight();
+    Target->ScaleFactor = ScaleFactor;
 
     return BGE_SUCCESS;
 }
