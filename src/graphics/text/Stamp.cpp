@@ -85,6 +85,17 @@ Result Stamp::Pick(const Glyph* G)
         return BGE_FAILURE;
     }
 
+    const Scalar TexCoords[] = {
+        G->Coord.U, G->Coord.T,
+        G->Coord.U, G->Coord.V,
+        G->Coord.S, G->Coord.V,
+        G->Coord.S, G->Coord.T
+    };
+
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 8, (GLvoid*)TexCoords,
+                                                        GL_DYNAMIC_DRAW);
+
     return BGE_SUCCESS;
 }
 
