@@ -47,6 +47,8 @@ class BGE_API Stamp : public Rectangle
         Scalar Y;
     } Start, Current, Offset;
 
+    Scalar Adv;
+
 
 protected:
 
