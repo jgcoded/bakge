@@ -64,12 +64,6 @@ public:
 
     Result Pick(const Glyph* G);
 
-    virtual Result Bind() const;
-
-    virtual Result Unbind() const;
-
-    virtual Result Draw() const;
-
 }; // Stamp
 
 } // bakge

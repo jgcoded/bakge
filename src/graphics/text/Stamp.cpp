@@ -54,22 +54,4 @@ Result Stamp::Pick(const Glyph* G)
     return BGE_FAILURE;
 }
 
-
-Result Stamp::Bind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result Stamp::Unbind() const
-{
-    return BGE_FAILURE;
-}
-
-
-Result Stamp::Draw() const
-{
-    return BGE_FAILURE;
-}
-
 } // bakge
