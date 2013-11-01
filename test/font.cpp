@@ -92,6 +92,7 @@ bakge::Result InitTest()
     UICam->SetSpan(512.0f, 512.0f, 2.0f);
 
     St = bakge::Stamp::Create();
+    St->SetDimensions(50, 50);
 
     return BGE_SUCCESS;
 }
@@ -101,8 +102,7 @@ bakge::Result PreRenderTest()
 {
     UICam->Bind();
     Tex->Bind();
-    Obj->Bind();
-    It->Bind();
+    St->Bind();
 
     return BGE_SUCCESS;
 }
@@ -110,6 +110,7 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
+    St->Draw();
 
     return BGE_SUCCESS;
 }
@@ -117,8 +118,8 @@ bakge::Result RenderTest()
 
 bakge::Result PostRenderTest()
 {
-    It->Unbind();
-    Obj->Unbind();
+    St->Advance();
+    St->Unbind();
     Tex->Unbind();
     UICam->Unbind();
 
