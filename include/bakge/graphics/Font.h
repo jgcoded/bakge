@@ -47,6 +47,15 @@ typedef struct
         Scalar Y;
     } Offset;
 
+    struct {
+        // Bottom-left corner
+        Scalar U;
+        Scalar V;
+        // Top-right corner
+        Scalar S;
+        Scalar T;
+    } Coord;
+
     int Codepoint;
 
     float Advance;
