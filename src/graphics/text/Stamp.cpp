@@ -144,4 +144,15 @@ Result Stamp::Advance()
     return BGE_SUCCESS;
 }
 
+
+Result Stamp::Begin(Scalar X, Scalar Y)
+{
+    Start.X = X;
+    Start.Y = Y;
+    Current.X = X;
+    Current.Y = Y;
+
+    return BGE_SUCCESS;
+}
+
 } // bakge

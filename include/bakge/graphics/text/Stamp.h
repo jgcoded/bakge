@@ -77,6 +77,8 @@ public:
 
     Result Advance();
 
+    Result Begin(Scalar X, Scalar Y);
+
 }; // Stamp
 
 } // bakge
