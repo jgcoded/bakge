@@ -78,7 +78,7 @@ bakge::Result InitTest()
     PHYSFS_addToSearchPath("C:/", 0);
     F = bakge::Font::Load("arial.ttf");
 
-    int R = F->Bake(&Tex, 36, 132, 24.0f);
+    int R = F->Bake(&Tex, 4, 132, 20.0f);
     bakge::Log("test/font: Bake result %d\n", R);
 
     It = bakge::Pawn::Create();
@@ -88,8 +88,8 @@ bakge::Result InitTest()
 
     It->SetPosition(0, 0, 0);
 
-    UICam->SetPosition(-256.0f, -256.0f, -1.0f);
-    UICam->SetSpan(512.0f, 512.0f, 2.0f);
+    UICam->SetPosition(-256.0f, 256.0f, -1.0f);
+    UICam->SetSpan(512.0f, -512.0f, 2.0f);
 
     St = bakge::Stamp::Create();
     St->SetDimensions(50, 50);
@@ -112,12 +112,15 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
+    const char* Str = "The Quick Brown Fox Jumps Over the Lazy Dog.";
+    const char* C = Str;
     bakge::Glyph G;
-    for(int i='X';i<'f';++i) {
-        Tex->Extract(i, &G);
+    while(*C) {
+        Tex->Extract(*C, &G);
         St->Pick(&G);
         St->Draw();
         St->Advance();
+        ++C;
     }
 
     return BGE_SUCCESS;
