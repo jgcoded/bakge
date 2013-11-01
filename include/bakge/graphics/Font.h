@@ -37,8 +37,8 @@ namespace bakge
 
 typedef struct
 {
-    uint16 Width;
-    uint16 Height;
+    int Width;
+    int Height;
 
     struct {
         float X;
