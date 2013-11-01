@@ -40,4 +40,23 @@ GlyphMap::~GlyphMap()
 {
 }
 
+
+Result GlyphMap::Extract(int Codepoint, Glyph* Target)
+{
+    if(Codepoint < Start || Codepoint > End) {
+        Target->Codepoint = 0;
+        return BGE_FAILURE;
+    }
+
+    int i = Codepoint - Start;
+
+    Target->Width = Data[i].x1 - Data[i].x0;
+    Target->Height = Data[i].y1 - Data[i].y0;
+    Target->Advance = Data[i].xadvance;
+    Target->Offset.X = Data[i].xoff;
+    Target->Offset.Y = Data[i].yoff;
+
+    return BGE_SUCCESS;
+}
+
 } // bakge

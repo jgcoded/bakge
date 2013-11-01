@@ -97,6 +97,22 @@ public:
         return End;
     }
 
+    /*! @brief Fill the target Glyph struct with data about the given
+     * codepoint.
+     *
+     * Fill the target Glyph struct with data about the given codepoint.
+     * If the codepoint is not part of this GlyphMap, Target->Codepoint is
+     * set to 0 and the function returns BGE_FAILURE.
+     *
+     * @param[in] Codepoint Unicode codepoint to extract data about.
+     * @param[out] Target Filled with codepoint data if found.
+     *
+     * @return BGE_SUCCESS if the codepoint was found and data was
+     * successfully filled into Target; BGE_FAILURE if any errors occurred or
+     * the codepoint was not found.
+     */
+    Result Extract(int Codepoint, Glyph* Target);
+
 }; // GlyphMap
 
 } // bakge
