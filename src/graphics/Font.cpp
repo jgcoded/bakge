@@ -160,4 +160,10 @@ int Font::Bake(GlyphMap** Target, int GlyphStart, int GlyphEnd,
     }
 }
 
+
+int Font::GetKerning(int A, int B)
+{
+    return stbtt_GetCodepointKernAdvance(&FontInfo, A, B);
+}
+
 } /* bakge */

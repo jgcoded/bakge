@@ -106,6 +106,8 @@ public:
     int Bake(GlyphMap** Target, int GlyphStart, int GlyphEnd,
                                             int PixelHeight);
 
+    int GetKerning(int A, int B);
+
 }; /* Font */
 
 } /* bakge */
