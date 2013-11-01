@@ -71,6 +71,8 @@ public:
 
     Result SetDimensions(Scalar Width, Scalar Height);
 
+    virtual Result Bind() const;
+
 }; // Stamp
 
 } // bakge

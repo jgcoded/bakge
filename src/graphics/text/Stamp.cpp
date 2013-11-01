@@ -23,6 +23,9 @@
  * */
 
 #include <bakge/Bakge.h>
+#ifdef _DEBUG
+#include <bakge/internal/Debug.h>
+#endif // _DEBUG
 
 namespace bakge
 {
@@ -71,7 +74,36 @@ Stamp* Stamp::Create()
 
 Result Stamp::Pick(const Glyph* G)
 {
-    return BGE_FAILURE;
+    if(SetDimensions(G->Width, G->Height) == BGE_FAILURE) {
+        Log("ERROR: Stamp::Pick - Couldn't resize to glyph dimensions.\n");
+        return BGE_FAILURE;
+    }
+
+    return BGE_SUCCESS;
+}
+
+
+Result Stamp::Bind() const
+{
+    GLint Program;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &Program);
+    if(Program == 0) {
+        return BGE_FAILURE;
+    }
+
+    /* Check each of our attributes' locations to ensure they exist */
+    GLint Location = glGetAttribLocation(Program, BGE_VERTEX_ATTRIBUTE);
+    if(Location >= 0) {
+        glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+        glEnableVertexAttribArray(Location);
+        glVertexAttribPointer(Location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+#ifdef _DEBUG
+    } else {
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+#endif // _DEBUG
+    }
+
+    return BGE_SUCCESS;
 }
 
 
