@@ -75,6 +75,7 @@ Stamp* Stamp::Create()
 
 Result Stamp::Pick(const Glyph* G)
 {
+    //TODO Add kerning advance
     Offset.X = G->Offset.X;
     Offset.Y = G->Offset.Y;
     Adv = G->Advance;
