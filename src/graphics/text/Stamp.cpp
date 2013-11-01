@@ -69,4 +69,25 @@ Result Stamp::Pick(const Glyph* G)
     return BGE_FAILURE;
 }
 
+
+Result Stamp::SetDimensions(Scalar Width, Scalar Height)
+{
+    Scalar Positions[] = {
+        0, 0, 0,
+        0, Height, 0,
+        Width, Height, 0,
+        Width, 0, 0,
+    };
+
+    this->Width = Width;
+    this->Height = Height;
+
+    glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Positions,
+                                                            GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    return BGE_SUCCESS;
+}
+
 } // bakge

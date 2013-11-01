@@ -64,6 +64,8 @@ public:
 
     Result Pick(const Glyph* G);
 
+    Result SetDimensions(Scalar Width, Scalar Height);
+
 }; // Stamp
 
 } // bakge
