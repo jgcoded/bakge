@@ -33,6 +33,7 @@ bakge::GlyphMap* Tex;
 GLint ShaderProgram;
 bakge::Camera2D* UICam;
 bakge::Font* F;
+bakge::Stamp* St;
 
 float Rot;
 bakge::Microseconds NowTime;
@@ -66,6 +67,8 @@ bakge::Result InitTest()
     UICam->SetPosition(-256.0f, -256.0f, -1.0f);
     UICam->SetSpan(512.0f, 512.0f, 2.0f);
 
+    St = new bakge::Stamp;
+
     return BGE_SUCCESS;
 }
 
@@ -83,7 +86,6 @@ bakge::Result PreRenderTest()
 
 bakge::Result RenderTest()
 {
-    Obj->Draw();
 
     return BGE_SUCCESS;
 }
@@ -116,6 +118,8 @@ bakge::Result ShutDownTest()
 
     if(F != NULL)
         delete F;
+
+    delete St;
 
     return BGE_SUCCESS;
 }
