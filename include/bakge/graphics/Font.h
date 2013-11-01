@@ -43,8 +43,8 @@ typedef struct
     int Height;
 
     struct {
-        float X;
-        float Y;
+        Scalar X;
+        Scalar Y;
     } Offset;
 
     int Codepoint;
