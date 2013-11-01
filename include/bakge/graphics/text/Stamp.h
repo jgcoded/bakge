@@ -42,6 +42,11 @@ namespace bakge
  */
 class BGE_API Stamp : public Rectangle
 {
+    struct {
+        Scalar X;
+        Scalar Y;
+    } Start, Current, Offset;
+
 
 protected:
 

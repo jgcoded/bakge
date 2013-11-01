@@ -29,6 +29,12 @@ namespace bakge
 
 Stamp::Stamp()
 {
+    Start.X = 0;
+    Start.Y = 0;
+    Current.X = 0;
+    Current.Y = 0;
+    Offset.X = 0;
+    Offset.Y = 0;
 }
 
 
