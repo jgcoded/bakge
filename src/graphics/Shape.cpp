@@ -147,7 +147,7 @@ Result Shape::Unbind() const
         glDisableVertexAttribArray(Location);
 #ifdef _DEBUG
     } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_NORMAL_ATTRIBUTE);
 #endif // _DEBUG
     }
 
@@ -156,7 +156,7 @@ Result Shape::Unbind() const
         glDisableVertexAttribArray(Location);
 #ifdef _DEBUG
     } else {
-        BGE_WARN_MISSING_ATTRIBUTE(BGE_VERTEX_ATTRIBUTE);
+        BGE_WARN_MISSING_ATTRIBUTE(BGE_TEXCOORD_ATTRIBUTE);
 #endif // _DEBUG
     }
 
