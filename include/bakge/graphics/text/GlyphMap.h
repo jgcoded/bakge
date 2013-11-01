@@ -79,6 +79,24 @@ public:
         return Tex->Unbind();
     }
 
+    BGE_INL uint32 GetNumGlyphs() const
+    {
+        if(End < Start)
+            return 0;
+
+        return End - Start;
+    }
+
+    BGE_INL uint32 GetStartGlyph() const
+    {
+        return Start;
+    }
+
+    BGE_INL uint32 GetEndGlyph() const
+    {
+        return End;
+    }
+
 }; // GlyphMap
 
 } // bakge
