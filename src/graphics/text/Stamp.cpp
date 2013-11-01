@@ -137,20 +137,20 @@ Result Stamp::Bind() const
 }
 
 
-Result Stamp::SetDimensions(Scalar Width, Scalar Height)
+Result Stamp::SetDimensions(Scalar W, Scalar H)
 {
-    Scalar X = Current.X + Offset.X;
-    Scalar Y = Current.Y + Offset.Y;
+    Scalar X = Current.X;
+    Scalar Y = Current.Y;
 
     Scalar Positions[] = {
         X, Y, 0,
-        X, Y + Height, 0,
-        X + Width, Y +Height, 0,
-        X + Width, Y, 0,
+        X, Y + H, 0,
+        X + W, Y + H, 0,
+        X + W, Y, 0,
     };
 
-    this->Width = Width;
-    this->Height = Height;
+    Width = W;
+    Height = H;
 
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_POSITIONS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 12, (GLvoid*)Positions,
