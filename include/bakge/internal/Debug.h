@@ -52,6 +52,7 @@ void GLFWErrorHandler(int Code, const char* Description);
  */
 const char* GetGLErrorName(GLenum Error);
 
+#if BGE_WARN_MISSING_VARIABLES
 /*! @brief Log a warning that an attribute variable is missing.
  *
  * Log a warning that an attribute variable is missing from the currently
@@ -77,6 +78,10 @@ const char* GetGLErrorName(GLenum Error);
  */
 #define BGE_WARN_MISSING_UNIFORM(Name) \
     Log("WARNING: Unable to find uniform '%s' in current shader\n", Name);
+#else
+#define BGE_WARN_MISSING_ATTRIBUTE(Name)
+#define BGE_WARN_MISSING_UNIFORM(Name)
+#endif // BGE_WARN_MISSING_VARIABLES
 
 } // bakge
 
