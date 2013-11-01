@@ -80,6 +80,8 @@ public:
 
     Result Begin(Scalar X, Scalar Y);
 
+    Result Kern(Scalar Amount);
+
 }; // Stamp
 
 } // bakge

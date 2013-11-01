@@ -172,6 +172,14 @@ Result Stamp::Advance()
 }
 
 
+Result Stamp::Kern(Scalar Amount)
+{
+    Current.X += Amount;
+
+    return BGE_SUCCESS;
+}
+
+
 Result Stamp::Begin(Scalar X, Scalar Y)
 {
     Start.X = X;
