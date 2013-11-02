@@ -318,6 +318,18 @@ Result GetNumIndices(bmf::v100* Handle, uint32* Num)
 
 void GetVertexPositions(bmf::v100* Handle, Scalar* Buffer)
 {
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetVertexPositions() - Passed NULL bmf::v100*\n");
+        return;
+    }
+
+    if(Buffer == NULL) {
+        Log("ERROR: GetVertexPositions() - Passed NULL Scalar*\n");
+        return;
+    }
+#endif // _DEBUG
+
     if(PHYSFS_seek(Handle->F, Handle->PositionsOffset) == 0) {
         Log("ERROR: GetVertexPositions (v100) - Error seeking positions "
                                                             "offset.\n");
@@ -340,6 +352,18 @@ void GetVertexPositions(bmf::v100* Handle, Scalar* Buffer)
 
 void GetVertexNormals(bmf::v100* Handle, Scalar* Buffer)
 {
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetVertexNormals() - Passed NULL bmf::v100*\n");
+        return;
+    }
+
+    if(Buffer == NULL) {
+        Log("ERROR: GetVertexNormals() - Passed NULL Scalar*\n");
+        return;
+    }
+#endif // _DEBUG
+
     if(PHYSFS_seek(Handle->F, Handle->NormalsOffset) == 0) {
         Log("ERROR: GetVertexNormals (v100) - Error seeking normals "
                                                             "offset.\n");
@@ -362,6 +386,18 @@ void GetVertexNormals(bmf::v100* Handle, Scalar* Buffer)
 
 void GetVertexTexCoords(bmf::v100* Handle, Scalar* Buffer)
 {
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetVertexTexCoords() - Passed NULL bmf::v100*\n");
+        return;
+    }
+
+    if(Buffer == NULL) {
+        Log("ERROR: GetVertexTexCoords() - Passed NULL Scalar*\n");
+        return;
+    }
+#endif // _DEBUG
+
     if(PHYSFS_seek(Handle->F, Handle->TexCoordsOffset) == 0) {
         Log("ERROR: GetVertexTexCoords (v100) - Error seeking texcoords "
                                                             "offset.\n");
@@ -384,6 +420,18 @@ void GetVertexTexCoords(bmf::v100* Handle, Scalar* Buffer)
 
 void GetTriangleIndices(bmf::v100* Handle, uint32* Buffer)
 {
+#ifdef _DEBUG
+    if(Handle == NULL) {
+        Log("ERROR: GetTriangleIndices() - Passed NULL bmf::v100*\n");
+        return;
+    }
+
+    if(Buffer == NULL) {
+        Log("ERROR: GetTriangleIndices() - Passed NULL uint32*\n");
+        return;
+    }
+#endif // _DEBUG
+
     if(PHYSFS_seek(Handle->F, Handle->TrianglesOffset) == 0) {
         Log("ERROR: GetTriangleIndices (v100) - Error seeking indices "
                                                             "offset.\n");
