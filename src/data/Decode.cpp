@@ -67,15 +67,18 @@ int _stbicb_EOF(void* User)
 Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
                                                 int* H, int* N)
 {
+    BeginLogBlock();
+
+    Log("DecodeImageFile - \"%s\"\n", FilePath);
+
     if(PHYSFS_exists(FilePath) == 0) {
-        Log("ERROR: DecodeImageFile - \"%s\" does not exist.\n");
-        Log("  %s\n", PHYSFS_getLastError());
+        Log("  ERROR: File does not exist.\n");
         return BGE_FAILURE;
     }
 
     PHYSFS_File* F = PHYSFS_openRead(FilePath);
     if(F == NULL) {
-        Log("ERROR: Couldn't open file \"%s\"\n", FilePath);
+        Log("  ERROR: Couldn't open file for reading.\n");
         return BGE_FAILURE;
     }
 
@@ -91,14 +94,16 @@ Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
     Result R = BGE_SUCCESS;
 
     if(*Data != NULL) {
-        Log("DecodeImageFile - \"%s\" successfully decoded.\n", FilePath);
-        Log("  %dx%d, %d bytes per pixel\n", *W, *H, *N);
+        Log("  - \"%s\" successfully decoded.\n", FilePath);
+        Log("  - %dx%d, %d bytes per pixel\n", *W, *H, *N);
     } else {
-        Log("DecodeImageFile - Error while decoding \"%s\"\n", FilePath);
+        Log("  ERROR: Error while decoding \"%s\".\n", FilePath);
         R = BGE_FAILURE;
     }
 
     PHYSFS_close(F);
+
+    Log("  - Closing file \"%s\"\n", FilePath);
 
     EndLogBlock();
 
