@@ -29,6 +29,7 @@ namespace bakge
 
 CompositeTexture::CompositeTexture()
 {
+    Corner = 0;
 }
 
 
@@ -137,6 +138,7 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
 
     Tex->Width = W;
     Tex->Height = H;
+    Tex->Corner = C;
 
     glBindTexture(GL_TEXTURE_2D, Tex->TextureID);
 

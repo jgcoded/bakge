@@ -61,6 +61,8 @@ namespace bakge
  */
 class BGE_API CompositeTexture : public bakge::Texture
 {
+    int Corner;
+
     CompositeTexture();
 
 
@@ -91,6 +93,11 @@ public:
                                             const void* TL, const void* TR,
                                             const void* BR, const void* HG,
                                             const void* VG, const void* F);
+
+    BGE_INL int GetCornerDimension() const
+    {
+        return Corner;
+    }
 
 }; // CompositeTexture
 
