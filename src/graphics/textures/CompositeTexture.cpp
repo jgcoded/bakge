@@ -43,14 +43,6 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
                                 const void* HG, const void* VG,
                                                 const void* F)
 {
-    static const GLint DefaultParams[] = {
-        GL_TEXTURE_MIN_FILTER, GL_NEAREST,
-        GL_TEXTURE_MAG_FILTER, GL_NEAREST,
-        GL_TEXTURE_WRAP_S, GL_REPEAT,
-        GL_TEXTURE_WRAP_T, GL_REPEAT,
-        0
-    };
-
     BeginLogBlock();
     Log("CompositeTexture::Create %dx%d\n", W, H);
 
@@ -139,31 +131,10 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
 
     glBindTexture(GL_TEXTURE_2D, Tex->TextureID);
 
-    // Pick out and set texture parameters/values
-    const GLint* Params = DefaultParams;
-    GLint i = 0;
-    GLint Pair[2]; // Index 0 is parameter name; 1 is value
-    GLint At = 0;
-    while(Params[i] != 0) {
-        Pair[At] = Params[i];
-        // If we just picked a value, set the texture parameter
-        if(At == 1)
-            glTexParameteri(GL_TEXTURE_2D, Pair[0], Pair[1]);
-
-#ifdef _DEBUG
-        if(glGetError() == GL_INVALID_ENUM) {
-            Log("Texture: Invalid parameter name %x or value %x\n", Pair[0],
-                                                                    Pair[1]);
-            EndLogBlock();
-            delete Tex;
-            delete Bitmap;
-            return NULL;
-        }
-#endif // _DEBUG
-
-        At ^= 1; // Flip between 0 and 1
-        ++i;
-    }
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, W, H, 0, GL_RGBA,
                                     GL_UNSIGNED_BYTE, Bitmap);
