@@ -47,9 +47,22 @@ struct v100
 
 } // bmf
 
-Result DecodeImageFile(const char* FilePath, Byte** Data)
+Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
+                                                int* H, int* N)
 {
-    return BGE_FAILURE;
+    if(PHYSFS_exists(FilePath) == 0) {
+        Log("ERROR: DecodeImageFile - \"%s\" does not exist.\n");
+        return BGE_FAILURE;
+    }
+
+    *Data = stbi_load(FilePath, W, H, N, 4);
+
+    BeginLogBlock();
+    Log("DecodeImageFile - \"%s\" successfully decoded.\n");
+    Log("  %dx%d, %d bytes per pixel\n", *W, *H, *N);
+    EndLogBlock();
+
+    return BGE_SUCCESS;
 }
 
 

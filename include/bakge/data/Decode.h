@@ -43,11 +43,15 @@ namespace bakge
  * @param[in] FilePath Null-terminated string of the file in on disk.
  * @param[in] Data Pointee set to address of allocated buffer on success. On
  *                 failure, the pointee is set to NULL.
+ * @param[in] W Pointee set to the width of the image decoded.
+ * @param[in] H Pointee set to the height of the image decoded.
+ * @param[in] N Pointee set to the number of bytes per pixel in the image.
  *
  * @return BGE_SUCCESS if the image data was successfully decoded; BGE_FAILURE
  * if the file does not exist or is not a valid and supported image format.
  */
-BGE_FUNC Result DecodeImageFile(const char* FilePath, Byte** Data);
+BGE_FUNC Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
+                                                            int* H, int* N);
 
 /* @brief Open a v1.0.0 Bakge Mesh File and return its handle.
  *
