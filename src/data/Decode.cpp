@@ -88,18 +88,21 @@ Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
 
     BeginLogBlock();
 
+    Result R = BGE_SUCCESS;
+
     if(*Data != NULL) {
         Log("DecodeImageFile - \"%s\" successfully decoded.\n", FilePath);
         Log("  %dx%d, %d bytes per pixel\n", *W, *H, *N);
     } else {
         Log("DecodeImageFile - Error while decoding \"%s\"\n", FilePath);
+        R = BGE_FAILURE;
     }
 
     PHYSFS_close(F);
 
     EndLogBlock();
 
-    return BGE_SUCCESS;
+    return R;
 }
 
 
