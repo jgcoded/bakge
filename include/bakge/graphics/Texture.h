@@ -45,6 +45,9 @@ namespace bakge
  */
 class BGE_API Texture : public Bindable
 {
+
+protected:
+
     int Width;
     int Height;
 
