@@ -69,59 +69,67 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
         return NULL;
     }
 
+    // Cache these values to prevent a bunch of repeated ops
+    int C4 = C * 4; // Length of corner segment (horizontal & vertical)
+    int CM1 = C - 1; // Offset to end of corner row/column
+    int W4 = W * 4; // Horizontal length of bitmap
+    int H4 = H * 4; // Vertical length bitmap
+    int IW = W - 2 * C; // Width of fill segment
+    int IH = H - 2 * C; // Height of fill segment
+    int i, j;
+
     Byte* Offset = Bitmap;
 
     // Copy bottom-left corner
-    for(int i=0;i<C;++i)
-        memcpy(Offset+(i*W*4), (Byte*)BL+((C-i-1)*4*C), sizeof(Byte)*4*C);
+    for(i=0;i<C;++i)
+        memcpy(Offset+(i*W4), (Byte*)BL+((CM1-i)*C4), C4);
 
     // Copy bottom-right corner
-    Offset = Bitmap + ((W-C) * 4);
-    for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), (Byte*)BR+((C-i-1)*4*C), sizeof(Byte)*4*C);
+    Offset = Bitmap+((W-C)*4);
+    for(i=0;i<C;++i)
+        memcpy(Offset+(i*W4), (Byte*)BR+((CM1-i)*C4), C4);
 
     // Copy top-left corner
-    Offset = Bitmap + (W * 4 * (H-C));
-    for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), (Byte*)TL+((C-i-1)*4*C), sizeof(Byte)*4*C);
+    Offset = Bitmap+(W4*(H-C));
+    for(i=0;i<C;++i)
+        memcpy(Offset+(i*W4), (Byte*)TL+((CM1-i)*C4), C4);
 
     // Copy top-right corner
-    Offset = Bitmap + (W * 4 * (H-C)) + ((W-C) * 4);
-    for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), (Byte*)TR+((C-i-1)*4*C), sizeof(Byte)*4*C);
+    Offset = Bitmap+(W4*(H-C))+((W-C)*4);
+    for(i=0;i<C;++i)
+        memcpy(Offset+(i*W4), (Byte*)TR+((CM1-i)*C4), C4);
 
     // Copy vertical gradients
-    Offset = Bitmap + (C * 4);
-    Byte* Offset2 = Bitmap + (W*4*(H-C)) + (C*4);
-    for(int i=0;i<C;++i) {
-        for(int j=0;j<W - (C * 2);++j) {
-            memcpy(Offset+(i*W*4)+(j*4), (Byte*)VG+(i*4), sizeof(Byte)*4);
-            memcpy(Offset2+(i*W*4)+(j*4), (Byte*)VG+((C-i-1)*4),
-                                                sizeof(Byte)*4);
+    Offset = Bitmap+C4;
+    Byte* Offset2 = Bitmap+(W4*(H-C))+C4;
+    for(i=0;i<C;++i) {
+        for(j=0;j<IW;++j) {
+            memcpy(Offset+(i*W4)+(j*4), (Byte*)VG+(i*4), 4);
+            memcpy(Offset2+(i*W4)+(j*4), (Byte*)VG+((CM1-i)*4), 4);
         }
     }
 
-    Offset = Bitmap + (W*4*C);
-    for(int i=0;i<H - (C * 2);++i) {
-        memcpy(Offset + (i*W*4), HG, sizeof(Byte) * 4  * C);
+    Offset = Bitmap+(W*C4);
+    for(i=0;i<IH;++i) {
+        memcpy(Offset+(i*W4), HG, C4);
     }
 
     // Copy right-edge in reverse
-    Offset = Bitmap + (W*4*C) + ((W-C)*4);
-    for(int i=0;i<C;++i) {
-        memcpy(Offset+(i*4), (Byte*)HG + ((C-i-1)*4), sizeof(Byte) * 4);
+    Offset = Bitmap+(W*C4)+((W-C)*4);
+    for(i=0;i<C;++i) {
+        memcpy(Offset+(i*4), (Byte*)HG+((CM1-i)*4), 4);
     }
 
     // Copy through-out the rest of the edge
-    for(int i=0;i<H - (C*2);++i) {
-        memcpy(Offset + (i*W*4), Offset, sizeof(Byte) * 4 * C);
+    for(i=0;i<IH;++i) {
+        memcpy(Offset+(i*W4), Offset, C4);
     }
 
     // Copy in fill
-    Offset = Bitmap + (C*4*W) + (C*4);
-    for(int i=0;i<H - (C*2);++i) {
-        for(int j=0;j<W - (C*2);++j) {
-            memcpy(Offset + (i*4*W) + (j*4), F, sizeof(Byte) * 4);
+    Offset = Bitmap+(C4*W)+(C4);
+    for(i=0;i<IH;++i) {
+        for(j=0;j<IW;++j) {
+            memcpy(Offset+(i*W4)+(j*4), F, 4);
         }
     }
 
