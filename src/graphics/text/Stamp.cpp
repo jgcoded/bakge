@@ -148,6 +148,7 @@ Result Stamp::SetTexCoords(Scalar S0, Scalar T0, Scalar S1, Scalar T1)
     glBindBuffer(GL_ARRAY_BUFFER, ShapeBuffers[SHAPE_BUFFER_TEXCOORDS]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Scalar) * 8, (GLvoid*)TexCoords,
                                                         GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     return BGE_SUCCESS;
 }
