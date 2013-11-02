@@ -95,6 +95,8 @@ Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
         Log("DecodeImageFile - Error while decoding \"%s\"\n", FilePath);
     }
 
+    PHYSFS_close(F);
+
     EndLogBlock();
 
     return BGE_SUCCESS;
