@@ -47,15 +47,44 @@ struct v100
 
 } // bmf
 
+// Called by stb_image when it requires data to process
+int _stbicb_Read(void* User, char* Data, int Size)
+{
+    return (int)PHYSFS_read((PHYSFS_File*)User, (void*)Data, 1, Size);
+}
+
+void _stbicb_Skip(void* User, uint32 Offset)
+{
+    uint32 Current = (uint32)PHYSFS_tell((PHYSFS_File*)User);
+    PHYSFS_seek((PHYSFS_File*)User, Current + Offset);
+}
+
+int _stbicb_EOF(void* User)
+{
+    return PHYSFS_eof((PHYSFS_File*)User);
+}
+
 Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
                                                 int* H, int* N)
 {
     if(PHYSFS_exists(FilePath) == 0) {
         Log("ERROR: DecodeImageFile - \"%s\" does not exist.\n");
+        Log("  %s\n", PHYSFS_getLastError());
         return BGE_FAILURE;
     }
 
-    *Data = stbi_load(FilePath, W, H, N, 4);
+    PHYSFS_File* F = PHYSFS_openRead(FilePath);
+    if(F == NULL) {
+        Log("ERROR: Couldn't open file \"%s\"\n", FilePath);
+        return BGE_FAILURE;
+    }
+
+    stbi_io_callbacks Callbacks;
+    Callbacks.read = _stbicb_Read;
+    Callbacks.skip = _stbicb_Skip;
+    Callbacks.eof = _stbicb_EOF;
+
+    *Data = stbi_load_from_callbacks(&Callbacks, (void*)F, W, H, N, 4);
 
     BeginLogBlock();
 
