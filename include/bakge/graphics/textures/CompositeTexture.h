@@ -31,7 +31,8 @@ namespace bakge
 {
 
 /*! @brief A special texture whose pixel data is built using four corner
- * textures, two gradients and a fill color.
+ * textures, two gradients and a fill color. Best used for static UI elements
+ * that share the same texture, like buttons or window bars.
  *
  * A special texture whose pixel data is built using 4 corner textures and
  * two gradients. The two gradients are used to fill the spaces directly
@@ -54,7 +55,9 @@ namespace bakge
  * according to the proper scale, using the GL_NEAREST magnification filters
  * to maintain a clear, crisp texture on the element. This approach is a bit
  * more complicated since it requires managing the scales and positions of
- * not only the UI element as a whole, but each of its 7 "subframes".
+ * not only the UI element as a whole, but each of its 7 "subframes". This
+ * does provide some benefits over using a CompositeTexture in that you load
+ * far less texture data into OpenGL and you can easily "re-skin" the element.
  */
 class BGE_API CompositeTexture : public bakge::Texture
 {
