@@ -60,7 +60,7 @@ bakge::Result InitTest()
     };
 
     static bakge::Byte Fill[] = {
-        30, 30, 180, 255
+        180, 180, 30, 255
     };
 
     Tex = bakge::CompositeTexture::Create(100, 100, 4, Corner, Corner, Corner,
