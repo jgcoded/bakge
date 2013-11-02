@@ -58,8 +58,14 @@ Result DecodeImageFile(const char* FilePath, Byte** Data, int* W,
     *Data = stbi_load(FilePath, W, H, N, 4);
 
     BeginLogBlock();
-    Log("DecodeImageFile - \"%s\" successfully decoded.\n");
-    Log("  %dx%d, %d bytes per pixel\n", *W, *H, *N);
+
+    if(*Data != NULL) {
+        Log("DecodeImageFile - \"%s\" successfully decoded.\n", FilePath);
+        Log("  %dx%d, %d bytes per pixel\n", *W, *H, *N);
+    } else {
+        Log("DecodeImageFile - Error while decoding \"%s\"\n", FilePath);
+    }
+
     EndLogBlock();
 
     return BGE_SUCCESS;
