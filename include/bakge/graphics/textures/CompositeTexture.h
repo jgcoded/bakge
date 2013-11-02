@@ -29,8 +29,6 @@
 
 namespace bakge
 {
-namespace gdk
-{
 
 /*! @brief A special texture whose pixel data is built using four corner
  * textures, two gradients and a fill color.
@@ -58,7 +56,7 @@ namespace gdk
  * more complicated since it requires managing the scales and positions of
  * not only the UI element as a whole, but each of its 7 "subframes".
  */
-class CompositeTexture : public bakge::Texture
+class BGE_API CompositeTexture : public bakge::Texture
 {
     CompositeTexture();
 
@@ -93,7 +91,6 @@ public:
 
 }; // CompositeTexture
 
-} // gdk
 } // bakge
 
 #endif // BAKGE_GDK_ENGINE_UI_COMPOSITETEXTURE_H

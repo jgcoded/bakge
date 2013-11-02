@@ -26,8 +26,6 @@
 
 namespace bakge
 {
-namespace gdk
-{
 
 CompositeTexture::CompositeTexture()
 {
@@ -122,5 +120,4 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
     return Tex;
 }
 
-} // gdk
 } // bakge
