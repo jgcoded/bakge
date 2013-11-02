@@ -10,6 +10,7 @@ set(TESTS
   audio
   bezier
   crowd
+  compositetexture
   device
   font
   grid
