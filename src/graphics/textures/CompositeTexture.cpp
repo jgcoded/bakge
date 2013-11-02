@@ -73,30 +73,31 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
 
     // Copy bottom-left corner
     for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), BL, sizeof(Byte) * 4 * C);
+        memcpy(Offset+(i*W*4), (Byte*)BL+((C-i-1)*4*C), sizeof(Byte)*4*C);
 
     // Copy bottom-right corner
     Offset = Bitmap + ((W-C) * 4);
     for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), BR, sizeof(Byte) * 4 * C);
+        memcpy(Offset + (i*W*4), (Byte*)BR+((C-i-1)*4*C), sizeof(Byte)*4*C);
 
     // Copy top-left corner
     Offset = Bitmap + (W * 4 * (H-C));
     for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), TL, sizeof(Byte) * 4 * C);
+        memcpy(Offset + (i*W*4), (Byte*)TL+((C-i-1)*4*C), sizeof(Byte)*4*C);
 
     // Copy top-right corner
     Offset = Bitmap + (W * 4 * (H-C)) + ((W-C) * 4);
     for(int i=0;i<C;++i)
-        memcpy(Offset + (i*W*4), TR, sizeof(Byte) * 4 * C);
+        memcpy(Offset + (i*W*4), (Byte*)TR+((C-i-1)*4*C), sizeof(Byte)*4*C);
 
     // Copy vertical gradients
     Offset = Bitmap + (C * 4);
     Byte* Offset2 = Bitmap + (W*4*(H-C)) + (C*4);
     for(int i=0;i<C;++i) {
         for(int j=0;j<W - (C * 2);++j) {
-            memcpy(Offset+(i*W*4)+(j*4), (Byte*)VG+(i*4), sizeof(Byte) * 4);
-            memcpy(Offset2+(i*W*4)+(j*4), (Byte*)VG+((C-i-1)*4), sizeof(Byte) * 4);
+            memcpy(Offset+(i*W*4)+(j*4), (Byte*)VG+(i*4), sizeof(Byte)*4);
+            memcpy(Offset2+(i*W*4)+(j*4), (Byte*)VG+((C-i-1)*4),
+                                                sizeof(Byte)*4);
         }
     }
 
