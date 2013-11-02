@@ -154,6 +154,9 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
         if(glGetError() == GL_INVALID_ENUM) {
             Log("Texture: Invalid parameter name %x or value %x\n", Pair[0],
                                                                     Pair[1]);
+            EndLogBlock();
+            delete Tex;
+            delete Bitmap;
             return NULL;
         }
 #endif // _DEBUG
@@ -167,6 +170,8 @@ CompositeTexture* CompositeTexture::Create(int W, int H, int C,
     glBindTexture(GL_TEXTURE_2D, 0);
 
     EndLogBlock();
+
+    delete Bitmap;
 
     return Tex;
 }
