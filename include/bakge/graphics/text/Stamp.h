@@ -78,10 +78,38 @@ public:
 
     Result Advance();
 
+    /*! @brief Set the Stamp start position and reset current position.
+     *
+     * Set the Stamp start position and reset current position.
+     *
+     * @param[in] X New X-position of the Stamp.
+     * @param[in] Y New Y-position of the Stamp.
+     *
+     * @return BGE_SUCCESS if the Stamp position was successfully set;
+     * BGE_FAILURE otherwise.
+     */
     Result Begin(Scalar X, Scalar Y);
 
+    /*! @brief Advance x-position, for kerning purposes.
+     *
+     * Advances the x-position, for kerning purposes. One can also use it
+     * to add a custom amount of space between characters.
+     *
+     * @brief Amount Height-scaled kerning advance.
+     *
+     * @return BGE_SUCCESS if kerning was successful; BGE_FAILURE if any
+     * errors occurred.
+     */
     Result Kern(Scalar Amount);
 
+    /*! @brief Set the glyph X-advance value. Used by GlyphMap::Extract.
+     *
+     * Set the glyph X-advance value. Used by GlyphMap::Extract. You likely
+     * won't ever need to use this, but it is available if you want to
+     * stylize your text rendering.
+     *
+     * @return X-position advance, after being set.
+     */
     BGE_INL Scalar SetAdvance(Scalar A)
     {
         Adv = A;
@@ -89,23 +117,61 @@ public:
         return A;
     }
 
+    /*! @brief Get the glyph X-advance value.
+     *
+     * You can use this in tandem with SetAdvance to stylize your text
+     * rendering.
+     *
+     * @return X-position advance of the currently picked glyph.
+     */
     BGE_INL Scalar GetAdvance() const
     {
         return Adv;
     }
 
+    /*! @brief Set the glyph origin offsets, relative to the rendering
+     * baseline.
+     *
+     * Set the glyph origin offsets, relative to the rendering baseline. Used
+     * internally by GlyphMap::Extract. You can use this to stylize your
+     * text rendering.
+     *
+     * @param[in] X X-offset of the glyph, from the baseline.
+     * @param[in] Y Y-offset of the glyph, from the baseline.
+     */
     BGE_INL void SetOffsets(Scalar X, Scalar Y)
     {
         Offset.X = X;
         Offset.Y = Y;
     }
 
+    /*! @brief Get the current glyph origin offsets, relative to the rendering
+    * baseline.
+    *
+    * Get the current glyph origin offsets, relative to the rendering
+    * baseline. You can use this in tandem with SetOffsets to stylize your
+    * text rendering.
+    *
+    * @param[out] X Pointee set to the current glyph's X-offset, relative to
+    *               the baseline.
+    * @param[out] Y Pointee set to the current glyph's Y-offset, relative to
+    *               the baseline.
+    */
     BGE_INL void GetOffsets(Scalar* X , Scalar* Y)
     {
         *X = Offset.X;
         *Y = Offset.Y;
     }
 
+    /*! @brief Set the scale factor for the glyph.
+     *
+     * Set the scale factor for the glyph. Used internally by
+     * GlyphMap::Extract. You can use this to stylize your text rendering.
+     *
+     * @param[in] F Scale factor to set to.
+     *
+     * @return Scale factor of the current glyph, after assignment.
+     */
     BGE_INL Scalar SetScaleFactor(Scalar F)
     {
         ScaleFactor = F;
@@ -113,6 +179,13 @@ public:
         return F;
     }
 
+    /*! @brief Get the scale factor for the glyph.
+     *
+     * Get the scale factor for the glyph. You can use this in tandem with
+     * SetScaleFactor to stylize your text rendering.
+     *
+     * @return Scale factor of the current glyph.
+     */
     BGE_INL Scalar GetScaleFactor() const
     {
         return ScaleFactor;
