@@ -118,7 +118,7 @@ public:
      * successfully filled into Target; BGE_FAILURE if any errors occurred or
      * the codepoint was not found.
      */
-    Result Extract(int Codepoint, Stamp* Target);
+    Result Extract(uint32 Codepoint, Stamp* Target);
 
 }; // GlyphMap
 

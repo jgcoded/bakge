@@ -42,7 +42,7 @@ GlyphMap::~GlyphMap()
 }
 
 
-Result GlyphMap::Extract(int Codepoint, Stamp* Target)
+Result GlyphMap::Extract(uint32 Codepoint, Stamp* Target)
 {
     if(Codepoint < Start || Codepoint > End) {
         return BGE_FAILURE;
@@ -55,7 +55,8 @@ Result GlyphMap::Extract(int Codepoint, Stamp* Target)
     Target->SetOffsets(Data[i].xoff, Data[i].yoff);
     Target->SetAdvance(Data[i].xadvance);
     Target->SetScaleFactor(ScaleFactor);
-    Target->SetDimensions(Data[i].x1 - Data[i].x0, Data[i].y1 - Data[i].y0);
+    Target->SetDimensions((Scalar)(Data[i].x1 - Data[i].x0),
+                            (Scalar)Data[i].y1 - Data[i].y0);
     Target->SetTexCoords((Scalar)Data[i].x0 / W, (Scalar)Data[i].y0 / H,
                             (Scalar)Data[i].x1 / W, (Scalar)Data[i].y1 / H);
 
