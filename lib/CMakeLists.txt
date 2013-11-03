@@ -24,3 +24,4 @@ set(CMAKE_SOURCE_DIR ${BAKGE_SOURCE_DIR})
 # Builds external libraries
 include(${BAKGE_SOURCE_DIR}/cmake/BuildLua.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/BuildGLEW.cmake)
+include(${BAKGE_SOURCE_DIR{/cmake/BuildEnet.cmake)
