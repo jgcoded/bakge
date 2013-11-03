@@ -54,6 +54,7 @@
 #pragma warning(disable : 4193)
 #pragma warning(disable : 4005)
 #define _CRT_SECURE_NO_WARNINGS
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #elif defined(__APPLE__)
 #import <cocoa/Cocoa.h>
