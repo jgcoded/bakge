@@ -370,6 +370,13 @@ set(BAKGE_ENET_HEADERS
   utility.h
   win32.h
 )
+foreach(ENET_HEADER ${BAKGE_ENET_HEADERS})
+  add_custom_command(TARGET bakge_sdk POST_BUILD COMMAND ${CMAKE_COMMAND} -E
+    copy
+      ${BAKGE_SOURCE_DIR}/lib/enet-1.3.10/include/enet/${ENET_HEADER}
+      ${BAKGE_SDK_INC_PATH}/enet/${ENET_HEADER}
+  )
+endforeach()
 
 
 ######################################################
