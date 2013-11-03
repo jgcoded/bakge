@@ -359,6 +359,17 @@ endforeach()
 
 ###########################
 # Enet headers
+set(BAKGE_ENET_HEADERS
+  callbacks.h
+  enet.h
+  list.h
+  protocol.h
+  time.h
+  types.h
+  unix.h
+  utility.h
+  win32.h
+)
 
 
 ######################################################
