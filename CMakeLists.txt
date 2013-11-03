@@ -68,12 +68,14 @@ set(BAKGE_TARGETS_LIST ${BAKGE_TARGET})
 set(BAKGE_LUA_TARGET lua)
 set(BAKGE_GLEW_TARGET glew)
 set(BAKGE_PHYSFS_TARGET physfs)
+set(BAKGE_ENET_TARGET enet)
 
 # Append library targets to a list we can use
 list(APPEND BAKGE_TARGETS_LIST
   ${BAKGE_PHYSFS_TARGET}
   ${BAKGE_GLEW_TARGET}
   ${BAKGE_LUA_TARGET}
+  ${BAKGE_ENET_TARGET}
 )
 
 ########################################
