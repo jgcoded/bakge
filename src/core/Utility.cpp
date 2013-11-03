@@ -44,6 +44,11 @@ Result Init(int argc, char* argv[])
         return Deinit();
     }
 
+    if(enet_initialize() != 0) {
+        fprintf(stderr, "Error initializing Enet\n");
+        return Deinit();
+    }
+
     if(PHYSFS_addToSearchPath(".", 0) == 0) {
         fprintf(stderr, "Error mounting running directory: %s\n",
                                             PHYSFS_getLastError());
@@ -141,6 +146,8 @@ Result Deinit()
 
     if(PHYSFS_isInit() != 0)
         PHYSFS_deinit();
+
+    enet_deinitialize();
 
     if(LogLock != NULL)
         delete LogLock;
