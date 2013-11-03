@@ -150,6 +150,7 @@ if(WIN32)
 
   set(BAKGE_LIBRARIES
     ${BAKGE_GLEW_TARGET}
+    ${BAKGE_ENET_TARGET}
     gdi32.lib
     user32.lib
     winmm.lib
