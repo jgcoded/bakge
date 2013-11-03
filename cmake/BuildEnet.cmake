@@ -28,6 +28,20 @@ if(ENET_TARGET)
     ${ENET_TARGET}/include/enet/win32.h
   )
 
+  if(BUILD_SHARED_LIBS)
+    if(WIN32)
+      add_definitions(-DENET_DLL)
+    else()
+      set(ENET_LIBRARY_TYPE SHARED)
+    endif()
+  endif()
+
+  add_library(${BAKGE_ENET_TARGET} ${ENET_LIBRARY_TYPE} ${ENET_SOURCES})
+
+  if(WIN32)
+    target_link_libraries(${BAKGE_ENET_TARGET} ws2_32 winmm)
+  endif()
+
 else()
   message("Couldn't find Enet path")
 endif()
