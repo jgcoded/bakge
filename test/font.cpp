@@ -72,7 +72,7 @@ bakge::Result InitTest()
     bakge::Log("test/font: Bake result %d\n", R);
 
     UICam->SetPosition(-256.0f, 256.0f, -1.0f);
-    UICam->SetSpan(512.0f, -512.0f, 2.0f);
+    UICam->SetSpan(600.0f, -400.0f, 2.0f);
 
     St = bakge::Stamp::Create();
     St->SetDimensions(50, 50);
