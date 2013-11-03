@@ -6,6 +6,7 @@ include(${BAKGE_SOURCE_DIR}/cmake/GetLua.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetGLEW.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetOpenAL.cmake)
 include(${BAKGE_SOURCE_DIR}/cmake/GetPhysFS.cmake)
+include(${BAKGE_SOURCE_DIR}/cmake/GetEnet.cmake)
 
 # Build GLFW with our modified CMake build
 set(GLFW_CLIENT_LIBRARY "opengl")
