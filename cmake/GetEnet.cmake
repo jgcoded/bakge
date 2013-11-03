@@ -5,6 +5,6 @@ set(ENET_ARCHIVE ${ENET_TARGET}.tar.gz}
 
 if(NOT EXISTS ${ENET_ARCHIVE} AND NOT EXISTS ${ENET_TARGET})
   message(STATUS "Enet library not found")
-  message(STATUS "  Downloading archive ${ENET_ARCHIVE}"
+  message(STATUS "  Downloading archive ${ENET_ARCHIVE}")
   file(DOWNLOAD ${ENET_MIRROR} ${LUA_ARCHIVE})
 endif()
