@@ -176,6 +176,7 @@ include_directories(
   ${BAKGE_SOURCE_DIR}/lib/lua-5.1.5/src
   ${BAKGE_SOURCE_DIR}/lib/physfs-2.0.3
   ${BAKGE_SOURCE_DIR}/lib/openal-1.15.1/include
+  ${BAKGE_SOURCE_DIR}/lib/enet-1.3.10
   ${BAKGE_SOURCE_DIR}/extern
 )
 
@@ -354,6 +355,10 @@ foreach(AL_HEADER ${BAKGE_OPENAL_HEADERS})
       ${BAKGE_SDK_INC_PATH}/AL/${AL_HEADER}
   )
 endforeach()
+
+
+###########################
+# Enet headers
 
 
 ######################################################
