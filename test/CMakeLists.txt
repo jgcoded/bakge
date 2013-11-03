@@ -12,7 +12,7 @@ set(TESTS
   crowd
   compositetexture
   device
-  enet
+  enettest
   font
   grid
   rectangle
