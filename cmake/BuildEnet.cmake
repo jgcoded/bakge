@@ -16,6 +16,18 @@ if(ENET_TARGET)
     ${ENET_TARGET}/win32.c
   )
 
+  set(ENET_HEADERS
+    ${ENET_TARGET}/include/enet/callbacks.h
+    ${ENET_TARGET}/include/enet/enet.h
+    ${ENET_TARGET}/include/enet/list.h
+    ${ENET_TARGET}/include/enet/protocol.h
+    ${ENET_TARGET}/include/enet/time.h
+    ${ENET_TARGET}/include/enet/types.h
+    ${ENET_TARGET}/include/enet/unix.h
+    ${ENET_TARGET}/include/enet/utility.h
+    ${ENET_TARGET}/include/enet/win32.h
+  )
+
 else()
   message("Couldn't find Enet path")
 endif()
