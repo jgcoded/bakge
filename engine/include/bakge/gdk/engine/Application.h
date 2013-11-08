@@ -70,6 +70,10 @@ public:
 
     Result CloseEvent();
 
+    Result ResizeEvent(int X, int Y);
+
+    Result DragEvent(int X, int Y);
+
 }; /* Application */
 
 } /* gdk */
